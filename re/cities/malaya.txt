@@ -1,0 +1,934 @@
+//===== rAthena Script ======================================= 
+//= Port Malaya
+//===== By: ================================================== 
+//= Euphy
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Port Malaya Town Script
+//===== Additional Comments: ================================= 
+//= 0.1 Alberta sailors only. [Euphy]
+//= 0.2 Adapted from Masao's conversion.
+//= 1.0 Added remaining NPCs.
+//= 1.1 Added Jeepney script. [DeadlySilence]
+//============================================================ 
+
+// Port Malaya Transportation
+//============================================================
+// Old coordinates: alberta (237,71)
+alberta,196,202,3	script	Optamara Crew#alberta	100,{
+	mes "[Equipe Optamara]";
+	mes "Olá!";
+	mes "Custa 10.000 Zeny para ir até Port Malaya. Tem interesse?";
+	next;
+	switch(select("About Port Malaya.:Go to Port Malaya.:Cancel.")) {
+	case 1:
+		mes "[Equipe Optamara]";
+		mes "Port Malaya é uma pequena vila que você pode chegar navegando a sudoeste de Alberta.";
+		next;
+		mes "[Equipe Optamara]";
+		mes "Eu não conseguia visitar a vila porque eles tiveram alguns problemas por lá, mas agora parece que tudo está bem!";
+		next;
+		mes "[Equipe Optamara]";
+		mes "Não sei dizer ao certo, mas era uma vila que parece um parque confortável e aconchegante.";
+		next;
+		mes "[Equipe Optamara]";
+		mes "Por pouco eu não voltava mais para a aconchegante Alberta.";
+		next;
+		mes "[Equipe Optamara]";
+		mes "Tenho certeza que você sentirá o mesmo quando chegar em Port Malaya.";
+		close;
+	case 2:
+		if (Zeny < 10000) {
+			mes "[Equipe Optamara]";
+			mes "Oh, meu Deus!!";
+			mes "Você não sabe quão longe é daqui. É claro que não é de graça. Por favor, volte com 10.000 Zeny. Desculpe!";
+			close;
+		}
+		mes "[Equipe Optamara]";
+		mes "Ótimo!";
+		mes "Partindo para Port Malaya!!";
+		set Zeny, Zeny-10000;
+		close2;
+		warp "malaya",271,55;
+		end;
+	case 3:
+		mes "[Equipe Optamara]";
+		mes "Os aventureiros de hoje agem como se estivessem ocupados. Volte quando tiver tempo e poderemos visitar Port Malaya juntos.";
+		close;
+	}
+}
+
+malaya,276,55,4	script	Optamara Crew#malaya	100,{
+	if (malaya_hi < 10) {
+		mes "[Equipe Optamara]";
+		mes "Acho que a vila ainda está agitada. Terminou sua visita? Sempre há um navio partindo para Alberta.";
+		next;
+	} else if (malaya_hi < 20) {
+		mes "[Equipe Optamara]";
+		mes "Acho que um aventureiro sem nome ajudou a tirar um peso das mentes dos moradores. Yahoo! Você gostaria de voltar para Alberta?";
+		next;
+	} else {
+		mes "[Equipe Optamara]";
+		mes "Você gostaria de voltar para Alberta comigo?";
+		next;
+	}
+	switch(select("Return.:Do not return.")) {
+	case 1:
+		mes "[Equipe Optamara]";
+		mes "Ótimo! Vamos partir agora para Alberta!!";
+		close2;
+		warp "alberta",192,217;
+		end;
+	case 2:
+		mes "[Equipe Optamara]";
+		mes "Tudo bem. Venha aqui se algum dia quiser voltar para Alberta.";
+		close;
+	}
+}
+
+// Generic Port Malaya NPCs
+//============================================================
+ma_in01,30,94,4	script	Inn Keeper#ma	583,{
+	if (malaya_hi < 10) {
+		mes "[Estalajadeiro]";
+		mes "Ah, meu Deus! Visitando?";
+		mes "Que péssima hora. A vila está um pouco desorganizada no momento, então na verdade estou fechado. Desculpe.";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Estalajadeiro]";
+		mes "Então você é o aventureiro de quem os moradores estão falando? Eu reabri minha estalagem graças a você. Obrigado.";
+		next;
+	} else {
+		mes "[Estalajadeiro]";
+		mes "Bem-vindo.";
+		mes "Esta é a melhor estalagem de Port Malaya, 'Cabana na Cidade'.";
+		next;
+	}
+	mes "[Estalajadeiro]";
+	mes "Veio descansar? A hospedagem custará 5.000 Zeny.";
+	next;
+	switch(select("Store.:Lodge. - 5,000z:Cancel.")) {
+	case 1:
+		mes "[Estalajadeiro]";
+		mes "Armazenado com sucesso. Até a próxima.";
+		savepoint "ma_in01",43,98,1,1;
+		close;
+	case 2:
+		if (Zeny < 5000) {
+			mes "[Estalajadeiro]";
+			mes "Desculpe. Acho que falta um pouco.";
+			close;
+		}
+		mes "[Estalajadeiro]";
+		mes "Espero que aproveite sua estadia.";
+		close2;
+		set Zeny, Zeny-5000;
+		percentheal 100,100;
+		warp "ma_in01",43,98;
+		end;
+	case 3:
+		close;
+	}
+}
+
+-	script	Unidentified Creature#i	-1,{
+	end;
+OnInit:
+	switch(atoi(strnpcinfo(2))) {
+		case 1: setarray .@npc$,"01","02","03","04"; break;
+		case 5: setarray .@npc$,"05","06","07","08"; break;
+		case 9: setarray .@npc$,"09","10","11"; break;
+		default: end;
+	}
+	set .@size, getarraysize(.@npc$);
+	set .@rand, rand(.@size);
+	for(set .@i,0; .@i<.@size; set .@i,.@i+1)
+		donpcevent "Unidentified Creature#"+.@npc$[.@i]+"::"+((.@i == .@rand)?"OnEnable":"OnDisable");
+	end;
+OnEnable:
+	enablenpc();
+	end;
+OnDisable:
+	disablenpc();
+	end;
+OnBingx2:
+	switch(atoi(strnpcinfo(2))) {
+		case 1: setarray .@npc$,"02","03","04"; break;
+		case 5: setarray .@npc$,"06","07","08"; break;
+		case 9: setarray .@npc$,"10","11"; break;
+	}
+	set .@size, getarraysize(.@npc$);
+	set .@rand, rand(.@size);
+	for(set .@i,0; .@i<.@size; set .@i,.@i+1)
+		donpcevent "Unidentified Creature#"+.@npc$[.@i]+"::"+((.@i == .@rand)?"OnEnable":"OnDisable");
+	donpcevent strnpcinfo(0)+"::OnDisable";
+	end;
+OnTouch_:
+	if (getcharid(1)) {
+		if ($ma_name04$ == strcharinfo(0) || $ma_name05$ == strcharinfo(0) || $ma_name06$ == strcharinfo(0)) {
+			donpcevent strnpcinfo(0)+"::OnBingx2";
+			mes "A criatura não identificada vislumbra você, cora e então desaparece.";
+			close;
+		}
+		if (rand(1,5)%2) {
+			switch(atoi(strnpcinfo(2))) {
+				case 1: set $ma_name04$,strcharinfo(0); break;
+				case 5: set $ma_name05$,strcharinfo(0); break;
+				case 9: set $ma_name06$,strcharinfo(0); break;
+			}
+		}
+		donpcevent strnpcinfo(0)+"::OnBingx2";
+		mes "A criatura não identificada vislumbra você e desaparece.";
+		close;
+	}
+	donpcevent strnpcinfo(0)+"::OnBingx2";
+	mes "A criatura não identificada olha para você e foge.";
+	close;
+}
+ma_fild01,74,367,6	duplicate(Unidentified Creature#i)	Unidentified Creature#01	572,2,2
+ma_fild02,282,41,4	duplicate(Unidentified Creature#i)	Unidentified Creature#05	572,2,2
+ma_scene01,195,92,4	duplicate(Unidentified Creature#i)	Unidentified Creature#09	572,2,2
+
+-	script	Unidentified Creature#j	-1,{
+	end;
+OnEnable:
+	enablenpc();
+	end;
+OnDisable:
+	disablenpc();
+	end;
+OnBingx2:
+	switch(atoi(strnpcinfo(2))) {
+		case 2: setarray .@npc$,"01","03","04"; break;
+		case 3: setarray .@npc$,"01","02","04"; break;
+		case 4: setarray .@npc$,"01","02","03"; break;
+		case 6: setarray .@npc$,"05","07","08"; break;
+		case 7: setarray .@npc$,"05","06","08"; break;
+		case 8: setarray .@npc$,"05","06","07"; break;
+		case 10: setarray .@npc$,"09","11"; break;
+		case 11: setarray .@npc$,"09","10"; break;
+	}
+	set .@size, getarraysize(.@npc$);
+	set .@rand, rand(.@size);
+	for(set .@i,0; .@i<.@size; set .@i,.@i+1)
+		donpcevent "Unidentified Creature#"+.@npc$[.@i]+"::"+((.@i == .@rand)?"OnEnable":"OnDisable");
+	donpcevent strnpcinfo(0)+"::OnDisable";
+	end;
+OnTouch_:
+	set .@i, atoi(strnpcinfo(2));
+	if (.@i%4 == 2) {
+		if (is_party_leader() == true)
+			set .@pass,1;
+	} else if (.@i%4 == 3) {
+		if (checkquest(4229,PLAYTIME) > -1 && checkquest(9223,PLAYTIME) > -1 && checkquest(12278,PLAYTIME) > -1)
+			set .@pass,1;
+	} else if (.@i%4 == 0) {
+		if (rand(1,100)%10 == 7)
+			set .@pass,1;
+	}
+	if (.@pass) {
+		if ($ma_name04$ == strcharinfo(0) || $ma_name05$ == strcharinfo(0) || $ma_name06$ == strcharinfo(0)) {
+			donpcevent strnpcinfo(0)+"::OnBingx2";
+			mes "A criatura não identificada vislumbra você, cora e então desaparece.";
+			close;
+		}
+		if (rand(1,5)%2) {
+			switch(.@i) {
+			case 2:
+			case 3:
+			case 4:
+				set $ma_name04$,strcharinfo(0);
+				break;
+			case 6:
+			case 7:
+			case 8:
+				set $ma_name05$,strcharinfo(0);
+				break;
+			case 10:
+			case 11:
+				set $ma_name06$,strcharinfo(0);
+				break;
+			}
+		}
+		donpcevent strnpcinfo(0)+"::OnBingx2";
+		mes "A criatura não identificada vislumbra você e desaparece.";
+		close;
+	}
+	donpcevent strnpcinfo(0)+"::OnBingx2";
+	mes "A criatura não identificada olha para você e foge.";
+	close;
+}
+ma_fild01,109,116,4	duplicate(Unidentified Creature#j)	Unidentified Creature#02	572,2,2
+ma_fild01,280,150,6	duplicate(Unidentified Creature#j)	Unidentified Creature#03	572,2,2
+ma_fild01,309,221,6	duplicate(Unidentified Creature#j)	Unidentified Creature#04	572,2,2
+ma_fild02,246,324,4	duplicate(Unidentified Creature#j)	Unidentified Creature#06	572,2,2
+ma_fild02,71,296,6	duplicate(Unidentified Creature#j)	Unidentified Creature#07	572,2,2
+ma_fild02,32,263,4	duplicate(Unidentified Creature#j)	Unidentified Creature#08	572,2,2
+ma_scene01,158,139,4	duplicate(Unidentified Creature#j)	Unidentified Creature#10	572,2,2
+ma_scene01,167,112,6	duplicate(Unidentified Creature#j)	Unidentified Creature#11	572,2,2
+
+malaya,227,311,4	script	Grandma#ma01	575,{
+	if (malaya_hi < 10) {
+		mes "[Vovó]";
+		mes "Você não é daqui? Cuide-se.";
+		next;
+		mes "[Vovó]";
+		mes "Estou preocupada porque minha nora está grávida. Espero que nada dê errado.";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Vovó]";
+		mes "Ouvi dizer que tem um forasteiro ajudando a vila.";
+		next;
+		mes "[Vovó]";
+		mes "Então minha nora estará segura.";
+		close;
+	}
+	if (rand(1,3) == 2) {
+		mes "[Vovó]";
+		mes "Heard there is this "+getd("$ma_name0"+rand(1,6)+"$")+" that follows Meoneonuncle around.";
+		next;
+		mes "[Vovó]";
+		mes "Vou torcer pelo amor proibido deles.";
+		close;
+	}
+	mes "[Vovó]";
+	mes "Estou preocupada com minha nora grávida. Espero que Meoneonuncle não a incomode.";
+	next;
+	select("Meoneonuncle?");
+	mes "[Vovó]";
+	mes "Não é daqui? Deixe-me te contar por que até um estrangeiro como você deve ser cuidadoso.";
+	next;
+	mes "[Vovó]";
+	mes "Meoneonuncle era uma mulher que viveu em Port Malaya há muito tempo. Ela se casou com um homem decente e também teve um bebê.";
+	next;
+	mes "[Vovó]";
+	mes "Mas a felicidade nunca dura para sempre, certo? O bebê morreu devido a um acidente...";
+	next;
+	mes "[Vovó]";
+	mes "Ela acabou falecendo após sofrer pelo seu bebê perdido por dias.";
+	next;
+	select("That is a sad story.");
+	mes "[Vovó]";
+	mes "Meoneonuncle então começou a aparecer em espírito e levar bebês de mulheres grávidas na vila.";
+	next;
+	mes "[Vovó]";
+	mes "Se você caminhar por Port Malaya à noite...";
+	next;
+	mes "[Vovó]";
+	mes "E ouvir tik-tik ou wak-wak, seja cauteloso, pois esse é o som das asas de Meoneonuncle batendo.";
+	close;
+}
+
+malaya,189,263,4	script	Drumming Young Man#ma02	578,{
+	if (malaya_hi < 10) {
+		emotion ET_HUK;
+		mes "[Jovem Tocando Tambor]";
+		mes "Ugh... é exatamente como daquela vez antes...";
+		next;
+		emotion ET_HUK;
+		mes "[Jovem Tocando Tambor]";
+		mes "Quando a lua foi engolida. Argh!";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Jovem Tocando Tambor]";
+		mes "Acho que a vila foi salva por um aventureiro sem nome.";
+		next;
+		emotion ET_OHNO;
+		mes "[Jovem Tocando Tambor]";
+		mes "Ufa... achei que o Bakonawa tinha aparecido de novo.";
+		close;
+	}
+	if (rand(1,3) == 2) {
+		mes "[Jovem Tocando Tambor]";
+		mes getd("$ma_name0"+rand(1,6)+"$")+" is said to have stopped Bakonawa from swallowing the moon. Isn't it awesome? I'm so relieved.";
+		close;
+	}
+	mes "[Jovem Tocando Tambor]";
+	mes "Bakonawa também é conhecido como o 'monstro que engole a lua' em Port Malaya.";
+	next;
+	mes "[Jovem Tocando Tambor]";
+	mes "Mas eu sei que o Bakonawa também poderia 'engolir pessoas' também.";
+	next;
+	select("Huk! Then isn't it dangerous?");
+	emotion ET_KIK;
+	mes "[Jovem Tocando Tambor]";
+	mes "Ha ha ha. Existe uma maneira de impedir que o Bakonawa engula uma pessoa.";
+	next;
+	mes "[Jovem Tocando Tambor]";
+	mes "Sim, existe uma fraqueza até para o pior monstro que já engoliu 6 luas.";
+	next;
+	select("Wow. What is it?");
+	mes "[Jovem Tocando Tambor]";
+	mes "Ele é sensível a ruídos, então quando ele estiver prestes a engolir a lua!!";
+	next;
+	mes "[Jovem Tocando Tambor]";
+	mes "Essa é sua chance!! Não importa que tipo de ruído!! Seja um caldeirão, símbolo, tambor, panela ou frigideira, apenas continue fazendo barulho.";
+	next;
+	mes "[Jovem Tocando Tambor]";
+	mes "Então o Bakonawa ficará surpreso, cuspirá a lua e fugirá!";
+	next;
+	mes "[Jovem Tocando Tambor]";
+	mes "Carregue um tambor com você. Você achará útil.";
+	close;
+}
+
+malaya,270,59,4	script	Port Guard#ma03	570,{
+	if (malaya_hi < 10) {
+		emotion ET_PROFUSELY_SWEAT;
+		mes "[Guarda do Porto]";
+		mes "A vila está um caos ultimamente. Tudo bem eu estar de folga assim?";
+		close;
+	} else if (malaya_hi < 20) {
+		emotion ET_STARE_ABOUT;
+		mes "[Guarda do Porto]";
+		mes "A vila está um pouco estável agora, mas você ainda deve ter cuidado ao caminhar à noite.";
+		close;
+	}
+	if (rand(1,3) == 2) {
+		mes "[Guarda do Porto]";
+		mes getd("$ma_name0"+rand(1,6)+"$")+" is said to escape from Buwaya alive after being captured. This person must be powerful.";
+		close;
+	}
+	emotion ET_HUK;
+	mes "[Guarda do Porto]";
+	mes "O quê!! Porto liberado!!";
+	next;
+	mes "[Guarda do Porto]";
+	mes "Hã? Você não é o capitão? Você me assustou. Droga! Ah, certo! Recebi um documento oficial para viajantes.";
+	next;
+	select("What document?");
+	mes "[Guarda do Porto]";
+	mes "Diz que os viajantes devem tomar cuidado com monstros ao caminhar na vila à noite.";
+	next;
+	mes "[Guarda do Porto]";
+	mes "Buwayas não vêm à vila com frequência, mas há casos em que eles agarram pessoas nas caixas que carregam à noite.";
+	next;
+	mes "[Guarda do Porto]";
+	mes "Hã?! E diz aqui que um monstro chamado Wokwok especialmente visita a vila com frequência à noite e deve ser evitado.";
+	next;
+	switch(select("I see.:Is there any way to prevent them from coming?")) {
+	case 1:
+		mes "[Guarda do Porto]";
+		mes "Cuidado à noite!";
+		close;
+	case 2:
+		mes "[Guarda do Porto]";
+		mes "Dizem que você pode atacar o ponto fraco do Buwaya dentro da caixa que eles carregam caso seja pego em uma.";
+		next;
+		mes "[Guarda do Porto]";
+		mes "E você deve correr para o prédio mais próximo quando ouvir o bater das asas do Wokwok ao longe.";
+		next;
+		emotion ET_SCRATCH;
+		mes "[Guarda do Porto]";
+		mes "Mas se o som de batimento for baixo ou se você não ouvir nada, vamos apenas dizer que você deve se preparar para o ataque e desejar sorte.";
+		close;
+	}
+}
+
+malaya,88,252,4	script	Little Girl#ma04	576,{
+	if (malaya_hi < 10) {
+		mes "[Garotinha]";
+		mes "Estou com medo, mas preciso visitar a fada na floresta.";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Garotinha]";
+		mes "He he. Papai disse que posso visitar a fada na floresta quando a vila se acalmar.";
+		close;
+	}
+	if (rand(1,3) == 2) {
+		set .@name$, getd("$ma_name0"+rand(1,6)+"$");
+		mes "[Garotinha]";
+		mes "A little while ago "+.@name$+" came and told me a fun story.";
+		next;
+		mes "[Garotinha]";
+		mes "'Eu plantei um par de pereiras no quintal.'";
+		mes "He he. Isn't it fun? "+.@name$+" seems like a fun person.";
+		close;
+	}
+	mes "[Garotinha]";
+	mes "Papai disse que não pegarei doenças de pele assim que eu for amiga da fada da floresta.";
+	next;
+	select("What is this fairy?");
+	mes "[Garotinha]";
+	mes "Encan'to! As fadas Encan'to vivem em grandes árvores ou rochas na floresta. Existem fadas meninos e fadas meninas...";
+	next;
+	mes "[Garotinha]";
+	mes "Mas os fadas meninos são mais bonitos. Por que isso?";
+	close;
+}
+
+malaya,219,92,6	script	Little Kid#ma05	577,{
+	if (malaya_hi < 10) {
+		mes "[Criança]";
+		mes "Minha mãe me disse para não brincar lá fora porque é perigoso. Por quê?";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Criança]";
+		mes "Minha mãe me disse que posso brincar, mas apenas em Port Malaya.";
+		next;
+		mes "[Criança]";
+		mes "He he. Mas eu nunca pensei em sair de Port Malaya.";
+		close;
+	}
+	if (rand(1,3) == 2) {
+		mes "[Criança]";
+		mes "Ouvi dizer que alguém pegou o chapéu de Jejeling em Baryo Mahiwaga.";
+		next;
+		mes "[Criança]";
+		mes "Why would someone steal a monster's hat? "+getd("$ma_name0"+rand(1,6)+"$")+" must be desperate.";
+		next;
+		mes "[Criança]";
+		mes "Oh espere! Isso deveria ser um segredo. Shsh! Por favor, finja que não me ouviu.";
+		close;
+	}
+	mes "[Criança]";
+	mes "Acho que alguém está roubando todos os chapéus da vila.";
+	next;
+	mes "[Criança]";
+	mes "O chapéu que minha mãe lavou ontem desapareceu. O chapéu do nosso vizinho também desapareceu há alguns dias.";
+	next;
+	mes "[Criança]";
+	mes "Hmm... você acha que o Jejeling pegou?";
+	next;
+	mes "[Criança]";
+	mes "Visitei um amigo em Baryo Mahiwaga e ele disse que viu o Jejeling usando o chapéu desaparecido...";
+	close;
+}
+
+malaya,363,283,4	script	Local#ma06	582,{
+	if (malaya_hi < 10) {
+		mes "[Morador]";
+		mes "Hmm... está na hora de ter cuidado com a maldição das bruxas?";
+		next;
+		mes "[Morador]";
+		mes "Cuidado com a agulha de Mongkukurum, estrangeiro.";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Morador]";
+		mes "Bem-vindo a Port Malaya, estrangeiro..";
+		next;
+		mes "[Morador]";
+		mes "A vila está um caos ultimamente. Se você vir alguém com olhos vermelhos, tente não encarar seus olhos.";
+		close;
+	}
+	set .@name$, getd("$ma_name0"+rand(1,6)+"$");
+	switch(rand(1,6)) {
+	case 1:
+		mes "[Morador]";
+		mes "Be careful walking around the village at night. "+.@name$+" was taken down by Wokwok.";
+		close;
+	case 2:
+		mes "[Morador]";
+		mes .@name$+" is said to have successfully tamed a Tikbalang. This person must be courageous. Wonder if I'll get to see this tamed Tikbalang?";
+		close;
+	case 3:
+		mes "[Morador]";
+		mes "Have you ever seen Bongisungisu? I heard "+.@name$+" is hunting down Bongisungisus.";
+		close;
+	case 4:
+		mes "[Morador]";
+		mes "If you plan to go out of the village, be careful of Tiucknuc. "+.@name$+" is said to be tricked by Tiucknuc and had to go to the hospital.";
+		close;
+	case 5:
+	case 6:
+		break;
+	}
+	mes "[Morador]";
+	mes "A vila está um caos ultimamente. Parece que Mongkukurum está de volta à vila.";
+	next;
+	select("Mongkukurum?");
+	mes "[Morador]";
+	mes "Um monstro que também é chamado de bruxa. Parece uma pessoa e também usa roupas.";
+	next;
+	mes "[Morador]";
+	mes "Mongkukurum faz uma boneca das pessoas que vê e a amaldiçoa com agulhas.";
+	next;
+	select("Is there a way to recognize this monster?");
+	mes "[Morador]";
+	mes "Existe uma maneira. Todos os Mongkukurum têm olhos vermelhos.";
+	next;
+	mes "[Morador]";
+	mes "Você pode reconhecê-los pelos olhos, mas! Você deve se lembrar de uma coisa.";
+	next;
+	mes "[Morador]";
+	mes "Você será cativado por Mongkukurum se encarar seus olhos por muito tempo.";
+	next;
+	mes "[Morador]";
+	mes "Nunca, jamais encare seus olhos por muito tempo.";
+	close;
+}
+
+malaya,41,127,6	script	Old Man #ma07	574,{
+	if (malaya_hi < 10) {
+		mes "[Velho]";
+		mes "Estrangeiros não são muito bem-vindos quando nossa vila está caótica como nestes dias.";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Velho]";
+		mes "Você não teve sorte de visitar a vila em um momento como este e não ser bem-vindo.";
+		close;
+	}
+	if (rand(1,3) == 2) {
+		mes "[Velho]";
+		mes getd("$ma_name0"+rand(1,6)+"$")+" is said to throw out Jellopy in this village.";
+		next;
+		mes "[Velho]";
+		mes "Tsk, tsk... Deve ser uma pessoa que não merece um Jellopy.";
+		close;
+	}
+	mes "[Velho]";
+	mes "Você também deve ficar atento para ver se Bangungot vive em uma árvore que você está prestes a cortar.";
+	next;
+	mes "[Velho]";
+	mes "Porque coisas estranhas acontecem se toras de árvores em que Bangungot viveu forem usadas como pilares de construção.";
+	next;
+	select("What happens?");
+	mes "[Velho]";
+	mes "Bem, para um Bangungot, significa perder sua casa, então eles ficam vingativos.";
+	next;
+	mes "[Velho]";
+	mes "Quando você tenta dormir perto do pilar, ele te manterá acordado pregando peças no início.";
+	next;
+	mes "[Velho]";
+	mes "Mas conforme o tempo passa e a vingança deles cresce, eles sentam em cima de você até você sufocar.";
+	next;
+	select("Oh, gosh...");
+	mes "[Velho]";
+	mes "Ha ha ha. Não existem Bangungots em pilares normais, então não perca o sono por causa disso.";
+	close;
+}
+
+malaya,63,185,4	script	Woman#ma08	583,{
+	if (malaya_hi < 10) {
+		mes "[Mulher]";
+		mes "Não tenho nada para compartilhar com você.";
+		close;
+	} else if (malaya_hi < 20) {
+		mes "[Mulher]";
+		mes "Estou preocupada com as crianças. Espero que não estejam aterrorizadas com o que está acontecendo na vila.";
+		close;
+	}
+	if (rand(1,3) == 2) {
+		set .@name$, getd("$ma_name0"+rand(1,6)+"$");
+		set .@rand, rand(1,10);
+		if (.@rand < 5) {
+			mes "[Mulher]";
+			mes "I like fun stories. Not so long ago, "+.@name$+" came and told me a funny story.";
+			next;
+		}
+		switch(.@rand) {
+		case 1:
+			mes "[Mulher]";
+			mes "'Minha tia pisou em uma formiga.'";
+			next;
+			break;
+		case 2:
+			mes "[Mulher]";
+			mes "'Você come pimenta em um dia frio.'";
+			next;
+			break;
+		case 3:
+			mes "[Mulher]";
+			mes "'Por que você está colocando farinha naquela flor?'";
+			next;
+			break;
+		case 4:
+			mes "[Mulher]";
+			mes "Na Loja de Ferramentas, 'Eu comprarei a agulha e a linha! Você compra o feno para perder a agulha nele.'";
+			next;
+			mes "[Mulher]";
+			mes .@name$+" said that and was kicked out of the Tool Store.";
+			next;
+			break;
+		case 5:
+			mes "[Mulher]";
+			mes "Uma Empregada Kafra com quem sou amiga me contou uma história sobre um cliente.";
+			next;
+			mes "[Mulher]";
+			mes "'Kafra, os sábios nunca se casam e quando se casam, eles se tornam o contrário.'";
+			next;
+			mes "[Mulher]";
+			mes "He he... Eu gosto de histórias engraçadas, mas um pouco difíceis para o meu gosto.";
+			close;
+		default:
+			mes "[Mulher]";
+			mes "I like fun stories. Oh by the way! "+.@name$+", love is photogenic. Don't you agree?";
+			next;
+			mes "[Mulher]";
+			mes "Precisa de escuridão para se desenvolver.";
+			next;
+		}
+		mes "[Mulher]";
+		mes "He he. Não é divertido?";
+		close;
+	}
+	mes "[Mulher]";
+	mes "Se você ouvir um bebê chorando da floresta fora da vila, nunca chegue perto.";
+	next;
+	select("Why?");
+	mes "[Mulher]";
+	mes "Existe um monstro chamado Tiucknuc que vaga pela floresta fora da vila e chora após se transformar em um bebê.";
+	next;
+	mes "[Mulher]";
+	mes "Mas quando viajantes gentis pegam o bebê, ele volta para sua forma original e ataca.";
+	next;
+	select("Sounds like a sneaky monster.");
+	mes "[Mulher]";
+	mes "Sim, este monstro é mau por enganar a bondade dos viajantes, mas...";
+	next;
+	mes "[Mulher]";
+	mes "Há um boato de que o monstro veio da alma de um bebê que nunca nasceu. Tão triste.";
+	close;
+}
+
+// Jeepneys
+//============================================================
+function	script	F_Malaya_Jeepney	{
+	.@mapName$        = getarg(0);
+	.@passengers      = getarg(1);
+
+	// set the other messages of varying amount)
+	for (.@i = 5; .@i < getargcount(); .@i++) {
+		setd(".@msgJeepneyInfo$[" + (.@i - 5) + "]", getarg(.@i));
+	}
+
+	if (malaya_hi < 10) {
+		mes "[Motorista de Jeepney]";
+		mes getarg(2);
+		close;
+	} else if ((malaya_hi >= 10) && (malaya_hi < 20)) {
+		mes "[Motorista de Jeepney]";
+		mes getarg(3);
+		close;
+	} else {
+		mes "[Motorista de Jeepney]";
+		mes getarg(4);
+		next;
+	}
+	switch(select("Board [Passenger " + getmapusers(.@mapName$) + "/" + .@passengers +"]:Jeepney?:Are there any other Jeepneys?:Ah... Yes...")) {
+	case 1:
+		if (getmapusers(.@mapName$) >= .@passengers) {
+			mes "[Motorista de Jeepney]";
+			mes "Receio que o Jeepney esteja cheio.";
+			mes "Desculpe, mas que tal outro Jeepney?";
+			close;
+		} else {
+			mes "[Motorista de Jeepney]";
+			mes "Tenha um bom dia.";
+			close2;
+			warp .@mapName$,29,24;
+			end;
+		}
+	case 2:
+		// iterate through all the jeepney information for this specific NPC
+		for (.@i = 0; .@i < getarraysize(.@msgJeepneyInfo$); .@i++) {
+			mes "[Motorista de Jeepney]";
+			mes getd(".@msgJeepneyInfo$[" + .@i + "]");
+
+			if (.@i < (getarraysize(.@msgJeepneyInfo$) - 1)) {
+				next;
+			}
+		}
+		close;
+	case 3:
+		mes "[Motorista de Jeepney]";
+		mes "Oh! Outros Jeepneys estão em operação, é claro.";
+		next;
+		mes "[Motorista de Jeepney]";
+		mes "Em Port Malaya existem Jeepneys de 12, 30 e 60 passageiros, com 3 de cada em operação.";
+		next;
+		mes "[Motorista de Jeepney]";
+		mes "Gostaria de saber a localização de outros carros?";
+		next;
+		switch (select("I'd like to know where the 12 passenger car is.:I'd like to know where the 30 passenger car is.:I'd like to know where the 60 passenger car is.")) {
+		case 1:
+			viewpoint 1, 237, 240, 1, 0xF7E009;
+			viewpoint 1, 67 , 44 , 2, 0xF7E009;
+			viewpoint 1, 282, 129, 3, 0xF7E009;
+			set .@zif_in, 12;
+			break;
+		case 2:
+			viewpoint 1, 134, 250, 4, 0xF7E009;
+			viewpoint 1, 341, 153, 5, 0xF7E009;
+			viewpoint 1, 293, 290, 6, 0xF7E009;
+			set .@zif_in, 30;
+			break;
+		case 3:
+			viewpoint 1, 242, 221, 7, 0xF7E009;
+			viewpoint 1, 62 , 245, 8, 0xF7E009;
+			viewpoint 1, 257, 58 , 9, 0xF7E009;
+			set .@zif_in, 60;
+			break;
+		}
+		mes "[Motorista de Jeepney]";
+		mes .@zif_in+" passenger Jeepney's location has been marked on your map.";
+		next;
+		break;
+	}
+	mes "[Motorista de Jeepney]";
+	mes "Tenha uma boa viagem.";
+	close;
+}
+
+malaya,237,240,4	script	Jeepney Driver#01	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif01",
+		12,
+
+		// Messages for malaya_hi checks.
+		"UUrgghhhh.... I'm scared... so scared... what happened to this place?",
+		"The place is still a mess... I wonder if I can operate a jeepney here...",
+		"Ha ha ha Welcome. I am ^1561EAVol^000000, operating the 12 man Jeepney here.",
+
+		// Monologues of variable lengths.
+		"Is this your first time in Port Malaya?",
+		"Jeepney drivers here also promote Jeepneys, so let me explain them to you.",
+		"Jeepneys were first developed to transport goods quickly, but are now used as public transport.",
+		"Since everybody has different tastes, you can see those with cool and elaborate decorations.",
+		"Of course you don't need to drive them yourselves, but you can ride them so please feel free to do so."
+	);
+}
+
+malaya,67,44,4	script	Jeepney Driver#02	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif02",
+		12,
+
+		"Wha... What's... Going on in that hospital...",
+		"I think the moaning coming from the hospital has lessened...",
+		"I'm ^1561EAChui^000000, operating a 12 man Jeepney. Hi there~",
+
+		"Is this your first time in Port Malaya?",
+		"Jeepney drivers here also promote Jeepneys, so let me explain them to you.",
+		"Jeepneys were first developed to transport goods quickly, but are now used as public transport.",
+		"I modified my Jeepney myself...",
+		"For safety reasons there's a limit to the number of passengers, and it's safe so no worries..."
+	);
+}
+
+malaya,282,129,4	script	Jeepney Driver#03	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif03",
+		12,
+
+		"It's not good for outsiders to have a chat... Perhaps the Mumbaki Leader may have the solution for this.",
+		"Are you the adventurer who recently met Mumbaki? No wait... Then you shouldn't be here... Yes it's a ghost... Arghhhh...",
+		"The name's ^1561EATop^000000, operating one of the 3 12 man Jeepneys in town.",
+
+		"First time in town?",
+		"Jeepney drivers here also promote Jeepneys, so let me explain them to you.",
+		"Jeepneys were first developed to transport goods quickly, but are now used as public transport.",
+		"They all look different depending on their drivers...",
+		"Now it is the fame of Port Malaya."
+	);
+}
+
+malaya,134,250,6	script	Jeepney Driver#04	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif04",
+		30,
+
+		"G...Go... Go away...",
+		"Arghh... Scared the devil out of me... Go away... Shoo...",
+		"^1561EABrav^000000, 30 man Jeepney driver at your service, driving as safely as I can since I get scared easily.",
+
+		"Is this your first time in Port Malaya?",
+		"Jeepneys were first developed to transport goods quickly, but are now used as public transport.",
+		"The modified cars are decorated by their operators.",
+		"You come to Port Malaya, you must ride a Jeepney.",
+		"Ha ha ha, of course you can't drive it yourself."
+	);
+}
+
+malaya,341,153,4	script	Jeepney Driver#05	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif05",
+		30,
+
+		"G... Ghosts in town... Hey... Do you have one on you?",
+		"I think there are fewer ghosts now... The town is slightly quieter...",
+		"Hi I'm ^1561EALivil^000000 operator for the 30 man Jeepney. Safety is my priority.",
+
+		"First time in town?",
+		"I'll give you a quick guide as a service.",
+		"Jeepneys were first developed to transport goods quickly, but are now used as public transport.",
+		"For safety reasons, Jeepneys have a limit on the number of passengers.",
+		"Some carried 180 people, but there aren't any of those in Port Malaya today."
+	);
+}
+
+malaya,293,290,6	script	Jeepney Driver#06	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif06",
+		30,
+
+		"Gu... Guards... What are the guards doing...",
+		"Did the guards finally do something? Phew... What a rush...",
+		"I'm ^1561EAGad^000000, the trustworthy 30 man Jeepney driver.",
+
+		"I see you're new to this town.",
+		"To guide travelers is also my task!! Let me explain.",
+		"Jeepneys were goods transport vehicles, now decorated and modified with Port Malaya's new technology!!",
+		"This Jeepney is my very own handiwork. Ha ha ha... It's cool right? Ha ha ha",
+		"Even though the customer is king, I can't let you drive it... Ha ha ha"
+	);
+}
+
+malaya,242,221,4	script	Jeepney Driver#07	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif07",
+		60,
+
+		"Oh no... I think the whole village is bewitched by ghosts... Maybe... I should give the Mumbaki Leader a visit...",
+		"Ghost... I'm sure the Mumbaki Leader knows how to get rid of these ghosts...",
+		"^1561EAHott^000000, at your service, the safest 60 man Jeepney Operator.",
+
+		"Jeepney is the public transportation of Port Malaya.",
+		"Therefore they are everywhere. And it's free! I know they all have different passenger limits, but that's no problem because they're everywhere."
+	);
+}
+
+malaya,62,245,6	script	Jeepney Driver#08	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif08",
+		60,
+
+		"Shoo~ Be gone if you're a ghost, and go away even if you're human~ Shoo~",
+		"Hey... You... Are human right? Right? Huh? Say you are... Please...",
+		"Hullo, I'm ^1561EAMuyan^000000, operator of this 60 man Jeepney. Nice to meet you.",
+
+		"Jeepneys are public transport, so safety is our priority.",
+		"My Jeepney received the best class of Port Malaya, a '60 man Jeepney' certificate.",
+		"Meaning!! That it is perfectly safe!! Don't you worry about the ride."
+	);
+}
+
+malaya,257,58,6	script	Jeepney Driver#09	582,{
+	callfunc(
+		"F_Malaya_Jeepney",
+		"ma_zif09",
+		60,
+
+		"...You're an outsider... Don't go touching anything and be careful in town...",
+		"The town is still quite dangerous. Best not touch anything until it is safe.",
+		"Hi there. I'm ^1561EAGramma^000000, Operator of the 60 man Jeepney of Port Malaya.",
+
+		"Is this your first time in Port Malaya?",
+		"We Jeepney drivers here also promote Jeepneys, so let me explain them to you.",
+		"Jeepneys were first developed to transport goods quickly, but are now used as public transport.",
+		"Since everybody have different tastes, you can see those with cool and elaborate decorations.",
+		"Of course you don't need to drive them yourselves, but you can ride them so please feel free to do so."
+	);
+}

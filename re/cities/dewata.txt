@@ -1,0 +1,1175 @@
+//===== rAthena Script ======================================= 
+//= Dewata Town
+//===== By: ================================================== 
+//= Gennosuke Kouga, Muad_Dib
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Dewata Town Script
+//===== Additional Comments: ================================= 
+//= 1.0 First version.
+//= 1.1 Standardized. [Euphy]
+//= 1.2 Fixed Zeny check. [Joseph]
+//= 1.3 Updated to match the official script. [Lemongrass/Euphy]
+//= 1.4 Added VIP features. [Euphy]
+//============================================================
+
+// Dewata Transportation :: dewata_trans
+//============================================================
+alberta,212,202,4	script	Dewata Sailor#alberta	536,{
+	mes "[Marinheiro de Dewata]";
+	mes "Você deseja visitar a ^8B4513Ilha de Dewata^000000?";
+	mes "Com suas ondas deslumbrantes e vistas encantadoras, é um ótimo lugar para relaxar.";
+	if (VIP_SCRIPT) {
+		set .@cost, vip_status(VIP_STATUS_ACTIVE)?1000:10000;
+		mes "A taxa de transporte é de 10.000 Zenys e 1.000 para VIP.";
+	} else {
+		set .@cost,10000;
+		mes "A taxa de transporte é de 10.000 Zenys.";
+	}
+	next;
+	switch(select("Yes!:No.")) {
+	case 1:
+		if (Zeny >= .@cost) {
+			mes "[Marinheiro de Dewata]";
+			mes "^8B4513Dewata^000000 é um belo e pacífico país insular.";
+			mes "Tenha uma boa viagem~";
+			close2;
+			set Zeny, Zeny - .@cost;
+			warp "dewata",232,53;
+			end;
+		} else {
+			mes "[Marinheiro de Dewata]";
+			mes "Você não tem a grana, garoto.";
+			mes "Volte quando estiver com a carteira mais cheia.";
+			close;
+		}
+	case 2:
+		mes "[Marinheiro de Dewata]";
+		mes "Me avise";
+		mes "quando estiver pronto para viajar~";
+		close;
+	}
+}
+
+dewata,229,49,6	script	Alberta Sailor#dewata	536,{
+	mes "[Marinheiro de Alberta]";
+	mes "Você deseja voltar para Alberta?";
+	next;
+	switch(select("Yes.:No.")) {
+	case 1:
+		mes "[Marinheiro de Alberta]";
+		mes "Espero que tenha se divertido muito em";
+		mes "sua viagem para a Ilha de ^8B4513Dewata^000000.";
+		mes "Por favor, volte sempre!";
+		close2;
+		warp "alberta",192,215;
+		end;
+	case 2:
+		mes "[Marinheiro de Alberta]";
+		mes "Divirta-se mais um pouco antes de ir.";
+		mes "A Ilha de ^8B4513Dewata^000000 ainda tem muito a oferecer.";
+		close;
+	}
+}
+
+// Generic Dewata NPCs :: dewata_npc
+//============================================================ 
+dewata,221,237,5	script	Young Man#dew-1	536,{
+	mes "[Apreciador de Frutas]";
+	mes "O que há de errado com a sua caaaaaara? Você deve ser muito perdido!";
+	next;
+	mes "[Apreciador de Frutas]";
+	mes "Deixe-me compartilhar um pouco de conhecimento com você.";
+	next;
+	mes "[Apreciador de Frutas]";
+	mes "Posso ser jovem, mas ninguém sabe mais do que eu sobre ^777700Fruto de Palma^000000. Muito bem! O que você quer saber?";
+	next;
+	switch(select("About the shell...:About the pulp...:About the palm kernel...:No thanks.")) {
+	case 1:
+		mes "[Apreciador de Frutas]";
+		mes "Então você quer saber sobre a polpa do Fruto de Palma? Deixe-me explicar.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Normalmente, a casca do Fruto de Palma é usada para fazer óleo. O óleo de palma é um ingrediente útil para muitos pratos.";
+		next;
+		mes "[Apreciador de Frutas]";
+		if (dew_drink > 0)
+			mes "Hmm... Você já conheceu o Memo? Então deve ser fácil para você entender.";
+		else
+			mes "Se você quer saber como usar o óleo de palma, vá encontrar o Memo no lado norte da ilha de Dewata. Todos os dias, ele prepara bebidas tradicionais com óleo de palma.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "De qualquer forma, nos referimos ao óleo que vem do Fruto de Palma como óleo de palma ou óleo de coco, que é bem conhecido por sua qualidade.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "As sobras da produção de óleo são secas e usadas como combustível para cozinhar ou aquecer.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Ele queima bem e tem um cheiro bom, não tem nada melhor que isso.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Ok!! Isso é tudo sobre a polpa, demora muito para explicar todos os efeitos úteis das cascas do Fruto de Palma.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Não é como se esse fosse o limite do meu conhecimento. Não me entenda mal!";
+		close;
+	case 2:
+		mes "[Apreciador de Frutas]";
+		mes "Então você quer saber sobre o interior da Palma? Deixe-me explicar.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "O fruto da palmeira tem 2 camadas de polpa. O exterior é muito áspero, e o interior é macio...";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Hmm... Sim! A polpa do fruto da palmeira é um pouco mais dura que uma casca de noz, deve ser pela água que contém dentro.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Dentro da casca, há cerca de 300ml de água, o que é útil para saciar a sede das pessoas, já que a ilha de Dewata tem um clima muito quente.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "E não é como se a gente simplesmente jogasse fora depois de beber a água lá de dentro!!";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Nós também podemos fazer um cantil de qualidade com ela! Como eu disse, ela tem uma casca externa bem espessa e pode servir como uma garrafa de água.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Também é ótimo para fazer carvão. O carvão feito de Fruto de Palma é bem conhecido por ser duradouro e ter uma queima de qualidade,";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "As pessoas adoram cozinhar frutos do mar e frango com carvão de Fruto de Palma..";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Ele tem o bônus extra de queimar com um aroma agradável de palma";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Ok!! Isso é tudo sobre a informação da polpa, demora muito para explicar todos esses efeitos úteis.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Não é como se isso fosse tudo o que eu sei. Não me entenda mal!";
+		close;
+	case 3:
+		mes "[Apreciador de Frutas]";
+		mes "Então, você quer saber sobre o núcleo macio de dentro? Deixe-me explicar para você";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "O núcleo dentro da polpa dura é usado como um digestivo natural.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Não há muito o que dizer sobre o núcleo de dentro..";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "mas garantimos usar cada parte do Fruto de Palma.";
+		next;
+		mes "[Apreciador de Frutas]";
+		mes "Você não concorda?";
+		close;
+	case 4:
+		mes "[Apreciador de Frutas]";
+		mes "Arrgg! Você não tem interesse nenhum no mundo!";
+		close;
+	}
+}
+
+dewata,114,243,6	script	Lazy Young Man#dew	536,1,1,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 500) {
+		mes "[Jovem Preguiçoso]";
+		mes "Por que você está carregando tanto? Não é pesado?";
+		close;
+	}
+	if (countitem(11534)) {
+		mes "[Jovem Preguiçoso]";
+		mes "Wewt~!! Isso não é Suco de Palma?";
+		mes "Você pode me dar isso? Eu acabei de acordar";
+		mes "e minha garganta está seca!";
+		next;
+		switch(select("Give:Do not give")) {
+		case 1:
+			mes "[Jovem Preguiçoso]";
+			mes "Sério? Para mim?? Eu te dou isto em troca... Obrigado... Hehe~";
+			delitem 11534,1; //Coco_Juice
+			getgroupitem(IG_GiftBox);
+			close;
+		case 2:
+			mes "[Jovem Preguiçoso]";
+			mes "Que seja então~ Ok...";
+			close;
+		}
+	}
+	mes "[Jovem Preguiçoso]";
+	mes "Ah~ Com sede~ Alguém tem um pouco de Suco";
+	mes "de Palma para mim?~";
+	close;
+OnTouch:
+	if (countitem(11534) == 0) {
+		mes "[Jovem Preguiçoso]";
+		mes "Arrgg~ Estou com sede~~ tanta sede~~";
+		mes "Me dê Suco de Palma... Suuuco de Palmaa~~";
+		emotion ET_FRET;
+		next;
+		emotion ET_FRET;
+		next;
+		emotion ET_FRET;
+		next;
+		emotion ET_FRET;
+		close;
+	}
+	end;
+}
+
+dewata,159,81,4	script	Tourist#dew-1	881,{
+	mes "[Nasolo]";
+	mes "Uau~ Oceano puro, uma praia quente...";
+	mes "Perfeito para um encontro com uma namorada...";
+	next;
+	mes "[Nasolo]";
+	mes "Se eu pelo menos tivesse uma...";
+	emotion ET_CRY;
+	next;
+	mes "[Nasolo]";
+	mes "Eu me pergunto quando minha princesa virá...";
+	emotion ET_OHNO;
+	close;
+}
+
+dewata,146,109,5	script	Restauranteur#dew	886,{
+	if (checkweight(11532,1) == 0 || checkweight(11533,1) == 0 || MaxWeight - Weight < 500) {
+		mes "[Restaurateur]";
+		mes "Você veio provar meu prato? É sempre bom comer com o estômago vazio.";
+		close;
+	}
+	mes "[Restaurateur]";
+	mes "Bem-vindo à ilha de Dewata.";
+	mes "Espero que você se comporte como um viajante";
+	mes "nobre, diferente de alguns desses";
+	mes "jovens rebeldes...";
+	next;
+	switch(select("About Dewata dishes:Today's menu?:I'm okay.")) {
+	case 1:
+		mes "[Restaurateur]";
+		mes "Precisa de informações sobre nossas comidas? Bem... Não tenho muito o que falar, mas sinta-se à vontade para ouvir se quiser.";
+		next;
+		mes "[Restaurateur]";
+		mes "Há muito o que cobrir, deixe-me começar.";
+		next;
+		mes "[Restaurateur]";
+		mes "Primeiro, os pratos de Dewata têm nomes especiais baseados em cada receita,";
+		next;
+		mes "[Restaurateur]";
+		mes "Se o nome do prato tiver 'Goreng', então é um alimento frito ou refogado.";
+		next;
+		mes "[Restaurateur]";
+		mes "Se for do tipo 'Bakar', então é um alimento grelhado.";
+		next;
+		mes "[Restaurateur]";
+		mes "E se for 'Satay', então você está comendo um espetinho.";
+		next;
+		mes "[Restaurateur]";
+		mes "Segundo, temos pratos nomeados após ingredientes básicos,";
+		next;
+		mes "[Restaurateur]";
+		mes "Na ilha de Dewata, chamamos arroz de Nasi, macarrão de Mie, pão de Roti, frango de Ayam, peixe de Ikan e milho de Jagung.";
+		next;
+		mes "[Restaurateur]";
+		mes "Portanto, se o arroz é frito, chamamos de 'Nasi Goreng', e macarrão frito é 'Mie Goreng'.";
+		next;
+		mes "[Restaurateur]";
+		mes "Bem... Isso é o suficiente para aproveitar nossas comidas em Dewata!! Se estiver com fome, temos nosso menu especial por apenas ^0000FF5000^000000 Zeny.";
+		close;
+	case 2:
+		mes "[Restaurateur]";
+		mes "Temos 2 itens, 'Nasi Goreng' e 'Satay'. Qual deles você quer?";
+		next;
+		switch(select("Nasi Goreng:Satay")) {
+		case 1:
+			mes "[Restaurateur]";
+			mes "Este é o Nasi Goreng frito com meu molho especial, mais um ovo frito por cima. Custa apenas ^0000FF5000^000000 Zeny.";
+			set .@food,11532;
+			break;
+		case 2:
+			mes "[Restaurateur]";
+			mes "Este é o Satay, um pedaço de carne espetado e grelhado sobre carvão de fruto de palma. Custa apenas ^0000FF5000^000000 Zeny.";
+			set .@food,11533;
+			break;
+		}
+		next;
+		switch(select("Taste:Walk away")) {
+		case 1:
+			if (Zeny < 5000) {
+				mes "[Restaurateur]";
+				mes "Cadê o dinheiro, criança? Puxa! Nada de comida de graça aqui! Certo?";
+				close;
+			}
+			mes "[Restaurateur]";
+			mes "Here's your "+getitemname(.@food)+", you won't regret it!";
+			set Zeny, Zeny - 5000;
+			getitem .@food,1;
+			close;
+		case 2:
+			mes "[Restaurateur]";
+			mes "É uma pena que você não vá provar este prato maravilhoso...";
+			close;
+		}
+	case 3:
+		mes "[Restaurateur]";
+		mes "Você está falando sério? Isso não tem a menor graça.";
+		close;
+	}
+}
+
+dewata,147,107,6	script	Gourmet#dew	85,{
+	mes "[Gourmet]";
+	mes "Oh... é como uma festa na minha";
+	mes "boca... e todos estão convidados!";
+	emotion ET_CRY;
+	next;
+	mes "[Gourmet]";
+	mes "Mestre~ Mais um, por favor~";
+	emotion ET_BEST;
+	emotion ET_OK, getnpcid(0, "Restauranteur#dew");
+	next;
+	mes "[Gourmet]";
+	mes "Você precisa provar isto! A comida aqui é suculenta~";
+	close;
+}
+
+dewata,154,107,4	script	Sightseer#dew	86,{
+	mes "[Turista]";
+	mes "Uau...";
+	mes "Quantos ele já comeu?";
+	emotion ET_SCRATCH;
+	next;
+	mes "[Turista]";
+	mes "Ele deve ser um comilão, não um gourmet...";
+	next;
+	mes "[Turista]";
+	mes "Você já esteve em Prontera? Acho que já vi ele em algum lugar..";
+	close;
+}
+
+dewata,95,203,6	script	Travel Guide#dew	536,{
+	mes "[Guia]";
+	mes "Este templo atrás de mim se chama Borobudur.";
+	mes "O templo de Borobudur foi construído no século 9";
+	mes "para venerar o Grande Buda, uma figura religiosa antiga.";
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "[Guia]";
+	mes "Este templo é feito com 6 plataformas quadradas e 3 plataformas redondas, e 2672 painéis de relevo esculpidos à mão, além de 504 estátuas de vários Budas.";
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "[Guia]";
+	mes "A estupa central, ou santuário, está localizada no centro da plataforma alta, que é cercada por mais 72 estátuas.";
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "[Guia]";
+	mes "Mesmo nos tempos modernos, o templo de Borobudur é um local de peregrinação para muitos monges que adoram o Buda. É também uma grande atração turística, como você pode imaginar.";
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "[Guia]";
+	mes "Isso é tudo que tenho sobre o templo de Borobudur, há alguma dúvida?";
+	mes "Se não, podemos seguir para o próximo local.";
+	close;
+}
+
+dewata,97,207,4	script	Tourist#dew1	803,{
+	mes "[Turista]";
+	mes "Ah, droga... eu acabei";
+	mes "escolhendo o guia turístico errado...";
+	next;
+	mes "[Turista]";
+	mes "Esse sujeito é uma verdadeira soneca...";
+	mes "Por que prolongar isso..";
+	emotion ET_CONFUSE;
+	next;
+	mes "[Turista]";
+	mes "Preciso trocar de agente de viagens...";
+	emotion ET_OHNO;
+	close;
+}
+
+dewata,100,206,4	script	Tourist#dew2	59,{
+	mes "[Turista]";
+	mes "Ei, vamos lá! Depressa,";
+	mes "enquanto o guia turístico está explicando~";
+	next;
+	mes "[Turista]";
+	mes "Vamos... Não parece que";
+	mes "ele vai parar de falar tão cedo.";
+	close;
+}
+
+dewata,101,206,4	script	Tourist#dew3	90,{
+	mes "[Turista]";
+	mes "Nós não vamos nos perder sem o guia?";
+	next;
+	mes "[Turista]";
+	mes "Nós já nos perdemos da última vez...";
+	close;
+}
+
+dewata,99,203,4	script	Tourist#dew4	755,{
+	mes "[Turista]";
+	mes "Oh~ Isso é muito interessante. Um";
+	mes "templo que adora o Buda...";
+	emotion ET_OK;
+	next;
+	mes "[Turista]";
+	mes "Mas eu não entendo muito bem";
+	mes "toda a simbologia aqui.";
+	next;
+	mes "[Turista]";
+	mes "Tão lindo... Eu me pergunto quem construiu";
+	mes "este lugar?";
+	close;
+}
+
+dewata,67,186,8	script	Monk#dew1	834,{
+	mes "[Monge]";
+	mes "Eu sou um monge, contente em passar meus dias em estudos religiosos.";
+	next;
+	mes "[Monge]";
+	mes "Acabei de retornar de uma peregrinação ao templo de Borobudur com meus companheiros monges...";
+	next;
+	mes "[Monge]";
+	mes "O templo de Borobudur recebe muitos peregrinos, já que é um dos poucos templos que restaram para adorar o Grande Buda.";
+	close;
+}
+
+dewata,65,188,8	script	Monk#dew2	834,{
+	mes "[Monge]";
+	mes "O templo de Borobudur é um dos poucos templos que restaram para adorar o Grande Buda.";
+	next;
+	mes "[Monge]";
+	mes "Não entendo por que restaram tão poucos templos que seguem nossos caminhos...";
+	close;
+}
+
+dewata,63,190,8	script	Monk#dew3	834,{
+	mes "[Monge]";
+	mes "Você é um turista? Você pode fazer uma oferta e um pedido a um dos santuários.";
+	next;
+	mes "[Monge]";
+	mes "Nosso grande Buda pode realizar seu desejo..";
+	close;
+}
+
+dewata,62,192,8	script	Monk#dew4	834,{
+	mes "[Monge]";
+	mes "Nosso grande Buda é o rei das almas e o líder de todos os bons Deuses.";
+	next;
+	mes "[Monge]";
+	mes "As tribos de Dewata acreditam em Buda; o estranho é que todos descrevem Buda como criaturas diferentes.";
+	next;
+	mes "[Monge]";
+	mes "Não tenho certeza sobre o motivo disso. Talvez porque existam muitas tribos diferentes em Dewata com características distintas.";
+	close;
+}
+
+dewata,89,191,6	script	Small Shrine#dew1	844,{
+	mes "Há um pequeno santuário aqui. Há muitas pessoas fazendo pedidos.";
+	next;
+	switch(select("Make a donation.:Make a wish.:Walk away.")) {
+	case 1:
+		mes "A caixa de doações diz:";
+		mes "^FF00001.000 ~ 100.000 Zeny^000000";
+		mes "Quanto você deseja doar?";
+		next;
+		input .@input,0,100000;
+		if (.@input < 1000) {
+			mes "- Cancelado. -";
+			close;
+		} else if (.@input <= 50000)
+			set .@good_luck, rand(1,10000);
+		else
+			set .@good_luck, rand(1,5000);
+		if (.@input > Zeny) {
+			mes "- Zenys insuficientes. -";
+			close;
+		}
+		mes "Qual é o seu desejo?";
+		next;
+		input(.@wish$);
+
+		setarray .@wishes$[0],
+			"Power","Strength", //1
+			"Faster","Speed","Quickness","Agility", //2
+			"Skillful Hands","Dex", //4
+			"Healthy","Fitness","Vital", //8
+			"Wisdom","Brain","Study","Int","1st place", //16
+			"Luck","Wealth","Items","Get Item","Goods","Lotto", //32
+			"Full Level","Level","LV", //64
+			"Lover","Girl friend","Boy friend"; //128
+		setarray .@index[0],
+			1,1,2,2,2,2,4,4,8,8,8,16,16,16,16,16,32,32,32,32,32,32,64,64,64,128,128,128;
+			
+		if (.@good_luck == 7 || .@good_luck == 77 || .@good_luck == 777 || .@good_luck == 7777)
+			set .@bonus,1;
+		for(set .@i,0; .@i<getarraysize(.@wishes$); set .@i,.@i+1) {
+			if (compare(.@wish$,.@wishes$[.@i])) {
+				set .@stat, .@stat | .@index[.@i];
+				break;
+			}
+		}
+
+		mes "You make a wish for ^0000FF" + .@wish$ + "^000000 to the small shrine.";
+		next;
+		callsub L_Wish;
+		set Zeny, Zeny - .@input;
+		if ((.@stat & 1) && .@bonus)
+			consumeitem 12043; //Str_Dish03
+		else if ((.@stat & 2) && .@bonus)
+			consumeitem 12058; //Agi_Dish03
+		else if ((.@stat & 4) && .@bonus)
+			consumeitem 12063; //Dex_Dish03
+		else if ((.@stat & 8) && .@bonus)
+			consumeitem 12053; //Vit_Dish03
+		else if ((.@stat & 16) && .@bonus)
+			consumeitem 12048; //Int_Dish03
+		else if ((.@stat & 32) && .@bonus)
+			consumeitem 12068; //Luk_Dish03
+		else if (.@stat & 64) {
+			specialeffect2 EF_ANGEL;
+			mes "- Uma entidade celestial lhe concede uma bênção. -";
+			next;
+		} else if (.@stat & 128) {
+			mes "- O santuário envolve você em uma aura amorosa. -";
+			if ((Sex == SEX_FEMALE && compare(.@wish$,.@wishes$[26])) || (Sex == SEX_MALE && compare(.@wish$,.@wishes$[27])))
+				specialeffect2 EF_LIGHTSPHERE;
+			next;
+		}
+		mes "Parece que este desejo pode se tornar realidade.";
+		close;
+	case 2:
+		mes "Qual é o seu desejo?";
+		next;
+		input .@wish$;
+		mes "You have made your wish for ^0000FF" + .@wish$ + "^000000 to the small shrine.";
+		next;
+		callsub L_Wish;
+		mes "Parece que este desejo pode se tornar realidade.";
+		close;
+	case 3:
+		close;
+	}
+
+L_Wish:
+	mes "Uma energia misteriosa emana do santuário.";
+	specialeffect EF_FLASHER,AREA,"Small Shrine#dew1";
+	specialeffect EF_FLASHER,AREA,"Small Shrine#dew2";
+	specialeffect EF_FLASHER,AREA,"Small Shrine#dew3";
+	specialeffect EF_FLASHER,AREA,"Small Shrine#dew4";
+	next;
+	mes "Você recebeu a bênção do santuário.";
+	specialeffect2 EF_BLESSING;
+	next;
+	return;
+}
+dewata,89,212,6	duplicate(Small Shrine#dew1)	Small Shrine#dew2	844
+dewata,68,212,6	duplicate(Small Shrine#dew1)	Small Shrine#dew3	844
+dewata,68,191,6	duplicate(Small Shrine#dew1)	Small Shrine#dew4	844
+
+dewata,75,122,6	script	Monk#dewt1	834,{
+	mes "[Monge]";
+	mes "Você é um estranho por aqui. O que traz você a este lugar tranquilo?";
+	next;
+	switch(select("I'm sightseeing.:No reason.")) {
+	case 1:
+		mes "[Monge]";
+		mes "Oh, você é um turista. Este é o '^0000FFPagode^000000' que reverencia o grande Buda. Por favor, seja respeitoso com os monges que estão orando aqui.";
+		close;
+	case 2:
+		mes "[Monge]";
+		mes "Tenha um bom dia...";
+		close;
+	}
+}
+
+dewata,69,101,6	script	Monk#dewt2	834,{
+	mes "[Monge]";
+	mes "Nós temos um pagode para a adoração dos Budas. Cada templo possui uma destas torres, embora poucas pessoas venham aqui além de outros monges.";
+	next;
+	switch(select("I see...:Explain about Buddhas:Ah, okay.")) {
+	case 1:
+		mes "[Monge]";
+		mes "Você deve sentir a compaixão de nosso Buda!";
+		close;
+	case 2:
+		mes "[Monge]";
+		mes "Buda é nosso Deus do mito de Dewata, ele é o rei das almas e também o líder dos deuses bons.";
+		next;
+		mes "[Monge]";
+		mes "Buda é o guardião das almas, muitas vezes descrito na dança tradicional como alguém que luta contra o mágico Rangda.";
+		next;
+		mes "[Monge]";
+		mes "Em Dewata, acreditamos que existem muitas divindades protegendo cada ilha e local tribal,";
+		next;
+		mes "[Monge]";
+		mes "então temos diferentes manifestações do Buda, geralmente descritas como um urso, tigre, dragão, serpente ou leão";
+		next;
+		mes "[Monge]";
+		mes "O Grande Leão é um dos famosos Budas adorados em Dewata.";
+		next;
+		mes "[Monge]";
+		mes "Espero que esta tenha sido uma boa explicação para você. Deixe-me saber se há mais alguma coisa que você queira saber.";
+		close;
+	case 3:
+		mes "[Monge]";
+		mes "Tenha um bom dia...";
+		close;
+	}
+}
+
+dewata,71,79,6	script	Monk#dewt3	834,{
+	mes "[Monge]";
+	mes "Esta torre foi construída na beira de um penhasco costeiro. Você pode orar com uma brisa fresca do oceano em seus cabelos.";
+	next;
+	mes "[Monge]";
+	mes "Venha, você deve sentir a compaixão do nosso Buda neste clima agradável.";
+	close;
+}
+
+dewata,211,272,4	script	Lodge Owner#dew	534,2,3,{
+OnTouch:
+	mes "[Dono da Hospedaria]";
+	mes "Ultimamente, temos muitos recém-casados visitando aqui.";
+	next;
+	mes "[Dono da Hospedaria]";
+	mes "Deve ser por causa da bela paisagem, certo?";
+	next;
+	mes "[Dono da Hospedaria]";
+	mes "Estou feliz com o meu negócio. Espero que todos nós tenhamos muito mais visitantes como eles.";
+	next;
+	mes "[Dono da Hospedaria]";
+	mes "Ah! Você deveria trazer seu amor para Dewata em sua lua de mel.";
+	mes "Eu lhe darei um bom preço-";
+	close;
+}
+
+dewata,245,244,4	script	Lodge Employee#dew	536,2,3,{
+OnTouch:
+	mes "[Funcionário da Hospedaria]";
+	mes "Argg~ Isso está realmente me irritando!";
+	emotion ET_FRET;
+	next;
+	mes "[Funcionário da Hospedaria]";
+	mes "Como é que vêm cada vez mais casais para cá?";
+	next;
+	mes "[Funcionário da Hospedaria]";
+	mes "E por que eles têm que agir de forma tão melosa? O que há com isso?";
+	next;
+	mes "[Funcionário da Hospedaria]";
+	mes "Vamos lá, mostrem um pouco de respeito pelas pessoas que trabalham aqui...";
+	close;
+}
+
+dewata,233,263,8	script	Sweet Married Couple#1	828,2,3,{
+OnTouch:
+	mes "[Marido Carinhoso]";
+	mes "Você é a coisa mais linda do mundo, querida~";
+	emotion ET_CHUP;
+	next;
+	mes "[Esposa Carinhosa]";
+	mes "Sério? Eu sou tão linda assim? Eu te amo, querido~";
+	emotion ET_CHUPCHUP, getnpcid(0, "Sweet Married Couple#2");
+	next;
+	mes "[Casal Feliz]";
+	mes "Hahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha";
+	mes "Hohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohoho";
+	emotion ET_SMILE;
+	emotion ET_SMILE, getnpcid(0, "Sweet Married Couple#2");
+	next;
+	mes "Vamos lá, estou ficando cansado disso. Vamos embora.";
+	close;
+}
+
+dewata,234,263,8	script	Sweet Married Couple#2	727,2,3,{
+OnTouch:
+	mes "[Esposa Carinhosa]";
+	mes "Querido~ Você sabe que flor é aquela~?";
+	emotion ET_QUESTION;
+	next;
+	mes "[Marido Carinhoso]";
+	mes "Hmm? Eu não sei. Mas ela é muito bonita.";
+	next;
+	mes "[Esposa Carinhosa]";
+	mes "Querido~ Quem é mais bonita, eu ou a flor?";
+	emotion ET_QUESTION;
+	next;
+	mes "[Marido Carinhoso]";
+	mes "Não importa o quão bonita a flor seja, você é sempre mais bonita~";
+	emotion ET_CHUP, getnpcid(0, "Sweet Married Couple#1");
+	next;
+	mes "[Esposa Carinhosa]";
+	mes "Sério? Eu sou tão bonita assim? Eu te amo, querida~";
+	emotion ET_CHUPCHUP;
+	next;
+	mes "[Casal Feliz]";
+	mes "Hahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha";
+	mes "Hohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohohoho";
+	emotion ET_SMILE, getnpcid(0, "Sweet Married Couple#1");
+	emotion ET_SMILE;
+	next;
+	mes "Vamos lá, isso me entedia. Vamos seguir em frente.";
+	close;
+}
+
+dewata,279,213,4	script	Tourist#dew-2	887,2,3,{
+OnTouch:
+	mes "[Turista Relaxado]";
+	mes "Uau~ Isso é muito confortável~";
+	next;
+	mes "[Turista Relaxado]";
+	mes "Estou me divertindo muito apenas relaxando.";
+	next;
+	mes "[Turista Relaxado]";
+	mes "Você deveria se deitar aqui também.";
+	mes "Assim que fizer isso, você nunca mais vai querer levantar.";
+	next;
+	mes "[Turista Relaxado]";
+	mes "É por isso que não me movo há uma semana inteira! Hahahaha~";
+	emotion ET_SMILE;
+	close;
+}
+
+dewata,269,208,4	script	Little Kid in Town#dew	538,2,3,{
+OnTouch:
+	mes "[Criança]";
+	mes "Hey "+((Sex == SEX_MALE)?"bro":"sis")+", look at that man!";
+	next;
+	mes "[Criança]";
+	mes "Ele está deitado ali há uma semana sem fazer nada...";
+	next;
+	mes "[Criança]";
+	mes "Quem É aquele homem?";
+	emotion ET_QUESTION;
+	next;
+	mes "[Criança]";
+	mes "Eu não quero ser um preguiçoso como ele quando eu crescer.";
+	close;
+}
+
+dewata,227,129,4	script	Sarr#dew	538,2,3,{
+OnTouch:
+	mes "[Sarr]";
+	mes "Eles estão se escondendo, então eu deveria procurar.";
+	mes "Eu vou encontrá-los com certeza!-";
+	next;
+	mes "[Sarr]";
+	mes "Um~";
+	next;
+	mes "[Sarr]";
+	mes "Dois~ Três~";
+	next;
+	mes "[Sarr]";
+	mes "Quatro~ Cinco~ Seis~";
+	next;
+	mes "[Sarr]";
+	mes "... ... ... ...";
+	next;
+	mes "[Sarr]";
+	mes "Noventa e nove~ Cem!!! Agora estou indo~";
+	close;
+}
+
+dewata,239,140,4	script	Siyak#dew	539,2,3,{
+OnTouch:
+	mes "[Siyak]";
+	mes "Ei, vamos lá, chegue para lá~ Ele vai me encontrar~~";
+	next;
+	mes "[Sarr]";
+	mes "Eu encontrei o Siyak!! Saia, saia!!";
+	emotion ET_KIK, getnpcid(0, "Sarr#dew");
+	emotion ET_HUK;
+	emotion ET_KIK, getnpcid(0, "Sipo#dew");
+	emotion ET_HUK, playerattached();
+	next;
+	mes "[Siyak]";
+	mes "Arrgg!! Isso é tudo culpa sua~!!";
+	emotion ET_FRET;
+	close;
+}
+
+dewata,193,145,4	script	Sipo#dew	538,2,3,{
+OnTouch:
+	mes "[Sipo]";
+	mes "Sarr não vai me achar aqui, né?";
+	next;
+	mes "[Sarr]";
+	mes "Achei o Siyak!! Apareça, apareça!!";
+	emotion ET_KIK, getnpcid(0, "Sarr#dew");
+	emotion ET_HUK, getnpcid(0, "Siyak#dew");
+	emotion ET_KIK;
+	emotion ET_HUK, playerattached();
+	next;
+	mes "[Sipo]";
+	mes "Hehe~ Agora o Siyak é o pegador~ Vou continuar me escondendo aqui.";
+	close;
+}
+
+dewata,228,177,4	script	Majya#dew	538,2,3,{
+OnTouch:
+	mes "[Majya]";
+	mes "Eu estava brincando de esconde-esconde com meus amigos...";
+	next;
+	mes "[Majya]";
+	mes "Eu estou aqui parado, e eles não me acharam por 3 horas...";
+	emotion ET_SCRATCH;
+	next;
+	mes "[Majya]";
+	mes "O que eu devo fazer? Aparecer? Eu não quero ser o pegador...";
+	close;
+}
+
+dewata,278,100,4	script	Missing Child#dew	703,2,3,{
+OnTouch:
+	mes "[Ukki]";
+	mes "WaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaa~";
+	emotion ET_CRY;
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Ei, criança...";
+	next;
+	mes "[Ukki]";
+	mes "WaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaaWaa~";
+	emotion ET_CRY;
+	next;
+	mes "[Ukki]";
+	mes "Mamãe~ Papai~ Onde vocês estãooo~ Waa~";
+	emotion ET_CRY;
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "... ... ...";
+	emotion ET_THINK, playerattached();
+	close;
+}
+
+dewata,249,87,4	script	Mum#dew	101,2,3,{
+OnTouch:
+	mes "[Mamãe]";
+	mes "Ukki~ Ukki~ Para onde ela foi?";
+	emotion ET_KEK;
+	next;
+	mes "[Mamãe]";
+	mes "Eu não consigo tirar os olhos dela por um segundo...";
+	next;
+	mes "[Mamãe]";
+	mes "Ukki~";
+	emotion ET_KEK;
+	close;
+}
+
+dewata,251,85,6	script	Poppa#dew	97,2,3,{
+OnTouch:
+	mes "[Papai]";
+	mes "Querida, a Ukki se perdeu de novo?";
+	emotion ET_QUESTION;
+	next;
+	mes "[Papai]";
+	mes "Arrgg... Eu não consigo ir a lugar nenhum com ela... Quantas vezes já foram?";
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "[Papai]";
+	mes "Ela já se perdeu em Luoyang, Amatsu, Moscovia, Brasilis, Kunlun,";
+	mes "e em Ayothaya...";
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "[Papai]";
+	mes "O quê!! Já são 7 vezes incluindo essa vez em Dewata... 7 vezes!!!!!!";
+	emotion ET_OTL;
+	close;
+}
+
+dewata,278,281,4	script	Happily Married Grandpa	534,{
+	mes "[Vovô Feliz no Casamento]";
+	mes "Hoje, eu deveria pedir para a minha senhora";
+	mes "preparar um ^006400arroz frito^000000 para mim.";
+	next;
+	mes "[Vovô Feliz no Casamento]";
+	mes "O ^006400arroz frito^000000 da minha esposa é";
+	mes "sempre muito especial!";
+	next;
+	mes "[Vovô Feliz no Casamento]";
+	mes "Isso me faz amá-la ainda mais.";
+	mes "Você não imagina o sabor maravilhoso!";
+	emotion ET_THROB;
+	close;
+}
+
+dewata,280,277,4	script	Happily Married Grandma	535,{
+	mes "[Vovó Feliz no Casamento]";
+	mes "Nos meus tempos de juventude,";
+	mes "havia muitos cavalheiros";
+	mes "que queriam me cortejar.";
+	emotion ET_PROFUSELY_SWEAT;
+	next;
+	mes "[Vovó Feliz no Casamento]";
+	mes "No entanto, encontrei o cara certo,";
+	mes "e me casei.";
+	mes "Eu perguntei o que ele mais gosta";
+	mes "em mim, ele disse que era";
+	mes "meu ^006400arroz frito^000000 caseiro.";
+	next;
+	mes "[Vovó Feliz no Casamento]";
+	mes "E desde então, ele só me pede";
+	mes "para fazer ^006400arroz frito^000000 para o jantar.";
+	mes "Mais de 40 anos de casamento";
+	mes "e ele ainda não se cansa disso.";
+	next;
+	mes "[Vovó Feliz no Casamento]";
+	mes "Eu sempre acho que tive sorte";
+	mes "de estar envelhecendo com um cara";
+	mes "que ama o que eu cozinho.";
+	emotion ET_THROB;
+	close;
+}
+
+dewata,165,103,6	script	Adventurer Semangat#dew	534,{
+	mes "[Aventureiro Semangat]";
+	mes "Eu também viajei pelo mundo";
+	mes "quando eu era jovem como você.";
+	mes "^FF0000Macaco, Sépia^000000";
+	mes "^FF0000Águia e Cobra^000000,";
+	mes "todos foram bons amigos que conheci";
+	mes "durante minhas viagens.";
+	next;
+	mes "[Aventureiro Semangat]";
+	mes "Eu ainda tenho paixão por aventura e viagens.";
+	mes "Mas, eu não posso simplesmente deixar";
+	mes "minha amada esposa e";
+	mes "netos para trás...";
+	next;
+	mes "[Aventureiro Semangat]";
+	mes "Você também terá algo";
+	mes "ou alguém que será tão precioso";
+	mes "em seu coração algum dia.";
+	close;
+}
+
+dewata,139,114,6	script	Semangat's Wife#dew	535,{
+	mes "[Esposa do Semangat]";
+	mes "Para onde aquele velho";
+	mes "foi de novo?";
+	mes "Você viu meu marido por aí?";
+	next;
+	switch(select("I think I saw him there..:No I haven't..")) {
+	case 1:
+		mes "[Esposa do Semangat]";
+		mes "Ele fugiu quando";
+		mes "eu estava procurando por ele.";
+		mes "Deve estar em algum lugar, contando histórias fantásticas";
+		mes "para alguns viajantes, como sempre.";
+		next;
+		mes "[Esposa do Semangat]";
+		mes "Eu peço desculpas";
+		mes "em nome do meu marido.";
+		mes "Por favor, não acredite nas histórias tolas dele";
+		mes "dizendo que ele se encontrou com ^FF0000Macacos e Cobras^000000, ou";
+		mes "que ele lutou ao lado de uma ^FF0000Sépia^000000.";
+		next;
+		mes "[Esposa do Semangat]";
+		mes "Ele viveu aqui";
+		mes "por toda a sua vida.";
+		mes "No entanto, sempre encontra alguns viajantes,";
+		mes "e que vão ouvir suas histórias inventadas.";
+		close;
+	case 2:
+		mes "[Esposa do Semangat]";
+		mes "Ah. Por favor, me avise";
+		mes "se você o vir por aí.";
+		close;
+	}
+}
+
+dewata,181,88,6	script	Young Man#dew-2	536,{
+	mes "[Jovem]";
+	mes "A praia de ^8B4513Dewata^000000 não é";
+	mes "realmente linda?";
+	mes "As crianças sempre brincam";
+	mes "nesta praia. Isso realmente";
+	mes "me lembra da minha juventude.";
+	next;
+	mes "[Jovem]";
+	mes "À noite, você pode ver";
+	mes "fogos de artifício da praia.";
+	mes "Com a brisa do oceano, o som das ondas,";
+	mes "e os fogos de artifício iluminando o céu,";
+	mes "a noite é um momento de beleza aqui!";
+	close;
+}
+
+dewata,179,204,4	script	Young Lady#dew	537,{
+	mes "[Jovem Moça]";
+	mes "Quando você estiver fora da cidade,";
+	mes "e encontrar ^FF0000Tigre, Macaco ou Porco^000000,";
+	mes "certifique-se de evitá-los.";
+	next;
+	select("What do you mean?");
+	mes "[Jovem Moça]";
+	mes "Eu ainda não vi,";
+	mes "mas a lenda diz que existe um";
+	mes "monstro cruel chamado ^FF0000Leak^000000";
+	mes "que pode se transformar em um animal";
+	mes "e hipnotizar as pessoas para matar.";
+	next;
+	mes "[Jovem Moça]";
+	mes "Você conhece os perigos deste mundo.";
+	mes "Nunca é demais ser cuidadoso,";
+	mes "mesmo que seja apenas uma lenda urbana.";
+	//emotion ET_SCRATCH; //TODO
+	close;
+}
+
+dewata,280,236,4	script	Settler#dew	726,{
+	mes "[Colono]";
+	mes "Eu não sou realmente de ^8B4513Dewata^000000.";
+	mes "Mas enquanto viajava,";
+	mes "eu encontrei este lugar...";
+	mes "E tomei a decisão";
+	mes "de morar nesta bela cidade.";
+	next;
+	mes "[Colono]";
+	mes "Tenho sido feliz morando aqui";
+	mes "e encontrando e vivenciando";
+	mes "todas essas belas paisagens.";
+	mes "É um sonho que se tornou realidade.";
+	next;
+	mes "[Colono]";
+	mes "Você já pensou em";
+	mes "se estabelecer aqui também?";
+	close;
+}
+
+dewata,204,230,6	script	Dieting Lady#dew	537,{
+	if (countitem(11533) == 0) {
+		mes "[Mulher de Dieta]";
+		mes "Ah~ Estou morrendo de fome!!";
+		mes "Deveria estar de dieta agora.";
+		mes "Por que ainda estou com fome?";
+		next;
+		mes "[Mulher de Dieta]";
+		mes "Não fale muito comigo!!";
+		mes "Quero muito experimentar aquele";
+		mes "^006400Satay^000000 grelhado~!!!!!";
+		close;
+	}
+	mes "[Mulher de Dieta]";
+	mes "Aquele ^006400Satay^000000 de";
+	mes "dar água na boca é para mim?";
+	next;
+	switch(select("Yes, want a taste?:No, it's for me!")) {
+	case 1:
+		delitem 11533,1; //Satay
+		mes "[Mulher de Dieta]";
+		mes "Muito obrigada!";
+		mes "Eu estava com tanta fome~!!";
+		mes "O cheiro deste ^006400Satay^000000";
+		mes "é tão bom~!";
+		next;
+		getitem 11533,1; //Satay
+		mes "[Mulher de Dieta]";
+		mes "Ah... preciso voltar a mim,";
+		mes "tudo o que é demais é ruim...";
+		mes "Devo continuar com minha dieta.";
+		mes "Desculpe, vou devolver para você.";
+		emotion ET_CRY;
+		close;
+	case 2:
+		mes "[Mulher de Dieta]";
+		mes "Argg.. Você é muito ganancioso!";
+		mes "Já que você não quer compartilhar.";
+		mes "De qualquer forma, eu não deveria sair da minha dieta";
+		mes "mesmo por algo que parece e cheira tão bem...";
+		emotion ET_HNG;
+		close;
+	}
+}
+
+dewata,117,156,6	script	Dreaming Kid#dew	538,{
+	mes "[Criança Sonhadora]";
+	mes "Minha vovó diz que";
+	mes "houve uma vez um pássaro chamado ^FF0000Garuda^000000";
+	mes "que voou acima desta cidade.";
+	mes "Depois disso, tivemos ótimas colheitas";
+	mes "e pudemos viver felizes.";
+	next;
+	mes "[Criança Sonhadora]";
+	mes "Eu quero ver aquele pássaro";
+	mes "voando sobre nossa cidade novamente!";
+	mes "Então minha mãe, meu pai,";
+	mes "minha vovó e meu vovô";
+	mes "podem ser felizes como nos velhos tempos.";
+	mes "O que você acha?";
+	close;
+}
+
+dewata,144,216,4	script	Energetic Kid#dew	538,{
+	mes "[Criança Energética]";
+	mes "Meus pais costumavam me dizer...";
+	next;
+	mes "- ^006400Filho,^000000 -";
+	mes "- ^006400Você deve estudar muito.^000000 -";
+	mes "- ^006400Seja feliz.^000000 -";
+	mes "- ^006400Viva uma vida tranquila^000000 -";
+	mes "- ^006400e segura.^000000 -";
+	mes "- ^006400A montanha lá longe^000000 -";
+	mes "- ^006400estará sempre lá por você.^000000 -";
+	next;
+	mes "[Criança Energética]";
+	mes "Não é uma ótima filosofia?";
+	mes "Eu quero viver desse jeito";
+	mes "e me tornar uma grande pessoa,";
+	mes "e ajudar todas as pessoas da nossa cidade";
+	mes "a viverem felizes para sempre!";
+	close;
+}
+
+dewata,127,248,6	script	Wishing Kid#dew	539,{
+	mes "[Criança que deseja ser adulta]";
+	mes "Minha família produz";
+	mes "o vinho tradicional de Dewata há eras.";
+	mes "Eu quero beber ele mesmo,";
+	mes "mas meu pai diz que sou muito novo.";
+	mes "Ele disse que só posso beber";
+	mes "depois que eu dormir por mais de ^FF0000100 dias^000000.";
+	next;
+	mes "[Criança que deseja ser adulta]";
+	mes "Todos os adultos adoram beber";
+	mes "o vinho do meu pai.";
+	mes "Eu quero muito experimentar um pouco.";
+	mes "Mas, o que devo fazer...?";
+	mes "Eu esqueci quantas ^FF0000noites^000000";
+	mes "eu já dormi... buá buá!";
+	emotion ET_CRY;
+	close;
+}
+
+dew_fild01,101,259,6	script	Jaty Tribe Gatekeeper	541,{
+	mes "[Guardião do Portão da Tribo Jaty]";
+	mes "Bem-vindo à cidade de ^FF0000Jaty^000000.";
+	mes "Nossa tribo reverencia a força e a bravura.";
+	mes "Desejamos a você um momento seguro e tranquilo aqui.";
+	close;
+}
+
+dew_fild01,106,306,4	script	R. Jaty Tribe Warrior	541,{
+	mes "[Guerreiro Jaty Reservado]";
+	mes "Eu quero ser o melhor";
+	mes "como ninguém jamais foi.";
+	next;
+	mes "[Guerreiro Jaty Reservado]";
+	mes "Estou aprendendo técnicas de caça";
+	mes "ultimamente. E estou ficando";
+	mes "cada vez melhor";
+	mes "a cada dia!";
+	next;
+	mes "[Guerreiro Jaty Reservado]";
+	mes "Eu não vou parar até";
+	mes "eu me tornar um verdadeiro guerreiro!";
+	close;
+}

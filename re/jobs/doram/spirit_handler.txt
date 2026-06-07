@@ -1,0 +1,1248 @@
+//===== rAthena Script =======================================
+//= Job change : Spirit Handler
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- The translation is not from iRO.
+//- Step 14 takes place in an instance (npc/re/instance/DeepForest.txt)
+//- Total : 15 steps.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Atemo]
+//============================================================
+
+// Step 1
+payon,165,116,5	script	Request Board#JQ_SH	4_BOARD3,{
+	if (Class == JOB_SPIRIT_HANDLER) {
+		mes "- Esta solicitação já foi concluída. -";
+		close;
+	}
+	if (Class != JOB_SUMMONER) {
+		mes "[Solicitação Urgente de Lenha]";
+		mes "Uma solicitação para capturar uma fera selvagem.";
+		mes "^123456Requisito:^000000";
+		mes "Ser bom com animais.";
+		mes "Aventureiro de ^dd5555Nível Base 200/Classe 60^000000 ou superior.";
+		mes "Preferência pela classe <FONT SIZE = 14>^dd5555<B>Invocador</B>^000000</FONT>.";
+		emotion ET_HELP;
+		next;
+		mes "- Parece ser uma solicitação difícil de realizar com minha classe atual. -";
+		close;
+	}
+	if (BaseLevel < 200 || JobLevel < 60) {	// !TODO: unknown dialog
+		mes "[Solicitação Urgente de Lenha]";
+		mes "Uma solicitação para capturar uma fera selvagem.";
+		mes "^123456Requisito:^000000";
+		mes "Ser bom com animais.";
+		mes "Aventureiro de ^dd5555Nível Base 200/Classe 60^000000 ou superior.";
+		mes "Preferência pela classe <FONT SIZE = 14>^dd5555<B>Invocador</B>^000000</FONT>.";
+		emotion ET_HELP;
+		next;
+		mes "- Seu nível é muito baixo para este quadro de solicitações. -";
+		close;
+	}
+	switch( isbegin_quest(11770) ) {
+	case 0:
+		mes "[Solicitação Urgente de Lenha]";
+		mes "Uma solicitação para capturar uma fera selvagem.";
+		mes "^123456Requisito:^000000";
+		mes "Ser bom com animais.";
+		mes "Aventureiro de ^dd5555Nível Base 200/Classe 60^000000 ou superior.";
+		mes "Preferência pela classe <FONT SIZE = 14>^dd5555<B>Invocador</B>^000000</FONT>.";
+		emotion ET_HELP;
+		next;
+		mes "[Solicitação Urgente de Lenha]";
+		mes "^123456Observação especial:^000000";
+		mes "Aqueles que ainda cheiram a carnívoro,";
+		mes "como um lobo ou falcão,";
+		mes "não podem concluir a missão.";
+		next;
+		mes "[Solicitação Urgente de Lenha]";
+		mes "Para outros detalhes, por favor, entre em contato com o <NAVI>[Marceneiro]<INFO>payon,252,297,0,101,0</INFO></NAVI> perto da fábrica de lenha.";
+		setquest 11770;
+		navigateto("payon",252,297);
+		close;
+	case 1:
+		mes "[Solicitação Urgente de Lenha]";
+		mes "Para outros detalhes, por favor, entre em contato com o <NAVI>[Marceneiro]<INFO>payon,252,297,0,101,0</INFO></NAVI> perto da fábrica de lenha.";
+		navigateto("payon",252,297);
+		close;
+	case 2:
+		mes "- Não há mais solicitações. -";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "Class == JOB_SUMMONER && BaseLevel == 200 && JobLevel == 60 && isbegin_quest(11770) == 0" );
+	end;
+}
+
+// Step 2
+payon,252,297,3	script	Woodworker#JQ_SH	2_M_BARD_ORIENT,{
+	if (isbegin_quest(11770) == 0) {
+		mes "[Marceneiro]";
+		mes "<FONT SIZE = 14>Bem-vindo~ Cliente~!</FONT>";
+		mes "Esta é uma marcenaria de lenha~";
+		emotion ET_DELIGHT;
+		npctalk "Welcome~ Customer~!", "", bc_self;
+		next;
+		mes "[Marceneiro]";
+		mes "Há algo~ que você esteja procurando~?";
+		close;
+	}
+	if (isbegin_quest(11770) == 1) {
+		mes "[Marceneiro]";
+		mes "<FONT SIZE = 14>Bem-vindo~ Cliente~!</FONT>";
+		mes "Esta é uma marcenaria de lenha~";
+		emotion ET_DELIGHT;
+		npctalk "Welcome~ Customer~!", "", bc_self;
+		next;
+		mes "[Marceneiro]";
+		mes "Há algo~ que você esteja procurando~?";
+		next;
+		select( "About the request." );
+		mes "[Marceneiro]";
+		mes "Você está falando de uma solicitação~ cliente~?";
+		mes "Você poderia esperar um momento, por favor~?";
+		emotion ET_AHA;
+		next;
+		mes "[Marceneiro]";
+		mes "A solicitação de marcenaria...";
+		mes "Hm...";
+		npctalk "Let's see...", "", bc_self;
+		next;
+		mes "[Marceneiro]";
+		mes "Sinto muito, mas está confirmado que não há nenhuma solicitação da nossa marcenaria.";
+		mes "Poderia me dizer que tipo de solicitação você recebeu? Cliente~";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		select( "Request for firewood." );
+		mes "[Marceneiro]";
+		mes "Aaaah!!!";
+		mes "Sinto muito!";
+		mes "Acho que não é da marcenaria, mas é uma solicitação pessoal do dono~";
+		emotion ET_SURPRISE;
+		next;
+		mes "[Marceneiro]";
+		mes "<FONT SIZE = 10>Se o chefe pediu para você fazer, você deveria ter me contado!</FONT>";
+		mes "Pode me dar um momento, por favor? Cliente?";
+		mes "Vou chamar o chefe...";
+		emotion ET_SORRY;
+		next;
+		mes "[Marceneiro]";
+		mes "<FONT SIZE = 14>Este cavalheiro saiu e se foi de novo!!</FONT>";
+		mes "<FONT SIZE = 10>Será que ele foi para a floresta de novo!</FONT>";
+		mes "Isso não pode estar acontecendo!!!";
+		emotion ET_FRET;
+		npctalk "This guy, seriously!!!!", "", bc_self;
+		next;
+		mes "[Marceneiro]";
+		mes "Sinto muito~ Cliente.";
+		mes "O chefe não está no escritório agora.";
+		next;
+		mes "[Marceneiro]";
+		mes "Não sei quando ele voltará.";
+		mes "Se você estiver com pressa, por que não vai à ^dd5555Floresta de Payon^000000?";
+		mes "Você vai <NAVI>[até lá]<INFO>pay_fild08,157,129,0,101,0</INFO></NAVI>.";
+		emotion ET_SORRY;
+		completequest 11770;
+		setquest 11771;
+		navigateto("pay_fild08",157,129);
+		close;
+	}
+	if (isbegin_quest(11771) == 1) {
+		mes "[Marceneiro]";
+		mes "Sinto muito~ Cliente.";
+		mes "O chefe não está no escritório agora.";
+		next;
+		mes "[Marceneiro]";
+		mes "Não sei quando ele voltará.";
+		mes "Se você estiver com pressa, por que não vai à ^dd5555Floresta de Payon^000000?";
+		mes "Você vai <NAVI>[até lá]<INFO>pay_fild08,157,129,0,101,0</INFO></NAVI>.";
+		emotion ET_SORRY;
+		navigateto("pay_fild08",157,129);
+		close;
+	}
+	mes "[Marceneiro]";
+	mes "<FONT SIZE = 14>Bem-vindo~ Cliente~!</FONT>";
+	mes "Esta é uma marcenaria de lenha~";
+	emotion ET_DELIGHT;
+	npctalk "Welcome~ Customer~!", "", bc_self;
+	next;
+	mes "[Marceneiro]";
+	mes "Você tem mais algum outro assunto?";
+	close;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11770) == 1" );
+	end;
+}
+
+// Step 3, 10
+pay_fild08,161,129,5	duplicate(dummy_npc)	Wrecked Cart#JQ_SH	4_EP18_WAGON
+pay_fild08,152,129,5	duplicate(dummy_cloaked_npc)	Lee Daegam#JQ_SH_1	2_M_PHARMACIST
+
+pay_fild08,157,129,3	script	Carpenter Firewood#JQ_SH	1_M_SMITH,{
+	if (isbegin_quest(11770) != 2) {
+		mes "[Carpinteiro Lenha]";
+		mes "Aaaah~~";
+		mes "Estou completamente perdido hoje! Eu estraguei tudo!!!";
+		emotion ET_CRY;
+		npctalk "Aaaah...", "", bc_self;
+		close;
+	}
+	if (isbegin_quest(11771) == 1) {
+		mes "[Carpinteiro Lenha]";
+		mes "Aaaah~~";
+		mes "Estou completamente perdido hoje! Eu estraguei tudo!!!";
+		emotion ET_CRY;
+		npctalk "Aaaah...", "", bc_self;
+		next;
+		select( "Chief?" );
+		mes "[Carpinteiro Lenha]";
+		mes "Quem?";
+		mes "...";
+		mes "Foi o Lee Daegam quem enviou você?";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Quanto tempo faz desde que você assou isso? Você está enviando alguém aqui de novo?!";
+		mes "Só empurrar não significa que vai funcionar!";
+		emotion ET_FRET;
+		next;
+		select( "I came for the request." );
+		mes "[Carpinteiro Lenha]";
+		mes "Huh...";
+		mes "<FONT SIZE = 14>Huh...</FONT>";
+		mes "<FONT SIZE = 18><B>Ah!!!!!!!!!</B></FONT>";
+		emotion ET_SURPRISE;
+		npctalk "Aaah!!!!!!!", "", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Eheh~~!!";
+		mes "Aaaah!!!";
+		mes "<FONT SIZE = 16>Isso mesmo!!!!!</FONT>";
+		emotion ET_HUK;
+		npctalk "That's right!!!!!!!!!", "", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "<FONT SIZE = 14>Desculpe!</FONT>";
+		mes "Eu saí por um tempo porque não tive progresso no meu trabalho e estava muito frustrado, mas não esperava a visita de um cliente.";
+		mes "Que vergonha!";
+		mes "Eheheh!";
+		emotion ET_PROFUSELY_SWEAT;
+		npctalk "I thought the request was from Lee Daegam~", "", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "É o momento perfeito!";
+		mes "Já que você veio até aqui, não volte para a marcenaria, venha aqui e veja o que as feras cruéis fizeram.";
+		npctalk "They've made a mess of all the tools, what can I do!", "", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Parece que são animais com cascos, como cervos e javalis, mas...";
+		mes "Por que eles são tão ferozes quando estão pastando na floresta!";
+		npctalk "Don't you guys ever get caught! I'm so angry!!", "", bc_self;
+		erasequest 11771;
+		setquest 11772;
+		close;
+	}
+	if (isbegin_quest(11772) == 1) {
+		mes "[Carpinteiro Lenha]";
+		mes "É o momento perfeito!";
+		mes "Já que você veio até aqui, não volte para a marcenaria, venha aqui e veja o que as feras cruéis fizeram.";
+		npctalk "They've made a mess of all the tools, what can I do!", "", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Parece que são animais com cascos, como cervos e javalis, mas...";
+		mes "Por que eles são tão ferozes quando estão pastando na floresta!";
+		npctalk "Don't you guys ever get caught! I'm so angry!!", "", bc_self;
+		close;
+	}
+	if (isbegin_quest(11773) == 1 || isbegin_quest(11774) == 1 || isbegin_quest(11775) == 1 || isbegin_quest(11776) == 1 || isbegin_quest(11777) == 1) {
+		mes "[Carpinteiro Lenha]";
+		mes "Então, como está indo sua investigação?";
+		mes "Você já encontrou aqueles animais selvagens?";
+		close;
+	}
+	if (isbegin_quest(11778) == 1) {
+		mes "[Carpinteiro Lenha]";
+		mes "O que você descobriu, aventureiro?";
+		mes "O que você conseguiu?";
+		next;
+		select( "About the food that fell on the street." );
+		mes "[Carpinteiro Lenha]";
+		mes "Como alguém poderia jogar comida na rua? Comida é preciosa, é um desperdício!!";
+		emotion ET_ANGER;
+		npctalk "When I was young, I used to eat tree roots because I didn't have anything to eat!!!", "", bc_self;
+		next;
+		select( "About wild animals." );
+		mes "[Carpinteiro Lenha]";
+		mes "Fico feliz que tenha alimentado alguns animais selvagens, mas...";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Então os animais selvagens não vieram até aqui enquanto pegavam a comida?";
+		emotion ET_SURPRISE;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Quem poderia ter feito uma coisa tão estranha...";
+		emotion ET_QUESTION;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "De qualquer forma, o aventureiro assumiu o trabalho, então posso ver algumas pistas!";
+		mes "Com esse impulso, resolveremos isso antes que Lee Daegam enlouqueça de novo...";
+		next;
+		mes "[???]";
+		mes "<FONT SIZE = 16>Ehem!</FONT>";
+		mes "<FONT SIZE = 14>Você tem uma fábrica~</FONT>";
+		emotion ET_HUK;
+		emotion ET_HUK, playerattached();
+		cloakoffnpcself( "Lee Daegam#JQ_SH_1" );
+		npctalk "What!!! Hem!!!!!!", "Lee Daegam#JQ_SH_1", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Ugh....";
+		mes "Eddga me disse que estava vindo...";
+		npctalk "Eddga is better.", "", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Lee Daegam, o que o traz aqui?";
+		next;
+		mes "[Lee Daegam]";
+		mes "Oh~~ Eheh~ Não é nada de especial~";
+		mes "Estou aqui para ver se tudo está correndo bem~";
+		npctalk "Oops! What's all this on the floor?", "Lee Daegam#JQ_SH_1", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Não vai funcionar se você vier o tempo todo assim...";
+		next;
+		mes "[Lee Daegam]";
+		mes "Oh meu~";
+		mes "Não parece muito diferente de ontem.";
+		mes "Você nem começou a trabalhar, mas ouço barulhos altos~";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "<FONT SIZE = 14>Oh... Eu... Eu...!!!</FONT>";
+		mes "<FONT SIZE = 14>Eu não consigo trabalhar porque as ferramentas continuam quebrando!!!</FONT>";
+		mes "<FONT SIZE = 14>Se você está aqui para me provocar, só está me atrapalhando, então volte!</FONT>";
+		emotion ET_FRET;
+		next;
+		mes "[Lee Daegam]";
+		mes "Oh meu!";
+		mes "Você não precisa gritar tanto. Já vou indo!";
+		mes "<FONT SIZE = 18>Hmph!</FONT>";
+		npctalk "Hmph!!!", "Lee Daegam#JQ_SH_1", bc_self;
+		emotion ET_HNG, getnpcid(0,"Lee Daegam#JQ_SH_1");
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "<FONT SIZE = 14>Oh, aquele velho!</FONT>";
+		mes "Você está me pedindo para trabalhar ou não? Você está apenas me irritando de novo!";
+		cloakonnpcself( "Lee Daegam#JQ_SH_1" );
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Ele só está me atrapalhando, muito menos me ajudando com o que confiei a você.";
+		mes "<FONT SIZE = 14>Oh meu!</FONT>";
+		emotion ET_FRET;
+		npctalk "Salt! I should sprinkle salt!", "", bc_self;
+		next;
+		select( "About Lee Daegam." );
+		mes "[Carpinteiro Lenha]";
+		mes "Como você ouviu antes, ele é um grande líder, ^123456Lee Daegam^000000, que deixou este trabalho para mim.";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Vou fazer um local de férias para os jovens por aqui! O que você me diz!";
+		npctalk "I think we need to make it even grander.", "", bc_self;
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Eu te disse que a construção seria difícil porque era uma área cheia de monstros, mas quem diria que até animais selvagens seriam um problema?";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Nesse meio tempo, ele veio me ver hoje e me provocou daquele jeito...";
+		mes "Se você não conseguir resolver esse problema de novo, acho que deveria pedir demissão...";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Então vou organizar minha bagagem no carrinho.";
+		mes "Dê uma olhada mais atenta nas ^dd5555Ferramentas Quebradas^000000.";
+		emotion ET_HNG;
+		npctalk "It's my fortune!", "", bc_self;
+		erasequest 11778;
+		setquest 11779;
+		close;
+	}
+	if (isbegin_quest(11779) == 1) {
+		mes "[Carpinteiro Lenha]";
+		mes "Nesse meio tempo, ele veio me ver hoje e me provocou daquele jeito...";
+		mes "Se você não conseguir resolver esse problema de novo, acho que deveria pedir demissão...";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Então vou organizar minha bagagem no carrinho.";
+		mes "Dê uma olhada mais atenta nas ^dd5555Ferramentas Quebradas^000000.";
+		emotion ET_HNG;
+		npctalk "It's my fortune!", "", bc_self;
+		close;
+	}
+	// !TODO: unknown dialog for steps [11-14]
+	if (isbegin_quest(11769) == 2) {
+		mes "[Carpinteiro Lenha]";
+		mes "Oh meu... Oh meu...";
+		mes "Como diabos isso pôde acontecer...";
+		next;
+		mes "[Carpinteiro Lenha]";
+		mes "Ele era um senhor rabugento, mas não era uma pessoa tão ruim, então o que aconteceu...";
+		mes "Oh meu...";
+		npctalk "Oh my...", "", bc_self;
+		emotion ET_THINK;
+		close;
+	}
+	end;
+
+OnInit:
+	// Step 3
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11771) == 1" );
+
+	// Step 10
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11778) == 1" );
+	end;
+}
+
+// Step 4, 11
+pay_fild08,153,129,5	duplicate(dummy_cloaked_npc)	Chulho#JQ_SH_1	4_POINT_BLUE
+pay_fild08,153,129,5	duplicate(dummy_cloaked_npc)	Chulho#JQ_SH_1_1	4_EXJOB_CHUL_HO
+
+pay_fild08,155,128,3	script	Broken Tools#JQ_SH	4_BRICKPILE,{
+	if (isbegin_quest(11772) == 1) {
+		mes "- Contém ferramentas quebradas. -";
+		next;
+		mes "- Ao redor da caixa, pegadas de animais estão marcadas de forma desordenada e, como o Carpinteiro Lenhador disse, parecem ser pegadas de herbívoros. -";
+		next;
+		mes "[Carpinteiro Lenhador]";
+		mes "O que me diz, aventureiro?";
+		mes "Acha que sabe de algo?";
+		next;
+		select( "I think I need to look around a little more." );
+		mes "[Carpinteiro Lenhador]";
+		mes "Então, olhe ao redor com atenção.";
+		mes "Temos que começar a construção o mais rápido possível, então não demore muito.";
+		next;
+		mes "[Carpinteiro Lenhador]";
+		mes "Avise-me se descobrir algo enquanto dá uma olhada.";
+		erasequest 11772;
+		setquest 11773;
+		navigateto("pay_fild08",153,116);
+		close;
+	}
+	if (isbegin_quest(11773) == 1) {
+		mes "- Contém ferramentas quebradas. -";
+		next;
+		mes "- Ao redor da caixa, pegadas de animais estão marcadas de forma desordenada e, como o Carpinteiro Lenhador disse, parecem ser pegadas de herbívoros. -";
+		next;
+		mes "[Carpinteiro Lenhador]";
+		mes "O que me diz, aventureiro?";
+		mes "Acha que sabe de algo?";
+		next;
+		select( "I think I need to look around a little more." );
+		mes "[Carpinteiro Lenhador]";
+		mes "Então, olhe ao redor com atenção.";
+		mes "Temos que começar a construção o mais rápido possível, então não demore muito.";
+		next;
+		mes "[Carpinteiro Lenhador]";
+		mes "Avise-me se descobrir algo enquanto dá uma olhada.";
+		navigateto("pay_fild08",153,116);
+		close;
+	}
+	if (isbegin_quest(11779) == 1) {
+		mes "- Um olhar mais atento às ferramentas quebradas mostra uma mancha borrada. -";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 16>Oh não!!</FONT>";
+		mes "<FONT SIZE = 14>Você não pode comer isso!</FONT>";
+		cutin "ex_sh_chulho00.png",2;
+		cloakoffnpcself( "Chulho#JQ_SH_1" );
+		npctalk "Oh my gosh!!", "Chulho#JQ_SH_1", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Cheira delicioso, mas faz você passar mal.</FONT>";
+		npctalk "I tried it!", "Chulho#JQ_SH_1", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>As coisas que comi na floresta eram doces e deliciosas, mas os morangos-cobra que peguei mais cedo eram amargos!</FONT>";
+		mes "<FONT SIZE = 16>Estou com raiva!</FONT>";
+		mes "<FONT SIZE = 18>Meu estômago dói!</FONT>";
+		npctalk "My stomach is still burning!", "Chulho#JQ_SH_1", bc_self;
+		emotion ET_PROFUSELY_SWEAT, getnpcid(0,"Chulho#JQ_SH_1");
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Até os amigos que seguiram a comida até aqui voltaram para casa irritados!</FONT>";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>A estrada ali cheira deliciosamente, mas esse caminho leva à vila, então nós, animais da montanha, teremos problemas se formos por ali!</FONT>";
+		npctalk "You're going to get in trouble!", "Chulho#JQ_SH_1", bc_self;
+		next;
+		select( "About the delicious smell." );
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>O cheiro vindo da frente da floresta está conectado à estrada para a vila.</FONT>";
+		mes "<FONT SIZE = 14>Mas não importa se cheira bem, se é amargo, irritante e causa dor de estômago.</FONT>";
+		next;
+		if (select( "Give him a strawberry.", "Stop." ) == 2) {
+			// !TODO: unknown dialog
+			cutin "",255;
+			cloakonnpcself( "Chulho#JQ_SH_1" );
+			end;
+		}
+		if (countitem(578) < 1) {
+			mes "[Chulho]";
+			mes "<FONT SIZE = 14>Hã?</FONT>";
+			mes "<FONT SIZE = 14>O que você está me dando?</FONT>";
+			cutin "ex_sh_chulho00.png",2;
+			close2;
+			cutin "",255;
+			cloakonnpcself( "Chulho#JQ_SH_1" );
+			end;
+		}
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Você está realmente me dando isso?!</FONT>";
+		mes "<FONT SIZE = 14>É delicioso! Delicioso!</FONT>";
+		mes "<FONT SIZE = 14>É muito melhor do que os morangos que comi na floresta!</FONT>";
+		cutin "ex_sh_chulho03.png",2;
+		cloakonnpcself( "Chulho#JQ_SH_1" );
+		cloakoffnpcself( "Chulho#JQ_SH_1_1" );
+		npctalk "It's good! It's good!!!!", "Chulho#JQ_SH_1_1", bc_self;
+		emotion ET_BIGTHROB, getnpcid(0,"Chulho#JQ_SH_1");
+		delitem 578,1;	// Strawberry
+		erasequest 11779;
+		setquest 11780;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Você me deu uma comida deliciosa, então vou te levar ao lugar que você está curioso, com aquele cheiro delicioso!</FONT>";
+		mes "<FONT SIZE = 14>Siga-me.</FONT>";
+		cutin "ex_sh_chulho01.png",2;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "Chulho#JQ_SH_1_1" );
+		navigateto("payon",233,159);
+		end;
+	}
+	if (isbegin_quest(11780) == 1) {
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Você me deu uma comida deliciosa, então vou te levar ao lugar que você está curioso, com aquele cheiro delicioso!</FONT>";
+		mes "<FONT SIZE = 14>Siga-me.</FONT>";
+		cloakoffnpcself( "Chulho#JQ_SH_1_1" );
+		cutin "ex_sh_chulho01.png",2;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "Chulho#JQ_SH_1_1" );
+		navigateto("payon",233,159);
+		end;
+	}
+	// Default dialog
+	mes "- Contém ferramentas quebradas. -";
+	close;
+
+OnInit:
+	// Step 4
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11772) == 1" );
+
+	// Step 11
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11779) == 1" );	// !TODO: countitem(578) > 0 ?
+	end;
+}
+
+// Step 5
+pay_fild08,153,116,3	script	Clutter Traces#JQ_SH1	4_SOIL,{
+	if (isbegin_quest(11773) == 1) {
+		mes "- Encontrei outro rastro.";
+		mes "Pegadas semelhantes às encontradas ao lado da caixa de ferramentas estão marcadas. -";
+		next;
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		erasequest 11773;
+		setquest 11774;
+		navigateto("pay_fild08",137,88);
+		close;
+	}
+	if (isbegin_quest(11774) == 1) {
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		navigateto("pay_fild08",137,88);
+		close;
+	}
+	// Default dialog
+	mes "- Há um rastro de algo bagunçado. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11773) == 1" );
+	end;
+}
+
+// Step 6
+pay_fild08,137,88,3	script	Clutter Traces#JQ_SH2	4_SOIL,{
+	if (isbegin_quest(11774) == 1) {
+		mes "- Encontrei outro rastro.";
+		mes "Dadas as pegadas grandes e profundas, parece ser um herbívoro enorme. -";
+		next;
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		erasequest 11774;
+		setquest 11775;
+		navigateto("pay_fild08",165,68);
+		close;
+	}
+	if (isbegin_quest(11775) == 1) {
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		navigateto("pay_fild08",165,68);
+		close;
+	}
+	// Default dialog
+	mes "- Há um rastro de algo bagunçado. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11774) == 1" );
+	end;
+}
+
+// Step 7
+pay_fild08,165,70,6	duplicate(dummy_cloaked_npc)	???#JQ_SH_1	4_POINT_BLUE
+
+pay_fild08,165,68,3	script	Clutter Traces#JQ_SH3	4_SOIL,{
+	if (isbegin_quest(11775) == 1) {
+		mes "- Encontrei outro rastro.";
+		mes "Olhando para as pegadas próximas, não parece ser apenas uma ou duas. -";
+		next;
+		mes "[???]";
+		mes "O que você está fazendo, curtindo assistir?";
+		cutin "ex_sh_spirit01.png",2;
+		cloakoffnpcself( "???#JQ_SH_1" );
+		npctalk "What are you looking at?", "???#JQ_SH_1", bc_self;
+		emotion ET_HUK, playerattached();
+		next;
+		cutin "",255;
+		mes "- Olhei em volta por causa da voz repentina, mas não consegui ver ninguém. -";
+		next;
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		erasequest 11775;
+		setquest 11776;
+		cloakonnpcself( "???#JQ_SH_1" );
+		navigateto("pay_fild08",214,89);
+		close;
+	}
+	if (isbegin_quest(11776) == 1) {
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		navigateto("pay_fild08",214,89);
+		close;
+	}
+	// Default dialog
+	mes "- Há um rastro de algo bagunçado. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11775) == 1" );
+	end;
+}
+
+// Step 8
+pay_fild08,213,91,6	duplicate(dummy_cloaked_npc)	???#JQ_SH_2	4_POINT_BLUE
+
+pay_fild08,214,89,3	script	Clutter Traces#JQ_SH4	4_SOIL,{
+	if (isbegin_quest(11776) == 1) {
+		mes "- Encontrei outro rastro.";
+		mes "É uma pegada limpa, diferente do que vi na oficina do lenhador. -";
+		next;
+		mes "- Os animais parecem ter seguido direto pela estrada para a oficina do lenhador. -";
+		next;
+		mes "[???]";
+		mes "É divertido ver pegadas?";
+		cloakoffnpcself( "???#JQ_SH_2" );
+		npctalk "There are so many footprints.", "???#JQ_SH_2", bc_self;
+		cutin "ex_sh_spirit02.png",2;
+		emotion ET_HUK, playerattached();
+		next;
+		cutin "",255;
+		mes "- Ouvi uma voz novamente, mas não consegui ver nada. -";
+		next;
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		erasequest 11776;
+		setquest 11777;
+		cloakonnpcself( "???#JQ_SH_2" );
+		navigateto("pay_fild09",31,87);
+		close;
+	}
+	if (isbegin_quest(11777) == 1) {
+		mes "- As pegadas estão indicando o caminho.";
+		mes "Parece que continuam.";
+		mes "Vamos seguir as pegadas. -";
+		navigateto("pay_fild09",31,87);
+		close;
+	}
+	// Default dialog
+	mes "- Há um rastro de algo bagunçado. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11776) == 1" );
+	end;
+}
+
+// Step 9
+pay_fild09,33,89,6	duplicate(dummy_cloaked_npc)	???#JQ_SH_3	4_POINT_BLUE
+
+pay_fild09,31,87,3	script	Clutter Traces#JQ_SH5	4_SOIL,{
+	if (isbegin_quest(11777) == 1) {
+		mes "- Encontrei outro rastro. -";
+		next;
+		mes "[???]";
+		mes "Se é uma pegada, ela vai até aquela floresta profunda.";
+		cloakoffnpcself( "???#JQ_SH_3" );
+		cutin "ex_sh_spirit02.png",2;
+		emotion ET_HUK, playerattached();
+		next;
+		select( "Who's speaking?" );
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Eu sou Chulho.</FONT>";
+		mes "<FONT SIZE = 14>Eu~~ Eu sou um espírito da floresta.</FONT>";
+		npctalk "Ahem!", "???#JQ_SH_3", bc_self;
+		cutin "ex_sh_chulho00.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Existem muitos amigos na floresta!</FONT>";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Hoje, estou brincando na floresta balançando galhos, e outros amigos estão se aglomerando ao longo da estrada.</FONT>";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Eu segui vocês porque achei que algo interessante tinha acontecido e vocês estavam caminhando tão animados.</FONT>";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Caminhar com todos foi bem divertido porque havia ^dd5555frutas e grãos^000000. Coisas que eram difíceis de ver no chão da floresta!</FONT>";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Então vi uma fruta estranhamente madura no chão, desviei o olhar por um momento e todos foram embora.</FONT>";
+		npctalk "It was very coveted!", "???#JQ_SH_3", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Depois que todos foram embora, não sobraram frutas deliciosas, mas havia pegadas por toda parte. Então... eu as segui até aqui.</FONT>";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>O quão delicioso foi comer sem deixar rastros?</FONT>";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 17>Oh!!!</FONT>";
+		mes "<FONT SIZE = 14>Tem outro morango-silvestre maravilhoso!!!</FONT>";
+		npctalk "It looks delicious!!", "???#JQ_SH_3", bc_self;
+		emotion ET_HUK, getnpcid(0,"???#JQ_SH_3");
+		next;
+		cutin "",255;
+		mes "- Recebi informações de que havia algo para comer por onde os animais selvagens passaram.";
+		mes "Vamos voltar para a lenha. -";
+		erasequest 11777;
+		setquest 11778;
+		cloakonnpcself( "???#JQ_SH_3" );
+		navigateto("pay_fild08",157,129);
+		close;
+	}
+	if (isbegin_quest(11778) == 1) {
+		mes "- Recebi informações de que havia algo para comer por onde os animais selvagens passaram.";
+		mes "Vamos voltar para a lenha. -";
+		navigateto("pay_fild08",157,129);
+		close;
+	}
+	// Default dialog
+	mes "- Há um rastro de algo bagunçado. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11777) == 1" );
+	end;
+}
+
+// Step 10
+// pay_fild08,157,129,3	script	Carpenter Firewood#JQ_SH	1_M_SMITH,{
+
+// Step 11
+// pay_fild08,155,128,3	script	Broken Tools#JQ_SH	4_BRICKPILE,{
+
+// Step 12
+payon,233,158,3	duplicate(dummy_cloaked_npc)	Chulho#JQ_SH_2	4_EXJOB_CHUL_HO
+payon,232,157,6	duplicate(dummy_cloaked_npc)	???#JQ_SH_k	4_POINT_BLUE
+payon,238,157,5	duplicate(dummy_cloaked_npc)	???#JQ_SH_lee	4_M_ORIENT01
+payon,242,157,3	duplicate(dummy_cloaked_npc)	Kwang Saeng#JQ_SH_lee	4_M_DARKPRIEST
+payon,240,156,5	duplicate(dummy_cloaked_npc)	Admiral Lee Daegam#JQ_SH_lee	2_M_PHARMACIST
+	
+payon,233,159,3	script	Food Pile#JQ_SH	4_EP16_FOOD,2,2,{
+	if (isbegin_quest(11780) == 1) {
+		mes "- A comida parece estar empilhada.";
+		mes "Vamos chegar mais perto e verificar. -";
+		close;
+	}
+	// Default dialog
+	mes "- A comida parece estar empilhada.";
+	mes "Quem faria algo assim em um lugar como este??? -";
+	close;
+
+OnTouch:
+	if (isbegin_quest(11780) == 1) {
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Aqui está!</FONT>";
+		mes "<FONT SIZE = 14>O cheiro aqui é muito ruim!</FONT>";
+		mes "<FONT SIZE = 16>Churup...</FONT>";
+		cloakoffnpcself( "Chulho#JQ_SH_2" );
+		cutin "ex_sh_chulho03.png",2;
+		emotion ET_HUNGRY, getnpcid(0,"Chulho#JQ_SH_2");
+		next;
+		mes "[???]";
+		mes "<FONT SIZE = 14>Que fofo!</FONT>";
+		mes "Seu moleque!";
+		mes "O que você está fazendo cobiçando o que é dos outros na vila?";
+		cloakoffnpcself( "???#JQ_SH_k" );
+		// npctalk "Cute!!!!", "???#JQ_SH_lee", bc_self;	// bug?
+		npctalk "Cute!!!!", "???#JQ_SH_k", bc_self;
+		cutin "ex_sh_spirit01.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Eu não queria!</FONT>";
+		mes "<FONT SIZE = 14>Eu só fiquei babando!</FONT>";
+		cutin "ex_sh_chulho02.png",2;
+		next;
+		mes "[???]";
+		mes "Além disso, essas são coisas que você não deveria comer!";
+		cutin "ex_sh_spirit01.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 18><B>Por quê?</B></FONT>";
+		cutin "ex_sh_chulho02.png",2;
+		emotion ET_HUK, getnpcid(0,"Chulho#JQ_SH_2");
+		next;
+		mes "[???]";
+		mes "Ultimamente, ^dd5555animais da montanha que ficam doentes após comerem o que caiu na estrada^000000 continuam vindo até mim, e a culpa é toda deles.";
+		cutin "ex_sh_spirit02.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Kisul é legal!</FONT>";
+		mes "<FONT SIZE = 14>Você está preocupado com sua dor de estômago?</FONT>";
+		cutin "ex_sh_chulho03.png",2;
+		next;
+		mes "[Kisul]";
+		mes "Eu vim para dar uma bronca naqueles que espalharam coisas estranhas porque era <FONT SIZE = 14><B>irritante</B></FONT> continuar vindo.";
+		cutin "ex_sh_spirit02.png",2;
+		emotion ET_HNG, getnpcid(0,"???#JQ_SH_k");
+		next;
+		mes "[Chulho]";
+		mes "...";
+		cutin "ex_sh_chulho02.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 18>Bom garoto!</FONT>";
+		cutin "ex_sh_chulho01.png",2;
+		npctalk "That's nice!!!!!!!", "Chulho#JQ_SH_2", bc_self;
+		next;
+		mes "[Kisul]";
+		mes "Psiu!";
+		mes "Vendo que você consegue ouvir o som de correria, você deve ter finalmente descoberto.";
+		cutin "ex_sh_spirit02.png",2;
+		npctalk "It's noisy.", "???#JQ_SH_k", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 10>O quê?</FONT>";
+		cutin "ex_sh_chulho01.png",2;
+		next;
+		mes "[Kisul]";
+		mes "Eu andei pregando uma peça em você para ver a cara daqueles velhos brancos que me incomodavam.";
+		mes "Fique parado.";
+		cutin "ex_sh_spirit02.png",2;
+		next;
+		cutin "",255;
+		mes "[???]";
+		mes "<FONT SIZE = 16>Senhor!</FONT>";
+		cloakoffnpcself( "???#JQ_SH_lee" );
+		npctalk "Sir!!!!!", "???#JQ_SH_lee", bc_self;
+		next;
+		mes "[???]";
+		mes "<FONT SIZE = 16>Senhor!!!</FONT>";
+		mes "<FONT SIZE = 16>Estamos em apuros!!!</FONT>";
+		npctalk "What should I do with this?", "???#JQ_SH_lee", bc_self;
+		emotion ET_HELP, getnpcid(0,"???#JQ_SH_lee");
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "Qual é o problema?";
+		mes "Por favor, explique rapidamente.";
+		cloakoffnpcself( "Admiral Lee Daegam#JQ_SH_lee" );
+		next;
+		mes "[Subordinado de Lee Daegam]";
+		mes "Eu coloquei no celeiro... A... a comida toda desapareceu!";
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "<FONT SIZE = 14>O quê!?</FONT>";
+		mes "Para onde foi toda a comida!";
+		next;
+		mes "[Subordinado de Lee Daegam]";
+		mes "A porta do celeiro estava bem trancada, eu estive no pátio o tempo todo e ninguém passou por lá.";
+		emotion ET_PROFUSELY_SWEAT, getnpcid(0,"???#JQ_SH_lee");
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "Então você está dizendo que a comida saiu andando sozinha?!";
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "Bem...";
+		mes "Primeiramente, chame alguém para investigar o celeiro discretamente. Em seguida, diga para irem à cozinha e prepararem uma refeição rapidamente, pois precisam de comida para uso imediato.";
+		npctalk "You can't mess things up like this!", "Admiral Lee Daegam#JQ_SH_lee", bc_self;
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "Depois vá aos alojamentos dos homens e diga para eles virem até Kwang Saeng.";
+		npctalk "Don't make a noise and go quietly.", "Admiral Lee Daegam#JQ_SH_lee", bc_self;
+		next;
+		mes "[Subordinado de Lee Daegam]";
+		mes "Sim, senhor.";
+		next;
+		cloakonnpcself( "???#JQ_SH_lee" );
+		mes "[Almirante Lee Daegam]";
+		mes "Suspiro~";
+		mes "Que fantasma!";
+		npctalk "How did you prepare that food!!!", "Admiral Lee Daegam#JQ_SH_lee", bc_self;
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "<FONT SIZE = 14>Eu não sei quem é, mas é melhor eu não pegar você roubando no meu celeiro!!!</FONT>";
+		npctalk "I'll catch you!!!", "Admiral Lee Daegam#JQ_SH_lee", bc_self;
+		next;
+		mes "[Kwang Saeng]";
+		mes "Lee Daegam, você está me procurando?";
+		cloakoffnpcself( "Kwang Saeng#JQ_SH_lee" );
+		npctalk "Haha!", "Kwang Saeng#JQ_SH_lee", bc_self;
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "<FONT SIZE = 16>Aaah~~!</FONT>";
+		mes "<FONT SIZE = 16>Kwang Saeng!!!</FONT>";
+		mes "Como você chegou aqui tão rápido?!";
+		npctalk "Welcome.", "Admiral Lee Daegam#JQ_SH_lee", bc_self;
+		next;
+		mes "[Kwang Saeng]";
+		mes "Eu vim rápido porque você disse que estava me procurando com pressa.";
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "Não é nada demais, mas houve um ladrão no celeiro e toda a comida desapareceu.";
+		next;
+		mes "[Kwang Saeng]";
+		mes "Oh, não!";
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "É por isso que estamos tentando pegar os criminosos, mas precisamos fazer comida nova para as pessoas agora mesmo...";
+		emotion ET_SCRATCH, getnpcid(0,"Admiral Lee Daegam#JQ_SH_lee");
+		next;
+		mes "[Kwang Saeng]";
+		mes "Tudo bem.";
+		mes "Eu vou buscar alguns remédios para você.";
+		next;
+		mes "[Kwang Saeng]";
+		mes "A propósito...";
+		mes "Estou preparando o remédio ^123456porque^000000 Lee Daegam me pediu, mas a construção da floresta não foi feita pelo próprio Lee Daegam?";
+		mes "Por que você não deixa que eu cuide disso?";
+		next;
+		mes "[Almirante Lee Daegam]";
+		mes "É preciso esforço para comprar um bom terreno por um preço barato.";
+		next;
+		mes "[Kwang Saeng]";
+		mes "Haha.";
+		mes "Lee Daegam.";
+		npctalk "Hahahahaha!", "Kwang Saeng#JQ_SH_lee", bc_self;
+		next;
+		npctalk "Hahahahaha!!!", "Admiral Lee Daegam#JQ_SH_lee", bc_self;
+		emotion ET_SMILE, getnpcid(0,"Admiral Lee Daegam#JQ_SH_lee");
+		emotion ET_SMILE, getnpcid(0,"Kwang Saeng#JQ_SH_lee");
+		sleep2 1000;
+		cloakonnpcself( "Admiral Lee Daegam#JQ_SH_lee" );
+		cloakonnpcself( "Kwang Saeng#JQ_SH_lee" );
+		mes "[Kisul]";
+		mes "Ah, puxa vida~";
+		mes "O que foi isso.";
+		mes "Eu me perguntei se havia um grande motivo, mas era um motivo entediante.";
+		cutin "ex_sh_kisul00.png",2;
+		npctalk "What a letdown~", "???#JQ_SH_k", bc_self;
+		next;
+		mes "[Kisul]";
+		mes "Então eu vou para casa, já que meu interesse esfriou.";
+		emotion ET_SLEEPY, getnpcid(0,"???#JQ_SH_k");
+		npctalk "That was boring~", "???#JQ_SH_k", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "Ah!";
+		mes "Você não vai me impedir?";
+		cutin "ex_sh_chulho01.png",2;
+		emotion ET_HUK, getnpcid(0,"Chulho#JQ_SH_2");
+		next;
+		mes "[Kisul]";
+		mes "Não, bem.";
+		mes "Ele já está metido em confusão, então ele não resolveria isso sozinho?";
+		cutin "ex_sh_kisul00.png",2;
+		next;
+		mes "[Kisul]";
+		mes "Vai ser divertido assistir.";
+		mes "Hehehe.";
+		cutin "ex_sh_kisul00.png",2;
+		emotion ET_KIK, getnpcid(0,"???#JQ_SH_k");
+		next;
+		cloakonnpcself( "???#JQ_SH_k" );
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Argh!</FONT>";
+		mes "<FONT SIZE = 14>É verdade!</FONT>";
+		mes "<FONT SIZE = 14>Estou em apuros!</FONT>";
+		cutin "ex_sh_chulho02.png",2;
+		npctalk "It's crazy!!!", "Chulho#JQ_SH_2", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Hyunrok ficará em grandes apuros se descobrir que ele deu remédios estranhos aos amigos e também escavou a floresta para criar algo estranho!!</FONT>";
+		npctalk "If you don't stop me, I'll destroy everything!", "Chulho#JQ_SH_2", bc_self;
+		cutin "ex_sh_chulho01.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 16>Vamos lá!</FONT>";
+		mes "<FONT SIZE = 16>Depressa!!</FONT>";
+		emotion ET_GO, getnpcid(0,"Chulho#JQ_SH_2");
+		erasequest 11780;
+		setquest 11781;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "Chulho#JQ_SH_2" );
+		navigateto("pay_fild09",108,346);
+		end;
+	}
+	if (isbegin_quest(11781) == 1) {
+		// Debug (npcs not uncloaked on official server)
+		cloakoffnpcself( "???#JQ_SH_k" );
+		cloakoffnpcself( "Chulho#JQ_SH_2" );
+
+		mes "[Kisul]";
+		mes "Então eu vou para casa, já que meu interesse esfriou.";
+		emotion ET_SLEEPY, getnpcid(0,"???#JQ_SH_k");
+		npctalk "That was boring~", "???#JQ_SH_k", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "Ah!";
+		mes "Você não vai me impedir?";
+		cutin "ex_sh_chulho01.png",2;
+		emotion ET_HUK, getnpcid(0,"Chulho#JQ_SH_2");
+		next;
+		mes "[Kisul]";
+		mes "Não, bem.";
+		mes "Ele já está metido em confusão, então ele não resolveria isso sozinho?";
+		cutin "ex_sh_kisul00.png",2;
+		next;
+		mes "[Kisul]";
+		mes "Vai ser divertido assistir.";
+		mes "Hehehe.";
+		cutin "ex_sh_kisul00.png",2;
+		emotion ET_KIK, getnpcid(0,"???#JQ_SH_k");
+		next;
+		cloakonnpcself( "???#JQ_SH_k" );
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Argh!</FONT>";
+		mes "<FONT SIZE = 14>É verdade!</FONT>";
+		mes "<FONT SIZE = 14>Estou em apuros!</FONT>";
+		cutin "ex_sh_chulho02.png",2;
+		npctalk "It's crazy!!!", "Chulho#JQ_SH_2", bc_self;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Hyunrok ficará em grandes apuros se descobrir que ele deu remédios estranhos aos amigos e também escavou a floresta para criar algo estranho!!</FONT>";
+		npctalk "If you don't stop me, I'll destroy everything!", "Chulho#JQ_SH_2", bc_self;
+		cutin "ex_sh_chulho01.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 16>Vamos lá!</FONT>";
+		mes "<FONT SIZE = 16>Depressa!!</FONT>";
+		emotion ET_GO, getnpcid(0,"Chulho#JQ_SH_2");
+		close2;
+		cutin "",255;
+		cloakonnpcself( "Chulho#JQ_SH_2" );
+		navigateto("pay_fild09",108,346);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11780) == 1" );
+	end;
+}
+
+// Step 13, 15
+pay_fild09,109,344,5	duplicate(dummy_cloaked_npc)	Chulho#JQ_SH_door	4_EXJOB_CHUL_HO
+
+pay_fild09,108,346,3	script	Suspicious Light#JQ_SH	4_ENERGY_WHITE,{
+	if (isbegin_quest(11770) == 0) {
+		mes "- Uma ondulação suspeita é visível. -";
+		close;
+	}
+	// !TODO: unknown dialog for steps [2-12]
+	if (isbegin_quest(11781) == 1) {
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Oh, não!</FONT>";
+		mes "<FONT SIZE = 14>Que atmosfera hedionda é essa!</FONT>";
+		mes "<FONT SIZE = 14>Como esperado, Hyunrok parece ter notado!</FONT>";
+		cloakoffnpcself( "Chulho#JQ_SH_door" );
+		cutin "ex_sh_chulho02.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>E se estivermos em grandes apuros?</FONT>";
+		mes "<FONT SIZE = 14>Vamos nos apressar, entrar e impedir Hyunrok.</FONT>";
+		npctalk "It's really scary when Hyunrok is angry!", "Chulho#JQ_SH_door", bc_self;
+		erasequest 11781;
+		setquest 11782;
+		next;
+		cloakonnpcself( "Chulho#JQ_SH_door" );
+		cutin "",255;
+	}
+	if (isbegin_quest(11782) == 1) {
+		.@md_name$ = "Deep Forest";
+
+		mes "- Uma ondulação suspeita aparece onde Chulho desapareceu. -";
+		next;
+		if (is_party_leader() == true) {	// !TODO: confirm if it's solo party
+			.@menu$[0] = "Open the door.";
+			.@menu$[1] = "Enter.";
+		}
+		switch( select( .@menu$[0], .@menu$[1], "Quit." ) ) {
+		case 1:
+			if (is_party_leader() == true)
+				instance_create(.@md_name$);
+			end;
+		case 2:
+			if (is_party_leader() == true) {
+				switch( instance_enter(.@md_name$) ) {
+				case IE_OTHER:
+					mes "^ff0000Um erro desconhecido ocorreu.^000000";
+					close;
+				case IE_NOINSTANCE:
+					mes "- O balanço parece perturbador.";
+					mes "Vamos esperar um pouco e então entrar. -";
+					close;
+				case IE_NOMEMBER:
+					end;
+				case IE_OK:
+					mapannounce "pay_fild09", "" + strcharinfo(0) + " of the " + getpartyname( getcharid(1) ) + " party is entering the " + .@md_name$ + ".", bc_map, 0xFF99;
+					// warp "1@exsh",90,35;
+					end;
+				}
+				end;
+			}
+			end;
+		case 3:
+			end;
+		}
+		end;
+	}
+	if (isbegin_quest(11769) == 1) {
+		if (checkweight(490087,1) == 0) {
+			// !TODO: unknown dialog
+			mes "- Espere um segundo aqui!! -";
+			mes "- Você tem muitos itens. -";
+			mes "- Isso significa que você não pode mais receber nenhum item. -";
+			mes "- Libere algum espaço -";
+			mes "- e tente novamente. -";
+			close;
+		}
+		if (SkillPoint > 0) {
+			// !TODO: unknown dialog
+			mes "[Chulho]";
+			mes "Por favor, use todos os seus pontos de habilidade antes de prosseguir.";
+			close3;
+		}
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Eu estava esperando!</FONT>";
+		mes "<FONT SIZE = 14>É difícil vir para a Floresta Profunda agora, mas pensando bem, eu só preciso sair para brincar!</FONT>";
+		mes "<FONT SIZE = 14>Embora Hyunrok não vá sair!</FONT>";
+		cloakoffnpcself( "Chulho#JQ_SH_door" );
+		cutin "ex_sh_chulho01.png",2;
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Ah, e esta é uma carta de Hyunrok!</FONT>";
+		mes "<FONT SIZE = 14>Vá em frente e leia!</FONT>";
+		cutin "ex_sh_chulho03.png",2;
+		next;
+		if (select( "Read the letter.", "Stop." ) == 2) {
+			// !TODO: unknown dialog
+			cutin "",255;
+			cloakonnpcself( "Chulho#JQ_SH_door" );
+			end;
+		}
+		mes "[Carta de Hyunrok]";
+		mes "Dear " + strcharinfo(0) + ".";
+		cutin "ex_sh_hyunrok00.png",2;
+		next;
+		mes "[Carta de Hyunrok]";
+		mes "É uma relação apenas por tocar em suas roupas...";
+		mes "O motivo pelo qual você entrou nesta floresta e o motivo pelo qual nos conhecemos deve ser tudo destino que os céus decidiram.";
+		next;
+		mes "[Carta de Hyunrok]";
+		mes "Nunca esquecerei a graça que nos ajudou no perigo, mesmo que não víssemos o relacionamento corretamente e fôssemos desrespeitosos no evento imediato.";
+		next;
+		mes "[Carta de Hyunrok]";
+		mes "Como Chulho disse, eu queria pelo menos dar um banquete para retribuir, mas ficar nesta Floresta Profunda por muito tempo é perigoso para aqueles fora da floresta, então sinto um peso em mandá-los de volta às pressas sem nem mesmo lhes dar um adeus adequado.";
+		next;
+		mes "[Carta de Hyunrok]";
+		mes "Tenho certeza de que você entenderá, pois fiz isso por você.";
+		next;
+		mes "[Carta de Hyunrok]";
+		mes "E não é uma pequena recompensa pela sua ajuda, mas está gravada em nossas almas para que possamos invocar nossa força sempre que precisarmos de ajuda.";
+		next;
+		mes "[Carta de Hyunrok]";
+		mes "Então, vamos ansiar por nos vermos novamente...";
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Você terminou de ler a carta?</FONT>";
+		mes "<FONT SIZE = 14>O que estava escrito?</FONT>";
+		cutin "ex_sh_chulho01.png",2;
+		next;
+		select( "Show the letter." );
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Hyunrok sempre diz coisas que são difíceis de entender!</FONT>";
+		mes "<FONT SIZE = 14>E leve isto também!</FONT>";
+		mes "<FONT SIZE = 14>Eu guardei porque era um item divertido, mas vou dar para você!</FONT>";
+		cutin "ex_sh_chulho02.png",2;
+		completequest 11769;
+		jobchange JOB_SPIRIT_HANDLER;
+		getitem 490087,1;	// 4th_Q_Necklace
+		close2;
+		cutin "",255;
+		cloakonnpcself( "Chulho#JQ_SH_door" );
+		end;
+	}
+	if (isbegin_quest(11769) == 2) {
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Nos vemos de novo</FONT>";
+		mes "<FONT SIZE = 14>Eu só estava lá fora brincando.</FONT>";
+		cutin "ex_sh_chulho01.png",2;
+		cloakoffnpcself( "Chulho#JQ_SH_door" );
+		next;
+		mes "[Chulho]";
+		mes "<FONT SIZE = 14>Tem muita diversão fora da floresta!</FONT>";
+		mes "<FONT SIZE = 14>Claro que a floresta também é divertida!</FONT>";
+		close2;
+		cutin "",255;
+		cloakonnpcself( "Chulho#JQ_SH_door" );
+		end;
+	}
+	end;
+
+OnInit:
+	// Step 13
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11781) == 1" );
+
+	// Step 14
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11782) == 1" );
+
+	// Step 15
+	questinfo( QTYPE_JOBQUEST, QMARK_YELLOW, "isbegin_quest(11769) == 1" );
+	end;
+}
+
+// Step 14
+// (inside the instance)
+
+// Step 15 (final)
+// pay_fild09,108,346,3	script	Suspicious Light#JQ_SH	4_ENERGY_WHITE,{

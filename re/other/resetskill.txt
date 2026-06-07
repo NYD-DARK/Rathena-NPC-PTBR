@@ -1,0 +1,151 @@
+//===== rAthena Script =======================================
+//= Hypnotist
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Stat and skill resetter for expanded first class under
+//= base level 50 and normal first class.
+//===== Additional Comments: =================================
+//= 1.0 First version, Renewal script.
+//= 1.1 Added Izlude duplicates. [Euphy]
+//============================================================
+
+// Main NPC :: resetskill_novice
+//============================================================
+izlude,127,175,3	script	Hypnotist#novice	124,{
+	mes "[Hipnotista]";
+	mes "Saudações, aventureiro.";
+	mes "Sou um membro da Academia";
+	mes "de Hipnotistas enviado aqui a Izlude";
+	mes "para fornecer serviços de Redefinição de Habilidades";
+	mes "para certos personagens de Primeira Classe por um preço excelente: grátis!";
+	next;
+	mes "[Hipnotista]";
+	mes "Embora eu ofereça redefinições";
+	mes "ilimitadas de atributos/habilidades por enquanto, eu tenho";
+	mes "duas condições que devem ser";
+	mes "cumpridas. Primeiro, você deve ser";
+	mes "inferior ao ^FF0000Nível Base 50^000000.";
+	next;
+	mes "[Hipnotista]";
+	mes "Segundo, você deve ser um personagem de";
+	mes "^FF0000Espadachim, Noviço, Mago,";
+	mes "Gatuno, Arqueiro, Mercador,";
+	mes "Taekwon Boy ou Taekwon Girl,";
+	mes "Justiceiro e Ninja^000000";
+	mes "para se qualificar.";
+	mes "Agora, você tem alguma pergunta?";
+	next;
+	switch(select("^FF0000Stat/Skill Reset?:Reset stats:Reset skills^000000:Cancel")) {
+	case 1:
+		mes "[Hipnotista]";
+		mes "As Redefinições de Atributos/Habilidades permitem aos aventureiros";
+		mes "redistribuir seus Pontos";
+		mes "de Habilidade se eles não estiverem";
+		mes "satisfeitos com suas habilidades atuais.";
+		next;
+		mes "[Hipnotista]";
+		mes "Antes de prosseguir com";
+		mes "uma Redefinição de Atributos/Habilidades, você deve";
+		mes "reduzir todo o peso";
+		mes "de todos os itens carregados pelo seu";
+		mes "personagem para 0. Você pode colocar";
+		mes "itens extras no Armazém da Kafra.";
+		next;
+		mes "[Hipnotista]";
+		mes "Ah, também é importante";
+		mes "remover seu ^FF0000Carrinho^000000";
+		mes "se você tiver um equipado.";
+		mes "Caso contrário, a hipnose não";
+		mes "funcionará, ou terá um efeito contrário...";
+		close;
+	case 2:
+		set .@str$,"Stat";
+	case 3:
+		if (.@str$ == "")
+			set .@str$,"Skill";
+		mes "[Hipnotista]";
+		mes "Você tem certeza que";
+		mes "deseja prosseguir com";
+		mes "my ^FF0000"+.@str$+" Reset^000000 service?";
+		next;
+		if(select("Yes:Cancel") == 1)
+			break;
+	case 4:
+		mes "[Hipnotista]";
+		mes "Obrigado, e boa";
+		mes "sorte em suas aventuras.";
+		mes "Por favor, viaje em segurança~";
+		close;
+	}
+	if ((Class >= Job_Swordman && Class <= Job_Thief) || Class == Job_Taekwon || Class == Job_Gunslinger || Class == Job_Ninja) {
+		if (checkcart()) {
+			mes "[Hipnotista]";
+			mes "Oh! Por favor, remova seu";
+			mes "Carrinho antes de prosseguir.";
+			mes "with the "+.@str$+" Reset service.";
+			mes "Obrigado por cooperar~";
+			close;
+		}
+		if (Weight != 0) {
+			mes "[Hipnotista]";
+			mes "If you're here for my "+.@str$;
+			mes "serviço de Redefinição, por favor,";
+			mes "lembre-se que você não pode";
+			mes "reset your "+.@str$+"s until the";
+			mes "o ^FF0000peso dos itens em seu";
+			mes "Inventário seja reduzido a 0^000000.";
+			next;
+			mes "[Hipnotista]";
+			mes "Por que você não coloca suas";
+			mes "coisas no Armazém da Kafra";
+			mes "por enquanto? Assim, você pode";
+			mes "manter todos os seus bens em segurança.";
+			close;
+		}
+		if (BaseLevel >= 50 && (Class == Job_Taekwon || Class == Job_Gunslinger || Class == Job_Ninja)) {
+			mes "[Hipnotista]";
+			mes "Sinto muito, mas personagens";
+			mes "com Níveis Base acima";
+			mes "de 50 não são elegíveis para o";
+			mes .@str$+" Reset service I provide.";
+			close;
+		}
+		mes "[Hipnotista]";
+		mes "Obrigado por usar";
+		mes "my "+.@str$+" Redistribution";
+		mes "serviços. Oh, e boa";
+		mes "sorte em suas";
+		mes "viagens, aventureiro.";
+		if (.@str$ == "Stat")
+			resetstatus;
+		else
+			resetskill;
+		close;
+	} else {
+		mes "[Hipnotista]";
+		mes "Sinto muito, mas sua";
+		mes "Classe não se qualifica";
+		mes "for the "+.@str$+" Reset service";
+		mes "que eu ofereço. Eu só posso";
+		mes "offer "+.@str$+" Resets to the";
+		mes "as seguintes Classes...";
+		next;
+		mes "[Hipnotista]";
+		mes "^FF0000Espadachim, Noviço,";
+		mes "Mago, Gatuno, Arqueiro,";
+		mes "Mercador, Taekwon";
+		mes "Boy, Taekwon Girl,";
+		mes "Justiceiro e Ninja^000000.";
+		close;
+	}
+}
+izlude_a,127,175,3	duplicate(Hypnotist#novice)	Hypnotist#novice_a	124
+izlude_b,127,175,3	duplicate(Hypnotist#novice)	Hypnotist#novice_b	124
+izlude_c,127,175,3	duplicate(Hypnotist#novice)	Hypnotist#novice_c	124
+izlude_d,127,175,3	duplicate(Hypnotist#novice)	Hypnotist#novice_d	124

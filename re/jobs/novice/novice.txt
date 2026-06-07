@@ -1,0 +1,3418 @@
+//===== rAthena Script =======================================
+//= Renewal Novice Training Grounds
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.6
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= A tutorial for new players starting at new_1-1 (53,111).
+//=
+//= This script was replaced by the Izlude Academy in 2012.
+//===== Additional Comments: =================================
+//= 1.0 First version, hand scripted from iRO. [Kisuka]
+//= 1.1 Updated warps, savepoints, NPC locations. [Kisuka]
+//= 1.2 Cleaning. [Euphy]
+//= 1.3 Fixed Eden Group Officer's level requirement. [Joseph]
+//= 1.4 Fixed checkquest to check quest accordingly. [Joseph]
+//= 1.4a Added 'npcskill' command. [Euphy]
+//= 1.5 Replaced with the official kRO scripts. [Euphy]
+//= 1.6 Added VIP features. [Euphy]
+//============================================================
+
+// Main NPCs
+//============================================================
+-	script	Sprakki#newbe01::NvSprakkiA	-1,{
+	if (job_novice_q == 0) {
+		mes "[Sprakki]";
+		mes "Olá! Bem-vindo ao mundo de Ragnarok Online. Meu nome é Sprakki e sou responsável por lhe dar dicas básicas de jogabilidade.";
+		mes "Clique no botão [Próximo] ou pressione [Enter] para continuar.";
+		next;
+		mes "[Sprakki]";
+		mes "Primeiro, você precisa aprender o básico sobre como controlar seu personagem.";
+		mes "Todos os ^4d4dffmovimentos básicos, seleção de itens e ataques^000000 usam o ^4d4dff clique esquerdo do mouse^000000.";
+		next;
+		cutin "tutorial01",3;
+		mes "-! Info !-";
+		mes "Clique no chão para mover o personagem.";
+		mes "Atacar monstros e conversar com as pessoas deste mundo pode ser feito simplesmente clicando nelas.";
+		next;
+		cutin "",255;
+		mes "[Sprakki]";
+		mes "Primeiro, tente se movimentar.";
+		mes "Você está vendo aquela ponte de madeira à direita?";
+		next;
+		mes "[Sprakki]";
+		mes "Atravesse a ponte e lá há um castelo usado como Centro de Treinamento.";
+		mes "Estarei esperando por você dentro daquele castelo. Por favor, vá até lá sozinho.";
+		set job_novice_q,1;
+		setquest 7117;
+		next;
+		cutin "tutorial02",3;
+		mes "-! Info !-";
+		mes "Você recebeu uma missão de Sprakki.";
+		mes "Você pode verificar o conteúdo da missão na Janela de Informações de Missão.";
+		next;
+		mes "[Sprakki]";
+		mes "Estarei esperando dentro do Centro de Treinamento após a ponte.";
+		next;
+		mes "-! Info !-";
+		mes "You can open the Quest Info Window by pressing the ^4d4dffAlt + U^000000 keys at the same time.";
+		next;
+		cutin "",255;
+		mes "[Sprakki]";
+		mes "Você verificou a Janela de Informações de Missão?";
+		mes "Estarei esperando no castelo do outro lado da ponte.";
+		close2;
+		cutin "",255;
+		end;
+	} else if (job_novice_q == 1) {
+		mes "[Sprakki]";
+		mes "Estarei esperando por você do outro lado da ponte, ao leste.";
+		close;
+	} else {
+		mes "[Sprakki]";
+		mes "Você está perdido?";
+		mes "Você já passou da ponte em direção ao leste?";
+		mes "Eu o guiarei melhor depois que nos encontrarmos no Centro de Treinamento.";
+		close;
+	}
+}
+new_1-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv1a	90
+new_2-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv2a	90
+new_3-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv3a	90
+new_4-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv4a	90
+new_5-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv5a	90
+
+-	script	Sprakki#newbe05::NvSprakkiB	-1,{
+	if (job_novice_q == 0) {
+		mes "[Sprakki]";
+		mes "Olá! Bem-vindo ao mundo de Ragnarok Online.";
+		mes "Meu nome é Sprakki e sou responsável por lhe dar dicas básicas de jogabilidade.";
+		mes "Clique no botão [Próximo] ou pressione a tecla [Enter] para continuar.";
+		next;
+		mes "[Sprakki]";
+		mes "Primeiro, você precisa aprender o básico sobre como controlar seu personagem.";
+		mes "Todos os ^4d4dffmovimentos básicos, seleção de itens e ataques^000000 usam o ^4d4dff clique esquerdo do mouse^000000.";
+		next;
+		cutin "tutorial01",3;
+		mes "-! Info !-";
+		mes "Clique no chão para mover o personagem.";
+		mes "Atacar monstros e conversar com as pessoas deste mundo pode ser feito simplesmente clicando nelas.";
+		next;
+		cutin "",255;
+		mes "[Sprakki]";
+		mes "Bem, então, vou lhe dar uma missão para falar comigo.";
+		mes "Após a conversa terminar, fale comigo novamente clicando com o botão esquerdo do mouse em mim.";
+		set job_novice_q,1;
+		setquest 7117;
+		next;
+		cutin "tutorial02",3;
+		mes "-! Info !-";
+		mes "Você recebeu uma missão de Sprakki.";
+		mes "You can check the contents of the quest in the Quest Info Window by pressing the ^4d4dffAlt + U^000000 keys at the same time.";
+		next;
+		cutin "",255;
+		mes "[Sprakki]";
+		mes "Você verificou a Janela de Informações de Missão?";
+		mes "Bem, fale comigo novamente.";
+		close;
+	} else if (job_novice_q < 3) {
+		if (job_novice_q == 1) {
+			mes "[Sprakki]";
+			mes "Ótimo!";
+			mes "Agora você sabe como se mover e conversar com os outros, certo?";
+			set job_novice_q,2;
+			getexp 600,5;
+			completequest 7117;
+			next;
+		}
+		mes "[Sprakki]";
+		mes "O Centro de Treinamento é preparado para aprendizes como você.";
+		mes "Você será treinado para se acostumar com o básico do jogo.";
+		next;
+		mes "[Sprakki]";
+		mes "Claro, este processo de treinamento é opcional; se quiser ir direto para a cidade, tudo bem também.";
+		mes "Mas você perderá todas as vantagens que pode obter no Centro de Treinamento.";
+		next;
+		switch(select("Begin Training.:Start the game right away.")) {
+		case 1:
+			mes "[Sprakki]";
+			mes "Vou guiá-lo até o Centro de Treinamento de Aprendiz.";
+			mes "Lá dentro, o instrutor 'Brade' estará esperando para falar com você.";
+			next;
+			mes "[Sprakki]";
+			mes "O instrutor 'Brade' o ajudará depois disso.";
+			mes "Por favor, vá vê-lo.";
+			setquest 7118;
+			next;
+			mes "^4d4dff- Você recebeu a missão 'Campo de Treinamento de Aprendiz -1' de Sprakki.";
+			mes "Por favor, verifique a Janela de Informações de Missão. -^000000";
+			close2;
+			savepoint strnpcinfo(4),100,100,1,1;
+			warp strnpcinfo(4),100,100;
+			end;
+		case 2:
+			set nov_1st_cos,0;
+			set nov_2nd_cos,0;
+			set nov_3_swordman,0;
+			set nov_3_archer,0;
+			set nov_3_thief,0;
+			set nov_3_magician,0;
+			set nov_3_acolyte,0;
+			set nov_3_merchant,0;
+			mes "[Sprakki]";
+			mes "Ok, você quer começar imediatamente.";
+			mes "Em qual cidade você quer começar?";
+			next;
+			set .@select, select("Prontera:Morocc:Geffen:Payon:Alberta:Izlude");
+			mes "[Sprakki]";
+			mes "Entendo.";
+			mes "Vá em frente e torne-se mais forte! Olhe para um futuro mais brilhante à sua frente.";
+			callfunc "F_NvErase";
+			close2;
+			switch(.@select) {
+			case 1:
+				savepoint "prontera",273,354,1,1;
+				warp "prontera",273,354;
+				break;
+			case 2:
+				savepoint "morocc",160,94,1,1;
+				warp "morocc",160,94;
+				break;
+			case 3:
+				savepoint "geffen",120,100,1,1;
+				warp "geffen",120,100;
+				break;
+			case 4:
+				savepoint "payon",70,100,1,1;
+				warp "payon",70,100;
+				break;
+			case 5:
+				savepoint "alberta",116,57,1,1;
+				warp "alberta",116,57;
+				break;
+			case 6: // Old coordinates: (94,103)
+				savepoint "izlude",128,98,1,1;
+				warp "izlude",128,98;
+				break;
+			}
+			end;
+		}
+	} else {
+		mes "[Sprakki]";
+		mes "Estes são os Campos de Treinamento de Aprendiz.";
+		mes "Vou guiá-lo até o Centro de Treinamento de Aprendiz.";
+		close2;
+		savepoint strnpcinfo(4),100,100,1,1;
+		warp strnpcinfo(4),100,100;
+		end;
+	}
+}
+new_1-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv1b	90
+new_2-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv2b	90
+new_3-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv3b	90
+new_4-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv4b	90
+new_5-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv5b	90
+
+-	script	Brade#newbe02::NvBradeA	-1,{
+	if (job_novice_q < 2) {
+		mes "[Instrutor Brade]";
+		mes "Olá! Bem-vindo ao mundo de Ragnarok Online.";
+		mes "Você participou dos Campos de Treinamento anteriores.";
+		mes "Os Campos de Treinamento agora estão sob nova direção.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Acho que teremos que começar seu treinamento do zero.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Meu nome é Instrutor Brade e sou responsável por lhe dar dicas básicas de jogabilidade.";
+		mes "Clique no botão [Próximo] ou pressione [Enter] para continuar.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Primeiro, você precisa aprender o básico sobre como controlar seu personagem.";
+		mes "Todos os ^4d4dff movimentos básicos, seleção de itens e ataques^000000 usam o ^4d4dff clique esquerdo do mouse^000000.";
+		next;
+		cutin "tutorial01",3;
+		mes "-! Info !-";
+		mes "Clique no chão para mover o personagem.";
+		mes "Atacar monstros e conversar com as pessoas deste mundo pode ser feito simplesmente clicando nelas.";
+		next;
+		cutin "",255;
+		next;
+		mes "[Instrutor Brade]";
+		mes "Primeiro, tente se movimentar.";
+		mes "Depois de se movimentar, fale comigo novamente.";
+		set nov_1st_cos,0;
+		set nov_2nd_cos,0;
+		set nov_3_swordman,0;
+		set nov_3_archer,0;
+		set nov_3_thief,0;
+		set nov_3_magician,0;
+		set nov_3_acolyte,0;
+		set nov_3_merchant,0;
+		set treasure_alb,0;
+		set job_novice_q,2;
+		setquest 7118;
+		next;
+		cutin "tutorial02",3;
+		mes "-! Informações !-";
+		mes "Você recebeu uma missão do Instrutor Brade.";
+		mes "Você pode verificar o conteúdo da missão na Janela de Informações de Missão.";
+		next;
+		mes "-! Informações !-";
+		mes "You can open the Quest Info Window by pressing the ^4d4dffAlt + U^000000keys at the same time.";
+		next;
+		cutin "",255;
+		mes "[Instrutor Brade]";
+		mes "Você verificou a Janela de Informações de Missão?";
+		mes "Bem, fale comigo novamente.";
+		close;
+	} else if (job_novice_q < 4) {
+		if (job_novice_q == 2) {
+			mes "[Instrutor Brade]";
+			mes "Ótimo.";
+			mes "Você completou a missão com sucesso, então vou recompensá-lo com pontos de experiência.";
+			set job_novice_q,3;
+			getexp 900,10;
+			completequest 7118;
+			next;
+			mes "[Instrutor Brade]";
+			mes "Os Pontos de Experiência que você ganhou caçando ou completando missões podem ser verificados rastreando a Barra de EXP, localizada no canto superior esquerdo da tela.";
+			next;
+			mes "[Instrutor Brade]";
+			mes "Suspiro... Vou falar de um jeito ríspido mesmo.";
+			mes "...Eu simplesmente não consigo me acostumar com a 'educação', sabe.";
+			mes "Não olhe para mim desse jeito!";
+			next;
+			mes "[Instrutor Brade]";
+			mes "Ok, preste atenção, seu verme.";
+			mes "O próximo passo são itens e equipamentos.";
+			next;
+			mes "[Instrutor Brade]";
+			mes "Primeiro, pegue isto.";
+			mes "Estes são equipamentos básicos e poções de recuperação.";
+		} else {
+			mes "[Instrutor Brade]";
+			mes "Uh... Onde estávamos? Ah, certo, vamos continuar.";
+			mes "É sobre itens e equipamentos.";
+			next;
+			mes "[Instrutor Brade]";
+			mes "Pegue isto.";
+			mes "Equipamentos básicos e poções de recuperação.";
+		}
+		set job_novice_q,4;
+		getitem 2352,1; //Novice_Plate
+		getitem 2510,1; //Novice_Hood
+		getitem 2414,1; //Novice_Boots
+		getitem 5055,1; //Novice_Egg_Cap
+		getitem 1243,1; //Novice_Knife
+		getitem 2112,1; //Novice_Guard
+		getitem 569,300; //Novice_Potion
+		setquest 7119;
+		next;
+		mes "[Instrutor Brade]";
+		mes "Na Janela de Informações Básicas, no canto superior esquerdo, pressione o ícone 'Item' para abrir a Janela de Itens.";
+		mes "A janela de itens é dividida em...";
+		next;
+		mes "[Instrutor Brade]";
+		mes "3 seções: itens consumíveis, equipamentos e outros itens.";
+		mes "Se você quiser usar ou equipar itens, basta dar um clique duplo no item ou arrastá-los para a Janela de Equipamentos.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Você pode ver informações detalhadas de cada item clicando com o botão direito no item.";
+		mes "As informações detalhadas do item aparecerão.";
+		next;
+		cutin "tutorial04",3;
+		mes "!- Informações -!";
+		mes "Clique com o botão direito em um item para ver informações detalhadas sobre ele.";
+		next;
+		mes "!- Informações -!";
+		mes "Clique com o botão direito em outros jogadores para exibir o Menu da Comunidade, onde você pode entrar em um grupo, ou solicitar troca com um jogador, etc.";
+		next;
+		cutin "",255;
+		mes "[Instrutor Brade]";
+		mes "Por que você não equipa os itens que eu lhe dei mais cedo?";
+		mes "^4d4dffClique Duplo^000000 no item que deseja equipar. Vamos continuar depois que você terminar de se equipar.";
+		next;
+		cutin "tutorial03",3;
+		mes "!- Informações -!";
+		mes "Itens podem ser facilmente equipados ou usados simplesmente dando um clique duplo neles.";
+		mes "The Hot Key to open the Inventory Window is ALT + E.";
+		next;
+		mes "!- Informações -!";
+		mes "To check on the items that are currently equipped, use the Hot Key ALT + Q.";
+		mes "Ou, arraste o item para o espaço de equipamento onde você deseja que o item seja equipado.";
+		next;
+		mes "!- Informações -!";
+		mes "Equipe todos os equipamentos fornecidos pelo Instrutor Brade.";
+		close2;
+		cutin "",255;
+		end;
+	} else if (job_novice_q == 4) {
+		if (isequipped(2414) + isequipped(2352) + isequipped(2510) + isequipped(2112) + isequipped(1243) < 4) {
+			mes "[Instrutor Brade]";
+			mes "Tente colocar pelo menos 4 dos equipamentos que eu lhe dei.";
+			mes "Coloque esses sapatos, vista essas roupas e arme-se com essa arma, seu verme.";
+			close;
+		}
+		mes "[Instrutor Brade]";
+		mes "Você está pronto.";
+		mes "Você está indo muito bem.";
+		set job_novice_q,5;
+		getexp 1200,15;
+		getitem 12323,50; //N_Fly_Wing
+		getitem 12324,20; //N_Butterfly_Wing
+		completequest 7119;
+		next;
+		mes "[Instrutor Brade]";
+		mes "Aqui estão algumas Asas de Mosca e Asas de Borboleta como recompensa.";
+		mes "Você não precisa delas no Campo de Treinamento, mas elas serão úteis mais tarde.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "A seguir, teclas de atalho.";
+		mes "Pressione a ^4d4dfftecla F12^000000 no seu teclado.";
+		mes "Uma caixa com 9 espaços aparecerá.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Arraste o canto direito da Janela de Teclas de Atalho e você poderá ver as outras páginas das teclas de atalho.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "As teclas de F1 a F9 são as teclas de atalho designadas.";
+		mes "Basta arrastar uma habilidade ou um item para a Janela de Teclas de Atalho e pressionar a tecla correspondente para usá-los imediatamente.";
+		next;
+		cutin "tutorial05",3;
+		mes "!- Informações -!";
+		mes "Você pode registrar uma habilidade ou um item na Janela de Teclas de Atalho apenas arrastando-os para o espaço da tecla de atalho.";
+		next;
+		mes "!- Informações -!";
+		mes "Habilidades ou itens registrados podem ser usados/equipados apenas pressionando a tecla correspondente.";
+		next;
+		mes "!- Informações -!";
+		mes "Você pode personalizar as teclas de atalho para usar quaisquer teclas que desejar, alterando a configuração de atalhos no menu de opções.";
+		next;
+		mes "!- Informações -!";
+		mes "Registre habilidades e itens que você usa com frequência para que possa usá-los facilmente.";
+		next;
+		cutin "",255;
+		mes "[Instrutor Brade]";
+		mes "A última parte é como usar Habilidades.";
+		mes "Mas antes disso, você precisa aprender algo primeiro.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Em algum lugar nesta sala, há alguém chamado ^4d4dffJinha^000000.";
+		mes "Encontre Jinha e aprenda a habilidade ^4d4dff[Primeiros Socorros]^000000 com ele.";
+		setquest 7120;
+		next;
+		mes "[Instrutor Brade]";
+		mes "Sua lição é depois disso.";
+		mes "Vá encontrar Jinha e aprenda a habilidade [Primeiros Socorros]. Depois volte para mim.";
+		close;
+	} else if (job_novice_q == 5) {
+		mes "[Instrutor Brade]";
+		mes "Em algum lugar nesta sala, há alguém chamado ^4d4dffJinha^000000.";
+		mes "Encontre Jinha e aprenda a habilidade ^4d4dff[Primeiros Socorros]^000000 com ele.";
+		close;
+	} else if (job_novice_q == 6) {
+		mes "[Instrutor Brade]";
+		mes "Agora você aprendeu a habilidade [Primeiros Socorros].";
+		mes "Como eu lhe disse antes, ao registrar a habilidade Primeiros Socorros na Janela de Teclas de Atalho, você pode usar a habilidade de forma rápida e fácil.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "E é isso, isso é tudo que posso lhe ensinar.";
+		mes "Você vê aquela saída para o oeste?";
+		mes "Siga para a próxima sala e haverá outro instrutor esperando por você.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Nos veremos em breve.";
+		mes "Mas por enquanto, vá para a sala ao oeste e obtenha mais informações.";
+		next;
+		mes "[Instrutor Brade]";
+		mes "Você se saiu bem até aqui.";
+		mes "Não é muito, mas aceite isto como uma recompensa.";
+		set job_novice_q,7;
+		getitem 2393,1; //N_Adventurer's_Suit
+		completequest 7120;
+		close;
+	} else if (job_novice_q == 7) {
+		mes "[Instrutor Brade]";
+		mes "A próxima etapa do Treinamento é feita na sala a oeste daqui.";
+		mes "Se você estiver perdido, posso enviá-lo para lá.";
+		next;
+		switch(select("I can get there by myself.:Please, send me to the next room.")) {
+		case 1:
+			mes "[Instrutor Brade]";
+			mes "Bom. Essa é a atitude que você deve ter.";
+			mes "Você não pode simplesmente depender dos outros para ajudá-lo.";
+			mes "Agora, vá em frente.";
+			close;
+		case 2:
+			mes "[Instrutor Brade]";
+			mes "Ah, bem.";
+			mes "Acho que é melhor do que vê-lo perdido e vagando por aí.";
+			mes "Hahahaha...";
+			close2;
+			warp strnpcinfo(4),41,172;
+			end;
+		}
+	} else {
+		mes "[Instrutor Brade]";
+		mes "Você não terminou os cursos aqui?";
+		mes "Ou você está apenas perdido?";
+		next;
+		switch(select("Send me to the Combat Training Ground.:I want to go to town.")) {
+		case 1:
+			mes "[Instrutor Brade]";
+			mes "Claro.";
+			mes "Cuidado para não se perder de novo.";
+			close2;
+			warp "new_"+charat(strnpcinfo(4),4)+"-3",96,21;
+			end;
+		case 2:
+			mes "[Instrutor Brade]";
+			mes "Cidade... Eh?";
+			mes "Nesse caso, vou enviá-lo para onde o funcionário da Kafra está.";
+			mes "Use o ^4d4dffServiço de Teletransporte da Kafra^000000 para ir para a cidade.";
+			close2;
+			warp strnpcinfo(4),41,172;
+			end;
+		}
+	}
+}
+new_1-2,100,105,3	duplicate(NvBradeA)	Brade#nv1a	733
+new_2-2,100,105,3	duplicate(NvBradeA)	Brade#nv2a	733
+new_3-2,100,105,3	duplicate(NvBradeA)	Brade#nv3a	733
+new_4-2,100,105,3	duplicate(NvBradeA)	Brade#nv4a	733
+new_5-2,100,105,3	duplicate(NvBradeA)	Brade#nv5a	733
+
+-	script	Jinha#newbe03::NvJinha	-1,{
+	if (job_novice_q < 5) {
+		mes "[Jinha]";
+		mes "Como posso te ajudar?";
+		mes "Hum? Você não seguiu o currículo corretamente.";
+		next;
+		mes "[Jinha]";
+		mes "Você precisa ver o Instrutor Brade antes de mim. Vou te enviar para o Instrutor Brade.";
+		close2;
+		warp strnpcinfo(4),100,100;
+		end;
+	} else if (job_novice_q == 5) {
+		if (getskilllv("NV_FIRSTAID") > 0) {
+			mes "[Jinha]";
+			mes "Olá!";
+			mes "Eu sou responsável por te ensinar a habilidade [Primeiros Socorros].";
+			mes "O Instrutor Brade pediu para você aprender, certo?";
+			next;
+			mes "[Jinha]";
+			mes "Uau... ...é incrível!";
+			mes "Você já conhece a habilidade Primeiros Socorros.";
+			mes "Não parece haver nada para eu te ensinar.";
+			next;
+			mes "[Jinha]";
+			mes "Ótimo. Seu instrutor da administração anterior era o Cecil?";
+			mes "Bem, você aprendeu Primeiros Socorros, posso confirmar isso.";
+			next;
+			mes "[Jinha]";
+			mes "Bem, você pode ir diretamente para a próxima etapa do curso.";
+			mes "Volte ao Instrutor Brade.";
+			set job_novice_q,6;
+			close;
+		} else {
+			mes "[Jinha]";
+			mes "Olá!";
+			mes "Como posso te ajudar?";
+			next;
+			select("I want to learn to use the [First Aid] Skill.");
+			mes "[Jinha]";
+			mes "Isso mesmo.";
+			mes "Primeiros Socorros é a habilidade usada para converter SP em HP quando você está em perigo.";
+			next;
+			mes "[Jinha]";
+			mes "A quantidade de recuperação é pequena.";
+			mes "Ainda assim, ela ajudará você a não desmaiar após um golpe crítico.";
+			specialeffect2 EF_BEGINSPELL6;
+			specialeffect2 EF_SPELLBREAKER;
+			next;
+			mes "[Jinha]";
+			mes "Você pode abrir a Janela de Habilidades pressionando o botão ^4d4dffhabilidades^000000 na Janela Básica.";
+			mes "Hot Key is ^4d4dffALT + S^000000.";
+			mes "Por que você não testa a habilidade?";
+			skill "NV_FIRSTAID",1,SKILL_PERM;
+			set skill_nov,3; // Has future uses - do not remove! [Euphy]
+			set job_novice_q,6;
+			next;
+			mes "[Jinha]";
+			mes "Bom, agora que você sabe como usar a habilidade Primeiros Socorros, você deve seguir para a próxima etapa.";
+			mes "Volte ao Instrutor Brade e mostre a ele o que você aprendeu aqui.";
+			close;
+		}
+	} else if (job_novice_q == 6) {
+		mes "[Jinha]";
+		mes "Você já não aprendeu a habilidade Primeiros Socorros?";
+		mes "Peça para o Instrutor Brade verificar.";
+		mes "Se você não sabe como chegar até ele, eu vou te enviar.";
+		next;
+		switch(select("I'm good by myself.:Please, send me to him.")) {
+		case 1:
+			mes "[Jinha]";
+			mes "Muito bem!";
+			mes "Essa é a atitude certa!";
+			mes "Você será um grande aventureiro no futuro.";
+			close;
+		case 2:
+			mes "[Jinha]";
+			mes "Vou te enviar para o Instrutor Brade.";
+			close2;
+			warp strnpcinfo(4),100,100;
+			end;
+		}
+	} else {
+		mes "[Jinha]";
+		mes "O que posso fazer por você?";
+		mes "O próximo curso continuará na Sala Oeste.";
+		mes "Siga para a sala oeste.";
+		close;
+	}
+}
+new_1-2,115,120,3	duplicate(NvJinha)	Jinha#nv1	59
+new_2-2,115,120,3	duplicate(NvJinha)	Jinha#nv2	59
+new_3-2,115,120,3	duplicate(NvJinha)	Jinha#nv3	59
+new_4-2,115,120,3	duplicate(NvJinha)	Jinha#nv4	59
+new_5-2,115,120,3	duplicate(NvJinha)	Jinha#nv5	59
+
+// People/Services in Ragnarok
+//============================================================
+-	script	Chocolat#newbe06::NvChocolat	-1,{
+	if (job_novice_q < 7) {
+		mes "[Chocolat]";
+		mes "Hum? Estranho.";
+		mes "Deixe-me ver essa Identidade de Treinamento por um segundo.";
+		next;
+		if (job_novice_q < 2) {
+			mes "[Chocolat]";
+			mes "Ah, entendo...";
+			mes "Você participou dos Campos de Treinamento anteriores.";
+			mes "Os Campos de Treinamento agora estão sob nova direção.";
+			next;
+			mes "[Chocolat]";
+			mes "Se você quiser fazer o curso básico,";
+			mes "você deve voltar ao Instrutor Brade.";
+			next;
+			mes "[Chocolat]";
+			mes "Ou você pode seguir em frente e começar com o treinamento teórico.";
+			mes "O que você gostaria de fazer?";
+			next;
+			switch(select("Send me to Basic Training.:Start Theory Training.")) {
+			case 1:
+				mes "[Chocolat]";
+				mes "Claro.";
+				mes "Vou te enviar para o Instrutor Brade.";
+				mes "O Instrutor Brade iniciará seu treinamento básico.";
+				close2;
+				warp strnpcinfo(4),100,100;
+				end;
+			case 2:
+				mes "[Chocolat]";
+				mes "Vou te falar sobre as pessoas que você encontrará na cidade.";
+				mes "Existem muitos tipos de pessoas na cidade e algumas delas serão úteis de se conhecer.";
+				next;
+				mes "[Chocolat]";
+				mes "Há muitas pessoas na cidade, mas entre elas, estas são as mais importantes de conhecer.";
+				next;
+				mes "[Chocolat]";
+				mes "São os funcionários da [Kafra] parados logo atrás de mim e a empresa rival deles, a [Cool Event Corp].";
+				mes "Quando visitar uma cidade pela primeira vez, você deve falar com o [Guia] de Informações.";
+				next;
+				mes "[Chocolat]";
+				mes "Bem, então, vamos ouvir cada um deles.";
+				mes "Comece falando com o funcionário da [Kafra].";
+				set job_novice_q,8;
+				setquest 7121;
+				next;
+				mes "^4d4dff- Você recebeu uma missão da Chocolat.";
+				mes "Por favor, verifique a janela de informações da missão. -^000000";
+				close;
+			}
+		} else {
+			mes "[Chocolat]";
+			mes "Você ainda estava no curso básico.";
+			mes "Você deve voltar ao Instrutor Brade ou à Jinha.";
+			next;
+			mes "[Chocolat]";
+			mes "Se você não sabe como encontrá-los, posso te enviar para o Instrutor Brade, que tal?";
+			next;
+			switch(select("I will go myself.:Will you do that for me?")) {
+			case 1:
+				mes "[Chocolat]";
+				mes "Claro. Saia pela porta à direita.";
+				close;
+			case 2:
+				mes "[Chocolat]";
+				mes "Claro.";
+				mes "Vejo você mais tarde.";
+				close2;
+				warp strnpcinfo(4),100,100;
+				end;
+			}
+		}
+	} else if (job_novice_q == 7) {
+		mes "[Chocolat]";
+		mes "Vou te falar sobre as pessoas que você encontrará na cidade.";
+		mes "Existem muitos tipos de pessoas na cidade e algumas delas serão úteis de se conhecer.";
+		next;
+		mes "[Chocolat]";
+		mes "Há muitas pessoas na cidade, mas entre elas, estas são as mais importantes de conhecer.";
+		next;
+		mes "[Chocolat]";
+		mes "São os funcionários da [Kafra] parados logo atrás de mim e a empresa rival deles, a [Cool Event Corp].";
+		mes "Quando visitar uma cidade pela primeira vez, você deve falar com o [Guia] de Informações.";
+		next;
+		mes "[Chocolat]";
+		mes "Bem, então, vamos ouvir cada um deles.";
+		mes "Comece falando com o funcionário da [Kafra].";
+		set job_novice_q,8;
+		setquest 7121;
+		close;
+	} else if (job_novice_q == 8) {
+		mes "[Chocolat]";
+		mes "Aqui, fale com esse pessoal parado atrás de mim.";
+		mes "Comece com o funcionário da [Kafra] atrás de mim.";
+		close;
+	} else if (job_novice_q == 9) {
+		mes "[Chocolat]";
+		mes "Você aprendeu muito sobre o serviço Kafra, hein?";
+		mes "A partir de agora, você pode usar o Serviço Kafra.";
+		next;
+		mes "[Chocolat]";
+		mes "Durante o Processo de Treinamento, se você quiser ir direto para a cidade, pode usar o Serviço Kafra para ir até lá.";
+		mes "Mas, uma vez que você sair do Centro de Treinamento, você nunca poderá voltar aqui.";
+		next;
+		mes "[Chocolat]";
+		mes "O próximo é o rival da Kafra, a equipe da [Cool Event Corp.]!";
+		mes "A equipe da [Cool Event Corp.] é especializada em eventos.";
+		mes "Bem, por que você não fala com ele você mesmo?";
+		close;
+	} else if (job_novice_q == 10) {
+		mes "[Chocolat]";
+		mes "Depois da [Kafra] e da [Cool Event Corp.], temos os [Guia]s de Informações.";
+		mes "Eles podem parecer insignificantes, mas podem te ajudar muito quando chegar a hora.";
+		next;
+		mes "[Chocolat]";
+		mes "Eu trouxe o Guia de Informações da Cidade de Prontera.";
+		mes "Pergunte a ele o que ele realmente faz na cidade.";
+		close;
+	} else if (job_novice_q == 11) {
+		mes "[Chocolat]";
+		mes "Como foi a explicação do [Guia] de Informações?";
+		mes "O último assunto é sobre o uso de [Pousadas].";
+		mes "Existe uma Pousada localizada em cada cidade.";
+		next;
+		mes "[Chocolat]";
+		mes "Você pode descansar em Pousadas ou Hotéis por uma pequena taxa.";
+		mes "Seu HP e SP serão recuperados completamente ao descansar lá.";
+		mes "Não faz mal usar uma, não é?";
+		next;
+		mes "[Chocolat]";
+		mes "Além desse pessoal, há muitos mercadores vendendo vários tipos de itens, então vá conferir.";
+		set job_novice_q,12;
+		completequest 7121;
+		getexp 1800,20;
+		getitem 7059,20; //Cargo_Free_Ticket
+		getitem 7060,30; //Warp_Free_Ticket
+		next;
+		mes "[Chocolat]";
+		mes "Você completou todas as missões que eu te dei.";
+		mes "Como recompensa, vou te dar Bilhetes Gratuitos para o Armazém Kafra e Serviço de Teleporte.";
+		mes "Eles serão úteis.";
+		next;
+		mes "[Chocolat]";
+		mes "Por mim, é só.";
+		mes "Agora, é hora de combate real!";
+		next;
+		mes "[Chocolat]";
+		mes "O Treinamento de Combate Real será ministrado pelo Instrutor Brade. Você o conheceu mais cedo.";
+		mes "Vou te enviar para o Campo de Treinamento de Combate Real.";
+		close2;
+		set .@map$, "new_"+charat(strnpcinfo(4),4)+"-3";
+		savepoint .@map$,96,21,1,1;
+		warp .@map$,96,21;
+		end;
+	} else {
+		mes "[Chocolat]";
+		mes "Você está perdido?";
+		next;
+		switch(select("No, just looking around:Yes, send me to the Combat Training Field")) {
+		case 1:
+			mes "[Chocolat]";
+			mes "Ok, volte até mim caso";
+			mes "precise que eu te redirecione.";
+			close;
+		case 2:
+			mes "[Chocolat]";
+			mes "Vou te enviar para o Campo de Treinamento de Combate Real.";
+			close2;
+			set .@map$, "new_"+charat(strnpcinfo(4),4)+"-3";
+			savepoint .@map$,96,21,1,1;
+			warp .@map$,96,21;
+			end;
+		}
+	}
+}
+new_1-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv1	96
+new_2-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv2	96
+new_3-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv3	96
+new_4-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv4	96
+new_5-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv5	96
+
+-	script	Kafra Employee#newbe07::NvKafra	-1,{
+	if (job_novice_q < 8) {
+		mes "[Empregada Kafra]";
+		mes "Olá.";
+		mes "Acho que ainda não é minha vez.";
+		mes "Por favor, fale com a 'Chocolat' primeiro.";
+		close;
+	} else if (job_novice_q == 8) {
+		mes "[Empregada Kafra]";
+		mes "Olá.";
+		mes "Fui enviada pela Sede da Kafra para ajudar os aprendizes.";
+		mes "A Corporação Kafra é a maior empresa do mundo, com uma longa e distinta história no continente de Midgard.";
+		mes "É importante para vocês, aventureiros, serem próximos de nós.";
+		next;
+		mes "[Empregada Kafra]";
+		mes "Vou te informar sobre os Serviços Kafra que você usará com mais frequência: [Salvar], [Armazém] e [Teleporte].";
+		next;
+		mes "[Empregada Kafra]";
+		mes "Quando você fala com uma Empregada Kafra e solicita o Serviço de Salvar,";
+		mes "o local onde você reviverá, após ser derrotado em batalha, será alterado.";
+		next;
+		mes "[Empregada Kafra]";
+		mes "Seu Ponto de Retorno é sempre o último lugar onde você salvou. Usar uma Asa de Borboleta fará você retornar ao local onde salvou pela última vez.";
+		mes "Este serviço é gratuito, então sinta-se à vontade para usar o Serviço de Salvar quando quiser.";
+		next;
+		callsub L_Services,2; //Storage
+		next;
+		callsub L_Services,3; //Teleport
+		set job_novice_q,9;
+		next;
+		mes "[Empregada Kafra]";
+		mes "Você quer ouvir outra explicação?";
+		next;
+		while(1) {
+			set .@select, select("About Save:About Storage:About Teleport:About Cart:No More.");
+			if (.@select == 5) {
+				mes "[Empregada Kafra]";
+				mes "Espero que esteja satisfeito com minha explicação";
+				mes "sobre o Serviço Kafra.";
+				close;
+			}
+			callsub L_Services, .@select;
+			next;
+		}
+	} else {
+		mes "[Empregada Kafra]";
+		mes "Serviço Kafra, ao seu dispor.";
+		mes "O que posso fazer por você?";
+		next;
+		mes "[Empregada Kafra]";
+		mes "Deixe-me te informar antes de usar o Serviço de Teleporte.";
+		mes "Se você se teleportar para a cidade,";
+		mes "^4d4dffvocê NUNCA poderá voltar para o Campo de Treinamento de Aprendizes.^000000";
+		mes "Portanto, tenha isso em mente.";
+		next;
+		switch(select("Teleport Service:About Kafra Service")) {
+		case 1:
+			mes "[Empregada Kafra]";
+			mes "Então, você vai direto para a cidade.";
+			mes "Deixe-me dar uma breve introdução.";
+			mes "^4d4dffProntera é a Capital do Reino de Rune-Midgard, e logo ao lado dela fica Izlude.^000000";
+			next;
+			mes "[Empregada Kafra]";
+			mes "^4d4dffMorroc é a Cidade do Deserto, você pode mudar sua Classe para Gatuno e Mercenário^000000 aqui.";
+			mes "^4d4dffPayon é a Vila nas Montanhas, e é perto da Vila dos Arqueiros.^000000";
+			mes "^4d4dffGeffen é a Cidade da Magia. Vá até lá se quiser se tornar um Mago.^000000";
+			next;
+			mes "[Empregada Kafra]";
+			mes "^4d4dffAlberta é a Cidade Portuária e lá você pode encontrar a guilda dos Mercadores.^000000";
+			mes "Além disso, se você estiver tentando pegar um barco para ir a algum lugar, precisa passar por Alberta primeiro.";
+			mes "Selecione a cidade para a qual deseja se teleportar.";
+			next;
+			switch(select("Prontera:Morocc:Payon:Alberta:Geffen")) {
+			case 1:
+				mes "[Empregada Kafra]";
+				mes "A Capital de Rune-Midgard, Prontera.";
+				mes "Vou te enviar para Prontera.";
+				mes "Que Freya abençoe sua jornada.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "prontera",117,72,1,1;
+				warp "prontera",150,50;
+				end;
+			case 2:
+				mes "[Empregada Kafra]";
+				mes "A Cidade do Deserto, Morroc...";
+				mes "Ela perdeu sua glória antiga...";
+				mes "Não perca o sonho em seu coração agora.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "morocc",150,99,1,1;
+				warp "morocc",155,110;
+				end;
+			case 3:
+				mes "[Empregada Kafra]";
+				mes "Hmm, você quer ser um Arqueiro?";
+				mes "Vamos para Payon.";
+				mes "Que Freya te abençoe.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "payon",70,100,1,1;
+				warp "payon",166,67;
+				end;
+			case 4:
+				mes "[Empregada Kafra]";
+				mes "A Cidade Portuária, Alberta.";
+				mes "Cidade principal para todas as trocas no continente de Midgard.";
+				mes "Se você quer experimentar outras civilizações, precisa visitar Alberta primeiro.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "alberta",30,232,1,1;
+				warp "alberta",114,58;
+				end;
+			case 5:
+				mes "[Empregada Kafra]";
+				mes "A Cidade da Magia!";
+				mes "A Torre de Geffen fica linda no centro da Cidade de Geffen.";
+				mes "Vou te enviar perto da fonte de Geffen.";
+				mes "Que a Deusa Freya te abençoe!";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "geffen",119,37,1,1;
+				warp "geffen",122,65;
+				end;
+			}
+		case 2:
+			mes "[Empregada Kafra]";
+			mes "Vou explicar sobre o Serviço Kafra.";
+			mes "Sobre qual serviço você deseja";
+			mes "ser informado?";
+			next;
+			while(1) {
+				set .@select, select("About Save:About Storage:About Teleport:About Cart:No More.");
+				if (.@select == 5) {
+					mes "[Empregada Kafra]";
+					mes "Espero que esteja satisfeito com minha explicação";
+					mes "sobre o Serviço Kafra.";
+					close;
+				}
+				callsub L_Services, .@select;
+				next;
+			}
+		}
+	}
+	end;
+
+L_Services:
+	switch(getarg(0)) {
+	case 1:
+		mes "[Empregada Kafra]";
+		mes "Quando você é morto em uma batalha,";
+		mes "você pode reviver no local onde salvou com este serviço.";
+		mes "Se você salvar em uma Kafra em cada vila,";
+		mes "você pode reviver na vila onde salvou.";
+		next;
+		mes "[Empregada Kafra]";
+		mes "O local salvo é sempre onde";
+		mes "você salvou por último, e ao usar uma Asa de Borboleta,";
+		mes "você pode se teleportar diretamente para seu ponto de retorno.";
+		mes "Então, sinta-se à vontade para usar este serviço.";
+		break;
+	case 2:
+		mes "[Empregada Kafra]";
+		mes "O próximo é sobre como usar o Serviço de Armazém.";
+		mes "Você pode armazenar e recuperar seus itens em qualquer cidade conforme sua conveniência.";
+		next;
+		mes "[Empregada Kafra]";
+		mes "Não é razoável carregar todos os seus itens com você quando você não precisa deles imediatamente.";
+		mes "Por favor, use nosso Armazém e mantenha seus itens seguros.";
+		next;
+		mes "[Empregada Kafra]";
+		mes "Nosso conveniente Serviço de Armazém";
+		mes "é fornecido aos nossos clientes por uma pequena taxa que varia de cidade para cidade.";
+		mes "No entanto, você deve ter";
+		mes "pelo menos ^3355FFNível de Habilidade Básica 6^000000";
+		mes "para usar o Armazém.";
+		next;
+		mes "[Empregada Kafra]";
+		//mes "There are 3 different item sections of the Storage into which items are organized: Consumable, Equipment and Etc.";
+		mes "Existem 7 seções diferentes de itens no Armazém, nas quais os itens são organizados: Consumíveis, Kafra (Loja de ROPs), Armaduras, Armas, Munições, Cartas e itens diversos.";
+		next;
+
+		// VIP System messages.
+		if (MIN_STORAGE != MAX_STORAGE) {
+			mes "[Funcionária Kafra]";
+			mes "There are a maximum of "+MIN_STORAGE+" Inventory Slots in Kafra Storage, meaning you can have up to "+MIN_STORAGE+" different kinds of items in Storage.";
+			next;
+			mes "[Funcionária Kafra]";
+			mes "If you have a Premium Subscription, the maximum Inventory Slots in Kafra Storage is "+MAX_STORAGE+"!";
+			mes "Lembre-se, porém, que no caso de Equipamentos, cada item ocupa um Espaço no Inventário.";
+			mes "O número máximo de itens que podem ser colocados no Armazém Kafra é 30.000.";
+			next;
+		} else {
+			mes "[Funcionária Kafra]";
+			mes "There are a maximum of "+MAX_STORAGE+" Inventory Slots in Kafra Storage, meaning you can have up to "+MAX_STORAGE+" different kinds of items in Storage.";
+			next;
+		}
+
+		mes "[Funcionária Kafra]";
+		mes "Este Armazém é compartilhado por todos os personagens de uma conta.";
+		mes "As Taxas de Armazém podem variar para cada Cidade.";
+		mes "Portanto, lembre-se disso ao usar nosso serviço de armazenamento.";
+		break;
+	case 3:
+		mes "[Funcionária Kafra]";
+		mes "Também fornecemos um Serviço de Teleporte para facilitar suas viagens quando precisar percorrer longas distâncias.";
+		next;
+		mes "[Funcionária Kafra]";
+		mes "Com a habilidade do nosso veterano teletransportador,";
+		mes "sua viagem será mais segura e confortável.";
+		mes "Ah, e lembre-se de que os locais para onde você pode se teletransportar variam de cidade para cidade.";
+		next;
+		mes "[Funcionária Kafra]";
+		mes "Isso é tudo pelo seu eterno";
+		mes "apoio. Estamos trabalhando muito para";
+		mes "recompensar nossos clientes.";
+		break;
+	case 4:
+		mes "[Funcionária Kafra]";
+		mes "A corporação Kafra oferece serviços de aluguel de Carrinho";
+		mes "para clientes envolvidos em negócios comerciais.";
+		mes "Originalmente, este serviço de aluguel de carrinho era fornecido apenas";
+		mes "pela guilda dos mercadores em Alberta.";
+		next;
+		mes "[Funcionária Kafra]";
+		mes "No entanto, desde que assumimos este serviço,";
+		mes "nossos clientes mercadores têm conseguido alugar carrinhos de quase qualquer lugar.";
+		mes "O serviço de aluguel de carrinho está disponível apenas para classes envolvidas em negócios comerciais";
+		mes "como ^4d4dffMercadores, Ferreiros, Alquimistas e Superaprendizes^000000.";
+		next;
+		mes "[Funcionária Kafra]";
+		mes "É claro que você deve aprender a habilidade 'Aumentar Capacidade' antes,";
+		mes "caso contrário, você não poderá alugar um carrinho conosco.";
+		mes "A taxa de aluguel varia de acordo com a cidade,";
+		mes "por favor, tenha isso em mente.";
+		break;
+	}
+	return;
+}
+new_1-2,30,176,4	duplicate(NvKafra)	Kafra Employee#nv1	117
+new_2-2,30,176,4	duplicate(NvKafra)	Kafra Employee#nv2	117
+new_3-2,30,176,4	duplicate(NvKafra)	Kafra Employee#nv3	117
+new_4-2,30,176,4	duplicate(NvKafra)	Kafra Employee#nv4	117
+new_5-2,30,176,4	duplicate(NvKafra)	Kafra Employee#nv5	117
+
+-	script	Cool Event Corp. Staff::NvCool	-1,{
+	if (job_novice_q < 9) {
+		mes "[Equipe da Cool Event Corp.]";
+		mes "Não é a minha vez agora.";
+		mes "Você já terminou de falar com a Funcionária Kafra?";
+		close;
+	} else if (job_novice_q == 9) {
+		mes "[Equipe da Cool Event Corp.]";
+		mes "Olá.";
+		mes "Estamos trabalhando arduamente para oferecer eventos em Midgard semelhantes aos serviços Kafra.";
+		next;
+		mes "[Equipe da Cool Event Corp.]";
+		mes "Nossa equipe está aqui para ajudá-lo com [armazém], [salvar] e [serviço de teleporte].";
+		next;
+		mes "[Equipe da Cool Event Corp.]";
+		mes "Se não houver uma Kafra por perto, estamos por perto para ajudá-lo.";
+		next;
+		mes "[Equipe da Cool Event Corp.]";
+		mes "Estamos trabalhando duro em uma rede de Eventos para tornar sua vida melhor.";
+		mes "Espero que você possa encontrar nossa equipe em Alberta.";
+		next;
+		mes "[Equipe da Cool Event Corp.]";
+		mes "Quem sabe, talvez nos encontremos fora desta academia.";
+		next;
+		mes "[Equipe da Cool Event Corp.]";
+		mes "A maioria de nós usa casacos vermelhos nos lugares onde as Funcionárias Kafra não trabalham.";
+		set job_novice_q,10;
+		close;
+	} else {
+		mes "[Equipe da Cool Event Corp.]";
+		mes "A maioria dos nossos serviços é semelhante aos da Corporação Kafra.";
+		close;
+	}
+}
+new_1-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool1	874
+new_2-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool2	874
+new_3-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool3	874
+new_4-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool4	874
+new_5-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool5	874
+
+-	script	Guide::NvGuide	-1,{
+	if (job_novice_q < 10) {
+		mes "[Guia]";
+		mes "Ainda não é a minha vez.";
+		mes "Ouça a Chocolat.";
+		close;
+	} else if (job_novice_q == 10) {
+		mes "[Guia]";
+		mes "Os Guias estão em cada cidade para guiá-lo a locais úteis.";
+		mes "Ask us where you want to go and we'll mark your mini maps with a ^4d4dff+^000000.";
+		mes "Não hesite em nos fazer perguntas.";
+		next;
+		mes "[Guia]";
+		mes "Nem todos nós temos a mesma aparência em todas as cidades, mas nossas funções são as mesmas.";
+		mes "Observe isso sempre que for a uma nova cidade.";
+		next;
+		mes "[Guia]";
+		mes "Se você quiser ir para sua primeira cidade, pode perguntar à Funcionária Kafra à esquerda.";
+		mes "Você pode ir até lá com o Serviço de Teleporte.";
+		set job_novice_q,11;
+		close;
+	} else {
+		mes "[Guia]";
+		mes "Com o que posso ajudá-lo?";
+		mes "Precisa que eu explique o que faço novamente?";
+		next;
+		switch(select("Yes, I need an explanation.:Nope.")) {
+		case 1:
+			mes "[Guia]";
+			mes "Os Guias estão em cada cidade para guiá-lo a locais úteis em cada cidade.";
+			mes "Ask us where you want to go and we'll mark your mini maps with a ^4d4dff+^000000.";
+			mes "Não hesite em nos fazer perguntas.";
+			next;
+			mes "[Guia]";
+			mes "Nem todos nós temos a mesma aparência em todas as cidades, mas nossas funções são as mesmas.";
+			mes "Observe isso sempre que for a uma nova cidade.";
+			next;
+			mes "[Guia]";
+			mes "Se você quiser ir para sua primeira cidade, pode perguntar à Funcionária Kafra à esquerda.";
+			mes "Você pode ir até lá com o Serviço de Teleporte.";
+			close;
+		case 2:
+			mes "[Guia]";
+			mes "Ok, bem, fale com a Chocolat se você terminou de falar conosco.";
+			close;
+		}
+	}
+}
+new_1-2,36,176,4	duplicate(NvGuide)	Guide#nv1	105
+new_2-2,36,176,4	duplicate(NvGuide)	Guide#nv2	105
+new_3-2,36,176,4	duplicate(NvGuide)	Guide#nv3	105
+new_4-2,36,176,4	duplicate(NvGuide)	Guide#nv4	105
+new_5-2,36,176,4	duplicate(NvGuide)	Guide#nv5	105
+
+// Real Combat Training
+//============================================================
+-	script	Brade#newbe04::NvBradeB	-1,{
+	if (job_novice_q < 12) {
+		if (job_novice_q < 2) {
+			mes "[Brade]";
+			mes "Você participou dos Campos de Treinamento anteriores.";
+			mes "Os Campos de Treinamento agora estão sob nova direção.";
+			next;
+			mes "[Brade]";
+			mes "Você quer fazer o curso básico,";
+			mes "ou quer apenas passar direto por aqui?";
+			next;
+			switch(select("Send me to Basic Training.:I'll start from here.")) {
+			case 1:
+				mes "[Brade]";
+				mes "Ok. Vou enviar você para o curso básico.";
+				close2;
+				warp "new_"+charat(strnpcinfo(4),4)+"-2",100,100;
+				end;
+			case 2:
+				mes "[Brade]";
+				mes "Então começaremos seu treinamento.";
+				mes "Vou preencher o formulário de inscrição.";
+				set job_novice_q,12;
+				close;
+			}
+		} else {
+			mes "[Brade]";
+			mes "Acho que você voltou do curso de teoria,";
+			mes "posso enviá-lo de volta para lá ou você quer apenas passar direto por aqui?";
+			next;
+			switch(select("Send me back to Chocolat.:I'll start from here.")) {
+			case 1:
+				mes "[Brade]";
+				mes "Ok. Vou enviar você para a Chocolat.";
+				close2;
+				warp "new_"+charat(strnpcinfo(4),4)+"-2",41,172;
+				end;
+			case 2:
+				mes "[Brade]";
+				mes "Então começaremos seu treinamento.";
+				mes "Vou preencher o formulário de inscrição.";
+				set job_novice_q,12;
+				close;
+			}
+		}
+	} else if (job_novice_q == 12) {
+		mes "[Brade]";
+		mes "Bem-vindo.";
+		mes "Agora esta é a prática real.";
+		mes "Podemos praticar combate real aqui.";
+		next;
+		mes "[Brade]";
+		mes "Como expliquei na primeira vez, podemos clicar nos monstros.";
+		mes "Um ataque por clique.";
+		next;
+		mes "[Brade]";
+		mes "Por conveniência,";
+		mes "^4d4dffSe você segurar a tecla Ctrl,^000000 enquanto ataca, você atacará automaticamente.";
+		next;
+		mes "[Brade]";
+		mes "Você também pode configurar esse modo antes da batalha digitando ^4d4dff[ /nc ]^000000.";
+		next;
+		mes "[Brade]";
+		mes "Então, vamos caçar Poring.";
+		mes "Por favor, cace 'Poring's no Nível 1 dos campos de treinamento.";
+		set job_novice_q,13;
+		setquest 7122;
+		getitem 569,100; //Novice_Potion
+		savepoint strnpcinfo(4),96,21,1,1;
+		next;
+		mes "^4d4dff- Você recebeu uma missão do Instrutor Brade.";
+		mes "Por favor, verifique a janela de informações da missão. -^000000";
+		close2;
+	} else if (job_novice_q < 15) {
+		if (job_novice_q == 13) {
+			if (checkquest(7122,HUNTING) == 2) {
+				mes "[Brade]";
+				mes "Você pode ver que não é tão difícil, huh?";
+				mes "Bom trabalho.";
+				set job_novice_q,14;
+				getitem 13040,1; //N_Cutter
+				getexp 3000,30;
+				completequest 7122;
+				next;
+			} else {
+				mes "[Brade]";
+				mes "Mate Porings o suficiente.";
+				mes "Porings são fáceis de lidar, então anime-se.";
+				mes "Tente novamente.";
+				npcskill "AL_HEAL",11,99,60;
+				close;
+			}
+		}
+		mes "[Brade]";
+		mes "Agora todos os cursos estão quase terminados.";
+		mes "Você é um Aprendiz e ainda não pode pegar nenhuma Classe.";
+		next;
+		mes "[Brade]";
+		mes "Se você adquirir todas as habilidades básicas com Nível de Classe 10, você pode mudar sua Classe.";
+		next;
+		mes "[Brade]";
+		mes "As primeiras Classes são definidas em 6 classes.";
+		next;
+		mes "[Brade]";
+		mes "As 6 classes básicas são";
+		mes "Espadachim, Gatuno,";
+		mes "Noviço, Mago,";
+		mes "Arqueiro e Mercador.";
+		next;
+		mes "[Brade]";
+		mes "Vamos experimentar as 6 classes básicas: Espadachim, Gatuno, Noviço, Mago, Arqueiro e Mercador e ver o que essas classes podem fazer.";
+		next;
+		mes "[Brade]";
+		mes "Atrás de mim, há pessoas enviadas de cada uma das Guildas das classes básicas.";
+		mes "Essas pessoas lhe darão manuais de instrução que permitem que você experimente algumas habilidades limitadas de cada classe.";
+		next;
+		mes "[Brade]";
+		mes "Equipe um manual da classe que você deseja experimentar e você poderá usar algumas habilidades básicas daquela classe correspondente.";
+		mes "Experimente essas habilidades e decida qual classe escolher.";
+		set job_novice_q,15;
+		close;
+	} else {
+		mes "[Brade]";
+		mes "Você experimentou as habilidades nos Manuais?";
+		mes "Se você quiser ouvir informações sobre cada classe, fale com as pessoas enviadas pelas Guildas das Classes.";
+		next;
+		mes "[Brade]";
+		mes "Acho que você aprendeu o suficiente, quer terminar e ir para sua primeira cidade?";
+		next;
+		switch(select("I will stay little longer.:I want to quit and go to the town.")) {
+		case 1:
+			mes "[Brade]";
+			mes "Tudo bem ficar aqui e praticar até achar que está pronto.";
+			next;
+			mes "[Brade]";
+			mes "Tente usar os manuais de classe para descobrir as características das habilidades de cada classe.";
+			mes "Eu irei restaurar seu HP e SP... Continue assim.";
+			npcskill "AL_HEAL",11,99,60;
+			percentheal 0,100;
+			close;
+		case 2:
+			mes "[Brade]";
+			mes "Parece que você está pronto.";
+			mes "Acho que você se decidiu, hein?";
+			mes "Bem, para onde você quer ir?";
+			next;
+			switch(select("Prontera:Morocc:Payon:Alberta:Geffen:Cancel")) {
+			case 1:
+				mes "[Brade]";
+				mes "Prontera, a capital do Reino de Rune-Midgard.";
+				mes "Cuide-se e que os deuses o abençoem em sua jornada.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "prontera",117,72,1,1;
+				warp "prontera",150,50;
+				end;
+			case 2:
+				mes "[Brade]";
+				mes "A cidade do deserto, Morroc...";
+				mes "Há muitas histórias escondidas dentro daquela cidade.";
+				mes "Cuide-se.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "morocc",150,99,1,1;
+				warp "morocc",155,110;
+				end;
+			case 3:
+				mes "[Brade]";
+				mes "Você selecionou Payon.";
+				mes "Que os deuses o abençoem.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "payon",70,100,1,1;
+				warp "payon",166,67;
+				end;
+			case 4:
+				mes "[Brade]";
+				mes "Alberta, a cidade portuária.";
+				mes "É o principal centro de todas as negociações.";
+				mes "Se você quer encontrar outras civilizações, você tem que ir para Alberta primeiro.";
+				mes "Bem, então, que os deuses abençoem sua alma.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "alberta",30,232,1,1;
+				warp "alberta",114,58;
+				end;
+			case 5:
+				mes "[Brade]";
+				mes "Geffen, a cidade da magia.";
+				mes "A Torre de Geffen no meio da cidade é legal.";
+				mes "Eu vou te enviar para perto da fonte de Geffen.";
+				mes "Que a Deusa Freya te abençoe.";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "geffen",119,37,1,1;
+				warp "geffen",122,65;
+				end;
+			case 6:
+				mes "[Brade]";
+				mes "Sim... Pense com prudência.";
+				mes "...Encontre-se com as pessoas de cada guilda.";
+				close;
+			}
+		}
+	}
+}
+new_1-3,96,30,4	duplicate(NvBradeB)	Brade#nv1b	733
+new_2-3,96,30,4	duplicate(NvBradeB)	Brade#nv2b	733
+new_3-3,96,30,4	duplicate(NvBradeB)	Brade#nv3b	733
+new_4-3,96,30,4	duplicate(NvBradeB)	Brade#nv4b	733
+new_5-3,96,30,4	duplicate(NvBradeB)	Brade#nv5b	733
+
+-	script	Swordman Guide#newbe10::NvSwordman	-1,{
+	if (job_novice_q < 15) {
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Eu não vou te ajudar até que você termine as instruções de Brade.";
+		close;
+	}
+	mes "[Representante da Guilda dos Espadachins]";
+	mes "Posso te ajudar?";
+	next;
+	switch(select("About Swordman Class.:Job change to Swordman.:Got any quests?:Cancel.")) {
+	case 1:
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Literalmente, Espadachim significa alguém que";
+		mes "é especializado em manejar espadas.";
+		mes "Mas eles também podem optar por usar lanças, se assim desejarem.";
+		next;
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Nós possuímos grande força física.";
+		mes "Então, naturalmente, podemos equipar armaduras e armas pesadas.";
+		mes "A maioria das classes de armas, exceto arcos e cajados,";
+		mes "pode ser equipada pela nossa classe.";
+		next;
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "A única fraqueza da classe Espadachim é que eles não podem usar feitiços mágicos.";
+		mes "Mas compensamos isso usando armas elementais.";
+		next;
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "O mérito de ser um Espadachim é a enorme quantidade de HP que temos.";
+		mes "A maioria de nós consegue suportar o peso dos ataques dos nossos inimigos com relativa facilidade.";
+		next;
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "E somos inigualáveis quando se trata de combate corpo a corpo um contra um.";
+		next;
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Quem escolhe ser Espadachim provavelmente desempenhará o papel de tanque. É nosso dever proteger os fracos.";
+		next;
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Como Espadachim, você pode avançar para a classe ^8E2323Cavaleiro^000000 ou ^8E2323Templário^000000 como sua segunda classe.";
+		mes "E recentemente, as terceiras profissões foram descobertas.";
+		next;
+		if (isequipped(2819) || countitem(2819)) {
+			mes "[Representante da Guilda dos Espadachins]";
+			mes "Experimente as habilidades de Espadachim listadas no manual.";
+			mes "Open your skill menu by pressing Alt + S";
+			mes "Certifique-se de que esteja no modo de lista clicando no botão de minimizar no canto superior direito do Menu de Habilidades.";
+			close;
+		}
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Se você estiver interessado em ser um Espadachim, eu lhe oferecerei este manual.";
+		mes "Você quer experimentar as habilidades de um Espadachim?";
+		next;
+		switch(select("I'll try the Swordman skills.:No thanks.")) {
+		case 1:
+			mes "[Representante da Guilda dos Espadachins]";
+			mes "Aqui está o manual do Espadachim.";
+			mes "Eu pegarei quaisquer manuais de outras classes que você tiver.";
+			next;
+			callfunc "F_NvErase";
+			getitem 2819,1; //Swordman_Manual
+			next;
+			mes "[Representante da Guilda dos Espadachins]";
+			mes "After equipping the Manual, open your Skill menu by pressing ALT+S.";
+			mes "Certifique-se de minimizar sua árvore de Habilidades clicando no botão '-' no canto superior direito da Janela da Árvore de Habilidades.";
+			close;
+		case 2:
+			mes "[Representante da Guilda dos Espadachins]";
+			mes "Hum. Você acha?";
+			mes "Ok, concordo com você. Escolher uma classe é muito importante em nossas vidas.";
+			mes "Fale comigo sempre que quiser experimentar as habilidades de Espadachim.";
+			close;
+		}
+	case 2:
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Você realmente quer mudar sua classe para Espadachim?";
+		mes "Se você quer ser um Espadachim, eu te enviarei para a Associação dos Espadachins imediatamente.";
+		next;
+		mes "[Representante da Guilda dos Espadachins]";
+		mes "Acho que você tem níveis de classe suficientes, claro, certo?";
+		mes "Você quer parar seu treinamento agora e ir para a Associação dos Espadachins?";
+		next;
+		switch(select("I'll consider it again.:I'll go to the Swordman Association.")) {
+		case 1:
+			mes "[Representante da Guilda dos Espadachins]";
+			mes "Por favor, experimente manuais de instrução suficientes de cada classe e considere com cuidado.";
+			mes "Claro, você é sempre bem-vindo.";
+			close;
+		case 2:
+			mes "[Representante da Guilda dos Espadachins]";
+			mes "Entendo.";
+			mes "Então, terminarei seu processo de treinamento e o enviarei para a Guilda dos Espadachins.";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+			warp "izlude_in",74,167;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7123);
+		if (.@quest == -1) {
+			mes "[Membro da Guilda dos Espadachins]";
+			mes "Você quer que eu lhe dê uma missão?";
+			mes "Hum. Deixe-me ver.";
+			mes "Ok! Que tal caçar alguns monstros Picky por aqui?";
+			next;
+			mes "^4d4dffVocê recebeu um pedido de caça da equipe da Guilda dos Espadachins.";
+			mes "Você pode verificar o conteúdo da missão na janela de informações de missões.^000000";
+			setquest 7123;
+			next;
+			mes "[Membro da Guilda dos Espadachins]";
+			mes "Use a habilidade 'Golpe Fulminante' no manual de Espadachim.";
+			mes "Open your Skill Tree by pressing ^4d4dffAlt + S^000000 and minimize the window by pressing the ^4d4dff'-'^000000 button on the top right corner of the window to see the available Swordman skills.";
+			next;
+			mes "[Membro da Guilda dos Espadachins]";
+			mes "Fale com o Instrutor Brutus se quiser lutar contra monstros mais fortes.";
+			mes "Estarei esperando por você aqui.";
+			mes "Boa sorte.";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (checkquest(7123,HUNTING) == 2) {
+				mes "[Membro da Guilda dos Espadachins]";
+				mes "Ótimo.";
+				mes "Acho que você é bom o suficiente para ser um Espadachim.";
+				mes "Vou lhe dar algumas poções como recompensa.";
+				completequest 7123;
+				getitem 569,200; //Novice_Potion
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[Membro da Guilda dos Espadachins]";
+				mes "Cace dois monstros Picky.";
+				mes "Você pode encontrá-los nos campos de treinamento mais difíceis falando com o Instrutor Brutus.";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[Membro da Guilda dos Espadachins]";
+			mes "Acho que você já terminou essa missão, certo?";
+			mes "Você experimentará mais missões como esta à medida que crescer como um aventureiro no mundo.";
+			next;
+			mes "[Membro da Guilda dos Espadachins]";
+			mes "Seu treinamento está concluído.";
+			mes "Se você escolher se tornar um Espadachim, desejo-lhe boa sorte.";
+			close;
+		} else {
+			mes "[Membro da Guilda dos Espadachins]";
+			mes "Sinto muito, mas não tenho missões para lhe dar agora.";
+			close;
+		}
+	case 4:
+		mes "[Membro da Guilda dos Espadachins]";
+		mes "Se você tiver alguma dúvida sobre a classe Espadachim, por favor, me pergunte.";
+		mes "A Guilda dos Espadachins está esperando por aprendizes como você.";
+		close;
+	}
+}
+new_1-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv1	728
+new_2-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv2	728
+new_3-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv3	728
+new_4-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv4	728
+new_5-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv5	728
+
+-	script	Acolyte Guide#newbe10::NvAcolyte	-1,{
+	if (job_novice_q < 15) {
+		mes "[Noviço de Prontera]";
+		mes "Parece que você ainda não terminou as lições do Instrutor Brade.";
+		close;
+	}
+	mes "[Noviço de Prontera]";
+	mes "O que posso fazer por você?";
+	next;
+	switch(select("What is an Acolyte?:Job change to Acolyte.:Cancel")) {
+	case 1:
+		mes "[Noviço de Prontera]";
+		mes "Um Noviço é alguém que adora a deusa Freya, sacrificando-se para ajudar os outros.";
+		next;
+		mes "[Noviço de Prontera]";
+		mes "Noviços usam habilidades de suporte para facilitar o combate.";
+		mes "É essencial ter um Noviço em qualquer grupo de sucesso.";
+		next;
+		mes "[Noviço de Prontera]";
+		mes "^8E2323Como Noviço, você pode evoluir sua futura classe para Sacerdote ou Monge^8E2323.";
+		next;
+		if (isequipped(2821) || countitem(2821)) {
+			mes "[Noviço de Prontera]";
+			mes "Experimente as habilidades de Noviço com o manual que você tem. Isso ajudará você a entender a classe mais facilmente.";
+			mes "Open your Skill Tree by pressing ^4d4dffAlt + S^000000 and minimize the window by pressing the ^4d4dff'-'^000000 button on the top right corner of the window to see the available skills.";
+			close;
+		}
+		mes "[Noviço de Prontera]";
+		mes "Se quiser, posso lhe dar um manual de habilidades para vivenciar como é ser um Noviço.";
+		mes "Você gostaria de experimentar as habilidades de um Noviço?";
+		next;
+		switch(select("Yes, please.:No, I'm not interested.")) {
+		case 1:
+			mes "[Noviço de Prontera]";
+			mes "Aqui está, o manual de instruções de um Noviço.";
+			mes "Vou pegar esses manuais de outras classes enquanto você estuda este.";
+			next;
+			callfunc "F_NvErase";
+			getitem 2821,1; //Acolyte_Manual
+			next;
+			mes "[Noviço de Prontera]";
+			mes "Certifique-se de equipar o Manual de Habilidades clicando duas vezes nele na Janela de Inventário.";
+			mes "Open your Skill Tree by pressing ^4d4dffAlt + S^000000 and minimize the window by pressing the ^4d4dff'-'^000000 button on the top right corner of the window to see the available skills.";
+			close;
+		case 2:
+			mes "[Noviço de Prontera]";
+			mes "Hum. Você acha mesmo?";
+			mes "Ok, concordo com você. Escolher uma classe é muito importante em nossa vida.";
+			mes "Fale comigo sempre que quiser saber sobre Noviços.";
+			close;
+		}
+	case 2:
+		mes "[Noviço de Prontera]";
+		mes "Você realmente quer se tornar um Noviço?";
+		mes "Se quiser, eu o enviarei para o Santuário de Prontera.";
+		next;
+		mes "[Noviço de Prontera]";
+		mes "Claro, suponho que você tenha níveis de classe suficientes para se tornar um Noviço, certo?";
+		mes "Você gostaria de sair do Processo de Treinamento e ir para o Santuário de Prontera?";
+		next;
+		switch(select("Let me reconsider.:I will go to the Sanctuary.")) {
+		case 1:
+			mes "[Noviço de Prontera]";
+			mes "Você deveria experimentar os manuais de cada classe.";
+			mes "Analise-os completamente e decida com cuidado.";
+			mes "Claro, eu o receberei a qualquer momento.";
+			close;
+		case 2:
+			mes "[Noviço de Prontera]";
+			mes "Isso é ótimo.";
+			mes "Então, encerrarei completamente o Processo de Treinamento e o enviarei para o Santuário de Prontera.";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "prontera",117,72,1,1;
+			warp "prt_church",172,19;
+			end;
+		}
+	case 3:
+		mes "[Noviço de Prontera]";
+		mes "Se você tiver alguma dúvida sobre Noviços, por favor, me pergunte a qualquer momento.";
+		mes "Nosso Deus, Odin, aguarda por aventureiros como você.";
+		close;
+	}
+}
+new_1-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv1	95
+new_2-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv2	95
+new_3-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv3	95
+new_4-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv4	95
+new_5-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv5	95
+
+-	script	Thief Guide#newbe10::NvThief	-1,{
+	if (job_novice_q < 15) {
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Parece que você ainda não terminou as lições do Instrutor Brade.";
+		close;
+	}
+	mes "[Membro da Guilda dos Gatunos]";
+	mes "Como posso ajudá-lo?";
+	next;
+	switch(select("About the Thief Class.:I want to be a Thief.:Got any Quests?:Cancel.")) {
+	case 1:
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Gatunos são especialistas no uso de armas da classe Adaga.";
+		mes "Eles atacam rapidamente e evitam facilmente ataques de seus inimigos.";
+		next;
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Gatunos podem aprender habilidades que lhes permitem esconder-se de seus inimigos ou roubar itens de monstros.";
+		mes "Eles também são temidos pelo uso de veneno, que enfraquece lentamente seus inimigos.";
+		next;
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Em perigo, ou caso os Gatunos não queiram se revelar,";
+		mes "eles podem até usar sua habilidade para se esconder facilmente.";
+		next;
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Gatunos podem mudar suas classes para ^8E2323Mercenário^000000 ou ^8E2323Arruaceiro^000000.";
+		next;
+		if (isequipped(2820) || countitem(2820)) {
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "O manual de classe pode ajudá-lo a entender o que é ser um Gatuno usando as habilidades essenciais para todos os Gatunos.";
+			close;
+		}
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Se quiser, vou lhe dar um manual de habilidades de Gatuno.";
+		mes "Você gostaria de experimentar as habilidades de um Gatuno?";
+		next;
+		switch(select("Yes, I would.:No, I don't.")) {
+		case 1:
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Aqui, por favor, pegue o manual de Gatuno.";
+			mes "Vou pegar os outros manuais de classe enquanto estou aqui.";
+			next;
+			callfunc "F_NvErase";
+			getitem 2820,1; //Thief_Manual
+			next;
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Certifique-se de equipar o Manual de Habilidades clicando duas vezes nele na Janela de Inventário.";
+			mes "Open your Skill Tree by pressing ^4d4dffAlt + S^000000 and minimize the window by pressing the ^4d4dff'-'^000000 button on the top right corner of the window to see the available skills.";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Oh, tem certeza?";
+			mes "A escolha de classe é muito importante, então considere com cuidado.";
+			mes "Se você quiser perguntar sobre Gatunos, fale comigo a qualquer momento.";
+			close;
+		}
+	case 2:
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Você realmente quer ser um Gatuno?";
+		mes "Se sim, eu o enviarei para a Guilda dos Gatunos imediatamente.";
+		next;
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Você já atingiu o nível de classe necessário, não atingiu?";
+		mes "Você quer terminar o treinamento de Aprendiz e ir para a Guilda dos Gatunos?";
+		next;
+		switch(select("Let me consider it again.:Yes, I do.")) {
+		case 1:
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Você já experimentou todos os manuais de classe?";
+			mes "Se você estiver indeciso sobre qual classe seguir, sugiro que fale com todos os Guias primeiro.";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Ok, entendo.";
+			mes "Bem-vindo. Então seu treinamento de Aprendiz está totalmente concluído e você será enviado para a Guilda dos Gatunos imediatamente.";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "morocc",150,99,1,1;
+			warp "moc_prydb1",99,185;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7127);
+		if (.@quest == -1) {
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Tarefas?";
+			mes "Hmm, o que seria bom para você?";
+			mes "Que tal caçar alguns Salgueiros.";
+			next;
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Você não pode trapacear nisso, então certifique-se de matar 5 Salgueiros. Quando terminar, venha falar comigo novamente.";
+			mes "Se você falar com o Treinador Brutus, ele pode te enviar para um campo de treinamento mais difícil onde há Salgueiros para caçar.";
+			setquest 7127;
+			next;
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Se você equipar o manual de Gatuno, você pode ter o efeito da habilidade Perícia com Adaga.";
+			mes "Perícia com Adaga e Esconderijo são as principais habilidades do Gatuno.";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (checkquest(7127,HUNTING) == 2) {
+				mes "[Membro da Guilda dos Gatunos]";
+				mes "Você é muito forte.";
+				mes "Não é muito, mas deixe-me lhe dar uma recompensa pelo seu esforço.";
+				completequest 7127;
+				getitem 12323,50; //N_Fly_Wing
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[Membro da Guilda dos Gatunos]";
+				mes "Caçe 5 Salgueiros e depois venha falar comigo para terminar sua tarefa.";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Acho que você já terminou essa tarefa, certo?";
+			mes "Você experimentará mais dessas tarefas à medida que crescer como um aventureiro no mundo.";
+			next;
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Seu treinamento agora está completo.";
+			mes "Se você escolher se tornar um Gatuno, desejo-lhe boa sorte.";
+			close;
+		} else {
+			mes "[Membro da Guilda dos Gatunos]";
+			mes "Sinto muito, mas não tenho nenhuma tarefa para lhe dar agora.";
+			close;
+		}
+	case 4:
+		mes "[Membro da Guilda dos Gatunos]";
+		mes "Se você tiver algo a perguntar sobre a classe Gatuno, sinta-se à vontade para me perguntar.";
+		close;
+	}
+}
+new_1-3,105,41,3	duplicate(NvThief)	Thief Guide#nv1	118
+new_2-3,105,41,3	duplicate(NvThief)	Thief Guide#nv2	118
+new_3-3,105,41,3	duplicate(NvThief)	Thief Guide#nv3	118
+new_4-3,105,41,3	duplicate(NvThief)	Thief Guide#nv4	118
+new_5-3,105,41,3	duplicate(NvThief)	Thief Guide#nv5	118
+
+-	script	Merchant Guide#newbe10::NvMerchant	-1,{
+	if (job_novice_q < 15) {
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Você ainda está no processo de treinamento com o Sr. Brad.";
+		close;
+	}
+	mes "[Membro da Guilda dos Mercadores]";
+	mes "Com o que posso ajudá-lo?";
+	next;
+	switch(select("Tell me about Merchants:I want to be a Merchant.:Give me a Quest.:Cancel")) {
+	case 1:
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Mercador? Simplificando, ele vende produtos e faz dinheiro.";
+		mes "Esse é o foco principal para qualquer Mercador.";
+		next;
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Temos habilidades especiais para ganhar dinheiro.";
+		mes "Podemos comprar mercadorias por um preço menor";
+		mes "e vendê-las por um preço maior.";
+		next;
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Além disso, Mercadores podem ter Carrinhos";
+		mes "onde podemos armazenar muitos itens.";
+		next;
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "^8E2323Mercadores podem se transformar em Ferreiro";
+		mes "^8E2323ou Alquimista^000000 como sua segunda classe.";
+		next;
+		if (isequipped(2823) || countitem(2823)) {
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Acho que você deveria testar as habilidades de Mercador antes de decidir o que fazer.";
+			close;
+		}
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Você quer ver como é ser um Mercador?";
+		next;
+		switch(select("I want to test Merchant skills.:I don't want to test it.")) {
+		case 1:
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Aqui está o manual de habilidades de Mercador.";
+			mes "Eu pegarei outros manuais de classe com você enquanto estiver nisso.";
+			next;
+			callfunc "F_NvErase";
+			getitem 2823,1; //Merchant_Manual
+			next;
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Certifique-se de equipar o Manual de Habilidade dando um clique duplo nele na Janela de Inventário.";
+			mes "Open your Skill Tree by pressing ^4d4dffAlt + S^000000 and minimize the window by pressing the ^4d4dff'-'^000000 button on the top right corner of the window to see the available skills.";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Hum. Você acha?";
+			mes "Ok, concordo com você. Escolher uma classe é muito importante em nossa vida.";
+			mes "Apenas fale comigo sempre que quiser experimentar as habilidades de Mercador.";
+			close;
+		}
+	case 2:
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Você quer ser um Mercador?";
+		mes "Ok, então, eu vou te enviar para a união da Guilda dos Mercadores agora mesmo.";
+		next;
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Espere, você verificou seu nível de Classe?";
+		mes "Você quer concluir seu treinamento de Aprendiz e ir direto para a união da Guilda dos Mercadores?";
+		next;
+		switch(select("I will think about it again.:Yes, I want to go to the Merchant Guild's union")) {
+		case 1:
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Ok, espero que considere ser um Mercador.";
+			mes "Sempre seremos bem-vindos em tê-lo!";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Isso é ótimo.";
+			mes "Então encerrarei o Processo de Treinamento e enviarei você para a união da Guilda dos Mercadores imediatamente.";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "alberta",30,232,1,1;
+			warp "alberta_in",62,44;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7126);
+		if (.@quest == -1) {
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Huh? Tarefa??";
+			mes "Humm... O que seria adequado para você...?";
+			mes "Ok, então traga-me ^5d5dff300 zenys^000000 vendendo alguns de seus itens para o Mercador de Batatas.";
+			next;
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Se você equipou o manual de Mercador, você tem a habilidade de usar as habilidades 'Superfaturar' e 'Desconto'.";
+			setquest 7126;
+			next;
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Eu esperarei por você aqui.";
+			mes "Boa sorte!";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (Zeny >= 300) {
+				mes "[Membro da Guilda dos Mercadores]";
+				mes "Excelente!";
+				mes "Zeny é a moeda de Midgard.";
+				mes "Você pode fazer zenys vendendo itens de monstros, bem como tomando decisões de negócios inteligentes.";
+				next;
+				mes "[Membro da Guilda dos Mercadores]";
+				mes "Podemos usar habilidades extremamente poderosas com zenys!";
+				mes "Mammonita! Esse é a nossa habilidade de ataque definitiva!!";
+				mes "Basicamente colamos dinheiro na arma e então golpeamos o inimigo. Morte por Zeny! Nyahahahaha!";
+				next;
+				mes "[Membro da Guilda dos Mercadores]";
+				mes "A propósito, você fez um excelente trabalho. Então, eu deveria te dar algo... O que seria bom?";
+				mes "Certo! Que tal um Phracon?";
+				mes "Phracon é um elemento metálico que você pode usar para refinar armas.";
+				completequest 7126;
+				getitem 1010,7; //Phracon
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[Membro da Guilda dos Mercadores]";
+				mes "Zeny é a moeda de Midgard.";
+				mes "Você pode fazer zenys vendendo itens de monstros, bem como tomando decisões de negócios inteligentes.";
+				next;
+				mes "[Membro da Guilda dos Mercadores]";
+				mes "Você pode conseguir itens matando monstros. Depois de caçar monstros, você pode vender esses itens para lucrar!";
+				mes "Que trabalho valioso, não é?";
+				next;
+				mes "[Membro da Guilda dos Mercadores]";
+				mes "Por que você não tenta ser um Mercador? Ganhar dinheiro não é fácil, mas será uma ótima experiência!";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Você já completou a tarefa.";
+			mes "Uma vez que você entrar no mundo principal, você pode obter várias tarefas empolgantes lá!";
+			next;
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Acho que você já é forte o suficiente agora para mudar sua classe, certo? Hahahaha não perca muito tempo aqui, Aprendiz.";
+			close;
+		} else {
+			mes "[Membro da Guilda dos Mercadores]";
+			mes "Sinto muito, mas não tenho nenhuma tarefa para lhe dar agora.";
+			close;
+		}
+	case 4:
+		mes "[Membro da Guilda dos Mercadores]";
+		mes "Se você tiver alguma pergunta sobre os Mercadores, sinta-se à vontade para me perguntar.";
+		mes "Acho que você poderia ser um Mercador rico. AhHahaha.";
+		close;
+	}
+}
+new_1-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv1	97
+new_2-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv2	97
+new_3-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv3	97
+new_4-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv4	97
+new_5-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv5	97
+
+-	script	Archer Guide#newbe10::NvArcher	-1,{
+	if (job_novice_q < 15) {
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Você ainda está no processo de treinamento com o Sr. Brade.";
+		close;
+	}
+	mes "[Membro da Guilda dos Arqueiros]";
+	mes "Com o que posso ajudá-lo?";
+	next;
+	switch(select("Tell me about Archers:I want to be an Archer:Cancel")) {
+	case 1:
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Arqueiros possuem habilidades especializadas no uso de Arco e uma variedade de habilidades poderosas.";
+		mes "Arqueiros são bons em manter distância e eliminar seus alvos.";
+		next;
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Arqueiros não possuem uma grande";
+		mes "vitalidade, então eles precisam manter";
+		mes "distância dos inimigos.";
+		next;
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Por outro lado, Arqueiros são atentos e possuem olhos incrivelmente precisos.";
+		mes "Então, uma vez prontos para atacar, eles podem matar inimigos antes mesmo que eles percebam sua presença.";
+		next;
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "^8E2323Arqueiros podem evoluir para muitas segundas Classes, como um Caçador.";
+		mes "Além de Caçadores, Arqueiros podem se tornar Bardos, se forem homens.";
+		mes "Eles podem se tornar Odaliscas, se forem mulheres^000000.";
+		next;
+		if (isequipped(2822) || countitem(2822)) {
+			mes "[Membro da Guilda dos Arqueiros]";
+			mes "Acho que você deveria testar as habilidades de Arqueiro antes de decidir o que fazer.";
+			mes "Posso lhe fornecer nosso manual de habilidades de teste.";
+			close;
+		}
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Você deseja se registrar para testar a experiência com habilidades?";
+		mes "Gostaria de testar as habilidades de Arqueiro?";
+		next;
+		switch(select("I want to test Archer skills.:I don't want to test it.")) {
+		case 1:
+			mes "[Membro da Guilda dos Arqueiros]";
+			mes "Aqui está o manual de Arqueiro.";
+			mes "Eu pegarei os outros manuais de classe com você enquanto você testa o manual de Arqueiro.";
+			next;
+			callfunc "F_NvErase";
+			getitem 2822,1; //Archer_Manual
+			next;
+			mes "[Membro da Guilda dos Arqueiros]";
+			mes "Certifique-se de equipar o Manual de Habilidades clicando duas vezes nele na Janela de Inventário.";
+			mes "Open your Skill Tree by pressing ^4d4dffAlt + S^000000 and minimize the window by pressing the ^4d4dff'-'^000000 button on the top right corner of the window to see the available skills.";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Arqueiros]";
+			mes "Hum. Você acha?";
+			mes "Ok, concordo com você. Escolher uma Classe é muito importante em nossas vidas.";
+			mes "Fale comigo sempre que quiser experimentar as habilidades de Arqueiro.";
+			close;
+		}
+	case 2:
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Você quer ser um Arqueiro?";
+		mes "Ok, então, eu o enviarei para a Guilda dos Arqueiros imediatamente.";
+		next;
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Espere, você verificou seu nível de Classe?";
+		mes "Você deseja concluir a arena de treinamento de Aprendiz e ir para a Guilda dos Arqueiros agora mesmo?";
+		next;
+		switch(select("I will think about it again.:Yes, I want to go to the Archer Guilds union")) {
+		case 1:
+			mes "[Membro da Guilda dos Arqueiros]";
+			mes "Teste todas as Classes se precisar, mas escolha Arqueiro porque somos os melhores.";
+			mes "Você é sempre bem-vindo!";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Arqueiros]";
+			mes "Isso é ótimo.";
+			mes "Então, vou encerrar completamente o Processo de Treinamento e enviá-lo para a Guilda dos Arqueiros.";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "payon",256,242,1,1;
+			warp "payon_in02",64,65;
+			end;
+		}
+	case 3:
+		mes "[Membro da Guilda dos Arqueiros]";
+		mes "Se você tiver alguma dúvida sobre Arqueiros, sinta-se à vontade para me perguntar.";
+		mes "Acho que você poderia ser um Arqueiro forte, jovem Aprendiz.";
+		close;
+	}
+}
+new_1-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv1	727
+new_2-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv2	727
+new_3-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv3	727
+new_4-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv4	727
+new_5-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv5	727
+
+-	script	Mage Guide#newbe10::NvMage	-1,{
+	if (job_novice_q < 15) {
+		mes "[Membro da Guilda dos Magos]";
+		mes "Você ainda está no processo de treinamento com o Instrutor Brade.";
+		close;
+	}
+	mes "[Membro da Guilda dos Magos]";
+	mes "Com o que posso ajudá-lo?";
+	next;
+	switch(select("Tell me about Mages:I want to be a Mage:Give me a Quest:Cancel")) {
+	case 1:
+		mes "[Membro da Guilda dos Magos]";
+		mes "Magos são aqueles que podem usar magia quando precisam proteger seus amigos.";
+		mes "Magos podem amaldiçoar inimigos usando os elementos de fogo, água, terra e a magia do trovão.";
+		next;
+		mes "[Membro da Guilda dos Magos]";
+		mes "No entanto, eles não podem equipar outras armas além de cajados e livros.";
+		mes "Porque eles são delicados demais";
+		mes "para carregar armas pesadas.";
+		next;
+		mes "[Membro da Guilda dos Magos]";
+		mes "Mas eles podem compensar essa fraqueza";
+		mes "com suas notáveis habilidades mágicas.";
+		mes "É por isso que muitas pessoas querem";
+		mes "se tornar um Mago!";
+		next;
+		mes "[Membro da Guilda dos Magos]";
+		mes "Magos precisam estar em sua guilda pelo poder e honra da guilda.";
+		mes "Esta é uma das razões pelas quais os Magos são populares em qualquer grupo e guilda.";
+		mes "Por que você não se torna um Mago?";
+		next;
+		mes "[Membro da Guilda dos Magos]";
+		mes "^8E2323Magos podem evoluir para Bruxos";
+		mes "^8E2323ou Sábios como sua segunda Classe^000000.";
+		next;
+		if (isequipped(2824) || countitem(2824)) {
+			mes "[Membro da Guilda dos Magos]";
+			mes "Acho que você deveria testar as habilidades de Mago antes de decidir o que fazer.";
+			mes "Posso lhe fornecer nosso formulário de registro de teste de habilidades.";
+			close;
+		}
+		mes "[Membro da Guilda dos Magos]";
+		mes "Você quer se registrar para experimentar como é ser um Mago?";
+		mes "Gostaria de testar as habilidades de Mago?";
+		next;
+		switch(select("I want to test Mage skills.:I don't want to test it.")) {
+		case 1:
+			mes "[Membro da Guilda dos Magos]";
+			mes "Aqui está o Manual de Mago.";
+			mes "Eu pegarei os outros formulários de registro e manuais de classe com você.";
+			next;
+			callfunc "F_NvErase";
+			getitem 2824,1; //Mage_Manual
+			next;
+			mes "[Membro da Guilda dos Magos]";
+			mes "After equipping the Manual, open your Skill menu by pressing ALT+S.";
+			mes "Certifique-se de minimizar sua árvore de habilidades clicando no botão '-' no canto superior direito da Janela de Árvore de Habilidades.";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Magos]";
+			mes "Hum. Você acha?";
+			mes "Ok, concordo com você. Escolher uma Classe é muito importante em nossas vidas.";
+			mes "Fale comigo sempre que quiser experimentar as habilidades de Mago.";
+			close;
+		}
+	case 2:
+		mes "[Membro da Guilda dos Magos]";
+		mes "Você quer ser um Mago?";
+		mes "Ok, então, eu o enviarei para a união da Guilda dos Magos em Geffen imediatamente.";
+		next;
+		mes "[Membro da Guilda dos Magos]";
+		mes "Espere, você verificou seu nível de Classe?";
+		mes "Você deseja concluir seu treinamento de Aprendiz e ir direto para a união da Guilda dos Magos?";
+		next;
+		switch(select("I will think about it again.:Yes, complete my training.")) {
+		case 1:
+			mes "[Membro da Guilda dos Magos]";
+			mes "Por favor, teste as habilidades de Mago antes de decidir.";
+			mes "Você é sempre bem-vindo!";
+			close;
+		case 2:
+			mes "[Membro da Guilda dos Magos]";
+			mes "Isso é ótimo.";
+			mes "Então, encerrarei o Processo de Treinamento e o enviarei para a união da Guilda dos Magos em Geffen imediatamente.";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "geffen",119,37,1,1;
+			warp "geffen_in",163,98;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7124);
+		if (.@quest == -1) {
+			mes "[Membro da Guilda dos Magos]";
+			mes "Huh? Missão?";
+			mes "Hmm... O que seria adequado para você...?";
+			mes "Você gostaria de caçar Lunáticos usando habilidades de Lanças?";
+			next;
+			mes "^4d4dffVocê recebeu uma missão de Caça do Guia dos Magos.";
+			mes "Você pode obter mais informações sobre a missão na janela de missões.^000000";
+			setquest 7124;
+			next;
+			mes "[Membro da Guilda dos Magos]";
+			mes "Você é capaz de usar a habilidade 'Lanças de Fogo' que é mostrada no manual de Mago.";
+			mes "Eu esperarei por você aqui.";
+			mes "Boa sorte!";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (checkquest(7124,HUNTING) == 2) {
+				mes "[Membro da Guilda dos Magos]";
+				mes "Você fez um excelente trabalho.";
+				mes "Então, você se interessou por Magos?";
+				mes "Certo. Vou lhe dar algo...";
+				mes "Aqui estão Asas de Borboleta de Aprendiz, por favor, aceite-as.";
+				completequest 7124;
+				getitem 12324,30; //N_Butterfly_Wing
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[Membro da Guilda dos Magos]";
+				mes "A missão é que você deve";
+				mes "caçar Lunáticos e trazer 5 trevos.";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[Membro da Guilda dos Magos]";
+			mes "Você já completou a missão.";
+			mes "Assim que você entrar no mundo principal, poderá encontrar várias missões emocionantes lá!";
+			next;
+			mes "[Membro da Guilda dos Magos]";
+			mes "Isso deve ser o suficiente para o seu treinamento.";
+			close;
+		} else {
+			mes "[Membro da Guilda dos Magos]";
+			mes "Sinto muito, mas não tenho nenhuma missão para lhe dar agora.";
+			close;
+		}
+	case 4:
+		mes "[Membro da Guilda dos Magos]";
+		mes "Se você tiver alguma dúvida sobre Magos, sinta-se à vontade para me perguntar.";
+		mes "Acho que você poderia ser um Mago inteligente...";
+		close;
+	}
+}
+new_1-3,117,41,3	duplicate(NvMage)	Mage Guide#nv1	123
+new_2-3,117,41,3	duplicate(NvMage)	Mage Guide#nv2	123
+new_3-3,117,41,3	duplicate(NvMage)	Mage Guide#nv3	123
+new_4-3,117,41,3	duplicate(NvMage)	Mage Guide#nv4	123
+new_5-3,117,41,3	duplicate(NvMage)	Mage Guide#nv5	123
+
+-	script	Bruce#nv::NvBruce	-1,{
+	mes "[Bruce]";
+	mes "Olá?";
+	mes "Estou aqui para guiá-lo sobre classes extras e classes especiais.";
+	next;
+	mes "[Bruce]";
+	mes "Para classes especiais, existem Taekwon, Ninja, Superaprendiz e Justiceiro.";
+	mes "Qual descrição de classe você quer ouvir?";
+	next;
+	while(1) {
+		switch(select("Taekwon:Ninja:Super Novice:Gunslinger:End the conversation.")) {
+		case 1:
+			mes "[Bruce]";
+			mes "É uma classe que geralmente usa muitas habilidades de chute.";
+			mes "Ela pertence à classe especial e depois você pode mudar sua classe para Mestre Taekwon, que possui habilidades de ataque muito mais fortes.";
+			next;
+			mes "[Bruce]";
+			mes "Existe uma classe secundária para escolher chamada Espiritualista, que também possui ataques fortes.";
+			mes "Você pode decidir isso mais tarde, quando ficar mais forte.";
+			next;
+			break;
+		case 2:
+			mes "[Bruce]";
+			mes "A especialidade do Ninja é o movimento rápido.";
+			mes "Eles se especializam no uso de armas de arremesso.";
+			next;
+			mes "[Bruce]";
+			mes "Ninjas são uma espécie de classe híbrida que pode usar várias habilidades de esquiva com a capacidade de ataques físicos e mágicos, dependendo da preferência.";
+			next;
+			break;
+		case 3:
+			mes "[Bruce]";
+			mes "O maior atrativo do Aprendiz mais forte, chamado Superaprendiz, é a sua inclinação para a mediocridade.";
+			mes "Eles são o proverbial \"faz-tudo\", mas mestre de nada.";
+			next;
+			mes "[Bruce]";
+			mes "Superaprendizes podem aprender a maioria das habilidades das classes de 1ª Classe.";
+			mes "Se você se tornar um Superaprendiz, não poderá mudar de classe, o que é uma pena, mas você pode crescer como um personagem muito individual.";
+			next;
+			break;
+		case 4:
+			mes "[Bruce]";
+			mes "Você pode mudar de classe diretamente de Aprendiz para uma classe especial otimizada para ataques de longa distância com armas de fogo.";
+			next;
+			mes "[Bruce]";
+			mes "Justiceiros usam todos os tipos de armas de fogo feitas em 'Einbroch', a cidade de aço.";
+			mes "Eu recomendo isso para aqueles que desejam se tornar atiradores poderosos.";
+			next;
+			break;
+		case 5:
+			mes "[Bruce]";
+			mes "Se precisar de mais informações,";
+			mes "você sempre pode acessar ^2F4F4F'www.ragnarok.co.kr'^000000";
+			close;
+		}
+	}
+}
+new_1-3,121,41,3	duplicate(NvBruce)	Bruce#nv1	57
+new_2-3,121,41,3	duplicate(NvBruce)	Bruce#nv2	57
+new_3-3,121,41,3	duplicate(NvBruce)	Bruce#nv3	57
+new_4-3,121,41,3	duplicate(NvBruce)	Bruce#nv4	57
+new_5-3,121,41,3	duplicate(NvBruce)	Bruce#nv5	57
+
+// Eden Group Officer (iRO only)
+//============================================================
+/*
+-	script	Eden Group Officer::NvEden	-1,{
+	if (BaseLevel < 10) {
+		mes "[Oficial do Grupo do Éden]";
+		mes "Olá, sou um representante do Grupo do Éden.";
+		mes "Estamos aqui para ajudar aventureiros em Midgard.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Temos agentes em todo o mundo esperando para enviá-lo ao nosso quartel-general secreto, onde você pode obter algumas missões úteis.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Se você aceitar nossas missões, nós até damos armas e equipamentos, então não deixe de nos visitar assim que terminar seu treinamento.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Fale comigo novamente quando atingir o Nível Base 10 e eu o enviarei para fora do campo de treinamento.";
+		mes "Você já aceitou as missões de todos os Guias?";
+		close;
+	}
+	mes "[Oficial do Grupo do Éden]";
+	mes "Ótimo! Você está pronto para enfrentar os desafios do mundo.";
+	mes "O que você gostaria de fazer?";
+	next;
+	switch(select("I want to leave the training grounds:Tell me about the towns.:Cancel")) {
+	case 1:
+		mes "[Oficial do Grupo do Éden]";
+		mes "Parece que você está pronto.";
+		mes "Acho que você já se decidiu, hein?";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Se você sabe para qual classe quer mudar, deve pedir aos ^4A4AFFGuias de Classe^000000 para enviá-lo para fora do campo de treinamento.";
+		mes "Para qual cidade você gostaria de ir?";
+		next;
+		switch(select("Prontera:Morocc:Payon:Alberta:Geffen:Cancel")) {
+		case 1:
+			mes "[Oficial do Grupo do Éden]";
+			mes "Prontera, a capital do Reino de Rune-Midgard.";
+			mes "Cuide-se e que Freya o abençoe em sua jornada.";
+			callsub S_Warp,"prontera",121,77,121,76;
+		case 2:
+			mes "[Oficial do Grupo do Éden]";
+			mes "A cidade desértica de Morroc foi recentemente destruída.";
+			mes "Vou enviá-lo para o acampamento onde os sobreviventes estão.";
+			callsub S_Warp,"moc_ruins",71,157,70,158;
+		case 3:
+			mes "[Oficial do Grupo do Éden]";
+			mes "Logo ao norte de Payon, você encontrará a Vila dos Arqueiros.";
+			mes "Boa sorte em suas jornadas.";
+			callsub S_Warp,"payon",167,68,172,111;
+		case 4:
+			mes "[Oficial do Grupo do Éden]";
+			mes "Alberta, a Cidade Portuária.";
+			mes "É o principal centro de todas as trocas comerciais.";
+			mes "Se você deseja viajar para outras civilizações, Alberta é a única saída.";
+			callsub S_Warp,"alberta",115,57,116,58;
+		case 5:
+			mes "[Oficial do Grupo do Éden]";
+			mes "Geffen é conhecida como a Cidade Mágica de Rune-Midgard.";
+			mes "Vou enviá-lo para perto das Fontes.";
+			mes "Que a Deusa Freya o abençoe.";
+			callsub S_Warp,"geffen",118,36,128,66;
+		case 6:
+			mes "[Oficial do Grupo do Éden]";
+			mes "Se você ainda não tem certeza de qual classe deseja seguir, fale com os Guias de Classe para obter mais ajuda.";
+			close;
+		}
+	case 2:
+		mes "[Oficial do Grupo do Éden]";
+		mes "Prontera é a capital principal do Reino de Rune-Midgard. Aqui você encontrará Mercadores vendendo seus itens e é um ponto de encontro favorito dos aventureiros.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "A guilda dos Noviços fica aqui, na Igreja de Prontera, localizada ao noroeste. A guilda dos Espadachins pode ser encontrada em Izlude, uma cidade logo a sudeste de Prontera.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Morroc é uma cidade localizada no deserto que foi recentemente destruída devido a um monstro maligno chamado Satã Morroc. A guilda dos Gatunos tem trabalhado para restaurá-la à sua glória antiga.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Payon é onde a guilda dos Arqueiros estabeleceu sua sede. Você também pode encontrar os Funcionários da Loja Kafra vendendo seus itens do Shopping perto do centro desta cidade.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Alberta é o centro comercial de Rune-Midgard. A guilda dos Mercadores está localizada aqui e as docas possuem navios que o levarão para diferentes cidades insulares.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Geffen é conhecida como a cidade mágica de Rune-Midgard. A guilda dos Magos está localizada aqui e pesquisas por novas magias estão sempre sendo conduzidas em sua sede.";
+		next;
+		mes "[Oficial do Grupo do Éden]";
+		mes "Se você deseja ser enviado diretamente para as guildas de classe, fale com os Guias de Classe e diga a eles que deseja mudar de classe.";
+		close;
+	case 3:
+		close;
+	}
+
+S_Warp:
+	close2;
+	callfunc "F_NvErase",1;
+	savepoint getarg(0),getarg(1),getarg(2),1,1;
+	warp getarg(0),getarg(3),getarg(4);
+	end;
+	
+OnTouch:
+	emotion ET_SURPRISE;
+	end;
+}
+new_1-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv1	729,5,5
+new_2-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv2	729,5,5
+new_3-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv3	729,5,5
+new_4-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv4	729,5,5
+new_5-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv5	729,5,5
+*/
+
+// Trainer
+//============================================================
+-	script	::NvBrutus	-1,{
+	mes "[Treinador Brutus]";
+	mes "Estes monstros são todos fracos e fáceis de matar. Mas tome cuidado, muitos deles são agressivos e sedentos por sangue!";
+	next;
+	mes "[Treinador Brutus]";
+	mes "Se você acha que os monstros aqui são muito fracos para você, posso enviá-lo para outro campo de treinamento onde os monstros são mais fortes do que os daqui.";
+	next;
+	mes "[Treinador Brutus]";
+	mes "Então, você gostaria de tentar?";
+	next;
+	switch(select("Send me to another Level:What monsters are there?:Cancel")) {
+	case 1:
+		mes "[Treinador Brutus]";
+		mes "Entendo, então deixe-me guiá-lo para outro nível. Para qual nível você deseja ir?";
+		next;
+		for(set .@i,1; .@i<6; set .@i,.@i+1) {
+			if (!compare(strnpcinfo(2),"nv"+.@i))
+				set .@menu$, .@menu$+"Send me to Level "+.@i;
+			set .@menu$, .@menu$+":";
+		}
+		set .@i, select(.@menu$+"Cancel");
+		if (.@i < 7)
+			warp "new_"+.@i+"-3",96,21;
+		close;
+	case 2:
+		mes "[Treinador Brutus]";
+		mes "Você parece ansioso para lutar.";
+		mes "Os níveis dos monstros aumentam a cada nível dos campos de treinamento.";
+		next;
+		mes "[Treinador Brutus]";
+		mes "O nível 1 tem os monstros mais fracos.";
+		mes "Lá você encontrará Porings, Drops e Lunáticos.";
+		next;
+		mes "[Treinador Brutus]";
+		mes "O nível 2 é mais desafiador.";
+		mes "Lá você encontrará Porings, Lunáticos, Salgueiros e Chonchons.";
+		next;
+		mes "[Treinador Brutus]";
+		mes "O nível 3 é o mesmo que o nível 2.";
+		mes "Lá você encontrará Porings, Lunáticos, Salgueiros e Chonchons.";
+		next;
+		mes "[Treinador Brutus]";
+		mes "O nível 4 tem monstros mais fortes.";
+		mes "Lá você encontrará Salgueiros, Hornets, Pickys e Fabres.";
+		next;
+		mes "[Treinador Brutus]";
+		mes "O nível 5 é o mesmo que o nível 4.";
+		mes "Lá você encontrará Salgueiros, Hornets, Pickys e Fabres.";
+		close;
+	case 3:
+		mes "[Treinador Brutus]";
+		mes "Hmm...?";
+		mes "Você está preocupado em ir para lugares mais desafiadores? Isso é compreensível, já que você ainda é um aventureiro iniciante. Boa sorte~";
+		close;
+	}
+}
+new_1-3,103,50,4	duplicate(NvBrutus)	Level 1 Trainer#nv1	84
+new_2-3,103,50,4	duplicate(NvBrutus)	Level 2 Trainer#nv2	84
+new_3-3,103,50,4	duplicate(NvBrutus)	Level 3 Trainer#nv3	84
+new_4-3,103,50,4	duplicate(NvBrutus)	Level 4 Trainer#nv4	84
+new_5-3,103,50,4	duplicate(NvBrutus)	Level 5 Trainer#nv5	84
+
+// Monster Spawns
+//============================================================
+new_1-3,0,0	monster	Poring	1002,20
+new_1-3,0,0	monster	Drops	1113,10
+new_1-3,0,0	monster	Lunatic	1063,20
+
+new_2-3,0,0	monster	Chonchon	1011,10
+new_2-3,0,0	monster	Lunatic	1063,15
+new_2-3,0,0	monster	Willow	1010,10
+new_2-3,0,0	monster	Poring	1002,15
+
+new_3-3,0,0	monster	Chonchon	1011,10
+new_3-3,0,0	monster	Lunatic	1063,15
+new_3-3,0,0	monster	Willow	1010,10
+new_3-3,0,0	monster	Poring	1002,5
+
+new_4-3,0,0	monster	Hornet	1004,5
+new_4-3,0,0	monster	Willow	1010,15
+new_4-3,0,0	monster	Fabre	1184,5
+new_4-3,0,0	monster	Picky	1049,15
+
+new_5-3,0,0	monster	Hornet	1004,5
+new_5-3,0,0	monster	Willow	1010,15
+new_5-3,0,0	monster	Fabre	1184,5
+new_5-3,0,0	monster	Picky	1049,15
+
+// Potato Merchant
+//============================================================
+-	shop	Potato Merchant#newbe09::NvPotato	93,516:-1
+
+new_1-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv1	93
+new_2-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv2	93
+new_3-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv3	93
+new_4-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv4	93
+new_5-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv5	93
+
+// Random Stuff
+//============================================================
+-	script	Bulletin Board::NvBulletin	-1,{
+	mes "^FF0000=================================";
+	mes "^E40CAA[Bem-vindo] ^CC0000ao^FF9000Aprendiz^7FFF00 Campo de Treinamento^00FF00 [Bem-vindo]";
+	mes "^FF0000=================================^000000";
+	close;
+}
+new_1-1,66,114,4	duplicate(NvBulletin)	Bulletin Board#nv1	111
+new_2-1,66,114,4	duplicate(NvBulletin)	Bulletin Board#nv2	111
+new_3-1,66,114,4	duplicate(NvBulletin)	Bulletin Board#nv3	111
+new_4-1,66,114,4	duplicate(NvBulletin)	Bulletin Board#nv4	111
+new_5-1,66,114,4	duplicate(NvBulletin)	Bulletin Board#nv5	111
+
+-	script	Guard::NvGuardA	-1,{
+	mes "[Guarda do Campo de Treinamento]";
+	mes "Bem-vindo ao Campo de Treinamento.";
+	mes "Você está agora no pátio externo. Por favor, entre no castelo para começar seu treinamento.";
+	close;
+}
+new_1-1,144,116,2	duplicate(NvGuardA)	Guard#nv1a	105
+new_2-1,144,116,2	duplicate(NvGuardA)	Guard#nv2a	105
+new_3-1,144,116,2	duplicate(NvGuardA)	Guard#nv3a	105
+new_4-1,144,116,2	duplicate(NvGuardA)	Guard#nv4a	105
+new_5-1,144,116,2	duplicate(NvGuardA)	Guard#nv5a	105
+
+-	script	Guard::NvGuardB	-1,{
+	mes "[Guarda do Campo de Treinamento]";
+	if (rand(2)) {
+		mes "Entre! Eu gostaria de dar-lhe as boas-vindas ao Campo de Treinamento!";
+		mes "Aqui, você pode se preparar para suas futuras aventuras pelo mundo de Ragnarok!";
+	} else {
+		mes "Vá, Aprendiz, vá!";
+		mes "Lute e torne-se mais forte! Olhe para um amanhã melhor!";
+	}
+	close;
+}
+new_1-1,144,107,2	duplicate(NvGuardB)	Guard#nv1b	105
+new_2-1,144,107,2	duplicate(NvGuardB)	Guard#nv2b	105
+new_3-1,144,107,2	duplicate(NvGuardB)	Guard#nv3b	105
+new_4-1,144,107,2	duplicate(NvGuardB)	Guard#nv4b	105
+new_5-1,144,107,2	duplicate(NvGuardB)	Guard#nv5b	105
+
+-	script	Instructor#Edwin::NvEdwin	-1,{
+	mes "[Edwin]";
+	mes "Eh? Por que você ainda está aqui?";
+	mes "Não há mais cursos que você precise fazer.";
+	next;
+	mes "[Edwin]";
+	mes "Bem, eu vou deixar você sair daqui.";
+	mes "Vá encontrar o instrutor, Brade.";
+	close2;
+	savepoint strnpcinfo(4),100,100,1,1;
+	warp strnpcinfo(4),100,100;
+	end;
+}
+new_1-2,161,182,5	duplicate(NvEdwin)	Instructor#nv1	92
+new_2-2,161,182,5	duplicate(NvEdwin)	Instructor#nv2	92
+new_3-2,161,182,5	duplicate(NvEdwin)	Instructor#nv3	92
+new_4-2,161,182,5	duplicate(NvEdwin)	Instructor#nv4	92
+new_5-2,161,182,5	duplicate(NvEdwin)	Instructor#nv5	92
+
+function	script	F_NvErase	{
+	if (getarg(0,0)) {
+		if (checkquest(7123) > -1) erasequest 7123;
+		if (checkquest(7124) > -1) erasequest 7124;
+		if (checkquest(7126) > -1) erasequest 7126;
+		if (checkquest(7127) > -1) erasequest 7127;
+	}
+	nude;
+	setarray .@manuals[0],countitem(2819),countitem(2820),countitem(2821),countitem(2822),countitem(2823),countitem(2824);
+	if (.@manuals[0]) delitem 2819,.@manuals[0]; //Swordman_Manual
+	if (.@manuals[1]) delitem 2820,.@manuals[1]; //Thief_Manual
+	if (.@manuals[2]) delitem 2821,.@manuals[2]; //Acolyte_Manual
+	if (.@manuals[3]) delitem 2822,.@manuals[3]; //Archer_Manual
+	if (.@manuals[4]) delitem 2823,.@manuals[4]; //Merchant_Manual
+	if (.@manuals[5]) delitem 2824,.@manuals[5]; //Mage_Manual
+	return;
+}
+
+// Pre-Renewal Backwards Compatibility
+//============================================================
+-	script	Final Tester::NvHanson	-1,{
+	if (nov_3_swordman < 40) {
+		mes "[Hanson]";
+		mes "Eh? Estranho?";
+		next;
+		mes "[Hanson]";
+		mes "O Campo de Treinamento está sob nova direção...";
+		mes "Você parece ter vindo da administração anterior.";
+		next;
+		mes "[Hanson]";
+		mes "Você pode continuar, você deve ter experiência suficiente se chegou até aqui.";
+		next;
+		mes "[Hanson]";
+		mes "Eu vou te enviar para qualquer cidade que você deseje ir.";
+		mes "Ou você tem uma classe favorita?";
+		next;
+		switch(select("Choose Profession.:Go to Towns.")) {
+		case 1:
+			mes "[Hanson]";
+			mes "Qual classe você gostaria de seguir?";
+			next;
+			switch(select("Swordman:Acolyte:Thief:Merchant:Archer:Mage")) {
+			case 1:
+				mes "[Hanson]";
+				mes "Essa é uma ótima escolha!";
+				mes "Após receber todos os suprimentos, eu irei teleportá-lo para a Associação dos Espadachins.";
+				next;
+				mes "[Hanson]";
+				mes "A cidade para a qual você será enviado chama-se Izlude, que é uma satélite de Prontera. A Associação dos Espadachins está localizada no oeste da cidade. Por favor, lembre-se disso.";
+				next;
+				callsub L_Supplies;
+				savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+				warp "izlude_in",74,167;
+				end;
+			case 2:
+				mes "[Hanson]";
+				mes "Você escolheu";
+				mes "tornar-se um Noviço.";
+				mes "Você será enviado para";
+				mes "a cidade de Prontera.";
+				next;
+				mes "[Hanson]";
+				mes "O Santuário de Prontera está localizado ao nordeste em Prontera. Por favor, lembre-se disso.";
+				next;
+				callsub L_Supplies;
+				savepoint "prontera",117,72,1,1;
+				warp "prt_church",172,19;
+				end;
+			case 3:
+				mes "[Hanson]";
+				mes "Você escolheu";
+				mes "tornar-se um Gatuno.";
+				mes "Você será enviado para";
+				mes "a cidade de Morroc.";
+				next;
+				mes "[Hanson]";
+				mes "A guilda dos Gatunos fica no primeiro subsolo de uma pirâmide que está a noroeste da cidade. Por favor, lembre-se disso.";
+				next;
+				callsub L_Supplies;
+				savepoint "morocc",150,99,1,1;
+				warp "moc_ruins",155,44;
+				end;
+			case 4:
+				mes "[Hanson]";
+				mes "Você escolheu";
+				mes "tornar-se um Mercador.";
+				mes "Você será enviado para";
+				mes "a cidade de Alberta.";
+				next;
+				callsub L_Supplies;
+				savepoint "alberta",30,232,1,1;
+				warp "alberta_in",62,44;
+				end;
+			case 5:
+				mes "[Hanson]";
+				mes "Você escolheu";
+				mes "tornar-se um Arqueiro.";
+				mes "Você será enviado para";
+				mes "a cidade de Payon.";
+				next;
+				mes "[Hanson]";
+				mes "A guilda dos Arqueiros está localizada ao noroeste em Payon. Por favor, lembre-se disso.";
+				next;
+				callsub L_Supplies;
+				savepoint "payon",256,242,1,1;
+				warp "payon_in02",64,65;
+				end;
+			case 6:
+				mes "[Hanson]";
+				mes "Você escolheu";
+				mes "tornar-se um Mago.";
+				mes "Você será enviado para";
+				mes "a cidade de Geffen.";
+				next;
+				mes "[Hanson]";
+				mes "A Academia dos Magos está localizada ao noroeste na cidade. Por favor, lembre-se disso.";
+				next;
+				callsub L_Supplies;
+				savepoint "geffen",119,37,1,1;
+				warp "geffen_in",163,98;
+				end;
+			}
+		case 2:
+			mes "[Hanson]";
+			mes "Para qual cidade você deseja ir?";
+			next;
+			callsub L_Warp, select("Prontera:Geffen:Morocc:Payon:Alberta:Never mind");
+			end;
+		}
+	} else {
+		mes "[Hanson]";
+		mes "Você recebeu todos os suprimentos.";
+		mes "Para qual cidade você deseja ir?";
+		next;
+		callsub L_Warp, select("Prontera:Geffen:Morocc:Payon:Alberta");
+		end;
+	}
+	end;
+
+L_Supplies:
+	mes "[Hanson]";
+	mes "Deixe-me dar-lhe";
+	mes "alguns suprimentos. Então";
+	mes "você será transportado";
+	mes "para a cidade escolhida.";
+	next;
+	mes "^660000Lista de Suprimentos^000000";
+	mes "^00003320 Bilhetes de Armazém Kafra Grátis^000000";
+	mes "^00003330 Bilhetes de Teleporte Kafra Grátis^000000";
+	mes "^0000331 Cortador de Aprendiz^000000";
+	mes "^0000331 Traje de Aventureiro Aprendiz^000000";
+	next;
+	mes "[Hanson]";
+	mes "Por favor, verifique seu inventário";
+	mes "para ver se recebeu todos os suprimentos listados. Deixe-me informar brevemente sobre os itens que você recebeu.";
+	next;
+	mes "[Hanson]";
+	mes "Os bilhetes grátis para armazém e teleporte da Kafra podem ser usados para serviços de armazém e teleporte da Kafra.";
+	set nov_3_swordman,40;
+	getitem 7059,20; //Cargo_Free_Ticket
+	getitem 7060,30; //Warp_Free_Ticket
+	getitem 2393,1; //N_Adventurer's_Suit
+	getitem 13040,1; //N_Cutter
+	next;
+	mes "[Hanson]";
+	mes "Você será";
+	mes "teleportado agora.";
+	mes "Boa sorte,";
+	mes "^A62A2A"+strcharinfo(0)+"^000000";
+	mes "e adeus.";
+	close2;
+	return;
+
+L_Warp:
+	mes "[Hanson]";
+	switch(getarg(0)) {
+	case 1:
+		mes "Eu vou te enviar para Prontera, a Cidade Capital.";
+		close2;
+		savepoint "prontera",117,72,1,1;
+		warp "prontera",150,50;
+		end;
+	case 2:
+		mes "Eu vou te enviar para Geffen, a Cidade da Magia.";
+		close2;
+		savepoint "geffen",119,37,1,1;
+		warp "geffen",122,65;
+		end;
+	case 3:
+		mes "Eu vou te enviar para Morroc, a Cidade do Deserto.";
+		close2;
+		savepoint "morocc",150,99,1,1;
+		warp "morocc",155,110;
+		end;
+	case 4:
+		mes "Eu vou te enviar para Payon, a Vila das Montanhas.";
+		close2;
+		savepoint "payon",70,100,1,1;
+		warp "payon",166,67;
+		end;
+	case 5:
+		mes "Eu vou te enviar para Alberta, a Cidade Portuária.";
+		close2;
+		savepoint "alberta",30,232,1,1;
+		warp "alberta",114,58;
+		end;
+	case 6:
+		mes "[Hanson]";
+		mes "Volte quando tiver se decidido.";
+		close;
+	}
+}
+new_1-4,100,29,1	duplicate(NvHanson)	Final Tester#nv1	46
+new_2-4,100,29,1	duplicate(NvHanson)	Final Tester#nv2	46
+new_3-4,100,29,1	duplicate(NvHanson)	Final Tester#nv3	46
+new_4-4,100,29,1	duplicate(NvHanson)	Final Tester#nv4	46
+new_5-4,100,29,1	duplicate(NvHanson)	Final Tester#nv5	46
+
+// Job Test
+//============================================================
+-	script	Job Guide Lark::NvLark	-1,{
+	mes "[Lark]";
+	mes "Você já decidiu qual classe vai escolher?";
+	next;
+	mes "[Lark]";
+	mes "Preparei um teste para ver qual é a melhor classe para você, de acordo com suas respostas.";
+	next;
+	mes "[Lark]";
+	mes "O que me diz?";
+	mes "Gostaria de fazer o teste?";
+	next;
+	set .@loop,1;
+	while(.@loop) {
+		switch(select("Take the test.:What's the test for?:No, thank you.")) {
+		case 1:
+			mes "[Lark]";
+			mes "Ótimo!";
+			mes "Vamos começar o teste~";
+			next;
+			set .@loop,0;
+			break;
+		case 2:
+			mes "[Lark]";
+			mes "Farei algumas perguntas simples.";
+			mes "Through this test, we will check "+strcharinfo(0)+"'s personality and propensity so that we can find the most appropriate job for you.";
+			next;
+			mes "[Lark]";
+			mes "Existem 3 tipos diferentes de testes e um total de 30 perguntas.";
+			next;
+			mes "[Lark]";
+			mes "O que você acha? Você fará o teste?";
+			next;
+			break;
+		case 3:
+			mes "[Lark]";
+			mes "Se você ainda não decidiu qual classe quer,";
+			mes "sugiro que faça o teste.";
+			close;
+		}
+	}
+	mes "[Lark]";
+	mes "Vamos começar o primeiro teste.";
+	mes "Escolha a resposta que você mais gostar.";
+	mes "^FF0000Existem 5 perguntas.^000000";
+	next;
+	mes "[Lark]";
+	mes "No meio da escuridão, você está caminhando pelas ruas de Prontera quando de repente ouve alguém gritar.";
+	next;
+	mes "'Aaaahh!! Não me machuque ~'";
+	next;
+	mes "Você corre para o local e vê alguém cercado por punks. Devido à sua aparição repentina, os punks ficam surpresos.";
+	mes "Qual seria sua reação nesta situação?";
+	next;
+	switch(select("Fight against the punks:Cast Magic.:Call for Guards.:Throw rocks at them.")) {
+	case 1:
+		set .@question_01$, "You subdue them easily.";
+		set .@swordman_p, .@swordman_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@question_01$, "You cast a spell on them.";
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 3:
+		set .@question_01$, "You call for help and Guards come to your aid.";
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	case 4:
+		set .@question_01$, "You skillfully throw rocks at the punks.";
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes .@question_01$+" You have destroyed the street punks.";
+	mes "Após limpar a bagunça, você se aproxima da pessoa que estava sendo atacada.";
+	mes "Você acha que a pessoa que estava cercada pelos punks é um homem ou uma mulher?";
+	next;
+	switch(select("Man:Woman")) {
+	case 1:
+		set .@question_02_01$, "he";
+		set .@question_02_02$, "son";
+		break;
+	case 2:
+		set .@question_02_01$, "she";
+		set .@question_02_02$, "daughter";
+		break;
+	}
+	mes "[Lark]";
+	mes "You find out that "+.@question_02_01$+" is the "+.@question_02_02$+" of a very rich family in Alberta and Punks attacked while "+.@question_02_01$+" was on an errand for the family.";
+	mes "What kind of errand was "+.@question_02_01$+" doing?";
+	next;
+	switch(select("Delivering an important object:Delivering a small souvenir:Delivering a message")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@archer_p, .@archer_p+1;
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	case 3:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Thanks to your bravery, "+.@question_02_01$+" becomes your friend and decides to go on a trip.";
+	mes "Para onde você vai?";
+	next;
+	switch(select("Capital city, Prontera:Mountain city, Payon:Port city, Alberta:Magic city, Geffen:Satelite city, Izlude:Desert city, Morocc:Industrial city, Einbroch:World of natural life, Amatsu:Garden city, Hugel")) {
+	case 1:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	case 2:
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	case 3:
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 4:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 5:
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 6:
+		set .@thief_p, .@thief_p+1;
+		break;
+	case 7:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 8:
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 9:
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você está se divertindo muito. Você sente que algo vai acontecer ou não?";
+	next;
+	switch(select("Happening:Not happening.")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@magician_p, .@magician_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Vamos agora para o segundo teste. Escolha a melhor resposta na sua opinião.";
+	mes "^FF0000Existem 5 perguntas.^000000";
+	next;
+	switch(select("Study:Exercise:Service:Violence")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	case 3:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	case 4:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	}
+	switch(select("Change:Preservation")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	switch(select("Consumer:Seller:Producer")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@thief_p, .@thief_p+1;
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 3:
+		set .@magician_p, .@magician_p+1;
+		break;
+	}
+	switch(select("Speed:Caution")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	switch(select("Theory:Experience")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@swordman_p, .@swordman_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Vamos agora para o terceiro teste. Por favor, responda (Sim) ou (Não) para cada pergunta.";
+	mes "^FF0000Existem 20 perguntas.^000000";
+	next;
+	mes "[Lark]";
+	mes "Você sempre pega o dinheiro que encontra no chão?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@merchant_p, .@merchant_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Se você tivesse o mesmo nome de alguém do sexo oposto, isso faria com que você se sentisse menos atraído por essa pessoa?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@ninja_p, .@ninja_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você gosta de conseguir carregar muitos itens de uma só vez?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@magician_p, .@magician_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você gosta de ler livros?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@ninja_p, .@ninja_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você lê tudo em uma revista?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você tira um tempo para se preocupar com o que está vestindo?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@merchant_p, .@merchant_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@swordman_p, .@swordman_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você conta para os outros que tipo de comidas sofisticadas você comeu recentemente?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você escreve coisas em um caderno com frequência?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você se considera atraente?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@ninja_p, .@ninja_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você gosta de estar em áreas onde muitas pessoas se reúnem?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você gosta da ideia de viver uma vida de solteiro?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você gosta de manter distância dos outros?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você acha que ter um bom esconderijo é importante na batalha?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@magician_p, .@magician_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você defenderia seus amigos mesmo se soubesse que eles estavam errados?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você tentaria convencer um inimigo a não lutar contra você usando lógica?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@archer_p, .@archer_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você consegue ficar sentado no mesmo lugar por um longo tempo?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você acha que consegue levar um soco direto no estômago de um Orc?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@magician_p, .@magician_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você cria apelidos para seus amigos?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Você sempre tem um plano B para diversas situações?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	}
+	mes "[Lark]";
+	mes "Ao conversar com outras pessoas, você espera um pouco para que elas tenham tempo de pensar?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@ninja_p, .@ninja_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+
+	// Calculate player's job.
+	// In the official script, higher .@who_job value always wins in a tie.
+	setarray .@points[0],
+		.@swordman_p, .@magician_p, .@archer_p, .@merchant_p, .@thief_p, .@acolyte_p, .@taekwon_p, .@gunslinger_p, .@ninja_p;
+	set .@max, .@points[0];
+	for(set .@i,1; .@i<9; set .@i,.@i+1) {
+		if (.@points[.@i] >= .@max) {
+			set .@max, .@points[.@i];
+			set .@ele, .@i;
+		}
+	}
+	set .@who_job, .@ele+1; // To match the official script's numbering.
+
+	mes "[Lark]";
+	mes "Obrigado, tenha uma vida longa.";
+	mes "A avaliação de aptidão vocacional terminou.";
+	next;
+	mes "[Lark]";
+	mes "... ... o resultado é um agregado. ... ...";
+	next;
+	mes "[Lark]";
+	mes "A tabulação está completa.";
+	mes "'^0000FFEntão^000000', se você pressionar este botão";
+	mes "você pode ver os resultados.";
+	next;
+	switch(.@who_job) {
+	case 1:
+		set .@job$, "Swordman";
+		mes "[Lark]";
+		mes "...simples e direto...";
+		mes "...crenças fortes podem afetar o mundo...";
+		mes "...representa a esperança de que as pessoas...";
+		mes "...para proteger a lealdade.";
+		mes "...impulsionando você ...";
+		next;
+		break;
+	case 2:
+		set .@job$, "Wizard";
+		mes "[Lark]";
+		mes "...entender todas essas coisas sozinho...";
+		mes "...trabalho duro e pensamento independente...";
+		mes "...tipo. Julgamento excelente, introvertido...";
+		mes "...e analítico, com discernimento...";
+		mes "...tipo : ele observa tudo...";
+		next;
+		break;
+	case 3:
+		set .@job$, "Archer";
+		mes "[Lark]";
+		mes "...imensurável, tem muitas emoções...";
+		mes "...para pessoas que estão tentando entender...";
+		mes "...tentando entender o tipo para receber. Também,...";
+		mes "...rejeita a mediocridade, e sua verdadeira...";
+		mes "...tipo de vida para viver. Impressionável...";
+		mes "...rico e romântico ...";
+		next;
+		break;
+	case 4:
+		set .@job$, "Merchant";
+		mes "[Lark]";
+		mes "...para identificar o sentido de audição das pessoas...";
+		mes "...determinação e objetivos notáveis...";
+		mes "...orientado e um forte tipo de responsabilidade...";
+		mes "...desejo de conquista forte...";
+		next;
+		break;
+	case 5:
+		set .@job$, "Thief";
+		mes "[Lark]";
+		mes "...sempre torna a vida divertida e quem deseja...";
+		mes "...sempre tentando encontrar um novo trabalho...";
+		mes "...contribuição para o mundo,...";
+		mes "...esse tipo. Aventureiro,...";
+		mes "...otimista.";
+		next;
+		break;
+	case 6:
+		set .@job$, "Acolyte";
+		mes "[Lark]";
+		mes "...mentalidade o torna caloroso e atencioso com os outros...";
+		mes "Eu sei que amei alguém,...";
+		mes "...ser de ajuda aos outros e para os outros...";
+		mes "...tipo de cuidado.";
+		mes "...sempre quer ajudar os outros.";
+		next;
+		break;
+	case 7:
+		set .@job$, "Taekwon Boy/Girl";
+		mes "[Lark]";
+		mes "...acreditar com uma convicção teimosa...";
+		mes "...coração e espírito dos campos é consistente: ele...";
+		mes "...dar passos para seguir em frente.";
+		mes "...tipo de comentários ou quer entender as crenças...";
+		mes "...esse tipo de esforço para corrigir através do treinamento,...";
+		mes "...ter uma mente sã...";
+		next;
+		break;
+	case 8:
+		set .@job$, "Gunslinger";
+		mes "[Lark]";
+		mes "As pessoas frequentemente elogiam a Justiça.";
+		mes "Às vezes o medo e a confusão podem existir...";
+		mes "...naquele momento, a definição de confusão...";
+		mes "...para manter o equilíbrio, você está carregando o fardo...";
+		mes "...para você ...";
+		next;
+		break;
+	case 9:
+		set .@job$, "Ninja";
+		mes "[Lark]";
+		mes "...para evitar o tipo de autoaspiração...";
+		mes "...casado com um objetivo proeminente e silenciosamente evitando...";
+		mes "...passo e seus objetivos...";
+		mes "...tipo de alcançar seu objetivo até que estejam completos...";
+		mes "...eu não me arrependo disso, pois...";
+		next;
+		break;
+	default:
+		mes "[Lark]";
+		mes "Um erro ocorreu.";
+		close;
+	}
+	mes "[Lark]";
+	mes "^8014EB"+.@job$+" is the job that suits you.^000000";
+	next;
+	mes "[Lark]";
+	mes "Well, "+.@job$+", you can choose among various career pathways.";
+	mes "Você deseja determinar a Classe que mais lhe convém?";
+	mes "Você deseja selecionar uma Classe?";
+	next;
+	switch(select(.@job$+".:Any other profession.")) {
+	case 1:
+		mes "[Lark]";
+		mes "The Novice Training Center course is now shut down, "+.@job$+". Would you like to make this occupation your profession?";
+		next;
+		if(select("I will think about it again.:I'll choose the former.") == 1) {
+			mes "[Lark]";
+			mes "Você receberá um livro correspondente a cada tipo de Classe.";
+			mes "Por favor, tenha experiência suficiente para determinar cuidadosamente a Classe que mais lhe convém.";
+			close;
+		}
+		break;
+	case 2:
+		mes "[Lark]";
+		mes "Sair agora do Centro de Treinamento. Você gostaria de transformar uma ocupação em sua escolha de carreira?";
+		next;
+		if(select("I will think about it again.:I still want to change my job.") == 1) {
+			mes "[Lark]";
+			mes "O manual de cada Classe deveria ter recebido.";
+			mes "Tenha experiência suficiente para determinar cuidadosamente, por favor.";
+			close;
+		}
+		mes "[Lark]";
+		mes "Sim, senhor. Por favor, selecione a Classe desejada.";
+		next;
+		set .@who_job, select("Swordman:Wizard:Archer:Merchant:Thief:Acolyte:Taekwon Boy/Girl:Gunslinger:Ninja:I'll think again.");
+		if (.@who_job == 10) {
+			mes "[Lark]";
+			mes "O Centro de Treinamento de Aprendizes tem muita experiência marítima, por favor, preste atenção no caminho.";
+			close;
+		}
+		break;
+	}
+	callfunc "F_NvErase",1;
+	set .@str$, "^A62A2A'"+strcharinfo(0)+"^000000'! Take care and may Freya bless you on your journey.";
+	switch(.@who_job) {
+	case 1:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para a guilda dos Espadachins em Izlude, a cidade satélite.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+		warp "izlude_in",74,167;
+		end;
+	case 2:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para a guilda dos Magos em Geffen, a cidade mágica.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "geffen",119,37,1,1;
+		warp "geffen_in",163,98;
+		end;
+	case 3:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para a guilda dos Arqueiros em Payon, a cidade das montanhas.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "payon",256,242,1,1;
+		warp "payon_in02",64,65;
+		end;
+	case 4:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para a guilda dos Mercadores em Alberta, a cidade portuária.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "alberta",30,232,1,1;
+		warp "alberta_in",62,44;
+		end;
+	case 5:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para a guilda dos Gatunos em Morocc, a cidade do deserto.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "morocc",150,99,1,1;
+		warp "moc_prydb1",99,185;
+		end;
+	case 6:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para Prontera, a capital do Reino de Rune-Midgard.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "prontera",117,72,1,1;
+		warp "prt_church",172,19;
+		end;
+	case 7:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para a Fênix em Payon, a cidade das montanhas.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "payon",164,58,1,1;
+		warp "payon",163,141;
+		end;
+	case 8:
+		mes "[Lark]";
+		mes "Você será enviado para a aeronave";
+		mes "em Izlude, a cidade satélite.";
+		mes "Você pode embarcar na aeronave para ir a Einbroch, a cidade industrial.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+		warp "izlude",128,67;
+		end;
+	case 9:
+		mes "[Lark]";
+		mes "Nós enviaremos você";
+		mes "para o capitão do navio contrabandista.";
+		mes "Você pode ir para Amatsu";
+		mes "com a ajuda do capitão.";
+		mes .@str$;
+		mes "Adeus.";
+		close2;
+		savepoint "alberta",117,56,1,1;
+		warp "alberta",171,132;
+		end;
+	default:
+		mes "[Lark]";
+		mes "Um erro ocorreu. Se o problema persistir, por favor, entre em contato com a equipe de GMs local.";
+		close;
+	}
+}
+new_1-3,106,50,4	duplicate(NvLark)	Job Guide Lark#01	706
+new_2-3,106,50,4	duplicate(NvLark)	Job Guide Lark#02	706
+new_3-3,106,50,4	duplicate(NvLark)	Job Guide Lark#03	706
+new_4-3,106,50,4	duplicate(NvLark)	Job Guide Lark#04	706
+new_5-3,106,50,4	duplicate(NvLark)	Job Guide Lark#05	706

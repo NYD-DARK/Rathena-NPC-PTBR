@@ -1,0 +1,125 @@
+//===== rAthena Script ======================================= 
+//= Renewal Merchant Job Quest
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Job Change to Merchant Class
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Kisuka]
+//= 1.1 Added support for Baby classes. [Euphy]
+//============================================================ 
+alberta_in,53,43,6	script	Merchant#mer	86,{
+	if (Upper == 1) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Whitesmith || ADVJOB == Job_Creator)) {
+			mes "[Chefe Mahnsoo]";
+			mes "Quanto tempo!";
+			mes "Ei, você não desistiu";
+			mes "do seu negócio, não é?";
+			mes "O que aconteceu?";
+			next;
+			mes "[Chefe Mahnsoo]";
+			mes "Uau...";
+			mes "Você realmente esteve em Valhalla?! Uau, você percorreu um longo caminho...";
+			next;
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[Chefe Mahnsoo]";
+				mes "Hmmm...";
+				mes "Parece que você não está pronto para se tornar um Mercador novamente. Vá terminar de aprender as Habilidades de Aprendiz básicas primeiro.";
+				next;
+				mes "[Chefe Mahnsoo]";
+				mes "Não se preocupe, sempre teremos uma vaga de Mercador aberta para você. Apenas volte quando estiver pronto, está bem?";
+				close;
+			}
+			mes "[Chefe Mahnsoo]";
+			mes "Acho que é destino nos encontrarmos assim mais uma vez. Muito bem. Mais uma vez, deixe-me transformá-lo em um Mercador!";
+			next;
+			skill "NV_TRICKDEAD",0,SKILL_PERM;
+			jobchange Job_Merchant_High;
+			skill "MC_CARTREVOLUTION",1,SKILL_PERM;
+			skill "MC_CHANGECART",1,SKILL_PERM;
+			skill "MC_LOUD",1,SKILL_PERM;
+			mes "[Chefe Mahnsoo]";
+			mes "Ah~ Que nostálgico. Como nos velhos tempos! Tudo bem, dê o seu melhor!";
+			close;
+		}else{
+			mes "[Chefe Mahnsoo]";
+			mes "^333333*Suspiro*^000000";
+			mes "Estou tão entediado...";
+			mes "Quando terei notícias da minha adorável Blossom?";
+			close;
+		}
+	}
+	mes "[Membro da Guilda Mahnsoo]";
+	mes "Ei, por que você está aqui?";
+	next;
+	switch(select("I want to be a merchant.:I want to know more about merchants.:Ask him the requirements to be a merchant.:Nothing.")) {
+	case 1:
+		mes "[Membro da Guilda Mahnsoo]";
+		if(BaseJob != Job_Novice) {
+			if(BaseJob == Job_Merchant) {
+				mes ".....? Desculpe? O que você está dizendo?";
+				mes "Você já é um mercador. Ah, meu Deus..";
+				mes "Hã?! ...Eu preciso rir agora?!";
+			}else{
+				mes "Ahh? Você está tentando dos dois jeitos?";
+				mes "Que tal apenas se dedicar à sua classe original?";
+				next;
+				mes "[Membro da Guilda Mahnsoo]";
+				mes "Nós temos ética profissional, sabe.";
+			}
+			close;
+		}else{
+			mes "Quer ser um mercador? Hmm...";
+			next;
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[Membro da Guilda Mahnsoo]";
+				mes "Mas se você quer ser um mercador, seu nível de habilidade básica deve chegar ao Nível 9 ou você deve gastar todos os seus pontos de habilidade.";
+				next;
+				mes "[Membro da Guilda Mahnsoo]";
+				mes "Você não acha que precisamos aprender algumas habilidades básicas, embora apenas lidemos com dinheiro?";
+				close;
+			}
+			mes "[Membro da Guilda Mahnsoo]";
+			mes "Bom, acho que você está totalmente pronto para isso, vendo que seu nível de habilidade básica foi atingido.";
+			mes "Agora eu permito que você seja um mercador.";
+			next;
+			mes "[Membro da Guilda Mahnsoo]";
+			mes "Parabéns por se tornar um mercador!";
+			mes "Parabéns novamente por ser um membro da guilda dos mercadores e um de nossos colegas. Espero sua participação ativa a partir de agora!";
+			callfunc "Job_Change",Job_Merchant;
+			getitem 1381,1;	// N_Battle_Axe
+			next;
+			mes "[Membro da Guilda Mahnsoo]";
+			mes "Com certeza, precisamos de jovens que tenham paixão para alcançar nosso grande objetivo de garantir 20% do volume de moeda mundial. Entendeu? Hã?";
+			mes "Bem, estou apenas dizendo... significa vamos ganhar muito dinheiro no final das contas. Vocês sabem disso~";
+			close;
+		}
+	case 2:
+		mes "[Membro da Guilda Mahnsoo]";
+		mes "Mercador? Para simplificar, a pessoa que vende produtos e ganha dinheiro é um mercador.";
+		mes "Não é bom em lutar e não tem habilidades especiais de ataque/recuperação... mas um mercador pode comprar coisas a um preço baixo e depois vendê-las e ganhar dinheiro.";
+		next;
+		mes "[Membro da Guilda Mahnsoo]";
+		mes "Bem, um mercador tem uma habilidade suprema chamada Mammonita que atinge um inimigo com seu dinheiro... Podemos equipar tudo, exceto Arcos, Cajados e Espadas de Duas Mãos. Mas sempre podemos vender e comprar esses itens.";
+		mes "Sim... nós, mercadores, sempre temos dinheiro em nossas mentes, entendeu?";
+		close;
+	case 3:
+		mes "[Membro da Guilda Mahnsoo]";
+		mes "Para se tornar um mercador, embora apenas vender e receber dinheiro seja nosso trabalho, você deve atingir pelo menos o nível de habilidade básica 9.";
+		next;
+		mes "[Membro da Guilda Mahnsoo]";
+		mes "Bem, costumávamos cobrar uma taxa inicial antes. Não era difícil conseguir esse dinheiro?";
+		mes "Havia muitas pessoas que não conseguiam juntar aquele dinheiro e ficavam chorando.";
+		next;
+		mes "[Membro da Guilda Mahnsoo]";
+		mes "Então, recentemente, decidimos permitir que qualquer Aprendiz que queira ser um mercador se torne um.";
+		mes "Porque estar vivo ou não depois, depende da habilidade de cada um.";
+		close;
+	case 4:
+		close;
+	}
+}

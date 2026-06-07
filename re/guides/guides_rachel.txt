@@ -1,0 +1,128 @@
+//===== rAthena Script ======================================= 
+//= Rachel Guides
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Guide for the city of Rachel.
+//===== Additional Comments: ================================= 
+//= 1.0 First version, Renewal guide.
+//= 1.1 Navigation system update. [Euphy]
+//============================================================ 
+
+rachel,138,146,5	script	Rachel Guide#rachel	934,{
+	mes "[Guia de Rachel]";
+	mes "Bem-vindo à capital de Arunafeltz, ^8B4513Rachel^000000, onde o sopro quente da deusa Freya alcança.";
+	mes "Se esta é a primeira vez que você usa os serviços de guia, sugiro que faça muitas perguntas.";
+	F_Navi("[Rachel Guide]");
+	next;
+	while (1) {
+		switch(select("[ Main Facilities ]:[ Merchants & Helpers ]:Remove Marks from Mini-Map:Cancel")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Inn ]:[ Weapon Shop ]:[ Tool Shop ]:[ Airport ]:[ Cheshrumnir ]:[ Priest Zed's Mansion ]:Previous Menu")) {
+				case 1:
+					mes "[Guia de Rachel]";
+					mes "You can rest your fatigue of the journey in the "+F_Navi("Inn","rachel,115,144")+". The left building next to me is the Inn of Rachel.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,115,144,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					mes "[Guia de Rachel]";
+					mes "Do you want to check out the weapons that are sold in Rachel? The "+F_Navi("Weapon Shop","rachel,42,82")+" is located near the west gate.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,42,82,1,0xFF4500;
+					next;
+					break;
+				case 3:
+					mes "[Guia de Rachel]";
+					mes "Rachel's "+F_Navi("Tool Shop","rachel,83,73")+" sells the best quality potions. It's located near the west gate.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,83,73,2,0xDAA520;
+					next;
+					break;
+				case 4:
+					mes "[Guia de Rachel]";
+					mes "The "+F_Navi("Airport","rachel,272,125")+" is located outside of the east gate.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,272,125,3,0x008000;
+					next;
+					break;
+				case 5:
+					mes "[Guia de Rachel]";
+					mes F_Navi("Cheshrumnir","rachel,150,243")+" is a holy ground where pope, the incarnation of goddess Freya stays.";
+					mes "Siga pela estrada ao norte para encontrar o prédio.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,150,243,4,0x0000FF;
+					next;
+					break;
+				case 6:
+					mes "[Guia de Rachel]";
+					mes "Vou marcar a localização";
+					mes "of the "+F_Navi("Priest Zed's Mansion","rachel,98,238","^000080");
+					mes "em seu minimapa.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,98,238,5,0x000080;
+					next;
+					break;
+				case 7:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ Cool Event Corp. Staff ]:[ Eden Teleport Officer ]:Previous Menu")) {
+				case 1:
+					mes "[Guia de Rachel]";
+					mes "Vou marcar a localização";
+					mes "of the "+F_Navi("Cool Event Corp. Staff","rachel,110,138","^803232");
+					mes "em seu minimapa.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,110,138,7,0x803232;
+					next;
+					break;
+				case 2:
+					mes "[Guia de Rachel]";
+					mes "Vou marcar a localização";
+					mes "of the "+F_Navi("Eden Teleport Officer","rachel,125,144","^556B2F");
+					mes "em seu minimapa.";
+					mes "Gostaria de verificar outros locais?";
+					viewpoint 1,125,144,8,0x556B2F;
+					next;
+					break;
+				case 3:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[Guia de Rachel]";
+			mes "Claro, removerei todas as marcas do seu minimapa.";
+			mes "Há mais alguma coisa que eu possa fazer por você?";
+			viewpoint 2,115,144,0,0xFFFFFF;
+			viewpoint 2,42,82,1,0xFFFFFF;
+			viewpoint 2,83,73,2,0xFFFFFF;
+			viewpoint 2,272,125,3,0xFFFFFF;
+			viewpoint 2,150,243,4,0xFFFFFF;
+			viewpoint 2,98,238,5,0xFFFFFF;
+			viewpoint 2,110,138,7,0xFFFFFF;
+			viewpoint 2,125,144,8,0xFFFFFF;
+			next;
+			break;
+		case 4:
+			mes "[Guia de Rachel]";
+			mes "Tenha uma viagem segura!";
+			close;
+		}
+	}
+}
