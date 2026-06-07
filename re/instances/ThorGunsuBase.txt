@@ -1,0 +1,476 @@
+//===== rAthena Script =======================================
+//= Instance: Thor Gunsu Base.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Part of the Episode 18 main quest.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 47.
+que_thr,133,53,5	script	Maram#Armybase1	4_EP18_MARAM,{
+	if (ep18_main < 45 || ep18_main > 46)
+		end;
+	if (ep18_main == 45) {
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Você chegou, aventureiro!";
+		mes "Obrigado por vir até aqui.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[Maram]";
+		mes "Parece que desta vez é para valer. A segurança aqui é diferente do que vimos até agora....";
+		mes "Vamos ter cuidado para não sermos pegos pelos guardas e explorar o local.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Tente se manter fora da linha de visão do guarda o máximo possível.";
+		mes "Se for pego, você pode ser atacado, então, se não conseguir passar, nos encontraremos aqui novamente.";
+		erasequest 16577;
+		setquest 16578;
+		ep18_main = 46;
+		next;
+	}
+	else if (ep18_main == 46) {
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Vamos tentar entrar evitando ao máximo a torre de guarda.";
+		next;
+	}
+
+	.@md_name$ = "Thor Military Base";
+	cutin "",255;
+	mes "^FF0000Cuidado: Se você realizar processamentos arbitrários dentro da instância, como domar monstros, isso não será considerado progresso normal.^000000";
+	next;
+	// player has party
+	if (is_party_leader())
+		// player is leader of the party
+		.@create$ = "Apply for entry to " + .@md_name$ + "";
+
+	switch( select( .@create$, "Enter " + .@md_name$ + "" ) ) {
+	case 1:
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "When the application is complete, talk to me again and select ^0000CD" + .@md_name$ + " entry^000000";
+		if (instance_create(.@md_name$) < 0) {
+			mes "Party: " + getpartyname(getcharid(1)) + "";
+			mes "Leader: " + strcharinfo(0) + "";
+			mes "^0000ff" + .@md_name$ + " ^000000- Unknown error";
+			close3;
+		}
+		close3;
+	case 2:
+		// Note: instance not forced solo
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "[Maram]";
+			mes "^ff0000Ocorreu um erro desconhecido.^000000";
+			close;
+		case IE_NOINSTANCE:
+			cutin "ep18_maram_01.png",2;
+			mes "[Maram]";
+			mes "Parece que você ainda não criou a instância. Por favor, verifique novamente em um momento.";
+			close3;
+		case IE_NOMEMBER:
+			mes "[Maram]";
+			mes "^ff0000Apenas um membro do grupo pode entrar na Instância Memorial.^000000";
+			close;
+		case IE_OK:
+			mapannounce "que_thr", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering " + .@md_name$ + ".", bc_map, 0xFF99;
+			// warp 1@tcamp,103,237;
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16577) == 1" );
+	end;
+}
+
+1@tcamp,106,237,3	script	Maram#Base1	4_EP18_MARAM,{
+	mes "[Maram]";
+	mes "Tenha cuidado e explore o interior.";
+	mes "Pelo que ouvi de Dandelion mais cedo, não há muitas pessoas, mas há torres de vigilância aqui e ali que monitoram uma área bastante ampla.";
+	next;
+	mes "[Maram]";
+	mes "Se você for pego pela torre de vigilância, soldados aparecerão, então tome cuidado para não ser visto.";
+	mes "Bem, se encontrar algo, por favor, entre em contato comigo!";
+	close;
+
+OnInstanceInit:
+	'step = 0;
+	'map_tcamp$ = instance_mapname("1@tcamp");
+
+	setcell 'map_tcamp$,137,216,142,216,cell_walkable,0;
+	setcell 'map_tcamp$,135,145,144,145,cell_walkable,0;
+	setcell 'map_tcamp$,223,105,223,110,cell_walkable,0;
+	setcell 'map_tcamp$,80,94,80,100,cell_walkable,0;
+
+	// some monsters spawn randomly
+	monster 'map_tcamp$,0,0,"Base Soldier",21310,18;	// EP18_MD_GUARD_A
+	monster 'map_tcamp$,0,0,"Base Soldier",21309,18;	// EP18_MD_THOR_GUARD
+	end;
+}
+
+// unknown npc effect
+// 1@tcamp,244,152,3	duplicate(dummy_npc)	#Remote 1	CLEAR_NPC
+
+
+//-------------------------------------------------------------------
+// Traps
+//-------------------------------------------------------------------
+1@tcamp,120,228,3	script	Watchtower#Watch1	4_SYSTEM_BOX,7,7,{
+	end;
+OnTouch:	// note: hidden player trigger the event
+	npctalk "Intruder detected !!";
+	mapannounce 'map_tcamp$, "Intruder found, intruder found. Ruled out immediately.", bc_map, 0xFF0000;
+	getmapxy .@map$,.@x,.@y, BL_NPC;
+
+	areamonster 'map_tcamp$,.@x-2,.@y-2,.@x+2,.@y+2,"Base Soldier",21309,3;	// EP18_MD_THOR_GUARD
+	areamonster 'map_tcamp$,.@x-2,.@y-2,.@x+2,.@y+2,"Base Soldier",21310,3;	// EP18_MD_GUARD_A
+	end;
+OnTimer2000:
+	specialeffect EF_WARP;
+	initnpctimer;
+	end;
+OnInstanceInit:
+	initnpctimer;
+	end;
+}
+
+1@tcamp,135,228,3	duplicate(Watchtower#Watch1)	Watchtower#Watch2	4_SYSTEM_BOX,7,7
+1@tcamp,152,133,3	duplicate(Watchtower#Watch1)	Watchtower#Watch3	4_SYSTEM_BOX,7,7
+1@tcamp,167,133,3	duplicate(Watchtower#Watch1)	Watchtower#Watch4	4_SYSTEM_BOX,7,7
+1@tcamp,182,133,3	duplicate(Watchtower#Watch1)	Watchtower#Watch5	4_SYSTEM_BOX,7,7
+1@tcamp,161,96,3	duplicate(Watchtower#Watch1)	Watchtower#Watch6	4_SYSTEM_BOX,7,7
+1@tcamp,146,96,3	duplicate(Watchtower#Watch1)	Watchtower#Watch7	4_SYSTEM_BOX,7,7
+1@tcamp,116,102,3	duplicate(Watchtower#Watch1)	Watchtower#Watch8	4_SYSTEM_BOX,7,7
+1@tcamp,88,92,3	duplicate(Watchtower#Watch1)	Watchtower#Watch9	4_SYSTEM_BOX,7,7
+1@tcamp,240,148,3	duplicate(Watchtower#Watch1)	Watchtower#Watch10	4_SYSTEM_BOX,7,7
+1@tcamp,156,71,3	duplicate(Watchtower#Watch1)	Watchtower#Watch11	4_SYSTEM_BOX,7,7
+1@tcamp,176,194,3	duplicate(Watchtower#Watch1)	Watchtower#Watch12	4_SYSTEM_BOX,7,7
+1@tcamp,192,194,3	duplicate(Watchtower#Watch1)	Watchtower#Watch13	4_SYSTEM_BOX,7,7
+1@tcamp,142,153,3	duplicate(Watchtower#Watch1)	Watchtower#Watch14	4_SYSTEM_BOX,7,7
+1@tcamp,142,168,3	duplicate(Watchtower#Watch1)	Watchtower#Watch15	4_SYSTEM_BOX,7,7
+1@tcamp,192,179,3	duplicate(Watchtower#Watch1)	Watchtower#Watch16	4_SYSTEM_BOX,7,7
+1@tcamp,237,90,3	duplicate(Watchtower#Watch1)	Watchtower#Watch17	4_SYSTEM_BOX,7,7
+
+
+//-------------------------------------------------------------------
+// Walls
+//-------------------------------------------------------------------
+1@tcamp,138,216,3	script	Lock Device#1-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("Maram#Lock Device1");
+	enablenpc .@maram$;
+	npctalk "Maram: Please wait a moment. I know how to open it.", .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "Maram: Well, we can pass now!", .@maram$;
+	disablenpc instance_npcname("Lock Device#1-1");
+	disablenpc instance_npcname("Lock Device#1-2");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,137,216,142,216,cell_walkable,1;
+	end;
+}
+1@tcamp,141,216,3	duplicate(Lock Device#1-1)	Lock Device#1-2	4_ROPEPILE
+1@tcamp,140,218,3	duplicate(dummy_disabled_npc)	Maram#Lock Device1	4_EP18_MARAM
+
+1@tcamp,136,145,3	script	Lock Device#2-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("Maram#Lock Device2");
+	enablenpc .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "It would be better to proceed with caution.", .@maram$;
+	disablenpc instance_npcname("Lock Device#2-1");
+	disablenpc instance_npcname("Lock Device#2-2");
+	disablenpc instance_npcname("Lock Device#2-3");
+	disablenpc instance_npcname("Lock Device#2-4");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,135,145,144,145,cell_walkable,1;
+	end;
+}
+1@tcamp,138,145,3	duplicate(Lock Device#2-1)	Lock Device#2-2	4_ROPEPILE
+1@tcamp,141,145,3	duplicate(Lock Device#2-1)	Lock Device#2-3	4_ROPEPILE
+1@tcamp,143,145,3	duplicate(Lock Device#2-1)	Lock Device#2-4	4_ROPEPILE
+1@tcamp,142,147,3	duplicate(dummy_disabled_npc)	Maram#Lock Device2	4_EP18_MARAM
+
+1@tcamp,223,109,3	script	Lock Device#3-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("Maram#Lock Device3");
+	enablenpc .@maram$;
+	npctalk "Maram: This building looks quite suspicious, right? There must be a surveillance system in here too.", .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "Maram: Let's explore carefully this time, being careful not to get caught.", .@maram$;
+	disablenpc instance_npcname("Lock Device#3-1");
+	disablenpc instance_npcname("Lock Device#3-2");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,223,105,223,110,cell_walkable,1;
+	end;
+}
+1@tcamp,223,106,3	duplicate(Lock Device#3-1)	Lock Device#3-2	4_ROPEPILE
+1@tcamp,226,114,3	duplicate(dummy_disabled_npc)	Maram#Lock Device3	4_EP18_MARAM
+
+1@tcamp,80,99,3	script	Lock Device#4-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("Maram#Lock Device4");
+	enablenpc .@maram$;
+	npctalk "Maram: Looks like we're in pretty deep. We should be able to safely find what we need.", .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "Maram: Shall we wish you good luck?", .@maram$;
+	disablenpc instance_npcname("Lock Device#4-1");
+	disablenpc instance_npcname("Lock Device#4-2");
+	disablenpc instance_npcname("Lock Device#4-3");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,80,94,80,100,cell_walkable,1;
+
+	enablenpc instance_npcname("Pile of documents#Base1");
+	enablenpc instance_npcname("Pile of documents#Base2");
+	enablenpc instance_npcname("Pile of documents#Base3");
+	enablenpc instance_npcname("Pile of documents#Base4");
+	enablenpc instance_npcname("Pile of documents#Base5");
+	enablenpc instance_npcname("Miriam#Base1");
+	enablenpc instance_npcname("Maram#Base5");
+	if ('step == 0)
+		'step = 1;
+	end;
+}
+1@tcamp,80,97,3	duplicate(Lock Device#4-1)	Lock Device#4-2	4_ROPEPILE
+1@tcamp,80,95,3	duplicate(Lock Device#4-1)	Lock Device#4-3	4_ROPEPILE
+1@tcamp,82,100,3	duplicate(dummy_disabled_npc)	Maram#Lock Device4	4_EP18_MARAM
+
+
+//-------------------------------------------------------------------
+// Final
+//-------------------------------------------------------------------
+1@tcamp,32,100,3	script(DISABLED)	Pile of documents#Base1	4_EP18_PAPERS,{
+	if ('step != 1)
+		end;
+	mes "[Pilha de documentos]";
+	mes "Todos os tipos de documentos estão misturados.";
+	mes "Peguei algumas páginas do meio e descobri que eram datas de validade de armas e registros de vendas.";
+	next;
+	mes "[Pilha de documentos]";
+	mes "Até a data é bem recente. Há também um registro de entrega de uma grande quantidade de armas para o Sr. Dandelion.";
+	mes "Parece que encontrei o que estava procurando. Guardei os documentos nos braços.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpcself();
+	end;
+}
+
+1@tcamp,49,123,3	script(DISABLED)	Pile of documents#Base2	4_EP18_PAPERS,{
+	if ('step != 1)
+		end;
+	mes "[Pilha de documentos]";
+	mes "Todos os tipos de documentos estão misturados.";
+	mes "Na página de cima... é uma batalha para decidir o menu do almoço?";
+	next;
+	mes "[Pilha de documentos]";
+	mes "Parece que o menu definido foi peixe frito coberto com molho....";
+	mes "Parece que ele deixou para trás apenas documentos sem importância. Vamos cuidar deles por enquanto.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpcself();
+	end;
+}
+
+1@tcamp,29,86,3	script(DISABLED)	Pile of documents#Base3	4_EP18_PAPERS,{
+	if ('step != 1)
+		end;
+	mes "[Pilha de documentos]";
+	mes "Todos os tipos de documentos estão misturados.";
+	mes "Peguei um do meio e vi... um mapa dos guardas de segurança na base militar?";
+	next;
+	mes "[Pilha de documentos]";
+	mes "Olhando a data, é um documento de muito tempo atrás.";
+	mes "Parece que ele deixou para trás apenas documentos sem importância. Vamos cuidar deles por enquanto.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpcself();
+	end;
+}
+
+1@tcamp,60,122,3	script(DISABLED)	Pile of documents#Base4	4_EP18_PAPERS,{
+	if ('step != 1)
+		end;
+	mes "[Pilha de documentos]";
+	mes "Todos os tipos de documentos estão misturados.";
+	mes "O capítulo principal é... 'Se você alimentar um Magmaring com uma batata e caçá-lo depois de um tempo, ele deveria dropar uma batata assada?'";
+	next;
+	mes "[Pilha de documentos]";
+	mes "...Por que isso está aqui? Mas estou curioso sobre os resultados!";
+	mes "Parece que ele deixou para trás apenas documentos sem importância. Vamos cuidar deles por enquanto.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpcself();
+	end;
+}
+
+1@tcamp,31,84,3	script(DISABLED)	Pile of documents#Base5	4_EP18_PAPERS,{
+	if ('step != 1)
+		end;
+	mes "[Pilha de documentos]";
+	mes "Todos os tipos de documentos estão misturados.";
+	mes "Quando puxei um do meio... encontrei uma ilustração do Papa desenhada com cobertura de biscoito do Papa usando uma caneta.";
+	next;
+	mes "[Pilha de documentos]";
+	mes "Que tipo de desenho é este? E está muito bem desenhado....";
+	mes "Parece que ele deixou para trás apenas documentos sem importância. Vamos cuidar deles por enquanto.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpcself();
+	end;
+}
+
+
+1@tcamp,34,100,3	script(DISABLED)	Miriam#Base1	4_EP18_MIRIAM,3,3,{
+	if ('step == 1) {
+		if (countitem(1000409) < 5) {	// Ep18_Docu_File
+			cutin "ep18_miriam_02.png",2;
+			mes "[Miriam]";
+			mes "Como esperado, você tem talento, aventureiro. Usei todas as minhas conexões para descobrir a localização.";
+			mes "Parece que você encontrou o aventureiro e Maram rapidamente.";
+			next;
+			mes "[Miriam]";
+			mes "Por favor, leia estes documentos. Eles contêm o que estamos procurando.";
+			mes "Em vez de eu explicar tudo para você, acho melhor que você veja por si mesmo.";
+			close3;
+		}
+		if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+			mes "[Mini Elly]";
+			mes "Tire isso da bolsa. Coloque na sua cabeça.";
+			close;
+		}
+		mes "[Miriam]";
+		mes ".......";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Não, Miriam! Como você está aqui?";
+		mes "Disseram que realizariam uma investigação separada!";
+		next;
+		cutin "ep18_miriam_01.png",2;
+		mes "[Miriam]";
+		mes "Como você e o aventureiro chegaram tão longe?";
+		mes "Como esperado, suas habilidades são boas. Usei todas as minhas conexões para descobrir a localização, mas você a encontrou de imediato.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[Maram]";
+		mes "Vamos fazer algo a respeito, certo, aventureiro?";
+		mes "De qualquer forma, que informações você obteve?";
+		next;
+		cutin "ep18_miriam_02.png",2;
+		mes "[Miriam]";
+		mes "Olhe este documento aqui.";
+		next;
+		cutin "",255;
+		mes "[Mini Elly]";
+		mes "Este documento é um registro de vendas de armas. Por favor, mostre-me.";
+		mes "Todas as armas e armamentos que essas pessoas descartaram têm menos de um ano para a data de validade.";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[Miriam]";
+		mes "Vocês vendem armas assim de forma tão imprudente.";
+		mes "Se uma arma não for mantida adequadamente, ela pode não funcionar corretamente.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[Maram]";
+		mes "A qualidade de todas as armas que saem pelo fundo é a mesma.";
+		mes "...Mas acho que é neste momento.";
+		next;
+		mes "[Maram]";
+		mes "Um ano não é uma data de validade longa, mas também não é curta demais.";
+		mes "Por que isso surgiu justamente agora, quando estávamos nos preparando para o protesto?";
+		next;
+		mes "[Maram]";
+		mes "Não haveria necessidade de descartá-lo imediatamente.";
+		next;
+		cutin "ep18_miriam_02.png",2;
+		mes "[Miriam]";
+		mes "Esta é uma das bases militares administradas pelo meu pai adotivo.";
+		mes "Eu estava me perguntando se isso realmente apareceria em um momento como este.";
+		next;
+		cutin "",255;
+		select( "If it's your adoptive father, is it Priest Amal?", "That adoptive father who is a hardliner and pro-war?" );
+		cutin "ep18_miriam_02.png",2;
+		mes "[Miriam]";
+		mes "É isso mesmo, aventureiro. Quando olhei o registro, não parece que meu pai adotivo estava envolvido.";
+		mes "Acho que é uma corrupção isolada no nível mais baixo, o incidente de vazamento de armas.";
+		next;
+		mes "[Miriam]";
+		mes "Vou ter que investigar um pouco mais, mas esse é o meu palpite por enquanto.";
+		mes "Ah, por favor, me dê os documentos. Vou levá-los como prova.";
+		delitem 1000409,5;	// Ep18_Docu_File
+		if ('step == 1)
+			'step = 2;
+		if (isbegin_quest(16578) == 1) {
+			erasequest 16578;
+			setquest 16579;
+		}
+		close2;
+		cutin "",255;
+		npctalk "Maram: Ha, this is really fun.", instance_npcname("Maram#Base5");
+		end;
+	}
+	if ('step == 2) {
+		cutin "ep18_miriam_02.png",2;
+		mes "[Miriam]";
+		mes "...Só um momento, estou lendo o documento.";
+		close;
+	}
+	end;
+
+OnTouch:
+	if (countitem(1000409) < 5)
+		npctalk "Miriam: Oh, adventurer? Maram, you too!?";
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16578) == 1 && countitem(1000409) > 4" );	// Ep18_Docu_File
+	end;
+}
+
+1@tcamp,32,102,3	script(DISABLED)	Maram#Base5	4_EP18_MARAM,{
+	if ('step == 1) {
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Eu não sabia que a Miriam estaria aqui. Certo, aventureiro?";
+		close3;
+	}
+	if ('step == 2) {
+		mes "[Maram]";
+		mes "Eles se moveram separadamente, mas acabaram no mesmo lugar.";
+		mes "Ainda assim, o que ganhei no processo foi diferente, então acho que tem algum significado.";
+		next;
+		cutin "ep18_miriam_02.png",2;
+		mes "[Miriam]";
+		mes "Então acho que terei que ir embora por um tempo.";
+		mes "Vou ter que relatar o que descobri ao meu pai adotivo.";
+		next;
+		mes "[Miriam]";
+		mes "Se for uma corrupção isolada, há uma chance de que até meu pai adotivo ainda não saiba disso.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[Maram]";
+		mes "Isso é realmente um caso isolado de corrupção? Isso é algo que me incomoda.";
+		mes "Eu também tenho algo para entregar em Rachel, então Miriam, vamos juntos.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Vou te indicar um atalho para sair, então você, aventureiro, diria a Suad o que descobriu aqui?";
+		mes "Nós seguiremos logo atrás, então, por favor, vá e conte primeiro.";
+		if (ep18_main == 46) {
+			ep18_main = 47;
+			erasequest 16579;
+			setquest 16580;
+			getitem 1000405,50;	// Ep18_Amethyst_Fragment
+		}
+		close2;
+		warp "wolfvill",162,154;
+		end;
+	}
+	// debug
+	warp "wolfvill",162,154;
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16579) == 1" );
+	end;
+}

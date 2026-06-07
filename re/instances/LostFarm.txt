@@ -1,0 +1,1473 @@
+//===== rAthena Script =======================================
+//= Lost Farm in Time
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Episode 17.2 Lost Farm in Time
+//===== Changelog: ===========================================
+//= 1.0 Initial release [crazyarashi]
+//= 1.1 Optimizations and cleanup [Everade]
+//= 1.2 Cleanup [Capuche]
+//============================================================
+
+ba_maison,311,206,3	script	Luina#greeen	4_EP17_BASIC_B,{
+	if (checkweight(1000103,20) == 0) {
+		mes "- Você não pode prosseguir com a missão porque tem itens demais. -";
+		close;
+	}
+	if (BaseLevel < 150) {
+		mes "[Cotton]";
+		mes "Bem, você parece fraco demais para trabalhar. Não acho que você consiga fazer isso agora.";
+		next;
+		mes "- Esta missão é para nível 150 ou superior -";
+		close;
+	}
+	if (ep17_2_main < 9) {
+		mes "- Cruzei o olhar com a boneca automática na frente da instalação agrícola. -";
+		next;
+		mes "- A boneca me olhou de cima a baixo e virou a cabeça. -";
+		close;
+	}
+	if (isbegin_quest(8586) == 0) {
+		mes "- Cruzei o olhar com a boneca automática na frente da instalação agrícola. -";
+		next;
+		mes "[Boneca Automática]";
+		mes "Frequência cardíaca, pressão arterial e temperatura corporal estão todas normais.";
+		mes "Respiração está normal. Estabilidade ocular normal.";
+		mes "Verificando informações de registro...";
+		next;
+		mes "- A boneca me olhou de cima a baixo, e como se ela parecesse satisfeita. -";
+		next;
+		mes "[Boneca Automática]";
+		mes "Hello, " + strcharinfo(0) + "?";
+		mes "Você veio para ver a instalação agrícola?";
+		npctalk "Meow.", "Kitty#greeen", bc_self;
+		next;
+		if (select( "Huh.", "No." ) == 2) {
+			mes "[Boneca Automática]";
+			mes "Esta é a instalação agrícola, onde Kitty e os outros vivem.";
+			mes "Apenas fale comigo, se você estiver interessado.";
+			mes "Eu explicarei tudo para você.";
+			close;
+		}
+		mes "[Boneca Automática]";
+		mes "Kitty, fique quieto por um minuto. Bom garoto~";
+		mes "Eu sou a responsável pela instalação agrícola aqui.";
+		mes "Eu cuido das plantas, dou fertilizante e alimento o Kitty aqui e seus amigos.";
+		npctalk "Purr.", "Kitty#greeen", bc_self;
+		next;
+		mes "[Boneca Automática]";
+		mes "Os ingredientes para a sobremesa que sai da cafeteria são colhidos aqui.";
+		mes "Ehem.";
+		next;
+		mes "[Boneca Automática]";
+		mes "Tem havido muitos convidados ultimamente, então recebemos mais pedidos para colher.";
+		mes "Minha colega de outro trabalho acabou de ser designada para este lugar, mas ela é um pouco desastrada.";
+		mes "É fácil conseguir uma boa colheita quando todos ouvem.";
+		next;
+		select( "You're talkative." );
+		mes "[Luina]";
+		mes "Ah, esqueci que deveria me apresentar primeiro, se eu quisesse conversar com um convidado por muito tempo.";
+		mes "Meu nome é Luina.";
+		next;
+		mes "[Luina]";
+		mes "Kitty aqui é uma planta chamada Pitaya. É uma espécie antiga aprimorada que vivia em algum lugar desta ilha.";
+		mes "Não sei se é estranho, mas eu não sou uma Pitaya, mas sou boa em ouvir.";
+		next;
+		mes "- Luina acariciou a Pitaya. -";
+		npctalk "Purr.", "Kitty#greeen", bc_self;
+		next;
+		mes "[Luina]";
+		mes "Meu mestre me disse que eu deveria dar nomes a coisinhas fofas.";
+		mes "Kitty, Borboleta, Feliz, e assim por diante.";
+		mes "Pitaya é uma criatura pequena e fofa, então eu lhes dei um nome.";
+		next;
+		mes "[Luina]";
+		mes "Kitty é o mais fofo, a Pitaya aqui é o Kitty.";
+		next;
+		mes "[Luina]";
+		mes "Então...";
+		mes "Você está aqui para cortar algumas caudas?";
+		next;
+		select( "Tail?", "I don't have a tail." );
+		mes "[Luina]";
+		mes "Você está aqui para cortar algumas caudas, não está?";
+		mes "Oh, cometi um erro.";
+		mes "Espere um pouco. Vou processar a explicação.";
+		setquest 8586;
+		close;
+	}
+	if (isbegin_quest(8586) == 1) {
+		mes "[Luina]";
+		mes "Se você olhar para o Kitty agora, ele não tem raízes, certo?";
+		mes "Ele absorve umidade do ar e faz fotossíntese mesmo sem as raízes.";
+		mes "Apenas um pouco de fertilizante... e alguns alimentos.";
+		next;
+		mes "[Luina]";
+		mes "Quando você planta as sementes, elas crescem fora do solo, mas eu nunca tinha visto um broto múltiplo antes.";
+		next;
+		mes "[Luina]";
+		mes "Para a cauda, você apenas segura a Pitaya, acaricia-a assim e a solta.";
+		next;
+		mes "- Luina segurou a Pitaya, demonstrou como puxar a cauda e colocá-la de volta. -";
+		next;
+		mes "[Luina]";
+		mes "Não, não. Eu não puxei.";
+		mes "A cauda colhida não é necessariamente suficiente para comer.";
+		mes "Você tem que levar a perda em conta.";
+		npctalk "Cluck...!", "Kitty#greeen", bc_self;
+		next;
+		mes "[Luina]";
+		mes "Você precisa remover as sementes e a casca, mas não é difícil.";
+		mes "Após processá-la, a cauda de Pitaya colhida vai para a mesa.";
+		next;
+		mes "[Luina]";
+		mes "A colheita é, na verdade, um pouco difícil, então minha colega, 'Silk', irá guiá-lo.";
+		mes "Você pode entrar mesmo sem uma colheita. Eu vou deixar você entrar aqui sem um guia.";
+		next;
+		mes "[Luina]";
+		mes "Se você estiver livre, fale com 'Cotton' aqui, ela é a gerente de jogo, e ela lhe dirá o que fazer.";
+		mes "Eu sei que é um pouco difícil para você, mas... se você nos der uma mão, nós o compensaremos adequadamente.";
+		npctalk "Cotton : I wish it's a little higher...", "Cotton#172_lost_0", bc_self;
+		next;
+		mes "[Luina]";
+		mes "Agora que você ouviu as instruções, pode entrar agora.";
+		mes "Você pode apenas entrar se quiser dar uma olhada.";
+		next;
+		mes "[Luina]";
+		mes "Nós falamos sobre o trabalho da Cotton primeiro, mas na verdade a colheita é mais urgente.";
+		mes "Se você confia nas suas habilidades de combate, eu gostaria que ajudasse com a colheita.";
+		mes "Eu gostaria que você pudesse me ajudar com a colheita...";
+		mes "Temos que alimentar o Chefe Kitty também.";
+		next;
+		select( "Boss Kitty?" );
+		mes "[Luina]";
+		mes "Eu apenas o chamo assim, ele é um pouco diferente dos outros, está se escondendo em um lugar difícil de ver.";
+		mes "Se você quiser vê-lo por perto, terá que espalhar a comida e fazer um pouco de barulho pela fazenda.";
+		next;
+		mes "[Luina]";
+		mes "Eu sou a responsável pela colheita, então, por favor, fale comigo sempre que quiser!";
+		completequest 8586;
+		next;
+		mes "[Luina]";
+		mes "Vamos falar sobre os detalhes quando você quiser ajudar.";
+		close;
+	}
+	if (isbegin_quest(8589) == 1) {
+		mes "[Luina]";
+		mes "Os filhotes vieram brincar com você?";
+		mes "Isso é estranho... Eu te ouvi muito bem.";
+		mes "... o quê? Até a Silk?";
+		mes "O que aconteceu?";
+		next;
+		select( "She is pretending to be a cat." );
+		emotion ET_FRET, getnpcid(0,"Kitty#greeen");
+		mes "[Kitty]";
+		mes "Có.";
+		next;
+		mes "-- O gato se escondeu atrás de Luina antes que ela o alcançasse. --";
+		next;
+		mes "[Luina]";
+		mes "O que...";
+		next;
+		mes "[Luina]";
+		mes "Talvez... apenas talvez?";
+		mes "Ele está me ouvindo?";
+		next;
+		select( "I guess." );
+		mes "[Luina]";
+		mes "Kitty.";
+		npctalk "*Growl*", "Kitty#greeen", bc_self;
+		next;
+		mes "[Luina]";
+		mes "...";
+		mes "É isso que os convidados chamariam de 'envergonhado'?";
+		npctalk "*Croak*", "Kitty#greeen", bc_self;
+		next;
+		mes "- Quando Luina estendeu a mão para o gato, ele encostou a cabeça na mão dela. -";
+		next;
+		mes "- O rosto de Luina ficou complexo com uma expressão satisfeita enquanto acariciava o gato. -";
+		next;
+		mes "[Luina]";
+		mes "Hmm...";
+		mes "O convidado não será capaz de fazer amizade com eles algum dia?";
+		next;
+		mes "[Luina]";
+		mes "Não seria ótimo se continuássemos brincando com eles assim?";
+		npctalk "*Croak*", "Kitty#greeen", bc_self;
+		next;
+		mes "[Luina]";
+		mes "Sim! Por favor, ajude a Silk novamente amanhã também.";
+		mes "Então, um dia... Você será capaz de fazer amizade com todas as Pitayas!";
+		mes "Aqui... é um sinal de promessa.";
+		completequest 8589;
+		getitem 1000103,20;
+		getexp 3094009,0;
+		next;
+		mes "[Luina]";
+		mes "Provavelmente.";
+		npctalk "Quack Quack.", "Kitty#greeen", bc_self;
+		next;
+		mes "- O gato chorou com um som agudo como se estivesse animado. -";
+		next;
+	}
+	switch( checkquest(8587,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Luina]";
+		mes "Concluímos a colheita necessária para hoje.";
+		mes "Retomaremos nossa colheita novamente ao amanhecer. Volte até lá.";
+		close;
+	case 2:
+		mes "[Luina]";
+		mes "^0000FFNossa luta com a Pitaya parece ter sido há muito tempo.^000000";
+		mes "^0000FFEu agora tenho coragem novamente para voltar à instalação agrícola.^000000";
+		erasequest 8587;
+		close;
+	}
+	.@party_id = getcharid(1);
+	if (.@party_id < 1) {
+		mes "^FF0000Você deve organizar pelo menos uma pessoa ou entrar em um grupo para entrar.^000000";
+		close;
+	}
+	.@md_name$ = "Farm Lost in Time";
+
+	setarray .@item[0],1000093,1000094,1000095,1000096,1000097,1000098;
+	for ( .@i = 0; .@i < 6; ++.@i ) {
+		if (countitem(.@item[.@i]) > 0) {
+			.@count = 1;
+			delitem .@item[.@i], countitem(.@item[.@i]);
+		}
+	}
+	if (.@count > 0) {
+		mes "[Luina]";
+		mes "!? O que aconteceu? Você tem uma cauda quebrada.";
+		mes "Eu cuidarei disso, por favor.";
+		mes "Obrigada.... Após a próxima experiência de colheita, certifique-se de entregá-la à Silk e sair.";
+		next;
+	}
+	mes "[Luina]";
+	mes "Hello, " + strcharinfo(0) + ".";
+	mes "Você vai entrar na instalação agrícola hoje?";
+	next;
+	switch( select( (is_party_leader() ? "Create " + .@md_name$ : ""), "Enter the dungeon.", "Cancel" ) ) {
+	case 1:
+		if (instance_create(.@md_name$) == -3)
+			dispbottom "The reservation of the instance '" + .@md_name$ + "' has failed due to an active instance.";
+		mes "[Luina]";
+		mes "Por favor, espere um momento~";
+		mes "Vou preparar a comida para hoje.";
+		close;
+	case 2:
+		if (instance_enter(.@md_name$) != IE_OK) {
+			mes "^FF0000A masmorra memorial ainda não foi criada.^000000";
+			close;
+		}
+		setquest 8587;
+		if (isbegin_quest(8588) > 0)
+			erasequest 8588;
+		setquest 8588;
+		mapannounce "ba_maison", "" + strcharinfo(0) + " of the party, " + .@party_name$ + ", is entering the " + .@md_name$ + ".", bc_map, "0x00FF99";
+		end;
+	case 3:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(8587,PLAYTIME) == -1" );	// condition on ep17_2_main not required
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(8587,PLAYTIME) == 2" );
+	end;
+}
+
+
+1@lost,1,1,0	script	#lost_farm_control	-1,{
+	end;
+OnInstanceInit:
+	'lost_farm = 0;
+	deletearray 'banghae;
+	'map_lost$ = instance_mapname("1@lost");
+	end;
+}
+
+1@lost,161,40,0	script	#startline	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (!is_party_leader())
+		end;
+	disablenpc();
+	'lost_farm = 0;
+	enablenpc instance_npcname("Wooden Box#01");
+	npctalk "Oh! Guest! Over here!!", instance_npcname("Wooden Box#01");
+	end;
+}
+
+1@lost,163,47,3	script(DISABLED)	Wooden Box#01	4_WOODBOX,{
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 0) {
+		mes "[Silk]";
+		mes "Bem-vindo ao terreno de criação! Eu sou a Silk, a responsável pela coleta!";
+		npctalk "Silk : Welcome to the breeding ground! I'm silk the one in charge of collecting!";
+		next;
+		mes "[Silk]";
+		mes "Eeek... Salve-me!";
+		npctalk "Silk : Eeek... Save me!";
+		close2;
+		if ('lost_farm == 0) {
+			'lost_farm = 1;
+			donpcevent instance_npcname("Wooden Box#01") + "::OnStart";
+		}
+		end;
+	}
+	npctalk "Silk : Calm down the Pitayas!";
+	end;
+
+OnStart:
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#01") + "::OnMobDead";
+	monster 'map_lost$,155,43,"King Eyes",20660,1, .@event$;
+	monster 'map_lost$,154,50,"Happy",20664,1, .@event$;
+	monster 'map_lost$,158,49,"Toto",20661,1, .@event$;
+	monster 'map_lost$,162,48,"Lightning",20662,1, .@event$;
+	monster 'map_lost$,168,49,"Cutie",20660,1, .@event$;
+	monster 'map_lost$,170,45,"Woody",20663,1, .@event$;
+	monster 'map_lost$,165,42,"Rusk",20664,1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_lost$, instance_npcname("Wooden Box#01") + "::OnMobDead") == 0) {
+		'lost_farm = 2;
+		disablenpc();
+		enablenpc instance_npcname("Silk#01");
+		sleep 1000;
+		npctalk "Silk : !!", instance_npcname("Silk#01");
+	}
+	end;
+}
+
+
+1@lost,163,47,3	script(DISABLED)	Silk#01	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm != 2)
+		end;
+	mes "[Silk]";
+	mes "Obrigada por salvar minha vida! De acordo com Luina, os Pitaya são criaturas gentis!";
+	npctalk "Silk : Thank you for saving my life! According to Luina, the Pitaya are a gentle creature!";
+	next;
+	mes "[Silk]";
+	mes "Você viu também! Estou com medo!";
+	npctalk "Silk : You've seen it too! I'm scared!";
+	next;
+	mes "[Silk]";
+	mes "Alimentar e abraçar por cinco minutos cada? Como vou acariciá-los, se eles continuam mostrando os dentes?";
+	npctalk "Silk : Feed and hug for five minutes each? How do I pet them, when they keep showing their teeth?";
+	next;
+	mes "[Silk]";
+	mes "O que mais deve ser feito em 5 minutos!";
+	npctalk "Silk : What else should be done in 5 minutes!";
+	next;
+	mes "[Silk]";
+	mes "...";
+	npctalk "Silk : ...";
+	next;
+	mes "[Silk]";
+	mes "Caro convidado...";
+	npctalk "Silk : Dear guest...";
+	next;
+	mes "[Silk]";
+	mes "Entendo por que Luina pediu por mais trabalhadores, já que ela não conseguia colher rapidamente sozinha.";
+	npctalk "Silk : I understand why Luina asked for more worker because she couldn't harvest quickly herself.";
+	next;
+	mes "[Silk]";
+	mes "Mas seria mais rápido segurá-lo e brincar com ele do jeito que você fez, em vez de acariciá-lo por 5 minutos.";
+	npctalk "Silk : But it would be faster to hold it and play with it just like you did, rather than petting it for 5 minutes.";
+	next;
+	mes "[Silk]";
+	mes "... embora eu não consiga segurá-lo.";
+	npctalk "Silk : ... though I can't hold onto it.";
+	next;
+	mes "[Silk]";
+	mes "Vamos seguir para o próximo habitat, é por aqui. Pronto? Lá vamos nós!";
+	npctalk "Silk : Let's move on to the next habitat, it's around here. Ready? Here we go!";
+	close2;
+	if ('lost_farm == 2) {
+		'lost_farm = 3;
+		disablenpc();
+		enablenpc instance_npcname("Silk#02");
+		instance_warpall 'map_lost$,218,149,instance_id();
+	}
+	end;
+}
+
+
+1@lost,214,146,3	script(DISABLED)	Silk#02	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 3) {
+		mes "[Silk]";
+		mes "Esta instalação... Como pode ver, este é um terreno de criação conveniente para nossos amigos escamados.";
+		npctalk "Silk : This facility... As you can see, this is a convenient breeding ground for our scaled friends.";
+		next;
+		mes "[Silk]";
+		mes "Seja para plantas ou animais. A temperatura e a umidade são sempre constantes.";
+		npctalk "Silk : Whether it's plants or animals. The temperature and humidity are always constant.";
+		next;
+		mes "[Silk]";
+		mes "Ouvi dizer que não é agradável para as pessoas, que tal a respiração?";
+		npctalk "Silk : I heard it's not pleasant for people, how about breathing?";
+		next;
+		mes "[Silk]";
+		mes "Agora vou espalhar um pouco de comida aqui também. Vamos acabar logo com isso. Vou me esconder...";
+		npctalk "Silk : Now I'm going to sprinkle some food here, too. Let's get this over with... I'll go hide.";
+		next;
+		mes "[Silk]";
+		mes "Ei... Pessoal, hora da ração e do arroz~";
+		npctalk "Silk : Hey... Guys, it's time for bars and rice~";
+		close2;
+		if ('lost_farm == 3) {
+			'lost_farm = 4;
+			npctalk "Silk : I've sprinkled the food already, they'll show up soon!";
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#02") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 4) {
+		mes "[Silk]";
+		mes "Haa, haa... Fiquei com tanto medo...";
+		npctalk "Silk : Haa, haa... I was so scared...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Tem certeza de que não está brincando agora?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Are you sure that you're not playing right now?";
+		next;
+		mes "[Silk]";
+		mes "Acho que é o certo para eles. Eu lhe disse antes, eles só produzirão caudas se estiverem de bom humor.";
+		npctalk "Silk : I think it's right for them. I told you before, they'll only produce tails if they're in a good mood.";
+		next;
+		mes "[Silk]";
+		mes "Aliás, vamos para o próximo local...? Ainda não terminamos, então...";
+		npctalk "Silk : By the way, shall we move on to the next location...? We're not done yet, so...";
+		next;
+		mes "[Silk]";
+		mes "O próximo é um parquinho com pedras e areia. Quando eu colher, terei que sacudir a areia primeiro...";
+		npctalk "Silk : The next one is a playground with rocks and sand. When I harvest, I'll have to shake off the sand first...";
+		close2;
+		if ('lost_farm == 4) {
+			'lost_farm = 5;
+			disablenpc();
+			enablenpc instance_npcname("Silk#03");
+			instance_warpall 'map_lost$,86,101,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,214,146,3	script(DISABLED)	Wooden Box#02	4_WOODBOX,{
+	npctalk "Silk : Save me! I'm going to get eaten by the Pitayas!";
+	end;
+OnStart:
+	enablenpc();
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#02") + "::OnMobDead";
+	monster 'map_lost$,210,148,"Lucy",20662,1, .@event$;
+	monster 'map_lost$,208,153,"Elizabeth",20660,1, .@event$;
+	monster 'map_lost$,215,151,"Dorothy",20664,1, .@event$;
+	monster 'map_lost$,216,151,"Clara",20661,1, .@event$;
+	monster 'map_lost$,211,143,"Coco",20662,1, .@event$;
+	monster 'map_lost$,211,144,"Cloud",20663,1, .@event$;
+	monster 'map_lost$,216,151,"Harmony",20660,1, .@event$;
+	sleep 3000;
+	npctalk "Silk : He~, Help me~~~~";
+	sleep 3000;
+	npctalk "Silk : Save the automatic doll~~~~~";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#02") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 4;
+		disablenpc();
+		enablenpc instance_npcname("Silk#02");
+		npctalk "Silk : ...Is it over?", instance_npcname("Silk#02");
+		end;
+	}
+	npctalk "Silk : There " + (.@count == 1 ? "is" : "are") + " " + .@count + " left!";
+	end;
+}
+
+
+1@lost,91,92,3	script(DISABLED)	Silk#03	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 5) {
+		mes "[Silk]";
+		mes "Não se preocupe com a minha localização...";
+		npctalk "Silk : Don't mind my location...";
+		next;
+		mes "[Silk]";
+		mes "Mesmo que seja certo vir brincar, pelo menos não comigo.";
+		npctalk "Silk : Even if it's right to come over to play, at least not with me.";
+		next;
+		mes "[Silk]";
+		mes "Mas acho que eles deveriam estar brincando com você! Isso mesmo!";
+		npctalk "Silk : But I think they should be playing with you! That's right!";
+		next;
+		mes "[Silk]";
+		mes "De qualquer forma, ajude-me com a próxima colheita! Ei, pessoal~ É hora de comer~~";
+		npctalk "Silk : Anyway, help me with the next harvest! Hey, guys~ It's time to eat~~";
+		close2;
+		if ('lost_farm == 5) {
+			'lost_farm = 6;
+			npctalk "Silk : I've spread the food, so they'll show up soon!";
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#03") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 7) {
+		mes "[Silk]";
+		mes "Woo...";
+		npctalk "Silk : Woo...";
+		next;
+		mes "[Silk]";
+		mes "Você e eu... estamos cobertos de areia...";
+		npctalk "Silk : You and I... are covered in sand...";
+		next;
+		mes "[Silk]";
+		mes "Ah, eu sou à prova d'água e de poeira, meu núcleo está bem.";
+		npctalk "Silk : Oh, I'm waterproof and dustproof, my core is fine.";
+		next;
+		mes "[Silk]";
+		mes "Estou com raiva? Do convidado? Não...";
+		npctalk "Silk : Am I angry? to the guest? no...";
+		next;
+		mes "[Silk]";
+		mes "A boneca automática... eu consigo ficar com raiva? ...Hmmm...";
+		npctalk "Silk : The automatic doll... can I be angry? ...Hmmm...";
+		next;
+		mes "[Silk]";
+		mes "...não agora, mas sinto que consigo... hmmm.";
+		npctalk "Silk : ...not now, but I feel like I can... hmmm.";
+		next;
+		mes "[Silk]";
+		mes "O próximo é o parquinho com uma piscina tipo oásis. Vamos nessa...";
+		npctalk "Silk : Next is the playground with an oasis-like pool. Let us go...";
+		close2;
+		if ('lost_farm == 7) {
+			'lost_farm = 8;
+			disablenpc();
+			enablenpc instance_npcname("Silk#04");
+			instance_warpall 'map_lost$,226,256,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,91,92,3	script(DISABLED)	Wooden Box#03	4_WOODBOX,{
+	npctalk "Silk : Kyaaah!";
+	end;
+OnStart:
+	enablenpc();
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#03") + "::OnMobDead";
+	monster 'map_lost$,81,103,"Lotti",20661,1, .@event$;
+	monster 'map_lost$,81,99,"Sally",20660,1, .@event$;
+	monster 'map_lost$,82,95,"Glory",20662,1, .@event$;
+	monster 'map_lost$,91,108,"Connie",20664,1, .@event$;
+	monster 'map_lost$,92,105,"Boris",20661,1, .@event$;
+	monster 'map_lost$,92,99,"Rony",20664,1, .@event$;
+	monster 'map_lost$,89,94,"Mikey",20663,1, .@event$;
+	sleep 3000;
+	npctalk "Silk : Oh, don't come here~~~";
+	sleep 3000;
+	npctalk "Silk : Not me, not meeee~~~";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#03") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 7;
+		disablenpc();
+		enablenpc instance_npcname("Silk#03");
+		end;
+	}
+	npctalk "Silk : There " + (.@count == 1 ? "is" : "are") + " " + .@count + " left!";
+	end;
+}
+
+
+
+
+
+
+1@lost,232,257,3	script(DISABLED)	Silk#04	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 8) {
+		mes "[Silk]";
+		mes "Novamente, não se preocupe com minha localização...";
+		npctalk "Silk : Again, don't worry about my location...";
+		next;
+		mes "[Silk]";
+		mes "O que você acha? Acho que você está se saindo bem para um iniciante.";
+		npctalk "Silk : What do you think? I think you're doing good for a first timer.";
+		next;
+		mes "[Silk]";
+		mes "Como esperado, você tem talento para isso! Eu estava certa!";
+		npctalk "Silk : As expected, you have a talent for this! I was right!";
+		next;
+		mes "[Silk]";
+		mes "Você acha que uma boneca automática pode bajular as pessoas? Eu apenas disse a verdade.";
+		npctalk "Silk : Do you think an automatic doll can flatter people? I only told the truth.";
+		next;
+		mes "[Silk]";
+		mes "Vamos observar seu talento e espalhar a comida! Pessoal~~ É hora de comer~~~";
+		npctalk "Silk : Let's look at your talent and spread the food! Guys~~ It's time to eat~~~";
+		close2;
+		if ('lost_farm == 8) {
+			'lost_farm = 9;
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#04") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 10) {
+		mes "[Silk]";
+		mes "...";
+		npctalk "Silk : ...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Você está bem?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Are you okay?";
+		next;
+		mes "[Silk]";
+		mes "Acho que é um pouco diferente de se acostumar com um convidado e se acostumar com esse tipo de trabalho.";
+		npctalk "Silk : I think it's a little different from geting used to a guest and getting used to this kind of work";
+		next;
+		mes "[Silk]";
+		mes "Vamos para o próximo local!";
+		npctalk "Silk : Let's move on to the next location!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Existe outro?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Is there another one?";
+		next;
+		mes "[Silk]";
+		mes "Pode ter sido uma pequena estufa vista de fora, mas é uma ilusão. Olhe para o teto... É bem alto, não é?";
+		npctalk "Silk : It may have been a small greenhouse from the outside, but it's an illusion. Look at the ceiling... It's really high, right?";
+		next;
+		mes "[Silk]";
+		mes "Existe um motivo para eu sempre guiar os convidados.";
+		npctalk "Silk : There is a reason why I always guide guests.";
+		next;
+		mes "[Silk]";
+		mes "O próximo é perto da entrada, mas de acordo com as informações de Luina, é uma área de sono. Você acha que está prestes a acordar?";
+		npctalk "Silk : Next up is near the entrance, but according to Luina's information, it's a sleepy area. You think he's about to wake up?";
+		close2;
+		if ('lost_farm == 10) {
+			'lost_farm = 11;
+			disablenpc();
+			enablenpc instance_npcname("Silk#05");
+			instance_warpall 'map_lost$,242,117,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,232,257,3	script(DISABLED)	Wooden Box#04	4_WOODBOX,{
+	npctalk "Silk : Don't come! Don't come!";
+	end;
+OnStart:
+	enablenpc();
+	npctalk "Silk : Hey, guys~ Not me~";
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#04") + "::OnMobDead";
+	monster 'map_lost$,227,261,"Rudolf",20664,1, .@event$;
+	monster 'map_lost$,223,262,"Daisy",20663,1, .@event$;
+	monster 'map_lost$,217,260,"Adonis",20660,1, .@event$;
+	monster 'map_lost$,216,252,"Bingo",20662,1, .@event$;
+	monster 'map_lost$,223,253,"Molly",20663,1, .@event$;
+	monster 'map_lost$,228,247,"Sammy",20661,1, .@event$;
+	monster 'map_lost$,234,253,"Joy",20662,1, .@event$;
+	sleep 3000;
+	npctalk "Silk : Don't come! Don't comeee!";
+	sleep 3000;
+	npctalk "Silk : Don't come this waaaaaay!";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#04") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 10;
+		disablenpc();
+		enablenpc instance_npcname("Silk#04");
+		npctalk "Silk : ...Oh, my...", instance_npcname("Silk#04");
+		end;
+	}
+	npctalk "Silk : There " + (.@count == 1 ? "is" : "are") + " " + .@count + " left!";
+	end;
+}
+
+
+1@lost,247,119,3	script(DISABLED)	Silk#05	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 11) {
+		mes "[Silk]";
+		mes "Respira fundo... Respira fundo...";
+		npctalk "Silk : Deep breaths... Deep Breaths...";
+		next;
+		mes "[Silk]";
+		mes "O quê? Uma boneca automática respira fundo? Você não gostaria de recuperar o fôlego se não conseguisse controlar sua mente?";
+		npctalk "Silk : What? Does an automatic doll breathe deeply? Wouldn't you want to catch a breath if you can't control your mind?";
+		next;
+		mes "[Silk]";
+		mes "Não com pulmões, mas... Pensando bem, como Pitaya faz sons?";
+		npctalk "Silk : Not with lungs, but... Come to think of it, how does Pitaya make a sounds?";
+		next;
+		mes "[Silk]";
+		mes "...Eu não quero ter medo.";
+		npctalk "Silk : ...I don't want to be afraid.";
+		next;
+		mes "[Silk]";
+		mes "Então vamos seguir em frente... Os Pitayas aqui são dorminhocos, então as respostas podem ser um pouco diferentes. Agora, pessoal... Venham aqui...";
+		npctalk "Silk : So let's move on... The Pitayas here are sleepyheads, so the responses may be a little different. Now, guys...Come here...";
+		close2;
+		if ('lost_farm == 11) {
+			'lost_farm = 12;
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#05") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 13) {
+		mes "[Silk]";
+		mes "Ufa...";
+		npctalk "Silk : Phew...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Você está bem?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Are you okay?";
+		next;
+		mes "[Silk]";
+		mes "'Gatos' te mordem?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Eu acho que sim.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : I think so.";
+		next;
+		mes "[Silk]";
+		mes "Existe uma condição que exige que você morda as pessoas para ser fofo?";
+		npctalk "Silk : Is there a condition that requires you to bite people to be cute?";
+		next;
+		mes "[Silk]";
+		mes "Como esperado... A alegria tem um preço.";
+		npctalk "Silk : As expected... Joy comes with a price.";
+		next;
+		mes "[Silk]";
+		mes "Para aproveitar sua fofura, estou pronto para dar meus braços e pernas...!";
+		npctalk "Silk : To enjoy it's cuteness, I'm ready to give my arms and legs...!";
+		next;
+		mes "[Silk]";
+		mes "Vi os convidados de novo. Eu respeito vocês. Ah, claro, foi admirável desde o início.";
+		npctalk "Silk : I saw the guests again. I respect you. Oh, of course, it was admirable from the beginning.";
+		next;
+		mes "[Silk]";
+		mes "Uma boneca automática conta piadas? Ah, você é muito bom em brincar. Eu sempre falo sério.";
+		npctalk "Silk : Does an automatic doll make jokes? Oh, you're pretty good at joking. I always mean it.";
+		next;
+		mes "[Silk]";
+		mes "Ainda temos algo para colher? Sinto muito por isso também. Vamos para a próxima seção.";
+		npctalk "Silk : Do we still have something to harvest? I'm sorry about that, too. Let's move to the next section.";
+		close2;
+		if ('lost_farm == 13) {
+			'lost_farm = 14;
+			disablenpc();
+			enablenpc instance_npcname("Silk#06");
+			instance_warpall 'map_lost$,116,165,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,247,119,3	script(DISABLED)	Wooden Box#05	4_WOODBOX,{
+	npctalk "Silk : Save the automatic doll!";
+	end;
+OnStart:
+	enablenpc();
+	npctalk "Silk : ...";
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#05") + "::OnMobDead";
+	monster 'map_lost$,248,115,"Dough",20664,1, .@event$;
+	monster 'map_lost$,247,110,"Roro",20663,1, .@event$;
+	monster 'map_lost$,246,120,"Jasmine",20661,1, .@event$;
+	monster 'map_lost$,243,124,"Melody",20660,1, .@event$;
+	monster 'map_lost$,247,120,"Misty",20664,1, .@event$;
+	monster 'map_lost$,244,115,"Sandy",20662,1, .@event$;
+	monster 'map_lost$,243,116,"Bonnie",20661,1, .@event$;
+	sleep 3000;
+	npctalk "Silk : .....";
+	sleep 3000;
+	npctalk "Silk : ........... what's the difference!";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#05") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 13;
+		disablenpc();
+		enablenpc instance_npcname("Silk#05");
+		npctalk "Silk : Is it over?!", instance_npcname("Silk#05");
+		end;
+	}
+	npctalk "Silk : There " + (.@count == 1 ? "is" : "are") + " " + .@count + " left!";
+	end;
+}
+
+
+1@lost,106,160,3	script(DISABLED)	Silk#06	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 14) {
+		mes "[Silk]";
+		mes "Estou preocupada...";
+		npctalk "Silk : I'm worried...";
+		next;
+		mes "[Silk]";
+		mes "Não há distinção entre nós, mas como eles conseguem nos diferenciar?";
+		npctalk "Silk : There's no distinction between us, but how canthey tell us apart?";
+		next;
+		mes "[Silk]";
+		mes "Será que eu cheiro...? Sniff, sniff.";
+		npctalk "Silk : Do I smell...? Sniff, sniff.";
+		next;
+		mes "[Silk]";
+		mes "Aliás... A cota de hoje finalmente passou da metade.";
+		npctalk "Silk : By the way... Today's quota is finally over half.";
+		next;
+		mes "[Silk]";
+		mes "Isso é tudo graças à sua ajuda... Muito obrigada.";
+		npctalk "Silk : This is all thanks to your help... Thank you so much.";
+		next;
+		mes "[Silk]";
+		mes "Então deixe-me chamar os Pitayas por aqui...";
+		npctalk "Silk : So let me call the Pitayas around here...";
+		close2;
+		if ('lost_farm == 14) {
+			'lost_farm = 15;
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#06") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 16) {
+		mes "[Silk]";
+		mes "Suspiro...";
+		npctalk "Silk : Sigh...";
+		next;
+		mes "[Silk]";
+		mes "De acordo com as instruções de Luina, o que resta agora é...";
+		npctalk "Silk : According to Luina's instructions, what's left now is...";
+		next;
+		mes "[Silk]";
+		mes "Apenas o Gato Chefão...";
+		npctalk "Silk : Only Boss Meow...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Gato Chefão?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Boss Meow?";
+		next;
+		mes "[Silk]";
+		mes "Se a condição para ser fofo é morder, então o gato chefão seria o mais fofo e melhor em morder tanto quanto os outros...";
+		npctalk "Silk : If the condition of being cute is biting, then boss meow would be cutest and better at biting as much as the others..";
+		next;
+		mes "[Silk]";
+		mes "...vai morder bem...?";
+		npctalk "Silk : ...it will bite well...?";
+		next;
+		mes "[Silk]";
+		mes "Para aproveitar sua fofura, estou pronta para dar não apenas meus braços e pernas, mas também meus colegas...!";
+		npctalk "Silk : To enjoy it's cuteness, I'm ready to give it not only arms and legs but also my colleagues...!";
+		next;
+		mes "[Silk]";
+		mes "O que acha... Caro convidado?";
+		npctalk "Silk : How about it... Dear guest?";
+		next;
+		mes "[Silk]";
+		mes "Vamos?";
+		npctalk "Silk : Shall we go?";
+		close2;
+		if ('lost_farm == 16) {
+			'lost_farm = 17;
+			sleep 3000;
+			npctalk "Silk : The rose garden is where Boss Meow usually sleeps, is on the second floor.";
+			sleep 3000;
+			npctalk "Silk : Let's see, Luina's record... I need to wake up a Big Meow. To get there...";
+			sleep 3000;
+			npctalk "Silk : ...so, two Big Meow... Boss Meow and Big Meow have a hierarchy, so they have a specific location for napping before mealtime...";
+			sleep 3000;
+			npctalk "Silk: I guess we just have to soothe one to make them clear the way. Well, if you choose one side, I'll go and... I'll feed the other side...";
+			sleep 3000;
+			npctalk "Silk : That's okay, I have a good eyesight, so if you get there and give me a signal, I'll take care of it! Now, for the closest one, I'll show you the coordinates on the map...";
+			enablenpc instance_npcname("#compass01");
+			viewpointmap 'map_lost$,1,38,253,1,0xFFFF00;
+			viewpointmap 'map_lost$,1,287,253,2,0xFFFF00;
+		}
+		end;
+	}
+	if ('lost_farm == 17) {
+		mes "[Silk]";
+		mes "Você pode escolher um dos locais no mapa e ir.";
+		viewpointmap 'map_lost$,1,38,253,1,0xFFFF00;
+		viewpointmap 'map_lost$,1,287,253,2,0xFFFF00;
+		close;
+	}
+	end;
+}
+
+1@lost,113,168,0	script(DISABLED)	#compass01	HIDDEN_WARP_NPC,30,30,{
+	end;
+OnTouch:
+	disablenpc();
+	viewpointmap 'map_lost$,1,38,253,1,0xFFFF00;
+	viewpointmap 'map_lost$,1,287,253,2,0xFFFF00;
+	end;
+}
+
+1@lost,106,160,3	script(DISABLED)	Wooden Box#06	4_WOODBOX,{
+	npctalk "Silk : Save me!";
+	end;
+OnStart:
+	enablenpc();
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#06") + "::OnMobDead";
+	monster 'map_lost$,108,164,"Berry",20661,1, .@event$;
+	monster 'map_lost$,107,169,"Rain",20660,1, .@event$;
+	monster 'map_lost$,111,173,"Windy",20663,1, .@event$;
+	monster 'map_lost$,115,173,"Poppie",20661,1, .@event$;
+	monster 'map_lost$,119,169,"Lala",20662,1, .@event$;
+	monster 'map_lost$,111,160,"Sasha",20664,1, .@event$;
+	monster 'map_lost$,115,161,"Emerald",20660,1, .@event$;
+	npctalk "Silk : I'm~~~";
+	sleep 1000;
+	npctalk "Silk : ...fine~~~~~";
+	sleep 1000;
+	npctalk "Silk : Well, I'm telling you~~~~~~~~ Ugh!";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#06") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 16;
+		disablenpc();
+		enablenpc instance_npcname("Silk#06");
+		npctalk "Silk : Sigh...", instance_npcname("Silk#06");
+		end;
+	}
+	npctalk "Silk : There " + (.@count == 1 ? "is" : "are") + " " + .@count + " left!";
+	end;
+}
+
+
+// traps left side
+1@lost,38,257,3	script	Big Meow#01	MD_PITAYA_B,{
+	mes "[Gato Chefão]";
+	mes "Ronronar.";
+	next;
+	mes "-- O gato chefão está tirando uma soneca. --";
+	close;
+}
+
+1@lost,38,256,0	script	#cat01warp	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if ('lost_farm == 17) {
+		'lost_farm = 18;
+		npctalk "Big Meow : Grrrrrrr.", instance_npcname("Big Meow#01");
+		disablenpc instance_npcname("Big Meow#01");
+		disablenpc instance_npcname("#cat01warp");
+		disablenpc instance_npcname("#compass01");
+		disablenpc instance_npcname("Silk#06");
+
+		enablenpc instance_npcname("banghae#101");
+		enablenpc instance_npcname("banghae#102");
+		enablenpc instance_npcname("banghae#103");
+		enablenpc instance_npcname("banghae#104");
+		enablenpc instance_npcname("banghae#105");
+		donpcevent instance_npcname("Wooden Box#10") + "::OnStart";
+
+		monster 'map_lost$,38,257,"Big Meow",20662,1, instance_npcname("Wooden Box#10") + "::OnMobDead";
+		end;
+	}
+	npctalk "Big Meow : *Sneeze*";
+	warp 'map_lost$,38,226;
+	end;
+}
+
+1@lost,38,265,0	script(DISABLED)	banghae#101	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[0] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,39,269,"Pearl",20663,1, .@event$;
+	monster 'map_lost$,37,269,"Sapphire",20662,1, .@event$;
+	monster 'map_lost$,36,264,"Ruby",20660,1, .@event$;
+	monster 'map_lost$,38,268,"Diamond",20661,1, .@event$;
+	monster 'map_lost$,36,269,"Emerald",20664,1, .@event$;
+	end;
+}
+
+1@lost,38,296,0	script(DISABLED)	banghae#102	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[1] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,35,296,"Sardonyx",20660,1, .@event$;
+	monster 'map_lost$,40,296,"Opal",20664,1, .@event$;
+	monster 'map_lost$,36,294,"Topaz",20662,1, .@event$;
+	monster 'map_lost$,38,299,"Zircon",20661,1, .@event$;
+	monster 'map_lost$,34,298,"Amethyst",20663,1, .@event$;
+	end;
+}
+
+1@lost,51,317,0	script(DISABLED)	banghae#103	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[2] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,48,319,"Aquamarine",20662,1, .@event$;
+	monster 'map_lost$,51,319,"Garnet",20660,1, .@event$;
+	monster 'map_lost$,45,317,"Iolite",20663,1, .@event$;
+	monster 'map_lost$,49,314,"Citrine",20661,1, .@event$;
+	monster 'map_lost$,49,320,"Peridot",20664,1, .@event$;
+	monster 'map_lost$,39,300,"Sardonyx",20660,1, .@event$;
+	monster 'map_lost$,39,300,"Opal",20664,1, .@event$;
+	monster 'map_lost$,39,300,"Topaz",20662,1, .@event$;
+	monster 'map_lost$,39,300,"Zircon",20661,1, .@event$;
+	monster 'map_lost$,39,300,"Amethyst",20663,1, .@event$;
+	end;
+}
+
+1@lost,92,317,0	script(DISABLED)	banghae#104	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[3] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,92,318,"Rutile",20660,1, .@event$;
+	monster 'map_lost$,95,317,"Aragonite",20662,1, .@event$;
+	monster 'map_lost$,91,316,"Amber",20661,1, .@event$;
+	monster 'map_lost$,90,315,"Tanzanite",20662,1, .@event$;
+	monster 'map_lost$,89,316,"Obsidian",20662,1, .@event$;
+	end;
+}
+
+1@lost,135,317,0	script(DISABLED)	banghae#105	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[4] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,139,317,"Onyx",20660,1, .@event$;
+	monster 'map_lost$,139,318,"Tanzite",20663,1, .@event$;
+	monster 'map_lost$,132,314,"Jasper",20660,1, .@event$;
+	monster 'map_lost$,137,313,"Rodonite",20660,1, .@event$;
+	monster 'map_lost$,133,319,"Jet",20662,1, .@event$;
+	end;
+}
+
+
+// traps right side
+1@lost,286,253,3	duplicate(Big Meow#01)	Big Meow#02	MD_PITAYA_Y
+
+1@lost,287,253,0	script	#cat02warp	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if ('lost_farm == 17) {
+		'lost_farm = 18;
+		npctalk "Big Meow : Grrrrrrr.", instance_npcname("Big Meow#02");
+		disablenpc instance_npcname("Big Meow#02");
+		disablenpc instance_npcname("#cat02warp");
+		disablenpc instance_npcname("#compass01");
+		disablenpc instance_npcname("Silk#06");
+
+		enablenpc instance_npcname("banghae#201");
+		enablenpc instance_npcname("banghae#202");
+		enablenpc instance_npcname("banghae#203");
+		enablenpc instance_npcname("banghae#204");
+		enablenpc instance_npcname("banghae#205");
+		donpcevent instance_npcname("Wooden Box#10") + "::OnStart";
+
+		monster 'map_lost$,286,253,"Big Meow",20661,1, instance_npcname("Wooden Box#10") + "::OnMobDead";
+		end;
+	}
+	npctalk "Big Meow : *Sneeze*";
+	warp 'map_lost$,287,226;
+	end;
+}
+
+1@lost,286,267,0	script(DISABLED)	banghae#201	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[0] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,283,265,"Pearl",20663,1, .@event$;
+	monster 'map_lost$,287,267,"Sapphire",20662,1, .@event$;
+	monster 'map_lost$,288,268,"Ruby",20660,1, .@event$;
+	monster 'map_lost$,290,265,"Diamond",20661,1, .@event$;
+	monster 'map_lost$,288,262,"Emerald",20664,1, .@event$;
+	end;
+}
+
+1@lost,287,296,0	script(DISABLED)	banghae#202	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[1] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,287,299,"Sardonyx",20660,1, .@event$;
+	monster 'map_lost$,289,298,"Opal",20664,1, .@event$;
+	monster 'map_lost$,284,295,"Topaz",20662,1, .@event$;
+	monster 'map_lost$,290,291,"Zircon",20661,1, .@event$;
+	monster 'map_lost$,287,293,"Amethyst",20663,1, .@event$;
+	end;
+}
+
+1@lost,270,317,0	script(DISABLED)	banghae#203	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[2] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,274,318,"Aquamarine",20662,1, .@event$;
+	monster 'map_lost$,272,316,"Garnet",20660,1, .@event$;
+	monster 'map_lost$,279,318,"Iolite",20663,1, .@event$;
+	monster 'map_lost$,278,316,"Citrine",20661,1, .@event$;
+	monster 'map_lost$,275,315,"Peridot",20664,1, .@event$;
+	end;
+}
+
+1@lost,232,317,0	script(DISABLED)	banghae#204	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[3] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,236,318,"Rutile",20660,1, .@event$;
+	monster 'map_lost$,234,318,"Aragonite",20662,1, .@event$;
+	monster 'map_lost$,241,316,"Amber",20661,1, .@event$;
+	monster 'map_lost$,241,315,"Tanzanite",20662,1, .@event$;
+	monster 'map_lost$,239,315,"Obsidian",20662,1, .@event$;
+	end;
+}
+
+1@lost,195,317,0	script(DISABLED)	banghae#205	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[4] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,201,317,"Onyx",20662,1, .@event$;
+	monster 'map_lost$,199,315,"Tanzite",20663,1, .@event$;
+	monster 'map_lost$,201,314,"Jasper",20660,1, .@event$;
+	monster 'map_lost$,202,317,"Rodonite",20660,1, .@event$;
+	monster 'map_lost$,202,318,"Jet",20662,1, .@event$;
+	end;
+}
+
+
+// boss
+1@lost,161,315,3	script(DISABLED)	Wooden Box#10	4_WOODBOX,{
+	if ('lost_farm < 19) {
+		npctalk "Silk : You must play with all the Pitayas on your way here.";
+		end;
+	}
+	if (!is_party_leader()) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 19) {
+		mes "[Silk]";
+		mes ".... venha por aqui.";
+		npctalk "Silk : .... come this way.";
+		next;
+		mes "[Silk]";
+		mes "Gato Chefão...!";
+		npctalk "Silk : Boss Meow...!";
+		close2;
+		disablenpc();
+		enablenpc instance_npcname("Wooden Box#10-1");
+		sleep 2000;
+		if ('lost_farm == 19) {
+			'lost_farm = 20;
+			donpcevent instance_npcname("#1_lost_boss") + "::OnBossSummon";
+		}
+		end;
+	}
+	if ('lost_farm == 21) {
+		mes "[Silk]";
+		mes "Convidado... Huh...";
+		npctalk "Silk : Guest... Huh...";
+		next;
+		mes "[Silk]";
+		mes "Isso é... não é medo, é mais como ressentimento...";
+		npctalk "Silk : This is... it's not fear, it's more like resentment...";
+		next;
+		mes "[Silk]";
+		mes "Somos todos iguais, mas não consigo fazer o mesmo trabalho que Luina...";
+		npctalk "Silk : We are all the same, but I can't do the same job as Luina...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Saia por enquanto.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Come out for now.";
+		close2;
+		disablenpc();
+		enablenpc instance_npcname("Silk#10");
+		npctalk "Silk : Yah!", instance_npcname("Silk#10");
+		end;
+	}
+	end;
+
+OnStart:
+	enablenpc();
+	sleep 3000;
+	mapannounce 'map_lost$, "Silk : Ahhhhhhhhhhhh! Save me!!",bc_yellow;
+	sleep 3000;
+	mapannounce 'map_lost$, "Silk : I was successful!!!!!!",bc_yellow;
+	sleep 3000;
+	mapannounce 'map_lost$, "Silk : I'll wait in front of the Boss Meow!",bc_yellow;
+	end;
+
+OnMobDead:
+	if ('lost_farm != 18 || 'banghae[0] == 0 || 'banghae[1] == 0 || 'banghae[2] == 0 || 'banghae[3] == 0 || 'banghae[4] == 0)
+		end;
+	if (mobcount('map_lost$, instance_npcname("Wooden Box#10") + "::OnMobDead") == 0) {
+		'lost_farm = 19;
+		npctalk "Silk : Shh.";
+	}
+	end;
+}
+
+1@lost,161,315,3	script(DISABLED)	Wooden Box#10-1	4_WOODBOX,{
+	switch (rand(1,3)) {
+	case 1:
+		npctalk "Silk : He-Help me~~~~!";
+		break;
+	case 2:
+		npctalk "Silk : Ca-calm Boss Meow down~~~";
+		break;
+	case 3:
+		npctalk "Silk : Here~~ You can have my arm~~";
+		break;
+	}
+	end;
+}
+
+1@lost,161,315,3	script(DISABLED)	Silk#10	4_EP17_BASKET,{
+	if (!is_party_leader() && 'lost_farm < 22) {
+		mes "[Silk]";
+		mes "Vou falar com o líder dos convidados!";
+		mes "Por favor, traga o líder aqui!";
+		close;
+	}
+	if ('lost_farm == 21) {
+		mes "[Silk]";
+		mes "As peças que compõem cada um são diferentes, então para que podemos usar isso...?";
+		next;
+		mes "[Silk]";
+		mes "Então esta é a única maneira de colher no futuro...?";
+		next;
+		mes "[Silk]";
+		mes "Bem, não posso evitar! Os convidados se divertiram?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Você se divertiu?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Did you have fun?";
+		next;
+		mes "[Silk]";
+		mes "Sim! Acabou! O trabalho não deveria ser divertido quando termina?";
+		next;
+		mes "[Silk]";
+		mes "Se você me der a cauda de Pitaya que coletou, a experiência de fazenda de hoje termina! Vamos, vamos lá fora!";
+		if ('lost_farm == 21)
+			'lost_farm = 22;
+		close;
+	}
+	if (isbegin_quest(8588) == 1) {
+		if (checkweight(1000103,8) == 0) {	// (custom)
+			mes "^008800Espere um segundo!!";
+			mes "Você não pode receber mais itens porque está carregando muitos itens. Por favor, tente novamente depois de esvaziar um pouco.^000000";
+			close;
+		}
+		mes "[Silk]";
+		mes "Vamos ver... Quantas você coletou?";
+		next;
+		setarray .@item[0],1000093,1000094,1000095,1000096,1000097;
+		for ( .@i = 0; .@i < 5; ++.@i ) {
+			if (countitem(.@item[.@i]) > 0) {
+				.@count += countitem(.@item[.@i]);
+				delitem .@item[.@i], countitem(.@item[.@i]);
+			}
+		}
+		if (.@count >= 20)
+			.@reward = 4;
+		else
+			.@reward = 2;
+		if (countitem(1000098) > 0) {
+			delitem 1000098, countitem(1000098);
+			.@reward += 2;
+		}
+		mes "[Silk]";
+		mes "The total is " + .@count + ".";
+		mes "Obrigada pelo seu trabalho duro!";
+		erasequest 8588;
+		getitem 1000103, .@reward;
+		next;
+	}
+	mes "[Silk]";
+	mes "Então... você quer sair?";
+	next;
+	if (select( "Go out.", "Don't go out." ) == 2) {
+		mes "[Silk]";
+		mes "Você está esperando por seus colegas?";
+		mes "Vou esperar por você, então, por favor, me avise quando quiser sair~";
+		close;
+	}
+	if (isbegin_quest(8589) == 0) {	// first time entering the instance
+		mes "[Silk]";
+		mes "Luina... Terminei o relatório de extensão, por favor, diga algo ao convidado depois disso!";
+		mes "Fiz um ótimo trabalho... *soluço*";
+		setquest 8589;
+	}
+	mes "Até a próxima!";
+	close2;
+	warp "ba_maison",308,202;
+	end;
+}
+
+
+1@lost,1,1,0	script	#1_lost_boss	HIDDEN_WARP_NPC,{
+	end;
+OnBossSummon:
+	monster 'map_lost$,167,318,"Boss Meow",20659,1, instance_npcname("#1_lost_boss") + "::OnBossKill";
+	donpcevent instance_npcname("#1_lost_boss") + "::OnSlaveSummon";
+	enablenpc instance_npcname("bossbang#301");
+	enablenpc instance_npcname("bossbang#302");
+	enablenpc instance_npcname("bossbang#401");
+	enablenpc instance_npcname("bossbang#402");
+	end;
+OnBossKill:
+	killmonster 'map_lost$, instance_npcname("#1_lost_boss") + "::OnBossKill";
+	if ('lost_farm == 20)
+		'lost_farm = 21;
+	disablenpc instance_npcname("Wooden Box#10-1");
+	disablenpc instance_npcname("bossbang#301");
+	disablenpc instance_npcname("bossbang#302");
+	disablenpc instance_npcname("bossbang#401");
+	disablenpc instance_npcname("bossbang#402");
+	enablenpc instance_npcname("Wooden Box#10");
+	end;
+OnSlaveSummon:
+	// note: mobs not killed when the boss dies
+	monster 'map_lost$,157,316,"Mora",20661,1;
+	monster 'map_lost$,167,314,"Max",20664,1;
+	monster 'map_lost$,166,319,"Cache",20664,1;
+	sleep 3000;
+	monster 'map_lost$,172,318,"Sammy",20655,1;
+	monster 'map_lost$,172,325,"Lightning",20656,1;
+	monster 'map_lost$,169,329,"Daisy",20657,1;
+	monster 'map_lost$,156,329,"Rudolf",20658,1;
+	monster 'map_lost$,155,318,"Happy",20654,1;
+	sleep 3000;
+	monster 'map_lost$,156,329,"Joy",20658,1;
+	monster 'map_lost$,169,329,"Glory",20657,1;
+	monster 'map_lost$,150,323,"King Eyes",20664,1;
+	monster 'map_lost$,161,332,"Elizabeth",20656,1;
+	sleep 6000;
+	monster 'map_lost$,150,320,"Roro",20660,1;
+	monster 'map_lost$,152,314,"Toto",20661,1;
+	monster 'map_lost$,166,327,"Dough",20664,1;
+	monster 'map_lost$,174,318,"Adonis",20660,1;
+	monster 'map_lost$,172,313,"Coco",20662,1;
+	end;
+}
+
+1@lost,135,317,0	script(DISABLED)	bossbang#301	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:	// note: mobs not killed when the boss dies
+	monster 'map_lost$,135,319,"Onyx",20656,1;
+	monster 'map_lost$,135,316,"Tanzanite","G_PITAYA_V",1;
+	monster 'map_lost$,131,313,"Jasper","G_PITAYA_R",1;
+	monster 'map_lost$,137,315,"Rhodonite","G_PITAYA_R",1;
+	monster 'map_lost$,133,319,"Jet",20656,1;
+	end;
+}
+
+1@lost,129,317,0	script(DISABLED)	bossbang#302	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	monster 'map_lost$,129,316,"Rutile","G_PITAYA_R",1;
+	monster 'map_lost$,132,317,"Aragonite",20656,1;
+	monster 'map_lost$,134,316,"Amber","G_PITAYA_Y",1;
+	monster 'map_lost$,130,316,"Joysite",20656,1;
+	monster 'map_lost$,131,316,"Obsidian",20656,1;
+	end;
+}
+
+1@lost,195,317,0	script(DISABLED)	bossbang#401	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	monster 'map_lost$,197,313,"Onyx",20656,1;
+	monster 'map_lost$,194,315,"Tanzanite","G_PITAYA_V",1;
+	monster 'map_lost$,201,313,"Jasper","G_PITAYA_R",1;
+	monster 'map_lost$,200,315,"Rhodonite","G_PITAYA_R",1;
+	monster 'map_lost$,202,318,"Jet",20656,1;
+	end;
+}
+
+1@lost,201,317,0	script(DISABLED)	bossbang#402	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	monster 'map_lost$,199,316,"Rutile","G_PITAYA_R",1;
+	monster 'map_lost$,203,317,"Aragonite",20656,1;
+	monster 'map_lost$,204,316,"Amber","G_PITAYA_Y",1;
+	monster 'map_lost$,199,315,"Joysite",20656,1;
+	monster 'map_lost$,193,315,"Obsidian",20656,1;
+	end;
+}
