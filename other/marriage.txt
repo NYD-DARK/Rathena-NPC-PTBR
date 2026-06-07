@@ -1,0 +1,1000 @@
+//===== rAthena Script ======================================= 
+//= Player Marriage
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Official Marriage script.
+//= Added isloggedin() check, even though Aegis doesn't do it.
+//= Currently does not support same-Sex marriages.
+//= Old script located in: npc/custom/marriage.txt
+//= - Variable in use: wedding_sign (max 1)
+//= - Variable in use: $@wedding (max 1) 
+//= - Variable in use: $@wed_groom$ $@wed_bride$
+//===== Additional Comments: ================================= 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Fixed a missing ")" [L0ne_W0lf]
+//= 1.2 Corrected duration of Wedding status. [L0ne_W0lf]
+//= 1.3 Changed permanent global variables to temporary ones. [Euphy]
+//=     Added GM NPCs (commented).
+//= 1.4 Added GM management function. [Euphy]
+//= 1.5 Added Marriage Covenant item and VIP features. [Euphy]
+//============================================================
+
+prt_church,97,100,4	script	Wedding Staff#w	71,{
+	cutin "wedding_marry01",2;
+	if (countitem(6026) == 0) {
+
+		// If the VIP system is enabled:
+		// - Non-VIP players must use a Marriage Covenant to get married.
+		// - VIP players may either pay the Zeny fee or use a Marriage Covenant.
+		if (VIP_SCRIPT && !vip_status(VIP_STATUS_ACTIVE)) {
+			mes "[Marry Happy]";
+			mes "Desculpe, mas você não pode se casar agora.";
+			mes "O casamento está disponível apenas para jogadores assinantes.";
+			mes "Mas se você tiver um ^FF0000Contrato de Casamento^000000, então você poderá se casar!";
+			goto L_End;
+		}
+
+	} else
+		set .@covenant,1;
+	if (Upper == 2) {
+		mes "[Marry Happy]";
+		mes "Olá~";
+		mes "Meu nome é Marry Happy";
+		mes "e estou aqui para lhe fornecer";
+		mes "informações relacionadas ao";
+		mes "casamento. Agora, você tem";
+		mes "alguma dúvida?";
+		next;
+		if (select("I want to get married.:I don't need your help!") == 1) {
+			mes "[Marry Happy]";
+			mes "Oh, me desculpe, mas";
+			mes "personagens adotados";
+			mes "não têm permissão para se";
+			mes "casar. Por enquanto, por que";
+			mes "você não aproveita os prazeres";
+			mes "simples da infância?";
+			goto L_End;
+		}
+		mes "[Marry Happy]";
+		mes "Oh, é claro que";
+		mes "não! Crianças pequenas";
+		mes "não podem se casar-- existem";
+		mes "muitas leis contra";
+		mes "isso~ Você não é a coisinha";
+		mes "mais adorável que existe?";
+		goto L_End;
+	}
+	mes "[Marry Happy]";
+	mes "O casamento é a bela";
+	mes "união de duas almas que";
+	mes "escolheram ficar juntas para sempre,";
+	mes "para compartilhar suas alegrias e vidas.";
+	mes "Existe alguém especial";
+	mes "assim em sua vida?";
+	next;
+	switch(select("Ask about Wedding Ceremony:Ask about Procedure:Apply for Wedding:We are the Invincible Single Army!")) {
+	case 1:
+		mes "[Marry Happy]";
+		mes "O sábio e benevolente";
+		mes "Rei Tristram III costumava";
+		mes "realizar cerimônias de casamento,";
+		mes "mas ele não é mais capaz de fazer";
+		mes "isso por causa de seus deveres reais";
+		mes "e sua agenda frenética.";
+		next;
+		mes "[Marry Happy]";
+		mes "Bispo Vomars, o bispo";
+		mes "do amor, é agora o oficial";
+		mes "da cerimônia de casamento.";
+		mes "Ele é verdadeiramente um tesouro para o";
+		mes "Reino de Rune-Midgard.";
+		next;
+		mes "[Marry Happy]";
+		mes "Quando você se casa com alguém,";
+		mes "é para o resto da sua vida, então pense cuidadosamente antes de fazer ou";
+		mes "aceitar uma proposta de casamento.";
+		mes "Tenha em mente que um homem só pode";
+		mes "se casar com uma mulher e vice-versa.";
+		next;
+		mes "[Marry Happy]";
+		mes "Se você tiver sorte o suficiente para";
+		mes "encontrar alguém com quem você realmente";
+		mes "queira passar o resto da sua";
+		mes "vida, você pode querer fazer o pedido. Espero que todos";
+		mes "encontrem seu par perfeito~";
+		break;
+	case 2:
+		mes "[Marry Happy]";
+		mes "A primeira parte do";
+		mes "procedimento de casamento é";
+		mes "completar a inscrição.";
+		mes "Uma vez que a noiva e o noivo";
+		mes "tiverem terminado de se inscrever, eles";
+		mes "devem formar um grupo de dois.";
+		next;
+		mes "[Marry Happy]";
+		mes "Após formar um grupo de dois,";
+		mes "o casal deve então falar com";
+		mes "o Bispo Vomars. O noivo";
+		mes "fala primeiro e deve dizer o";
+		mes "nome exato da noiva ao Bispo. Caso contrário, a cerimônia será interrompida.";
+		next;
+		mes "[Marry Happy]";
+		mes "Depois, a noiva";
+		mes "falará com o Bispo e dirá";
+		mes "a ele o nome do seu noivo.";
+		mes "Se esses nomes forem corretamente";
+		mes "ditos ao Bispo, eles";
+		mes "poderão trocar alianças.";
+		next;
+		mes "[Marry Happy]";
+		mes "Uma vez que as alianças de casamento são";
+		mes "trocadas, o casal está eternamente unido em matrimônio. É claro,";
+		mes "antes deste ponto, há muitas chances de mudar de ideia, então...";
+		next;
+		mes "[Marry Happy]";
+		mes "Se houver muitos";
+		mes "casais que desejam se";
+		mes "casar ao mesmo tempo, por favor";
+		mes "formem uma fila e falem com o Bispo";
+		mes "Vomars em ordem, já que apenas um casal pode se casar por vez.";
+		next;
+		mes "[Marry Happy]";
+		mes "Finalmente, certifique-se de dizer";
+		mes "ao Bispo Vomars o nome exato";
+		mes "do seu parceiro sem perder muito tempo. Se demorar demais,";
+		mes "a cerimônia irá parar automaticamente e você terá que tentar novamente.";
+		next;
+		mes "[Marry Happy]";
+		mes "As noivas precisam lembrar";
+		mes "que elas só têm 3 minutos";
+		mes "para terminar de falar com o Bispo";
+		mes "Vomars depois que seus noivos";
+		mes "terminarem de falar com ele.";
+		next;
+		if (select("Thanks, that helps a lot!:Easiest way to say my partner's name?") == 1) {
+			mes "[Marry Happy]";
+			mes "Bem, estou aqui para ajudar";
+			mes "os casamentos a prosseguirem o mais";
+			mes "suavemente possível.";
+			mes "Se houve algo";
+			mes "que você não entendeu,";
+			mes "sinta-se à vontade para me perguntar novamente.";
+			goto L_End;
+		}
+		mes "[Marry Happy]";
+		mes "A maneira mais fácil de escrever";
+		mes "o nome do seu parceiro para o";
+		mes "bispo é enviar uma mensagem privada";
+		mes "para seu parceiro, e";
+		mes "então clicar com o botão esquerdo na seção de nome à esquerda do prompt de chat.";
+		next;
+		mes "[Marry Happy]";
+		mes "Pressione as teclas ''Ctrl'' e ''C''";
+		mes "para copiar o nome. Então,";
+		mes "você pode colar o nome no";
+		mes "prompt de entrada pressionando";
+		mes "as teclas ''Insert'' e ''Shift''. Parece fácil, certo?";
+		next;
+		mes "[Marry Happy]";
+		mes "Muito bem, agora vamos tentar";
+		mes "isso. Pratique me dizendo o";
+		mes "nome do seu parceiro usando";
+		mes "o método que acabei de descrever.";
+		next;
+		input .@partner$;
+		mes "[Marry Happy]";
+		mes "Muito bem, depois que você";
+		mes "decidir se casar,";
+		mes "volte até mim e";
+		mes "envie sua inscrição.";
+		mes "Vejo você mais tarde, aventureiro~";
+		break;
+	case 3:
+		cutin "wedding_marry02",2;
+		if (VIP_SCRIPT) {
+			mes "[Marry Happy]";
+			mes "^FF0000Espere!^000000";
+			mes "^FF0000Se a sua conta não for premium, você deve ter um Contrato de Casamento para se casar.^000000";
+			mes "^FF0000Por favor, verifique o estado atual da sua conta e a do seu amado(a) antes de se registrar para um casamento.^000000";
+			next;
+		}
+		if (Sex == SEX_MALE) {
+			mes "[Marry Happy]";
+			mes "Então você gostaria de se casar?";
+			mes "Como noivo, você precisa preparar";
+			if (.@covenant) {
+				mes "^3377FF1 Smoking^000000 e me entregar o seu ^3377FF1 Contrato de Casamento^000000.";
+				mes "Noivas precisam fornecer seus próprios Vestidos de Casamento e pagar uma taxa";
+				mes "de 1.200.000 zenys ou também trazer um Contrato de Casamento.";
+			} else {
+				mes "^3377FF1 Smoking^000000 e pagar ^3377FF1.300.000 zenys^000000.";
+				mes "Noivas precisam fornecer seus próprios Vestidos de Casamento e pagar uma taxa";
+				mes "de 1.200.000 zenys.";
+			}
+		} else {
+			mes "[Marry Happy]";
+			mes "Então você gostaria de se casar?";
+			mes "Como noiva, você precisa preparar";
+			if (.@covenant) {
+				mes "^3377FF1 Vestido de Casamento^000000 e me entregar o seu ^3377FFContrato de Casamento^000000.";
+				mes "Noivos precisam trazer um Smoking e pagar";
+				mes "1.300.000 zenys ou também trazer um Contrato de Casamento.";
+			} else {
+				mes "^3377FF1 Vestido de Casamento^000000 e pagar uma taxa de 1.200.000 zenys. Noivos precisam";
+				mes "trazer um Smoking e pagar 1.300.000 zenys para se casar.";
+			}
+		}
+		next;
+		mes "[Marry Happy]";
+		mes "Noivas e noivos também precisam";
+		mes "ter ^3377FF1 Anel de Diamante^000000 para ser";
+		mes "trocado com seus parceiros.";
+		mes "Você precisará de todos esses itens";
+		mes "preparados quando você enviar sua";
+		mes "inscrição para a cerimônia de casamento.";
+		next;
+		mes "[Marry Happy]";
+		mes "O futuro noivo e";
+		mes "noiva devem ambos completar";
+		mes "o processo de inscrição antes";
+		mes "que o casamento possa ocorrer.";
+		mes "Agora, você gostaria de";
+		mes "se inscrever para o casamento?";
+		next;
+		if (select("Yes:No") == 1) {
+			if (getpartnerid()) {
+				cutin "wedding_marry02",2;
+				mes "[Marry Happy]";
+				mes "Sinto muito, mas você não pode";
+				mes "se inscrever para outro casamento!";
+				mes "Eu não posso permitir que você traia";
+				mes "seu cônjuge assim, e";
+				mes "além disso, a poligamia não é";
+				mes "legal aqui em Rune-Midgard.";
+				break;
+			}
+			else if (wedding_sign == 1) {
+				mes "[Marry Happy]";
+				mes "Você já não";
+				mes "completou a inscrição?";
+				mes "Hmm, certifique-se de que seu";
+				mes "parceiro também terminou o";
+				mes "processo de inscrição, e";
+				mes "então fale com o Bispo Vomars.";
+				break;
+			}
+			else if (BaseLevel < 45) {
+				mes "[Marry Happy]";
+				mes "Hmm, você precisa ser";
+				mes "forte o suficiente para proteger";
+				mes "aquela pessoa que você ama antes";
+				mes "de poder considerar o casamento.";
+				mes "Depois que você ficar mais forte,";
+				mes "venha falar comigo novamente.";
+				goto L_End;
+			}
+			else if (countitem(2613) < 1) {
+				mes "[Marry Happy]";
+				mes "Mm? Você esqueceu de";
+				mes "trazer o Anel de Diamante";
+				mes "para trocar com seu parceiro";
+				mes "durante a cerimônia de casamento?";
+				mes "Procure com cuidado e volte";
+				mes "depois que encontrá-lo, ok?";
+				goto L_End;
+			}
+			else if (Sex == SEX_FEMALE) {
+				if (countitem(6026) == 0 && Zeny < 1200000) {
+					mes "[Marry Happy]";
+					mes "Sinto muito, mas todas as noivas";
+					mes "devem pagar a taxa de 1.200.000";
+					mes "zenys ou trazer um Contrato de";
+					mes "Casamento para prosseguir com a";
+					mes "cerimônia de casamento. Talvez";
+					mes "você possa pedir ao seu parceiro";
+					mes "para ajudá-lo com os fundos?";
+					goto L_End;
+				}
+				else if (countitem(2338) < 1) {
+					mes "[Marry Happy]";
+					mes "Oh, querida, você esqueceu";
+					mes "seu Vestido de Casamento?";
+					mes "Depresse-se e encontre-o, então";
+					mes "traga-o até mim-- você";
+					mes "precisa absolutamente dele";
+					mes "para o casamento!";
+					goto L_End;
+				}
+			}
+			else if (Sex == SEX_MALE) {
+				if (countitem(6026) == 0 && Zeny < 1300000) {
+					mes "[Marry Happy]";
+					mes "Sinto muito, mas você não";
+					mes "tem os 1.300.000 zenys";
+					mes "ou o Contrato de Casamento";
+					mes "que todos os noivos devem pagar";
+					mes "pela cerimônia de casamento.";
+					mes "Você perdeu seu dinheiro?";
+					goto L_End;
+				}
+				else if (countitem(7170) < 1) {
+					mes "[Marry Happy]";
+					mes "Onde está seu Smoking?";
+					mes "Você absolutamente tem que";
+					mes "usá-lo durante a cerimônia";
+					mes "de casamento! Encontre-o, traga-o";
+					mes "para mim, e então podemos finalmente";
+					mes "começar o casamento, ok?";
+					goto L_End;
+				}
+			}
+			mes "[Marry Happy]";
+			mes "Bem, parece que você";
+			mes "tem tudo pronto.";
+			mes "Embora eu não tenha certeza de quem";
+			mes "é seu parceiro, deixe-me ser";
+			mes "a primeira a parabenizá-lo";
+			mes "pelo seu próximo casamento~";
+			next;
+			mes "[Marry Happy]";
+			mes "Agora, vamos começar a";
+			mes "inscrição. Por favor, escreva";
+			mes "o seu nome exato aqui.";
+			next;
+			while(1) {
+				input .@name$;
+				if (.@name$ != strcharinfo(0)) {
+					mes "[Marry Happy]";
+					mes "Hmmm, você tem que escrever";
+					mes "o seu nome exatamente como";
+					mes "ele é exibido. Talvez você";
+					mes "precise copiar e colar?";
+					mes "De qualquer forma, vamos tentar de novo.";
+					next;
+				}
+				else 
+					break;
+			}
+			mes "[Marry Happy]";
+			mes "Ótimo, parece que";
+			mes "terminamos sua inscrição.";
+			mes "Lembre-se de que você precisará";
+			mes "dizer ao Bispo Vomars o nome";
+			mes "exato do seu parceiro quando";
+			mes "você falar com ele mais tarde, ok?";
+			next;
+			mes "[Marry Happy]";
+			mes "Quando seu parceiro";
+			mes "terminar o processo de";
+			mes "inscrição, ambos devem";
+			mes "falar com o Bispo para começar";
+			mes "a cerimônia de casamento.";
+			emotion ET_THROB;
+			next;
+			mes "[Marry Happy]";
+			if (Sex == SEX_FEMALE) {
+				mes "Como você é a noiva,";
+				mes "você precisa esperar o";
+				mes "noivo falar com o Bispo";
+				mes "Vomars primeiro. Quando ele";
+				mes "terminar, será sua vez";
+				mes "de falar com o Bispo Vomars.";
+				if (.@covenant)
+					delitem 6026,1; //Marriage_Covenant
+				else
+					set Zeny, Zeny-1200000;
+				delitem 2338,1; //Wedding_Dress
+			}
+			else {
+				mes "Como você é o noivo,";
+				mes "você precisa falar com o";
+				mes "Bispo primeiro. Quando você";
+				mes "terminar, será a vez da sua";
+				mes "noiva de falar com o";
+				mes "Bispo Vomars.";
+				if (.@covenant)
+					delitem 6026,1; //Marriage_Covenant
+				else
+					set Zeny, Zeny-1300000;
+				delitem 7170,1; //Tuxedo
+			}
+			delitem 2613,1; //Diamond_Ring
+			set wedding_sign,1;
+			goto L_End;
+		}
+		mes "[Marry Happy]";
+		mes "Não...?";
+		mes "Bem, quando você";
+		mes "estiver pronto para o casamento,";
+		mes "sinta-se à vontade para voltar";
+		mes "até mim para que você possa se inscrever,";
+		mes "ok? Tenha um bom dia~";
+		break;
+	case 4:
+		cutin "wedding_marry02",2;
+		donpcevent "Single Army#Prontera::OnEnable";
+		donpcevent "Single Army#Geffen::OnEnable";
+		donpcevent "Single Army#Morocc::OnEnable";
+		donpcevent "Single Army#Payon::OnEnable";
+		donpcevent "Single Army#Amatsu::OnEnable";
+		donpcevent "Single Army#Kunlun::OnEnable";
+		emotion ET_HUK;
+		mes "[Exército dos Solteiros]";
+		mes "^CC9933Você tem que refinar";
+		mes "itens por conta própria para";
+		mes "fazer ótimos equipamentos!^000000";
+		emotion ET_ROCK, getnpcid(0, "Single Army#Prontera");
+		next;
+		mes "[Exército dos Solteiros]";
+		mes "^330099É um desperdício";
+		mes "formar grupos em";
+		mes "masmorras! Eu posso";
+		mes "me virar sozinho!^000000";
+		emotion ET_ROCK, getnpcid(0, "Single Army#Geffen");
+		next;
+		mes "[Exército dos Solteiros]";
+		mes "^666666Droga, eu treinei";
+		mes "sozinho desde";
+		mes "o nascimento, durante todo";
+		mes "o caminho até minha mudança de classe!^000000";
+		emotion ET_ROCK, getnpcid(0, "Single Army#Morocc");
+		next;
+		mes "[Exército dos Solteiros]";
+		mes "^666600EU ESCOLHO passar";
+		mes "o Natal sozinho...";
+		mes "jogando paciência e";
+		mes "fazendo palavras cruzadas!^000000";
+		emotion ET_ROCK, getnpcid(0, "Single Army#Payon");
+		next;
+		mes "[Exército dos Solteiros]";
+		mes "^CC9966As mulheres podem quebrar meu";
+		mes "espírito, mas elas nunca";
+		mes "tomarão... minha LIBERDADE!^000000";
+		emotion ET_ROCK, getnpcid(0, "Single Army#Amatsu");
+		next;
+		mes "[Exército dos Solteiros]";
+		mes "^669900...Nós somos os livres! Nós somos";
+		mes "o Invencível Exército dos Solteiros!^000000";
+		emotion ET_ROCK, getnpcid(0, "Single Army#Kunlun");
+		close2;
+		cutin "wedding_marry01",255;
+		emotion ET_SWEAT;
+		donpcevent "Single Army#Prontera::OnInit";
+		donpcevent "Single Army#Geffen::OnInit";
+		donpcevent "Single Army#Morocc::OnInit";
+		donpcevent "Single Army#Payon::OnInit";
+		donpcevent "Single Army#Amatsu::OnInit";
+		donpcevent "Single Army#Kunlun::OnInit";
+		end;
+	}
+	close2;
+	cutin "wedding_marry01",255;
+	end;
+
+L_End:
+	close2;
+	cutin "",255;
+	end;
+}
+
+prt_church,97,102,0	script	Single Army#Prontera	105,{
+	mes "[Exército dos Solteiros]";
+	mes "^CC9933Você tem que refinar";
+	mes "itens por conta própria para";
+	mes "fazer ótimos equipamentos!^000000";
+	close;
+
+OnInit:
+	hideonnpc "Single Army#Prontera";
+	end;
+
+OnEnable:
+	hideoffnpc "Single Army#Prontera";
+	emotion ET_GO;
+	end;
+}
+
+prt_church,98,102,0	script	Single Army#Geffen	705,{
+	mes "[Exército dos Solteiros]";
+	mes "^330099É um desperdício";
+	mes "formar grupos em";
+	mes "masmorras! Eu posso";
+	mes "me virar sozinho!^000000";
+	close;
+
+OnInit:
+	hideonnpc "Single Army#Geffen";
+	end;
+
+OnEnable:
+	hideoffnpc "Single Army#Geffen";
+	emotion ET_GO;
+	end;
+}
+
+prt_church,99,102,0	script	Single Army#Morocc	707,{
+	mes "[Exército dos Solteiros]";
+	mes "^666666Droga, eu treinei";
+	mes "sozinho desde";
+	mes "o nascimento, durante todo";
+	mes "o caminho até minha mudança de classe!^000000";
+	close;
+
+OnInit:
+	hideonnpc "Single Army#Morocc";
+	end;
+
+OnEnable:
+	hideoffnpc "Single Army#Morocc";
+	emotion ET_GO;
+	end;
+}
+
+prt_church,100,102,0	script	Single Army#Payon	708,{
+	mes "[Exército dos Solteiros]";
+	mes "^666600EU ESCOLHO passar";
+	mes "o Natal sozinho...";
+	mes "jogando paciência e";
+	mes "fazendo palavras cruzadas!^000000";
+	close;
+
+OnInit:
+	hideonnpc "Single Army#Payon";
+	end;
+
+OnEnable:
+	hideoffnpc "Single Army#Payon";
+	emotion ET_GO;
+	end;
+}
+
+prt_church,101,102,0	script	Single Army#Amatsu	767,{
+	mes "[Exército dos Solteiros]";
+	mes "^CC9966As mulheres podem quebrar meu";
+	mes "espírito, mas elas nunca";
+	mes "tomarão... minha LIBERDADE!^000000";
+	close;
+
+OnInit:
+	hideonnpc "Single Army#Amatsu";
+	end;
+
+OnEnable:
+	hideoffnpc "Single Army#Amatsu";
+	emotion ET_GO;
+	end;
+}
+
+prt_church,102,102,0	script	Single Army#Kunlun	780,{
+	mes "[Exército dos Solteiros]";
+	mes "^669900...Nós somos os livres! Nós somos";
+	mes "o Invencível Exército dos Solteiros!^000000";
+	close;
+
+OnInit:
+	hideonnpc "Single Army#Kunlun";
+	end;
+
+OnEnable:
+	hideoffnpc "Single Army#Kunlun";
+	emotion ET_GO;
+	end;
+}
+
+prt_church,100,128,4	script	Bishop#w	60,{
+	cutin "wedding_bomars01",2;
+	if (Upper == 2) {
+		mes "[Vomars]";
+		mes "Saudações, criança.";
+		mes "Você está perdida? Hmmm.";
+		mes "Você sabe onde sua";
+		mes "mamãe e papai estão?";
+		close2;
+		cutin "wedding_bomars01",255;
+		end;
+	}
+
+	if (!getpartnerid()) {
+		if (!$@wedding) {
+			if (wedding_sign == 1) {
+				getpartymember(getcharid(1));
+				set .@partymembercount,$@partymembercount;
+				if (.@partymembercount == 2) {
+					if (Sex == SEX_MALE) {
+						set $@wedding,1;
+						initnpctimer;
+						mes "[Vomars]";
+						mes "Jovens amantes, por favor";
+						mes "lembrem-se deste momento para";
+						mes "o resto de suas vidas. Que o futuro de vocês seja abençoado com paz";
+						mes "e alegria. Que o amor que vocês compartilham";
+						mes "cresça a cada dia que passa.";
+						next;
+						mapannounce "prt_church","It's the marriage proposal from the groom, Mr. " + strcharinfo(0) + "...",bc_map;
+						mes "[Vomars]";
+						mes "Até o fim do";
+						mes "mundo, que vocês fiquem";
+						mes "ao lado da pessoa";
+						mes "que vocês amam, para apoiar";
+						mes "e proteger. Agora, posso";
+						mes "saber o nome da sua noiva?";
+						next;
+						input $@wed_bride$;
+						mes "[Vomars]";
+						mes "Mr. " + strcharinfo(0) + "...";
+						mes "Você jura pela sua vida";
+						mes "que você sempre cuidará";
+						mes "e amará sua noiva,";
+						mes "Miss " + $@wed_bride$ + "?";
+						next;
+						select("I do.");
+						set $@wed_groom$,strcharinfo(0);
+						mes "[Vomars]";
+						mes "Agora, é hora da";
+						mes "sua noiva fazer";
+						mes "seus votos de casamento.";
+						mes "Se ela puder vir à frente...";
+						close2;
+						mapannounce "prt_church","The groom, Mr. " + strcharinfo(0) + ", has made his vows to Miss " + $@wed_bride$ + "...",bc_map;
+						cutin "",255;
+						end;
+					}
+					mes "[Vomars]";
+					mes "Sinto muito, mas o noivo";
+					mes "deve falar comigo primeiro para";
+					mes "começar o casamento.";
+					mes "É um protocolo antiquado,";
+					mes "mas admito que ele";
+					mes "mantém as coisas funcionando sem problemas.";
+					goto L_End;
+				}
+				mes "[Vomars]";
+				mes "Antes que você possa ser";
+				mes "casado(a), você deve";
+				mes "primeiro formar um grupo de";
+				mes "dois com seu parceiro.";
+				mes "Então, podemos prosseguir";
+				mes "com a cerimônia.";
+				goto L_End;
+			}
+			mes "[Vomars]";
+			mes "Você deve se inscrever para";
+			mes "o casamento com a Marry Happy";
+			mes "antes que possa se casar.";
+			mes "A Marry Happy informará a você";
+			mes "o que mais você precisará fazer";
+			mes "para se preparar para o casamento.";
+			goto L_End;
+		}
+		else if ($@wedding == 1) {
+			if (wedding_sign == 1) {
+				getpartymember(getcharid(1));
+				set .@partymembercount,$@partymembercount;
+				if (.@partymembercount == 2) {
+					if (Sex == SEX_FEMALE) {
+						if (strcharinfo(0) == $@wed_bride$) {
+							mes "[Vomars]";
+							mes "Jovens amantes, por favor";
+							mes "lembrem-se deste momento para";
+							mes "o resto de suas vidas. Que o futuro de vocês seja abençoado com paz";
+							mes "e alegria. Que o amor que vocês compartilham";
+							mes "cresça a cada dia que passa.";
+							next;
+							mapannounce "prt_church","Let's hear what the bride, Miss "+$@wed_bride$+", has to say...",bc_map;
+							mes "[Vomars]";
+							mes "Miss "+$@wed_bride$+"...";
+							mes "Você jura ficar";
+							mes "true to "+$@wed_groom$+",";
+							mes "ao lado dele, não importa";
+							mes "quais sejam os perigos?";
+							next;
+							if (select("^FF0000No.^000000:I do.") == 1) {
+								cutin "wedding_bomars03",2;
+								mapannounce "prt_church","Next couple, please proceed...",bc_map;
+								mes "[Vomars]";
+								mes "So "+$@wed_groom$;
+								mes "não é a pessoa com quem você";
+								mes "quer se casar? Hmm.";
+								mes "Sinto muito por este";
+								mes "mal-entendido...";
+								set $@wedding,0;
+								close2;
+								stopnpctimer;
+								cutin "",255;
+								end;
+							}
+							mes "[Vomars]";
+							mes "Você jura verdadeiramente";
+							mes "fidelidade e paciência?";
+							mes "Will you marry "+$@wed_groom$+"?";
+							next;
+							if (select("Yes, I do.:^FF0000No.^000000") == 1) {
+								if (isloggedin(getcharid(3,$@wed_groom$))) {
+									if (marriage($@wed_groom$)) {
+										//Call Wedding effect
+										wedding;
+										//Give ring to Bride, and change to wedding sprite.
+										sc_start SC_Wedding,3600000,1;
+										getitem 2635,1; //Bride_Ring
+										//Give ring to Groom, and change to wedding sprite.
+										attachrid(getcharid(3,$@wed_groom$));
+										sc_start SC_Wedding,3600000,1;
+										getitem 2634,1; //Bridegroom_Ring
+										detachrid;
+										//Switch Script progression back to Bride
+										attachrid(getcharid(3,$@wed_bride$));
+										cutin "wedding_bomars02",2;
+										mapannounce "prt_church","I now pronounce you, "+$@wed_groom$+" and "+$@wed_bride$+", husband and wife.",bc_map;
+										mes "[Vomars]";
+										mes "Pelo poder investido";
+										mes "em mim como Bispo Real do";
+										mes "Reino de Rune-Midgard,";
+										mes "eu agora os declaro marido";
+										mes "e mulher. Que seu futuro seja";
+										mes "abençoado com muitas grandes alegrias.";
+										next;
+										mes "[Vomars]";
+										mes "E por último...";
+										mes "Sejam sempre felizes,";
+										mes "dear "+$@wed_bride$+"...";
+										set $@wed_groom$,"";
+										set $@wed_bride$,"";
+										set $@wedding,0;
+										close2;
+										stopnpctimer;
+										cutin "",255;
+										detachrid;
+										end;
+									}
+								}
+								cutin "wedding_bomars03",2;
+								mes "[Vomars]";
+								mes "Hm. Parece que";
+								mes "seu noivo partiu antes";
+								mes "que a cerimônia terminasse.";
+								mes "Por favor, tente novamente assim que ele";
+								mes "retornar.";
+								goto L_End;
+							}
+							else {
+								cutin "wedding_bomars03",2;
+								mapannounce "prt_church","Alas! "+$@wed_bride$+" has rejected "+$@wed_groom$+"'s marriage proposal!",bc_map;
+								mes "[Vomars]";
+								mes "Hm. Parece que";
+								mes "você mudou de";
+								mes "ideia. Embora eu sinta";
+								mes "pena do noivo, você";
+								mes "deve fazer o que seu coração";
+								mes "diz que é o correto. Agora, corra!";
+							}
+							set $@wed_groom$,"";
+							set $@wed_bride$,"";
+							set $@wedding,0;
+							close2;
+							stopnpctimer;
+							cutin "",255;
+							end;
+						}
+						callsub S_Busy;
+					}
+					callsub S_Busy;
+				}
+				callsub S_Busy;
+			}
+			if (strcharinfo(0) == $@wed_bride$) {
+				mes "[Vomars]";
+				mes "Hm? Parece que";
+				mes "a Marry Happy ainda não";
+				mes "recebeu sua inscrição de";
+				mes "casamento. Por favor, fale";
+				mes "com ela para que possamos começar";
+				mes "a cerimônia de casamento.";
+				goto L_End;
+			}
+			callsub S_Busy;
+		}
+		callsub S_Busy;
+	}
+	mes "[Vomars]";
+	mes "Desejo a vocês eterna";
+	mes "felicidade. Não importa";
+	mes "quão escuro o presente possa";
+	mes "ser, fiquem sempre ao lado de";
+	mes "quem você ama e olhem";
+	mes "para o futuro com esperança.";
+
+L_End:
+	close2;
+	cutin  "",255;
+	end;
+
+S_Busy:
+	if ($@wed_groom$ != "" && $@wed_bride$ != "") {
+		mes "[Vomars]";
+		mes "O casamento de";
+		mes "Miss "+ $@wed_bride$ +" and";
+		mes "Mister "+ $@wed_groom$;
+		mes "está atualmente em andamento.";
+		mes "Por favor, mantenham o silêncio.";
+		goto L_End;
+	}
+	mes "[Vomars]";
+	mes "Estou realizando um casamento";
+	mes "para outro casal agora, então";
+	mes "por favor, esperem pacientemente pela sua";
+	mes "vez. Obrigado pela compreensão...";
+	goto L_End;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnReset:
+	set $@wed_groom$,"";
+	set $@wed_bride$,"";
+	set $@wedding,0;
+	end;
+
+OnTimer180000:
+	mapannounce "prt_church","You've responded too slowly... Next couple, please proceed.",bc_map;
+	donpcevent "Bishop#w::OnReset";
+	stopnpctimer;
+	end;
+}
+
+prt_church,28,178,4	script	The King of Rune-Midgarts	108,{
+	callfunc "F_GM_NPC";
+	mes "[Vomars]";
+	mes "Qu-quem é você?";
+	mes "Você deve saber a";
+	mes "senha para invocar";
+	mes "meus poderes impressionantes.";
+	next;
+	if (callfunc("F_GM_NPC",1854,0) < 1) {
+		mes "[Vomars]";
+		mes "Este não é";
+		mes "lugar para";
+		mes "brincadeiras.";
+		close2;
+		warp "prt_church",101,102;
+		end;
+	}
+	mes "[Wedding Switch]";
+	mes "Existe algum problema com";
+	mes "a cerimônia de casamento?";
+	mes "Eu posso resetar o NPC";
+	mes "Bispo Vomars se você quiser.";
+	next;
+	switch(select("No, thanks:RESET")) {
+	case 1:
+		mes "[Wedding Switch]";
+		mes "Muito bem, então.";
+		mes "No entanto, se o";
+		mes "NPC Bispo Vomars";
+		mes "estiver travado, pode";
+		mes "ser melhor resetá-lo.";
+		close;
+	case 2:
+		donpcevent "Bishop#w::OnStop";
+		donpcevent "Bishop#w::OnReset";
+		mapannounce "prt_church","You've responded too slowly... Next couple, please proceed.",bc_map;
+		mes "[Wedding Switch]";
+		mes "O NPC Bispo Vomars";
+		mes "foi reativado.";
+		mes "Agora deve ser possível";
+		mes "prosseguir com os casamentos.";
+		close;
+	}
+}
+
+prt_church,20,179,4	script	Divorce Staff	71,{
+	callfunc "F_GM_NPC";
+	mes "[Bad Ending]";
+	mes "Oh oh...";
+	mes "Você sabe que eu não";
+	mes "posso fazer nada por você.";
+	next;
+	if (callfunc("F_GM_NPC",1854,0) < 1) {
+		mes "[Bad Ending]";
+		mes "Hmm...";
+		mes "Você realmente";
+		mes "não deveria estar";
+		mes "neste lugar...";
+		close;
+	}
+	mes "[Bad Ending]";
+	mes "Ótimo, você sabe a";
+	mes "senha! Agora, você";
+	mes "quer que eu remova o";
+	mes "Anel de Casamento do seu";
+	mes "inventário?";
+	next;
+	switch(select("Drop 1 Wedding Ring.:Keep it.")) {
+	case 1:
+		set .@ring, (Sex == SEX_MALE)?2634:2635; //Bridegroom_Ring, Bride_Ring
+		if (countitem(.@ring)) {
+			delitem .@ring,1;
+			mes "[Bad Ending]";
+			mes "Feito!";
+		} else {
+			mes "[Bad Ending]";
+			mes "Eu não pude encontrar";
+			mes "o Anel de Casamento...";
+			mes "Por favor, certifique-se";
+			mes "de que ele não esteja equipado.";
+		}
+		close;
+	case 2:
+		mes "[Bad Ending]";
+		mes "Tem certeza de que quer";
+		mes "manter esse anel?";
+		mes "Muito bem, mas se ele se tornar";
+		mes "um problema, você venha até mim.";
+		close;
+	}
+}
+
+prt_church,22,179,4	script	Remarry Staff	71,{
+	callfunc "F_GM_NPC";
+	mes "[Wedding Again]";
+	mes "Hmm...?";
+	mes "O que exatamente você";
+	mes "está fazendo aqui?";
+	next;
+	if (callfunc("F_GM_NPC",1854,0) < 1) {
+		mes "[Wedding Again]";
+		mes "Ahk!";
+		mes "Um aventureiro";
+		mes "como você não deveria";
+		mes "estar neste lugar!";
+		close;
+	}
+	if (getpartnerid()) {
+		mes "[Wedding Again]";
+		mes "Hmm...";
+		mes "Eu só posso criar";
+		mes "um Anel de Casamento se o";
+		mes "personagem for casado.";
+		close;
+	}
+	mes "[Wedding Again]";
+	mes "Ah, vejo que você";
+	mes "sabe a senha.";
+	mes "Muito bem, se você de alguma forma";
+	mes "perdeu seu Anel de Casamento,";
+	mes "eu posso fazer um novo para você.";
+	next;
+	switch(select("Make new Wedding Ring.:Cancel.")) {
+	case 1:
+		set .@ring, (Sex == SEX_MALE)?2634:2635; //Bridegroom_Ring, Bride_Ring
+		if (countitem(.@ring) || isequipped(.@ring)) {
+			mes "[Wedding Again]";
+			mes "Espere, espere...";
+			mes "Você está usando seu";
+			mes "Anel de Casamento. É melhor";
+			mes "eu não fazer outro para você, já que";
+			mes "você não precisa de mais de um.";
+		} else {
+			getitem .@ring,1;
+			mes "[Wedding Again]";
+			mes "Aqui está~";
+			mes "É seu novíssimo";
+			mes "Anel de Casamento!";
+		}
+		close;
+	case 2:
+		mes "[Wedding Again]";
+		mes "Muito bem. Se você algum dia";
+		mes "perder seu Anel de Casamento,";
+		mes "venha até mim se por acaso";
+		mes "precisar de um novo, ok?";
+		close;
+	}
+}
