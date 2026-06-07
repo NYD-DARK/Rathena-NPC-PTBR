@@ -1,0 +1,161 @@
+//===== rAthena Script =======================================
+//= Izlude Guides
+//===== By: ==================================================
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.5a
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Guides for the City of Izlude
+//===== Additional Comments: =================================
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Updated the guide according to how it is on iRO, thanks [MasterOfMuppets]
+//=     to Muad_Dib
+//= 1.4 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.5 Rescripted to official 10.3 standards. [L0ne_W0lf]
+//= 1.5a Fixed some errors with the loop[Samuray22]
+//	-Thanks to $ephiroth.
+//============================================================
+
+izlude,121,87,6	script	Guide#iz	105,{
+	cutin "prt_soldier",2;
+	mes "[Guia de Izlude]";
+	mes "Bem-vindo a Izlude,";
+	mes "a cidade satélite de Prontera.";
+	mes "Se precisar de alguma orientação";
+	mes "por Izlude, sinta-se à vontade";
+	mes "para me perguntar a qualquer momento.";
+	set .@loop1,1;
+	while(.@loop1) {
+		next;
+		switch(select("City Guide:Remove Marks from Mini-Map:Notice.:Cancel")) {
+		case 1:
+			mes "[Guia de Izlude]";
+			mes "Por favor, selecione";
+			mes "um local a partir";
+			mes "do menu a seguir.";
+			if (.@compass_check == 0) {
+				mes "Você gostaria que eu";
+				mes "marcasse os locais";
+				mes "no seu Minimapa?";
+				next;
+				if (select("Yes:No") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				
+				switch(select("^FF0000Swordman Association^000000:Swordman Hall:Arena:Izlude Marina:Weapon Shop:Tool Shop:Cancel")) {
+				case 1:
+					mes "[Guia de Izlude]";
+					mes "A Associação de Espadachins";
+					mes "fica em uma ilha que está";
+					mes "no oeste de Izlude. Se está pensando em mudar sua classe para Espadachim,";
+					mes "deveria conferir.";
+					if (.@compass_check)
+						viewpoint 1,52,140,0,0xFF0000;
+					break;
+				case 2:
+					mes "[Guia de Izlude]";
+					mes "O Salão dos Espadachins";
+					mes "fica na ilha oriental";
+					mes "conectada a Izlude.";
+					if (.@compass_check)
+						viewpoint 1,214,130,1,0x00FF00;
+					break;
+				case 3:
+					mes "[Guia de Izlude]";
+					mes "A famosa Arena";
+					mes "de Izlude está localizada na";
+					mes "extremidade norte de Izlude.";
+					if (.@compass_check)
+						viewpoint 1,128,225,2,0x00FF00;
+					break;
+				case 4:
+					mes "[Guia de Izlude]";
+					mes "Você pode encontrar a";
+					mes "Marina na parte nordeste";
+					mes "de Izlude. Lá, você pode";
+					mes "pegar um navio que te levará";
+					mes "a Alberta ou à Ilha de Byalan.";
+					if (.@compass_check)
+						viewpoint 1,200,180,3,0xFF0000;
+					break;
+				case 5:
+					mes "[Guia de Izlude]";
+					mes "Você pode encontrar facilmente";
+					mes "a Loja de Armas";
+					mes "no noroeste de Izlude.";
+					if (.@compass_check)
+						viewpoint 1,111,149,4,0xFF00FF;
+					break;
+				case 6:
+					mes "[Guia de Izlude]";
+					mes "A Loja de Utilidades não deve";
+					mes "ser difícil de encontrar na";
+					mes "parte nordeste de Izlude.";
+					if (.@compass_check)
+						viewpoint 1,148,148,5,0xFF00FF;
+					break;
+				case 7:
+					mes "[Guia de Izlude]";
+					mes "Por favor, peça-me para ''Remover";
+					mes "Marcas do Minimapa'' se você";
+					mes "não quiser mais que as";
+					mes "marcas de localização sejam exibidas";
+					mes "no seu Minimapa.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,0,0x00FF00;
+			viewpoint 2,237,41,1,0x0000FF;
+			viewpoint 2,46,345,2,0x00FF00;
+			viewpoint 2,175,220,3,0xFF0000;
+			viewpoint 2,134,221,4,0xFF0000;
+			viewpoint 2,204,214,5,0xFF0000;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[Guia de Izlude]";
+			mes "Avanços em feitiçaria e";
+			mes "tecnologia permitiram";
+			mes "que atualizássemos nosso sistema";
+			mes "de informações, possibilitando marcar";
+			mes "locais no seu Minimapa";
+			mes "para facilitar a navegação.";
+			next;
+			mes "[Guia de Izlude]";
+			mes "Seu Minimapa está localizado";
+			mes "no canto superior direito";
+			mes "da tela. Se não conseguir";
+			mes "see it, press the Ctrl + Tab";
+			mes "teclas ou clicar no botão ''Mapa'' na sua Janela de Informações Básicas.";
+			next;
+			mes "[Guia de Izlude]";
+			mes "No seu Minimapa,";
+			mes "click on the ''+'' and ''-''";
+			mes "símbolos para dar zoom e";
+			mes "afastar o zoom do seu Minimapa. Nós";
+			mes "esperamos que aproveite suas viagens";
+			mes "aqui na cidade de Izlude.";
+			break;
+		case 4:
+			mes "[Guia de Izlude]";
+			mes "Tudo bem então, sinta-se";
+			mes "à vontade para vir até mim";
+			mes "se algum dia se sentir perdido";
+			mes "por Izlude, certo?";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	cutin "prt_soldier",255;
+	end;
+}

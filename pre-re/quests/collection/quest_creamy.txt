@@ -1,0 +1,248 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests. (Dialog is semi-custom)
+//= Repeatable EXP Quest (Powder of Butterfly)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+prt_fild04,356,148,3	script	Laertes#Creamy_Hunt	798,{
+	if (checkquest(60122) != -1) {
+		if (checkquest(60122,HUNTING) != 2 ) {
+			mes "[Laertes]";
+			mes "Você terminou de caçar os 50 Creamy?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Laertes]";
+				mes "Hmm, acho que você ainda não caçou 50...";
+				close;
+			case 2:
+				mes "[Laertes]";
+				mes "Lembre-se, preciso de ajuda para caçar Creamy, então vá e cace 50 deles.";
+				close;
+			case 3:
+				mes "[Laertes]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Laertes]";
+					mes "Ok então, volte aqui se mudar de ideia.";
+					erasequest 60122;
+					close;
+				case 2:
+					mes "[Laertes]";
+					mes "Por favor, mate 50 Creamy.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Laertes]";
+			mes "Incrível, você fez isso rapidamente.";
+			getexp 2950,1125;
+			erasequest 60122;
+			close;
+		}
+	}
+	if (checkquest(60123) != -1) {
+		if (checkquest(60123,HUNTING) != 2 ) {
+			mes "[Laertes]";
+			mes "Você terminou de caçar os 50 Creamy?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Laertes]";
+				mes "Hmm, acho que você ainda não caçou 100...";
+				close;
+			case 2:
+				mes "[Laertes]";
+				mes "Lembre-se, preciso de ajuda para caçar Creamy, então vá e cace 100 deles.";
+				close;
+			case 3:
+				mes "[Laertes]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Laertes]";
+					mes "Ok então, volte aqui se mudar de ideia.";
+					erasequest 60123;
+					close;
+				case 2:
+					mes "[Laertes]";
+					mes "Por favor, mate 100 Creamy.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Laertes]";
+			mes "Incrível, você fez isso rapidamente.";
+			getexp 2950,1125;
+			getexp 2950,1125;
+			erasequest 60123;
+			close;
+		}
+	}
+	if (checkquest(60124) != -1) {
+		if (checkquest(60124,HUNTING) != 2 ) {
+			mes "[Laertes]";
+			mes "Você terminou de caçar os 150 Creamy?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Laertes]";
+				mes "Hmm, acho que você ainda não caçou 150...";
+				close;
+			case 2:
+				mes "[Laertes]";
+				mes "Lembre-se, preciso de ajuda para caçar Creamy, então vá e cace 150 deles.";
+				close;
+			case 3:
+				mes "[Laertes]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Laertes]";
+					mes "Ok então, volte aqui se mudar de ideia.";
+					erasequest 60124;
+					close;
+				case 2:
+					mes "[Laertes]";
+					mes "Por favor, mate 150 Creamy.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Laertes]";
+			mes "Incrível, você fez isso rapidamente.";
+			getexp 2950,1125;
+			getexp 2950,1125;
+			getexp 2950,1125;
+			erasequest 60124;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 14) {
+		//for maximum level
+		if (BaseLevel < 45) {
+			mes "[Laertes]";
+			mes "Bom dia!";
+			mes "Talvez você pudesse me ajudar?";
+			next;
+			switch(select("Sure:No")) {
+			case 1:
+				mes "[Laertes]";
+				mes "Eu trabalho para um boticário em Prontera.";
+				mes "Venho aqui para coletar materiais para remédios.";
+				next;
+				switch(select("Gather Items:Hunt Creamys:Cancel")) {
+				case 1:
+					// Item turn in
+					mes "[Laertes]";
+					mes "Preciso ter um bom estoque de ^FF0000Pó de Borboleta^000000";
+					next;
+					switch(select("I have Powder of Butterfly:What did you need?")) {
+					case 1:
+						/*
+						if (checkweight(502,5) == 0) {
+							mes "[Laertes]";
+							mes "Ei, parece que o peso em";
+							mes "suas costas vai te esmagar. Volte";
+							mes "depois de perder um pouco de peso.";
+							close;
+						}
+						*/
+						if (countitem(924) > 24) {
+							mes "[Laertes]";
+							mes "Ei, obrigado novamente.";
+							mes "Aqui está, como prometido.";
+							delitem 924,25; //Powder_Of_Butterfly
+							getexp 2950,1125;
+							//getitem 502,5; //Orange_Potion
+							close;
+						}
+						else {
+							mes "[Laertes]";
+							mes "Não parece que você tem o suficiente.";
+							next;
+							mes "[Laertes]";
+							mes "Se você me trouxer ^FF000025 Pó de Borboleta^000000,";
+							mes "eu lhe darei alguns suprimentos médicos.";
+							close;
+						}
+					case 2:
+						mes "[Laertes]";
+						mes "Se você me trouxer ^FF000025 Pó de Borboleta^000000,";
+						mes "eu lhe darei alguns suprimentos médicos.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Laertes]";
+					mes "Ah, ok, acho que você pode me ajudar caçando alguns Creamy.";
+					mes "Quantos você gostaria de caçar?";
+					next;
+					switch(select("50 Creamys:100 Creamys:150 Creamys")) {
+					case 1:
+						mes "[Laertes]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60122;
+						close;
+					case 2:
+						mes "[Laertes]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60123;
+						close;
+					case 3:
+						mes "[Laertes]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60124;
+						close;
+					}
+				case 3:
+					mes "[Laertes]";
+					mes "Se mudar de ideia, por favor volte.";
+					close;
+				}
+			case 2:
+				mes "[Laertes]";
+				mes "Se mudar de ideia, por favor volte.";
+				close;
+			}
+		}
+		else {
+			mes "[Laertes]";
+			mes "Bom dia!";
+			next;
+			mes "[Laertes]";
+			mes "Eu trabalho para um boticário em Prontera";
+			mes "Venho aqui para coletar materiais para remédios.";
+			close;
+		}
+	}
+	else {
+		mes "[Laertes]";
+		mes "Seu nível está muito baixo!";
+		next;
+		mes "[Laertes]";
+		mes "Vá matar mais Porings!";
+		close;
+	}
+}

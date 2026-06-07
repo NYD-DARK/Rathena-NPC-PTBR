@@ -1,0 +1,244 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Bacillus)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+ein_fild01,43,249,0	script	Local Villager#hunt	898,{
+	if (checkquest(60125) != -1) {
+		if (checkquest(60125,HUNTING) != 2 ) {
+			mes "[Aldeão Local]";
+			mes "Você terminou de caçar os 50 Pungus Demoníacos?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Aldeão Local]";
+				mes "Hum, acho que você ainda não caçou 50...";
+				close;
+			case 2:
+				mes "[Aldeão Local]";
+				mes "Lembre-se, preciso de ajuda para caçar Pungus Demoníacos, então vá caçar 50 deles.";
+				close;
+			case 3:
+				mes "[Aldeão Local]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Aldeão Local]";
+					mes "Ok então, bem, volte aqui se mudar de ideia.";
+					erasequest 60125;
+					close;
+				case 2:
+					mes "[Aldeão Local]";
+					mes "Por favor, mate 50 Pungus Demoníacos.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Aldeão Local]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 250266,144452;
+			erasequest 60125;
+			close;
+		}
+	}
+	if (checkquest(60126) != -1) {
+		if (checkquest(60126,HUNTING) != 2 ) {
+			mes "[Aldeão Local]";
+			mes "Você terminou de caçar os 50 Pungus Demoníacos?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Aldeão Local]";
+				mes "Hum, acho que você ainda não caçou 100...";
+				close;
+			case 2:
+				mes "[Aldeão Local]";
+				mes "Lembre-se, preciso de ajuda para caçar Pungus Demoníacos, então vá caçar 100 deles.";
+				close;
+			case 3:
+				mes "[Aldeão Local]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Aldeão Local]";
+					mes "Ok então, bem, volte aqui se mudar de ideia.";
+					erasequest 60126;
+					close;
+				case 2:
+					mes "[Aldeão Local]";
+					mes "Por favor, mate 100 Pungus Demoníacos.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Aldeão Local]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 250266,144452;
+			getexp 250266,144452;
+			erasequest 60126;
+			close;
+		}
+	}
+	if (checkquest(60127) != -1) {
+		if (checkquest(60127,HUNTING) != 2 ) {
+			mes "[Aldeão Local]";
+			mes "Você terminou de caçar os 150 Pungus Demoníacos?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Aldeão Local]";
+				mes "Hum, acho que você ainda não caçou 150...";
+				close;
+			case 2:
+				mes "[Aldeão Local]";
+				mes "Lembre-se, preciso de ajuda para caçar Pungus Demoníacos, então vá caçar 150 deles.";
+				close;
+			case 3:
+				mes "[Aldeão Local]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Aldeão Local]";
+					mes "Ok então, bem, volte aqui se mudar de ideia.";
+					erasequest 60127;
+					close;
+				case 2:
+					mes "[Aldeão Local]";
+					mes "Por favor, mate 150 Pungus Demoníacos.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Aldeão Local]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 250266,144452;
+			getexp 250266,144452;
+			getexp 250266,144452;
+			erasequest 60127;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 59) {
+		//for maximum level
+		if (BaseLevel < 75) {
+			mes "[Aldeão Local]";
+			mes "Ei, você aí. É, você mesmo!";
+			mes "Acha que pode me ajudar com algo?";
+			next;
+			switch(select("Sure:No")) {
+			case 1:
+				mes "[Aldeão Local]";
+				mes "Estou tentando seguir meu caminho, mas não consigo passar por esses Pungus Demoníacos.";
+				next;
+				switch(select("Gather Items:Hunt Demon Pungus:Cancel")) {
+				case 1:
+					// Item turn in
+					mes "[Aldeão Local]";
+					mes "Pode me ajudar coletando ^FF0000Bacilos^000000?";
+					mes "Eu o recompensarei por ajudar a limpar isso para mim.";
+					next;
+					switch(select("I have Bacillus:What did you need?")) {
+					case 1:
+						/*
+						if (checkweight(504,10) == 0) {
+							mes "[Aldeão Local]";
+							mes "Ei, parece que o peso nas";
+							mes "suas costas vai esmagá-lo. Volte";
+							mes "depois que tiver perdido algum peso.";
+							close;
+						}
+						*/
+						if (countitem(7119) > 49) {
+							mes "[Aldeão Local]";
+							mes "Eu tinha minhas dúvidas, mas você me provou o contrário.";
+							delitem 7119,50; //Spawns
+							getexp 250266,144452;
+							//getitem 504,10; //White_Potion
+							close;
+						}
+						else {
+							mes "[Aldeão Local]";
+							mes "Não parece que você tem o suficiente.";
+							next;
+							mes "[Aldeão Local]";
+							mes "Preciso ver que você coletou ^FF000050 Bacilos^000000, e então poderei recompensá-lo.";
+							close;
+						}
+					case 2:
+						mes "[Aldeão Local]";
+						mes "Preciso ver que você coletou ^FF000050 Bacilos^000000, e então poderei recompensá-lo.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Aldeão Local]";
+					mes "Ah, ok, acho que você pode me ajudar caçando alguns Pungus Demoníacos.";
+					mes "Quantos você gostaria de caçar?";
+					next;
+					switch(select("50 Demon Pungus:100 Demon Pungus:150 Demon Pungus")) {
+					case 1:
+						mes "[Aldeão Local]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60125;
+						close;
+					case 2:
+						mes "[Aldeão Local]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60126;
+						close;
+					case 3:
+						mes "[Aldeão Local]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60127;
+						close;
+					}
+				case 3:
+					mes "[Aldeão Local]";
+					mes "Se mudar de ideia, por favor, volte.";
+					close;
+				}
+			case 2:
+				mes "[Aldeão Local]";
+				mes "Se mudar de ideia, por favor, volte.";
+				close;
+			}
+		}
+		else {
+			mes "[Aldeão Local]";
+			mes "Hum, hum. Eu não acho...";
+			next;
+			mes "[Aldeão Local]";
+			mes "É, desculpe, não posso conversar agora.";
+			close;
+		}
+	}
+	else {
+		mes "[Aldeão Local]";
+		mes "É incrível, realmente é.";
+		mes "Eu só queria conseguir superar tudo isso.";
+		close;
+	}
+}
+
+

@@ -1,0 +1,232 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Stone Hearts)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+moc_fild11,57,138,0	script	Private Jeremy#hunt	707,{
+	if (checkquest(60140) != -1) {
+		if (checkquest(60140,HUNTING) != 2 ) {
+			mes "[Soldado Jeremy]";
+			mes "Você terminou de caçar os 50 Golems?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Soldado Jeremy]";
+				mes "Hmm, não acho que você já tenha caçado 50...";
+				close;
+			case 2:
+				mes "[Soldado Jeremy]";
+				mes "Lembre-se, preciso de ajuda para caçar Golems, então vá e cace 50 deles.";
+				close;
+			case 3:
+				mes "[Soldado Jeremy]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Soldado Jeremy]";
+					mes "Certo então, volte aqui se mudar de ideia.";
+					erasequest 60140;
+					close;
+				case 2:
+					mes "[Soldado Jeremy]";
+					mes "Por favor, mate 50 Golems.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Soldado Jeremy]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 14000,9000;
+			erasequest 60140;
+			close;
+		}
+	}
+	if (checkquest(60141) != -1) {
+		if (checkquest(60141,HUNTING) != 2 ) {
+			mes "[Soldado Jeremy]";
+			mes "Você terminou de caçar os 50 Golems?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Soldado Jeremy]";
+				mes "Hmm, não acho que você já tenha caçado 100...";
+				close;
+			case 2:
+				mes "[Soldado Jeremy]";
+				mes "Lembre-se, preciso de ajuda para caçar Golems, então vá e cace 100 deles.";
+				close;
+			case 3:
+				mes "[Soldado Jeremy]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Soldado Jeremy]";
+					mes "Certo então, volte aqui se mudar de ideia.";
+					erasequest 60141;
+					close;
+				case 2:
+					mes "[Soldado Jeremy]";
+					mes "Por favor, mate 100 Golems.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Soldado Jeremy]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 14000,9000;
+			getexp 14000,9000;
+			erasequest 60141;
+			close;
+		}
+	}
+	if (checkquest(60142) != -1) {
+		if (checkquest(60142,HUNTING) != 2 ) {
+			mes "[Soldado Jeremy]";
+			mes "Você terminou de caçar os 150 Golems?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Soldado Jeremy]";
+				mes "Hmm, não acho que você já tenha caçado 150...";
+				close;
+			case 2:
+				mes "[Soldado Jeremy]";
+				mes "Lembre-se, preciso de ajuda para caçar Golems, então vá e cace 150 deles.";
+				close;
+			case 3:
+				mes "[Soldado Jeremy]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Soldado Jeremy]";
+					mes "Certo então, volte aqui se mudar de ideia.";
+					erasequest 60142;
+					close;
+				case 2:
+					mes "[Soldado Jeremy]";
+					mes "Por favor, mate 150 Golems.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Soldado Jeremy]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 14000,9000;
+			getexp 14000,9000;
+			getexp 14000,9000;
+			erasequest 60142;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 24) {
+		//for maximum level
+		if (BaseLevel < 61) {
+			mes "[Soldado Jeremy]";
+			mes "Saudações, cidadão!";
+			mes "Diga, como você gostaria de me ajudar?";
+			next;
+			switch(select("Sure:No")) {
+			case 1:
+				mes "[Soldado Jeremy]";
+				mes "Obrigado! Eu agradeço muito.";
+				next;
+				switch(select("Gather Items:Hunt Golems:Cancel")) {
+				case 1:
+					// Item turn in
+					mes "[Soldado Jeremy]";
+					mes "A Guarda de Morroc precisa de ^FF0000Corações de Pedra^000000 para nosso regime de treinamento.";
+					next;
+					switch(select("I have Stone Hearts:What did you need?")) {
+					case 1:
+						if (countitem(953) > 24) {
+							mes "[Soldado Jeremy]";
+							mes "A Guarda de Morroc agradece a você, cidadão.";
+							delitem 953,25; //Stone_Heart
+							getexp 14000,9000;
+							close;
+						}
+						else {
+							mes "[Soldado Jeremy]";
+							mes "Não parece que você tem o suficiente.";
+							next;
+							mes "[Soldado Jeremy]";
+							mes "A Guarda de Morroc precisa de ^FF000025 Corações de Pedra^000000 para nosso regime de treinamento.";
+							close;
+						}
+					case 2:
+						mes "[Soldado Jeremy]";
+						mes "A Guarda de Morroc precisa de ^FF000025 Corações de Pedra^000000 para nosso regime de treinamento.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Soldado Jeremy]";
+					mes "Ah, ok, acho que você pode me ajudar caçando alguns Golems.";
+					mes "Quantos você gostaria de caçar?";
+					next;
+					switch(select("50 Golems:100 Golems:150 Golems")) {
+					case 1:
+						mes "[Soldado Jeremy]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60140;
+						close;
+					case 2:
+						mes "[Soldado Jeremy]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60141;
+						close;
+					case 3:
+						mes "[Soldado Jeremy]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60142;
+						close;
+					}
+				case 3:
+					mes "[Soldado Jeremy]";
+					mes "Se você mudar de ideia, por favor, volte.";
+					close;
+				}
+			case 2:
+				mes "[Soldado Jeremy]";
+				mes "Se você mudar de ideia, por favor, volte.";
+				close;
+			}
+		}
+		else {
+			mes "[Soldado Jeremy]";
+			mes "Saudações, cidadão!";
+			next;
+			mes "[Soldado Jeremy]";
+			mes "Por favor, não interrompa minha missão para a Guarda de Morroc.";
+			close;
+		}
+	}
+	else {
+		mes "[Soldado Jeremy]";
+		mes "É perigoso aqui, cidadão.";
+		close;
+	}
+}
+
+

@@ -1,0 +1,233 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Chrysalis)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+gef_fild04,191,54,3	script	Halgus#Pupa_Hunt	123,{
+	if (checkquest(60110) != -1) {
+		if (checkquest(60110,HUNTING) != 2 ) {
+			mes "[Halgus]";
+			mes "Você se livrou dos Pupa?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Halgus]";
+				mes "Hmm, acho que você ainda não se livrou de 50 Pupa...";
+				close;
+			case 2:
+				mes "[Halgus]";
+				mes "Lembre-se, livre-se de 50 Pupa do campo.";
+				close;
+			case 3:
+				mes "[Halgus]";
+				mes "Tem certeza de que quer parar a caçada?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Halgus]";
+					mes "Certo então, volte aqui se mudar de ideia.";
+					erasequest 60110;
+					close;
+				case 2:
+					mes "[Halgus]";
+					mes "Lembre-se, livre-se de 50 Pupa do campo.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Halgus]";
+			mes "Oh, muito obrigado.";
+			mes "Eu sei que provavelmente poderia ter feito isso sozinho, mas não é fácil ficar parado aqui o tempo todo.";
+			getexp 385,30;
+			erasequest 60110;
+			close;
+		}
+	}
+	if (checkquest(60111) != -1) {
+		if (checkquest(60111,HUNTING) != 2 ) {
+			mes "[Halgus]";
+			mes "Você se livrou dos Pupa?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Halgus]";
+				mes "Hmm, acho que você ainda não se livrou de 100 Pupa...";
+				close;
+			case 2:
+				mes "[Halgus]";
+				mes "Lembre-se, livre-se de 100 Pupa do campo.";
+				close;
+			case 3:
+				mes "[Halgus]";
+				mes "Tem certeza de que quer parar a caçada?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Halgus]";
+					mes "Certo então, volte aqui se mudar de ideia.";
+					erasequest 60111;
+					close;
+				case 2:
+					mes "[Halgus]";
+					mes "Lembre-se, livre-se de 100 Pupa do campo.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Halgus]";
+			mes "Oh, muito obrigado.";
+			mes "Eu sei que provavelmente poderia ter feito isso sozinho, mas não é fácil ficar parado aqui o tempo todo.";
+			getexp 385,30;
+			getexp 385,30;
+			erasequest 60111;
+			close;
+		}
+	}
+	if (checkquest(60112) != -1) {
+		if (checkquest(60112,HUNTING) != 2 ) {
+			mes "[Halgus]";
+			mes "Você se livrou dos Pupa?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Halgus]";
+				mes "Hmm, acho que você ainda não se livrou de 150 Pupa...";
+				close;
+			case 2:
+				mes "[Halgus]";
+				mes "Lembre-se, livre-se de 150 Pupa do campo.";
+				close;
+			case 3:
+				mes "[Halgus]";
+				mes "Tem certeza de que quer parar a caçada?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Halgus]";
+					mes "Certo então, volte aqui se mudar de ideia.";
+					erasequest 60112;
+					close;
+				case 2:
+					mes "[Halgus]";
+					mes "Lembre-se, livre-se de 150 Pupa do campo.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Halgus]";
+			mes "Oh, muito obrigado.";
+			mes "Eu sei que provavelmente poderia ter feito isso sozinho, mas não é fácil ficar parado aqui o tempo todo.";
+			getexp 385,30;
+			getexp 385,30;
+			getexp 385,30;
+			erasequest 60112;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 1) {
+		//for maximum level
+		if (BaseLevel < 21) {
+			mes "[Halgus]";
+			mes "Novo por aqui, não é?";
+			mes "Bem, veja, eu gosto de ajudar os rostos novos por aqui.";
+			mes "E vamos ser sinceros, você não é o rosto mais bonito que já vi.";
+			next;
+			mes "[Halgus]";
+			mes "Mesmo assim, minha filha achou que seria divertido reunir Pupa por este campo e está se tornando desagradável.";
+			mes "Você se importaria de me ajudar a eliminar alguns Pupa para limpar este campo?";
+			next;
+			switch(select("Sure, I don't mind:No")) {
+			case 1:
+				mes "[Halgus]";
+				mes "Sério? O que você gostaria de fazer para ajudar?";
+				next;
+				switch(select("Gather Items:Get rid of Pupa:Cancel")) {
+				case 1:
+					// Item turn in
+					mes "[Halgus]";
+					mes "Você pode coletar ^00CE0025 Crisálidas^000000 e trazê-las para mim? Prometo recompensá-lo bem.";
+					next;
+					switch(select("I have Chrysalis:What did you need?")) {
+					case 1:
+						if (countitem(915) > 24) {
+							mes "[Halgus]";
+							mes "Incrível, você encontrou tantas tão rápido.";
+							mes "Como prometi, dê-me as Crisálidas e eu o recompensarei com minha sabedoria.";
+							delitem 915,25; //Chrysalis
+							getexp 385,30;
+							close;
+						}
+						else {
+							mes "[Halgus]";
+							mes "Eu preciso de ^00CE0025 Crisálidas^000000 e nada menos, por favor.";
+							close;
+						}
+					case 2:
+						mes "[Halgus]";
+						mes "Eu preciso de ^00CE0025 Crisálidas^000000.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Halgus]";
+					mes "Muito obrigado!";
+					mes "De quantos você gostaria de se livrar?";
+					next;
+					switch(select("50 Pupa:100 Pupa:150 Pupa")) {
+					case 1:
+						mes "[Halgus]";
+						mes "Se você puder se livrar de 50 Pupa do campo, ficarei grato.";
+						setquest 60110;
+						close;
+					case 2:
+						mes "[Halgus]";
+						mes "Se você puder se livrar de 100 Pupa do campo, ficarei grato.";
+						setquest 60111;
+						close;
+					case 3:
+						mes "[Halgus]";
+						mes "Se você puder se livrar de 150 Pupa do campo, ficarei grato.";
+						setquest 60112;
+						close;
+					}
+				case 3:
+					mes "[Halgus]";
+					mes "Se mudar de ideia, por favor, volte.";
+					close;
+				}
+			case 2:
+				mes "[Halgus]";
+				mes "Se mudar de ideia, por favor, volte.";
+				close;
+			}
+		}
+		else {
+			mes "[Halgus]";
+			mes "Você provavelmente poderia me ajudar facilmente, mas quero dar caridade àqueles que não são tão fortes quanto você.";
+			close;
+		}
+	}
+	else {
+		mes "[Halgus]";
+		mes "Por favor, volte para mim quando estiver um pouco mais forte.";
+		close;
+	}
+}

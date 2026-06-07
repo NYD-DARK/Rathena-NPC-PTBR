@@ -1,0 +1,231 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Fluffs)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+gef_fild07,321,193,4	script	Langry#Fabre_Hunt	754,{
+	if (checkquest(60107) != -1) {
+		if (checkquest(60107,HUNTING) != 2 ) {
+			mes "[Langry]";
+			mes "Você terminou de caçar os 50 Fabres?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Langry]";
+				mes "Hmm, não acho que você tenha caçado 50 ainda...";
+				close;
+			case 2:
+				mes "[Langry]";
+				mes "Lembre-se, preciso de ajuda para caçar Fabres, então vá e cace 50 deles.";
+				close;
+			case 3:
+				mes "[Langry]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Langry]";
+					mes "Ok então, bem, volte aqui se mudar de ideia.";
+					erasequest 60107;
+					close;
+				case 2:
+					mes "[Langry]";
+					mes "Por favor, mate 50 Fabres.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Langry]";
+			mes "Incrível, você fez isso rapidamente.";
+			getexp 385,30;
+			erasequest 60107;
+			close;
+		}
+	}
+	if (checkquest(60108) != -1) {
+		if (checkquest(60108,HUNTING) != 2 ) {
+			mes "[Langry]";
+			mes "Você terminou de caçar os 50 Fabres?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Langry]";
+				mes "Hmm, não acho que você tenha caçado 100 ainda...";
+				close;
+			case 2:
+				mes "[Langry]";
+				mes "Lembre-se, preciso de ajuda para caçar Fabres, então vá e cace 100 deles.";
+				close;
+			case 3:
+				mes "[Langry]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Langry]";
+					mes "Ok então, bem, volte aqui se mudar de ideia.";
+					erasequest 60108;
+					close;
+				case 2:
+					mes "[Langry]";
+					mes "Por favor, mate 100 Fabres.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Langry]";
+			mes "Incrível, você fez isso rapidamente.";
+			getexp 385,30;
+			getexp 385,30;
+			erasequest 60108;
+			close;
+		}
+	}
+	if (checkquest(60109) != -1) {
+		if (checkquest(60109,HUNTING) != 2 ) {
+			mes "[Langry]";
+			mes "Você terminou de caçar os 150 Fabres?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Langry]";
+				mes "Hmm, não acho que você tenha caçado 150 ainda...";
+				close;
+			case 2:
+				mes "[Langry]";
+				mes "Lembre-se, preciso de ajuda para caçar Fabres, então vá e cace 150 deles.";
+				close;
+			case 3:
+				mes "[Langry]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Langry]";
+					mes "Ok então, bem, volte aqui se mudar de ideia.";
+					erasequest 60109;
+					close;
+				case 2:
+					mes "[Langry]";
+					mes "Por favor, mate 150 Fabres.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Langry]";
+			mes "Incrível, você fez isso rapidamente.";
+			getexp 385,30;
+			getexp 385,30;
+			getexp 385,30;
+			erasequest 60109;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 1) {
+		//for maximum level
+		if (BaseLevel < 21) {
+			mes "[Langry]";
+			mes "Você acha que pode me ajudar?";
+			mes "Por favor?";
+			next;
+			switch(select("Sure:No")) {
+			case 1:
+				mes "[Langry]";
+				mes "Sério?!";
+				mes "Isso é ótimo!";
+				next;
+				switch(select("Gather Items:Hunt Fabres:Cancel")) {
+				case 1:
+					// Item turn in
+					mes "[Langry]";
+					mes "Preciso coletar ^0000CE25 Felpa^000000 para";
+					mes "completar este projeto de serviço comunitário.";
+					mes "Sabe de uma coisa? Posso até te recompensar um pouco por me ajudar.";
+					next;
+					switch(select("I have some Fluff:What was that again?")) {
+					case 1:
+						if (countitem(914) > 24) {
+							mes "[Langry]";
+							mes "Obrigado pela Felpa. Isso me ajuda muito.";
+							mes "Ah, e aqui está, isso deve ajudar você a ficar mais forte, mais rápido!";
+							delitem 914,25; //Fluff
+							getexp 385,30;
+							close;
+						}
+						else {
+							mes "[Langry]";
+							mes "Não vejo nenhuma Felpa, espere, sim vejo, são as mentiras saindo da sua boca.";
+							close;
+						}
+					case 2:
+						mes "[Langry]";
+						mes "Preciso de ^00CE0025 Felpa^000000.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Langry]";
+					mes "Ah, ok, acho que você pode me ajudar caçando alguns Fabres.";
+					mes "Quantos você gostaria de caçar?";
+					next;
+					switch(select("50 Fabres:100 Fabres:150 Fabres")) {
+					case 1:
+						mes "[Langry]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60107;
+						close;
+					case 2:
+						mes "[Langry]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60108;
+						close;
+					case 3:
+						mes "[Langry]";
+						mes "Volte quando tiver terminado sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60109;
+						close;
+					}
+				case 3:
+					mes "[Langry]";
+					mes "Se você mudar de ideia, por favor, volte.";
+					close;
+				}
+			case 2:
+				mes "[Langry]";
+				mes "Se você mudar de ideia, por favor, volte.";
+				close;
+			}
+		}
+		else {
+			mes "[Langry]";
+			mes "Olá, meu nome é Langry.";
+			mes "Tenho que completar este serviço comunitário, mas sou preguiçoso demais.";
+			close;
+		}
+	}
+	else {
+		mes "[Langry]";
+		mes "Você pode muito bem ser a pessoa mais improvável de todas, recicle alguns Fabres e volte.";
+		close;
+	}
+}
+
+

@@ -1,0 +1,245 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Antelope Horns)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+ein_fild06,82,171,0	script	Vegetable Farmer#Goat	919,{
+	if (checkquest(60137) != -1) {
+		if (checkquest(60137,HUNTING) != 2 ) {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Você terminou de caçar as 50 Cabras?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Hmm, acho que você ainda não caçou 50.";
+				close;
+			case 2:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Lembre-se, preciso de ajuda para caçar Cabras, então vá e caçe 50 delas.";
+				close;
+			case 3:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Tem certeza de que quer parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Fazendeiro de Vegetais]";
+					mes "Ok então, volte aqui se mudar de ideia.";
+					erasequest 60137;
+					close;
+				case 2:
+					mes "[Fazendeiro de Vegetais]";
+					mes "Por favor, mate 50 Cabras para que eu possa cultivar meus vegetais sem preocupações.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 258489,155155;
+			erasequest 60137;
+			close;
+		}
+	}
+	if (checkquest(60138) != -1) {
+		if (checkquest(60138,HUNTING) != 2) {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Você terminou de caçar as 100 Cabras?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Hmm, acho que você ainda não caçou 100.";
+				close;
+			case 2:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Lembre-se, preciso de ajuda para caçar Cabras, então vá e caçe 100 delas.";
+				close;
+			case 3:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Tem certeza de que quer parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Fazendeiro de Vegetais]";
+					mes "Ok então, volte aqui se mudar de ideia.";
+					erasequest 60138;
+					close;
+				case 2:
+					mes "[Fazendeiro de Vegetais]";
+					mes "Por favor, mate 100 Cabras para que eu possa cultivar meus vegetais sem preocupações.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 258489,155155;
+			getexp 258489,155155;
+			erasequest 60138;
+			close;
+		}
+	}
+	if (checkquest(60139) != -1) {
+		if (checkquest(60139,HUNTING) != 2) {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Você terminou de caçar as 150 Cabras?";
+			next;
+			switch(select("Yes:No:I want to quit")) {
+			case 1:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Hmm, acho que você ainda não caçou 150.";
+				close;
+			case 2:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Lembre-se, preciso de ajuda para caçar Cabras, então vá e caçe 150 delas.";
+				close;
+			case 3:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Tem certeza de que quer parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado.";
+				next;
+				switch(select("Yes:No")) {
+				case 1:
+					mes "[Fazendeiro de Vegetais]";
+					mes "Ok então, volte aqui se mudar de ideia.";
+					erasequest 60139;
+					close;
+				case 2:
+					mes "[Fazendeiro de Vegetais]";
+					mes "Por favor, mate 150 Cabras para que eu possa cultivar meus vegetais sem preocupações.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 258489,155155;
+			getexp 258489,155155;
+			getexp 258489,155155;
+			erasequest 60139;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 69) {
+		//for maximum level
+		if (BaseLevel < 85) {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Oh, ótimo!";
+			mes "Você está aqui para me ajudar, certo?";
+			mes "Se não, então estou em uma situação terrível.";
+			next;
+			switch(select("Sure:No")) {
+			case 1:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Essas Cabras continuam comendo meus vegetais.";
+				mes "Pode fazer o que puder para me ajudar?";
+				next;
+				switch(select("Gather Items:Hunt Goats:Cancel")) {
+				case 1:
+					// Item turn in
+					mes "[Fazendeiro de Vegetais]";
+					mes "Preciso de ^FF0000Chifres de Antílope^000000 para provar seu trabalho árduo, e eu o recompensarei.";
+					next;
+					switch(select("I have Antelope Horns:What did you need?")) {
+					case 1:
+						/*
+						if (checkweight(504,10) == 0) {
+							mes "[Fazendeiro de Vegetais]";
+							mes "Ei, parece que o peso em";
+							mes "suas costas vai esmagá-lo. Volte";
+							mes "depois que tiver perdido algum peso.";
+							close;
+						}
+						*/
+						if (countitem(7106) > 49) {
+							mes "[Fazendeiro de Vegetais]";
+							mes "Incrível, você fez isso com rapidez.";
+							mes "Sou verdadeiramente grato.";
+							delitem 7106,50; //Goat's_Horn
+							getexp 258489,155155;
+							//getitem 504,10; //White_Potion
+							close;
+						}
+						else {
+							mes "[Fazendeiro de Vegetais]";
+							mes "Não parece que você tem o suficiente.";
+							next;
+							mes "[Fazendeiro de Vegetais]";
+							mes "Preciso ver que você coletou ^FF000050 Chifres de Antílope^000000, e então poderei recompensá-lo.";
+							close;
+						}
+					case 2:
+						mes "[Fazendeiro de Vegetais]";
+						mes "Preciso ver que você coletou ^FF000050 Chifres de Antílope^000000, e então poderei recompensá-lo.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Fazendeiro de Vegetais]";
+					mes "Obrigado.";
+					mes "Quantas Cabras você gostaria de caçar?";
+					next;
+					switch(select("50 Goats:100 Goats:150 Goats")) {
+					case 1:
+						mes "[Fazendeiro de Vegetais]";
+						mes "Mate 50 daquelas Cabras e me avise quando terminar. Recompensarei seus esforços.";
+						setquest 60137;
+						close;
+					case 2:
+						mes "[Fazendeiro de Vegetais]";
+						mes "Mate 100 daquelas Cabras e me avise quando terminar. Recompensarei seus esforços.";
+						setquest 60138;
+						close;
+					case 3:
+						mes "[Fazendeiro de Vegetais]";
+						mes "Mate 150 daquelas Cabras e me avise quando terminar. Recompensarei seus esforços.";
+						setquest 60139;
+						close;
+					}
+				case 3:
+					mes "[Fazendeiro de Vegetais]";
+					mes "Se mudar de ideia, por favor, volte.";
+					close;
+				}
+			case 2:
+				mes "[Fazendeiro de Vegetais]";
+				mes "Se mudar de ideia, por favor, volte.";
+				close;
+			}
+		}
+		else {
+			mes "[Fazendeiro de Vegetais]";
+			mes "Oh, puxa, oh, puxa!";
+			next;
+			mes "[Fazendeiro de Vegetais]";
+			mes "Desculpe, não posso conversar agora, estou em uma situação terrível aqui, essas malditas Cabras vão me matar.";
+			close;
+		}
+	}
+	else {
+		mes "[Fazendeiro de Vegetais]";
+		mes "Meus vegetais, para onde todos foram?";
+		mes "Oh, não... não!!!";
+		close;
+	}
+}
+
