@@ -1,0 +1,274 @@
+//===== rAthena Script =======================================
+//= Renters
+//===== Description: =========================================
+//= [Official Conversion]
+//= Renewal-specific breeder NPCs.
+//===== Changelogs: ==========================================
+//= 2.1 Moved some renters to a separate renewal file. [Daegaladh]
+//= 2.2 Updated to match the official scripts. [Euphy]
+//= 2.3 Added fourth class support. [Emistry]
+//============================================================
+
+// Dragon Breeder :: dragon
+//============================================================
+job3_rune01,88,62,5	script	Dragon Breeder	105,{
+	mes "[Criador de Dragões]";
+	if ((eaclass()&EAJ_THIRDMASK)==EAJ_RUNE_KNIGHT) {
+		mes "Bem-vindo. Você gostaria de alugar um Dragão?";
+		next;
+		switch(select("Yes:No")) {
+		case 1:
+			//if (!getskilllv("RK_DRAGONTRAINING")) {
+			if (!getskilllv("KN_RIDING")) {
+				mes "[Criador de Dragões]";
+				mes "Por favor, aprenda a montar em um Dragão primeiro.";
+				close;
+			}
+			else if (checkdragon()) {
+				mes "[Criador de Dragões]";
+				mes "Você já tem um Dragão.";
+				close;
+			}
+			else if (ismounting()) {
+				mes "[Criador de Dragões]";
+				mes "Por favor, remova sua montaria de rops.";
+				close;
+			}
+			setdragon;
+			close;
+		case 2:
+			mes "[Criador de Dragões]";
+			mes "Entendo. Então, tenha um ótimo dia.";
+			close;
+		}
+	}
+	mes "O que você está fazendo aqui?";
+	mes "Apenas Cavaleiros Rúnicos podem alugar um Dragão.";
+	close;
+}
+
+// Dragon/Gryphon Master :: dragon
+//============================================================
+prontera,130,213,5	script	Riding Creature Master	105,{
+	mes "[Mestre de Montarias]";
+	if ((eaclass()&EAJ_THIRDMASK)==EAJ_RUNE_KNIGHT) {
+		mes "Bem-vindo. Você gostaria de alugar um Dragão?";
+		next;
+		switch(select("Yes:No")) {
+		case 1:
+			//if (!getskilllv("RK_DRAGONTRAINING")) {
+			if (!getskilllv("KN_RIDING")) {
+				mes "[Mestre de Montarias]";
+				mes "Por favor, aprenda a montar em um Dragão primeiro.";
+				close;
+			}
+			else if (checkdragon()) {
+				mes "[Mestre de Montarias]";
+				mes "Você já tem um Dragão.";
+				close;
+			}
+			else if (ismounting()) {
+				mes "[Mestre de Montarias]";
+				mes "Por favor, remova sua montaria de rops.";
+				close;
+			}
+			setdragon;
+			close;
+		case 2:
+			mes "[Mestre de Montarias]";
+			mes "Entendo. Então, tenha um ótimo dia.";
+			close;
+		}
+	}
+	if ((eaclass()&EAJ_THIRDMASK)==EAJ_ROYAL_GUARD) {
+		mes "Bem-vindo. Você gostaria de alugar um Grifo?";
+		next;
+		switch(select("Yes:No")) {
+		case 1:
+			if (!getskilllv("KN_RIDING")) {
+				mes "[Mestre de Montarias]";
+				mes "Por favor, aprenda a montar em um Grifo primeiro.";
+				close;
+			}
+			else if (checkriding()) {
+				mes "[Mestre de Montarias]";
+				mes "Você já tem um Grifo.";
+				close;
+			}
+			else if (ismounting()) {
+				mes "[Mestre de Montarias]";
+				mes "Por favor, remova sua montaria de rops.";
+				close;
+			}
+			setriding;
+			close;
+		case 2:
+			mes "[Mestre de Montarias]";
+			mes "Entendo. Então, tenha um ótimo dia.";
+			close;
+		}
+	}
+	mes "Estou aqui para fornecer montarias para Cavaleiros Rúnicos e Guardiões Reais.";
+	close;
+}
+geffen,100,55,3	duplicate(Riding Creature Master)	Riding Creature Master#2	105
+payon,166,102,5	duplicate(Riding Creature Master)	Riding Creature Master#3	105
+aldebaran,133,109,5	duplicate(Riding Creature Master)	Riding Creature Master#4	105
+yuno,171,187,3	duplicate(Riding Creature Master)	Riding Creature Master#5	105
+rachel,106,130,5	duplicate(Riding Creature Master)	Riding Creature Master#6	105
+
+// Peco removing NPC :: dragon
+//============================================================
+prontera,125,208,5	script	Peco Peco Remover	105,{
+	mes "[Soldado]";
+	mes "Se você não conseguir desmontar de um Peco Peco";
+	mes "por algum motivo desconhecido,";
+	mes "por favor, sinta-se à vontade para usar meus serviços.";
+	if (checkriding()) {
+		next;
+		mes "[Soldado]";
+		mes "Você está montado em um Peco Peco.";
+		mes "Você gostaria de desmontar?";
+		next;
+		switch(select("Yes:No")) {
+		case 1:
+			setriding 0;
+			mes "[Soldado]";
+			mes "Diga-me, como é a sensação de";
+			mes "pisar no chão com seus próprios";
+			mes "pés novamente?";
+			close;
+		case 2:
+			mes "[Soldado]";
+			mes "Entendo. Por favor, sinta-se à vontade para me procurar";
+			mes "se mudar de ideia.";
+			close;
+		}
+	}
+	close;
+}
+
+// Mado Gear Renter :: madogear
+//============================================================
+-	script	::mgm	-1,{
+	mes "[Armeiro de Mado Gear]";
+	if ((eaclass()&EAJ_THIRDMASK)==EAJ_MECHANIC) {
+		mes "Bem-vindo, Mecânico.";
+		mes "Você gostaria de alugar um Carrinho ou";
+		mes "montar um Mado Gear?";
+		next;
+		switch(select("Rent a Pushcart:Ride a Mado Gear:Buy Emergency Mado Gear:Upgrade Cooling Device:Cancel")) {
+		case 1:
+			if (checkcart()) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Sinto muito, mas você já";
+				mes "tem um Carrinho.";
+				close;
+			}
+			setcart;
+			mes "[Armeiro de Mado Gear]";
+			mes "Aqui está!";
+			close;
+		case 2:
+			if (checkmadogear()) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Sinto muito, mas você já está";
+				mes "montado em um Mado Gear.";
+				close;
+			}
+			else if (!getskilllv("NC_MADOLICENCE")) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Por favor, aprenda a habilidade para obter a Licença de Mado Gear primeiro.";
+				close;
+			}
+			else if(ismounting()) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Por favor, remova sua montaria de rops.";
+				close;
+			}
+			setmadogear;
+			mes "[Armeiro de Mado Gear]";
+			mes "Divirta-se e volte sempre!";
+			close;
+		case 3:
+			mes "[Armeiro de Mado Gear]";
+			mes "O Mado Gear de Emergência é muito útil para situações de emergência e é vendido por 1.000.000 de Zenys.";
+			next;
+			if (select("Purchase:Cancel") == 2) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Entendo. Por favor, sinta-se à vontade para me procurar";
+				mes "se mudar de ideia.";
+				close;
+			}
+			if (countitem(23277) > 0) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Sinto muito, mas você já possui um Mado Gear de Emergência.";
+				close;
+			}
+			if (Zeny < 1000000) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Sinto muito, mas você não tem Zenys suficientes para comprar o Mado Gear de Emergência.";
+				close;
+			}
+			Zeny -= 1000000;
+			getitem 23277,1; //Mado_Box
+			mes "[Armeiro de Mado Gear]";
+			mes "Aqui está!";
+			close;
+		case 4:
+			mes "[Armeiro de Mado Gear]";
+			mes "Qual dispositivo você deseja aprimorar?";
+			next;
+			if (select("Cooling Device:High Quality Cooler") == 1) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Aprimorar o Dispositivo de Resfriamento para Refrigerador de Alta Qualidade requer 1 Dispositivo de Resfriamento e 2.000.000 de Zenys.";
+				next;
+				.@itemid = 2804;
+				.@cost = 2000000;
+			} else {
+				mes "[Armeiro de Mado Gear]";
+				mes "Aprimorar o Refrigerador de Alta Qualidade para Refrigerador Especial requer 1 Refrigerador de Alta Qualidade e 4.000.000 de Zenys.";
+				next;
+				.@itemid = 2809;
+				.@cost = 4000000;
+			}
+			if (select("Upgrade:Cancel") == 2) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Entendo. Por favor, sinta-se à vontade para me procurar";
+				mes "se mudar de ideia.";
+				close;
+			}
+			if (!countitem(.@itemid)) {
+				mes "[Armeiro de Mado Gear]";
+				mes "I'm sorry, but you don't have the " + getitemname(.@itemid) + ".";
+				close;
+			}
+			if (Zeny < .@cost) {
+				mes "[Armeiro de Mado Gear]";
+				mes "Sinto muito, mas você não tem Zenys suficientes para aprimorar o dispositivo.";
+				close;
+			}
+			Zeny -= .@cost;
+			delitem .@itemid,1;
+			getitem (.@itemid == 2804 ? 2809 : 2810),1; //High_Quality_Cooler,Special_Cooler
+			mes "[Armeiro de Mado Gear]";
+			mes "Here you are! Your very own " + getitemname(.@itemid) + ".";
+			close;
+		case 5:
+			close;
+		}
+	}
+	mes "Como posso ajudar?";
+	mes "Mado Gears só estão disponíveis para Mecânicos.";
+	close;
+}
+prontera,163,178,3	duplicate(mgm)	Mado Gear Armorer#prt	105
+geffen,103,55,5	duplicate(mgm)	Mado Gear Armorer#gef	105
+payon,166,106,5	duplicate(mgm)	Mado Gear Armorer#pay	105
+aldebaran,133,112,5	duplicate(mgm)	Mado Gear Armorer#alde	105
+yuno,167,187,3	duplicate(mgm)	Mado Gear Armorer#yuno	105
+rachel,106,134,5	duplicate(mgm)	Mado Gear Armorer#ra	105
+dicastes01,187,207,3	duplicate(mgm)	Mado Gear Armorer#dic	105
+manuk,273,212,5	duplicate(mgm)	Mado Gear Armorer#man	105
+splendide,180,174,5	duplicate(mgm)	Mado Gear Armorer#spl	105
+mid_camp,242,243,3	duplicate(mgm)	Mado Gear Armorer#mid	105

@@ -1,0 +1,121 @@
+//===== rAthena Script ======================================= 
+//= Alchemist Shop
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Merchants for Alchemist Materials and Manuals.
+//===== Additional Comments: ================================= 
+//= 1.0 Split Geneticist shop from main file. [Euphy]
+//=     Updated dialogue to match the official script.
+//============================================================ 
+
+// Main NPC :: craft_book_alche_skill_npc
+//============================================================
+alde_alche,31,186,3	script	Craft Book Merchant#alde	883,{
+	mes "[Mercador de Livros de Criação]";
+	mes "Bem-vindo.";
+	mes "Estou aqui para vender";
+	mes "^0000FFlivros de criação especiais^000000 para Bioquímicos.";
+	next;
+	mes "[Mercador de Livros de Criação]";
+	mes "Bioquímicos possuem algumas habilidades";
+	mes "que exigem livros de criação para serem ativadas.";
+	next;
+	mes "[Mercador de Livros de Criação]";
+	mes "Quanto mais livros de criação você tiver,";
+	mes "mais habilidades você poderá usar.";
+	next;
+	mes "[Mercador de Livros de Criação]";
+	mes "Por favor, entenda que";
+	mes "eu me especializo na venda destes livros especiais e";
+	mes "eu ^FF0000não vendo outros itens^000000.";
+	next;
+	mes "[Mercador de Livros de Criação]";
+	mes "Gostaria de dar uma olhada nos meus livros de criação?";
+	next;
+	if(select("Sure.:No.") == 2) {
+		mes "[Mercador de Livros de Criação]";
+		mes "Obrigado por visitar minha loja.";
+		mes "Por favor, tome cuidado em suas viagens.";
+		close;
+	}
+	if (checkweight(1201,1) == 0) {
+		mes "[Mercador de Livros de Criação]";
+		mes "Sinto muito, mas seu inventário está quase cheio.";
+		mes "Por favor, esvazie seu inventário primeiro.";
+		close;
+	}
+	if (MaxWeight - Weight < 2500) {
+		mes "[Mercador de Livros de Criação]";
+		mes "Por favor, esvazie seu inventário primeiro.";
+		close;
+	}
+	mes "[Mercador de Livros de Criação]";
+	mes "Certo então, aqui está a lista de livros de criação disponíveis.";
+	next;
+	switch(select("[Apple Bomb Craft Book] 100,000 zeny:[Pineapple Bomb Craft Book] 100,000 zeny:[Coconut Bomb Craft Book] 100,000 zeny:[Melon Bomb Craft Book] 100,000 zeny:[Banana Bomb Craft Book] 100,000 zeny:[Plant Gene Cultivation Method] 100,000 zeny:[Superior Potion Craft Manual] 100,000 zeny:[Mix Cooking Book] 100,000 zeny:[Health Improvement Research Book] 100,000 zeny:[Vigor Drink Recipe] 100,000 zeny:Close")){
+	case 1: set .@item,6279; break;
+	case 2: set .@item,6280; break;
+	case 3: set .@item,6281; break;
+	case 4: set .@item,6282; break;
+	case 5: set .@item,6283; break;
+	case 6: set .@item,6284; break;
+	case 7: set .@item,6285; break;
+	case 8: set .@item,11022; break;
+	case 9: set .@item,11023; break;
+	case 10: set .@item,11024; break;
+	case 11:
+		mes "[Mercador de Livros de Criação]";
+		mes "Obrigado pela preferência.";
+		mes "Volte sempre.";
+		close;
+	}
+	mes "[Mercador de Livros de Criação]";
+	mes "^0000FF["+getitemname(.@item)+"] costs";
+	mes "100.000 zenys.";
+	mes "Quantos você gostaria de comprar?";
+	next;
+	input .@amount;
+	if (.@amount == 0) {
+		mes "[Mercador de Livros de Criação]";
+		mes "Gostaria de ver livros diferentes?";
+		close;
+	}
+	if (.@amount < 1 || .@amount > 99 ){
+		mes "[Mercador de Livros de Criação]";
+		mes "Você não pode comprar mais do que 100 de uma vez.";
+		close;
+	}
+	mes "[Mercador de Livros de Criação]";
+	mes "You've entered "+.@amount+"x ^0000FF["+getitemname(.@item)+"]^000000 to be purchased.";
+	mes "Gostaria de continuar?";
+	next;
+	if (select("Yes:No") == 1) {
+		set .@total, .@amount * 100000;
+		if (Zeny < .@total) {
+			mes "[Mercador de Livros de Criação]";
+			mes "Sinto muito, mas você não tem zenys suficientes.";
+			close;
+		}
+		if (checkweight(.@item,.@amount) == 0){
+			mes "[Mercador de Livros de Criação]";
+			mes "Não parece que você pode carregar tudo.";
+			mes "Por favor, verifique o espaço no seu inventário.";
+			close;
+		}
+		mes "[Mercador de Livros de Criação]";
+		mes "Obrigado pela preferência.";
+		set Zeny,Zeny - .@total;
+		getitem .@item,.@amount;
+		close;
+	}
+	mes "[Mercador de Livros de Criação]";
+	mes "Por favor, leve o tempo que precisar";
+	mes "antes de tomar sua decisão.";
+	close;
+}

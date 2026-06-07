@@ -1,0 +1,152 @@
+//===== rAthena Script =======================================
+//= Arrow Quivers
+//===== By: ==================================================
+//= Muad_Dib (Prometheus Project); L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Turns arrows into Arrow Quivers.
+//= Breakdown of Subroutine "S_BuyQuiver"
+//= arg(0): Type of Arrow to be packaged (item ID).
+//= arg(1): How many of each 'getarg(0)' arrow per quiver.
+//= arg(2): The cost of making a 'getarg(0)' quiver.
+//= arg(3): The quiver given by the NPC (item ID).
+//===== Additional Comments: =================================
+//= 1.0 Added Mora NPC. [Euphy]
+//= 1.1 Updated to match the official scripts. [Euphy]
+//= 1.2 Update regarding the Barter Shop [JohnnyPlayy, Capuche]
+//============================================================
+
+// Mora :: ep14_1_tre
+//============================================================
+mora,106,117,3	script	Quiver Maker#mora	4_M_RAFLE_GR,{
+	if (checkweight(1201,1) == 0) {
+		mes "[Fabricante de Aljavas]";
+		mes "Você está carregando coisas demais.";
+		mes "Abra um espaço em seu inventário e volte. Vou lhe contar algo interessante.";
+		close;
+	}
+	if (MaxWeight - Weight < 2000) {
+		mes "[Fabricante de Aljavas]";
+		mes "Você parece exausto com toda essa bagagem.";
+		mes "Abra um espaço em seu inventário e volte. Vou lhe contar algo interessante.";
+		close;
+	}
+	mes "[Fabricante de Aljavas]";
+	mes "Os moradores de Mora perguntam para que servem as aljavas. Eles simplesmente não entendem como o mundo funciona.";
+	mes "Não é de se admirar que não saibam nada sobre aljavas - passam o dia todo espalhando geleia em folhas.";
+	next;
+	if (getbattleflag("feature.barter")) {
+		.@menu$ = "I want arrows";
+	}
+	switch( select("Please make me a quiver.", .@menu$, "What's a quiver?") ) {
+	case 1:
+		if (getbattleflag("feature.barter")) {
+			mes "[Fabricante de Aljavas]";
+			mes "Finalmente, apareceu alguém que conhece o verdadeiro valor de uma aljava. Farei isso para aqueles que reconhecem seu valor.";
+			close2;
+			callshop "Quiver_Archer", 1;
+			end;
+		}
+		mes "[Fabricante de Aljavas]";
+		mes "Finalmente alguém que valoriza uma aljava!";
+		mes "Posso fazer Aljavas Élficas e Aljavas de Caça.";
+		mes "De qual você precisa?";
+		next;
+		switch(select("An Elven Quiver:A Hunting Quiver:I don't need a quiver.")) {
+		case 1: callsub S_BuyQuiver,1773,500,500,12575; //Arrow_Of_Elf_Cntr
+		case 2: callsub S_BuyQuiver,1774,500,500,12576; //Hunting_Arrow_Cntr
+		case 3:
+			mes "[Fabricante de Aljavas]";
+			mes "Você pode comprar flechas do mercador de utilidades ao meu lado.";
+			close;
+		}
+		end;
+	case 2:
+		if (getbattleflag("feature.barter")) {
+			mes "[Fabricante de Aljavas]";
+			mes "Eu não vendo flechas comuns. Estas são flechas artesanais que só podem ser compradas aqui. Você realmente reconheceria o valor delas, não é?";
+			close2;
+			callshop "Catch_Arrows", 1;
+		}
+		end;
+	case 3:
+		mes "[Fabricante de Aljavas]";
+		mes "Uma flecha pode ser fina e leve, mas carregar centenas ou milhares de flechas é como carregar um tronco inteiro.";
+		next;
+		mes "[Fabricante de Aljavas]";
+		mes "Mas quando você tem aljavas, você pode colocar as flechas nelas e economizar peso e espaço.";
+		mes "Se estiver interessado em uma, posso costurar uma para você.";
+		close;
+	}
+	end;
+
+S_BuyQuiver:
+	.@item_req = getarg(0);
+	.@req_amount = getarg(1);
+	if (countitem(getarg(0)) < .@req_amount) {
+		mes "[Fabricante de Aljavas]";
+		mes "Bring more than "+ .@req_amount +" "+ getitemname(.@item_req) +" and I'll make you a quiver.";
+		close;
+	}
+	mes "[Fabricante de Aljavas]";
+	mes "Oh, I see you have "+ getitemname(.@item_req) +" in your hand!";
+	mes "Você tem interesse em usar uma aljava? É muito conveniente!";
+	mes "If you're interested, I can trade "+ .@req_amount +" of those arrows for one of these quivers for ^FF3131"+getarg(2)+" zeny^000000.";
+	next;
+	switch(select("Trade all the arrows you have:Get only one quiver:Don't trade")) {
+	case 1:
+		set .@arrows, countitem(.@item_req);
+		set .@quiver, .@arrows / .@req_amount;
+		set .@arrows_used, .@quiver * .@req_amount;
+		set .@arrow_zeny01, .@quiver * getarg(2);
+		mes "The number of arrows you have : ^3131FF"+.@arrows+"^000000";
+		mes "The number of quivers available : ^3131FF"+.@quiver+"^000000";
+		mes "Zeny needed for trade : ^3131FF"+.@arrow_zeny01+" zeny^000000";
+		next;
+		mes "Negociar?";
+		next;
+		if(select("Trade:Don't trade") == 2) {
+			mes "[Fabricante de Aljavas]";
+			mes "Ei, você não duvida das minhas habilidades, duvida?";
+			close;
+		}
+		break;
+	case 2:
+		set .@quiver, 1;
+		set .@arrows_used, .@req_amount;
+		set .@arrow_zeny01, getarg(2);
+		set .@zeny_mes,1;
+		break;
+	case 3:
+		mes "[Fabricante de Aljavas]";
+		mes "Ei, você não duvida das minhas habilidades, duvida?";
+		close;
+	}
+	if (Zeny < .@arrow_zeny01) {
+		mes "[Fabricante de Aljavas]";
+		if (.@zeny_mes == 1)
+			mes "Eu disse que aceitaria moedas humanas só por você, e você ainda não quer gastar o dinheiro?";
+		else
+			mes "Você realmente não espera conseguir uma obra-prima de graça, espera?";
+		close;
+	}
+	mes "[Fabricante de Aljavas]";
+	mes "Ei, aqui está.";
+	mes "Há ^3131FFalgo que você precisa saber^000000 - tente se lembrar disso.";
+	mes "^FF0000Você não pode usar aljavas quando seu peso estiver acima de 70%.^000000";
+	mes "É melhor manter isso em mente, ou você pode ter problemas mais tarde.";
+	set Zeny, Zeny-.@arrow_zeny01;
+	delitem .@item_req,.@arrows_used;
+	getitem getarg(3),.@quiver;
+	close;
+}
+
+//= Basic Shops
+//============================================================
+
+//= Arrows
+-	marketshop	Catch_Arrows	HIDDEN_NPC,1773:5:-1,1774:5:-1
