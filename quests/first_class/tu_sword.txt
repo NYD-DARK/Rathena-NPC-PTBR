@@ -1,0 +1,2497 @@
+//===== rAthena Script ======================================= 
+//= Swordman Class Tutorial and Job Specific Quest
+//===== By: ================================================== 
+//= Fix up by Jukka
+//===== Current Version: ===================================== 
+//= 1.6
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Swordman training quest.
+//===== Additional Comments: ================================= 
+//= 1.0 Fully working
+//= 1.1 optimized [Lupus]
+//= 1.2 Fixed a typo on NPC name. [SinSloth]
+//= 1.3 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.4 Misc. updates. [L0ne_W0lf]
+//= 1.5 Added Renewal Izlude coordinates.
+//= 1.6 Added Pre-Renewal support. [Euphy]
+//============================================================ 
+
+// Shurank
+//============================================================
+izlude_in,82,163,3	script	Shurank	733,{
+	mes "[Shurank]";
+	if(Class == Job_Novice || Class == Job_Baby){
+		mes "Ainda se perguntando";
+		mes "o que fazer com";
+		mes "o seu futuro, hein?";
+		next;
+		mes "[Shurank]";
+		mes "Se me permite ser ousado,";
+		mes "sugiro que você siga";
+		mes "o caminho da força.";
+		mes "Torne-se... um Espadachim.";
+		next;
+		mes "[Shurank]";
+		mes "Se deseja arriscar sua vida no caminho da espada, fale com o representante da Associação de Espadachins à esquerda.";
+		next;
+		mes "[Shurank]";
+		mes "Faça o que fizer,";
+		mes "espero que viva sua vida sem arrependimentos. E se por acaso se tornar um Espadachim,";
+		mes "volte para mim...";
+		close;
+	}
+	if(BaseClass == Job_Swordman && (eaclass()&(EAJL_2|EAJL_UPPER|EAJL_THIRD))){
+		mes "Pelas suas vestes,";
+		mes "vejo que você é";
+		if(Sex == SEX_MALE)
+			mes "um homem da espada.";
+		else
+			mes "uma mulher da espada.";
+		mes "Seus olhos me dizem que";
+		mes "você já viu muitas batalhas.";
+		next;
+		mes "[Shurank]";
+		mes "Não há nada que eu possa lhe ensinar. Mas se conhecer novos Espadachins que demonstrem potencial, por favor, envie-os até mim.";
+		close;
+	}
+	if(BaseClass != Job_Swordman){
+		mes "Saudações, aventureiro.";
+		mes "Se por acaso conhecer";
+		mes "algum novo Espadachim,";
+		mes "por favor, envie-os até mim.";
+		next;
+		mes "[Shurank]";
+		mes "Minha especialidade é ensinar os fundamentos da Classe Espadachim para recrutas inexperientes que acabaram de realizar a mudança de Classe.";
+		next;
+		mes "[Shurank]";
+		mes "Embora fosse ótimo se todos pudessem empunhar uma espada,";
+		mes "receio que não haja nada que eu possa lhe ensinar efetivamente. Os métodos da sua Classe são...";
+		mes "estranhos para mim.";
+		close;
+	}
+	switch(tu_swordman){
+	case 23:
+		mes "Saudações, meu amigo.";
+		mes "Não há mais nada";
+		mes "que eu possa lhe ensinar...";
+		next;
+		mes "[Shurank]";
+		mes "Para melhorar suas habilidades,";
+		mes "você deve explorar este vasto mundo e vivenciar todo tipo de situação de batalha. E sempre se dedique ao seu treinamento.";
+		close;
+	case 22:
+		mes "Esta será minha";
+		mes "última lição para você.";
+		mes "Por favor, escute com atenção";
+		mes "enquanto lhe conto tudo sobre";
+		mes "Impacto Explosivo.";
+		next;
+		mes "[Shurank]";
+		mes "Impacto Explosivo, dominado no Nível de Habilidade 10, requer ^5D478BGolpe Fulminante Nível 5^000000. Quando usada, esta habilidade causa dano em área aos inimigos ao redor do usuário.";
+		next;
+		mes "[Shurank]";
+		mes "Inimigos atingidos pelo Impacto Explosivo";
+		mes "serão empurrados por um ataque de propriedade Fogo. Depois disso, sua arma causará temporariamente 20% a mais de dano com ataques de propriedade Fogo.";
+		next;
+		mes "[Shurank]";
+		mes "O Impacto Explosivo é ideal para usar";
+		mes "quando cercado por inimigos, mas lembre-se de que ele também causa um pouco de dano ao próprio usuário.";
+		next;
+		set .@chk_magnum, getskilllv("SM_MAGNUM");
+		if(.@chk_magnum > 5){
+			mes "[Shurank]";
+			mes "Vejo que você tem treinado o uso do Impacto Explosivo. Embora seja uma habilidade incrível, não é para todo Espadachim. Ainda assim, não há mal nenhum em aprendê-la.";
+			next;
+			mes "[Shurank]";
+			mes "Aqui está uma humilde recompensa por";
+			mes "seus grandes esforços. Mas não deixe que seus talentos o tornem arrogante!";
+			set tu_swordman, 23;
+			completequest 8228;
+			if (checkre(3))
+				getexp 186,0;
+			else
+				getexp 1860,0;
+			getitem 1113,1; //Scimiter
+			next;
+			mes "[Shurank]";
+			mes "Isso é tudo que tenho a lhe ensinar sobre as habilidades de Espadachim. Espero ter conseguido esclarecer tudo o que você não entendeu sobre sua Classe e habilidades.";
+			next;
+			mes "[Shurank]";
+			mes "Quanto ao assunto referente";
+			mes "àquele assassino, não está mais em nossas mãos. Neste momento, não há nada que possamos";
+			mes "fazer a respeito.";
+			next;
+			mes "[Shurank]";
+			mes "No entanto, eu gostaria";
+			mes "de pedir que você mantenha as";
+			mes "informações que você aprendeu";
+			mes "em segredo. Este assunto é considerado altamente confidencial...";
+			next;
+			mes "[Shurank]";
+			mes "De qualquer forma, não há necessidade de se preocupar mais com isso. Mas se precisarmos de assistência algum dia, lembrarei de pedir sua ajuda.";
+			next;
+			mes "[Shurank]";
+			mes "Você se saiu muito bem. Continue treinando e, se atingir o ^5D478BNível de Classe 40^000000, você poderá ser promovido a Cavaleiro ou Templário.";
+			next;
+			mes "[Shurank]";
+			mes "Bem...";
+			mes "Nós, Espadachins, geralmente não somos sentimentais, mas estou feliz por tê-lo conhecido. Faça o seu melhor e torne-se um Espadachim esplêndido.";
+			close;
+		}
+		mes "[Shurank]";
+		mes "Isso é tudo que tenho a lhe ensinar sobre as habilidades de Espadachim. Espero ter conseguido esclarecer tudo o que você não entendeu sobre sua Classe e habilidades.";
+		next;
+		mes "[Shurank]";
+		mes "Quanto ao assunto referente";
+		mes "àquele assassino, não está mais em nossas mãos. Neste momento, não há nada que possamos fazer a respeito.";
+		next;
+		mes "[Shurank]";
+		mes "No entanto, eu gostaria";
+		mes "de pedir que você mantenha as";
+		mes "informações que você aprendeu";
+		mes "em segredo. Este assunto é considerado altamente confidencial...";
+		next;
+		mes "[Shurank]";
+		mes "De qualquer forma, não há necessidade de se preocupar mais com isso. Mas se precisarmos de assistência algum dia, lembrarei de pedir sua ajuda.";
+		next;
+		mes "[Shurank]";
+		mes "Você se saiu muito bem. Continue treinando e, se atingir o ^5D478BNível de Classe 40^000000, você poderá ser promovido a Cavaleiro ou Templário.";
+		next;
+		mes "[Shurank]";
+		mes "Bem...";
+		mes "Nós, Espadachins, geralmente não somos sentimentais, mas estou feliz por tê-lo conhecido. Faça o seu melhor e torne-se um Espadachim esplêndido.";
+		next;
+		mes "[Shurank]";
+		mes "Antes de ir, por favor, pegue isto.";
+		mes "Espero que faça bom uso disso enquanto treina para ficar cada vez mais forte. Boa sorte lá fora.";
+		set tu_swordman, 23;
+		completequest 8228;
+		getitem 1113,1; //Scimiter
+		close;
+	case 21:
+		mes "Ah, você retornou. Acabei de receber um comunicado de";
+		mes "Dequ'ee. Parece que você tem trabalhado muito duro e que aproveitou ao máximo esta experiência.";
+		next;
+		mes "[Shurank]";
+		mes "Por enquanto, acredito que você se beneficiará aprendendo mais sobre as habilidades de Espadachim. Primeiro, deixe-me falar mais sobre as Especialidades com Espada.";
+		next;
+		mes "[Shurank]";
+		mes "Existem dois tipos diferentes:";
+		mes "^5D478BPerícia com Espada de Uma Mão^000000 e";
+		mes "^5D478BPerícia com Espada de Duas Mãos^000000. Ambas";
+		mes "são Habilidades Passivas que aumentam seu Poder de Ataque à medida que são evoluídas.";
+		next;
+		mes "[Shurank]";
+		mes "Perícia com Espada de Uma Mão";
+		mes "aumenta o dano de Adagas e Espadas de Uma Mão, enquanto Perícia com Espada de Duas Mãos aumenta o dano de Espadas de Duas Mãos.";
+		next;
+		set .@chk_hanson, getskilllv("SM_SWORD");
+		set .@chk_yangson, getskilllv("SM_TWOHAND");
+		if((.@chk_hanson > 9) || (.@chk_yangson > 9)){
+			mes "[Shurank]";
+			mes "Ah, pelo jeito que você maneja sua espada, vejo que você dominou uma Perícia com Espada. Estou realmente impressionado.";
+			next;
+			mes "[Shurank]";
+			mes "Deixe-me lhe dar";
+			mes "esta pequena recompensa";
+			mes "em reconhecimento";
+			mes "pela sua conquista.";
+			set tu_swordman, 22;
+			changequest 8227,8228;
+			if (checkre(3))
+				getexp 186,0;
+			else
+				getexp 1860,0;
+			next;
+			mes "[Shurank]";
+			mes "Na próxima vez, falarei mais sobre a habilidade Impacto Explosivo.";
+			mes "Estarei aqui quando você estiver pronto para aprender mais.";
+			close;
+		}
+		mes "[Shurank]";
+		mes "Na próxima vez, falarei mais sobre a habilidade Impacto Explosivo.";
+		mes "Estarei aqui quando você estiver pronto para aprender mais.";
+		set tu_swordman, 22;
+		close;
+	case 13:
+		mes "Você deve partir o mais rápido possível para encontrar Dequ'ee em Geffen. Você se lembra de onde encontrá-lo, não é?";
+		close;
+	case 12:
+		mes "Então, como tem ido o seu";
+		mes "treinamento para a habilidade";
+		mes "Vigor?";
+		next;
+		set .@chk_endure, getskilllv("SM_ENDURE");
+		if(.@chk_endure > 1){
+			mes "[Shurank]";
+			mes "Pelo brilho de resistência na sua pele, vejo agora que fui tolo em perguntar. Muito bem~";
+			set tu_swordman, 13;
+			erasequest 8221;
+			setquest 8222;
+			if (checkre(3))
+				getexp 126,0;
+			else
+				getexp 1260,0;
+			next;
+			mes "[Shurank]";
+			mes "Ah, mais uma vez, tenho";
+			mes "outra tarefa para você realizar. Por favor, visite Dequ'ee em Geffen, pois parece que ele tem algo";
+			mes "para lhe pedir.";
+			next;
+			mes "[Shurank]";
+			mes "Apresse-se para encontrar Dequ'ee e volte para mim quando terminar o que quer que ele deseje que você faça.";
+			close;
+		} else {
+			mes "[Shurank]";
+			mes "Hmm...";
+			mes "Você ainda não está";
+			mes "pronto. Nesse";
+			mes "meio tempo, eu o encorajo";
+			mes "a redobrar seus esforços!";
+			close;
+		}
+	case 11:
+		mes "Então, você já";
+		mes "aprendeu a usar";
+		mes "a habilidade Vigor?";
+		next;
+		set .@chk_endure, getskilllv("SM_ENDURE");
+		if((.@chk_endure > 0) && (.@chk_endure < 2)){
+			mes "[Shurank]";
+			mes "Vejo que você";
+			mes "sabe como usar a";
+			mes "habilidade Vigor. Ainda assim, não faria mal se eu revisasse os detalhes básicos sobre seu uso...";
+			next;
+			mes "[Shurank]";
+			mes "Como você notou, receber qualquer dano faz você recuar de dor, atordoando-o por um instante. Portanto, inimigos que atacam rapidamente são perigosos, pois é difícil contra-atacar ou escapar deles.";
+			next;
+			mes "[Shunrank]";
+			mes "Ativar o Vigor permite que você ignore os ataques. Você receberá dano, mas os ataques inimigos não o impedirão tanto. Isso significa que você pode contra-atacar ou escapar se precisar.";
+			next;
+			mes "[Shurank]";
+			mes "Claro, você não pode usar o Vigor para sempre. No entanto, quanto mais você aumenta o nível da habilidade";
+			mes "Vigor, mais tempo o efeito do Vigor durará. Além disso, lembre-se de que o Vigor também tem um atraso de habilidade.";
+			next;
+			mes "[Shurank]";
+			mes "Como você já aprendeu a habilidade Vigor, não acho que precise explicar mais nada. Você se saiu bem.";
+			erasequest 8221;
+			setquest 8222;
+			set tu_swordman, 13;
+			next;
+			mes "[Shurank]";
+			mes "Ah, mais uma vez, tenho";
+			mes "outra tarefa para você realizar. Por favor, visite Dequ'ee em Geffen, pois parece que ele tem algo";
+			mes "para lhe pedir.";
+			next;
+			mes "[Shurank]";
+			mes "Apresse-se para encontrar Dequ'ee e volte para mim quando terminar o que quer que ele deseje que você faça.";
+			close2;
+			end;
+		} else if(.@chk_endure > 1){
+			mes "[Shurank]";
+			mes "Pelo brilho de resistência na sua pele, vejo agora que fui tolo em perguntar. Muito bem~";
+			set tu_swordman, 13;
+			erasequest 8221;
+			setquest 8222;
+			if (checkre(3))
+				getexp 126,0;
+			else
+				getexp 1260,0;
+			next;
+			mes "[Shurank]";
+			mes "Ah, mais uma vez, tenho";
+			mes "outra tarefa para você realizar. Por favor, visite Dequ'ee em Geffen, pois parece que ele tem algo";
+			mes "para lhe pedir.";
+			next;
+			mes "[Shurank]";
+			mes "Apresse-se para encontrar Dequ'ee e volte para mim quando terminar o que quer que ele deseje que você faça.";
+			close;
+		} else {
+			mes "[Shurank]";
+			mes "Não...?";
+			mes "Recomendo que você a aprenda assim que puder. Vigor é uma habilidade inestimável para qualquer Espadachim!";
+			close;
+		}
+	case 10:
+		mes "Chegou a hora";
+		mes "de eu lhe contar";
+		mes "tudo o que sei sobre";
+		mes "a habilidade Vigor.";
+		next;
+		set .@chk_endure, getskilllv("SM_ENDURE");
+		if(.@chk_endure == 0){
+			mes "[Shurank]";
+			mes "Como você notou, receber qualquer dano faz você recuar de dor, atordoando-o por um instante. Portanto, inimigos que atacam rapidamente são perigosos, pois é difícil contra-atacar ou escapar deles.";
+			next;
+			mes "[Shunrank]";
+			mes "Ativar o Vigor permite que você ignore os ataques. Você receberá dano, mas os ataques inimigos não o impedirão tanto. Isso significa que você pode contra-atacar ou escapar se precisar.";
+			next;
+			mes "[Shurank]";
+			mes "Claro, você não pode usar o Vigor para sempre. No entanto, quanto mais você aumenta o nível da habilidade";
+			mes "Vigor, mais tempo o efeito do Vigor durará. Além disso, lembre-se de que o Vigor também tem um atraso de habilidade.";
+			next;
+			mes "[Shurank]";
+			mes "Muito bem. Agora quero que você treine o uso da habilidade Vigor. Você pode se tornar um grande Espadachim";
+			mes "se você conseguir suportar ataques";
+			mes "dos seus inimigos!";
+			set tu_swordman, 11;
+			changequest 8220,8221;
+			close;
+		} else if((.@chk_endure > 0) && (.@chk_endure < 2)){
+			mes "[Shurank]";
+			mes "Vejo que você";
+			mes "sabe como usar a";
+			mes "habilidade Vigor. Ainda assim, não faria mal se eu revisasse os detalhes básicos sobre seu uso...";
+			next;
+			mes "[Shurank]";
+			mes "Como você notou, receber qualquer dano faz você recuar de dor, atordoando-o por um instante. Portanto, inimigos que atacam rapidamente são perigosos, pois é difícil contra-atacar ou escapar deles.";
+			next;
+			mes "[Shurank]";
+			mes "Ativar o Vigor permite que você ignore os ataques. Você receberá dano, mas os ataques inimigos não o impedirão tanto. Isso significa que você pode contra-atacar ou escapar se precisar.";
+			next;
+			mes "[Shurank]";
+			mes "Claro, você não pode usar o Vigor para sempre. No entanto, quanto mais você aumenta o nível da habilidade";
+			mes "Vigor, mais tempo o efeito do Vigor durará. Além disso, lembre-se de que o Vigor também tem um atraso de habilidade.";
+			next;
+			mes "[Shurank]";
+			mes "Como você já aprendeu a habilidade Vigor, não acho que precise explicar mais nada. Você se saiu bem.";
+			set tu_swordman, 13;
+			erasequest 8221;
+			setquest 8222;
+			next;
+			mes "[Shurank]";
+			mes "Ah, mais uma vez, tenho";
+			mes "outra tarefa para você realizar. Por favor, visite Dequ'ee em Geffen, pois parece que ele tem algo";
+			mes "para lhe pedir.";
+			next;
+			mes "[Shurank]";
+			mes "Apresse-se para encontrar Dequ'ee e volte para mim quando terminar o que quer que ele deseje que você faça.";
+			close;
+		} else if(.@chk_endure > 1){
+			mes "[Shurank]";
+			mes "Hm. Mas, julgando pelo brilho de resistência na sua pele, suponho que lhe ensinar sobre Vigor seria uma perda de tempo. Muito bem!";
+			set tu_swordman, 13;
+			erasequest 8221;
+			setquest 8222;
+			if (checkre(3))
+				getexp 126,0;
+			else
+				getexp 1260,0;
+			next;
+			mes "[Shurank]";
+			mes "Ah, mais uma vez, tenho";
+			mes "outra tarefa para você realizar. Por favor, visite Dequ'ee em Geffen, pois parece que ele tem algo";
+			mes "para lhe pedir.";
+			next;
+			mes "[Shurank]";
+			mes "Apresse-se para encontrar Dequ'ee e volte para mim quando terminar o que quer que ele deseje que você faça.";
+			close;
+		}
+	case 9:
+		mes "Então, você tem";
+		mes "aprendido mais sobre";
+		mes "o uso da habilidade Provocar?";
+		next;
+		set .@chk_provoke, getskilllv("SM_PROVOKE");
+		if((.@chk_provoke > 4) && (.@chk_provoke < 10)){
+			mes "[Shurank]";
+			mes "Ah, vejo que você tem um bom entendimento da habilidade Provocar. Deixe-me recompensá-lo desta pequena forma pelos seus esforços.";
+			set tu_swordman, 10;
+			if (checkre(3))
+				getexp 112,0;
+			else
+				getexp 1120,0;
+			next;
+			mes "[Shurank]";
+			mes "Na próxima vez que falarmos, lhe direi o que sei sobre a habilidade ^5D478BVigor^000000. Quando estiver pronto para aprender, volte a mim.";
+			close;
+		} else if(.@chk_provoke == 10){
+			mes "[Shurank]";
+			mes "V-você dominou";
+			mes "Provocar? Impressionante!";
+			mes "Vejo que você se decidiu";
+			mes "a se tornar";
+			mes "um Espadachim notável.";
+			mes "Aqui está uma pequena recompensa...";
+			set tu_swordman, 10;
+			if (checkre(3))
+				getexp 126,0;
+			else
+				getexp 1260,0;
+			next;
+			mes "[Shurank]";
+			mes "Na próxima vez que falarmos, lhe direi o que sei sobre a habilidade ^5D478BVigor^000000. Quando estiver pronto para aprender, volte a mim.";
+			close;
+		} else {
+			mes "[Shurank]";
+			mes "Hmm, reconheço";
+			mes "seu progresso, mas você ainda não está pronto. Você precisa se tornar mais habilidoso em Provocar antes que";
+			mes "eu possa continuar minhas lições.";
+			close;
+		}
+	case 8:
+		mes "Ah, você retornou.";
+		mes "Então, como tem progredido seu treinamento";
+		mes "no uso da habilidade";
+		mes "Provocar?";
+		next;
+		set .@chk_provoke, getskilllv("SM_PROVOKE");
+		if((.@chk_provoke > 0) && (.@chk_provoke < 5)){
+			mes "[Shurank]";
+			mes "Ah, agora posso ver que você";
+			mes "sabe como usá-la. Isso é uma grande melhoria em relação a não conseguir usá-la de jeito nenhum. Deixe-me refrescar sua memória sobre os detalhes de Provocar.";
+			next;
+			mes "[Shurank]";
+			mes "Para usar o Provocar efetivamente, você deve entender";
+			mes "como funciona: Provocar enfurece seus oponentes, fazendo-os";
+			mes "querer atacar você.";
+			next;
+			mes "[Shurank]";
+			mes "Quando provocado, um inimigo terá maior força de ataque, tornando-o mais perigoso, mas também terá defesa reduzida, tornando seu inimigo mais fácil de derrotar.";
+			next;
+			mes "[Shurank]";
+			mes "Idealmente, você pode querer usar Provocar em inimigos quando eles estiverem enfraquecidos o suficiente para que você possa finalizá-los mais rapidamente. Mas isso depende de você.";
+			next;
+			mes "[Shurank]";
+			mes "Além disso, quanto maior o nível de Provocar usado, maior o aumento de ataque e a redução de defesa do seu alvo.";
+			next;
+			mes "[Shurank]";
+			mes "Como uma Habilidade Ativa, Provocar consumirá uma pequena quantidade de SP, assim como Golpe Fulminante. Então, tome cuidado para não ficar sem SP ao usar esta habilidade.";
+			next;
+			mes "[Shurank]";
+			mes "Muito bem, volte a mim quando se tornar suficientemente habilidoso no uso de Provocar. Enquanto isso, continue treinando.";
+			set tu_swordman, 9;
+			close;
+		} else if((.@chk_provoke > 4) && (.@chk_provoke < 10)){
+			mes "[Shurank]";
+			mes "Ah, vejo que você tem um bom entendimento da habilidade Provocar. Deixe-me recompensá-lo desta pequena forma pelos seus esforços.";
+			set tu_swordman, 10;
+			if (checkre(3))
+				getexp 112,0;
+			else
+				getexp 1120,0;
+			next;
+			mes "[Shurank]";
+			mes "Na próxima vez que falarmos, lhe direi o que sei sobre a habilidade ^5D478BVigor^000000. Quando estiver pronto para aprender, volte a mim.";
+			close;
+		} else if(.@chk_provoke == 10){
+			mes "[Shurank]";
+			mes "V-você dominou";
+			mes "Provocar? Impressionante!";
+			mes "Vejo que você se decidiu";
+			mes "a se tornar";
+			mes "um Espadachim notável.";
+			mes "Aqui está uma pequena recompensa...";
+			set tu_swordman, 10;
+			if (checkre(3))
+				getexp 126,0;
+			else
+				getexp 1260,0;
+			next;
+			mes "Na próxima vez que falarmos, lhe direi o que sei sobre a habilidade ^5D478BVigor^000000. Quando estiver pronto para aprender, volte a mim.";
+			close;
+		} else {
+			mes "[Shurank]";
+			mes "Ainda não aprendeu Provocar, hein? Como Espadachim, acredito que é importante que você, pelo menos, seja capaz de usar Provocar!";
+			close;
+		}
+	case 7:
+		mes "Ah, você retornou. Para um novo Espadachim, você está indo muito";
+		mes "bem. Então, qual é a mensagem";
+		mes "de Dequ'ee?";
+		next;
+		mes "[Shurank]";
+		mes "Entendo...";
+		mes "Bem, agora que cuidamos";
+		mes "disso, deixe-me continuar sua instrução sobre as habilidades de Espadachim. Desta vez, abordaremos Provocar.";
+		next;
+		set .@chk_provoke, getskilllv("SM_PROVOKE");
+		if(.@chk_provoke == 0){
+			mes "[Shurank]";
+			mes "Você ainda não";
+			mes "aprendeu Provocar?";
+			mes "Hm. Mais um motivo pelo qual";
+			mes "eu deveria explicar para você então.";
+			next;
+			mes "[Shurank]";
+			mes "Para usar o Provocar efetivamente, você deve entender";
+			mes "como funciona: Provocar enfurece seus oponentes, fazendo-os";
+			mes "querer atacar você.";
+			next;
+			mes "[Shurank]";
+			mes "Quando provocado, um inimigo terá maior força de ataque, tornando-o mais perigoso, mas também terá defesa reduzida, tornando seu inimigo mais fácil de derrotar.";
+			next;
+			mes "[Shurank]";
+			mes "Idealmente, você pode querer usar Provocar em inimigos quando eles estiverem enfraquecidos o suficiente para que você possa finalizá-los mais rapidamente. Mas isso depende de você.";
+			next;
+			mes "[Shurank]";
+			mes "Além disso, quanto maior o nível de Provocar usado, maior o aumento de ataque e a redução de defesa do seu alvo.";
+			next;
+			mes "[Shurank]";
+			mes "Como uma Habilidade Ativa, Provocar consumirá uma pequena quantidade de SP, assim como Golpe Fulminante. Então, tome cuidado para não ficar sem SP ao usar esta habilidade.";
+			next;
+			mes "[Shurank]";
+			mes "Agora peço que você treine o uso de Provocar. Volte";
+			mes "a mim quando tiver uma compreensão suficiente do uso da habilidade Provocar.";
+			set tu_swordman, 8;
+			changequest 8217,8218;
+			close;
+		} else if((.@chk_provoke > 0) && (.@chk_provoke < 5)){
+			mes "[Shurank]";
+			mes "Hm. Você parece ter uma compreensão básica de Provocar, mas deixe-me lhe dar alguns detalhes para que você possa entender melhor o uso dessa habilidade.";
+			next;
+			mes "[Shurank]";
+			mes "Para usar o Provocar efetivamente, você deve entender";
+			mes "como funciona: Provocar enfurece seus oponentes, fazendo-os";
+			mes "querer atacar você.";
+			next;
+			mes "[Shurank]";
+			mes "Quando provocado, um inimigo terá maior força de ataque, tornando-o mais perigoso, mas também terá defesa reduzida, tornando seu inimigo mais fácil de derrotar.";
+			next;
+			mes "[Shurank]";
+			mes "Idealmente, você pode querer usar Provocar em inimigos quando eles estiverem enfraquecidos o suficiente para que você possa finalizá-los mais rapidamente. Mas isso depende de você.";
+			next;
+			mes "[Shurank]";
+			mes "Além disso, quanto maior o nível de Provocar usado, maior o aumento de ataque e a redução de defesa do seu alvo.";
+			next;
+			mes "[Shurank]";
+			mes "Como uma Habilidade Ativa, Provocar consumirá uma pequena quantidade de SP, assim como Golpe Fulminante. Então, tome cuidado para não ficar sem SP ao usar esta habilidade.";
+			next;
+			mes "[Shurank]";
+			mes "Agora peço que você treine o uso de Provocar. Volte";
+			mes "a mim quando tiver uma compreensão suficiente do uso da habilidade Provocar.";
+			set tu_swordman, 9;
+			changequest 8218,8219;
+			close;
+		} else if((.@chk_provoke > 4) && (.@chk_provoke < 10)){
+			mes "[Shurank]";
+			mes "Ah, vejo que você tem um bom entendimento da habilidade Provocar. Deixe-me recompensá-lo desta pequena forma pelos seus esforços.";
+			set tu_swordman, 10;
+			changequest 8219,8220;
+			if (checkre(3))
+				getexp 112,0;
+			else
+				getexp 1120,0;
+			next;
+			mes "[Shurank]";
+			mes "Na próxima vez que falarmos, lhe direi o que sei sobre a habilidade ^5D478BVigor^000000. Quando estiver pronto para aprender, volte a mim.";
+			close;
+		} else if(.@chk_provoke == 10){
+			mes "[Shurank]";
+			mes "V-você dominou";
+			mes "Provocar? Impressionante!";
+			mes "Vejo que você se decidiu";
+			mes "a se tornar";
+			mes "um Espadachim notável.";
+			mes "Aqui está uma pequena recompensa...";
+			set tu_swordman, 10;
+			completequest 8218;
+			completequest 8219;
+			completequest 8220;
+			setquest 8221;
+			if (checkre(3))
+				getexp 126,0;
+			else
+				getexp 1260,0;
+			next;
+			mes "[Shurank]";
+			mes "Na próxima vez que falarmos, lhe direi o que sei sobre a habilidade ^5D478BVigor^000000. Quando estiver pronto para aprender, volte a mim.";
+			close;
+		}
+	case 6:
+		mes "Desejo que você encontre um Cavaleiro chamado ^5D478BDequ'ee^000000 em ^5D478BGeffen^000000. Escute com atenção, esta é a mensagem";
+		mes "que quero que você entregue a ele.";
+		next;
+		mes "[Shurank]";
+		mes "^0000FFO que aconteceu";
+		mes "com o assassino?^000000";
+		mes "^0000FFVocê descobriu quem ele é? Se descobriu, o que devemos fazer agora?^000000";
+		next;
+		mes "[Shurank]";
+		mes "Se você usar essas palavras exatas, Dequ'ee entenderá o que";
+		mes "você está falando. Lembre-se da resposta dele e me informe.";
+		next;
+		mes "[Shurank]";
+		mes "Não deve ser muito difícil lutar contra os monstros no caminho para Geffen, mas se encontrar algum que seja forte demais, não há vergonha em fugir.";
+		next;
+		mes "[Shurank]";
+		mes "Mas agora que penso nisso, pode levar um tempo para você viajar até Geffen. Eu mesmo o enviarei para lá! Boa sorte!";
+		next;
+		warp "gef_fild07",35,192;
+		close;
+	case 5:
+		mes "Ah, você retornou. Sei que disse que lhe ensinaria o que sei sobre a habilidade Provocar, mas...";
+		next;
+		mes "[Shurank]";
+		mes "Na verdade, tenho uma tarefa importante que gostaria que você realizasse. Não é muito difícil: tudo o que você precisa fazer é entregar uma mensagem.";
+		next;
+		mes "[Shurank]";
+		mes "Desejo que você encontre um Cavaleiro chamado ^5D478BDequ'ee^000000 em ^5D478BGeffen^000000. Escute com atenção, esta é a mensagem";
+		mes "que quero que você entregue a ele.";
+		next;
+		mes "[Shurank]";
+		mes "^0000FFO que aconteceu";
+		mes "com o assassino?^000000";
+		mes "^0000FFVocê descobriu quem ele é? Se descobriu, o que devemos fazer agora?^000000";
+		next;
+		mes "[Shurank]";
+		mes "Se você usar essas palavras exatas, Dequ'ee entenderá o que";
+		mes "você está falando. Lembre-se da resposta dele e me informe.";
+		next;
+		mes "[Shurank]";
+		mes "Não deve ser muito difícil lutar contra os monstros no caminho para Geffen, mas se encontrar algum que seja forte demais, não há vergonha em fugir.";
+		next;
+		mes "[Shurank]";
+		mes "Embora exista um serviço de Portal,";
+		mes "recomendo viajar a pé. Você não pode se tornar forte sem testar sua força e praticar suas habilidades!";
+		set tu_swordman, 6;
+		changequest 8215,8216;
+		close;
+	case 4:
+		mes "Como você dominou Golpe Fulminante,";
+		mes "sinto que você está pronto para aprender mais sobre as habilidades de Espadachim.";
+		next;
+		mes "[Shurank]";
+		mes "Agora, você deve estar familiarizado com a habilidade ^5D478BAumentar Recuperação de HP^000000. Quando";
+		mes "se trata de dano, você deve ser";
+		mes "capaz tanto de recebê-lo quanto de causá-lo.";
+		next;
+		set .@chk_hp, getskilllv("SM_RECOVERY");
+		if(.@chk_hp == 0){
+			mes "[Shurank]";
+			mes "Mas, julgando por essa";
+			mes "sua estrutura magra,";
+			mes "parece que você não aprendeu a habilidade Aumentar Recuperação de HP de jeito nenhum...!";
+			next;
+			mes "[Shurank]";
+			mes "A habilidade Aumentar Recuperação de HP";
+			mes "é uma habilidade passiva que está sempre em vigor e não consome";
+			mes "nenhum SP seu.";
+			next;
+			mes "[Shurank]";
+			mes "Ela permite que você regenere seu HP duas vezes mais rápido. Isso pode não parecer grande coisa, mas reduzirá o tempo que você precisa descansar entre as batalhas.";
+			next;
+			mes "[Shurank]";
+			mes "Sugiro fortemente que você";
+			mes "aprenda esta habilidade! Claro, existem outras habilidades de Espadachim que são tão importantes quanto...";
+			set tu_swordman, 5;
+			next;
+		} else if(.@chk_hp == 10){
+			mes "[Shurank]";
+			mes "Ah! Esse brilho saudável!";
+			mes "Vejo que você já dominou esta habilidade. Deixe-me lhe dar uma pequena recompensa pelo seu treinamento árduo!";
+			set tu_swordman, 5;
+			if (checkre(3))
+				getexp 112,0;
+			else
+				getexp 1120,0;
+			next;
+		} else {
+			mes "[Shurank]";
+			mes "Ah, e vejo que você já aprendeu um pouco sobre isso. Mas deixe-me falar brevemente mais sobre Aumentar Recuperação de HP.";
+			next;
+			mes "[Shurank]";
+			mes "A habilidade Aumentar Recuperação de HP";
+			mes "é uma habilidade passiva que está sempre em vigor e não consome";
+			mes "nenhum SP seu.";
+			next;
+			mes "[Shurank]";
+			mes "Ela permite que você regenere seu HP duas vezes mais rápido. Isso pode não parecer grande coisa, mas reduzirá o tempo que você precisa descansar entre as batalhas.";
+			next;
+			mes "[Shurank]";
+			mes "Aumentar Recuperação de HP é uma habilidade bastante importante, mas se você quer dominá-la ou não, depende de você.";
+			set tu_swordman, 5;
+			next;
+		}
+		setquest 8215;
+		mes "[Shurank]";
+		mes "Até agora, acredito que você sabe o suficiente sobre a habilidade Aumentar Recuperação de HP. Na próxima vez, ensinarei o que sei sobre a habilidade Provocar.";
+		close;
+	case 3:
+		mes "Se você quer ser";
+		mes "capaz de usar todo";
+		mes "o poder da habilidade Golpe Fulminante,";
+		mes "é melhor que você a tenha dominado";
+		mes "se quiser que eu o reconheça";
+		mes "como um colega Espadachim.";
+		next;
+		set .@chk_bash, getskilllv("SM_BASH");
+		if(.@chk_bash == 10){
+			mes "[Shurank]";
+			mes "Esses calos...!";
+			mes "Apenas um mestre do Golpe Fulminante tem esse tipo de mão. Ótimo trabalho, Espadachim. Estou muito impressionado.";
+			next;
+			mes "[Shurank]";
+			mes "Aqui está um pequeno prêmio em reconhecimento aos seus esforços até agora. Mas não relaxe ainda! Você ainda tem um longo caminho a percorrer antes de compreender";
+			mes "todos os fundamentos.";
+			set tu_swordman, 4;
+			changequest 8213,8214;
+			if (checkre(3))
+				getexp 97,0;
+			else
+				getexp 970,0;
+			getitem 2503,1; //Muffler
+			close;
+		} else {
+			mes "[Shurank]";
+			mes "Hmm, você pode ser capaz de";
+			mes "usar Golpe Fulminante muito bem, mas você ainda não é um mestre nisso. Eu o encorajo a dominar o Golpe Fulminante para liberar seu verdadeiro potencial!";
+			close;
+		}
+	case 2:
+		mes "Espero que você tenha";
+		mes "treinado o uso de";
+		mes "Golpe Fulminante. Se você quer crescer como Espadachim, terá grande";
+		mes "necessidade de dominar esta habilidade.";
+		next;
+		set .@chk_bash, getskilllv("SM_BASH");
+		if((.@chk_bash > 4) && (.@chk_bash < 10)){
+			mes "[Shurank]";
+			mes "Hm. Não parece que você ganhou maestria em Golpe Fulminante, mas parece que está se esforçando.";
+			next;
+			mes "[Shurank]";
+			mes "Deixe-me revisar o uso da habilidade Golpe Fulminante para você. Se você já ouviu isso antes, será uma boa reciclagem.";
+			next;
+			mes "[Shurank]";
+			mes "Golpe Fulminante é uma habilidade ativa, dominada no Nível 10, que permite que você esmague seu alvo. Em essência,";
+			mes "é um ataque de alto dano!";
+			next;
+			mes "[Shurank]";
+			mes "Como é uma habilidade ativa, Golpe Fulminante consome SP cada vez que é";
+			mes "usada. Se você não tomar cuidado, ficará sem SP rapidamente...!";
+			next;
+			mes "[Shurank]";
+			mes "Aqui está uma pequena recompensa por todo o seu trabalho árduo. Espero que você perceba a importância de usar Golpe Fulminante conforme";
+			mes "fica mais forte.";
+			set tu_swordman, 3;
+			changequest 8212,8213;
+			if (checkre(3))
+				getexp 83,0;
+			else
+				getexp 830,0;
+			close;
+		} else if(.@chk_bash == 10){
+			mes "[Shurank]";
+			mes "Esses calos...!";
+			mes "Apenas um mestre do Golpe Fulminante tem esse tipo de mão. Ótimo trabalho, Espadachim. Estou muito impressionado.";
+			next;
+			mes "[Shurank]";
+			mes "Aqui está um pequeno prêmio em reconhecimento aos seus esforços até agora. Mas não relaxe ainda! Você ainda tem um longo caminho a percorrer antes de compreender";
+			mes "todos os fundamentos.";
+			set tu_swordman, 4;
+			changequest 8212,8214;
+			if (checkre(3))
+				getexp 97,0;
+			else
+				getexp 970,0;
+			getitem 2503,1; //Muffler
+			close;
+		} else {
+			mes "[Shurank]";
+			mes "Hmm, você pode ser capaz de";
+			mes "usar Golpe Fulminante muito bem, mas você ainda não é um mestre nisso. Eu o encorajo a dominar o Golpe Fulminante para liberar seu verdadeiro potencial!";
+			close;
+		}
+	case 1:
+		mes "Você tem aprendido";
+		mes "a arte de usar Golpe Fulminante? Acredito fervorosamente que a habilidade Golpe Fulminante é a essência da esgrima!";
+		next;
+		set .@chk_bash, getskilllv("SM_BASH");
+		if((.@chk_bash > 0) && (.@chk_bash < 5)){
+			mes "[Shurank]";
+			mes "Vejo que você entende";
+			mes "um pouco sobre a habilidade Golpe Fulminante. Mas ainda assim, não é suficiente. Deixe-me explicar em detalhes...";
+			next;
+			mes "[Shurank]";
+			mes "Golpe Fulminante é uma habilidade ativa, dominada no Nível 10, que permite que você esmague seu alvo. Em essência,";
+			mes "é um ataque de alto dano!";
+			next;
+			mes "[Shurank]";
+			mes "Como é uma habilidade ativa, Golpe Fulminante consome SP cada vez que é";
+			mes "usada. Se você não tomar cuidado, ficará sem SP rapidamente...!";
+			next;
+			mes "[Shurank]";
+			mes "Bem, é tudo o que posso lhe dizer sobre o Golpe Fulminante por enquanto. Quanto às suas nuances sutis, você terá que experimentá-las por si mesmo";
+			mes "em batalha.";
+			next;
+			mes "[Shurank]";
+			mes "Ainda assim, pelos seus esforços de treinamento, deixe-me lhe dar uma humilde recompensa. Mas lembre-se, ainda temos mais";
+			mes "fundamentos para cobrir!";
+			set tu_swordman, 2;
+			changequest 8211,8212;
+			if (checkre(3))
+				getexp 58,0;
+			else
+				getexp 580,0;
+			close;
+		} else if((.@chk_bash > 4) && (.@chk_bash < 10)){
+			mes "[Shurank]";
+			mes "Hmm...";
+			mes "Ainda não dominou o Golpe Fulminante, hein? Bem, de qualquer forma, acho que você fez algum progresso.";
+			next;
+			mes "[Shurank]";
+			mes "Deixe-me explicar o uso da habilidade Golpe Fulminante para você. Se você já ouviu isso antes, será uma boa reciclagem.";
+			next;
+			mes "[Shurank]";
+			mes "Vejo que você entende";
+			mes "um pouco sobre a habilidade Golpe Fulminante. Mas ainda assim, não é suficiente. Deixe-me explicar em detalhes...";
+			next;
+			mes "[Shurank]";
+			mes "Golpe Fulminante é uma habilidade ativa, dominada no Nível 10, que permite que você esmague seu alvo. Em essência,";
+			mes "é um ataque de alto dano!";
+			next;
+			mes "[Shurank]";
+			mes "Como é uma habilidade ativa, Golpe Fulminante consome SP cada vez que é";
+			mes "usada. Se você não tomar cuidado, ficará sem SP rapidamente...!";
+			next;
+			mes "[Shurank]";
+			mes "Bem, é tudo o que posso lhe dizer sobre o Golpe Fulminante por enquanto. Quanto às suas nuances sutis, você terá que experimentá-las por si mesmo";
+			mes "em batalha.";
+			next;
+			mes "[Shurank]";
+			mes "Pelos seus esforços e paciência, ofereço-lhe esta pequena recompensa. Por favor, aceite-a e fique ainda mais forte...";
+			set tu_swordman, 3;
+			changequest 8211,8213;
+			if (checkre(3))
+				getexp 83,0;
+			else
+				getexp 830,0;
+			next;
+			mes "[Shurank]";
+			mes "Acredito que todo verdadeiro Espadachim deve dominar a habilidade Golpe Fulminante. Se você algum dia dominar a habilidade como Espadachim, volte a mim.";
+			close;
+		} else if(.@chk_bash == 10){
+			mes "[Shurank]";
+			mes "Esses calos...!";
+			mes "Apenas um mestre do Golpe Fulminante tem esse tipo de mão. Ótimo trabalho, Espadachim. Estou muito impressionado.";
+			next;
+			mes "[Shurank]";
+			mes "Aqui está um pequeno prêmio em reconhecimento aos seus esforços até agora. Mas não relaxe ainda! Você ainda tem um longo caminho a percorrer antes de compreender";
+			mes "todos os fundamentos.";
+			set tu_swordman, 4;
+			changequest 8211,8214;
+			if (checkre(3))
+				getexp 97,0;
+			else
+				getexp 970,0;
+			getitem 2503,1; //Muffler
+			close;
+		} else {
+			mes "[Shurank]";
+			mes "Você ainda não sabe usar Impacto Explosivo...? De que serve uma espada se não for para esmagar as coisas?! Volte a falar comigo";
+			mes "quando você tiver aprendido a usar";
+			mes "essa habilidade!";
+			close;
+		}
+	case 0:
+		mes "Ah, um companheiro de armas.";
+		mes "Permita-me apresentar. Sou Shurank Chainlier, um Cavaleiro a serviço da Cavalaria de Prontera.";
+		next;
+		mes "[Shurank]";
+		mes "Preocupa-me profundamente que os Espadachins de hoje talvez não entendam verdadeiramente o caminho da espada. E pensar que eles podem se tornar Cavaleiros mais tarde...";
+		next;
+		mes "[Shurank]";
+		mes "Você tem treinado";
+		mes "para ser um Espadachim especialista?";
+		mes "Se sim, você deve aprender os";
+		mes "fundamentos, o primeiro dos";
+		mes "quais é a habilidade ^5D478BImpacto Explosivo^000000.";
+		next;
+		set .@chk_bash, getskilllv("SM_BASH");
+		if(.@chk_bash == 0){
+			mes "[Shurank]";
+			mes "^333333*Arf*^000000";
+			mes "Essas mãos macias e delicadas! Você nunca aprendeu a usar Impacto Explosivo, não é?! Como espera liderar batalhas sem saber Impacto Explosivo?";
+			next;
+			mes "[Shurank]";
+			mes "Agora, se você deseja se tornar um verdadeiro Espadachim, deve aprender a habilidade Impacto Explosivo. Não há dúvidas quanto a isso: você precisa saber o básico! Pegue isto e aprenda a usar Impacto Explosivo!";
+			set tu_swordman, 1;
+			if (checkre(3))
+				getexp 49,0;
+			else
+				getexp 490,0;
+			setquest 8211;
+			close;
+		} else if((.@chk_bash > 0) && (.@chk_bash < 5)){
+			mes "[Shurank]";
+			mes "Vejo que você entende";
+			mes "um pouco sobre a habilidade Impacto Explosivo. Mas ainda assim, não é o bastante. Deixe-me explicar detalhadamente...";
+			next;
+			mes "[Shurank]";
+			mes "Impacto Explosivo é uma habilidade ativa, dominada no nível 10, que permite esmagar seu alvo. Em essência,";
+			mes "é um ataque de alto dano!";
+			next;
+			mes "[Shurank]";
+			mes "Como é uma habilidade ativa, Impacto Explosivo consome SP cada vez que é";
+			mes "usada. Se você não tomar cuidado, ficará sem SP num instante...!";
+			next;
+			mes "[Shurank]";
+			mes "Bem, é só isso que posso te dizer sobre Impacto Explosivo por enquanto. Quanto às suas sutilezas, você terá que experimentá-las por si mesmo";
+			mes "em batalha.";
+			next;
+			mes "[Shurank]";
+			mes "Ainda assim, pelo seu esforço no treinamento, deixe-me te dar uma humilde recompensa. Mas lembre-se, ainda temos mais";
+			mes "fundamentos para cobrir!";
+			set tu_swordman, 2;
+			setquest 8212;
+			if (checkre(3))
+				getexp 58,0;
+			else
+				getexp 580,0;
+			close;
+		} else if((.@chk_bash > 4) && (.@chk_bash < 10)){
+			mes "[Shurank]";
+			mes "Vejo que você ganhou alguma proficiência com a habilidade Impacto Explosivo. Mas ainda assim, não é o bastante. Deixe-me explicar...";
+			next;
+			mes "[Shurank]";
+			mes "Impacto Explosivo é uma habilidade ativa, dominada no nível 10, que permite esmagar seu alvo. Em essência,";
+			mes "é um ataque de alto dano!";
+			next;
+			mes "[Shurank]";
+			mes "Como é uma habilidade ativa, Impacto Explosivo consome SP cada vez que é";
+			mes "usada. Se você não tomar cuidado, ficará sem SP num instante...!";
+			next;
+			mes "[Shurank]";
+			mes "Bem, é só isso que posso te dizer sobre Impacto Explosivo por enquanto. Quanto às suas sutilezas, você terá que experimentá-las por si mesmo";
+			mes "em batalha.";
+			next;
+			mes "[Shurank]";
+			mes "Ainda assim, pelo seu esforço no treinamento, deixe-me te dar uma humilde recompensa. Mas lembre-se, ainda temos mais";
+			mes "fundamentos para cobrir!";
+			set tu_swordman, 3;
+			setquest 8213;
+			if (checkre(3))
+				getexp 83,0;
+			else
+				getexp 830,0;
+			next;
+			mes "[Shurank]";
+			mes "Mas se você deseja se tornar um Espadachim especialista aos meus olhos, deve dominar Impacto Explosivo!";
+			close;
+		} else if(.@chk_bash == 10){
+			mes "[Shurank]";
+			mes "Esses calos...!";
+			mes "Somente um mestre na habilidade Impacto Explosivo tem esse tipo de mãos. Ótimo trabalho, Espadachim. Estou muito impressionado.";
+			next;
+			mes "[Shurank]";
+			mes "Aqui está um pequeno prêmio em reconhecimento aos seus esforços até agora. Mas não relaxe ainda! Você ainda tem um longo caminho a percorrer antes de compreender";
+			mes "todos os fundamentos.";
+			set tu_swordman, 4;
+			// completequest 8211;
+			// completequest 8212;
+			// completequest 8213;
+			setquest 8214;
+			if (checkre(3))
+				getexp 97,0;
+			else
+				getexp 970,0;
+			getitem 2503,1; //Muffler
+			close;
+		}
+	}
+	mes "...";
+	mes "......";
+	close;
+}
+
+// Daqu'ee
+//============================================================
+geffen,154,143,3	script	Dequ'ee	734,{
+	if(BaseJob == Job_Novice){
+		mes "[Dequ'ee]";
+		mes "Olá.";
+		mes "Frustrado com";
+		mes "ser um Aprendiz?";
+		mes "Eu sei, eu sei,";
+		mes "todos nós já estivemos";
+		mes "nessa situação.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Se você quer se tornar mais forte,";
+		mes "por que não considera se tornar um Espadachim? Exigirá disciplina de sua parte, mas essa Classe fará de você um guerreiro resistente.";
+		next;
+		mes "[Dequ'ee]";
+		mes "No final, a decisão é sua.";
+		mes "Não sei como você quer viver sua vida, mas deveria considerar seriamente a Classe Espadachim...";
+		close;
+	}
+	if(BaseClass == Job_Swordman && (eaclass()&(EAJL_2|EAJL_UPPER))){
+		mes "[Dequ'ee]";
+		mes "Ah...";
+		mes "Um colega espadachim!";
+		mes "Como você tem passado?";
+		next;
+		mes "[Dequ'ee]";
+		mes "Deve haver muitos que dependem";
+		mes "da força da sua lâmina. É uma responsabilidade incrível, mas nunca podemos decepcionar nossos aliados em batalha...";
+		close;
+	}
+	if(BaseClass != Job_Swordman){
+		mes "[Dequ'ee]";
+		mes "Olá.";
+		mes "Não é fã de espadas, hein?";
+		mes "Bem, se você fosse, teríamos";
+		mes "algo para conversar.";
+		next;
+		mes "[Dequ'ee]";
+		mes "É.";
+		mes "Não há muita";
+		mes "conversa";
+		mes "acontecendo aqui.";
+		mes "Bastante entediante...";
+		close;
+	}
+	if(tu_swordman > 20){
+		mes "[Dequ'ee]";
+		mes "Espero que você continue";
+		mes "a treinar a si mesmo nos";
+		mes "caminhos da espada.";
+		mes "Existe uma arte em";
+		mes "manejar uma lâmina...";
+		close;
+	}
+	if(tu_swordman == 20){
+		mes "[Dequ'ee]";
+		mes "Hã...?";
+		mes "Você não deveria";
+		mes "estar de olho no Bankley?";
+		mes "O que aconteceu?";
+		next;
+		mes "[Dequ'ee]";
+		mes "Suicídio...?";
+		mes "Você está falando sério?!";
+		mes "Mas não há necessidade de se matar";
+		mes "se ele suspeitasse que foi pego. Tem algo estranho acontecendo aqui!";
+		next;
+		mes "[Dequ'ee]";
+		mes "Bem, você fez um bom trabalho.";
+		mes "Quanto aos outros três suspeitos, certificarei de que sejam monitorados por membros da Associação dos Espadachins.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Ainda assim, não acho que aprenderemos nada novo com aqueles três.";
+		mes "Parece que este caso está encerrado por enquanto. Mais uma vez, obrigado pela sua ajuda.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Por que você não se reporta ao Shurank agora? Acho que ele ainda";
+		mes "quer te ensinar o básico da esgrima.";
+		set tu_swordman, 21;
+		changequest 8226,8227;
+		close2;
+		if (checkre(0))
+			warp "izlude",127,100;
+		else
+			warp "izlude",35,78;
+		end;
+	}
+	if(tu_swordman == 19){
+		mes "[Dequ'ee]";
+		mes "O que você ainda está fazendo aqui?";
+		mes "Depressa, vá verificar o Bankley!";
+		mes "Não se sabe o que";
+		mes "ele pode estar tramando!";
+		close;
+	}
+	if((tu_swordman == 17) || (tu_swordman == 18)){
+		mes "[Dequ'ee]";
+		if(tu_swordman == 17){
+			mes "TheisWesomeof";
+			mes "ConBanfoevidehi";
+			mes "victkleyundncem";
+			mes "hekdlfiDrindkelsd";
+			next;
+		} else if(tu_swordman == 18){
+			mes "hekdlfiDrindkelsd";
+			mes "TheisWesomeof";
+			mes "ConBanfoevidehi";
+			mes "victkleyundncem";
+			next;
+		}
+		mes "[Dequ'ee]";
+		mes "Eu entendi agora!";
+		mes "Esta é uma cifra de transposição complexa na qual removemos o código de uma pessoa do restante. Então, quem você acha que é";
+		mes "o assassino?";
+		next;
+		switch(select("Hans:Bankley:Geil:Muetro")) {
+		case 1:
+			mes "[Dequ'ee]";
+			mes "Hans...?";
+			mes "Isso não pode estar certo.";
+			mes "Não coincide com";
+			mes "este algoritmo que acabei";
+			mes "de criar. Você tem";
+			mes "que tentar novamente!";
+			close;
+		case 2:
+			mes "[Dequ'ee]";
+			mes "Bankley...?";
+			mes "Ei, você pode estar";
+			mes "certo. Deixe-me verificar...";
+			next;
+			mes "[Dequ'ee]";
+			mes "Sim, quando você retira a senha de Bankley do restante e lê tudo na ordem correta...";
+			next;
+			mes "[Dequ'ee]";
+			mes "Certo! Parece que Bankley é o assassino! Embora não possamos confiar 100% nisso, esta evidência é bastante conclusiva.";
+			next;
+			mes "[Dequ'ee]";
+			mes "Corra para Morocc e monitore Bankley caso ele faça algo desesperado. Se algo acontecer, relate-me imediatamente!";
+			set tu_swordman, 19;
+			changequest 8224,8225;
+			if (checkre(3))
+				getexp 162,0;
+			else
+				getexp 1620,0;
+			close2;
+			warp "moc_fild07",359,201;
+			end;
+		case 3:
+			mes "[Dequ'ee]";
+			mes "Geil...?";
+			mes "Isso não pode estar certo.";
+			mes "Não coincide com";
+			mes "este algoritmo que acabei";
+			mes "de criar. Você tem";
+			mes "que tentar novamente!";
+			close;
+		case 4:
+			mes "[Dequ'ee]";
+			mes "Muetro...?";
+			mes "Isso não pode estar certo.";
+			mes "Não coincide com";
+			mes "este algoritmo que acabei";
+			mes "de criar. Você tem";
+			mes "que tentar novamente!";
+			close;
+		}
+	}
+	if(tu_swordman == 16){
+		mes "[Dequ'ee]";
+		mes "Acho que esses códigos precisam ser organizados em uma certa ordem antes que possamos descobrir seus segredos.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Hm, você adivinha a ordem e eu tentarei formular uma criptoanálise baseada no seu palpite.";
+		next;
+		switch(select("Muetro:Hans:Geil:Bankley")) {
+		case 1:
+			mes "[Dequ'ee]";
+			mes "Ok, o código do Muetro";
+			mes "é o que usaremos";
+			mes "primeiro. Agora, o código de quem";
+			mes "você acha que";
+			mes "deveria ir em segundo?";
+			next;
+			switch(select("Hans:Geil:Bankley")) {
+			case 1:
+				mes "[Dequ'ee]";
+				mes "Hans...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Geil:Bankley")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Muetro, Hans,";
+					mes "Geil e Bankley.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "ConBanfoevidehi";
+					mes "victkleyundncem";
+					mes "TheisWesomeof";
+					mes "hekdlfiDrindkelsd";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Muetro, Hans,";
+					mes "Geil e Bankley.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "ConBanfoevidehi";
+					mes "victkleyundncem";
+					mes "hekdlfiDrindkelsd";
+					mes "TheisWesomeof";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 2:
+				mes "[Dequ'ee]";
+				mes "Geil...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Hans:Bankley")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Muetro, Geil,";
+					mes "Hans e Bankley.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "ConBanfoevidehi";
+					mes "TheisWesomeof";
+					mes "victkleyundncem";
+					mes "hekdlfiDrindkelsd";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Muetro, Geil,";
+					mes "Bankley e Hans.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "ConBanfoevidehi";
+					mes "TheisWesomeof";
+					mes "hekdlfiDrindkelsd";
+					mes "victkleyundncem";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 3:
+				mes "[Dequ'ee]";
+				mes "Bankley...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Hans:Geil")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Muetro, Bankley,";
+					mes "Hans e Geil.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "ConBanfoevidehi";
+					mes "hekdlfiDrindkelsd";
+					mes "victkleyundncem";
+					mes "TheisWesomeof";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Muetro, Bankley,";
+					mes "Geil e Hans.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "ConBanfoevidehi";
+					mes "hekdlfiDrindkelsd";
+					mes "TheisWesomeof";
+					mes "victkleyundncem";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			}
+			break;
+		case 2:
+			mes "[Dequ'ee]";
+			mes "Ok, o código do Hans";
+			mes "é o que usaremos";
+			mes "primeiro. Agora, o código de quem";
+			mes "você acha que";
+			mes "deveria ir em segundo?";
+			next;
+			switch(select("Muetro:Geil:Bankley")) {
+			case 1:
+				mes "[Dequ'ee]";
+				mes "Muetro...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Geil:Bankley")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Hans, Muetro,";
+					mes "Geil e Bankley.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "victkleyundncem";
+					mes "ConBanfoevidehi";
+					mes "TheisWesomeof";
+					mes "hekdlfiDrindkelsd";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Hans, Muetro,";
+					mes "Bankley e Geil.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "victkleyundncem";
+					mes "ConBanfoevidehi";
+					mes "hekdlfiDrindkelsd";
+					mes "TheisWesomeof";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 2:
+				mes "[Dequ'ee]";
+				mes "Geil...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Muetro:Bankley")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Hans, Geil,";
+					mes "Muetro e Bankley.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "victkleyundncem";
+					mes "TheisWesomeof";
+					mes "ConBanfoevidehi";
+					mes "hekdlfiDrindkelsd";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Hans, Geil,";
+					mes "Bankley e Muetro.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "victkleyundncem";
+					mes "TheisWesomeof";
+					mes "hekdlfiDrindkelsd";
+					mes "ConBanfoevidehi";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 3:
+				mes "[Dequ'ee]";
+				mes "Bankley...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Muetro:Geil")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Hans, Bankley,";
+					mes "Muetro e Geil.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "victkleyundncem";
+					mes "hekdlfiDrindkelsd";
+					mes "ConBanfoevidehi";
+					mes "TheisWesomeof";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Hans, Bankley,";
+					mes "Geil e Muetro.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "victkleyundncem";
+					mes "hekdlfiDrindkelsd";
+					mes "TheisWesomeof";
+					mes "ConBanfoevidehi";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			}
+			break;
+		case 3:
+			mes "[Dequ'ee]";
+			mes "Ok, o código do Geil";
+			mes "é o que usaremos";
+			mes "primeiro. Agora, o código de quem";
+			mes "você acha que";
+			mes "deveria ir em segundo?";
+			next;
+			switch(select("Muetro:Hans:Bankley")) {
+			case 1:
+				mes "[Dequ'ee]";
+				mes "Muetro...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Hans:Bankley")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Geil, Muetro,";
+					mes "Hans e Bankley.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "TheisWesomeof";
+					mes "ConBanfoevidehi";
+					mes "victkleyundncem";
+					mes "hekdlfiDrindkelsd";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar... Espere!";
+					next;
+					mes "[Dequ'ee]";
+					mes "Eu acho que nós";
+					mes "podemos entender essa";
+					mes "coisa! Me dê um tempo";
+					mes "para formular um algoritmo!";
+					set tu_swordman, 17;
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Geil, Muetro,";
+					mes "Bankley e Hans.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "TheisWesomeof";
+					mes "ConBanfoevidehi";
+					mes "hekdlfiDrindkelsd";
+					mes "victkleyundncem";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 2:
+				mes "[Dequ'ee]";
+				mes "Hans...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Muetro:Bankley")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Geil, Hans,";
+					mes "Muetro e Bankley.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "TheisWesomeof";
+					mes "victkleyundncem";
+					mes "ConBanfoevidehi";
+					mes "hekdlfiDrindkelsd";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Geil, Hans,";
+					mes "Bankley e Muetro.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "TheisWesomeof";
+					mes "victkleyundncem";
+					mes "hekdlfiDrindkelsd";
+					mes "ConBanfoevidehi";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 3:
+				mes "[Dequ'ee]";
+				mes "Bankley...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Muetro:Hans")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Geil, Bankley,";
+					mes "Muetro e Hans.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "TheisWesomeof";
+					mes "hekdlfiDrindkelsd";
+					mes "ConBanfoevidehi";
+					mes "victkleyundncem";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Geil, Bankley,";
+					mes "Hans e Muetro.";
+					mes "Então, o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "TheisWesomeof";
+					mes "hekdlfiDrindkelsd";
+					mes "victkleyundncem";
+					mes "ConBanfoevidehi";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decodificar dessa";
+					mes "maneira. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			}
+			break;
+		case 4:
+			mes "[Dequ'ee]";
+			mes "Ok, o código do Bankley";
+			mes "é o que usaremos";
+			mes "primeiro. Agora, de quem";
+			mes "você acha que";
+			mes "deve vir em segundo?";
+			next;
+			switch(select("Muetro:Hans:Geil")) {
+			case 1:
+				mes "[Dequ'ee]";
+				mes "Do Muetro...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Hans:Geil")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Bankley, Muetro,";
+					mes "Hans e Geil.";
+					mes "Então o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "hekdlfiDrindkelsd";
+					mes "ConBanfoevidehi";
+					mes "victkleyundncem";
+					mes "TheisWesomeof";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decifrar isso do";
+					mes "jeito que está agora. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Bankley, Muetro,";
+					mes "Geil e Hans.";
+					mes "Então o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "hekdlfiDrindkelsd";
+					mes "ConBanfoevidehi";
+					mes "TheisWesomeof";
+					mes "victkleyundncem";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decifrar isso do";
+					mes "jeito que está agora. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 2:
+				mes "[Dequ'ee]";
+				mes "Do Hans...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Muetro:Geil")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Bankley, Hans,";
+					mes "Muetro e Geil.";
+					mes "Então o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "hekdlfiDrindkelsd";
+					mes "victkleyundncem";
+					mes "ConBanfoevidehi";
+					mes "TheisWesomeof";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decifrar isso do";
+					mes "jeito que está agora. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Bankley, Hans,";
+					mes "Geil e Muetro.";
+					mes "Então o código";
+					mes "completo seria...";
+					mes " ";
+					mes "hekdlfiDrindkelsd";
+					mes "victkleyundncem";
+					mes "TheisWesomeof";
+					mes "ConBanfoevidehi";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decifrar isso do";
+					mes "jeito que está agora. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			case 3:
+				mes "[Dequ'ee]";
+				mes "Do Geil...?";
+				mes "Certo, então";
+				mes "a pessoa com";
+				mes "o terceiro código";
+				mes "seria...?";
+				next;
+				switch(select("Muetro:Hans")) {
+				case 1:
+					mes "[Dequ'ee]";
+					mes "Bankley, Geil,";
+					mes "Muetro e Hans.";
+					mes "Então o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "hekdlfiDrindkelsd";
+					mes "TheisWesomeof";
+					mes "ConBanfoevidehi";
+					mes "victkleyundncem";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decifrar isso do";
+					mes "jeito que está agora. Vamos";
+					mes "tentar... Espere!";
+					next;
+					mes "[Dequ'ee]";
+					mes "Eu acho que";
+					mes "conseguimos entender";
+					mes "isso! Me dê um tempo";
+					mes "para formular um algoritmo!";
+					set tu_swordman, 18;
+					close;
+				case 2:
+					mes "[Dequ'ee]";
+					mes "Bankley, Geil,";
+					mes "Hans, Muetro.";
+					mes "Então o código";
+					mes "completo seria...";
+					next;
+					mes "[Dequ'ee]";
+					mes " ";
+					mes "hekdlfiDrindkelsd";
+					mes "TheisWesomeof";
+					mes "victkleyundncem";
+					mes "ConBanfoevidehi";
+					next;
+					mes "[Dequ'ee]";
+					mes "Não...";
+					mes "Não tem como";
+					mes "eu decifrar isso do";
+					mes "jeito que está agora. Vamos";
+					mes "tentar outra combinação.";
+					close;
+				}
+			}
+			break;
+		}
+	}
+	if(tu_swordman == 15){
+		set .@hans$, "victkleyundncem";
+		set .@bang$, "hekdlfiDrindkelsd";
+		set .@mutr$, "ConBanfoevidehi";
+		set .@geil$, "TheisWesomeof";
+		mes "[Dequ'ee]";
+		mes "Ah, você voltou.";
+		mes "Acabei de conseguir uma nova";
+		mes "pista sobre a possível";
+		mes "identidade do assassino.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Ouvi dizer que todos os nossos suspeitos têm pedaços de algum";
+		mes "tipo de código. Se juntarmos o código e decifrá-lo, poderemos descobrir quem é o assassino.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Você conseguiu todos os códigos";
+		mes "de todos os suspeitos? Primeiro,";
+		mes "me diga o código que o Hans tinha.";
+		next;
+		input .@inputstr$;
+		if(.@inputstr$ == .@hans$){
+			mes "[Dequ'ee]";
+			mes "victkleyundncem?";
+			mes "Isso certamente";
+			mes "soa estranho.";
+			mes "Agora, me diga o do Bankley.";
+			next;
+			input .@inputstr$;
+			if(.@inputstr$ == .@bang$){
+				mes "[Dequ'ee]";
+				mes "hekdlfiDrindkelsd..";
+				mes "Que diabo é isso...?";
+				mes "É certamente enigmático.";
+				mes "E o do Muetro?";
+				next;
+				input .@inputstr$;
+				if(.@inputstr$ == .@mutr$){
+					mes "[Dequ'ee]";
+					mes "ConBanfoevidehi.";
+					mes "Vai ser difícil";
+					mes "de descobrir";
+					mes "isso. Certo, agora";
+					mes "me diga o do Geil.";
+					next;
+					input .@inputstr$;
+					if(.@inputstr$ == .@geil$){
+						mes "[Dequ'ee]";
+						mes "TheisWesomeof...";
+						mes "Certo, ótimo.";
+						mes "Agora tudo o que temos";
+						mes "que fazer é descobrir o que";
+						mes "tudo isso significa.";
+						next;
+						mes "[Dequ'ee]";
+						mes "Isso vai ser";
+						mes "muito difícil.";
+						mes "Você tem alguma ideia?";
+						mes "Temos que descobrir";
+						mes "isso, é a única pista";
+						mes "que temos...";
+						set tu_swordman, 16;
+						changequest 8223,8224;
+						close;
+					} else {
+						mes "[Dequ'ee]";
+						mes "...Tem certeza de que ouviu";
+						mes "ele direito? Por que você não vai checar de novo?";
+						close;
+					}
+				} else {
+	
+					mes "[Dequ'ee]";
+					mes "...Tem certeza de que ouviu";
+					mes "ele direito? Por que você não vai checar de novo?";
+					close;
+	
+				}
+			} else {
+				mes "[Dequ'ee]";
+				mes "...Tem certeza de que ouviu";
+				mes "ele direito? Por que você não vai checar de novo?";
+				close;
+			}
+		} else {
+	
+			mes "[Dequ'ee]";
+			mes "Tem certeza de que isso está certo?";
+			mes "Não, não, acho que não.";
+			mes "Você poderia verificar esse código e interrogar os suspeitos de novo";
+			mes "se precisar?";
+			close;
+	
+		}
+	}
+	if(tu_swordman == 14){
+		mes "[Dequ'ee]";
+		mes "Eu não pedi para você";
+		mes "interrogar os";
+		mes "suspeitos em Morroc?";
+		mes "Precisamos terminar essa";
+		mes "investigação o mais cedo";
+		mes "possível!";
+		close;
+	}
+	if(tu_swordman == 13){
+		mes "[Dequ'ee]";
+		mes "Ah, você está aqui!";
+		mes "O Shurank deve ter";
+		mes "pedido para você me ajudar.";
+		mes "Eu realmente agradeço por isso.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Como você provavelmente já percebeu, estou investigando um assassinato. Basicamente, quero que você me ajude a descobrir quem é o assassino.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Quanto à vítima, bem, isso é informação confidencial. Você entende, não entende?";
+		next;
+		mes "[Dequ'ee]";
+		mes "Agora, quero que você vá até Morroc e interrogue quatro suspeitos. Os nomes deles são ^5D478BMuetro^000000, ^5D478BGeil^000000, ^5D478BHans^000000";
+		mes "e ^5D478BBankley^000000. Não deve ser muito difícil.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Depois de falar com todos eles, volte e relate para mim. E é especialmente importante que você se lembre ou anote quaisquer pistas importantes que você possa conseguir";
+		mes "dos nossos suspeitos.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Além disso, tenha em mente que esta é uma missão especial para a Associação de Espadachins. Então mantenha tudo o que aprender em segredo. Entendido?";
+		next;
+		mes "[Dequ'ee]";
+		mes "Agora vá e veja se consegue aprender alguma coisa com Muetro, Geil, Hans e Bankley. Precisamos descobrir a identidade do assassino o mais rápido possível!";
+		next;
+		mes "[Dequ'ee]";
+		mes "Ah, espere...";
+		mes "Morroc fica um pouco longe. Certo, vou deixar você em algum lugar";
+		mes "perto daquela cidade.";
+		next;
+		set tu_swordman, 14;
+		changequest 8222,8223;
+		warp "moc_fild07",359,201;
+		close;
+	}
+	if((tu_swordman > 7) && (tu_swordman < 13)){
+		mes "[Dequ'ee]";
+		mes "Hmm...";
+		mes "Ainda recebendo";
+		mes "treinamento especial";
+		mes "do Shurank?";
+		next;
+		mes "[Dequ'ee]";
+		mes "Isso é ótimo.";
+		mes "Espadachins hoje em dia estão ficando cada vez mais desleixados. Alguém tem que manter os novatos na linha e atentos!";
+		close;
+	}
+	if(tu_swordman == 7){
+		mes "[Dequ'ee]";
+		mes "O que você";
+		mes "ainda está fazendo aqui?";
+		mes "Vá e entregue minha";
+		mes "mensagem para o Shurank.";
+		next;
+		mes "[Dequ'ee]";
+		mes "Avise-o de que não";
+		mes "temos certeza da identidade do assassino,";
+		mes "mas temos uma lista de suspeitos.";
+		mes "Mais cedo ou mais tarde, descobriremos";
+		mes "quem ele é.";
+		close;
+	}
+	if(tu_swordman == 6){
+		mes "[Dequ'ee]";
+		mes "Ah...!";
+		mes "Você é o Espadachim";
+		mes "enviado pelo Shurank? Bom,";
+		mes "Estive esperando...";
+		next;
+		mes "[Dequ'ee]";
+		mes "Agora me diga...";
+		mes "Que mensagem o";
+		mes "Shurank tem para mim?";
+		next;
+		switch(select("Killer...:Murderer...")) {
+		case 1:
+			mes "[" + strcharinfo(0) + "]";
+			mes "O que aconteceu";
+			mes "com o assassino?";
+			next;
+			switch(select("Who he is...:Who is behind...")) {
+			case 1:
+				mes "[" + strcharinfo(0) + "]";
+				mes "Você descobriu";
+				mes "quem ele é?";
+				mes "Se descobriu...";
+				next;
+				switch(select("Why are we...:What are we...")) {
+				case 1:
+					mes "[" + strcharinfo(0) + "]";
+					mes "Por que está sentado";
+					mes "por aí, sem fazer nada?!";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o assassino?";
+					mes "Você descobriu quem ele é? Se descobriu, por que estamos sentados por aí, sem fazer nada?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Isso não parece ser";
+					mes "a mensagem que eu deveria receber do Shurack. Preciso da mensagem exata dele ou não posso enviar";
+					mes "uma resposta...";
+					close;
+				case 2:
+					mes "[" + strcharinfo(0) + "]";
+					mes "O que nós";
+					mes "devemos fazer agora?";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o assassino?";
+					mes "Você descobriu quem ele é? Se descobriu, o que devemos fazer agora?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Isso não parece ser";
+					mes "a mensagem que eu deveria receber do Shurack. Preciso da mensagem exata dele ou não posso enviar";
+					mes "uma resposta...";
+					close;
+				}
+			case 2:
+				mes "[" + strcharinfo(0) + "]";
+				mes "Você descobriu";
+				mes "quem está por trás de tudo isso?";
+				mes "Se descobriu...";
+				next;
+				switch(select("Why are we...:What are we...")) {
+				case 1:
+					mes "[" + strcharinfo(0) + "]";
+					mes "Por que está sentado";
+					mes "por aí, sem fazer nada?!";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o assassino?";
+					mes "Você descobriu quem está por trás de tudo isso? Se descobriu, por que estamos sentados por aí, sem fazer nada?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Isso não parece ser";
+					mes "a mensagem que eu deveria receber do Shurack. Preciso da mensagem exata dele ou não posso enviar";
+					mes "uma resposta...";
+					close;
+				case 2:
+					mes "[" + strcharinfo(0) + "]";
+					mes "O que nós";
+					mes "devemos fazer agora?";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o assassino?";
+					mes "Você descobriu quem está por trás de tudo isso? Se descobriu, o que devemos fazer agora?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Isso não parece ser";
+					mes "a mensagem que eu deveria receber do Shurack. Preciso da mensagem exata dele ou não posso enviar";
+					mes "uma resposta...";
+					close;
+				}
+			}
+			break;
+		case 2:
+			mes "[" + strcharinfo(0) + "]";
+			mes "O que aconteceu";
+			mes "com o assassino?";
+			next;
+			switch(select("Who he is...:Who is behind...")) {
+			case 1:
+				mes "[" + strcharinfo(0) + "]";
+				mes "Você descobriu";
+				mes "quem ele é?";
+				mes "Se descobriu...";
+				next;
+				switch(select("Why are we...:What are we...")) {
+				case 1:
+					mes "[" + strcharinfo(0) + "]";
+					mes "Por que está sentado";
+					mes "por aí, sem fazer nada?!";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o";
+					mes "assassino? Você descobriu";
+					mes "quem ele é? Se descobriu,";
+					mes "por que estamos sentados por aí,";
+					mes "sem fazer nada?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Isso não parece ser";
+					mes "a mensagem que eu deveria receber do Shurack. Preciso da mensagem exata dele ou não posso enviar";
+					mes "uma resposta...";
+					close;
+				case 2:
+					mes "[" + strcharinfo(0) + "]";
+					mes "O que nós";
+					mes "devemos fazer agora?";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o";
+					mes "assassino? Você descobriu";
+					mes "quem ele é? Se descobriu,";
+					mes "o que devemos fazer agora?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Eu entendo";
+					mes "as preocupações dele.";
+					mes "Certo, agora por favor";
+					mes "dê esta resposta a ele.";
+					next;
+					mes "[Dequ'ee]";
+					mes "Nós não descobrimos";
+					mes "quem é o assassino";
+					mes "com certeza. No entanto,";
+					mes "temos uma lista de suspeitos";
+					mes "e vamos descobrir em breve.";
+					next;
+					mes "[Dequ'ee]";
+					mes "Obrigado por se dar ao trabalho de vir até aqui. Deixe-me recompensá-lo com alguns pontos de experiência.";
+					set tu_swordman, 7;
+					changequest 8216,8217;
+					if (checkre(3))
+						getexp 112,0;
+					else
+						getexp 1120,0;
+					next;
+					mes "[Dequ'ee]";
+					mes "Cuide-se,";
+					mes "bravo";
+					mes "Espadachim.";
+					next;
+					if (checkre(0))
+						warp "izlude",127,100;
+					else
+						warp "izlude",35,78;
+					close;
+				}
+			case 2:
+				mes "[" + strcharinfo(0) + "]";
+				mes "Você descobriu";
+				mes "quem está por trás de tudo isso?";
+				mes "Se descobriu...";
+				next;
+				switch(select("Why are we...:What are we...")) {
+				case 1:
+					mes "[" + strcharinfo(0) + "]";
+					mes "Por que está sentado";
+					mes "por aí, sem fazer nada?!";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o";
+					mes "assassino? Você descobriu";
+					mes "quem está por trás de tudo isso?";
+					mes "Se descobriu, por que estamos sentados por aí, sem fazer nada?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Isso não parece ser";
+					mes "a mensagem que eu deveria receber do Shurack. Preciso da mensagem exata dele ou não posso enviar";
+					mes "uma resposta...";
+					close;
+				case 2:
+					mes "[" + strcharinfo(0) + "]";
+					mes "O que nós";
+					mes "devemos fazer agora?";
+					next;
+					mes "[Dequ'ee]";
+					mes "Então o Shurank está perguntando,";
+					mes "'O que aconteceu com o";
+					mes "assassino? Você descobriu";
+					mes "quem está por trás de tudo isso?";
+					mes "Se descobriu, o que nós";
+					mes "devemos fazer agora?'";
+					next;
+					mes "[Dequ'ee]";
+					mes "Hmm...";
+					mes "Isso não parece ser";
+					mes "a mensagem que eu deveria receber do Shurack. Preciso da mensagem exata dele ou não posso enviar";
+					mes "uma resposta...";
+					close;
+				}
+			}
+			break;
+		}
+	}
+	
+	mes "Hmm...?";
+	mes "Você tem algum";
+	mes "assunto comigo?";
+	close;
+}
+
+// Geil
+//============================================================
+morocc_in,51,101,3	script	Geil	89,{
+	mes "[Geil]";
+	if(tu_swordman == 15){
+		mes "Você foi enviado pelas autoridades? Pare de me dar tanto trabalho! Eu não sou o assassino! Eu nem sei quem foi morto. Eu não sou quem você está procurando!";
+		next;
+		mes "[Geil]";
+		mes "Claro, algum cara";
+		mes "estranho me contou algum";
+		mes "tipo de código relacionado a tudo isso, mas só isso! É tudo o que eu sei! Eu não sou o assassino, não sou cúmplice, nada!";
+		next;
+		mes "[Geil]";
+		mes "^5D478BTheisWesomeof^000000";
+		mes "Esse é o código. Não acredito que não consigo esquecer isso.";
+		mes "Quero dizer, acho que estava bêbado";
+		mes "quando aquele cara me contou.";
+		next;
+		mes "[Geil]";
+		mes "O que há de tão importante nesse código, e por que vocês continuam me perseguindo por causa do assassinato?!";
+		close;
+	}
+	if(tu_swordman == 14){
+		mes "Você foi enviado pelas autoridades? Pare de me dar tanto trabalho! Eu não sou o assassino! Eu nem sei quem foi morto. Eu não sou quem você está procurando!";
+		next;
+		mes "[Geil]";
+		mes "Claro, algum cara";
+		mes "estranho me contou algum";
+		mes "tipo de código relacionado a tudo isso, mas só isso! É tudo o que eu sei! Eu não sou o assassino, não sou cúmplice, nada!";
+		next;
+		mes "[Geil]";
+		mes "^5D478BTheisWesomeof^000000";
+		mes "Esse é o código. Não acredito que não consigo esquecer isso.";
+		mes "Quero dizer, acho que estava bêbado";
+		mes "quando aquele cara me contou.";
+		next;
+		mes "[Geil]";
+		mes "O que há de tão importante nesse código, e por que vocês continuam me perseguindo por causa do assassinato?!";
+		set tu_swordman, 15;
+		close;
+	}
+	mes "Todos nós deveríamos";
+	mes "nos esforçar para viver em";
+	mes "paz e harmonia";
+	mes "com nossos semelhantes.";
+	next;
+	mes "[Geil]";
+	mes "Mas o medo, a desconfiança e o pânico sempre parecem atrapalhar e bagunçar os eventos mundiais. Temos que encontrar dentro de nós mesmos uma maneira de conviver com os outros. Você não concorda?";
+	close;
+}
+
+// Meutro
+//============================================================
+morocc,82,292,5	script	Muetro	84,{
+	mes "[Muetro]";
+	if(tu_swordman == 15){
+		mes "Você é igual";
+		mes "a todos os outros.";
+		mes "Você quer o código";
+		mes "que eu sei, né?";
+		next;
+		mes "[Muetro]";
+		mes "^5D478BConBanfoevidehi^000000";
+		mes "Feliz agora? Agora";
+		mes "me deixe em paz e";
+		mes "pegue o assassino.";
+		close;
+	}
+	if(tu_swordman == 14){
+		mes "Você é igual";
+		mes "a todos os outros.";
+		mes "Você quer o código";
+		mes "que eu sei, né?";
+		next;
+		mes "[Muetro]";
+		mes "^5D478BConBanfoevidehi^000000";
+		mes "Feliz agora? Agora";
+		mes "me deixe em paz e";
+		mes "pegue o assassino.";
+		set tu_swordman, 15;
+		close;
+	}
+	mes "^666666*Suspiro*^000000";
+	mes "Eu tento e tento, mas às vezes coisas ridículas acontecem e";
+	mes "eu não posso fazer nada a respeito delas.";
+	next;
+	mes "[Muetro]";
+	mes "Suponho que seja o destino. Não há como escapar do que eu possivelmente não";
+	mes "posso ter esperança de controlar ou entender.";
+	close;
+}
+
+// Hans
+//============================================================
+morocc,240,72,3	script	Hans	86,{
+	mes "[Hans]";
+	if(tu_swordman == 15){
+		mes "Ajuda!";
+		mes "Por favor, me ajude!";
+		mes "Eu não sou assassino!";
+		mes "Eu sou praticamente";
+		mes "inofensivo!";
+		next;
+		mes "[Hans]";
+		mes "^5D478Bvictkleyundncem^000000";
+		mes "Este é um código que eu sei.";
+		mes "Alguma pessoa estranha";
+		mes "me contou isso mais cedo e disse";
+		mes "que eu precisaria saber em breve!";
+		next;
+		mes "[Hans]";
+		mes "Ele disse que este código";
+		mes "salvaria minha vida. Primeiro,";
+		mes "eu pensei que ele era louco, mas por";
+		mes "algum motivo não consigo esquecer.";
+		next;
+		mes "[Hans]";
+		mes "É como se ele tivesse usado magia ou algo assim para fazer isso ficar grudado na minha mente. Por favor, me deixe em paz, isso é tudo o que sei!";
+		close;
+	}
+	if(tu_swordman == 14){
+		mes "Ajuda!";
+		mes "Por favor, me ajude!";
+		mes "Eu não sou assassino!";
+		mes "Eu sou praticamente";
+		mes "inofensivo!";
+		next;
+		mes "[Hans]";
+		mes "^5D478Bvictkleyundncem^000000";
+		mes "Este é um código que eu sei.";
+		mes "Alguma pessoa estranha";
+		mes "me contou isso mais cedo e disse";
+		mes "que eu precisaria saber em breve!";
+		next;
+		mes "[Hans]";
+		mes "Ele disse que este código";
+		mes "salvaria minha vida. Primeiro,";
+		mes "eu pensei que ele era louco, mas por";
+		mes "algum motivo não consigo esquecer.";
+		next;
+		mes "[Hans]";
+		mes "É como se ele tivesse usado magia ou algo assim para fazer isso ficar grudado na minha mente. Por favor, me deixe em paz, isso é tudo o que sei!";
+		set tu_swordman, 15;
+		close;
+	}
+	mes "Sinto muito...";
+	mes "Mas não acho que posso ser de alguma ajuda para você. Agora, parece que tenho meus próprios problemas...";
+	close;
+}
+
+// Bankley
+//============================================================
+morocc_in,12,156,3	script	Bankley	97,{
+	if(tu_swordman > 19){
+		mes "^3355FFBankley tinha uma expressão";
+		mes "piedade no rosto.^000000";
+		mes "^3355FFSeu corpo está completamente sem vida. Há um ferimento longo e profundo em seu peito, e uma faca encharcada de sangue está cerrada em sua mão direita.^000000";
+		close;
+	}
+	if(tu_swordman == 19){
+		mes "...";
+		mes "......";
+		next;
+		mes "^3355FFEle está morto!^000000";
+		next;
+		mes "^3355FFBankley tinha uma expressão triste e de piedade no rosto. Como a cor ainda está fresca em suas bochechas, ele morreu há pouco tempo.";
+		mes "^3355FFHá um ferimento longo e profundo em seu peito, e uma faca encharcada de sangue está cerrada em sua mão direita.^000000";
+		set tu_swordman, 20;
+		changequest 8225,8226;
+		close;
+	}
+	mes "[Bankley]";
+	if(tu_swordman == 15){
+		mes "Eu não matei ninguém...!";
+		mes "Eu sou inocente e não";
+		mes "tenho nada a esconder!";
+		next;
+		mes "[Bankley]";
+		mes "Mas olhe...";
+		mes "Se ajudar, deixe-me te dar este código estranho que algum cara esquisito me deu. Acho que deve ser algum tipo de pista.";
+		next;
+		mes "[Bankley]";
+		mes "^5D478BhekdlfiDrindkelsd^000000";
+		mes "Você entende o que";
+		mes "isso significa? Não faço ideia, mas";
+		mes "eu te contei tudo o que sei!";
+		next;
+		mes "[Bankley]";
+		mes "Eu me sinto tão violado!";
+		mes "Assim que provar que sou inocente, vocês vão me compensar pelo";
+		mes "meu sofrimento mental!?";
+		next;
+		mes "[Bankley]";
+		mes "Pare de me incomodar";
+		mes "e de desperdiçar seu tempo.";
+		mes "É melhor você caçar";
+		mes "o verdadeiro culpado!";
+		close;
+	}
+	if(tu_swordman == 14){
+		mes "Eu não matei ninguém...!";
+		mes "Eu sou inocente e não";
+		mes "tenho nada a esconder!";
+		next;
+		mes "[Bankley]";
+		mes "Mas olhe...";
+		mes "Se ajudar, deixe-me te dar este código estranho que algum cara esquisito me deu. Acho que deve ser algum tipo de pista.";
+		next;
+		mes "[Bankley]";
+		mes "^5D478BhekdlfiDrindkelsd^000000";
+		mes "Você entende o que";
+		mes "isso significa? Não faço ideia, mas";
+		mes "eu te contei tudo o que sei!";
+		next;
+		mes "[Bankley]";
+		mes "Eu me sinto tão violado!";
+		mes "Assim que provar que sou inocente, vocês vão me compensar pelo";
+		mes "meu sofrimento mental!?";
+		next;
+		mes "[Bankley]";
+		mes "Pare de me incomodar";
+		mes "e de desperdiçar seu tempo.";
+		mes "É melhor você caçar";
+		mes "o verdadeiro culpado!";
+		set tu_swordman, 15;
+		close;
+	}
+	mes "Embora eu não possa pagar por isso agora, meu sonho é viajar pelo mundo e visitar todas as suas grandes cidades!";
+	next;
+	mes "[Bankley]";
+	mes "Algum dia, tenho certeza de que terei a chance de realizar meus sonhos";
+	mes "e torná-los realidade. Mas por enquanto, terei que viver da melhor maneira que puder.";
+	close;
+}

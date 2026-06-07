@@ -1,0 +1,111 @@
+//===== rAthena Script ======================================= 
+//= Quest NPCs related to Aldebaran 
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project; 7.15 +
+//===== Description: ========================================= 
+//= 'Doctor Band', 'Feather Bonnet', 'Opera Masque', 'Sakkat Hat' Quests.
+//===== Additional Comments: ================================= 
+//= Fully working
+//= 1.1 Fixed Doctor Band items [Lupus]
+//= 1.2 Removed Duplicates [Silent]
+//= 1.3 Updated headgear NPC. [L0ne_W0lf]
+//============================================================ 
+
+// 'Doctor Band', 'Feather Bonnet', 'Opera Masque', 'Sakkat Hat' Quest
+//============================================================
+aldeba_in,152,166,4	script	Trader#01	86,{
+	mes "[Comerciante]";
+	mes "Quem é este homem misterioso?";
+	mes "Eu, o enigmático e elegante 'Comerciante?'";
+	next;
+	mes "[Comerciante]";
+	mes "Viajando pelo Continente de Midgard, com todos os seus chapéus maravilhosos? Ninguém sabe...";
+	next;
+	mes "[Comerciante]";
+	mes "Com que propósito eu coleciono e troco esses chapéus de todo o mundo? Escolha um chapéu e chegue mais perto de desvendar o mistério...";
+	next;
+	mes "(1) ^3355FFFaixa Médica^000000:";
+	mes "1 Red Bandana + 50 Irons + 1 Cracked Diamond + 3500 Zeny";
+	mes "(2)^3355FFChapéu de Penas^000000:";
+	mes "1 Romantic Gent + 300 Feather of Birds + 500 Zeny";
+	mes "(3) ^3355FFFantasma da Ópera^000000:";
+	mes "20 Iron + 1 Singing Plant + 5000 Zeny ";
+	mes "(4) ^3355FFSakkat^000000:";
+	mes "120 Trunks + 10000 Zeny ";
+	next;
+	switch(select(" Doctor Band : Feather Bonnet : Phantom of Opera : Sakkat ")) {
+	case 1:
+		if ((countitem(2275) > 0) && (countitem(998) > 49) && (countitem(733) > 0) && (Zeny > 3499)) {
+			delitem 2275,1; //Red_Bandana
+			delitem 998,50; //Iron
+			delitem 733,1; //Crystal_Jewel___
+			set Zeny, Zeny-3500;
+			mes "[Comerciante]";
+			mes "Hm! Você não tem uma licença médica, tem? Tudo bem, eu ouvi falar de um médico renegado e sem licença que realizou milagres médicos! Mas... Isso pode ter sido em uma história em quadrinhos.";
+			next;
+			mes "[Comerciante]";
+			mes "Ah, tanto faz. Apenas não seja pego.";
+			getitem 2273,1; //Doctor_Cap
+			close;
+		}
+		else {
+			mes "[Comerciante]";
+			mes "Ei, você~";
+			mes "Verifique os requisitos novamente.";
+			mes "Você não parece um idiota, no entanto. Então, vamos lá cara, seja realista.";
+			close;
+		}
+	case 2:
+		if ((countitem(2247) > 0) && (countitem(916) > 299) && (Zeny > 499)) {
+			delitem 2247,1; //Oldman's_Romance
+			delitem 916,300; //Feather_Of_Birds
+			set Zeny, Zeny-500;
+			mes "[Comerciante]";
+			mes "Ooh~! Você tem bom senso de moda. Sei que teve trabalho para coletar essas coisas, mas este chapéu vale a pena. Pegue-o. Tudo que você precisa agora é de um casaco de pele e uma bengala!";
+			getitem 5018,1; //Feather_Bonnet
+			close;
+		}
+		else {
+			mes "[Comerciante]";
+			mes "Ei, você~";
+			mes "Vá verificar meus requisitos novamente. Você não parece um idiota, no entanto. Vamos lá cara, seja realista.";
+			close;
+		}
+	case 3:
+		if ((countitem(998) > 19) && (countitem(707) > 0) && (Zeny > 4999)){ //Iron Singing_Plant 
+			delitem 998,20; //Iron
+			delitem 707,1; //Singing_Plant
+			set Zeny, Zeny-5000;
+			mes "[Comerciante]";
+			mes "Este aqui? É um pouco assustador, embora tenha uma certa qualidade romântica. O que você acha? Gostou? Certo, pegue, é seu!";
+			getitem 2281,1; //Phantom_Of_Opera
+			close;
+		}
+		else {
+			mes "[Comerciante]";
+			mes "Bufão. Vá verificar os requisitos novamente. ^3355FFFantasma da Ópera^000000 não é fácil de encontrar. Então, vamos lá cara, seja realista.";
+			close;
+		}
+	case 4:
+		if ((countitem(1019) > 119) && (Zeny > 9999)){ //Wooden_Block 
+			delitem 1019,120; //Wooden_Block
+			set Zeny, Zeny-10000;
+			mes "[Comerciante]";
+			mes "Se você tiver a chance de visitar a Vila dos Planaltos, Payon, por favor, vá conhecer o Artesão de Sakkat.";
+			next;
+			mes "[Comerciante]";
+			mes "Ele nunca vendeu Sakkat para outros comerciantes além de mim, já que apenas eu consigo reconhecer sua qualidade. Devido à sua raridade, o Sakkat se tornou um produto muito único e excepcional. Ok! Pegue, é seu!";
+			getitem 2280,1; //Sahkkat
+			close;
+		}
+		else {
+			mes "[Comerciante]";
+			mes "IDIOTA~ Verifique meus requisitos novamente. Vamos lá cara, você não parece um idiota, então seja realista~";
+			close;
+		}
+	}
+}

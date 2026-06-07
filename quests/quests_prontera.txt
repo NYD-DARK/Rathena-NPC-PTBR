@@ -1,0 +1,3695 @@
+//===== rAthena Script =======================================
+//= Quest NPCs related to Prontera
+//===== Description: =========================================
+//= Collection of Prontera-based quests.
+//= * Culvert Access
+//= * Ph.D Hat Quest
+//= * Geoborg Family Curse
+//===== Comments: ============================================
+//= Culvert Access:
+//= - [Official Conversion]
+//= - Variable in use: MISC_QUEST (bit 8)
+//= Ph.D Hat Quest:
+//= - [Official Conversion]
+//= - n/a
+//= Geoborg Family Curse:
+//= - [Official Conversion]
+//= - Variable in use: prt_curse (max 61)
+//===== Changelog: ===========================================
+//= 1.0 First Version. [kobra_k88] [L0ne_W0lf]
+//= Fixed flower name Dreamy -> Illusion
+//= 1.2 Fixed exploit [Lupus]
+//= 1.3 Removed Duplicates [Silent]
+//= 1.4 Moved Culvert from cities/prontera.txt [Evera]
+//= 1.5 Culvert has been rescripted from the ground up. [L0ne_W0lf]
+//= 1.6 Added Geoborg Family Curse quest. [L0ne_W0lf]
+//= 1.6a Fixed a couple spelling mistakes. [L0ne_W0lf]
+//= 1.7 Updated "Ph.D Quest" Dialogs. [Samuray22]
+//= 1.7b Fixed some minor typos. [SinSloth]
+//= 1.7c replaced item "names" with item id. [Lupus]
+//= 1.8 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.9 Fixed "him" -> "her" in Ph.D hat quest. THansk to yyCC. [L0ne_W0lf]
+//= 2.0 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 2.0a Corrected a Typo error ";;". [Samuray22]
+//= 2.0b Corrected a Typo error. (bugreport:950) [Samuray22]
+//= 2.1 Added missing checkweights. [L0ne_W0lf]
+//= 2.2 Added Nameless Island quest addition. [L0ne_W0lf]
+//= 2.3 Bamph will now talk to those who failed the Geoborg quest. [L0ne_W0lf]
+//= 2.3a Touch up to Bamph fo other fail-points. [L0ne_W0lf]
+//= 2.3b Hopefully the last change needed for Nameless quest. [L0ne_W0lf]
+//= 2.4 Updated Headgear Quest. [L0ne_W0lf]
+//= 2.5 Fixed requirements for PH D. Hat. [L0ne_W0lf]
+//= 2.5a Fixed requirements for PH D. Hat agian lol. [L0ne_W0lf]
+//= 2.6 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 2.7 Corrected 'IProntera' typo. (bugreport:4522) [L0ne_W0lf]
+//= 2.8 Updated RE/Pre-RE EXP. [Euphy]
+//= 2.9 Updated Nameless Island addition and added questlog support. [Euphy]
+//= 3.0 Commented custom quest log support for Geoborg Family Curse Quest [Everade]
+//============================================================
+
+// Prontera Culvert :: prt_npc
+//============================================================
+prt_in,88,105,2	script	Recruiter	105,{
+	if (MISC_QUEST & 8) {
+		mes "[Recrutador]";
+		mes "Ah...";
+		mes "Eu conheço esses olhos.";
+		mes "Cheios de compaixão";
+		mes "...e coragem.";
+		next;
+		mes "[Recrutador]";
+		mes "Claro que você é um voluntário para a campanha de reconquista do Esgoto de Prontera. Você me deixaria te teletransportar para lá?";
+		next;
+		if (select("Warp to Culvert Entrance.:Quit.") == 1) {
+			warp "prt_fild05",274,208;
+			end;
+		}
+		close;
+	}
+	mes "[Recrutador]";
+	mes "Ah, deixe-me informar que o Quartel General de Defesa da Capital do Reino de Rune-Midgard decidiu agora recrutar uma força punitiva devido à situação do Esgoto de Prontera.";
+	next;
+	switch(select("Volunteer.:Situation...?:Quit.")) {
+	case 1:
+		callsub S_Volunteer;
+		mes "[Recrutador]";
+		mes "Você está pronto, herói?";
+		mes "Eu vou te teletransportar agora";
+		mes "para o Esgoto.";
+		next;
+		warp "prt_fild05",274,208;
+		end;
+	case 2:
+		mes "[Recrutador]";
+		mes "Você ainda não ouviu falar...?";
+		mes "O Esgoto de Prontera está infestado de todo tipo de vermes imundos!";
+		next;
+		mes "[Recrutador]";
+		mes "Devido ao sério risco de contaminação da água e à segurança dos habitantes de Rune-Midgard, o Esgoto foi colocado em quarentena por decreto real.";
+		next;
+		mes "[Recrutador]";
+		mes "Desnecessário dizer, isso causou escassez no abastecimento de água em nosso reino. De fato, uma crise dessas em tempos tão sombrios...";
+		next;
+		mes "[Recrutador]";
+		mes "Nosso povo";
+		mes "tem sede de água...";
+		mes "Mas eles têm sede";
+		mes "ainda mais...";
+		mes "Por um herói!";
+		next;
+		mes "[Recrutador]";
+		mes "Você ficará parado enquanto as crianças de Rune-Midgard sofrem com gargantas secas e derramam lágrimas de secura?! Você enterraria nossas crianças?!";
+		next;
+		mes "[Recrutador]";
+		mes "Guerreiros! Rune-Midgard está chamando vocês! Limpem a praga desta terra e expulsem os vermes do Esgoto! Só vocês... Podem fazer a diferença.";
+		next;
+		if (select("Volunteer.:Quit.") == 1) {
+			callsub S_Volunteer;
+			mes "[Recrutador]";
+			mes "Aventureiro...";
+			mes "Eu vou te teletransportar agora";
+			mes "para o Esgoto de Prontera.";
+			next;
+			warp "prt_fild05",274,208;
+			end;
+		}
+		mes "[Recrutador]";
+		mes "Hmpf. Bem. Da próxima vez que você beber água, lembre-se que uma média de nove crianças e meia acabaram de morrer... ^990000De sede^000000.";
+		close;
+
+	case 3:
+		close;
+	}
+
+S_Volunteer:
+	set MISC_QUEST,MISC_QUEST | 8;
+	mes "[Recrutador]";
+	mes "Seu registro...";
+	mes "está agora completo.";
+	next;
+	mes "[Recrutador]";
+	mes "Eu gostaria de agradecer por você ter se voluntariado para fazer sua parte por nosso grande reino. Aqui, pegue estas provisões para suas batalhas contra as forças das trevas.";
+	next;
+	mes "[Recrutador]";
+	mes "3 Poções Vermelhas, 1 Leite,";
+	mes "e 1 Poção Laranja";
+	mes "...para te dar esperança.";
+	getitem 501,3; //Red_Potion
+	getitem 519,1; //Milk
+	getitem 502,1; //Orange_Potion
+	next;
+	return;
+}
+
+prt_fild05,270,212,5	script	Culvert Guardian	105,{
+	if (MISC_QUEST & 8) {
+		mes "[Guardião do Esgoto]";
+		mes "Ah, você é um dos nossos voluntários. Esta é a entrada do Esgoto de Prontera.";
+		mes "Você deseja";
+		mes "entrar?";
+		next;
+		if (select("Sure.:Quit.") == 1) {
+			warp "prt_sewb1",131,247;
+			end;
+		}
+		close;
+	}
+	mes "[Guardião do Esgoto]";
+	mes "Sinto muito, mas só podemos permitir a entrada de voluntários para a Campanha do Esgoto.";
+	next;
+	mes "[Guardião do Esgoto]";
+	mes "Se você gostaria de se voluntariar, por favor, visite o ^000077Registrador do Esgoto^000000 localizado na direção das 11 horas em Prontera.";
+	close;
+}
+
+// Ph.D Hat Quest :: npc_6cript
+//============================================================
+prt_in,38,108,4	script	Teacher	53,{
+	if ((countitem(710) > 0) && (countitem(703) > 0) && (countitem(704) > 0) && (countitem(708) > 0)) {
+		mes "[Professor]";
+		mes "Oh...";
+		mes "Essas Flores em sua mão são...";
+		next;
+		switch(select("Show Flowers:Present Flowers:Cancel")) {
+		case 1:
+			mes "[Professor]";
+			mes "Ah...";
+			mes "Esses são definitivamente os 4 tipos de Flores que eu estava procurando! Você me daria elas?";
+			next;
+			mes "[Professor]";
+			mes "Se você pudesse...";
+			mes "Eu lhe darei meu item precioso.";
+			close;
+		case 2:
+			if ((countitem(710) > 0) && (countitem(703) > 0) && (countitem(704) > 0) && (countitem(708) > 0)) {
+				delitem 710,1;  //Illusion_Flower
+				delitem 703,1;  //Hinalle
+				delitem 704,1;  //Aloe
+				delitem 708,1;  //Ment
+				getitem 5012,1;	//Ph.D_Hat
+				mes "[Professor]";
+				mes "Eu realmente aprecio muito o que você fez por mim. Sou verdadeiramente grato. Eu lhe darei meu item precioso como prometido.";
+				next;
+				mes "[Professor]";
+				mes "Este é o Chapéu que usei na minha formatura da Universidade. Ele me lembra meus dias felizes de escola. Por favor, aceite isto...";
+				close;
+			}
+			else {
+				mes "[Professor]";
+				mes "... Oh, sinto muito.";
+				mes "Mas não é isso que estou procurando. Talvez você precise estudar um pouco sobre flores?";
+				close;
+			}
+		}
+	}
+	else {
+		mes "[Professor]";
+		mes "Você não acha...";
+		mes "Que flores são bonitas?";
+		next;
+		switch(select("Talk:Quit")) {
+		case 1:
+			mes "[Professor]";
+			mes "Quando eu era jovem,";
+			mes "eu não tinha amigos e";
+			mes "estudava o tempo todo.";
+			next;
+			mes "[Professor]";
+			mes "Às vezes me arrependo do que fiz quando era mais jovem, mas não é grande coisa agora. Através de muito estudo, terminei todos os cursos educacionais mais cedo do que todos os outros alunos.";
+			next;
+			mes "[Professor]";
+			mes "No entanto...";
+			mes "Eu era triste e às vezes solitário. Sempre que o estudo ficava muito difícil, eu precisava de alguém que me ouvisse. Finalmente, um dia, eu conheci minha melhor amiga.";
+			next;
+			mes "[Professor]";
+			mes "Quando vi uma Bela Flor florescendo no Jardim abandonado, percebi que era minha amiga que compartilhava meu destino.";
+			next;
+			mes "[Professor]";
+			mes "Embora seja uma Flor Comum e Normal para os outros, ela me deu a razão para estudar novamente. Eu pude alcançar meus objetivos por causa dela.";
+			next;
+			mes "[Professor]";
+			mes "Então, recentemente...";
+			mes "Estou tentando retribuí-la. Agora estou estudando Flores e planejo cobrir o mundo inteiro com elas.";
+			next;
+			mes "[Professor]";
+			mes "Para realizar meu trabalho...";
+			mes "Preciso de muitos buquês de flores. Mas para alguém que raramente sai, é muito difícil encontrar todas as flores de que preciso.";
+			next;
+			mes "[Professor]";
+			mes "Preciso de 1 ^3355FFFlor da Ilusão^000000, 1 ^3355FFHinalle^000000, 1 ^3355FFAloe^000000 e 1 ^3355FFMent^000000. Se você puder trazê-las para mim, eu lhe darei meu tesouro...";
+			close;
+		case 2:
+			mes "[Professor]";
+			mes "Um dia desses eu cobrirei o mundo inteiro com Flores.";
+			close;
+		}
+	}
+}
+
+// Geoborg Family Curse :: prt_curse
+//============================================================
+prontera,248,212,3	script	Busy Boy#prt	706,3,3,{
+	callsub S_CheckWeight; //Check Player's weight
+	if (BaseLevel > 59) {
+		if (prt_curse == 0) {
+			mes "[Garoto Preocupado]";
+			mes "Ah, que droga...";
+			mes "O que eu vou fazer?";
+			mes "Tenho que entregar estes";
+			mes "livros, mas... eu... Ah, meu,";
+			mes "Não posso ter medo agora!";
+			close;
+		}
+		else if (prt_curse == 1) {
+			mes "[Garoto Preocupado]";
+			mes "Ah, que droga...";
+			mes "O que eu vou fazer?";
+			mes "Tenho que entregar estes";
+			mes "livros, mas... eu... Ah, meu,";
+			mes "Não posso ter medo agora!";
+			next;
+			if (select("Speak with him:Ignore him") == 1) {
+				mes "["+strcharinfo(0)+"]";
+				mes "Diga, qual é";
+				mes "o problema?";
+				next;
+				mes "[Garoto Preocupado]";
+				mes ".........?";
+				next;
+				mes "[Garoto Preocupado]";
+				if (Sex == SEX_MALE) {
+					mes "Argh! Você é aquele cara desajeitado";
+					mes "que me fez derrubar";
+				}
+				else {
+					mes "Argh! Você é aquela garota desorientada";
+					mes "que me fez derrubar";
+				}
+				mes "todos aqueles livros mais cedo!";
+				mes "Espere, você me deixou na mão antes,";
+				mes "então por que agir todo preocupado agora?";
+				emotion ET_SURPRISE;
+			}
+			else {
+				mes "[Garoto Preocupado]";
+				mes "Ok, ok...";
+				mes "Nem pense";
+				mes "em flutuar no";
+				mes "céu. Você é tipo,";
+				mes "tão estável. Não pense...";
+				mes "Apenas... Apenas embarque naquele navio...";
+				close;
+			}
+			next;
+			select("Well, I, um...");
+			mes "[Garoto Ocupado]";
+			if (Sex == SEX_MALE) {
+				mes "É... Um homem de";
+				mes "verdade não teria";
+				mes "me abandonado antes";
+				mes "sem me ajudar.";
+				mes "Você é um chato de carteirinha,";
+				mes "sabia?";
+			}
+			else {
+				mes "É... Se você fosse";
+				mes "uma dama elegante e atenciosa,";
+				mes "você teria me ajudado";
+				mes "antes. Não é mesmo?";
+			}
+			next;
+			mes "^3355FFVocê instintivamente";
+			mes "chuta uma das pilhas";
+			mes "de livros ao lado";
+			mes "do garoto.";
+			mes "Você não conseguiu evitar:";
+			mes "foi um reflexo natural!^000000";
+			next;
+			Specialeffect EF_HITDARK;
+			emotion ET_HUK;
+			mes "^3355FF*BAM!*^000000";
+			next;
+			emotion ET_HUK;
+			mes "[Garoto Ocupado]";
+			mes "Argh! Aqueles livros...!";
+			mes "Demorou tanto para";
+			mes "empilhar tudo aquilo!";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Ah não, que bagunça!";
+			mes "Aqui, deixe-me ajudá-lo";
+			mes "a organizar isso direito";
+			mes "do fundo do meu";
+			mes "maldito coração.";
+			emotion ET_THROB, playerattached();
+			next;
+			mes "[Garoto Ocupado]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			emotion ET_THINK;
+			next;
+			mes "[Garoto Ocupado]";
+			mes "Hã...?";
+			mes "Ah, obrigado por";
+			mes "me ajudar aqui.";
+			mes "Eu realmente aprecio.";
+			next;
+			select("Are these all yours?");
+			mes "[Garoto Ocupado]";
+			mes "Estes? Ah, eu deveria";
+			mes "entregar estes no meu trabalho.";
+			mes "Preciso levar estes para Juno";
+			mes "da Biblioteca de Prontera";
+			mes "para um cliente. No entanto, hum...";
+			next;
+			mes "[Garoto Ocupado]";
+			mes "Bem...";
+			mes "Eu enjoo muito";
+			mes "fácil, então me apavora";
+			mes "ter que ir de Dirigível";
+			mes "até Juno.";
+			emotion ET_THINK;
+			next;
+			mes "[Garoto Ocupado]";
+			mes "Agora estou em apuros!";
+			mes "Nunca me atraso, mas";
+			mes "desta vez não consigo evitar.";
+			mes "Não há nada que eu possa fazer!";
+			mes "Ah, vou perder este trabalho!";
+			emotion ET_CRY;
+			next;
+			mes "[Garoto Ocupado]";
+			mes "Espere... Vocês aventureiros";
+			mes "viajam muito, certo?";
+			mes "Se você estiver viajando para Juno,";
+			mes "poderia, por favor, entregar isso";
+			mes "para mim? Terei sérios problemas";
+			mes "se eu não enviar esses livros...";
+			next;
+			callsub S_GetBooks;
+			mes "[Garoto Ocupado]";
+			mes "E-Eu entendo.";
+			mes "Não é da sua";
+			mes "conta, eu sei, mas";
+			mes "estou tão desesperado...";
+			emotion ET_CRY;
+			set prt_curse,2;
+			close;
+		}
+		else if (prt_curse == 2) {
+			mes "[Garoto Ocupado]";
+			mes "Ah, olá de novo.";
+			mes "Desculpe, mas estou tentando";
+			mes "me concentrar. Vou...";
+			mes "Reunir toda a minha coragem...";
+			mes "e e-embarcar naquele Dirigível!";
+			mes "Argh! Não, não consigo!";
+			emotion ET_THINK;
+			next;
+			callsub S_GetBooks;
+			mes "[Garoto Ocupado]";
+			mes "^333333*Soluço...*^000000";
+			mes "O que vou fazer?";
+			mes "Aquele sujeito está esperando";
+			mes "para que eu entregue os livros dele";
+			mes "há um bom tempo...";
+			emotion ET_CRY;
+			close;
+		}
+		else if (prt_curse == 3) {
+			mes "[Garoto Ocupado]";
+			mes "Ah, por favor, entregue";
+			mes "aqueles livros que te dei";
+			mes "ao ^FF0000Sr. Karlomoff^000000, que";
+			mes "deve estar esperando";
+			mes "na Biblioteca de Juno. Obrigado";
+			mes "novamente pela sua ajuda~";
+			close;
+		}
+		mes "[Garoto Ocupado]";
+		mes "Argh! Você poderia me";
+		mes "deixar em paz e me deixar trabalhar?";
+		mes "Tenho algo importante";
+		mes "para fazer! Quando terminar de organizar";
+		mes "estes livros, preciso... preciso fazer alguns preparativos!";
+		close;
+	}
+	mes "[Garoto Ocupado]";
+	mes "Argh! Você poderia me";
+	mes "deixar em paz e me deixar trabalhar?";
+	mes "Tenho algo importante";
+	mes "para fazer! Quando terminar de organizar";
+	mes "estes livros, preciso... preciso fazer alguns preparativos!";
+	close;
+
+OnTouch:
+	callsub S_CheckWeight; //Check Player's weight
+	if (BaseLevel > 59) {
+		if (prt_curse == 0) {
+			Specialeffect EF_HITDARK;
+			mes "^3355FF*BAQUE!*^000000";
+			next;
+			mes "[Garoto Atarefado]";
+			mes "Ei, cuidado!";
+			mes "Você não pode ser mais";
+			mes "cuidadoso?! Puxa vida!";
+			emotion ET_ANGER;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Opa, sinto muito.";
+			mes "Você está bem?";
+			next;
+			mes "[Garoto Atarefado]";
+			mes "Sim, mas não graças a você!";
+			mes "Ah... Não se preocupe, estou bem.";
+			next;
+			mes "^3355FFVocê nota que o garoto";
+			mes "deixou cair muitos livros de capa dura";
+			mes "que são provavelmente sobre";
+			mes "ruínas e suas lendas, com base";
+			mes "em seus títulos. O garoto sacudiu";
+			mes "a poeira de si mesmo e começou a";
+			mes "empilhar os livros cuidadosamente.^000000";
+			next;
+			if (select("Leave:Help him pile the books") == 1) {
+				mes "[Garoto Atarefado]";
+				mes "Da próxima vez, olhe";
+				mes "por onde anda,";
+				mes "tá legal? Quer dizer, você";
+				mes "pode realmente quebrar";
+				mes "algo se você for";
+				mes "sempre tão descuidado!";
+				set prt_curse,1;
+				close;
+			}
+			mes "[Garoto Atarefado]";
+			mes "Hã...?";
+			mes "Ah, obrigado por";
+			mes "me ajudar aqui.";
+			mes "Eu realmente agradeço.";
+			next;
+			select("Are these all yours?");
+			mes "[Garoto Atarefado]";
+			mes "Estes? Ah, eu deveria";
+			mes "entregá-los para o meu trabalho.";
+			mes "Preciso levá-los para Juno";
+			mes "da Biblioteca de Prontera";
+			mes "para um cliente. No entanto, hum...";
+			next;
+			mes "[Garoto Atarefado]";
+			mes "Bem...";
+			mes "Eu fico enjoado muito";
+			mes "facilmente, então me assusta";
+			mes "muito andar de Dirigível";
+			mes "até Juno.";
+			emotion ET_THINK;
+			next;
+			mes "[Garoto Atarefado]";
+			mes "Agora estou em apuros!";
+			mes "Nunca me atraso, mas desta";
+			mes "vez simplesmente não consigo evitar.";
+			mes "Não há nada que eu possa fazer!";
+			mes "Ah, vou perder este trabalho!";
+			emotion ET_CRY;
+			next;
+			mes "[Garoto Atarefado]";
+			mes "Espere... Vocês aventureiros";
+			mes "viajam muito, certo?";
+			mes "Se você estiver viajando para Juno,";
+			mes "poderia, por favor, entregar estes";
+			mes "para mim? Terei sérios problemas";
+			mes "se eu não enviar estes livros...";
+			next;
+			callsub S_GetBooks;
+			mes "[Garoto Atarefado]";
+			mes "E-Eu entendo.";
+			mes "Não é problema seu,";
+			mes "eu sei, mas";
+			mes "estou tão desesperado...";
+			emotion ET_CRY;
+			set prt_curse,2;
+			close;
+		}
+		else if (prt_curse == 3) {
+			mes "[Garoto Atarefado]";
+			mes "Ah, por favor, entregue";
+			mes "aqueles livros que te dei";
+			mes "ao ^FF0000Sr. Karlomoff^000000, que";
+			mes "deve estar esperando perto da";
+			mes "Biblioteca de Juno. Obrigado";
+			mes "novamente pela sua ajuda~";
+			close;
+		}
+	}
+	end;
+
+S_GetBooks:
+	if (select("Help him:Don't help him") == 1) {
+		mes "[Garoto Atarefado]";
+		mes "Ah, muito obrigado!";
+		mes "Você não entende o quanto";
+		mes "eu detesto aqueles Dirigíveis.";
+		mes "Agora, você poderia, por favor, entregar";
+		mes "estes livros ao ^FF0000Sr. Karlomoff^000000";
+		mes "perto da Biblioteca de Juno?";
+		next;
+		mes "[Garoto Atarefado]";
+		mes "Eu sei que estes livros são";
+		mes "bem pesados, mas seja muito";
+		mes "cuidado com eles! Enfim,";
+		mes "obrigado por fazer isso por mim.";
+		mes "Eu estava realmente no meu limite...";
+		set prt_curse,3;
+		//setquest 18030;// custom addition to make the script consistent
+		getitem 7431,1; //Books
+		close;
+	}
+	return;
+
+S_CheckWeight:
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "No momento, você está carregando";
+		mes "muitas coisas com você.";
+		mes "Por favor, volte depois";
+		mes "de usar o Serviço Kafra";
+		mes "para guardar alguns de seus itens.^000000";
+		close;
+	}
+	return;
+}
+
+yuno,311,195,3	script	Historian#prt01	754,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "No momento, você está carregando";
+		mes "muitas coisas com você.";
+		mes "Por favor, volte depois";
+		mes "de usar o Serviço Kafra";
+		mes "para guardar alguns de seus itens.^000000";
+		close;
+	}
+	if (prt_curse < 3) {
+		mes "[Historiador]";
+		mes "O passado misterioso de Juno";
+		mes "guarda um grande segredo.";
+		mes "Tenho certeza! Isso me excita";
+		mes "saber que minha pesquisa";
+		mes "me aproxima tanto";
+		mes "de finalmente revelá-lo!";
+		next;
+		mes "[Historiador]";
+		mes "Mas admito que nem eu sei o quanto terei que investigar";
+		mes "para descobrir o que quero. É nosso dever como historiadores";
+		mes "descobrir a verdade do passado, mas certamente não será fácil.";
+		next;
+		mes "[Historiador]";
+		mes "Entender, ver a";
+		mes "verdade do passado com meus";
+		mes "próprios olhos... Eu venderia até";
+		mes "minha alma por essa oportunidade.";
+		close;
+	}
+	else if (prt_curse == 3) {
+		mes "^3355FFAo se aproximar, este";
+		mes "historiador fechou de repente";
+		mes "o livro que estava lendo,";
+		mes "olhou para o céu e";
+		mes "soltou um suspiro profundo numa tentativa vã";
+		mes "de aliviar sua tensão.^000000";
+		next;
+		mes "[Historiador]";
+		mes "GRRRRRRRRR!";
+		mes "Onde estão meus livros?!";
+		emotion ET_ANGER;
+		next;
+		select("Are you alright?");
+		mes "[Historiador]";
+		mes "Er? Ah. Sinto muito que você";
+		mes "tenha que ver isso. Eu estou apenas";
+		mes "extremamente chateado. Veja bem,";
+		mes "estou esperando uma entrega de";
+		mes "livros de pesquisa de Prontera,";
+		mes "mas eles ainda não chegaram.";
+		next;
+		mes "[Historiador]";
+		mes "Na verdade, o entregador está";
+		mes "muito atrasado. Isso atrasará minha";
+		mes "pesquisa consideravelmente, já que";
+		mes "não posso prosseguir sem mais";
+		mes "material novo para estudar.";
+		next;
+		if (countitem(7431) > 0) {
+			select("Excuse me, but what's your name?");
+			mes "[Historiador]";
+			mes "Hm? Sou Karlomoff, o";
+			mes "primeiro estudioso do Grupo";
+			mes "de Pesquisa Histórica Rekenber.";
+			mes "Você precisava de algo, ou";
+			mes "estava procurando por alguém";
+			mes "em particular por aqui?";
+			next;
+		}
+		else {
+			select("Oh, I'm delivering the books for him.");
+			emotion ET_QUESTION;
+			mes "[Historiador]";
+			mes "Ah, sério?";
+			mes "Ótimo, você está aqui!";
+			mes "Então, onde estão os livros?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Eu...";
+			mes "Eu não os tenho";
+			mes "agora.";
+			next;
+			mes "[Historiador]";
+			mes "O quê...?";
+			mes "Não me diga que";
+			mes "você os perdeu! Aqueles";
+			mes "livros eram inestimáveis!";
+			mes "Você veio até aqui";
+			mes "só para me dizer isso?";
+			next;
+			mes "[Historiador]";
+			mes "Bem, suponho que você terá";
+			mes "que relatar a perda dos";
+			mes "livros e conseguir novas";
+			mes "cópias daqueles livros que";
+			mes "você deveria entregar.";
+			mes "Agora, apresse-se, preciso pesquisar!";
+			close;
+		}
+		select("Right, I brought your books.");
+		mes "[Historiador]";
+		mes "O quê? Mas você não é o";
+		mes "entregador. Bem, deixe-me ver";
+		mes "os livros que você trouxe. Hum...";
+		mes "Exatamente como pensei: o Reino";
+		mes "de Rune-Midgarts possui uma grande";
+		mes "riqueza de informações antigas.";
+		next;
+		mes "[Historiador]";
+		mes "Ah, muito obrigado por";
+		mes "trazê-los. No entanto, pela sua";
+		mes "forma de se vestir, posso dizer";
+		mes "que você é um aventureiro.";
+		mes "O que aconteceu com o entregador que deveria trazê-los?";
+		next;
+		mes "[Historiador]";
+		mes "..........?";
+		mes "Medo de andar de Dirigível?";
+		mes "Enjoo? Bem, isso é";
+		mes "bastante compreensível. O pobre";
+		mes "rapaz deveria ter me contatado";
+		mes "sobre isso com antecedência.";
+		next;
+		mes "[Historiador]";
+		mes "Nossa, faz um tempo";
+		mes "que não recebo uma";
+		mes "visita. Você gostaria";
+		mes "de ficar e conversar um pouco?";
+		mes "Só me dê um minuto para pegar";
+		mes "um copo de água gelada primeiro~";
+		set prt_curse,4;
+		delitem 7431,1; //Books
+		close;
+	}
+	else if (prt_curse == 4) {
+		mes "[Historiador]";
+		mes "Ah, aquele copo de";
+		mes "água era exatamente o";
+		mes "que eu precisava para me";
+		mes "refrescar. Deixe-me te contar";
+		mes "um pouco sobre meu trabalho.";
+		next;
+		mes "[Historiador]";
+		mes "Eu devo ter mencionado antes, mas meu nome é Karlomoff e";
+		mes "trabalho na Pesquisa Histórica Rekenber como seu 1º estudioso. Nós";
+		mes "recentemente terminamos nosso projeto sobre a República de Schwarzwald.";
+		next;
+		mes "[Historiador]";
+		mes "Agora, estamos tentando aprender";
+		mes "mais sobre a história do Reino";
+		mes "de Rune-Midgarts. Acreditamos";
+		mes "que está ligada à nossa República";
+		mes "de Schwarzwald porque elas compartilham o";
+		mes "continente. Faz sentido, certo?";
+		next;
+		mes "[Historiador]";
+		mes "Em última análise, esperamos que";
+		mes "novas informações de nossa";
+		mes "pesquisa sobre Rune-Midgarts lancem";
+		mes "uma nova luz sobre nossa";
+		mes "compreensão atual do passado da";
+		mes "República de Schwarzwald.";
+		next;
+		mes "[Historiador]";
+		mes "Incluindo a mim, há";
+		mes "^3131FF3 membros do Grupo de Pesquisa";
+		mes "Histórica Rekenber^000000";
+		mes "que estão estudando a história";
+		mes "do Reino de Rune-Midgarts.";
+		next;
+		select("Rekenber Historical Research Group?");
+		mes "[Historiador]";
+		mes "Vocês, aventureiros de Rune-";
+		mes "Midgarts, talvez não saibam, mas";
+		mes "a Corporação Rekenber tem";
+		mes "controle não oficial sobre nossa";
+		mes "República de Schwarzwald. Alguns";
+		mes "odeiam, outros não se importam.";
+		next;
+		mes "[Historiador]";
+		mes "De qualquer forma, a Rekenber tem seu próprio";
+		mes "Grupo de Pesquisa Histórica, já que";
+		mes "redescobrir tecnologias antigas tem sido a chave para o seu sucesso, bem,";
+		mes "pelo que posso dizer. Pessoalmente, eu aprecio a busca pelo conhecimento.";
+		next;
+		mes "[Historiador]";
+		mes "Ah, aqui está um fato";
+		mes "interessante! Você sabia que o";
+		mes "título de governante de Rune-Midgarts";
+		mes "nem sempre é passado";
+		mes "pela mesma família?";
+		next;
+		mes "[Historiador]";
+		mes "Na verdade, existem várias";
+		mes "famílias reais que realizam uma";
+		mes "competição especial para decidir";
+		mes "qual príncipe se tornará o";
+		mes "próximo rei. Fascinante...";
+		next;
+		select("Several royal families?");
+		mes "[Historiador]";
+		mes "Sim, vou tentar explicar";
+		mes "brevemente. Há um total";
+		mes "de 7 famílias reais. Cada";
+		mes "família descende de um";
+		mes "dos 7 guerreiros que fundaram";
+		mes "o Reino de Rune-Midgarts.";
+		next;
+		mes "[Historiador]";
+		mes "De acordo com os registros,";
+		mes "Jormungand, a serpente da";
+		mes "terra, apareceu e trouxe";
+		mes "o caos a todo o continente.";
+		mes "7 guerreiros apareceram e afastaram a serpente, salvando o mundo.";
+		next;
+		mes "[Historiador]";
+		mes "Com o retorno da paz,";
+		mes "os 7 guerreiros estabeleceram";
+		mes "o Reino de Rune-Midgarts,";
+		mes "escolhendo Tristram Geoborg III";
+		mes "como o primeiro governante do reino.";
+		next;
+		mes "[Historiador]";
+		mes "Sabendo que seus descendentes";
+		mes "nem sempre seriam dignos de";
+		mes "governar o reino, os 7 guerreiros concordaram em realizar um concurso entre";
+		mes "suas famílias a cada geração para evitar a corrupção real.";
+		next;
+		emotion ET_PROFUSELY_SWEAT;
+		mes "[Historiador]";
+		mes "Ah... Não muito animado";
+		mes "com história, hein? Bem,";
+		mes "talvez se eu cantar a antiga";
+		mes "canção deste mito, você seria";
+		mes "mais capaz de entender...";
+		next;
+		mes "[Historiador]";
+		mes "^FF0000*A grande serpente*^000000";
+		mes "^FF0000*engoliu o mar.*^000000";
+		mes "^FF0000*A águia do arco-íris*^000000";
+		mes "^FF0000*engoliu a serpente.*^000000";
+		mes "^FF0000*Então a águia construiu seu ninho.*^000000";
+		mes "^FF0000*Um ninho sobre o mar engolido.*^000000";
+		next;
+		mes "[Historiador]";
+		mes "^333333*Hum-hum*^000000 Como você vê, sou";
+		mes "bastante desafinado. Mas o";
+		mes "ponto é que as pessoas ainda";
+		mes "louvam as façanhas dos 7 guerreiros";
+		mes "através desta canção. Não é";
+		mes "interessante saber disso?";
+		set prt_curse,5;
+		close;
+	}
+	else if (prt_curse == 5) {
+		mes "[Historiador]";
+		mes "Sinto muito ter deixado minha";
+		mes "boca tagarelar enquanto falava";
+		mes "longamente sobre a história de";
+		mes "Rune-Midgarts. Ainda assim,";
+		mes "espero que você tenha achado essa história";
+		mes "pelo menos um pouco agradável.";
+		next;
+		mes "[Historiador]";
+		mes "Ah! Você estará voltando para";
+		mes "o Reino de Rune-Midgarts?";
+		mes "Se sim, então tenho um favor para";
+		mes "lhe pedir. Você poderia, por favor,";
+		mes "entregar este relatório que escrevi para minha colega em Morocc?";
+		next;
+		mes "[Historiador]";
+		mes "Seria de grande ajuda";
+		mes "para mim se você pudesse levar este";
+		mes "relatório para ela imediatamente.";
+		mes "Ah, o nome dela é Rodafrian.";
+		mes "Tenho certeza de que você pode encontrá-la";
+		mes "em algum lugar naquela cidade do deserto.";
+		set prt_curse,6;
+		getitem 7342,1; //File01
+		//changequest 18030,18031;// custom addition to make the script consistent
+		close;
+	}
+	else if (prt_curse == 6) {
+		mes "[Historiador]";
+		mes "Por favor, encontre minha colega,";
+		mes "Rodafrian, em Morocc e";
+		mes "entregue meu relatório a ela.";
+		mes "Você deve conseguir encontrá-la";
+		mes "lá pesquisando.";
+		next;
+		if (select("I will:Can I listen to that song again?") == 1) {
+			mes "[Historiador]";
+			mes "Mais uma vez, obrigado";
+			mes "pela sua ajuda.";
+			mes "Isso realmente acelerará o";
+			mes "progresso da minha pesquisa,";
+			mes "especialmente porque aqueles livros";
+			mes "foram entregues um pouco tarde...";
+		}
+		else {
+			mes "[Historiador]";
+			mes "Canção? Ah, você quer dizer aquela";
+			mes "que louva os 7 que";
+			mes "fundaram o Reino de Rune-Midgarts?";
+			mes "Claro, vejamos...";
+			next;
+			mes "[Historiador]";
+			mes "^FF0000*A grande serpente*^000000";
+			mes "^FF0000*engoliu o mar.*^000000";
+			mes "^FF0000*A águia do arco-íris*^000000";
+			mes "^FF0000*engoliu a serpente.*^000000";
+			mes "^FF0000*Então a águia construiu seu ninho.*^000000";
+			mes "^FF0000*Um ninho sobre o mar engolido.*^000000";
+			next;
+			mes "[Historiador]";
+			mes "Você deve estar mais interessado";
+			mes "em história do que eu suspeitava.";
+			mes "Se quiser, escreverei uma";
+			mes "carta ou recomendação";
+			mes "para o Grupo de Pesquisa Histórica Rekenber.";
+			mes "Ha ha ha~";
+		}
+		close;
+	}
+	else if (prt_curse > 55) {
+		mes "[Historiador]";
+		mes "Ah, já faz um tempo";
+		mes "desde a última vez que o vi.";
+		mes "A Rodafrian, na verdade, veio";
+		mes "me visitar há alguns dias.";
+		mes "Acredito que ela veio aqui";
+		mes "para se gabar ou me ameaçar...";
+		next;
+		mes "[Historiador]";
+		mes "Foi muito surreal.";
+		mes "Ela continuava delirando sobre";
+		mes "alguma revelação incrível,";
+		mes "e sobre finalmente me colocar";
+		mes "no meu lugar. Eu não sabia que ela";
+		mes "poderia ser tão competitiva!";
+		close;
+	}
+	else {
+		mes "[Historiador]";
+		mes "ZzzzZZz....";
+		mes "ZzzzZZz....ZZZzzzz...";
+		close;
+	}
+}
+
+morocc_in,45,126,3	script	Historian#prt02	702,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "No momento, você está carregando";
+		mes "muitas coisas com você.";
+		mes "Por favor, volte depois de";
+		mes "usar o Serviço Kafra";
+		mes "para guardar alguns de seus itens.^000000";
+		close;
+	}
+	if (prt_curse == 6) {
+		if (countitem(7342) < 0) {
+			mes "^3355FFVocê parece ter perdido";
+			mes "o Relatório de Karlomoff. Você";
+			mes "precisava entregá-lo aqui a";
+			mes "um de seus colegas...";
+			close;
+		}
+		mes "[Historiadora Rodafrian]";
+		mes "Ah, por que este lugar";
+		mes "tem que ser tão quente? Isso";
+		mes "não pode ser bom para a minha pele...";
+		mes "Ooh, eu queria estar de volta em casa";
+		mes "na República de Schwarzwald~";
+		emotion ET_CRY;
+		next;
+		mes "[Historiadora Rodafrian]";
+		mes "Olá.";
+		mes "E-com licença, mas,";
+		mes "hum, posso ajudar?";
+		next;
+		select("Mr. Karlomoff has sent me.");
+		mes "[Historiadora Rodafrian]";
+		mes "Karlomoff...?";
+		mes "Ele? Tudo bem...";
+		mes "Para que ele te enviou";
+		mes "até mim?";
+		next;
+		mes "^3355FFVocê entrega o";
+		mes "relatório de Karlomoff para Rodafrian.^000000";
+		next;
+		mes "[Historiadora Rodafrian]";
+		mes "Um relatório? O que ele";
+		mes "quer exibir desta vez?";
+		mes "^333333*Suspiro*^000000 Ah, bem, obrigada pelo";
+		mes "incômodo. Vou dar uma olhada,";
+		mes "embora eu não espere";
+		mes "muito se Karlomoff o escreveu.";
+		next;
+		if (select("Ask her about her research:End conversation") == 1) {
+			mes "[Historiadora Rodafrian]";
+			mes "Oh, você conhece o";
+			mes "Grupo de Pesquisa Histórica Rekenber?";
+			mes "Ah, certo. Karlomoff";
+			mes "já deve ter te contado.";
+			mes "Atualmente, estamos pesquisando";
+			mes "o Reino de Rune-Midgard.";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "Bem, embora eu entenda o";
+			mes "valor de livros e";
+			mes "registros antigos, acho que Karlomoff";
+			mes "confia demais neles.";
+			mes "Prefiro uma pesquisa mais ativa,";
+			mes "no campo da arqueologia.";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "No momento, estou passando";
+			mes "um tempo em Morroc para visitar a";
+			mes "Esfinge e as Pirâmides e ver";
+			mes "se consigo escavar algumas relíquias.";
+			mes "Espero conseguir descobrir novas evidências históricas dessa forma.";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "Se você estiver interessado em";
+			mes "aprender mais sobre a história de Morroc,";
+			mes "por favor, vá em frente e";
+			mes "fale com meu assistente. Ele é muito apaixonado por estudar a";
+			mes "cultura e o histórico desta cidade.";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "Na verdade, o povo de";
+			mes "Morroc também aprecia a história";
+			mes "de sua cidade e passa adiante";
+			mes "canções sobre tempos antigos";
+			mes "através das gerações. Deixe-me";
+			mes "ver, como era aquela?";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "^FF0000*A grande serpente*^000000";
+			mes "^FF0000*engoliu o mar.*^000000";
+			mes "^FF0000*A águia do arco-íris*^000000";
+			mes "^FF0000*engoliu a serpente, e*^000000";
+			mes "e... e... Hum. Ai, meu Deus.";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "Não consigo me lembrar da próxima";
+			mes "linha! Na verdade, você";
+			mes "já ouviu essa canção antes?";
+			next;
+			switch(select("Yes, I have.:Yes, but it is different.:No, sorry.")) {
+			case 1:
+				mes "[Historiadora Rodafrian]";
+				mes "Ah, que ótimo!";
+				mes "Você poderia me";
+				mes "fornecer a linha que";
+				mes "segue estas letras?";
+				next;
+				mes "^FF0000*A grande serpente*^000000";
+				mes "^FF0000*engoliu o mar.*^000000";
+				mes "^FF0000*A águia do arco-íris*^000000";
+				mes "^FF0000*engoliu a serpente.*^000000";
+				mes "......................";
+				next;
+				input .@answer$;
+				if (.@answer$ == "Then the eagle built its nest.") {
+					mes "[Historiadora Rodafrian]";
+					mes "Sério? Isso faz";
+					mes "sentido, mas essas letras";
+					mes "soam diferentes das";
+					mes "que eu tinha ouvido. Hmmmm...";
+					mes "Se você não se importa, você";
+					mes "poderia me dizer seu nome?";
+					callsub S_GiveName,1;
+				}
+				else {
+					mes "[Historiadora Rodafrian]";
+					mes "Hã...?";
+					mes "Isso não soa";
+					mes "certo de jeito nenhum. Tem certeza";
+					mes "de que essa é a letra que você ouviu?";
+					delitem 7342,1; //File01
+					set prt_curse,7;
+					close;
+				}
+
+			case 2:
+				mes "[Historiadora Rodafrian]";
+				mes "O que foi isso?";
+				mes "A canção é diferente?";
+				mes "Hmm. Então, você";
+				mes "poderia, por favor, cantar a versão";
+				mes "que você conhece para mim?";
+				next;
+				mes "^3355FFVocê limpa a garganta";
+				mes "e começa a cantar a canção";
+				mes "que você ouviu de Karlomoff.^000000";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				input .@line$;
+				if (.@line$ == "The great serpent swallowed the sea.") {
+					set .@total,.@total+1;
+					mes "*A grande serpente*";
+					mes "*engoliu o mar.*";
+				}
+				else mes "* "+.@line$+"*";
+
+				input .@line$;
+				if (.@line$ == "The eagle of the rainbow swallowed the serpent.") {
+					set .@total,.@total+1;
+					mes "*A águia do arco-íris*";
+					mes "*engoliu a serpente.*";
+				}
+				else mes "*"+.@line$+"*";
+
+				input .@line$;
+				if (.@line$ == "Then the eagle built its nest.") {
+					set .@total,.@total+1;
+					mes "*Então a águia construiu seu ninho.*";
+				}
+				else mes "*"+.@line$+"*";
+
+				input .@line$;
+				if (.@line$ == "A nest upon the swallowed sea.") {
+					set .@total,.@total+1;
+					mes "*Um ninho sobre o mar engolido.*";
+				}
+				else mes "*"+.@line$+"*";
+				next;
+				if (.@total == 4) {
+					mes "[Historiadora Rodafrian]";
+					mes "Sério? Isso faz";
+					mes "sentido, mas essas letras";
+					mes "soam diferentes das";
+					mes "que eu tinha ouvido. Hmmmm...";
+					mes "Se você não se importa, você";
+					mes "poderia me dizer seu nome?";
+					callsub S_GiveName,1;
+				}
+				else {
+					mes "[Historiadora Rodafrian]";
+					mes "Hã...?";
+					mes "Isso não soa certo";
+					mes "de jeito nenhum. Tem certeza de que";
+					mes "essas são as letras que você ouviu?";
+					delitem 7342,1; //File01
+					set prt_curse,7;
+					close;
+				}
+
+			case 3:
+				mes "[Historiadora Rodafrian]";
+				mes "............";
+				mes "........................";
+				mes "Bem, então. Você";
+				mes "se importaria se eu te perguntasse";
+				mes "seu nome, aventureiro?";
+				callsub S_GiveName,1;
+			}
+		}
+		mes "[Historiadora]";
+		mes "Embora eu adore fazer minha";
+		mes "pesquisa e descobrir";
+		mes "novas informações sobre";
+		mes "história, às vezes me sinto um pouco sozinha.";
+		mes "Não muitas pessoas";
+		mes "compartilham meus interesses, sabe...";
+		close;
+	}
+	else if (prt_curse == 7) {
+		mes "^3355FFCom os braços cruzados, Rodafrian";
+		mes "parece estar em profunda reflexão.";
+		mes "Então, como se estivesse tomando";
+		mes "uma decisão importante, ela";
+		mes "olha diretamente em seus olhos";
+		mes "e começa a falar.^000000";
+		next;
+		mes "[Historiadora Rodafrian]";
+		mes "Aventureiro...";
+		mes "Eu quero saber o seu nome.";
+		callsub S_GiveName,0;
+	}
+	else if (prt_curse > 7 && prt_curse < 30) {
+		mes "[Historiadora Rodafrian]";
+		mes "Se bem me lembro, Mondo deve";
+		mes "estar no Monte Mjolnir, localizado";
+		mes "na região norte do";
+		mes "Reino de Rune-Midgard. Peça a";
+		mes "ele as letras da canção que eu não consigo me lembrar...";
+		close;
+	}
+	else if (prt_curse == 30 || prt_curse == 55) {
+		mes "[Historiadora Rodafrian]";
+		mes "Ah, você voltou.";
+		mes "Você encontrou o Mondo";
+		mes "e descobriu a letra da";
+		mes "música que eu estava procurando?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "^FF0000*A grande serpente*^000000";
+		mes "^FF0000*engoliu o mar.*^000000";
+		mes "^FF0000*A águia do arco-íris*^000000";
+		mes "^FF0000*engoliu a serpente.*^000000";
+		mes "^FF0000*Então escamas de cobra cresceram na*^000000";
+		mes "^FF0000*águia, e ela morreu lentamente.*^000000";
+		next;
+		mes "[Historiadora Rodafrian]";
+		mes "Ah, sim!";
+		mes "Sim, era isso! Agora";
+		mes "eu me lembro, muito obrigada!";
+		mes "Ah, de volta ao trabalho...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "^333333(Como historiadora, Rodafrian";
+		mes "talvez possa me ajudar a";
+		mes "investigar a maldição dos";
+		mes "Geoborgs. Os sacerdotes me disseram";
+		mes "para não contar a ninguém, porém.";
+		mes "Devo correr este risco?)^000000";
+		next;
+		if (select("Tell her about Jormungand's curse:Don't tell her") == 1) {
+			mes "^3355FFVocê explica tudo";
+			mes "o que você aprendeu para";
+			mes "Rodafrian, escolhendo não";
+			mes "esconder segredos.^000000";
+			emotion ET_AHA;
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes ".....................!";
+			emotion ET_SURPRISE;
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "Obrigada por compartilhar isso";
+			mes "comigo. Espero que você perceba";
+			mes "o quão preciosa é essa informação.";
+			mes "Eu não tinha ideia de que a família";
+			mes "real estava guardando esse tipo";
+			mes "de segredo. Céus...";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "Sabe, eu realmente não";
+			mes "sei muito sobre veneno, mas";
+			mes "eu sei que, além dos nossos";
+			mes "próprios Mercenários, existem especialistas";
+			mes "em veneno vivendo em alguma terra";
+			mes "estranha localizada a oeste.";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "Enfim, seu relatório sobre";
+			mes "a família Geoborg será";
+			mes "muito apreciado pelo";
+			mes "Grupo de Pesquisa Histórica Rekenber.";
+			mes "Mas primeiro, preciso";
+			mes "terminar este projeto de Morocc...";
+			next;
+			mes "[Historiadora Rodafrian]";
+			mes "De qualquer forma, mantenha esta informação";
+			mes "em segredo entre nós dois";
+			mes "por enquanto. Então, quando eu revelar a maldição secreta da família real Geoborg,";
+			mes "finalmente vou ofuscar aquele Karlomoff! Bwahahahahaha!";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "^333333(Droga, ela não me deu";
+			mes "ajuda nenhuma... Tudo o que eu fiz foi";
+			mes "revelar um enorme segredo para ela";
+			mes "que ela pode espalhar por aí!";
+			mes "Ah, bem, acho melhor eu voltar";
+			mes "para os sacerdotes...)^000000";
+			if (prt_curse == 30)  {
+				set prt_curse,31;
+				//changequest 18042,18044;
+			} else {
+				set prt_curse,60;
+				//changequest 18051,18052;
+			}
+			close;
+		}
+
+		mes "[Historiadora Rodafrian]";
+		mes "Ah, deixe-me agradecer";
+		mes "mais uma vez por ter se dado";
+		mes "ao trabalho de conseguir";
+		mes "aquela letra para mim~";
+		mes "Já dei bastante trabalho";
+		mes "ao meu assistente...";
+		next;
+		mes "[Historiadora Rodafrian]";
+		mes "Também é melhor eu não esquecer";
+		mes "de analisar o relatório do Karlomoff.";
+		mes "Terei que debater com ele";
+		mes "mais cedo ou mais tarde, e eu";
+		mes "realmente quero colocar aquele sujeito";
+		mes "no devido lugar!";
+		next;
+		mes "^3355FFRodafrian parecia muito";
+		mes "feliz e começou a ler";
+		mes "o relatório de Karlomoff.";
+		mes "Por enquanto, o melhor seria";
+		mes "retornar ao Padre Bamph.^000000";
+		if (prt_curse == 30) {
+			set prt_curse,40;
+			//changequest 18042,18045;
+		} else {
+			set prt_curse,56;
+			//completequest 18051;
+		}
+		close;
+	}
+	else if (prt_curse == 31 || prt_curse == 40) {
+		mes "^3355FFRodafrian parecia muito";
+		mes "feliz e começou a ler";
+		mes "o relatório de Karlomoff.";
+		mes "Por enquanto, o melhor seria";
+		mes "retornar ao Padre Bamph.^000000";
+		close;
+	}
+	else if (prt_curse == 56) {
+		emotion ET_FRET;
+		mes "[Historiadora Rodafrian]";
+		mes "Acabei de fazer uma visita ao";
+		mes "Karlomoff e disse umas boas";
+		mes "e boas! Acho que...";
+		mes "Acho que o coloquei no devido lugar.";
+		mes "Mas eu nunca sei ao certo";
+		mes "com aquele sujeito traiçoeiro...";
+		close;
+	}
+	else if (prt_curse == 60) {
+		emotion ET_FRET;
+		mes "[Historiadora Rodafrian]";
+		mes "Acabei de fazer uma visita ao";
+		mes "Karlomoff e disse umas boas";
+		mes "e boas! Acho que...";
+		mes "Acho que o coloquei no devido lugar.";
+		mes "Mas eu nunca sei ao certo";
+		mes "com aquele sujeito traiçoeiro...";
+		next;
+		mes "Não parece que";
+		mes "Rodafrian possa te oferecer";
+		mes "mais informações. Por";
+		mes "enquanto, o melhor seria";
+		mes "ir para a ^3355FFIgreja de Prontera.^000000";
+		close;
+	}
+	else {
+		mes "[Historiadora Rodafrian]";
+		mes "Sinto muito, mas estou";
+		mes "realmente muito ocupada com minha";
+		mes "pesquisa no momento.";
+		mes "Talvez possamos conversar mais";
+		mes "tarde, depois que eu terminar?";
+		close;
+	}
+
+S_GiveName:
+	next;
+	select("My name is "+strcharinfo(0)+".");
+	mes "[Historiadora Rodafrian]";
+	mes "Ah "+strcharinfo(0)+", eh?";
+	mes "Você se importa se eu pedir um favor? Eu realmente preciso verificar a verdadeira";
+	mes "letra desta música. No entanto,";
+	mes "preciso ficar aqui em Morocc";
+	mes "para concluir minha pesquisa.";
+	next;
+	mes "[Historiadora Rodafrian]";
+	mes "Você poderia, por favor, encontrar meu";
+	mes "colega Mondo e perguntar a ele";
+	mes "sobre a letra desta música? Você pode";
+	mes "encontrá-lo nas ruínas antigas";
+	mes "no Monte Mjolnir, ao norte do";
+	mes "Reino de Rune-Midgard.";
+	next;
+	mes "[Historiadora Rodafrian]";
+	mes "Peço desculpas por pedir";
+	mes "a você para fazer o que parece";
+	mes "uma tarefa boba, mas eu realmente";
+	mes "preciso saber a letra desta música";
+	mes "para a minha pesquisa...";
+	if (getarg(0) == 1) delitem 7342,1; //File01
+	set prt_curse,8;
+	//changequest 18031,18032;
+	close;
+}
+
+mjolnir_01,135,168,3	script	Historian#prt03	754,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "No momento, você está carregando";
+		mes "muitas coisas com você.";
+		mes "Por favor, volte depois de";
+		mes "usar o Serviço Kafra";
+		mes "para guardar alguns de seus itens.^000000";
+		close;
+	}
+	if (prt_curse == 8) {
+		mes "[Historiador Mondo]";
+		mes "Com licença...";
+		mes "Mas se você não tem";
+		mes "nada importante para";
+		mes "mim, então você";
+		mes "poderia, por favor, ir embora? Tenho";
+		mes "pesquisas a fazer...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Sinto muito, mas a Sra. Rodafrian";
+		mes "quis que eu lhe pedisse";
+		mes "a letra de uma música descrevendo";
+		mes "a fundação do Reino de Rune-Midgarts.";
+		mes "Você poderia contar";
+		mes "para mim para ela?";
+		next;
+		mes "[Historiador Mondo]";
+		mes "Rodafrian? Ah, ela deve";
+		mes "estar falando daquela antiga canção";
+		mes "infantil. Como era mesmo?";
+		mes "Ah, agora me lembrei...";
+		next;
+		mes "[Historiador Mondo]";
+		mes "^FF0000*A grande serpente*^000000";
+		mes "^FF0000*engoliu o mar.*^000000";
+		mes "^FF0000*A águia do arco-íris*^000000";
+		mes "^FF0000*engoliu a serpente.*^000000";
+		mes "^FF0000*Então escamas de cobra cresceram na*^000000";
+		mes "^FF0000*águia, e ela morreu lentamente.*^000000";
+		next;
+		select("...........?");
+		mes "[Historiador Mondo]";
+		mes "Sim, eu sei: a música";
+		mes "é meio mórbida, apesar";
+		mes "de ser cantada como";
+		mes "uma canção tão alegre. Às vezes";
+		mes "essas musiquinhas são para";
+		mes "assustar crianças para que façam o bem.";
+		next;
+		select("Excuse me...");
+		mes "[Historiador Mondo]";
+		mes "Hm? Você parece confuso.";
+		mes "Você tinha alguma pergunta";
+		mes "para me fazer sobre a música?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Na verdade, eu ouvi";
+		mes "uma versão diferente";
+		mes "dessa música, então eu estava";
+		mes "me perguntando por que as letras";
+		mes "seriam diferentes...";
+		next;
+		mes "[Historiador Mondo]";
+		mes "Sério?";
+		mes "Bem, deixe-me";
+		mes "ouvir a versão que";
+		mes "você ouviu, começando";
+		mes "do início.";
+		next;
+		callsub S_Song;
+	}
+	else if (prt_curse == 9) {
+		mes "[Historiador Mondo]" ;
+		mes "Ah, você me diria";
+		mes "a letra da versão do";
+		mes "mito da fundação do Reino";
+		mes "de Rune-Midgarts que";
+		mes "você por acaso ouviu?";
+		next;
+		callsub S_Song;
+	}
+	else if (prt_curse == 10) {
+		mes "[Historiador Mondo]";
+		mes "Interessante...";
+		mes "A versão que você ouviu";
+		mes "de Karlomoff é diferente";
+		mes "da que eu conheço. É";
+		mes "possível que a versão dele";
+		mes "seja a mais autêntica.";
+		next;
+		mes "[Historiador Mondo]";
+		mes "Afinal, eu aprendi";
+		mes "a versão que eu conheço";
+		mes "ouvindo uma";
+		mes "criança cantar.";
+		next;
+		select("A kid?");
+		mes "[Historiador Mondo]";
+		mes "Sim. Minha suposição? A versão";
+		mes "que a criança cantou pode ter";
+		mes "mudado à medida que foi transmitida";
+		mes "de boca em boca através das gerações. Se você quer saber mais, você";
+		mes "deveria provavelmente encontrar essa criança.";
+		next;
+		mes "[Historiador Mondo]";
+		mes "De qualquer forma, Karlomoff pode ter";
+		mes "a versão mais precisa da";
+		mes "música, já que ele é muito bom";
+		mes "em obter e autenticar";
+		mes "registros escritos históricos e";
+		mes "documentos. É a especialidade dele.";
+		next;
+		mes "[Historiador Mondo]";
+		mes "Ah, se você quiser saber mais,";
+		mes "então você deveria tentar encontrar a";
+		mes "criança que estava cantando a música.";
+		mes "Hmm, ele pode estar perto do ^3131DDrio";
+		mes "aqui perto^000000. Espero que";
+		mes "não seja muito difícil encontrá-lo.";
+		next;
+		mes "[Historiador Mondo]";
+		mes "Assim que você puder falar";
+		mes "com essa criança, vá em frente e";
+		mes "relate para Rodafrian.";
+		mes "Ela provavelmente precisa saber";
+		mes "em breve, e eu posso conversar com aquela";
+		mes "criança no meu tempo livre, então...";
+		next;
+		mes "[Historiador Mondo]";
+		mes "Bem então, espero que você";
+		mes "encontre o que está procurando.";
+		mes "Boa sorte em suas";
+		mes "viagens, aventureiro.";
+		set prt_curse,11;
+		//changequest 18032,18033;
+		close;
+	}
+	else {
+		mes "[Historiador Mondo]";
+		mes "Não é este um lugar";
+		mes "tão bonito?";
+		mes "Não é de admirar que";
+		mes "os povos antigos escolheram";
+		mes "viver por aqui...";
+		close;
+	}
+
+
+S_Song:
+	mes "["+strcharinfo(0)+"]";
+	input .@line$;
+	if (.@line$ == "The great serpent swallowed the sea.") {
+		set .@total,.@total+1;
+		mes "*A grande serpente*";
+		mes "*engoliu o mar.*";
+	}
+	else mes "*"+.@line$+"*";
+
+	input .@line$;
+	if (.@line$ == "The eagle of the rainbow swallowed the serpent.") {
+		set .@total,.@total+1;
+		mes "*A águia do arco-íris*";
+		mes "*engoliu a serpente.*";
+	}
+	else mes "*"+.@line$+"*";
+
+	input .@line$;
+	if (.@line$ == "Then the eagle built its nest.") set .@total,.@total+1;
+	mes "*"+.@line$+"*";
+
+	input .@line$;
+	if (.@line$ == "A nest upon the swallowed sea.") set .@total,.@total+1;
+	mes "*"+.@line$+"*";
+
+	if (.@total == 4) set prt_curse,10;
+	else {
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Espere, espere...";
+		mes "Acho que cometi um erro!";
+		mes "(Aquela não era a";
+		mes "letra correta...)";
+		set prt_curse,9;
+	}
+	close;
+}
+
+mjolnir_01,298,302,0	script	#prt_poem01	-1,2,2,{
+OnTouch:
+	if (prt_curse == 11) {
+		mes "^FF0000*A grande serpente*^000000";
+		mes "^FF0000*engoliu o mar.*^000000";
+		close;
+	}
+	end;
+}
+
+mjolnir_01,300,297,0	script	#prt_poem02	-1,2,2,{
+OnTouch:
+	if (prt_curse == 11) {
+		mes "^FF0000*A grande serpente*^000000";
+		mes "^FF0000*engoliu o mar.*^000000";
+		close;
+	}
+	end;
+}
+
+mjolnir_01,292,288,0	script	#prt_poem03	-1,2,2,{
+OnTouch:
+	if (prt_curse == 11) {
+		mes "^FF0000*A águia do arco-íris*^000000";
+		mes "^FF0000*engoliu a serpente.*^000000";
+		close;
+	}
+	end;
+}
+
+mjolnir_01,302,286,0	script	#prt_poem04	-1,2,2,{
+OnTouch:
+	if (prt_curse == 11) {
+		mes "^FF0000*Então escamas de cobra*^000000";
+		mes "^FF0000*cresceram na águia...*^000000";
+		close;
+	}
+	end;
+}
+
+mjolnir_01,313,279,0	script	#prt_poem05	-1,2,2,{
+OnTouch:
+	if (prt_curse == 11) {
+		mes "^FF0000*E ela lentamente morreu...*^000000";
+		close;
+	}
+	end;
+}
+
+mjolnir_01,312,269,5	script	Dog#prt	81,{
+	mes "[Cachorro]";
+	mes "Au Au!";
+	close;
+}
+
+mjolnir_01,313,269,5	script	Dazed Boy#prt	706,{
+	if (prt_curse == 11) {
+		mes "[Garoto Distraído]";
+		mes "A grande serpente";
+		mes "engoliu o mar.";
+		mes "A águia do arco-íris";
+		mes "engoliu a serpente.";
+		mes "Então escamas de cobra cresceram na";
+		mes "águia, e ela lentamente morreu.";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes "Meu Deus...!";
+		mes "Você poderia parar de";
+		mes "cantar essa música?";
+		next;
+		mes "[Garoto Distraído]";
+		mes "..................";
+		next;
+		mes "^3355FFO garotinho olhou quietamente";
+		mes "para a mulher por um";
+		mes "pouco, e então se agachou";
+		mes "e começou a acariciar um";
+		mes "cachorro sentado ao lado dele.^000000";
+		next;
+		if (select("What did you just sing?:Ignore them") == 1) {
+			mes "[Garoto Distraído]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[Garoto Distraído]";
+			mes "Au-au, você já";
+			mes "ouviu essa música? A mamãe";
+			mes "me ensinou a cantar, sabe.";
+			mes "Ela diz que as pessoas cantavam";
+			mes "isso por muito tempo~";
+			next;
+			mes "^3355FFO garoto continuou falando";
+			mes "com o cachorro como um velho amigo,";
+			mes "ignorando sua presença e";
+			mes "agindo como se você não existisse.^000000";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "Kaanu...";
+			mes "O que eu te disse";
+			mes "sobre ignorar";
+			mes "as perguntas das pessoas!";
+			next;
+			mes "[Kaanu]";
+			mes ".........";
+			mes "..................";
+			mes "Ih, Au-au.";
+			mes "A mamãe parece chateada";
+			mes "por algum motivo.";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "Desculpe, meu filho é...";
+			mes "Olha, você queria saber";
+			mes "mais sobre essa música? Tente";
+			mes "não se preocupar com isso: é apenas uma velha cantiga infantil.";
+			next;
+			if (select("Why are you here?:May I hear the song again?") == 1) {
+				mes "[Mulher com Aparência Exausta]";
+				mes ".................";
+				next;
+				mes "^3355FFO lábio da mulher se aperta";
+				mes "com vergonha. É óbvio";
+				mes "que este tópico a faz";
+				mes "sentir-se muito desconfortável.^000000";
+				next;
+				mes "[Kaanu]";
+				mes "...";
+				mes "......";
+				mes ".........";
+				next;
+				mes "[Kaanu]";
+				mes "Au-au, você sabe";
+				mes "por que a mamãe está sempre";
+				mes "tão triste? Eu queria saber";
+				mes "por que a mamãe nunca sorri...";
+				next;
+				mes "[Mulher com Aparência Exausta]";
+				mes "........";
+				set prt_curse,12;
+				close;
+			}
+			mes "[Mulher com Aparência Exausta]";
+			mes "..................";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "Ok. Posso fazer";
+			mes "esta coisa simples para você.";
+			mes "Deixe-me recitar esta música...";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "A grande serpente";
+			mes "engoliu o mar.";
+			mes "A águia do arco-íris";
+			mes "engoliu a serpente.";
+			mes "Então escamas de cobra cresceram na";
+			mes "águia, e ela lentamente morreu.";
+			set prt_curse,12;
+			close;
+		}
+		mes "[Garoto Distraído]";
+		mes "...";
+		mes "......";
+		mes ".........";
+		close;
+	}
+	else if (prt_curse == 36) {
+		mes "^3355FFO garotinho parecia";
+		mes "muito cansado e desgastado da";
+		mes "vida, uma expressão muito";
+		mes "perturbadora no rosto";
+		mes "de uma criança pequena.^000000";
+		close;
+	}
+	else if (prt_curse == 45) {
+		mes "^3355FFO garotinho ainda";
+		mes "não fala com você, mas";
+		mes "ele reconhece sua";
+		mes "presença fazendo contato visual";
+		mes "e sorrindo.^000000";
+		close;
+	}
+	else if (prt_curse > 54) {
+		mes "^3355FFO garotinho ainda";
+		mes "não fala com você, mas ele";
+		mes "te faz se sentir bem-vindo";
+		mes "dando-lhe um sorriso caloroso.^000000";
+		close;
+	}
+	else {
+		mes "[Garoto Distraído]";
+		mes "...";
+		mes "......";
+		mes ".........";
+		next;
+		mes "^3355FFVocê acha difícil";
+		mes "ignorar os olhos";
+		mes "curiosos e desconfiados do";
+		mes "garotinho dirigidos a você. É muito claro que";
+		mes "ele não confia em você.^000000";
+		close;
+	}
+}
+
+mjolnir_01,316,268,3	script	Exhausted-Looking Woman	879,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "No momento, você está carregando";
+		mes "muitas coisas com você.";
+		mes "Por favor, volte depois de";
+		mes "usar o Serviço Kafra";
+		mes "para guardar alguns dos seus itens.^000000";
+		close;
+	}
+	if (prt_curse == 11) {
+		mes "[Garoto Distraído]";
+		mes "A grande serpente";
+		mes "engoliu o mar.";
+		mes "A águia do arco-íris";
+		mes "engoliu a serpente.";
+		mes "Então escamas de cobra cresceram na";
+		mes "águia, e ela morreu lentamente.";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes "Meu Deus...!";
+		mes "Você pode, por favor, parar";
+		mes "de cantar essa música?";
+		next;
+		mes "[Garoto Distraído]";
+		mes "..................";
+		next;
+		mes "^3355FFO garotinho silenciosamente";
+		mes "olhou para a mulher por um";
+		mes "pouquinho, e então se agachou";
+		mes "e começou a acariciar um";
+		mes "cachorro sentado ao lado dele.^000000";
+		next;
+		if (select("What did you just sing?:Ignore them") == 1) {
+			mes "[Garoto Distraído]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[Garoto Distraído]";
+			mes "Au-au, você já";
+			mes "ouviu essa música? Mamãe";
+			mes "me ensinou a cantar, sabe.";
+			mes "Ela diz que as pessoas cantavam";
+			mes "ela por muito tempo~";
+			next;
+			mes "^3355FFO garoto continuou falando";
+			mes "com o cachorro como um velho amigo,";
+			mes "ignorando sua presença e";
+			mes "agindo como se você não existisse.^000000";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "Kaanu...";
+			mes "O que eu te disse";
+			mes "sobre ignorar";
+			mes "as perguntas das pessoas!";
+			next;
+			mes "[Kaanu]";
+			mes ".........";
+			mes "..................";
+			mes "Ih, Au-au.";
+			mes "Mamãe parece chateada";
+			mes "por algum motivo.";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "Me desculpe, meu filho é...";
+			mes "Olha, você queria saber";
+			mes "mais sobre essa música? Tente";
+			mes "não se preocupar com isso: é apenas uma velha melodia infantil.";
+			next;
+			if (select("Why are you here?:May I hear the song again?") == 1) {
+				mes "[Mulher com Aparência Exausta]";
+				mes ".................";
+				next;
+				mes "^3355FFO lábio da mulher se aperta";
+				mes "de vergonha. É óbvio";
+				mes "que este tópico a faz";
+				mes "sentir-se muito desconfortável.^000000";
+				next;
+				mes "[Kaanu]";
+				mes "...";
+				mes "......";
+				mes ".........";
+				next;
+				mes "[Kaanu]";
+				mes "Au-au, você sabe";
+				mes "por que mamãe está sempre";
+				mes "tão triste? Eu gostaria de saber";
+				mes "por que mamãe nunca sorri...";
+				next;
+				mes "[Mulher com Aparência Exausta]";
+				mes "........";
+				set prt_curse,12;
+				close;
+			}
+			mes "[Mulher com Aparência Exausta]";
+			mes "..................";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "Tudo bem. Eu consigo fazer";
+			mes "esta coisa simples para você.";
+			mes "Deixe-me recitar esta música...";
+			next;
+			mes "[Mulher com Aparência Exausta]";
+			mes "A grande serpente";
+			mes "engoliu o mar.";
+			mes "A águia do arco-íris";
+			mes "engoliu a serpente.";
+			mes "Então escamas de cobra cresceram na";
+			mes "águia, e ela morreu lentamente.";
+			set prt_curse,12;
+			close;
+		}
+		mes "[Mulher com Aparência Exausta]";
+		mes "...........";
+		close;
+	}
+	else if (prt_curse == 12) {
+		mes "[Mulher com Aparência Exausta]";
+		mes "Nem muitas pessoas";
+		mes "vêm para esta área remota.";
+		mes "O que te traz até aqui, eu me pergunto?";
+		mes "Por que será?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Na verdade, estou apenas";
+		mes "tentando aprender as";
+		mes "letras reais daquela";
+		mes "música que o garotinho";
+		mes "vem cantando.";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes ".........";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes "As letras dessa música, e";
+		mes "seu significado, podem mudar";
+		mes "de pessoa para pessoa à medida que";
+		mes "o tempo passa. Suponho que parte";
+		mes "da razão seja porque ela é";
+		mes "transmitida oralmente...";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes "Parece uma música tão feliz";
+		mes "mas o seu significado mudou";
+		mes "para mim desde que";
+		mes "o acidente aconteceu...";
+		mes "Já faz tanto tempo, mas não acho";
+		mes "que a dor vá curar algum dia.";
+		next;
+		select("Accident?");
+		mes "[Mulher com Aparência Exausta]";
+		mes "Eu... Me desculpe.";
+		mes "Não acho que consigo falar";
+		mes "sobre isso. Se eu tentar, sei que vou";
+		mes "reviver o horror. Todos os dias";
+		mes "já são uma luta para lidar";
+		mes "com os pecados que cometi.";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes "Sei que é egoísta, mas";
+		mes "tenho um favor a te pedir.";
+		mes "Eu não posso realmente sair desta área,";
+		mes "e raramente recebo visitantes. Você seria tão gentil de entregar algo para Prontera para mim?";
+		mes "Algo para Prontera para mim?";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes "Eu costumava morar em Prontera,";
+		mes "e desde o acidente,";
+		mes "o Padre Bamph tem sido muito";
+		mes "de apoio para mim. Não é o suficiente para recompensar sua bondade, mas por favor, entregue estas ervas para ele para mim.";
+		mes "Entregue estas ervas para ele para mim.";
+		next;
+		mes "[Mulher com Aparência Exausta]";
+		mes "Você pode encontrar o ^3131FFPadre Bamph^000000";
+		mes "na ^3131FFIgreja de Prontera^000000. Quando você";
+		mes "o encontrar, por favor, transmita minhas";
+		mes "mais calorosas saudações. Eu o faria";
+		mes "pessoalmente, mas por causa do que fiz, não posso retornar a Prontera...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "^333333(Tudo bem então. Acho que";
+		mes "devo entregar estas";
+		mes "ervas para a Igreja de Prontera";
+		mes "antes de falar com Rodafrian.)^000000";
+		getitem 7432,1; //Leather_Pouch
+		set prt_curse,13;
+		//changequest 18033,18034;
+		close;
+	}
+	else if (prt_curse > 12 && prt_curse < 16) {
+		mes "[Mulher com Aparência Exausta]";
+		mes "O Padre Bamph me ajudou";
+		mes "muito. Por favor, leve";
+		mes "aquela bolsa de ervas para ele";
+		mes "na Igreja de Prontera, e envie";
+		mes "meus mais sinceros cumprimentos.";
+		close;
+	}
+	else if (prt_curse == 16) {
+		mes "[Bonnie Imbullea]";
+		mes "Oh, você voltou?";
+		mes "Você conseguiu entregar";
+		mes "aquela bolsa de ervas que";
+		mes "eu lhe dei ao Padre Bamph?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Sim, consegui. Na verdade,";
+		mes "o Padre Bamph me enviou";
+		mes "aqui para lhe perguntar algumas";
+		mes "coisas. Sabe, ele me contou";
+		mes "tudo sobre o segredo real";
+		mes "e, bem, seu exorcismo.";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Oh. Entendo.";
+		mes "Você deve me achar";
+		mes "um monstro...";
+		mes "Essas pobres crianças";
+		mes "morreram por minha causa...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "N-não! De forma alguma!";
+		mes "Eu só queria perguntar se havia";
+		mes "uma conexão entre";
+		mes "a música que Kaanu tem";
+		mes "cantado e a maldição de Jormungand.";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "...";
+		mes "......";
+		mes ".........";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Após o exorcismo falhar,";
+		mes "eu deveria ter sido punida";
+		mes "com a morte. Mas a família real e a Igreja de Prontera tiveram";
+		mes "compaixão de mim, e permitiram";
+		mes "que eu vivesse aqui em exílio.";
+		emotion ET_THINK;
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Eu comecei a cantar esta música";
+		mes "para me distrair,";
+		mes "mesmo que estivesse relacionada";
+		mes "à maldição de Jormungand.";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Sabe, agora que penso";
+		mes "bem, lembro-me de ter ouvido";
+		mes "que após o exorcismo falhar,";
+		mes "uma criada encontrou um fragmento de";
+		mes "uma Pedra Vermelha enquanto limpava";
+		mes "os terrenos cerimoniais secretos.";
+		emotion ET_SURPRISE, playerattached();
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Eu sempre achei";
+		mes "isso um pouco estranho.";
+		mes "Eu queria investigar";
+		mes "isso, mas então fui dispensada";
+		mes "da Igreja de Prontera";
+		mes "após meu fracasso...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Um fragmento de";
+		mes "uma Pedra Vermelha?";
+		mes "Talvez... talvez seja";
+		mes "evidência de que alguém";
+		mes "sabotou o exorcismo!";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "O que aconteceu foi trágico,";
+		mes "mas me faria sentir";
+		mes "muito melhor se essa fosse";
+		mes "realmente a verdade. Mesmo que o";
+		mes "exorcismo tenha sido sabotado,";
+		mes "não podemos voltar no tempo...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "^333333(Hmm...";
+		mes "É melhor eu voltar";
+		mes "para a Igreja de Prontera";
+		mes "e informar o Padre Bamph";
+		mes "sobre esta informação.)^000000";
+		set prt_curse,17;
+		//changequest 18035,18036;
+		close;
+	}
+	else if (prt_curse == 17) {
+		mes "[Bonnie Imbullea]";
+		mes "É realmente muito";
+		mes "difícil viver";
+		mes "com essa culpa.";
+		mes "Fui treinada para ajudar";
+		mes "as pessoas, não matá-las!";
+		next;
+		mes "^3355FFVocê tenta confortar";
+		mes "Bonnie Imbullea por";
+		mes "um tempo antes de";
+		mes "retornar à Igreja de Prontera.";
+		close;
+	}
+	else if (prt_curse == 35 || prt_curse == 44 || prt_curse == 54) {
+		mes "^3355FFVocê diz a Bonnie Imbullea";
+		mes "que as mortes dos príncipes";
+		mes "não foram culpa dela e que o exorcismo provavelmente foi sabotado.";
+		mes "No entanto, você mantém os detalhes, como o uso de veneno, em segredo.^000000";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "É isso mesmo...?";
+		mes "Oh, estou tão feliz! Eu realmente";
+		mes "achei que teria que viver o";
+		mes "resto da minha vida em reclusão com";
+		mes "essa vergonha horrível. Oh, obrigada";
+		mes "muito pela sua ajuda!";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Kaanu poderá";
+		mes "conhecer outras crianças da";
+		mes "sua idade... Nós poderemos finalmente viver";
+		mes "uma vida normal. Que maravilha...";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Mas espere...";
+		mes "Como exatamente os";
+		mes "príncipes morreram, então?";
+		mes "Não havia";
+		mes "ferimentos nos corpos";
+		mes "pelo que me lembro...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Bem, hum, eu não saberia";
+		mes "nada sobre isso, mas";
+		mes "o Padre Bamph e o Padre";
+		mes "Biscuss estão cuidando da";
+		mes "investigação, e eles estão";
+		mes "fazendo o possível para descobrir.";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Entendo. Bem, eu confio";
+		mes "neles: eles são ótimos padres,";
+		mes "afinal. Embora eu possa ser";
+		mes "perdoada pelo meu fracasso, ainda temo pela família real...";
+		mes "Tudo o que posso fazer por agora é rezar.";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "De qualquer forma, eu prometo que";
+		mes "não revelarei o que sei";
+		mes "sobre este incidente ao";
+		mes "público. E se você algum dia passar";
+		mes "pela montanha novamente, espero";
+		mes "que você passe para nos visitar.";
+		next;
+		mes "[Bonnie Imbullea]";
+		mes "Você não entende";
+		mes "o quanto as notícias que você trouxe";
+		mes "significam para mim.";
+		mes "Eu finalmente posso me libertar";
+		mes "dessa culpa opressora...";
+		mes "Obrigada, gentil aventureiro~";
+		if (prt_curse == 35) {
+			set prt_curse,36;
+			//completequest 18050;
+		} else if (prt_curse == 44) {
+			set prt_curse,45;
+			//completequest 18049;
+		} else {
+			next;
+			mes "^3355FFAgora, você pode retornar para";
+			mes "Rodafrian, o historiador";
+			mes "estacionado em Morocc.^000000";
+			set prt_curse,55;
+			//changequest 18049,18051;
+		}
+
+		close;
+	}
+	else if (prt_curse == 36) {
+		mes "[Bonnie Imbullea]";
+		mes "Por sua graça e misericórdia,";
+		mes "por favor, tenha piedade das almas pobres";
+		mes "e proteja a família real...";
+		mes "Abençoe-nos com sua luz e";
+		mes "que sua sabedoria nos guie...";
+		close;
+	}
+	else if (prt_curse == 45) {
+		mes "[Bonnie Imbullea]";
+		mes "Eu acho que nos acostumamos";
+		mes "demais à paz";
+		mes "e serenidade do Monte";
+		mes "Mjolnir. Não será fácil";
+		mes "ir embora, mesmo que sejamos bem-vindos para retornar a Prontera...";
+		close;
+	}
+	else if (prt_curse > 54) {
+		mes "[Bonnie Imbullea]";
+		mes "Muito obrigada";
+		mes "por ajudar na";
+		mes "investigação dos";
+		mes "príncipes. Eu nunca";
+		mes "conheceria a felicidade novamente se não";
+		mes "fosse por seus esforços.";
+		close;
+	}
+	else {
+		mes "[Bonnie Imbullea]";
+		mes "^333333*Suspiro...*^000000";
+		close;
+	}
+}
+
+
+prt_church,115,122,0	warp	#sazekan	1,1,prt_church,168,106
+prt_church,166,106,0	warp	#prtchhall	1,1,prt_church,112,122
+
+prt_church,185,106,3	script	Father Bamph	60,{
+	if (prt_curse == 13) {
+		mes "[Padre Bamph]";
+		mes "Bem-vindo à";
+		mes "Igreja de Prontera.";
+		mes "Por favor, relaxe e";
+		mes "deixe sua mente e";
+		mes "espírito encontrarem descanso";
+		mes "nestes salões sagrados.";
+		next;
+		select("Give him the herb pouch.");
+		if (countitem(7432) < 1) {
+			mes "["+strcharinfo(0)+"]";
+			mes "Ack!";
+			mes "Agora, onde eu coloquei";
+			mes "aquela bolsa com as ervas?";
+			close;
+		}
+		mes "[Padre Bamph]";
+		mes "Posso perguntar...";
+		mes "Por que você está me dando";
+		mes "esta bolsa de ervas?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Bem, havia uma";
+		mes "dama vivendo no Monte";
+		mes "Mjolnir que queria que eu";
+		mes "a entregasse a você. Hum, ela";
+		mes "tem um filho chamado Kaanu?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Oh, você deve ter conhecido";
+		mes "Bonnie Imbullea. Faz";
+		mes "muito tempo desde";
+		mes "que a vi. Como";
+		mes "ela está, posso perguntar?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Oh...";
+		mes "Eu acho que ela está bem.";
+		mes "Mas ela parece realmente...";
+		mes "Eu não sei, atormentada...";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Bom! Se ela estivesse feliz";
+		mes "e relaxada depois do que";
+		mes "ela fez, nem mesmo Deus a perdoaria";
+		mes "ela! Ela merece viver o";
+		mes "resto da vida em agonia!";
+		next;
+		mes "[Padre Bamph]";
+		mes "Padre Biscuss, como você pode";
+		mes "dizer algo assim?";
+		mes "Ela fez o melhor que pôde para impedir o que";
+		mes "tinha acontecido! Deveríamos ter pena";
+		mes "dela pelo sofrimento que ela deve estar sentindo. Onde está sua compaixão?";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Bah! Não fale comigo";
+		mes "sobre compaixão! Você não";
+		mes "foi quem recomendou";
+		mes "que ela realizasse o exorcismo em";
+		mes "primeiro lugar? Você não";
+		mes "esqueceu isso, esqueceu?";
+		next;
+		mes "[Padre Bampf]";
+		mes "......";
+		mes ".........";
+		mes "............";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Hah!";
+		next;
+		select("About Bonnie Imbullea");
+		mes "[Padre Bamph]";
+		mes "Bem...";
+		mes "Eu não...";
+		mes "Eu não sei se";
+		mes "eu deveria te contar";
+		mes "sobre aquele incidente...";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Sabe de uma coisa? Se Bonnie";
+		mes "enviou este aventureiro aqui";
+		mes "para um favor, provavelmente significa";
+		mes "que ela confia nesta pessoa. Além disso, precisamos de alguém para realizar";
+		if (Sex == SEX_MALE)
+			mes "esta tarefa para nós. Por que não ele?";
+		else
+			mes "esta tarefa para nós. Por que não ela?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Suas palavras têm o tom";
+		mes "da verdade, Padre Biscuss.";
+		mes "Bem então, aventureiro, me dê";
+		mes "a oportunidade de lhe dizer";
+		mes "algo muito importante. Mas, você não deve contar a ninguém mais...";
+		set prt_curse,14;
+		delitem 7432,1; //Leather_Pouch
+		close;
+	}
+	else if (prt_curse == 14) {
+		mes "[Padre Bamph]";
+		mes "O que eu estou prestes a contar";
+		mes "deve ser mantido em segredo.";
+		mes "Agora, você sabe sobre";
+		mes "Jormungand, a grande serpente";
+		mes "nascida do deus Loki e";
+		mes "da giganta Angrboda?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Jormungand era uma besta";
+		mes "maligna que, após a guerra de";
+		mes "mil anos entre os deuses e";
+		mes "demônios, começou a atacar humanos.";
+		mes "Trouxe grande caos e muito";
+		mes "sofrimento ao redor do mundo...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Finalmente, o primeiro Tristram";
+		mes "da família Geoborg derrotou";
+		mes "Jormungand junto com outros 6";
+		mes "guerreiros, mas somente após";
+		mes "ela ter matado seu amado pai.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Tristram se tornaria o";
+		mes "primeiro rei do Reino";
+		mes "Rune-Midgarts, mas sua família";
+		mes "sofreria com a maldição lançada";
+		mes "por Jormungand antes de sua derrota.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Até hoje...";
+		mes "^FF0000Todo primeiro príncipe da";
+		mes "família Geoborg morre";
+		mes "jovem^000000. Essa é";
+		mes "a maldição de Jormungand e";
+		mes "o segredo da família real.";
+		emotion ET_HUK, playerattached();
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "O quê...?!";
+		mes "Isso é realmente verdade?!";
+		mes "Não há nenhuma maneira de";
+		mes "reverter esta terrível maldição?!";
+		next;
+		mes "[Padre Bamph]";
+		mes "Por favor, abaixe a voz.";
+		mes "Sim, é uma pena que a";
+		mes "família real deva sofrer assim.";
+		mes "Mas todos os exorcismos";
+		mes "que foram tentados";
+		mes "ao longo dos anos falharam...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Embora a situação";
+		mes "parecesse sem esperança, o Rei";
+		mes "Tristram III tentou mais uma vez exorcizar a maldição. Seguindo";
+		mes "suas ordens, os maiores sacerdotes e exorcistas foram todos convocados.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Uma série de testes foi";
+		mes "realizada para selecionar os";
+		mes "melhores sacerdotes e exorcistas";
+		mes "para remover esta maldição. No final, ^3131FFBonnie Imbullea^000000 foi escolhida para";
+		mes "liderar a cerimônia de exorcismo.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Espere, mas você mencionou";
+		mes "algo sobre um acidente.";
+		mes "Isso significa que ela falhou";
+		mes "em realizar o exorcismo?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Sim, infelizmente.";
+		mes "Após os sacerdotes e";
+		mes "exorcistas se reunirem no";
+		mes "local secreto da cerimônia,";
+		mes "três príncipes foram mortos";
+		mes "em vez de apenas o primeiro.";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Embora todos nós tenhamos jurado";
+		mes "manter esse incidente em segredo,";
+		mes "Bonnie Imbullea assumiu total";
+		mes "responsabilidade pelas mortes.";
+		mes "É por isso que ela está em exílio";
+		mes "autoimposto do reino.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "O quê...?";
+		mes "Isso é...";
+		mes "Isso é loucura!";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Eu sei que esta";
+		mes "é uma história muito longa,";
+		mes "e que é um pouco";
+		mes "complicada. Por favor";
+		mes "ouça o que temos";
+		mes "a pedir a partir daqui...";
+		emotion ET_THINK;
+		set prt_curse,15;
+		close;
+	}
+	else if (prt_curse == 15) {
+		mes "[Padre Bamph]";
+		mes "Agora, você deve saber que";
+		mes "todos os príncipes que foram";
+		mes "mortos naquele dia exibiam estranhas";
+		mes "marcas em seus corpos.";
+		mes "Quase parecia que eles";
+		mes "estavam desenvolvendo escamas de cobra.";
+		emotion ET_SURPRISE, playerattached();
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Espere, escamas de cobra";
+		mes "cresceram? Isso soa exatamente";
+		mes "como uma das versões";
+		mes "desta música que estou investigando.";
+		mes "Acho que era a música sobre a origem do Reino Rune-Midgarts.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Espere, essa música?";
+		mes "Hm, não vejo como";
+		mes "está relacionada. Vamos ver";
+		mes "agora, como foi?";
+		mes "Arco-íris... Águias...";
+		mes "Ah! Agora me lembrei!";
+		next;
+		mes "[Padre Bamph]";
+		mes "A grande serpente";
+		mes "engoliu o mar.";
+		mes "A águia do arco-íris";
+		mes "engoliu a serpente.";
+		mes "Então a águia construiu seu ninho.";
+		mes "Um ninho sobre o mar engolido.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Hmm...";
+		mes "Bem, eu ouvi uma";
+		mes "versão diferente";
+		mes "da mesma música.";
+		mes "É algo como...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "A grande serpente";
+		mes "engoliu o mar.";
+		mes "A águia do arco-íris";
+		mes "engoliu a serpente.";
+		mes "Então escamas de cobra cresceram na";
+		mes "águia, e ela lentamente morreu.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Oh, céus. Aprendi a música";
+		mes "quando eu era um menino com";
+		mes "meu pai. No entanto, sua versão parece revelar a maldição secreta";
+		mes "dos Geoborgs. Por favor, me diga, onde você ouviu essa música?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Bem, eu ouvi essa";
+		mes "versão pela primeira vez de um historiador,";
+		mes "e então descobri que";
+		mes "Bonnie Imbullea a conhece";
+		mes "também. Hum, há algum problema?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Se essas letras de música";
+		mes "forem espalhadas, o segredo da";
+		mes "maldição da família real poderia";
+		mes "ser revelado ao público. Você";
+		mes "poderia nos ajudar falando";
+		mes "com Bonnie Imbullea mais uma vez?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Se puder, por favor, tente";
+		mes "descobrir se há alguma";
+		mes "conexão entre a maldição";
+		mes "e a música, ou se ela pode";
+		mes "se lembrar de algo que aconteceu";
+		mes "depois que o exorcismo falhou...";
+		set prt_curse,16;
+		//changequest 18034,18035;
+		close;
+	}
+	else if (prt_curse == 16) {
+		mes "[Padre Bamph]";
+		mes "Por favor, visite Bonnie";
+		mes "Imbullea no Monte Mjolnir";
+		mes "para ver se você pode aprender mais";
+		mes "sobre essa música, ou sobre o que";
+		mes "aconteceu após a tentativa de exorcismo da maldição de Jormungand.";
+		close;
+	}
+	else if (prt_curse == 17) {
+		mes "[Padre Bamph]";
+		mes "Ah, você já falou";
+		mes "com Bonnie Imbullea?";
+		mes "Por favor, diga-me se você";
+		mes "aprendeu algo novo.";
+		next;
+		mes "^3355FFVocê relatou tudo";
+		mes "o que Bonnie Imbullea disse";
+		mes "sobre isso, incluindo a descoberta";
+		mes "de um fragmento de Pedra Vermelha";
+		mes "nas dependências cerimoniais secretas.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Pedra Vermelha? Não";
+		mes "há motivo para isso estar em";
+		mes "um lugar sagrado. Hmm. Há";
+		mes "mais a este caso do que aparenta.";
+		mes "É melhor investigarmos";
+		mes "a verdade, começando agora.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Venha comigo, aventureiro,";
+		mes "às dependências cerimoniais secretas";
+		mes "da família real.";
+		mes "Just use the switch hidden";
+		mes "dentro da estante e";
+		mes "eu te encontrarei lá.";
+		set prt_curse,18;
+		//changequest 18036,18037;
+		close;
+	}
+	else if (prt_curse > 17 && prt_curse < 22) {
+		mes "[Padre Bamph]";
+		mes "Venha comigo às";
+		mes "dependências cerimoniais secretas";
+		mes "para que possamos investigar";
+		mes "a possibilidade de sabotagem";
+		mes "com o exorcismo que";
+		mes "Bonnie Imbullea realizou.";
+		next;
+		mes "[Padre Bamph]";
+		mes "There is a hidden switch";
+		mes "na estante que você";
+		mes "pode usar para se transportar";
+		mes "até lá. Vá, e eu te encontrarei";
+		mes "nas dependências cerimoniais.";
+		close;
+	}
+	else if (prt_curse == 22) {
+		mes "[Padre Bamph]";
+		mes "Este é um assunto de grave";
+		mes "importância, mas não podemos";
+		mes "alertar a família real ainda e";
+		mes "causar pânico. Seria";
+		mes "melhor investigar completamente isso";
+		mes "primeiro e coletar provas.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Corajoso aventureiro, você";
+		mes "poderia visitar a Guilda dos Assassinos";
+		mes "em Morocc e ver se você";
+		mes "consegue aprender algo sobre como";
+		mes "verificar se veneno";
+		mes "foi usado para matar os príncipes?";
+		set prt_curse,23;
+		//changequest 18039,18040;
+		close;
+	}
+	else if (prt_curse == 23) {
+		mes "[Padre Bamph]";
+		mes "Por favor, veja se você consegue";
+		mes "aprender algo sobre testar";
+		mes "o uso de veneno a partir de";
+		mes "um membro da Guilda dos Assassinos";
+		mes "em Morocc.";
+		close;
+	}
+	else if (prt_curse == 31) {
+		mes "[Padre Bamph]";
+		mes "Ah, você voltou~";
+		mes "Você conseguiu aprender";
+		mes "algo sobre veneno com";
+		mes "a Guilda dos Assassinos? Eu sei";
+		mes "que seus membros devem ser";
+		mes "muito difíceis de encontrar...";
+		next;
+		mes "^3355FFVocê relata todas as";
+		mes "informações que aprendeu";
+		mes "sobre veneno para o Padre Bamph,";
+		mes "incluindo o método para testar";
+		mes "o uso de veneno em assassinatos.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ah, entendi. Então, você";
+		mes "poderia trazer 1 Gema Amarela";
+		mes "e 1 Poção Verde";
+		mes "às dependências cerimoniais secretas assim que puder? Eu esperarei";
+		mes "lá por você mais uma vez.";
+		set prt_curse,32;
+		//changequest 18044,18046;
+		close;
+	}
+	else if (prt_curse == 32 || prt_curse == 33 || prt_curse == 41 || prt_curse == 42 || prt_curse == 51 || prt_curse == 52) {
+		mes "[Padre Bamph]";
+		mes "Você pode usar o";
+		mes "switch in the bookshelf to";
+		mes "entrar nas dependências cerimoniais secretas.";
+		mes "Não se esqueça que nós";
+		mes "precisamos^3131FF 1 Gema Amarela^000000 e ^3131FF1 Poção Verde^000000 para testar veneno.";
+		close;
+	}
+	else if (prt_curse == 34) {
+		mes "[Padre Bamph]";
+		mes "Não posso acreditar!";
+		mes "Se veneno foi usado, então";
+		mes "o segundo e o terceiro príncipes";
+		mes "foram assassinados! Inacreditável...";
+		mes "Como alguém pode matar crianças?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Pelo menos, agora";
+		mes "sabemos que suas mortes não";
+		mes "foram culpa de Bonnie Imbullea.";
+		mes "Agora preciso discutir com o Padre";
+		mes "Biscuss e decidir como contar";
+		mes "à família real sobre isso...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Mais uma vez, deixe-me lembrar";
+		mes "você que tudo o que aconteceu";
+		mes "aqui deve ser mantido";
+		mes "em segredo. O público não pode saber";
+		mes "da maldição de Jormungand! Isso causaria agitação política e caos!";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ainda assim, isso não significa";
+		mes "que eu não possa pessoalmente agradecer";
+		mes "a você por toda a sua ajuda. Sou muito grato pelo que você fez,";
+		mes "aventureiro. Que a segurança o acompanhe em todas as suas jornadas.";
+		set prt_curse,35;
+		//changequest 18047,18050;
+		close;
+	}
+	else if (prt_curse > 34 && prt_curse < 40 && !aru_monas) {
+		mes "[Padre Bamph]";
+		mes "Estou sem saber";
+		mes "o que fazer. Às vezes, até";
+		mes "eu tenho dúvidas e acredito";
+		mes "que Odin nos abandonou...";
+		close;
+	}
+	else if (prt_curse == 40) {
+		mes "[Padre Bamph]";
+		mes "Ah, você voltou~";
+		mes "Você conseguiu aprender";
+		mes "algo sobre veneno com";
+		mes "a Guilda dos Assassinos? Eu sei";
+		mes "que seus membros devem ser";
+		mes "muito difíceis de encontrar...";
+		next;
+		mes "^3355FFVocê relata todas as";
+		mes "informações que aprendeu";
+		mes "sobre veneno para o Padre Bamph,";
+		mes "incluindo o método para testar";
+		mes "o uso de veneno em assassinatos.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ah, entendi. Então, você";
+		mes "poderia trazer^3131FF 1 Gema Amarela";
+		mes "Gemstone^000000 e ^3131FF1 Poção Verde^000000";
+		mes "às dependências cerimoniais secretas assim que puder? Eu esperarei";
+		mes "lá por você mais uma vez.";
+		set prt_curse,41;
+		//changequest 18045,18046;
+		close;
+	}
+	else if (prt_curse == 43 || prt_curse == 53) {
+		mes "[Padre Bamph]";
+		mes "Não acredito!";
+		mes "Se veneno foi usado, então";
+		mes "o segundo e o terceiro príncipes";
+		mes "foram assassinados! Inacreditável...";
+		mes "Como alguém pode matar crianças?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Pelo menos, agora";
+		mes "sabemos que suas mortes não";
+		mes "foram culpa de Bonnie Imbullea.";
+		mes "Agora preciso discutir com o Padre";
+		mes "Biscuss e decidir como contar";
+		mes "à família real sobre isso...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ah, e você poderia";
+		mes "informar ^3131FFBonnie Imbullea^000000 que";
+		mes "as mortes dos príncipes não";
+		mes "foram culpa dela? Tenho certeza que essa notícia traria grande alívio";
+		mes "de seu fardo de culpa...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Mais uma vez, deixe-me lembrar";
+		mes "você que tudo o que aconteceu";
+		mes "aqui deve ser mantido";
+		mes "em segredo. O público não pode saber";
+		mes "da maldição de Jormungand! Causaria turbulência política e caos!";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ainda assim, isso não significa";
+		mes "que eu não possa pessoalmente agradecer";
+		mes "você por toda a sua ajuda. Sou muito grato pelo que você fez,";
+		mes "aventureiro. Que a segurança o acompanhe em todas as suas jornadas.";
+		if (prt_curse == 43)
+			set prt_curse,44;
+		else
+			set prt_curse,54;
+		//changequest 18047,18049;
+		getexp (checkre(3))?90000:1600000,0;
+		close;
+	}
+	else if (prt_curse > 43 && prt_curse < 50 && !aru_monas) {
+		mes "[Padre Bamph]";
+		mes "Você já falou com";
+		mes "Bonnie Imbullea?";
+		mes "Tente não se preocupar com a";
+		mes "notícia do assassinato dos";
+		mes "príncipes. O Padre Biscuss";
+		mes "e eu cuidaremos disso.";
+		close;
+	}
+	else if (prt_curse == 50) {
+		mes "[Padre Bamph]";
+		mes "Ah, você voltou~";
+		mes "Você conseguiu aprender";
+		mes "algo sobre veneno na";
+		mes "Guilda dos Assassinos? Sei que";
+		mes "seus membros devem ser";
+		mes "muito difíceis de encontrar...";
+		next;
+		mes "Você relata todas as";
+		mes "informações que aprendeu";
+		mes "sobre veneno ao Padre Bamph,";
+		mes "incluindo o método para testar";
+		mes "o uso de veneno em assassinatos.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ah, entendo. Então, você";
+		mes "poderia me trazer ^3131FF1 Gema Amarela^000000 e ^3131FF1 Poção Verde^000000";
+		mes "para os terrenos cerimoniais secretos o mais rápido possível?";
+		mes "Esperarei";
+		mes "lá por você mais uma vez.";
+		set prt_curse,51;
+		//changequest 18043,18046;
+		close;
+	}
+	else if (prt_curse == 60) {
+		mes "[Padre Bamph]";
+		mes "Oh, "+strcharinfo(0)+"~";
+		mes "Muito tempo sem nos ver.";
+		mes "Você já falou com";
+		mes "Bonnie? Ah, e";
+		mes "como posso ajudá-lo hoje?";
+		next;
+		mes "^3355FFVocê diz ao Padre Bamph";
+		mes "que ervas raras crescem em";
+		mes "uma terra a oeste, embora";
+		mes "você não mencione que";
+		mes "contou a Rodafrian sobre a maldição.^000000";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Terra a oeste?";
+		mes "Dizem que esse lugar";
+		mes "é habitado por fanáticos.";
+		mes "Padre Bamph, acho que eles";
+		mes "podem ser os principais suspeitos";
+		mes "do assassinato dos príncipes...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Bem, admito que é";
+		mes "possível, mas não tivemos";
+		mes "contato com ninguém da";
+		mes "terra a oeste por tanto tempo...";
+		mes "Ainda é muito cedo para fazer esse tipo de suposição.";
+		next;
+		select("Land to the west?");
+		mes "[Padre Bamph]";
+		mes "Pouco se sabe sobre";
+		mes "a terra a oeste. Nós";
+		mes "enviamos vários padres";
+		mes "para lá uma vez para espalhar nossa";
+		mes "fé. No entanto, eles falharam...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Pelo que posso dizer,";
+		mes "quase todos lá";
+		mes "são fortes adeptos da";
+		mes "religião nativa daquela região.";
+		mes "Enfim, obrigado por nos informar.";
+		mes "Nós cuidaremos disso a partir daqui.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ah, para preservar os segredos";
+		mes "da família real, peço que";
+		mes "você se abstenha de entrar nos";
+		mes "terrenos cerimoniais secretos";
+		mes "from now on. Thanks again for your help, "+strcharinfo(0)+".";
+		set prt_curse,61;
+		//completequest 18052;
+		close;
+	}
+	else {
+		if (prt_curse == 36 || prt_curse == 45 || prt_curse == 56 || prt_curse == 61) {
+// Begin Nameless Island Access Quest Addition
+			if (aru_monas == 0) {
+				mes "[Padre Bamph]";
+				mes "Sinto muito, mas você";
+				mes "se importaria se conversássemos";
+				mes "mais tarde? Tenho que lidar";
+				mes "com uma tarefa muito importante agora...";
+				close;
+			} else if (aru_monas == 1) {
+				mes "[Padre Bamph]";
+				mes "Oh, eu estava esperando";
+				mes "por você, aventureiro. Sinto muito";
+				mes "por ter lhe dado um aviso tão curto,";
+				mes "mas parece que você";
+				mes "ficou muito mais forte";
+				mes "desde a última vez que nos encontramos.";
+				next;
+				mes "[Padre Bamph]";
+				mes "A Igreja recebeu";
+				mes "um pedido do Palácio de Prontera,";
+				mes "mas não temos";
+				mes "os recursos para lidar com isso.";
+				mes "Acredito que você seria adequado";
+				mes "para esta tarefa se nos ajudar.";
+				next;
+				mes "[Padre Bamph]";
+				mes "Um homem de alta patente subitamente";
+				mes "desapareceu há um tempo.";
+				mes "Embora o Palácio de Prontera";
+				mes "tenha nos pedido para encontrá-lo, eu";
+				mes "só posso dizer quem ele é mais tarde.";
+				next;
+				mes "[Padre Bamph]";
+				mes "Tudo o que sabemos é que ele foi";
+				mes "visto pela última vez em Comodo. Por favor,";
+				mes "fale com nosso informante, ^6B8E23Larjes^000000,";
+				mes "e ele o ajudará em sua";
+				mes "busca pelo oficial desaparecido.";
+				set aru_monas,2;
+				//changequest 17000,17001;
+				close;
+			}
+			else if (aru_monas == 2 || aru_monas == 3) {
+				mes "[Padre Bamph]";
+				mes "Por favor, vá para Comodo e";
+				mes "encontre nosso informante, ^6B8E23Larjes^000000,";
+				mes "no Cassino. Ele irá ajudá-lo";
+				mes "em sua busca pelo";
+				mes "oficial desaparecido.";
+				close;
+			}
+			else if (aru_monas == 4) {
+				mes "[Padre Bamph]";
+				mes "Ah, então você encontrou Larjes?";
+				mes "Como sua investigação sobre";
+				mes "o desaparecimento daquele";
+				mes "oficial está progredindo? Espero que ele";
+				mes "ainda esteja são e salvo";
+				mes "quando você o encontrar.";
+				next;
+				select("Tell him what Larjes said.");
+				mes "[Padre Bamph]";
+				mes "Entendo. Detectamos alguma";
+				mes "atividade preocupante de";
+				mes "Arunafeltz ultimamente, mas eu não";
+				mes "imaginava que eles fariam";
+				mes "seu movimento tão cedo. Hmm...";
+				mes "Dê-me um momento para pensar.";
+				set aru_monas,5;
+				close;
+			}
+			else if (aru_monas == 5) {
+				if (rand(1,5) == 4) {
+					mes "[Padre Bamph]";
+					mes "Bem, eu considerei todos";
+					mes "os cenários possíveis. Acho";
+					mes "que seria melhor se você";
+					mes "continuasse sua investigação";
+					mes "em nosso nome. Isso, se";
+					mes "você estiver disposto a fazê-lo.";
+					next;
+					mes "[Padre Bamph]";
+					mes "Não queremos provocar";
+					mes "um conflito internacional";
+					mes "com nosso envolvimento oficial,";
+					mes "mas também não posso forçá-lo a";
+					mes "trabalhar para nós. Se você";
+					mes "pode ajudar é sua escolha.";
+					next;
+					if (select("Let me think about it.:Of course, I'll help.") == 1) {
+						mes "[Padre Bamph]";
+						mes "Espero que você decida";
+						mes "nos ajudar. A segurança de";
+						mes "nossa nação depende do";
+						mes "sucesso desta investigação.";
+						mes "Nós realmente poderíamos usar sua ajuda.";
+						close;
+					}
+					mes "[Padre Bamph]";
+					mes "Obrigado. Fico feliz em saber";
+					mes "que você nos ajudará. Você pode";
+					mes "pegar o dirigível em Izlude para";
+					mes "viajar para Arunafeltz, onde você";
+					mes "deve continuar sua investigação.";
+					next;
+					mes "[Padre Bamph]";
+					mes "Acredito que você";
+					mes "deve ser capaz de aprender mais se você";
+					mes "investigar a cidade de ^9370DBRachel^000000.";
+					mes "Por favor, aceite este dinheiro";
+					mes "para cobrir sua taxa de dirigível.";
+					mes "Obrigado e boa sorte.";
+					set aru_monas,6;
+					set Zeny, Zeny + (checkre(0)?5000:1500);
+					//changequest 17002,17003;
+					close;
+				}
+				else {
+					mes "[Padre Bamph]";
+					mes "Hmm... Qual é a melhor maneira";
+					mes "para lidarmos com isso? Deixe-me";
+					mes "pensar em nossas opções.";
+					mes "Nós podemos -- não. Isso não";
+					mes "funcionaria. Isso será difícil.";
+					close;
+				}
+			}
+			else if (aru_monas == 6) {
+				// Anyone else see the irony in this?
+				mes "[Padre Bamph]";
+				mes "Você pode ter problemas";
+				mes "em Rachel, pois a cultura";
+				mes "de lá é muito diferente da";
+				mes "nossa. Seus modos de fazer";
+				mes "as coisas, seu governo...";
+				mes "Tudo está ligado à religião.";
+				close;
+			}
+			else if (aru_monas > 6 && aru_monas < 25) {
+				mes "[Padre Bamph]";
+				mes "Muito obrigado por todo";
+				mes "o seu trabalho árduo. Nossos agentes";
+				mes "entrarão em contato quando eles";
+				mes "descobrirem qualquer nova informação.";
+				mes "Lembre-se que ninguém pode";
+				mes "saber o que estivemos fazendo.";
+				close;
+			}
+			else if (aru_monas == 25 || aru_monas == 26) {
+				mes "[Padre Bamph]";
+				mes "Obrigado por nos trazer";
+				mes "tão importante informação. Com";
+				mes "sua ajuda, conseguimos";
+				mes "resolver alguns casos não resolvidos.";
+				mes "Nós esperávamos algo como";
+				mes "isso, mas não tão cedo.";
+				next;
+				mes "[Padre Bamph]";
+				mes "Temo que a Corte Real";
+				mes "tenha entrado em discussões mesquinhas";
+				mes "por suas próprias necessidades egoístas. Eu rezo para que";
+				mes "isso não piore, que não devolva";
+				mes "ao caos. ^666666*Suspiro*^000000 Veremos...";
+				close;
+			}
+			else {
+				mes "[Padre Bamph]";
+				mes "É perturbador para mim que";
+				mes "Arunafeltz tenha estado tão quieto";
+				mes "ultimamente. Você conhece a expressão";
+				mes "sobre a calmaria quieta";
+				mes "antes de uma tempestade furiosa, certo?";
+				close;
+			}
+// End Nameless Island Access Quest Addition
+		}
+	}
+}
+
+prt_church,184,110,3	script	Father Biscuss	60,{
+	if (prt_curse == 54) {
+		mes "[Padre Biscuss]";
+		mes "Hmm, eu ainda suspeito que";
+		mes "alguém da Guilda dos Assassinos";
+		mes "pode ter matado os";
+		mes "príncipes. Só por precaução, vou";
+		mes "enviar um espião. Mantenha";
+		mes "essa informação em segredo.";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Então sim. Você não aprendeu";
+		mes "ou ouviu nada de nós,";
+		mes "e você não sabe nada";
+		mes "sobre a maldição da família real.";
+		mes "De agora em diante, Padre Bamph";
+		mes "e eu lidaremos com essa questão.";
+		close;
+	}
+	else if (prt_curse == 35) {
+		mes "[Padre Biscuss]";
+		mes "Eu nunca vi o Padre";
+		mes "Bamph assim antes, mas";
+		mes "posso entender como ele se sente.";
+		mes "Como um dos líderes desta";
+		mes "igreja, ele se sente responsável";
+		mes "pelas mortes desses príncipes.";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Tenho certeza de que ele se";
+		mes "sentirá melhor em alguns dias,";
+		mes "mas agora, ele não está em condição";
+		mes "de compilar as";
+		mes "valiosas informações que você";
+		mes "forneceu, então eu farei isso.";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Pessoalmente, eu sinto que";
+		mes "o que aconteceu foi trágico,";
+		mes "mas deveria ser vingado.";
+		mes "Talvez seja por isso que guardei";
+		mes "rancor contra Imbullea";
+		mes "por todo esse tempo. De qualquer forma...";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Embora não possamos";
+		mes "reconhecer publicamente,";
+		mes "em nome da Igreja de Prontera,";
+		mes "quero agradecer";
+		mes "você por toda a sua ajuda.";
+		set prt_curse,36;
+		//completequest 18050;
+		getexp (checkre(3))?90000:1600000,0;
+		close;
+	}
+	else if (prt_curse == 36) {
+		mes "[Padre Biscuss]";
+		mes "Ninguém pode conhecer a luz";
+		mes "sem experimentar";
+		mes "a escuridão. A paz não";
+		mes "tem significado até ser";
+		mes "contrastada com o caos.";
+		next;
+		mes "[Padre Biscuss]";
+		mes "A religião se torna ainda";
+		mes "mais importante em tempos";
+		mes "de caos e tempos de necessidade.";
+		mes "Devo manter a calma, especialmente";
+		mes "quando o Padre Bamph se sente tão mal com todo este incidente...";
+		close;
+	}
+	else {
+		mes "[Padre Biscuss]";
+		mes "Por favor, observe";
+		mes "silêncio dentro da";
+		mes "Sala dos Padres. Obrigado";
+		mes "pela cooperação.";
+		close;
+	}
+}
+
+prt_church,177,113,3	script	#gototomb	111,{
+	if (prt_curse > 17 && prt_curse < 23 || prt_curse > 31 && prt_curse < 35 || prt_curse == 41 || prt_curse == 42 || prt_curse == 44 || prt_curse == 51 || prt_curse == 52) {
+		warp "prt_church",21,91;
+	}
+	end;
+}
+
+prt_church,23,89,3	script	Father Biscuss#tomb	60,{
+	mes "[Padre Biscuss]";
+	mes "Hm...?";
+	mes "Você está pronto para";
+	mes "voltar para cima?";
+	next;
+	if (select("Yes:No") == 1) {
+		mes "[Padre Biscuss]";
+		mes "Por favor, me siga.";
+		next;
+		warp "prt_church",178,111;
+		end;
+	}
+	mes "[Padre Biscuss]";
+	mes "Por favor, leve seu tempo";
+	mes "e investigue isto o mais";
+	mes "cuidadosamente que puder.";
+	close;
+}
+
+prt_church,16,114,4	script	Father Bamph#tomb	60,{
+	if (prt_curse == 18) {
+		mes "[Padre Bamph]";
+		mes "Estes são os corpos";
+		mes "dos príncipes Geoborg";
+		mes "que foram mortos durante";
+		mes "o exorcismo. Por favor, olhe";
+		mes "para o corpo à esquerda.";
+		set prt_curse,19;
+		close;
+	}
+	else if (prt_curse == 19) {
+		mes "[Padre Bamph]";
+		mes "Por favor, olhe";
+		mes "para o corpo mais";
+		mes "à esquerda, o primeiro príncipe.";
+		close;
+	}
+	else if (prt_curse == 20) {
+		mes "["+strcharinfo(0)+"]";
+		mes "Aquela marca estranha parecia";
+		mes "escamas de cobra.";
+		mes "Será... será essa a marca";
+		mes "deixada pela maldição de Jormungand?";
+		next;
+		mes "[Padre Bamph]";
+		mes "Exato.";
+		mes "Agora, vamos examinar o";
+		mes "corpo do segundo príncipe,";
+		mes "localizado no meio.";
+		close;
+	}
+	else if (prt_curse == 21) {
+		mes "[Padre Bamph]";
+		mes "Agora...";
+		mes "Agora devemos";
+		mes "examinar o terceiro príncipe.";
+		close;
+	}
+	else if (prt_curse == 22) {
+		mes "[Padre Bamph]";
+		mes "Vamos subir para onde";
+		mes "podemos continuar esta conversa.";
+		mes "Ah, você pode querer pedir";
+		mes "ao Padre Biscuss para guiá-lo.";
+		close;
+	}
+	else if (prt_curse == 32 || prt_curse == 41 || prt_curse == 51) {
+		mes "[Padre Bamph]";
+		mes "Você tem uma ^3131FFGema Amarela^000000";
+		mes "e uma ^3131FFPoção Verde^000000";
+		mes "prontas? Se sim, você deve começar";
+		mes "a testar no corpo do terceiro príncipe antes dos outros.";
+		close;
+	}
+	else if (prt_curse == 33 || prt_curse == 42 || prt_curse == 52) {
+		mes "[Padre Bamph]";
+		mes "A marca desapareceu?";
+		mes "Oh, isso é simplesmente horrível!";
+		mes "Isso significaria que veneno";
+		mes "foi usado para assassinar os outros";
+		mes "príncipes! Eu quase... não consigo...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Eu... preciso de um tempo";
+		mes "para me recuperar do choque";
+		mes "e para pensar cuidadosamente";
+		mes "sobre tudo isto. Por enquanto,";
+		mes "vamos voltar para cima.";
+		if (prt_curse == 33) set prt_curse,34;
+		else if (prt_curse == 42) set prt_curse,43;
+		else set prt_curse,53;
+		close;
+	}
+	else if (prt_curse == 43 || prt_curse == 53) {
+		mes "[Padre Bamph]";
+		mes "Nós já perturbamos os";
+		mes "corpos dessas pobres";
+		mes "almas o suficiente. Devemos";
+		mes "voltar para cima agora...";
+		close;
+	}
+	end;
+}
+
+prt_church,19,111,5	script	#prince1	887,{
+	if (prt_curse == 19) {
+		mes "[Padre Bamph]";
+		mes "Este é o corpo";
+		mes "do primeiro filho do rei, o";
+		mes "príncipe herdeiro. Assim como aconteceu por gerações,";
+		mes "a maldição tirou a vida";
+		mes "do primeiro filho príncipe...";
+		mes "do primeiro filho príncipe...";
+		next;
+		mes "^3355FFDebaixo de uma das";
+		mes "mangas do príncipe, você";
+		mes "nota uma marca escura. Ao";
+		mes "levantar a manga, você";
+		mes "percebe que a marca se assemelha";
+		mes "às escamas de uma serpente.^000000";
+		set prt_curse,20;
+		//changequest 18037,18038;
+		close;
+	}
+	else if (prt_curse == 33 || prt_curse > 41 && prt_curse < 51 || prt_curse == 52) {
+		mes "^3355FFVocê derramou um pouco";
+		mes "da solução feita de";
+		mes "Gema Amarela e Poção Verde";
+		mes "na marca na pele.";
+		mes "Você esperou um tempo, mas não houve reação da solução.^000000";
+		close;
+	}
+	else {
+		mes "^3355FFÉ o corpo de um homem";
+		mes "vestido com trajes luxuosos.";
+		mes "Embora falecido, a cor";
+		mes "da vida ainda não deixou o corpo.";
+		close;
+	}
+}
+
+prt_church,21,111,5	script	#prince2	887,{
+	if (prt_curse == 20) {
+		mes "[Padre Bamph]";
+		mes "Este é o corpo";
+		mes "do segundo príncipe. A maldição";
+		mes "só deveria matar";
+		mes "o primeiro filho príncipe, mas";
+		mes "todos os três príncipes desta";
+		mes "geração foram mortos...";
+		next;
+		mes "[Padre Bamph]";
+		mes "Apesar de nossos grandes esforços";
+		mes "para exorcizar esta poderosa";
+		mes "maldição, todos falhamos. Aqueles";
+		mes "envolvidos começaram a acreditar";
+		mes "que Odin pode nos ter abandonado...";
+		emotion ET_HUK, playerattached();
+		next;
+		mes "^3355FFVocê examina o corpo";
+		mes "do segundo príncipe e nota";
+		mes "que as marcas de escamas em sua";
+		mes "pele são mais fracas e ligeiramente";
+		mes "diferentes em cor das";
+		mes "marcas no primeiro príncipe.^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Padre Bamph...!";
+		mes "Olha, estas marcas são";
+		mes "diferentes no segundo";
+		mes "príncipe do que no primeiro";
+		mes "príncipe! Vê? Elas são diferentes";
+		mes "em escuridão e coloração.";
+		next;
+		mes "[Padre Bamph]";
+		mes "Minha nossa, você tem razão!";
+		mes "Como pudemos ignorar isso?";
+		mes "Hm, isso apoia a ideia";
+		mes "de que uma conspiração pode estar";
+		mes "envolvida. Vamos verificar";
+		mes "o corpo do terceiro príncipe.";
+		set prt_curse,21;
+		//changequest 18038,18039;
+		close;
+	}
+	else if (prt_curse == 33 || prt_curse > 41 && prt_curse < 51 || prt_curse == 52) {
+		specialeffect EF_POISONATTACK;
+		specialeffect EF_POISONHIT;
+		specialeffect EF_BUBBLE;
+		mes "^3355FFVocê derramou um pouco da";
+		mes "solução feita de Poção Verde";
+		mes "e Pedra Amarela";
+		mes "nas marcas de escama do corpo. As";
+		mes "marcas de escama ficam mais fracas e";
+		mes "a solução borbulha ao contato.";
+		close;
+	}
+	else {
+		mes "^3355FFÉ o corpo de um homem";
+		mes "vestido com vestes luxuosas.";
+		mes "Embora falecido, a cor";
+		mes "da vida ainda não deixou o corpo.";
+		close;
+	}
+}
+
+prt_church,24,111,5	script	#prince3	887,{
+	if (prt_curse == 21) {
+		mes "^3355FFVocê e o Padre Bamph";
+		mes "inspecionam apressadamente o terceiro";
+		mes "príncipe e descobrem que as";
+		mes "marcas de escama em sua pele estão";
+		mes "um pouco mais escuras que as marcas";
+		mes "na pele do segundo príncipe.^000000";
+		next;
+		mes "[Padre Bamph]";
+		mes "Isso é muito suspeito...";
+		mes "As mortes do segundo e";
+		mes "terceiro príncipes podem ter sido";
+		mes "causadas por assassinato, em vez de";
+		mes "a maldição. No entanto, o que poderia";
+		mes "ter sido usado para matá-los?";
+		next;
+		while(1) {
+			if (select("A weapon!:Poison!") == 1) {
+				mes "[Padre Bamph]";
+				mes "Hmm... Mas nenhum dos";
+				mes "corpos tinha feridas";
+				mes "ou cicatrizes. Se esse fosse o";
+				mes "caso, tenho certeza que o rei teria";
+				mes "declarado guerra a alguém.";
+				mes "Não poderia ter sido uma arma.";
+				next;
+			}
+			else  break;
+		}
+		mes "[Padre Bamph]";
+		mes "Veneno...?";
+		mes "Oh, céus! Ninguém na";
+		mes "Igreja de Prontera saberia";
+		mes "a primeira coisa sobre isso. Mas";
+		mes "talvez veneno tenha sido usado.";
+		mes "Como podemos ter certeza?";
+		next;
+		mes "[Padre Biscuss]";
+		mes "Digo, você vai direto";
+		mes "aos especialistas. Alguém na";
+		mes "^FF0000Guilda dos Assassinos em Morocc^000000";
+		mes "deve saber. Ouvi dizer que eles";
+		mes "podem fazer veneno que pode matar";
+		mes "um homem com apenas uma gota!";
+		next;
+		mes "[Padre Bamph]";
+		mes "Ah, essa é uma boa ideia!";
+		mes "Hmm, mas primeiro, vamos";
+		mes "continuar essa conversa";
+		mes "lá fora, que tal? Eu prefiro";
+		mes "não perturbar esses corpos...";
+		set prt_curse,22;
+		close;
+	}
+	else if (prt_curse == 22) {
+		mes "[Padre Bamph]";
+		mes "Vamos subir onde";
+		mes "podemos continuar esta conversa.";
+		mes "Ah, você pode querer pedir";
+		mes "ao Padre Biscuss para guiá-lo.";
+		close;
+	}
+	else if (prt_curse == 32 || prt_curse == 41 || prt_curse == 51) {
+		if (countitem(506) > 0 && countitem(715) > 0) {
+			mes "^3355FFVocê abre uma garrafa de";
+			mes "Poção Verde e insere uma";
+			mes "Pedra Amarela. A gema";
+			mes "dissolve-se rapidamente, convenientemente";
+			mes "formando uma solução para testar a presença de veneno. Você derrama";
+			mes "nas marcas de escama do príncipe.^000000";
+			next;
+			specialeffect EF_POISONATTACK;
+			specialeffect EF_POISONHIT;
+			specialeffect EF_BUBBLE;
+			mes "^3355FF*Pssssssssh*^000000";
+			next;
+			mes "^3355FFA solução borbulha";
+			mes "ao tocar a pele,";
+			mes "e as marcas de escama de serpente";
+			mes "no corpo do príncipe";
+			mes "desaparecem lentamente até sumirem.^000000";
+			delitem 506,1; //Green_Potion
+			delitem 715,1; //Yellow_Gemstone
+			if (prt_curse == 32) set prt_curse,33;
+			else if (prt_curse == 41) set prt_curse,42;
+			else set prt_curse,52;
+			//changequest 18046,18047;
+			close;
+		}
+		mes "^3355FFVocê precisará ter";
+		mes "uma Poção Verde e";
+		mes "uma Pedra Amarela";
+		mes "para testar e confirmar";
+		mes "se veneno matou o";
+		mes "segundo e terceiro príncipes.^000000";
+		close;
+	}
+	else if (prt_curse == 33 || prt_curse == 42 || prt_curse == 52) {
+		mes "^3355FFAs marcas de escama de serpente";
+		mes "neste corpo de príncipe desapareceram";
+		mes "depois que você aplicou";
+		mes "a solução de Poção Verde e Pedra";
+		mes "Amarela na pele.^000000";
+		close;
+	}
+	else {
+		mes "^3355FFÉ o corpo de um homem";
+		mes "vestido com vestes luxuosas.";
+		mes "Embora falecido, a cor";
+		mes "da vida ainda não deixou o corpo.";
+		close;
+	}
+}
+
+moc_fild16,201,295,5	script	Assassin Guildsman#poiso	884,{
+	if (prt_curse == 23) {
+		mes "[Membro da Guilda dos Assassinos]";
+		mes "Que negócios";
+		mes "o trazem aqui?";
+		next;
+		if (select("Poison:Nothing") == 1) {
+			mes "["+strcharinfo(0)+"]";
+			mes "Preciso falar com";
+			mes "um especialista em venenos.";
+			mes "Estou investigando";
+			mes "algo para a";
+			mes "Igreja de Prontera,";
+			mes "possivelmente um assassinato.";
+			next;
+			mes "[Membro da Guilda dos Assassinos]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[Membro da Guilda dos Assassinos]";
+			mes "Ouça com atenção.";
+			mes "Eu só direi isso";
+			mes "a você uma vez.";
+			next;
+			mes "[Membro da Guilda dos Assassinos]";
+			mes "Existe um";
+			mes "Pub Privado de Assassinos";
+			mes "na direção das 7 horas";
+			mes "em Morocc. Vá encontrar alguém";
+			mes "chamada ^3131FFMarjana^000000 lá dentro.";
+			set prt_curse,24;
+			//changequest 18040,18041;
+			close;
+		}
+		mes "[Membro da Guilda dos Assassinos]";
+		mes "Não. Esse olhar em";
+		mes "seus olhos. Tenho certeza";
+		mes "que há uma razão para";
+		mes "você ter vindo aqui...";
+		close;
+	}
+	else {
+		mes "[Membro da Guilda dos Assassinos]";
+		mes "Está muito seco e";
+		mes "com muito vento hoje. Eu gosto desse";
+		mes "tempo. Parece que";
+		mes "corresponde perfeitamente à alma";
+		mes "de um verdadeiro Assassino, o solitário";
+		mes "que se esconde nas sombras.";
+		close;
+	}
+}
+
+que_job01,10,16,5	script	Marjana#poison	885,{
+	if (prt_curse == 24) {
+		mes "[Marjana]";
+		mes "Que negócio te traz";
+		mes "aqui? Tenho";
+		mes "4 minutos para falar";
+		mes "comigo, então seja direta.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Quero saber";
+		mes "mais sobre veneno";
+		mes "e confirmar se foi";
+		mes "usado para matar alguém.";
+		next;
+		mes "[Marjana]";
+		mes "Veneno? Você veio";
+		mes "à pessoa certa.";
+		mes "Se eu não souber a resposta,";
+		mes "duvido que encontre alguém";
+		mes "que saiba. Pergunte.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "É verdade que o";
+		mes "veneno de um";
+		mes "Mercenário";
+		mes "pode ser tão poderoso";
+		mes "pode matar uma pessoa?";
+		next;
+		mes "[Marjana]";
+		mes "É verdade que um veneno tão potente";
+		mes "existe, mas um veneno tão mortal";
+		mes "é geralmente usado apenas por";
+		mes "Algozes. Geralmente,";
+		mes "Mercenários normais usam venenos";
+		mes "que são muito menos potentes.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Certo. Você pode fazer";
+		mes "um veneno que deixe uma";
+		mes "marca específica no corpo?";
+		next;
+		mes "[Marjana]";
+		mes "Claro. Existem todos os tipos de";
+		mes "venenos que eu";
+		mes "tenho certeza que você nem consegue imaginar.";
+		mes "No entanto, venenos que deixam";
+		mes "marcas específicas são difíceis de";
+		mes "usar, e poucos conseguem utilizá-los.";
+		next;
+		mes "[Marjana]";
+		mes "Os tipos de marcas";
+		mes "que são deixadas dependem";
+		mes "dos materiais";
+		mes "usados para criar o veneno.";
+		mes "Como alguns materiais são";
+		mes "exclusivos de certas áreas...";
+		next;
+		mes "[Marjana]";
+		mes "Bem, o tipo de marca";
+		mes "que foi deixada poderia";
+		mes "servir como algum tipo";
+		mes "de pista. Qual era a marca";
+		mes "no corpo da vítima?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Ainda não temos certeza se";
+		mes "veneno foi usado,";
+		mes "mas existem marcas que";
+		mes "parecem escamas de cobra";
+		mes "deixadas nos corpos.";
+		next;
+		mes "[Marjana]";
+		mes "Hmm. Sabe, se eu tivesse";
+		mes "que adivinhar, diria que";
+		mes "veneno foi provavelmente usado.";
+		mes "Mas o veneno teria que";
+		mes "originar de fora do";
+		mes "Reino Rune-Midgarts...";
+		next;
+		mes "[Marjana]";
+		mes "Sim...";
+		mes "Os materiais usados para";
+		mes "fazer essas marcas de escamas de cobra...";
+		mes "Alguns deles nem";
+		mes "podem ser encontrados aqui no";
+		mes "continente de Midgard.";
+		next;
+		mes "[Marjana]";
+		mes "Estamos ficando sem tempo.";
+		mes "Ouça, você pode confirmar se";
+		mes "veneno foi usado para matar alguém";
+		mes "misturando uma Pedra Amarela com uma Poção Verde, e espalhando";
+		mes "a solução no corpo.";
+		next;
+		mes "[Marjana]";
+		mes "Se veneno foi usado, a";
+		mes "solução reagirá com";
+		mes "o corpo. Mas este método";
+		mes "não funcionará se muito tempo";
+		mes "tiver passado após o assassinato.";
+		mes "É melhor você tentar isso logo...";
+		set prt_curse,25;
+		close;
+	}
+
+OnInit:
+	disablenpc "Marjana#poison";
+	end;
+
+OnEnable:
+	enablenpc "Marjana#poison";
+	end;
+}
+
+morocc,45,103,0	script	#prtcurse	-1,2,2,{
+OnTouch:
+	if (prt_curse == 25) {
+		mes "["+strcharinfo(0)+"]";
+		mes "Hm. É melhor rever";
+		mes "os fatos que aprendi para";
+		mes "que eu possa me concentrar melhor";
+		mes "nesta investigação. Vamos ver~";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Há muito tempo, a serpente gigante";
+		mes "Jormungand ameaçou a humanidade.";
+		mes "7 guerreiros derrotaram Jormungand, liderados por Tristram III da família Geoborg";
+		mes "mas Jormungand amaldiçoou a linhagem Geoborg em sua derrota.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Desde então, a maldição mata";
+		mes "o primeiro príncipe da";
+		mes "família Geoborg em tenra idade.";
+		mes "No entanto, todos os príncipes desta";
+		mes "geração foram mortos.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "De acordo com o que aprendi";
+		mes "com aquele assassino,";
+		mes "o primeiro príncipe morreu da";
+		mes "maldição, e os outros dois podem";
+		mes "ter morrido de envenenamento.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "É muito provável que se";
+		mes "veneno foi usado, então a";
+		mes "pessoa que o usou foi um";
+		mes "assassino de fora do";
+		mes "Reino Rune-Midgarts. Sim,";
+		mes "isso é tudo que sei.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Agora, aquela historiadora Rodafrian";
+		mes "está esperando que eu conte";
+		mes "a ela a letra daquela música, mas o Padre Bamph também está esperando";
+		mes "pelas informações que aprendi com a Guilda dos Assassinos. O que devo fazer?";
+		next;
+		if (select("Go to Rodafrian:Go to Father Bamph") == 1) {
+			mes "["+strcharinfo(0)+"]";
+			mes "Bem, é mais fácil para mim";
+			mes "visitar Rodafrian agora.";
+			mes "Ela está muito mais perto";
+			mes "que o Padre Bamph, então acho";
+			mes "que falarei com ela primeiro.";
+			set prt_curse,30;
+			//changequest 18041,18042;
+			close;
+		}
+		mes "["+strcharinfo(0)+"]";
+		mes "Bem, é mais importante";
+		mes "que eu vá ver o Padre Bamph";
+		mes "e investigar os";
+		mes "corpos dos príncipes. É melhor que eu vá";
+		mes "para Prontera imediatamente.";
+		set prt_curse,50;
+		//changequest 18041,18043;
+		close;
+	}
+}
+
+prt_in,162,99,4	script	Librarian#curse	67,{
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "No momento, você está carregando";
+		mes "muitas coisas com você.";
+		mes "Por favor, volte depois";
+		mes "de usar o Serviço Kafra";
+		mes "para guardar alguns de seus itens.";
+		close;
+	}
+	if (prt_curse == 3) {
+		if (countitem(7431) < 1) {
+			mes "[Bibliotecário]";
+			mes "Por favor, certifique-se de retornar";
+			mes "os livros da biblioteca ao local";
+			mes "correto após usá-los.";
+			mes "Não temos pessoal suficiente";
+			mes "para organizar todos esses livros...";
+			next;
+			if (select("Report the loss of the books:End Conversation") == 1) {
+				mes "[Bibliotecário]";
+				mes "Oh, você perdeu alguns livros?";
+				mes "Por favor, anote os títulos dos";
+				mes "livros e pague a taxa de";
+				mes "multa de 700 zeny. Depois disso,";
+				mes "nós lhe forneceremos";
+				mes "cópias de substituição.";
+				next;
+				if (Zeny > 699) {
+					mes "[Bibliotecário]";
+					mes "Ah, aqui está você.";
+					mes "Por favor, pegue estas";
+					mes "cópias de substituição,";
+					mes "e tente não perdê-las";
+					mes "novamente. Obrigado.";
+					set Zeny, Zeny-700;
+					getitem 7431,1; //Books
+					close;
+				}
+				mes "[Bibliotecário]";
+				mes "Hmm...";
+				mes "Volte o mais rápido";
+				mes "que puder com os";
+				mes "700 zeny para pagar a";
+				mes "taxa de multa por livro perdido.";
+				close;
+			}
+			mes "[Bibliotecário]";
+			mes "Por favor, mantenha o silêncio";
+			mes "dentro da biblioteca.";
+			mes "Obrigado pela cooperação.";
+			close;
+		}
+		else {
+			mes "[Bibliotecário]";
+			mes "Ser bibliotecário pode";
+			mes "ser bastante difícil. As pessoas";
+			mes "simplesmente deixam os livros";
+			mes "espalhados, mas esperam que sejam";
+			mes "organizados. Oh, livros";
+			mes "estão sempre se perdendo também...";
+			next;
+			mes "[Bibliotecário]";
+			mes "Quando você tem";
+			mes "que limpar a bagunça";
+			mes "delas, você percebe";
+			mes "o quão desleixadas";
+			mes "as pessoas podem ser.";
+			close;
+		}
+	}
+	else {
+		mes "[Bibliotecário]";
+		mes "Ser bibliotecário pode";
+		mes "ser bastante difícil. As pessoas";
+		mes "simplesmente deixam os livros";
+		mes "espalhados, mas esperam que sejam";
+		mes "organizados. Oh, livros";
+		mes "estão sempre se perdendo também...";
+		next;
+		mes "[Bibliotecário]";
+		mes "Quando você tem";
+		mes "que limpar a bagunça";
+		mes "delas, você percebe";
+		mes "o quão desleixadas";
+		mes "as pessoas podem ser.";
+		close;
+	}
+}

@@ -1,0 +1,1946 @@
+//===== rAthena Script =======================================
+//= Old Blue Box Quest
+//===== By ===================================================
+//= Celesta, Lupus
+//===== Version ==============================================
+//= 2.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+// [Official Conversion]
+//= Old Blue Box quest (?)
+//= Officially this quest gave an OBB in exhange for a the
+//= required items unlimitedly, however this was changed by
+//= Gravity, who claimed this behavior as a bug. 
+//= The exact purpose of this quest is undetermined, but
+//= Gravity claimed that another quest would eventually
+//= branch from this one.
+//===== Additional Comments: ================================= 
+//= 1.7 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.8 Added missing checkweights. [L0ne_W0lf]
+//= 1.9 Moved Morocc NPCs to Morocc Ruins. [L0ne_W0lf]
+//= 2.0 Removed unused "name" variable. [L0ne_W0lf]
+//============================================================ 
+
+alberta,43,244,0	script	Tourist#thai	99,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Espere um momento! -";
+		mes "- Atualmente você está carregando -";
+		mes "- muitos itens com você. -";
+		mes "- Por favor, diminua seu peso -";
+		mes "- e tente novamente. -";
+		close;
+	}
+	if (thai_head >= 1 && thai_head <= 5) {
+		switch(thai_head) {
+		case 1:
+			set .@th_rand,rand(1,100);
+			if (.@th_rand > 6 && .@th_rand < 20) {
+				mes "[Turista]";
+				mes "...........";
+				next;
+				mes "[Turista]";
+				mes "Você é muito maldoso...";
+				next;
+				mes "[Turista]";
+				mes "...........";
+				next;
+				mes "[Turista]";
+				mes "...........";
+				next;
+				mes "[Turista]";
+				mes "...........";
+				next;
+				mes "[Turista]";
+				mes "Você não é...?";
+				next;
+				mes "[Turista]";
+				mes "...........";
+				next;
+				mes "[Turista]";
+				mes "...........";
+				next;
+				mes "[Turista]";
+				mes "...........";
+				next;
+				mes "[Turista]";
+				mes "Tudo bem, tudo bem, mas você não precisa ser maldoso.";
+				set thai_head,2;
+				close;
+			}
+			mes "[Turista]";
+			mes "...........";
+			next;
+			mes "[Turista]";
+			mes "Eu não achei que você fosse tão";
+			mes "maldoso. Cai fora, não estou com vontade";
+			mes "de falar com você.";
+			close;
+		case 2:
+			mes "[Turista]";
+			mes "..........";
+			next;
+			switch(select("So do you have business in Lutie?:You don't want to go to Lutie for a tour.:What made you come over here?")) {
+			case 1:
+				mes "[Turista]";
+				mes "Sim.";
+				mes "Bem, na verdade...";
+				next;
+				mes "[Turista]";
+				mes "Eu queria dar para minha namorada";
+				mes "alguns biscoitos bem assados.";
+				mes "Infelizmente, na minha cidade natal de";
+				mes "Morroc, nós não temos comidas";
+				mes "chiques como essa.";
+				next;
+				mes "[Turista]";
+				mes "Eu perguntei para todos esses";
+				mes "mercadores sobre isso, e me";
+				mes "disseram que eu só conseguiria";
+				mes "eles em Lutie... essa é a minha história.";
+				next;
+				mes "[Turista]";
+				mes "Agora estou ficando sem dinheiro e";
+				mes "comida... não posso ficar aqui por muito mais tempo...";
+				next;
+				if (select("Do you want me to help you?:Well, good luck with everything.") == 1) {
+					set thai_head,3;
+					mes "[Turista]";
+					mes "Graças a Deus! Muito obrigado.";
+					mes "Eu sabia que você me ajudaria~!";
+					next;
+					mes "[Turista]";
+					mes "Umm...";
+					mes "Antes de falarmos sobre essa ajuda...";
+					mes "Er, hmmmm...";
+					mes "Bem, você sabe que eu estou praticamente";
+					mes "morrendo de fome agora...";
+					next;
+					mes "[Turista]";
+					mes "Você poderia, por favor, me conseguir um pouco de Carne?";
+					mes "Eu sei que estou pedindo demais,";
+					mes "mas estou praticamente sem um centavo";
+					mes "então não tenho muita";
+					mes "escolha...";
+					close;
+				}
+				set thai_head,1;
+				mes "[Turista]";
+				mes ".........";
+				mes "Como você pode ser tão insensível";
+				mes "depois de ouvir minha história?";
+				mes "...Você é muito maldoso!";
+				close;
+			case 2:
+				mes "[Turista]";
+				mes "...Ah, sério? Hmm... as pessoas disseram que eu";
+				mes "só conseguiria os biscoitos bem";
+				mes "assados em Lutie.";
+				next;
+				mes "[Turista]";
+				mes "Eu queria dar para minha namorada";
+				mes "alguns biscoitos bem assados.";
+				mes "Infelizmente, na minha cidade natal de";
+				mes "Morroc, nós não temos comidas";
+				mes "chiques como essa.";
+				next;
+				mes "[Turista]";
+				mes "Eu perguntei para todos esses";
+				mes "mercadores sobre isso, e me";
+				mes "disseram que eu só conseguiria";
+				mes "eles em Lutie... essa é a minha história.";
+				next;
+				mes "[Turista]";
+				mes "Agora estou ficando sem dinheiro e";
+				mes "comida... não posso ficar aqui por muito mais tempo...";
+				next;
+				if (select("Do you want me to help you?:Well, good luck with everything.") == 1) {
+					set thai_head,3;
+					mes "[Turista]";
+					mes "Graças a Deus! Muito obrigado.";
+					mes "Eu sabia que você me ajudaria~!";
+					next;
+					mes "[Turista]";
+					mes "Umm...";
+					mes "Antes de falarmos sobre essa ajuda...";
+					mes "Er, hmmmm...";
+					mes "Bem, você sabe que eu estou praticamente";
+					mes "morrendo de fome agora...";
+					next;
+					mes "[Turista]";
+					mes "Você poderia, por favor, me conseguir um pouco de Carne?";
+					mes "Eu sei que estou pedindo demais,";
+					mes "mas estou praticamente sem um centavo";
+					mes "então não tenho muita";
+					mes "escolha...";
+					close;
+				}
+				set thai_head,1;
+				mes "[Turista]";
+				mes ".........";
+				mes "Como você pode ser tão insensível";
+				mes "depois de ouvir minha história?";
+				mes "...Você é muito maldoso!";
+				close;
+			case 3:
+				mes "[Turista]";
+				mes "Me disseram que eu só conseguiria encontrar";
+				mes "a entrada para Lutie em";
+				mes "Al De Baran...";
+				next;
+				mes "[Turista]";
+				mes "Então eu vim para cá depois de procurar";
+				mes "por Al De Baran... quase";
+				mes "me matando quando atravessei o deserto... *Soluço*";
+				close;
+			}
+		case 3:
+			if (countitem(517) == 0) {
+				mes "[Turista]";
+				mes "Eu entendo... posso entender que você";
+				mes "não pode me ajudar. Tudo bem...";
+				mes "Não é como se eu tivesse o direito";
+				mes "de exigir algo de você...";
+				mes "Mas...";
+				next;
+				mes "[Turista]";
+				mes "*Soluço*... tão... faminto...";
+				close;
+			}
+			set .@th_rand,rand(1,100);
+			if (.@th_rand > 0 && .@th_rand < 10) {
+				if (countitem(517) == 10) {
+					mes "[Turista]";
+					mes "Ah... obrigado! Muito obrigado mesmo!";
+					delitem 517,10; //Meat
+					next;
+				}
+				else if (countitem(517) < 10) {
+					mes "[Turista]";
+					mes "Eu agradeço que você esteja";
+					mes "me ajudando por causa da";
+					mes "bondade do seu coração,";
+					mes "mas...";
+					next;
+					mes "[Turista]";
+					mes "O que você está...";
+					mes "Pechincha?! Você pode alimentar";
+					mes "um homem faminto com mais";
+					mes "do que isso... traga-me";
+					mes "mais Carne!";
+					close;
+				}
+				else if (countitem(517) > 10) {
+					mes "[Turista]";
+					mes "Eu agradeço por trazer";
+					mes "tudo isso para mim, mas...";
+					next;
+					mes "[Turista]";
+					mes "Caramba, você quer que eu";
+					mes "me engasgue até morrer?";
+					mes "Eu não consigo comer tudo isso!";
+					mes "Traga-me menos Carne, certo?";
+					close;
+				}
+			}
+			else if (.@th_rand > 11 && .@th_rand < 80) {
+				if (countitem(517) == 20) {
+					mes "[Turista]";
+					mes "Ah... obrigado! Muito obrigado mesmo!";
+					delitem 517,20; //Meat
+					next;
+				}
+				else if (countitem(517) < 20) {
+					mes "[Turista]";
+					mes "Eu agradeço que você esteja";
+					mes "me ajudando por causa da";
+					mes "bondade do seu coração,";
+					mes "mas...";
+					next;
+					mes "[Turista]";
+					mes "O que você está...";
+					mes "Pechincha?! Você pode alimentar";
+					mes "um homem faminto com mais";
+					mes "do que isso... traga-me";
+					mes "mais Carne!";
+					close;
+				}
+				else if (countitem(517) > 20) {
+					mes "[Turista]";
+					mes "Eu agradeço por trazer";
+					mes "tudo isso para mim, mas...";
+					next;
+					mes "[Turista]";
+					mes "Caramba, você quer que eu";
+					mes "me engasgue até morrer?";
+					mes "Eu não consigo comer tudo isso!";
+					mes "Traga-me menos Carne, certo?";
+					close;
+				}
+			}
+			else {
+				if (countitem(517) == 40) {
+					mes "[Turista]";
+					mes "Ah... obrigado! Muito obrigado mesmo!";
+					delitem 517,40; //Meat
+					next;
+				}
+				else if (countitem(517) < 40) {
+					mes "[Turista]";
+					mes "Eu agradeço que você esteja";
+					mes "me ajudando por causa da";
+					mes "bondade do seu coração,";
+					mes "mas...";
+					next;
+					mes "[Turista]";
+					mes "O que você está...";
+					mes "Pechincha?! Você pode alimentar";
+					mes "um homem faminto com mais";
+					mes "do que isso... traga-me";
+					mes "mais Carne!";
+					close;
+				}
+				else if (countitem(517) > 40) {
+					mes "[Turista]";
+					mes "Caramba, você quer que eu";
+					mes "me engasgue até morrer?";
+					mes "Eu não consigo comer tudo isso!";
+					mes "Traga-me menos Carne, certo?";
+					close;
+				}
+			}
+			set thai_head,4;
+			mes "^3355FFEle parecia estar";
+			mes "faminto há muito tempo.";
+			mes "Ele comeu toda a carne que eu dei a ele";
+			mes "e acabou num piscar de olhos.^000000";
+			if (countitem(538) > 0) {
+				mes "^0000FF...Oh, céus! Ele pegou meus biscoitos sem nem pedir e comeu todos eles também!!^000000";
+				delitem 538,countitem(538); //Well_Baked_Cookie
+			}
+			next;
+			mes "[Turista]";
+			mes "*Ufa*... obrigado.";
+			mes "Finalmente...";
+			mes "Estou estufado.";
+			mes "...Oh. Certo.";
+			mes "Minha namorada.";
+			next;
+			mes "[Turista]";
+			mes "Er... sobre o Biscoito";
+			mes "bem assado que mencionei? Hum... eu";
+			mes "sei que estou sendo rude e egoísta";
+			mes "...Mas não acho que consiga encontrar";
+			mes "por conta própria.";
+			next;
+			mes "[Turista]";
+			mes "Então, poderia me trazer ^0000FF20 Biscoitos bem assados^000000?";
+			next;
+			mes "[Turista]";
+			mes "Embora eu não devesse pedir";
+			mes "por mais favores, e você teria";
+			mes "que passar por todo esse trabalho...";
+			mes "enquanto eu estaria seguro aqui...";
+			next;
+			mes "[Turista]";
+			mes "Eu realmente quero fazer minha";
+			mes "namorada feliz. Tudo";
+			mes "valeria a pena por";
+			mes "aquele sorriso no rosto dela...";
+			mes "Eu simplesmente não posso perder essa chance!";
+			next;
+			mes "[Turista]";
+			mes "Você nunca esteve apaixonado...?";
+			mes "Com certeza você entende a";
+			mes "influência que esta mulher tem";
+			mes "sobre mim! Caso contrário... eu estaria";
+			mes "vendendo joias... qualquer coisa";
+			mes "além disso.";
+			next;
+			mes "[Turista]";
+			mes "Estou implorando, já que você é";
+			mes "mais forte e menos delicado";
+			mes "que eu, por favor, traga-me";
+			mes "^0000FF20 Biscoitos bem assados^000000!";
+			mes "Para mim, é impossível!!";
+			close;
+		case 4:
+			if (countitem(538) > 19) {
+				mes "[Turista]";
+				mes "Ah~!! Muito obrigado!!";
+				mes "Realmente existem muitas pessoas";
+				mes "boas como você neste mundo.";
+				next;
+				set thai_head,5;
+				delitem 538,20; //Well_Baked_Cookie
+				mes "[Turista]";
+				mes "Eu agradeço pelo que você fez por";
+				mes "mim... agora posso vê-la sorrir de";
+				mes "felicidade.";
+				next;
+				mes "[Turista]";
+				mes "Hmm, ainda resta um problema";
+				mes "para mim, no entanto... Como eu";
+				mes "volto para casa em Morroc??";
+				mes "Bem, se isso pode deixar minha garota";
+				mes "feliz...";
+				next;
+				mes "[Turista]";
+				mes "...Eu darei um jeito nisso.";
+				mes "Mais cedo ou mais tarde. Cara,";
+				mes "aquele deserto é muito grande,";
+				mes "sabe?";
+				close;
+			}
+			mes "[Turista]";
+			mes "Entendo... Compreendo que você";
+			mes "não pode me ajudar. Tudo bem...";
+			mes "Não é como se eu tivesse o direito";
+			mes "de exigir qualquer coisa de você...";
+			mes "Mas...";
+			close;
+		case 5:
+			mes "[Turista]";
+			mes "Muito obrigado!";
+			next;
+			mes "[Turista]";
+			mes "Hmm... eu quero retribuir o favor...";
+			mes "E você é um aventureiro...";
+			mes "Mas eu não tenho nenhum tipo de...";
+			mes "armadura mágica ou aquelas";
+			mes "cartas com as quais vocês";
+			mes "sempre brincam...";
+			next;
+			mes "[Turista]";
+			mes "Hmmm...";
+			mes "....Já sei!";
+			mes "Mais cedo ou mais tarde, você";
+			mes "vai querer visitar algum tipo";
+			mes "de sábio ou...";
+			mes "...alguma coisa, certo?";
+			next;
+			mes "[Turista]";
+			mes "Visite meu amigo ^649664Jacob^000000 em";
+			mes "Morroc. Diga a ele que eu";
+			mes "te apresentei. Ele sabe";
+			mes "sobre um sábio...";
+			mes "Embora ele mesmo não seja";
+			mes "um...";
+			next;
+			mes "[Turista]";
+			mes "Ah, desculpe, eu nem te disse";
+			mes "meu nome. Meu nome é...";
+			mes "^0000FFPandger Mayer^000000.";
+			next;
+			mes "[Turista]";
+			mes "Então é isso, diga ao meu amigo Jacob";
+			mes "que Pandger Mayer te apresentou.";
+			next;
+			mes "[Turista]";
+			mes "Então... você diz a eles:";
+			mes "^0000FFPandger Mayer te apresentou^000000";
+			mes "Exatamente assim~";
+			mes "^0000FFPandger Mayer te apresentou^000000";
+			mes "^FF0000Não esqueça~^000000";
+			next;
+			mes "[Turista]";
+			mes "Desculpe por não poder retribuir com";
+			mes "mais do que isso, no entanto. É meio";
+			mes "frustrante, não?";
+			next;
+			mes "[Turista]";
+			mes "Aqui, pegue isto como uma prova";
+			mes "extra da minha gratidão.";
+			mes "Essa bugiganga tem sido";
+			mes "bem útil em situações";
+			mes "complicadas...";
+			next;
+			mes "[Turista]";
+			mes "Espero que seja útil.";
+			if (MaxWeight - Weight < 500) {
+				mes "Umm... parece que você está carregando coisas demais.";
+				mes "Não quer que eu te ajude?";
+				close;
+			}
+			set thai_head,6;
+			getitem 1205,1; //Cutter_
+			next;
+			mes "[Turista]";
+			mes "Heh... mais uma vez, obrigado pela";
+			mes "ajuda. Cuide-se, cara.";
+			close;
+		}
+	}
+	else if (thai_head > 5) {
+		switch(rand(1,3)) {
+		case 1:
+			mes "[Turista]";
+			mes "Ei, muito obrigado pela sua";
+			mes "ajuda. De qualquer forma... agora lembrei";
+			mes "que preciso atravessar o";
+			mes "deserto de novo... *Suspiro*";
+			mes "Sim, é melhor eu voltar...";
+			next;
+			mes "[Turista]";
+			mes "...não importa o quão difícil seja.";
+			mes "Mas... sim. Vai ser bem";
+			mes "difícil. Atravessar o deserto...";
+			mes "sozinho. Por conta própria... droga.";
+			close;
+		case 2:
+			mes "[Turista]";
+			mes "Ei, muito obrigado pela sua";
+			mes "ajuda.... Não tenho certeza se";
+			mes "consigo voltar para Morroc";
+			mes "inteiro...";
+			next;
+			mes "[Turista]";
+			mes "Mas é melhor eu voltar";
+			mes "para minha namorada. Esse é";
+			mes "o motivo de eu ter vindo";
+			mes "aqui para começar,";
+			mes "de qualquer forma.";
+			close;
+		case 3:
+			mes "[Turista]";
+			mes "Ei, muito obrigado pela sua";
+			mes "ajuda. Cara... Morroc é muito";
+			mes "longe, não é? Ah, droga...";
+			mes "Acho que se eu fui louco";
+			mes "o suficiente para vir aqui por";
+			mes "causa da minha namorada...";
+			next;
+			mes "[Turista]";
+			mes "Sou louco o suficiente para caminhar todo";
+			mes "o caminho de volta para Morroc...";
+			mes "...";
+			mes "...a menos que...";
+			mes "Você me daria uma carona nas costas?";
+			next;
+			mes "[Turista]";
+			mes "...brincadeira. Eu não sou um";
+			mes "idiota tão grande assim, eu acho.";
+			mes "Tente não parecer tão";
+			mes "surpreso!";
+			close;
+		}
+	}
+	else {
+		if (JobLevel < 36) {
+			mes "[Turista]";
+			mes "Onde estou...?";
+			mes "...Quem sou eu?";
+			next;
+			mes "[Turista]";
+			mes ".........";
+			next;
+			mes "[Turista]";
+			mes ".....";
+			next;
+			mes "[Turista]";
+			mes ".........";
+			next;
+			mes "[Turista]";
+			mes "Mahahahahahaha!!";
+			next;
+			mes "[Turista]";
+			mes "*Baba*...Eu adoro chocolate!";
+			next;
+			mes "[Turista]";
+			mes "Espere...";
+			mes "Eu tenho uma namorada...";
+			mes "e...e...";
+			mes "biscoitos...?";
+			mes "Eu me sinto tão perdido...";
+			next;
+			mes "^3355FFNós não falamos com gente maluca~^000000";
+			close;
+		}
+		mes "[Turista]";
+		mes "Onde estou?";
+		mes "*Soluço*...Acho que me perdi...";
+		mes "Ei, onde é isto!?";
+		next;
+		switch(select("Ignore him.:This is Alberta.:This is Al De Baran.")) {
+		case 1:
+			mes "[Turista]";
+			mes "..........";
+			close;
+		case 2:
+			mes "[Turista]";
+			mes "Ah...entendi. Então isto é";
+			mes "Alberta... droga. Eu deveria";
+			mes "ir para ^0000FFLutie^000000...";
+			next;
+			mes "[Turista]";
+			mes "Ei, obrigado por me avisar.";
+			mes "Agora pelo menos eu sei onde estou.";
+			mes "Caramba... eles têm barcos aqui";
+			mes "que vão para todo lugar, não têm?";
+			next;
+			mes "[Turista]";
+			mes "Ah é, para todo lugar... menos Lutie.";
+			mes "Cara, isso é um saco.";
+			close2;
+			set thai_head,2;
+			end;
+		case 3:
+			mes "[Turista]";
+			mes "Ah... ah, é verdade!";
+			mes "Sim, Al De Baran...";
+			mes "Acho que não estou perdido";
+			mes "afinal.";
+			next;
+			mes "[Turista]";
+			mes "Me disseram que posso ver uma ^FF0000Torre do Relógio^000000 em Al De Baran.";
+			mes "Você pode me dizer onde encontro a ^FF0000Torre do Relógio^000000?";
+			next;
+			if (select("It's in the center of the town.:Eh, I think I gave you the wrong town name.") == 1) {
+				mes "[Turista]";
+				mes "..............";
+				mes "Sabe, estou começando";
+				mes "a achar que...";
+				mes "você está tirando";
+				mes "uma com a minha cara...";
+				set thai_head,1;
+				close;
+			}
+			mes "[Turista]";
+			mes "Hah~!...Eu sabia! Bem, é";
+			mes "bem difícil admitir quando";
+			mes "você faz algo errado.";
+			mes "Obrigado por ser honesto, amigo.";
+			close;
+		}
+	}
+}
+
+moc_ruins,105,62,4	script	Jacob#thai	50,{
+	if (thai_head >= 6 && thai_head <= 11) {
+		switch (thai_head) {
+		case 6:
+			mes "[Tommy]";
+			mes "Uééééé~~~!!";
+			mes "Papai~~ me deixa ter uma Munak~~~!";
+			mes "Uáááááá!";
+			next;
+			mes "[Tommy]";
+			mes "Eu quero uma Munak, Munakkkk~~!!";
+			mes "Outras pessoas têm uma Munak, por que eu não posso~~?";
+			next;
+			mes "[Tommy]";
+			mes "Munak Munak Munak Munak~~~!";
+			next;
+			mes "[Jacob]";
+			mes "Er... Humm...";
+			next;
+			mes "[Tommy]";
+			mes "Munak Munak Munak Munak~~~!";
+			next;
+			mes "[Jacob]";
+			mes "Tommy, o papai está meio ocupado agora...";
+			next;
+			mes "[Tommy]";
+			mes "Munak Munak Munak Munak~~~!";
+			next;
+			mes "[Jacob]";
+			mes "*Suspiro*... tudo bem... tudo bem. Se você quer tanto assim...";
+			next;
+			mes "[Jacob]";
+			mes "Puxa... ser pai não é uma coisa";
+			mes "fácil de se fazer... Humm? Você tem algum assunto comigo?";
+			mes " ";
+			mes "[Tommy]";
+			mes "^FF0000Munak Munak Munak Munak!!^000000";
+			next;
+			input .@input$;
+			if (.@input$ != "Pandger Mayer introduced you") {
+				mes "["+strcharinfo(0)+"]";
+				mes ""+.@input$+"";
+				next;
+				mes "[Jacob]";
+				mes "....Desculpe, o que você disse? Não faço ideia do que você está falando.";
+				close;
+			}
+			mes "["+strcharinfo(0)+"]";
+			mes "Pandger Mayer te apresentou.";
+			next;
+			mes "[Jacob]";
+			mes "Ah, você quer dizer aquele cara apaixonado?";
+			mes "A última vez que o vi, ele estava";
+			mes "saindo para procurar biscoitos em algum lugar...";
+			next;
+			mes "[Jacob]";
+			mes "Só existe um motivo para ele ter mencionado meu nome para você...";
+			mes " ";
+			mes " ";
+			mes "[Tommy]";
+			mes "^FF0000Munak Munak Munak Munak!!^000000";
+			next;
+			mes "[Jacob]";
+			mes "......";
+			mes "*Suspiro* Por enquanto, tenho um favor a";
+			mes "te pedir. Você poderia me trazer";
+			mes "^0000FF1 Sem Destinatário^000000?";
+			set thai_head,7;
+			next;
+			mes "[Jacob]";
+			mes "Eu preciso que esse garoto se acalme primeiro...";
+			mes " ";
+			mes " ";
+			mes "[Tommy]";
+			mes "^FF0000Munak Munak Munak Munak!!^000000";
+			close;
+		case 7:
+			if (countitem(636) > 0) {
+				delitem 636,1; //No_Recipient
+				mes "[Tommy]";
+				mes "^FF0000Munak Munak Munak Munak!!^000000";
+				next;
+				mes "[Jacob]";
+				mes "Oh, muito obrigado...";
+				mes "Deixe-me acalmar este garoto";
+				mes "primeiro. Desculpe por meu filhinho estar sendo tão barulhento.";
+				next;
+				mes "[Jacob]";
+				mes "Tommy, Tommy?";
+				next;
+				mes "[Tommy]";
+				mes "^FF0000Muuu^9F0000naaak^5F0000aaak^3F0000aaak^000000kkk!!..Err?";
+				mes "O que é isso, papai?";
+				next;
+				mes "[Jacob]";
+				mes "Isso se chama Sem Destinatário~";
+				mes "Com isso, posso conseguir uma Munak para você~";
+				next;
+				mes "[Tommy]";
+				mes "Você está falando sério, papai?!";
+				next;
+				mes "[Jacob]";
+				mes "Sim, estou~";
+				mes "Você já me ouviu mentir alguma vez?";
+				next;
+				mes "[Tommy]";
+				mes ".......";
+				mes "Eu sei que você sempre mente para a mamãe.";
+				next;
+				mes "[Jacob]";
+				mes "..........";
+				mes "Não não não não não... isso não";
+				mes "é considerado mentira, Tommy.";
+				mes "Eu só estou tentando fazer soar melhor para a mamãe~";
+				next;
+				mes "[Tommy]";
+				mes ".......";
+				next;
+				mes "^3355FFEle olha para seu pai com";
+				mes "dúvida. As crianças hoje em dia são espertas";
+				mes "demais para se mentir para elas...^000000";
+				next;
+				mes "[Tommy]";
+				if (Sex == SEX_MALE)
+					mes "Então, senhor, você acha que meu papai pode pegar uma Munak com isso?";
+				else
+					mes "Então, senhora, você acha que meu papai pode pegar uma Munak com isso?";
+				next;
+				switch(select("Yes.:...not sure.:No, ^FF0000never^000000.")) {
+				case 1:
+					mes "[Tommy]";
+					mes "Heh!! Eu sabia que meu papai";
+					mes "não mentiria para mim!! Obrigado!!";
+					next;
+					mes "[Jacob]";
+					mes "(...*Ufa!* Obrigado~)";
+					set thai_head,9;
+					close;
+				case 2:
+					mes "[Tommy]";
+					if (Sex == SEX_MALE)
+						mes "Então me diga, senhor. Ele mentiu para mim, então?";
+					else
+						mes "Então me diga, senhora. Ele mentiu para mim, então?";
+					next;
+					mes "[Jacob]";
+					mes "Espere... espere, Tommy, isso não é verdade...";
+					mes "(^0000FFPuxa, por que você está fazendo isso comigo? Me ajude logo!!^000000)";
+					next;
+					mes "[Tommy]";
+					mes "Podemos pegar uma Munak com isso ou";
+					mes "não, hein? Me digaaaaa~~~!";
+					next;
+					switch(select("Yes, we can.:No, we can't.")) {
+					case 1:
+						mes "[Tommy]";
+						mes "Heh heh! Eu sabia!";
+						mes "Obrigado~!!!";
+						next;
+						mes "[Tommy]";
+						mes "Agora eu posso ter uma Munak!";
+						next;
+						mes "[Jacob]";
+						mes "(...*Ufa* Obrigado~)";
+						set thai_head,9;
+						close;
+					case 2:
+						set thai_head,8;
+						mes "[Tommy]";
+						mes "Eu sabia!! Papai, você é um mentiroso!!";
+						next;
+						mes "[Tommy]";
+						mes "Eu te odeio... eu te odeio!!!";
+						mes "Eu queria que Baphomet te levasse para algum lugar e te comesse!!";
+						next;
+						mes "[Jacob]";
+						mes "Droga... Tommy, Tommy...";
+						mes "Escute-me....";
+						next;
+						mes "[Tommy]";
+						mes "Eu não quero te ouvir!!!";
+						mes "Eu te odeioooooo!!";
+						next;
+						mes "[Jacob]";
+						mes "....Você.";
+						next;
+						mes "[Jacob]";
+						mes "Eu não quero mais ver sua cara feia";
+						mes "por aqui...";
+						mes "Vá embora~!";
+						mes "Como você pôde fazer isso comigo, hein?";
+						next;
+						mes "[Tommy]";
+						mes "Eu te odeioooooo!!";
+						mes " ";
+						mes " ";
+						mes "[Jacob]";
+						mes "Tommy... Tommy, por favor...";
+						mes "Você vai me deixar explicar...?";
+						set thai_head,8;
+						close;
+					}
+				case 3:
+					set thai_head,8;
+					mes "[Tommy]";
+					mes "Eu sabia!! Papai, você é um mentiroso!!";
+					next;
+					mes "[Tommy]";
+					mes "Eu te odeio... eu te odeio!!!";
+					mes "Eu queria que Baphomet te levasse para algum lugar e te comesse!!";
+					next;
+					mes "[Jacob]";
+					mes "Droga... Tommy, Tommy...";
+					mes "Escute-me....";
+					next;
+					mes "[Tommy]";
+					mes "Eu não quero te ouvir!!!";
+					mes "Eu te odeioooooo!!";
+					next;
+					mes "[Jacob]";
+					mes "....Você.";
+					next;
+					mes "[Jacob]";
+					mes "Eu não quero mais ver";
+					mes "sua cara feia.";
+					mes "Vá embora!";
+					mes "Como você pôde fazer isso comigo, hein?";
+					next;
+					mes "[Tommy]";
+					mes "Eu te odeioooooo!!";
+					mes "[Jacob]";
+					mes "Tommy... Tommy, por favor...";
+					mes "Você vai me deixar explicar...?";
+					set thai_head,8;
+					close;
+				}
+			}
+			mes "[Tommy]";
+			mes "^FF0000Munak Munak Munak Munak!!^000000";
+			next;
+			mes "[Jacob]";
+			mes "*Suspiro*... esse é o meu garoto. Por favor, me consiga um Destinatário Inexistente assim que puder!";
+			close;
+		case 8:
+			if (rand(1,1000) == 792) {
+				mes "[Tommy]";
+				mes "^FF0000Munak Munak Munak Munak!!^000000";
+				next;
+				mes "[Jacob]";
+				mes "....*Suspiro* Tudo bem.";
+				mes "Eu vou te dar uma chance";
+				mes "de compensar o seu erro.";
+				mes "Por favor, me consiga um Destinatário Inexistente assim que puder.";
+				set thai_head,7;
+				close;
+			}
+			mes "[Jacob]";
+			mes "....Eu não quero mais falar";
+			mes "com VOCÊ. Caia fora~!";
+			mes "É sua culpa que meu garotinho";
+			mes "pensa que eu sou um grande mentiroso!";
+			close;
+		case 9:
+			mes "[Jacob]";
+			mes "*Ufa* Agora posso deixá-lo em paz.";
+			mes "As crianças de hoje em dia são tão impacientes... Estou preocupado com meu filho.";
+			next;
+			mes "[Jacob]";
+			mes "No entanto, não posso fazer nada";
+			mes "quanto ao temperamento dele... Acho";
+			mes "que ele é jovem demais para saber";
+			mes "o que está fazendo.";
+			next;
+			mes "[Jacob]";
+			mes "Estou tendo dificuldade em tentar";
+			mes "ser um bom pai, e estou";
+			mes "começando a dar valor aos esforços";
+			mes "dos meus pais para me criar.";
+			next;
+			mes "[Jacob]";
+			mes "Respeite seus pais enquanto eles";
+			mes "ainda estão vivos. É tarde demais";
+			mes "para se arrepender depois que os perde.";
+			next;
+			mes "[Jacob]";
+			mes "Eu também era um garoto selvagem... meus";
+			mes "pais tiveram muita dificuldade para me";
+			mes "criar. Tenho vergonha do que fiz";
+			mes "quando era jovem...";
+			next;
+			mes "[Jacob]";
+			mes "Naquela época, meus pais não";
+			mes "tinham condições de me dar três";
+			mes "refeições por dia. E havia muitos";
+			mes "cobradores que sempre vinham";
+			mes "até nossa casa bem";
+			mes "cedo pela manhã.";
+			next;
+			mes "[Jacob]";
+			mes "Você já ouviu falar sobre";
+			mes "papéis de confisco? Assim que";
+			mes "aqueles cobradores colavam aquele";
+			mes "papel de confisco em qualquer";
+			mes "uma das minhas coisas, ela";
+			mes "não seria mais minha.";
+			next;
+			mes "[Jacob]";
+			mes "Eu odiava meus pais por não me proporcionarem um lar doce lar,";
+			mes "e me tornei rebelde.";
+			mes "Mas, não importava o quanto eu fosse ruim,";
+			mes "Mesmo naquelas circunstâncias difíceis...";
+			next;
+			mes "[Jacob]";
+			mes "Eles nunca desistiram de mim.";
+			mes "Mais tarde, eles me disseram que eu era a única esperança deles...";
+			mes "mesmo sendo mais um fardo do que qualquer outra coisa no momento.";
+			next;
+			mes "[Tommy]";
+			mes "Papai, você percebe que já contou";
+			mes "essa história centenas de vezes? *Piff~*";
+			mes "Pare com isso~";
+			next;
+			mes "^3355FFTommy estava pulando e correndo";
+			mes "por aí como um coelho louco e";
+			mes "eventualmente esbarrou em mim.^000000";
+			next;
+			mes "[Jacob]";
+			mes "...Tommy, respeite seu pai.";
+			mes "Esta é a história da vida do seu pai.";
+			next;
+			mes "[Jacob]";
+			mes "A.aa.aand.!!!";
+			next;
+			mes "[Jacob]";
+			mes "Quantas vezes eu já te disse";
+			mes "para se comportar na frente das pessoas?!";
+			next;
+			mes "[Jacob]";
+			if (Sex == SEX_MALE)
+				mes "Peça desculpas a ele!";
+			else
+				mes "Peça desculpas a ela!";
+			next;
+			mes "[Tommy]";
+			mes "*Piff~*";
+			next;
+			mes "[Jacob]";
+			mes "Eu não ouvi nada~!!";
+			next;
+			mes "[Tommy]";
+			mes "...Desculpa...*abaixa a cabeça*";
+			set thai_head,10;
+			close;
+		case 10:
+			set .@rem,rand(1,11);
+			if (.@rem == 1) {
+				mes "[Jacob]";
+				mes "Ah~ sim! Você não disse que Pandger Mayer me apresentou a você?";
+				mes "Ele não me apresentaria a qualquer um. Oh, você deve ser";
+				mes "...um aventureiro.";
+				next;
+				mes "[Jacob]";
+				mes "Certo.";
+				mes "Tenho algo para lhe contar.";
+				next;
+				mes "[Jacob]";
+				mes "Quando você for para o oeste de Morocc, e";
+				mes "atravessar uma caverna, você";
+				mes "chegará a uma cidade chamada Comodo.";
+				next;
+				mes "[Jacob]";
+				mes "Quando chegar lá, verá um velho chamado ^0000FFAncião Creek^000000.";
+				mes "Como um Sábio, ele ganhou o respeito de muitos.";
+				next;
+				mes "[Jacob]";
+				mes "As pessoas dizem que muitos aventureiros";
+				mes "estão visitando esse homem por algum";
+				mes "motivo. Por que você não vai falar com ele e ver se ele tem alguma sabedoria para você?";
+				set thai_head,11;
+				close;
+			}
+			else if (.@rem > 1 && .@remrem < 7) {
+				mes "[Jacob]";
+				mes "Respeite seus pais quando eles";
+				mes "ainda estão vivos. É tarde demais para se arrepender depois que os perde.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "(Hmmm... eu só sei que há mais que esse cara pode me contar...)";
+				close;
+			}
+			else {
+				mes "[Jacob]";
+				mes "Quando você tiver um filho,";
+				mes "não se esqueça de ensiná-lo";
+				mes "esta única coisa:";
+				next;
+				mes "[Jacob]";
+				mes "'^0000FFSeja bom com as outras pessoas.^000000'";
+				mes "'^0000FFTente se colocar no lugar de outra pessoa antes de julgá-la.^000000'";
+				mes "Você entendeu?";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "(Há mais coisas que esse cara pode me contar, eu só sei disso...)";
+				close;
+			}
+		case 11:
+			mes "[Jacob]";
+			mes "Agora, por que você não visita o Sábio?";
+			mes "E agradeço pela sua gentileza.";
+			next;
+			mes "[Jacob]";
+			mes "Ele está em Comodo, caso você não";
+			mes "tenha entendido. Um aventureiro como você deve conseguir chegar lá sem problemas.";
+			close;
+		}
+	}
+	else if (thai_head > 11) {
+		mes "[Jacob]";
+		mes "Obrigado pelo favor que você fez";
+		mes "por mim... embora nós não tenhamos";
+		mes "conseguido capturar um Munak no final...";
+		next;
+		mes "[Jacob]";
+		mes "Parece que ele aprendeu algo";
+		mes "com a experiência.";
+		mes "Ele não exige mais algo";
+		mes "que eu não possa fazer por ele, ou";
+		mes "se comporta mal.";
+		next;
+		mes "[Jacob]";
+		mes "Esse foi outro favor que você me fez, mesmo que não tenha sido sua intenção. Obrigado.";
+		close;
+	}
+	else {
+		mes "[Jacob]";
+		mes "*Boceja*....";
+		mes "Hoje é um dia tão entediante~.";
+		mes "Acho melhor eu ir dar uma caminhada";
+		mes "com meu filho. Você quer caminhar comigo?";
+		next;
+		mes "[Filho de Jacob]";
+		mes "Fico feliz em ouvir isso, papai~";
+		close;
+	}
+}
+
+comodo,68,195,0	script	Old Man#thai	120,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Espere um momento! -";
+		mes "- Atualmente você está carregando -";
+		mes "- itens demais com você. -";
+		mes "- Por favor, alivie seu peso -";
+		mes "- e tente novamente. -";
+		close;
+	}
+	if (thai_head >= 11 && thai_head <= 15) {
+		switch(thai_head) {
+		case 11:
+			mes "[Ancião Creek]";
+			mes "Bom dia, aventureiro.";
+			mes "Que tipo de assunto";
+			mes "você tem comigo?";
+			next;
+			mes "[Ancião Creek]";
+			mes "Você busca fortuna ou";
+			mes "alívio mental? Se não, você";
+			mes "deseja terminar algo que";
+			mes "você começou?";
+			next;
+			mes "[Ancião Creek]";
+			mes "Responda-me, aventureiro!";
+			next;
+			switch(select("I seek fortune!:I seek...wisdom.:I want to finish what I've started.")) {
+			case 1:
+				mes "[Ancião Creek]";
+				mes "Você é honesto...!";
+				mes "No entanto, sugiro que tente não se deixar levar pela ganância por riqueza.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Você sabe o significado exato";
+				mes "do velho ditado...";
+				mes "^0000FFO excesso é tão ruim quanto a falta^000000?";
+				mes "Eu lhe darei o que deseja se";
+				mes "você responder da maneira que espero.";
+				next;
+				switch(select("It's necessary to have a lot!:Too dumb to see the future.:Too much of a good thing can be bad.:Cringe to the powerful.")) {
+				case 1:
+					mes "[Ancião Creek]";
+					mes "...";
+					mes "Saia da minha frente,";
+					mes "seu tolo ganancioso.";
+					set thai_head,12;
+					close;
+				case 2:
+					mes "[Ancião Creek]";
+					mes "Bah! Quanto mais ignorantes eles são, mais arrogantemente agem!";
+					mes "Você achou que eu aceitaria qualquer significado?";
+					mes "Cuide-se, seu tolo ignorante.";
+					set thai_head,12;
+					close;
+				case 3:
+					mes "[Ancião Creek]";
+					mes "Isso mesmo. Você sabe muito";
+					mes "bem. Esse ditado serve como uma lição sobre a ganância.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Existe um homem que conheço há";
+					mes "muito tempo... ele era tão ganancioso por";
+					mes "dinheiro e fortuna, que não se importava com o que os outros pensavam dele.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Consequentemente, as pessoas ao redor";
+					mes "não gostavam dele nem um pouco. No final, ele perdeu seus amigos devido à sua ganância.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Claro, essa regra se aplica a";
+					mes "você também. Esse tipo de coisa é um princípio universal, afinal.";
+					set thai_head,13;
+					close;
+				case 4:
+					mes "[Ancião Creek]";
+					mes ".....";
+					mes "Você achou que eu aceitaria qualquer significado??";
+					mes "Cuide-se, seu tolo ignorante.";
+					set thai_head,12;
+					close;
+				}
+			case 2:
+				mes "[Ancião Creek]";
+				mes "Entendo. Tenho tentado ajudar";
+				mes "outras pessoas que precisam de conselhos";
+				mes "para melhorar suas vidas.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Já que você precisa do meu conselho";
+				mes "também, tentarei";
+				mes "transmitir minha sabedoria de uma";
+				mes "maneira que você entenda.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Agora, diga-me o que o incomoda agora.";
+				next;
+				switch(select("Boy/girlfriend issue.:Financial problem.:Bored to death.:Career issue.:I want money.:Give me items, old man.")) {
+				case 1:
+					mes "[Ancião Creek]";
+					mes "Sinto inveja de você! Ainda assim, jovens";
+					mes "como você têm a sorte de";
+					mes "ter esses problemas... infelizmente,";
+					mes "ninguém além de você mesmo pode realmente";
+					mes "ajudá-lo nesse tipo de";
+					mes "situação...";
+					next;
+					mes "[Ancião Creek]";
+					mes "No entanto, o conselho que posso lhe dar";
+					mes "é este: Seja honesto com seu";
+					mes "amado(a). Uma mentira leva a";
+					mes "outra mentira rapidamente.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Se você tratar a pessoa que ama";
+					mes "como especial para você, essa pessoa";
+					mes "eventualmente virá a";
+					mes "entender seus sentimentos...";
+					next;
+					mes "[Ancião Creek]";
+					mes "E lembre-se disto...";
+					mes "Cada um tem uma maneira diferente de mostrar que ama alguém.";
+					mes "Portanto... não se desencoraje se seus sentimentos não forem correspondidos.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Mas, ainda assim, acredito que ser honesto";
+					mes "é o melhor caminho para conquistar seu";
+					mes "amor verdadeiro.";
+					next;
+					mes "[Ancião Creek]";
+					mes "....bem, isso é tudo que posso lhe";
+					mes "dizer. Espero que você seja feliz";
+					mes "com esse fragmento de sabedoria.";
+					close2;
+					set thai_head,14;
+					end;
+				case 2:
+					mes "[Ancião Creek]";
+					mes "...sim, todos têm seus próprios";
+					mes "problemas financeiros. No entanto, pense desta forma:";
+					next;
+					mes "[Ancião Creek]";
+					mes "Dinheiro é importante para";
+					mes "sobreviver, mas não é tudo o que a vida significa.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Alguns podem ter como objetivo de vida";
+					mes "fazer fortunas, mas não acho que seja a maneira mais feliz de viver.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Como você vê, existem pessoas";
+					mes "poderosas neste mundo que podem controlar nossas vidas. Mas, muitas vezes...";
+					next;
+					mes "[Ancião Creek]";
+					mes "Elas são gananciosas demais para estarem nessa";
+					mes "posição e não têm";
+					mes "suas prioridades em ordem.";
+					mes "Em vez de melhorar o mundo, elas usam seu poder apenas para ajudar a si mesmas.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Se eu fosse como elas, eu não gostaria";
+					mes "de governar o mundo dessa maneira.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Você não acha que precisamos de alguém que possa mudar este mundo??";
+					next;
+					mes "[Ancião Creek]";
+					mes ".....Peço desculpas por ser de";
+					mes "temperamento explosivo. Eu só queria que";
+					mes "você soubesse que dinheiro não é tudo. Mas, é algo que você precisa para viver.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Estou ciente de que pessoas gananciosas";
+					mes "ridicularizam essa crença, dizendo";
+					mes "que é o esforço de um homem pobre";
+					mes "para proteger seu orgulho.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Mas, ainda acredito que estou certo.";
+					mes "Afinal... eu sou um Sábio.";
+					mes "Espero que você fique satisfeito com meu sábio conselho.";
+					close2;
+					set thai_head,14;
+					end;
+				case 3:
+					mes "[Ancião Creek]";
+					mes "Sim, sempre precisamos ser";
+					mes "entretidos. Mas... parece";
+					mes "que você pode não estar satisfeito com nada.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Tudo se resume aos vários gostos";
+					mes "e interesses que as pessoas têm.";
+					mes "Coisas que outras pessoas aproveitam podem não";
+					mes "desagradar você. Além disso, se sua";
+					mes "mente não estiver disposta a ser feliz,";
+					mes "você não aproveitará a vida.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Aqui está um exemplo de ter";
+					mes "a mentalidade correta.";
+					mes "Digamos que estamos limpando";
+					mes "a rua da cidade,";
+					mes "o que pode ser um trabalho duro e extenuante...";
+					next;
+					mes "[Ancião Creek]";
+					mes "Você está sempre coberto de poeira.";
+					mes "No verão, seu corpo fica";
+					mes "pegajoso de suor...";
+					mes "No inverno, você estará";
+					mes "exposto ao frio congelante...";
+					next;
+					mes "[Ancião Creek]";
+					mes "No entanto, mesmo assim, será diferente para alguém com uma perspectiva diferente.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Idealmente, deveríamos tentar";
+					mes "encontrar alegria em fazer";
+					mes "outras pessoas felizes.";
+					mes "Ao limpar a rua, podemos";
+					mes "dar aos outros um motivo para sorrir.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Turistas passando pela rua";
+					mes "podem aproveitar sua limpeza...";
+					mes "No geral, isso faz com que toda a comunidade pareça boa.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Se seus pais virem você limpando";
+					mes "a rua, eles terão orgulho";
+					mes "de seu filho.";
+					mes "...Mas agora, acho que não estou fazendo sentido algum.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Bem, eu peço desculpas.";
+					mes "Apenas tente pensar positivamente.";
+					mes "Com a atitude certa, eventualmente você encontrará algo para aproveitar.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Haha~ Vejo que você está apenas";
+					mes "clicando no botão 'próximo' nestas";
+					mes "janelas, porque está farto desta conversa com NPC.";
+					next;
+					mes "[Ancião Creek]";
+					mes "....de qualquer forma, é só isso.";
+					mes "Espero que você fique satisfeito";
+					mes "com meu sábio conselho.";
+					close2;
+					set thai_head,14;
+					end;
+				case 4:
+					mes "[Ancião Creek]";
+					mes "Esse é um pensamento agonizante para todo jovem.";
+					mes "Mas você tem muito tempo para pensar sobre o que quer fazer no futuro.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Experimente mais em muitos lugares";
+					mes "diferentes e leia o máximo de livros";
+					mes "que puder. Concentre-se em ampliar sua perspectiva.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Então, você perceberá o que realmente quer fazer.";
+					mes "....é só o que posso dizer.";
+					mes "Espero que você fique satisfeito com meu sábio conselho.";
+					close2;
+					set thai_head,14;
+					end;
+				case 5:
+					mes "[Ancião Creek]";
+					mes "....";
+					mes "Entendo, você escolheu a resposta errada desde o início.";
+					next;
+					mes "[Ancião Creek]";
+					mes "Acredito que isso será uma lição para ser mais honesto consigo mesmo.";
+					mes "Escolha a resposta certa da próxima vez!";
+					close;
+				case 6:
+					mes "[Ancião Creek]";
+					mes "Seu patife!";
+					next;
+					mes "[Ancião Creek]";
+					mes "Saia da minha frente imediatamente! Eu não falo com lixo!";
+					set thai_head,12;
+					close;
+				}
+			case 3:
+				mes "[Ancião Creek]";
+				mes "Sim, você precisa ver as coisas até o fim.";
+				close;
+			}
+		case 12:
+			if (rand(1,1000) == 792) {
+				mes "[Ancião Creek]";
+				mes "....*Suspiro* Tudo bem.";
+				mes "Eu te perdoo.";
+				set thai_head,11;
+				close;
+			}
+			mes "[Ancião Creek]";
+			mes "Não desejo continuar esta conversa com você.";
+			mes "Saia da minha frente imediatamente!";
+			close;
+		case 13:
+			mes "[Ancião Creek]";
+			mes "...Eu estava apenas te testando";
+			mes "para poder te dar algo";
+			mes "especial. Sou a única pessoa no mundo que pode te dar isso...";
+			next;
+			mes "[Ancião Creek]";
+			mes "Eu precisava verificar se você era a pessoa certa como imaginei inicialmente.";
+			mes "....Hmm.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Mas você não espera que eu dê algo especial sem nenhuma compensação, espera?";
+			mes "Você traria os itens que eu quero?";
+			next;
+			mes "[Ancião Creek]";
+			mes "Não é algo difícil de fazer.";
+			mes "Isso é...";
+			next;
+			mes "[Ancião Creek]";
+			mes "10 Brigan,";
+			mes "15 Casca de Molusco,";
+			mes "10 Casca de Caranguejo";
+			mes "e 50 Cyfar.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Bem, estou colecionando esses como um hobby.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Não tenho dúvidas de que você será capaz de reunir todos eles.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Me faça esse favor, jovem rapaz.";
+			set thai_head,15;
+			close;
+		case 14:
+			if (rand(1,30) == 5) {
+				mes "[Ancião Creek]";
+				mes "....hmm. Vejo que você quer mais.";
+				mes "Volte mais tarde.";
+				set thai_head,13;
+				close;
+			}
+			mes "[Ancião Creek]";
+			mes "Resta algum assunto entre";
+			mes "nós? Diga-me, jovem aventureiro...";
+			next;
+			mes "^3355FFVocê sente que pode ter deixado algo passar.^000000";
+			close;
+		case 15:
+			if (countitem(7054) > 9 && countitem(965) > 14 && countitem(964) > 9 && countitem(7053) > 49) {
+				mes "[Ancião Creek]";
+				mes "Vejo que você sabe como o mundo";
+				mes "funciona. Quando você precisa de algo";
+				mes "de alguém, você deve dar";
+				mes "para poder receber.";
+				mes "Obrigado pela sua gentileza.";
+				delitem 7054,10; //Brigan
+				delitem 965,15; //Clam_Shell
+				delitem 964,10; //Crap_Shell
+				delitem 7053,50; //Cyfar
+				next;
+				set thai_head,16;
+				getitem 603,1; //Old_Blue_Box
+				mes "[Ancião Creek]";
+				mes "Por favor, pegue isto primeiro.";
+				mes "Se não se importar, vá falar com meu";
+				mes "neto mais tarde. Ele parece ter testemunhado algo horrível algum tempo atrás...";
+				next;
+				mes "[Ancião Creek]";
+				mes "Não faço ideia do que ele viu,";
+				mes "porque o choque tirou";
+				mes "sua habilidade de falar.";
+				mes "Quando ele se recuperar, eu te contarei.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Na verdade, os itens que pedi";
+				mes "serão usados para curar";
+				mes "a condição dele. Eu não";
+				mes "coleciono essas coisas realmente como";
+				mes "um hobby...";
+				next;
+				mes "[Ancião Creek]";
+				mes "Sinto muito por lhe causar";
+				mes "tantos problemas para o meu próprio benefício.";
+				close;
+			}
+			mes "[Ancião Creek]";
+			mes "Lembre-se, quando você quer algo,";
+			mes "especialmente quando é algo especial, você";
+			mes "deve sempre oferecer algo em troca.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Eu quero...";
+			next;
+			mes "[Ancião Creek]";
+			mes "10 Brigan,";
+			mes "15 Casca de Molusco,";
+			mes "10 Casca de Caranguejo e";
+			mes "50 Cyfar.";
+			close;
+		}
+	}
+	else if (thai_head > 15) {
+		mes "[Ancião Creek]";
+		mes "Sinta-se à vontade para voltar a qualquer momento...";
+		mes "E se você precisar de conselhos, estou mais do que disposto a te ajudar.";
+		next;
+		mes "[Ancião Creek]";
+		mes "Você deseja que eu te dê um conselho, aventureiro?";
+		next;
+		if (select("Yes.:No.") == 1) {
+			mes "[Ancião Creek]";
+			mes "Agora, diga-me o que o incomoda no momento.";
+			next;
+			switch(select("Boy/girlfriend issue.:Financial problem.:Bored to death.:Career issue.:Give me items, old man.")) {
+			case 1:
+				mes "[Ancião Creek]";
+				mes "Tenho inveja de você! Ainda assim, jovens";
+				mes "como você têm sorte de";
+				mes "ter tais problemas... infelizmente,";
+				mes "ninguém além de você mesmo pode realmente";
+				mes "te ajudar nesses tipos de";
+				mes "situações...";
+				next;
+				mes "[Ancião Creek]";
+				mes "No entanto, o conselho que posso lhe dar";
+				mes "é este: Seja honesto com sua";
+				mes "pessoa amada. Uma mentira leva a";
+				mes "outra mentira num piscar de olhos.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Se você tratar a pessoa que ama";
+				mes "como algo especial para você, essa pessoa";
+				mes "eventualmente passará a";
+				mes "entender seus sentimentos...";
+				next;
+				mes "[Ancião Creek]";
+				mes "E, lembre-se disto...";
+				mes "Cada um tem uma maneira diferente de mostrar que ama alguém.";
+				mes "Então... não desanime se seus sentimentos não forem correspondidos.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Mas ainda assim, acredito que ser honesto";
+				mes "é a melhor maneira de conquistar seu";
+				mes "verdadeiro amor.";
+				next;
+				mes "[Ancião Creek]";
+				mes "....bem, isso é tudo que posso lhe";
+				mes "dizer. Espero que você seja feliz";
+				mes "com esse pequeno fragmento de sabedoria.";
+				close;
+			case 2:
+				mes "[Ancião Creek]";
+				mes "...sim, todos têm seus próprios";
+				mes "problemas financeiros. No entanto, pense desta forma:";
+				next;
+				mes "[Ancião Creek]";
+				mes "Dinheiro é importante para";
+				mes "sobreviver, mas não é tudo na vida.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Alguns podem ter como objetivo de vida";
+				mes "fazer fortuna, mas não acho que seja a maneira mais feliz de viver.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Como você vê, existem pessoas";
+				mes "poderosas neste mundo que podem controlar nossas vidas. Mas, muitas vezes...";
+				next;
+				mes "[Ancião Creek]";
+				mes "Eles são gananciosos demais para estar nessa";
+				mes "posição e não priorizam";
+				mes "o que é certo.";
+				mes "Em vez de melhorar o mundo, eles usam seu poder apenas para ajudar a si mesmos.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Se eu fosse eles, eu não gostaria de";
+				mes "governar o mundo dessa maneira.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Você não acha que precisamos de alguém que possa mudar este mundo??";
+				next;
+				mes "[Ancião Creek]";
+				mes ".....Peço desculpas por ser de pavio";
+				mes "curto. Eu só queria que";
+				mes "você soubesse que dinheiro não é tudo. Mas é algo que você precisa para viver.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Estou ciente de que pessoas gananciosas";
+				mes "ridicularizam essa crença, dizendo";
+				mes "que é o esforço de um homem pobre";
+				mes "para proteger seu orgulho.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Mas ainda acredito que estou certo.";
+				mes "Afinal de contas... eu sou um Sábio.";
+				mes "Espero que você fique satisfeito com meu sábio conselho.";
+				close;
+			case 3:
+				mes "[Ancião Creek]";
+				mes "Sim, sempre precisamos nos";
+				mes "entretener. Mas... parece";
+				mes "que você pode não estar satisfeito";
+				mes "com nada.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Tudo se resume aos vários gostos";
+				mes "e interesses que as pessoas possuem.";
+				mes "Coisas que outras pessoas gostam podem";
+				mes "desagradar você. Além disso, se sua";
+				mes "mente não estiver disposta a ser feliz,";
+				mes "você não aproveitará a vida.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Aqui está um exemplo de ter";
+				mes "a mentalidade correta.";
+				mes "Digamos que estamos limpando";
+				mes "a rua da cidade,";
+				mes "o que pode ser um trabalho duro e extenuante...";
+				next;
+				mes "[Ancião Creek]";
+				mes "Você está sempre coberto de poeira.";
+				mes "No verão, seu corpo fica";
+				mes "pegajoso de suor...";
+				mes "No inverno, você estará";
+				mes "lá fora no frio congelante...";
+				next;
+				mes "[Ancião Creek]";
+				mes "No entanto, mesmo assim, será diferente para alguém com uma perspectiva diferente.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Idealmente, deveríamos tentar";
+				mes "encontrar alegria em fazer";
+				mes "outras pessoas felizes.";
+				mes "Ao limpar a rua, podemos";
+				mes "dar aos outros um motivo para sorrir.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Os turistas que passam pela";
+				mes "rua podem desfrutar da sua";
+				mes "limpeza...";
+				mes "No geral, isso faz com que toda a comunidade pareça boa.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Se seus pais virem você limpando";
+				mes "a rua, eles terão orgulho do";
+				mes "filho deles.";
+				mes "...Mas agora, acho que estou começando a falar coisas sem sentido.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Ah, bem, peço desculpas.";
+				mes "Apenas tente pensar positivamente.";
+				mes "Com a atitude certa, eventualmente você encontrará algo para aproveitar.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Haha~ Eu posso ver que você está apenas";
+				mes "clicando no botão 'próximo' nessas";
+				mes "janelas, porque está farto desta conversa com o NPC.";
+				next;
+				mes "[Ancião Creek]";
+				mes "....de qualquer forma, é só isso.";
+				mes "Espero que você fique satisfeito";
+				mes "com meu sábio conselho.";
+				close;
+			case 4:
+				mes "[Ancião Creek]";
+				mes "Esse é um pensamento agonizante para todo jovem.";
+				mes "Mas você tem muito tempo para pensar sobre o que quer fazer no futuro.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Experimente mais em muitos lugares";
+				mes "diferentes e leia o máximo de livros";
+				mes "que puder. Foque em ampliar sua perspectiva.";
+				next;
+				mes "[Ancião Creek]";
+				mes "Então, você perceberá o que realmente quer fazer.";
+				mes "....é só o que posso dizer.";
+				mes "Espero que você fique satisfeito com meu sábio conselho.";
+				close;
+			case 5:
+				mes "[Ancião Creek]";
+				mes "Seu patife!";
+				next;
+				mes "[Ancião Creek]";
+				mes "Saia da minha frente imediatamente! Eu não converso com lixo!";
+				close2;
+				warp "comodo",196,255;
+				end;
+			}
+		}
+		mes "[Ancião Creek]";
+		mes "Espero que você aproveite sua vida. Lembre-se, o tempo voa e você só vive uma vez.";
+		close;
+	}
+	else {
+		mes "[Ancião Creek]";
+		mes "Eu tenho ajudado as pessoas dando conselhos para melhorar suas vidas.";
+		next;
+		mes "[Ancião Creek]";
+		mes "Já que você também precisa da minha ajuda, tentarei transmitir um pouco de sabedoria.";
+		next;
+		mes "[Ancião Creek]";
+		mes "Agora me diga, o que o incomoda neste momento?";
+		next;
+		switch(select("Boy/girlfriend issue.:Financial problem.:Bored to death.:Career issue.:Give me items, old man.")) {
+		case 1:
+			mes "[Ancião Creek]";
+			mes "Eu sinto inveja de você! Ainda assim, jovens";
+			mes "como você têm sorte de";
+			mes "ter esses problemas... tristemente,";
+			mes "ninguém além de você mesmo pode realmente";
+			mes "ajudá-lo nesse tipo de";
+			mes "situação...";
+			next;
+			mes "[Ancião Creek]";
+			mes "No entanto, o conselho que posso lhe dar";
+			mes "é este: Seja honesto com sua";
+			mes "pessoa amada. Uma mentira leva a";
+			mes "outra mentira rapidamente.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Se você tratar a pessoa que ama";
+			mes "como especial para você, essa pessoa";
+			mes "eventualmente passará a";
+			mes "entender seus sentimentos...";
+			next;
+			mes "[Ancião Creek]";
+			mes "E lembre-se disso...";
+			mes "Cada um tem um jeito diferente de mostrar que ama alguém.";
+			mes "Então... não desanime se seus sentimentos não forem correspondidos.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Mas ainda assim, acredito que ser honesto";
+			mes "é a melhor maneira de conquistar seu";
+			mes "amor verdadeiro.";
+			next;
+			mes "[Ancião Creek]";
+			mes "....bem, é só isso que posso dizer";
+			mes "a você. Espero que você fique feliz";
+			mes "com essa parcela de sabedoria.";
+			close;
+		case 2:
+			mes "[Ancião Creek]";
+			mes "...sim, todo mundo tem seus próprios";
+			mes "problemas financeiros. No entanto, pense desta forma:";
+			next;
+			mes "[Ancião Creek]";
+			mes "O dinheiro é importante para ganhar";
+			mes "a vida, mas não é tudo o que ela significa.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Alguns podem ter como objetivo de vida";
+			mes "fazer fortunas, mas não acho que seja a maneira mais feliz de viver.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Como você vê, existem pessoas";
+			mes "poderosas neste mundo que podem controlar nossas vidas. Mas, muitas vezes...";
+			next;
+			mes "[Ancião Creek]";
+			mes "Eles são gananciosos demais para estarem nessa";
+			mes "posição e não têm";
+			mes "suas prioridades claras.";
+			mes "Em vez de melhorar o mundo, eles usam seu poder apenas para ajudar a si mesmos.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Se eu fosse eles, não desejaria";
+			mes "governar o mundo dessa maneira.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Você não acha que precisamos de alguém que possa mudar este mundo??";
+			next;
+			mes "[Ancião Creek]";
+			mes ".....peço desculpas por ser de temperamento";
+			mes "curto. Eu só queria que você";
+			mes "soubesse que dinheiro não é tudo. Mas, é algo que você precisa para viver.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Estou ciente de que pessoas gananciosas";
+			mes "ridicularizam essa crença, dizendo";
+			mes "que é um esforço do homem pobre";
+			mes "para proteger seu orgulho.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Mas, ainda acredito que estou certo.";
+			mes "Afinal... eu sou um Sábio.";
+			mes "Espero que você fique feliz com meu sábio conselho.";
+			close;
+		case 3:
+			mes "[Ancião Creek]";
+			mes "Sim, nós sempre precisamos ser";
+			mes "entretidos. Mas... parece que";
+			mes "você pode não ficar satisfeito";
+			mes "com nada.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Trata-se dos vários gostos";
+			mes "e interesses que as pessoas possuem.";
+			mes "Coisas que outras pessoas gostam podem";
+			mes "desagradá-lo. Além disso, se sua";
+			mes "mente não estiver disposta a ser feliz,";
+			mes "você não aproveitará a vida.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Aqui está um exemplo de ter";
+			mes "o estado de espírito correto.";
+			mes "Digamos que estejamos limpando";
+			mes "a rua da cidade,";
+			mes "o que pode ser um trabalho duro e exaustivo...";
+			next;
+			mes "[Ancião Creek]";
+			mes "Você está sempre coberto de poeira.";
+			mes "No verão, seu corpo fica";
+			mes "pegajoso de suor...";
+			mes "No inverno, você estará";
+			mes "lá fora no frio congelante...";
+			next;
+			mes "[Ancião Creek]";
+			mes "No entanto, mesmo assim, será diferente para alguém com uma perspectiva diferente.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Idealmente, deveríamos tentar";
+			mes "encontrar alegria em fazer";
+			mes "outras pessoas felizes.";
+			mes "Ao limpar a rua, podemos";
+			mes "dar aos outros um motivo para sorrir.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Turistas que passam pela";
+			mes "rua podem desfrutar de sua";
+			mes "limpeza...";
+			mes "No geral, isso faz a comunidade inteira parecer boa.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Se seus pais o virem limpando";
+			mes "a rua, eles ficarão orgulhosos de";
+			mes "seu filho.";
+			mes "...Mas agora, acho que estou começando a não fazer sentido.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Oh bem, peço desculpas.";
+			mes "Apenas tente pensar positivamente.";
+			mes "Com a atitude certa, eventualmente você encontrará algo para desfrutar.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Haha~ Eu percebo que você está apenas";
+			mes "clicando no botão 'próximo' nessas";
+			mes "janelas, porque está farto desta conversa com o NPC.";
+			next;
+			mes "[Ancião Creek]";
+			mes "....de qualquer forma, é só isso.";
+			mes "Espero que você fique feliz";
+			mes "com meu sábio conselho.";
+			close;
+		case 4:
+			mes "[Ancião Creek]";
+			mes "Esse é um pensamento angustiante para todo jovem.";
+			mes "Mas você tem muito tempo para pensar sobre o que quer fazer no futuro.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Experimente mais em muitos lugares";
+			mes "diferentes e leia o máximo de livros";
+			mes "que puder. Foque em ampliar sua perspectiva.";
+			next;
+			mes "[Ancião Creek]";
+			mes "Então, você perceberá o que realmente quer fazer.";
+			mes "....isso é tudo o que posso dizer.";
+			mes "Espero que você fique feliz com meu sábio conselho.";
+			close;
+		case 5:
+			mes "[Ancião Creek]";
+			mes "Seu moleque!";
+			next;
+			mes "[Ancião Creek]";
+			mes "Saia da minha frente imediatamente! Eu não falo com lixo!";
+			close2;
+			warp "comodo",196,255;
+			end;
+		}
+	}
+}
+
+moc_ruins,107,62,0	script	Tommy#thai	716,{
+	if (thai_head >= 6 && thai_head <= 11) {
+		switch(thai_head) {
+		case 6:
+			mes "[Tommy]";
+			mes "Wahhhhhh~~~!!";
+			mes "Papai~~ deixa eu ter uma Munak~~~!";
+			mes "Waaaahhhh....";
+			next;
+			mes "[Tommy]";
+			mes "Eu quero minha Munak~~!!";
+			mes "Outras pessoas têm uma, por que eu não posso ter também?!";
+			next;
+			mes "[Tommy]";
+			mes "Munak Munak Munak Munak~~~";
+			next;
+			mes "[Jacob]";
+			mes "Umm..Tommy...";
+			next;
+			mes "[Tommy]";
+			mes "Munak Munak Munak Munak~~~";
+			next;
+			mes "[Jacob]";
+			mes "Tommy, seu papai está meio ocupado agora...";
+			next;
+			mes "[Tommy]";
+			mes "Munak Munak Munak Munak!";
+			next;
+			mes "[Jacob]";
+			mes "Suspiro... tudo bem, tudo bem...";
+			close;
+		case 7:
+			mes "[Tommy]";
+			mes "*chora*...Eu quero uma Munak!....*chora*";
+			mes "Meus amigos todos têm uma Munak, e eu não tenho...";
+			mes "Waaaahhhhh~~";
+			close;
+		case 8:
+			mes "[Tommy]";
+			mes "Papai, eu te odeio!!";
+			mes "Eu odeio todos vocês!!!";
+			next;
+			mes "[Tommy]";
+			mes "Waaaahhh~~~!";
+			mes "Eu não ligo para o que ninguém";
+			mes "está me dizendo! Serei mau porque odeio todos!";
+			close;
+		case 9:
+			mes "[Tommy]";
+			mes "Heh~!";
+			mes "Estou tão feliz~";
+			mes "Nós vamos conseguir uma Munak~!";
+			mes "Heh heh heh~!";
+			close;
+		case 10:
+			mes "[Tommy]";
+			mes "Heh~!";
+			mes "Estou tão feliz~";
+			mes "Nós vamos conseguir uma Munak~!";
+			mes "Heh heh heh~!";
+			close;
+		case 11:
+			mes "[Tommy]";
+			mes "Heh~!";
+			mes "Eu gosto de você~";
+			mes "Porque agora nós vamos";
+			mes "conseguir uma Munak~";
+			mes "Tão feliz! *sorri*";
+			close;
+		}
+	}
+	else if (thai_head > 11) {
+		mes "[Tommy]";
+		mes "Papai... eu não vou te pedir algo que seja difícil demais para você.";
+		next;
+		mes "[Tommy]";
+		mes "Eu vi que você estava ofegante quando fomos buscar uma Munak.";
+		mes "Sinto muito por ter te dado trabalho, papai...";
+		next;
+		mes "[Tommy]";
+		mes "Serei bonzinho de agora em diante.";
+		mes "Serei gentil com meu papai, com você e com qualquer um.";
+		next;
+		mes "[Tommy]";
+		mes "Meu pai me disse que serei uma boa criança se eu não me comportar mal às vezes.";
+		close;
+	}
+	else {
+		mes "[Tommy]";
+		mes "Eu odeio ver meu papai descansando no quarto dele o dia todo nos finais de semana.";
+		mes "Mas estou tão feliz hoje porque meu papai e eu vamos passear juntos!!";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= Official OBB Quest. You can pass it any times you want.
+//= 1.6 Updated, fixed, optimized and translated into English [Lupus]
+//= 1.6a Halved the required items to make an obb, thanks to marquis007 [MasterOfMuppets]
+//============================================================ 

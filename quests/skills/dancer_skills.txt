@@ -1,0 +1,738 @@
+//===== rAthena Script ======================================= 
+//= Dancer Skills Quests
+//===== By: ================================================== 
+//= Lupus, Reddozen
+//===== Current Version: ===================================== 
+//= 1.5
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Quests for skills: Charming Wink
+//===== Additional Comments: ================================= 
+//= 1.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.4a Changed NPC location [Yommy]
+//= 1.5 Replaced effect numerics with constants. [L0ne_W0lf]
+//============================================================
+
+comodo,204,172,5	script	Canell#qsk_dan01	724,{
+	if (BaseJob == Job_Dancer && JobLevel > 39) {
+		if (DANCER_SK == 0) {
+			mes "[Canell]";
+			mes "É bem conhecido que precisamos";
+			mes "ser bonitos para cativar aqueles";
+			mes "que nos assistem dançar. Mas confiar";
+			mes "apenas na nossa aparência externa";
+			mes "é um terrível desperdício do nosso pleno";
+			mes "potencial como artistas.";
+			next;
+			mes "[Canell]";
+			mes "Sim, eu percebo que você";
+			mes "não entende muito bem que";
+			mes "o estado de espírito correto é";
+			mes "um elemento essencial para a verdadeira";
+			mes "beleza. Agora me diga, você está";
+			mes "confiante na sua dança...?";
+			next;
+			if (select("Of course, old crone!:I... I'm not sure...") == 1) {
+				mes "[Canell]";
+				mes "Ho-ho~ Acredito que você";
+				mes "confundiu confiança com";
+				mes "arrogância! Os ingênuos não";
+				mes "conseguem ver que há uma distinção vitalmente importante entre as duas.";
+				mes "Agora... Prepare-se para a punição!";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Ai...!";
+				mes "E-esse chicote!";
+				mes "I-i-isso dooooiii!";
+				specialeffect2 EF_HIT2;
+				percentheal -5,0;
+				close;
+			}
+			mes "[Canell]";
+			mes "A consciência de seus próprios defeitos";
+			mes "e falhas é o primeiro passo crucial";
+			mes "para o aprimoramento.";
+			mes "Contudo, seu óbvio descuido com";
+			mes "o seu dom para a dança é...";
+			mes "motivo para punição!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "O que é isso...? Ai!";
+			mes "P-pare de me ch-chicotear";
+			mes "agora! I-isso arde!";
+			specialeffect2 EF_HIT2;
+			percentheal -10,0;
+			next;
+			mes "[Canell]";
+			mes "Ho-ho~! Felizmente para";
+			mes "você, eu vou te ensinar o que";
+			mes "você deve aprender para superar";
+			mes "suas limitações atuais. Quando";
+			mes "eu terminar com você, anjos e demônios não resistirão aos seus encantos~";
+			next;
+			if (select("No way, you're not teaching me!:Alright, I'll see what I can learn.") == 1) {
+				mes "[Canell]";
+				mes "Então... Você ainda não";
+				mes "dominou a arte refinada de";
+				mes "exalar charme e humildade!";
+				mes "Deve haver consequências";
+				mes "para essa afronta descarada à nossa";
+				mes "profissão! Prepare-se!";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Nãããão--!";
+				mes "Não esse chicote";
+				mes "de novo! Argh, isso é--";
+				mes "Dói demais!";
+				specialeffect2 EF_HIT2;
+				percentheal -10,0;
+				close;
+			}
+			mes "[Canell]";
+			mes "Ho-ho~ É bom que você";
+			mes "reconheça que tem muito";
+			mes "a aprender. Bem, não vamos perder";
+			mes "tempo. Sua primeira lição será sobre treinamento de imagem e autovisualização.";
+			mes "Agora, para isso...";
+			next;
+			mes "[Canell]";
+			mes "...Você deve me trazer";
+			mes "^FF00001 Espelho de Cristal^000000!";
+			mes "Esta ferramenta é imperativa";
+			mes "para a lição, então vá buscá-la";
+			mes "e traga-a para mim rapidamente!";
+			set DANCER_SK,1;
+			close;
+		}
+		else if (DANCER_SK == 1) {
+			if (countitem(747) > 0) {
+				mes "[Canell]";
+				mes "Finalmente, você veio";
+				mes "com o espelho. Agora,";
+				mes "olhe profundamente e examine";
+				mes "seu reflexo. Contemple";
+				mes "cada mancha e defeito, cada";
+				mes "traço charmoso do seu rosto.";
+				next;
+				mes "[Canell]";
+				mes "Nenhum rosto é perfeito, mas";
+				mes "saiba que seu rosto é apenas";
+				mes "seu, e que é o que lhe confere uma beleza que não pode ser de";
+				mes "mais ninguém. Agora, repita";
+				mes "estas verdades depois de mim...";
+				next;
+				mes "[Canell]";
+				mes "''Eu sou bonita...";
+				mes "Eu sou irresistível...''";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Eu sou bonita...";
+				mes "Eu sou irresistível...";
+				next;
+				mes "[Canell Intoxicada]";
+				mes "Mais alto!";
+				mes "Mais sentimento!";
+				mes "''Eu sou bonita!";
+				mes "Eu sou irresistível!";
+				mes "Eu sou a mulher mais atraente";
+				mes "de todo o mundo!''";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Eu sou bonita!";
+				mes "Eu sou irresistível!";
+				mes "Eu sou a mulher mais atraente";
+				mes "de todo o mundo!";
+				specialeffect2 EF_FLASHER;
+				next;
+				mes "^3355FFSua autoestima subiu";
+				mes "às alturas. Felizmente,";
+				mes "você conseguiu evitar";
+				mes "se tornar uma prima donna.^000000";
+				delitem 747,1; //Crystal_Mirror
+				set DANCER_SK,2;
+				close;
+			}
+			else {
+				mes "[Canell Frustrada]";
+				mes "Eu te disse para voltar";
+				mes "aqui sem trazer";
+				mes "^FF00001 Espelho de Cristal^000000!? Agora vá";
+				mes "e pegue-o antes que eu encontre";
+				mes "motivos para te punir!";
+				specialeffect EF_CLAYMORE;
+				close;
+			}
+		}
+		else if (DANCER_SK == 2) {
+			mes "[Canell]";
+			mes "Sim, o primeiro e mais";
+			mes "importante passo para se tornar";
+			mes "bonita é perceber e";
+			mes "aceitar sua própria formosura.";
+			mes "Confiança primeiro, depois beleza.";
+			mes "Nunca o contrário.";
+			next;
+			mes "[Canell]";
+			mes "Agora que você estabeleceu";
+			mes "a atitude correta sobre beleza,";
+			mes "é hora de aprender uma";
+			mes "técnica avançada de - digamos";
+			mes "- sedução. Conheço um";
+			mes "especialista que recomendo fortemente.";
+			next;
+			mes "[Canell]";
+			mes "Vá encontrar minha irmã";
+			mes "na Igreja de Prontera. Se você";
+			mes "mencionar meu nome, ela";
+			mes "deve estar disposta a te";
+			mes "ensinar. Eu mesma faria isso, mas preciso aproveitar meu novo Espelho de Cristal~";
+			next;
+			mes "^3355FFJá era de se esperar que ela";
+			mes "ficasse com o seu espelho.^000000";
+			emotion ET_ANGER, playerattached();
+			set DANCER_SK,3;
+			close;
+		}
+		else if (DANCER_SK > 2 && DANCER_SK < 7) {
+			mes "[Canell]";
+			mes "Ah, que rosto e forma";
+			mes "tão glamourosos. Minha";
+			mes "beleza é incompará--";
+			mes "Oh! É você. Então minha";
+			mes "irmã na Igreja de Prontera";
+			mes "já lhe ensinou algo?";
+			emotion ET_GO;
+			close;
+		}
+		else if (DANCER_SK == 7) {
+			mes "[Canell]";
+			mes "Ah, então você";
+			mes "conseguiu encontrar a Aelle?";
+			mes "Você conseguiu aprender";
+			mes "algo com ela?";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Na verdade, eu só aprendi";
+			mes "sobre piscadas, mas não";
+			mes "tanto sobre como fazê-las.";
+			mes "Ela... Ela ficou bêbada e";
+			mes "não pôde me ensinar mais.";
+			next;
+			mes "[Canell]";
+			mes "Oh, eu deveria saber";
+			mes "que isso aconteceria. Ah,";
+			mes "bem, acho que não há como";
+			mes "evitar agora. Mas você deve";
+			mes "saber que deixar minha irmã";
+			mes "bêbada... é um crime.";
+			next;
+			mes "[Canell]";
+			mes "Pá!";
+			specialeffect2 EF_HIT2;
+			percentheal -5,0;
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "?!";
+			mes "Que diabos";
+			mes "foi isso?";
+			next;
+			mes "[Canell]";
+			mes "Agora, uma verdadeira Odalisca deveria";
+			mes "ser capaz de descobrir o";
+			mes "segredo para piscar por conta";
+			mes "própria. Mas como eu sou uma";
+			mes "mulher tão gentil, vou me";
+			mes "dignar a explicar para você. Ho-ho~";
+			next;
+			mes "^3355FFMulher gentil...?";
+			mes "Mas ela acabou de te bater!";
+			mes "De leve, claro, mas";
+			mes "ainda assim, um tapa é um tapa.^000000";
+			set DANCER_SK,8;
+			close;
+		}
+		else if (DANCER_SK == 8) {
+			mes "[Canell]";
+			mes "Muito bem, o segredo para";
+			mes "piscar corretamente é deixar";
+			mes "sua pálpebra se mover de";
+			mes "forma sedutora num ritmo natural.";
+			mes "Feche seu olho por um segundo, depois abra-o lentamente nesta contagem.";
+			next;
+			mes "[Canell]";
+			mes "Un, deux, trois~";
+			mes "Olhe para mim, faça";
+			mes "assim. Un, deux, trois~";
+			mes "Agora, deixe-me ver você tentar.";
+			emotion ET_BEST;
+			next;
+			switch(select("Un deux trois~-:Un, doux trois~:Un, deux, trois~")) {
+			default:
+				mes "[Canell]";
+				mes "Não, não!";
+				mes "Isso está errado,";
+				mes "completamente errado!";
+				mes "Você não consegue fazer direito?!";
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "A-ai!";
+				mes "P-por favor...!";
+				mes "Não o chicote de novo!";
+				specialeffect2 EF_HIT2;
+				percentheal -5,0;
+				close;
+			case 3:
+				mes "["+ strcharinfo(0) +"]";
+				mes "Un, deux, trois~";
+				emotion ET_BEST, playerattached();
+				specialeffect2 EF_FLASHER;
+				next;
+				mes "[Canell]";
+				mes "Ótimo, é exatamente";
+				mes "assim que se faz. Agora,";
+				mes "não se esqueça, os elementos";
+				mes "de ritmo e naturalidade";
+				mes "são absolutamente essenciais para";
+				mes "esta técnica de sedução.";
+				emotion ET_CHUP;
+				next;
+				mes "[Canell]";
+				mes "Agora que você dominou";
+				mes "a arte de piscar, você";
+				mes "deve saber que não pode";
+				mes "seduzir aqueles que são muito";
+				mes "mais fortes que você. Portanto, suas";
+				mes "piscadas não funcionarão em todos.";
+				next;
+				mes "[Canell]";
+				mes "Claro, minhas piscadas não";
+				mes "têm essa desvantagem. Ho-ho~";
+				mes "De qualquer forma, é hora de nos separarmos agora. Espero que você cresça para";
+				mes "se tornar uma Odalisca mais glamourosa e charmosa nos próximos dias.";
+				emotion ET_SMILE;
+				next;
+				mes "^3355FFVocê finalmente aprendeu";
+				mes "a habilidade Piscada Sedutora.^000000";
+				set DANCER_SK,9;
+				specialeffect2 EF_ABSORBSPIRITS;
+				skill "DC_WINKCHARM",1,SKILL_PERM;
+				close;
+			}
+		}
+		else if (DANCER_SK > 8 && getskilllv("DC_WINKCHARM")) {
+			mes "[Canell]";
+			mes "Hm...?";
+			mes "Há mais alguma coisa";
+			mes "que você queria";
+			mes "me perguntar? Ah, você deve";
+			mes "estar hipnotizado pela minha";
+			mes "beleza, não está?";
+			emotion ET_HNG;
+			next;
+			mes "[Canell]";
+			mes "Oh, ser tão bonita";
+			mes "deve ser um pecado! Eu deveria";
+			mes "trabalhar na Igreja de Prontera,";
+			mes "assim como minha irmã, para";
+			mes "orar por perdão~";
+			close;
+		}
+
+		else if (DANCER_SK == 9 && getskilllv("DC_WINKCHARM") == 0) {
+			mes "[Canell]";
+			mes "Hm? Oh, eu lembro de você!";
+			mes "Uma Musa agora, vejo~ Esse";
+			mes "visual combina com você. Agora, tenho";
+			mes "certeza de que você esqueceu algumas";
+			mes "coisas desde que transcendera,";
+			mes "estou certa? Observe esta piscada...";
+			next;
+			mes "[Canell]";
+			mes "Lembrou agora? Está tudo";
+			mes "no movimento natural, sedutor";
+			mes "e rítmico da";
+			mes "pálpebra. Espero que você use";
+			mes "sua Piscada Sedutora para deixar";
+			mes "sua beleza interior brilhar~";
+			next;
+			mes "^3355FFVocê aprendeu a";
+			mes "habilidade Piscada Sedutora.^000000";
+			specialeffect2 EF_ABSORBSPIRITS;
+			skill "DC_WINKCHARM",1,SKILL_PERM;
+			close;
+		}
+	}
+	else if (BaseJob == Job_Dancer && JobLevel < 40) {
+		mes "[Canell]";
+		mes "Oh, você é uma";
+		mes "garotinha tão adorável! Ah,";
+		mes "me desculpe, mas quando você";
+		mes "se tornar uma dama, digamos,";
+		mes "no Nível de Classe 40, então eu";
+		mes "poderei te ensinar algo~";
+		close;
+	}
+
+	else if (BaseJob != Job_Dancer) {
+		if (Sex == SEX_FEMALE) {
+			mes "[Canell]";
+			mes "Oh, que garotinha";
+			mes "tão fofa~! Com uma";
+			mes "barriguinha tão gordinha,";
+			mes "tão fofinhaaaaa~";
+			close;
+		}
+		else {
+			mes "[Canell]";
+			mes "Olá,";
+			mes "bonitão~";
+			mes "^333333*Pisca~*^000000";
+			emotion ET_CHUP;
+			specialeffect2 EF_VALLENTINE2;
+			next;
+			mes "^3355FFEstranhamente,";
+			mes "a piscada dela fez";
+			mes "seu coração disparar.^000000";
+			close;
+		}
+	}
+}
+
+prontera,183,333,1	script	Aelle#qsk_dan02	79,{
+	if (BaseJob == Job_Dancer) {
+		if (DANCER_SK == 3) {
+			mes "[Aelle]";
+			mes "Psiu, ei! Eu tenho";
+			mes "alguns warps baratos,";
+			mes "porém um pouco ilegais,";
+			mes "para a Masmorra dos Orcs, Glast Heim";
+			mes "e a Cave do Morto. Então,";
+			mes "você quer entrar nessa?";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Na verdade, hum, estou aqui";
+			mes "para procurar alguém.";
+			mes "Você por acaso não";
+			mes "conheceria a irmã da";
+			mes "Canelle, conheceria?";
+			next;
+			mes "[Aelle]";
+			mes "Ah, então minha irmã";
+			mes "metida mandou você, hein?";
+			mes "Eu devia ter imaginado,";
+			mes "julgando pelas suas roupas.";
+			mes "Então você quer se tornar uma";
+			mes "artista mais sedutora, eh?";
+			next;
+			mes "[Aelle]";
+			mes "Awww...";
+			mes "Que decepção.";
+			mes "Então... Você não veio";
+			mes "aqui comprar esses warps?";
+			mes "Tem certeza que não quer nenhum?";
+			set DANCER_SK,4;
+			close;
+		}
+		else if (DANCER_SK == 4) {
+			mes "[Aelle]";
+			mes "Ok, ok...";
+			mes "Então você veio para que eu";
+			mes "te ensine alguma técnica de";
+			mes "sedução ou algo assim, certo?";
+			mes "Hum. Bem, essa aula que eu dou?";
+			mes "É longa e complicada.";
+			next;
+			mes "[Aelle]";
+			mes "Falar e explicar";
+			mes "todos os detalhes intrincados";
+			mes "por tanto tempo vai";
+			mes "com certeza ressecar minha garganta. Então primeiro, você";
+			mes "tem que me trazer uma";
+			mes "bebida refrescante antes de começarmos...";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Oh... Entendo.";
+			mes "Tudo bem, acho que";
+			mes "posso poupar uma poção";
+			mes "ou duas, ou talvez trazer";
+			mes "uma garrafa de suco--";
+			next;
+			mes "[Aelle]";
+			mes "Ei, ei, nada disso!";
+			mes "Eu quero tomar uma";
+			mes "bebida de verdade.";
+			mes "Sabe, algo";
+			mes "mais... ^FF0000Alcoó^000000lico.";
+			next;
+			mes "[Aelle]";
+			mes "Ah, e eu preciso de alguns";
+			mes "petiscos para manter toda";
+			mes "minha energia de ensino! É,";
+			mes "algumas frutas deliciosas em um prato";
+			mes "e alguns biscoitos também!";
+			next;
+			mes "[Aelle]";
+			mes "Entãooo, eu quero comer";
+			mes "^FF00001 Maçã^000000, ^FF00003 Bananas^000000 e";
+			mes "^FF00005 Biscoitos Bem Assados^000000. Ah,";
+			mes "certifique-se de trazer ^FF0000Porcelana^000000";
+			mes "para servi-los, e não";
+			mes "esqueça o ^FF0000Álcool^000000, ok?";
+			next;
+			mes "[Aelle]";
+			mes "Uma última coisa...!";
+			mes "Não deixe ninguém aqui";
+			mes "na igreja saber o que";
+			mes "estamos fazendo. Eu não quero";
+			mes "me meter em muita encrenca!";
+			set DANCER_SK,5;
+			close;
+		}
+		else if (DANCER_SK == 5) {
+			if (countitem(970) > 0 && countitem(512) > 0 && countitem(513) > 2 && countitem(538) > 4 && countitem(736) > 0) {
+				mes "[Aelle]";
+				mes "Ótimo, você trouxe";
+				mes "a comida! É uma sorte";
+				mes "que estou faminta porque";
+				mes "vou terminar tudo!";
+				next;
+				mes "^3355FFAelle devorou a";
+				mes "comida como uma fera";
+				mes "faminta e voraz que";
+				mes "estava privada há muito tempo.^000000";
+				next;
+				mes "[Aelle]";
+				mes "Isso foi tãão bom!";
+				mes "Faz tanto tempo que não";
+				mes "comia tanto! Por outro lado,";
+				mes "você não tem muitas chances";
+				mes "de se empanturrar na igreja.";
+				mes "Ah, é verdade, a lição!";
+				next;
+				mes "[Aelle]";
+				mes "Agora, o gesto mais fácil,";
+				mes "mais sutil e mais atraente";
+				mes "de todos os tempos é a";
+				mes "^FF0000piscadela^000000. Ela já me salvou em momentos";
+				mes "de crise, e dominá-la";
+				mes "vai realçar seus encantos.";
+				next;
+				mes "[Aelle]";
+				mes "Para o olho destreinado,";
+				mes "a piscadela só parece";
+				mes "um movimento simples, certo?";
+				mes "Você fecha um olho e depois";
+				mes "abre de novo. Mas se";
+				mes "você fizer direito... Se você...";
+				next;
+				mes "[Aelle]";
+				mes "Oh, faz tanto tempo";
+				mes "que eu não bebia";
+				mes "tanto assim! Ugh, estou me sentindo";
+				mes "meio... enfim, a-apenas feche";
+				mes "e seus-- ^333333*arroto*^000000 piscar";
+				mes "é tão tão tão tão f-fácil~";
+				next;
+				mes "[Aelle Bêbada]";
+				mes "Faça! Me copie enquanto";
+				mes "eu faço! Pisque, a-apenas";
+				mes "assim, ok? Viu?";
+				mes "^333333*Piiiiiiiiiiiiiisque*^000000";
+				emotion ET_BEST;
+				next;
+				mes "["+ strcharinfo(0) +"]";
+				mes "Nu-nossa...";
+				mes "Isso foi...";
+				mes "É tão lindo!";
+				mes "E tudo apenas com";
+				mes "uma simples piscadela!";
+				next;
+				mes "[Aelle Totalmente Bêbada]";
+				mes "Si-sim... O...";
+				mes "O segredo é...";
+				mes "*Arroto* É no--";
+				mes "Bwahahahaahah!";
+				mes "Está tudo girando!";
+				emotion ET_SMILE;
+				next;
+				mes "^3355FFEm seu estupor embriagado,";
+				mes "Aelle te soca com";
+				mes "seus punhos e ri";
+				mes "maniacamente para si mesma.^000000";
+				percentheal -10,0;
+				specialeffect2 EF_HIT2;
+				emotion ET_THINK, playerattached();
+				delitem 970,1; //Alchol
+				delitem 512,1; //Apple
+				delitem 513,3; //Banana
+				delitem 538,5; //Well_Baked_Cookie
+				delitem 736,1; //White_Platter
+				set DANCER_SK,6;
+				close;
+			}
+			else {
+				mes "[Aelle]";
+				mes "Como você espera que";
+				mes "eu te ensine qualquer coisa";
+				mes "se eu desmaio no meio da";
+				mes "lição? É isso aí,";
+				mes "vou precisar de alguns petiscos";
+				mes "nutritivos, mas deliciosos para comer~";
+				next;
+				mes "[Aelle]";
+				mes "Então, eu quero comer";
+				mes "^FF00001 Maçã^000000, ^FF00003 Bananas^000000 e";
+				mes "^FF00005 Biscoitos Bem Assados^000000. Ah,";
+				mes "certifique-se de trazer ^FF0000Porcelana^000000";
+				mes "para servi-los, e não";
+				mes "esqueça o ^FF0000Álcool^000000, ok?";
+				close;
+			}
+		}
+		else if (DANCER_SK == 6) {
+			mes "["+ strcharinfo(0) +"]";
+			mes "Você ainda não me contou";
+			mes "o segredo de fazer";
+			mes "uma simples piscadela ter tanto";
+			mes "charme provocante.";
+			mes "Eu realmente preciso--";
+			next;
+			mes "[Aelle Totalmente Bêbada]";
+			mes "ZzzZzz... Hã?";
+			mes "Sim, eu sei, eu sou...";
+			mes "Eu sou uma gênia, é...";
+			mes "...ZzzzZzzzZzZzzzZZZzz...";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "A-acorda!";
+			mes "Eu passei por";
+			mes "todo esse trabalho para";
+			mes "aprender essa técnica!";
+			next;
+			mes "[Aelle Irritada]";
+			mes "CALA A BOCA!";
+			mes "EU TO C-COM SONO!";
+			mes "V-vai embora. Fale com";
+			mes "Canell, minha irmã...";
+			mes "...ZzzzzZzZZZzzzZZ....";
+			set DANCER_SK,7;
+			close2;
+			warp "prontera",156,272;
+			end;
+		}
+		else if (DANCER_SK > 6 && DANCER_SK < 8) {
+			mes "["+ strcharinfo(0) +"]";
+			mes "Aelle, eu realmente";
+			mes "preciso que você me ensine";
+			mes "todo o resto";
+			mes "que eu preciso saber sobre";
+			mes "piscar e--";
+			next;
+			mes "[Aelle]";
+			mes "^333333*Soluço*^000000 Zzz--quê?";
+			mes "Eu preciso te ensinar";
+			mes "a ir embora. Fale com minha";
+			mes "irmã, estou muito cansada agora.";
+			mes "Me deixa em paz garota!";
+			close2;
+			warp "prontera",156,272;
+			end;
+		}
+		else if (DANCER_SK > 8) {
+			mes "[Aelle Sóbria]";
+			mes "Ohhh...";
+			mes "D-dor de cabeça...";
+			emotion ET_FRET;
+			next;
+			mes "[Aelle]";
+			mes "Ah, uau, olhe só para você!";
+			mes "Dá para ver que você";
+			mes "ficou muito mais";
+			mes "bonita. Sim, você está";
+			mes "mais elegante e refinada";
+			mes "do que eu consigo me lembrar.";
+			next;
+			mes "[Aelle]";
+			mes "Sempre acredite na sua";
+			mes "beleza, empunhe seu charme";
+			mes "como uma arma... E qualquer coisa";
+			mes "que você desejar neste mundo pode";
+			mes "ser sua! Bwahahahahaha!";
+			close;
+		}
+		else {
+			mes "[Aelle]";
+			mes "Psiu, ei! Eu tenho";
+			mes "alguns warps baratos, mas";
+			mes "levemente ilegais, para o Calabouço";
+			mes "dos Orcs, Glast Heim";
+			mes "e o Poço dos Mortos. Então";
+			mes "você quer entrar nessa?";
+			next;
+			mes "[??????]";
+			mes "Irmã Aelle...";
+			mes "Você ainda está tentando";
+			mes "vender warps ilegais";
+			mes "de novo? Irmã Aelle?";
+			next;
+			mes "[Aelle]";
+			mes "Droga, é o pastor!";
+			mes "Shiii, se alguém te perguntar,";
+			mes "eu não estava fazendo nada!";
+			emotion ET_HUK;
+			next;
+			mes "[Aelle]";
+			mes "Obrigada, querida...";
+			mes "Eu sei que você pode";
+			mes "guardar meu contrabando";
+			mes "como nosso segredinho. ^333333*Piscadela*^000000";
+			emotion ET_BEST;
+			close;
+		}
+	}
+	else {
+		mes "[Aelle]";
+		mes "Psiu, ei! Eu tenho";
+		mes "alguns warps baratos, mas";
+		mes "levemente ilegais, para o Calabouço";
+		mes "dos Orcs, Glast Heim";
+		mes "e o Poço dos Mortos. Então";
+		mes "você quer entrar nessa?";
+		next;
+		mes "[??????]";
+		mes "Irmã Aelle...";
+		mes "Você ainda está tentando";
+		mes "vender warps ilegais";
+		mes "de novo? Irmã Aelle?";
+		next;
+		mes "[Aelle]";
+		mes "Droga, é o pastor!";
+		mes "Shiii, se alguém te perguntar,";
+		mes "eu não estava fazendo nada!";
+		emotion ET_HUK;
+		next;
+		mes "[Aelle]";
+		mes "Obrigada, querida...";
+		mes "Eu sei que você pode";
+		mes "guardar meu contrabando";
+		mes "como nosso segredinho. ^333333*Piscadela*^000000";
+		emotion ET_BEST;
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 for fully working skills only [Lupus]
+//= 1.1 Added more new skill quests for more classes [Lupus]
+//= Somehow eA engine doesn't let you keep learn't skill V_V'
+//= 1.2 Added to correct locations, correct NPC's, fixed
+//= some of the items required and made them into real
+//= quests. [Reddozen] 
+//= 1.3 Fixed bugs and minor typos. Optimized [Lupus]
+//= 1.3a fixed an item ID typo, thx 2Spiritual Kid
+//= 1.3b Splitted into different files [DracoRPG]
+//============================================================

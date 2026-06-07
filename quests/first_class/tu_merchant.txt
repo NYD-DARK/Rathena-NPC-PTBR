@@ -1,0 +1,907 @@
+//===== rAthena Script =======================================
+//= Merchant Class Tutorial and Job Specific Quest
+//===== By: ==================================================
+//= Fix up by Jukka
+//===== Current Version: =====================================
+//= 2.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Merchant training quest.
+//===== Additional Comments: =================================
+//= 1.0 Fully working
+//= 1.1 Fixed bugs, optimized [Lupus]
+//= 1.2 fixed Weight check
+//= 1.2 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.3 Misc. updates. [L0ne_W0lf]
+//= 2.0 Clean-up. [Capuche]
+//============================================================
+
+// Guarnien
+//============================================================
+alberta_in,70,51,5	script	Guarnien	4W_M_02,{
+	mes "[Guarnien]";
+	if(Class != Job_Merchant){
+		mes "Olá, estranho.";
+		mes "Eu gostaria de poder";
+		mes "lhe oferecer ajuda";
+		mes "em suas aventuras...";
+		next;
+		mes "[Guarnien]";
+		mes "No entanto, o que tenho a ensinar só beneficiaria Mercadores. Comércio e ganhar dinheiro são minhas áreas de especialidade. Se tiver amigos Mercadores, mande-os para mim.";
+		if(Class == Job_Merchant_High){
+			next;
+			mes "[Guarnien]";
+			mes "Tecnicamente, sim, você é um Mercador, mas sei reconhecer um especialista quando vejo um. Você já viveu a vida de Mercador antes, eu percebo!";
+		}
+		close;
+	}
+	switch(tu_merchant){
+	case 17:
+		mes "Nem podemos começar";
+		mes "a imaginar o número";
+		mes "de mercados e pessoas";
+		mes "por aí neste amplo,";
+		mes "vasto mundo nosso.";
+		next;
+		mes "[Guarnien]";
+		mes "Todos eles são possíveis clientes e parceiros de negócios. Claro, caberá a você conhecê-los.";
+		mes "Se você puder ser sinceramente gentil com todos que encontrar, você";
+		mes "não terá problemas.";
+		close;
+	case 15:
+	case 16:
+		.@chk_vend = getskilllv("MC_VENDING");
+		if (tu_merchant == 15) {
+			mes "Acredito que é hora";
+			mes "da minha palestra final.";
+			mes "Vou discutir a habilidade";
+			mes "definitiva do Mercador: ^871F78Vending^000000. Por favor, ouça com atenção.";
+			next;
+			mes "[Guarnien]";
+			mes "A habilidade Vending é uma habilidade ativa que permite que você abra sua própria loja onde estiver. Vending permite que você faça negócios reais com outras pessoas.";
+			next;
+			mes "[Guarnien]";
+			mes "No entanto, você só pode vender itens armazenados no seu Carrinho,";
+			mes "então você precisará de um. O preço máximo que você pode definir para";
+			mes "cada item é 99.990.000 Zenys.";
+			next;
+			mes "[Guarnien]";
+			mes "Basicamente, você precisa aprender a habilidade Push Cart primeiro antes de poder aprender a habilidade Vending.";
+			next;
+			mes "[Guarnien]";
+			mes "Quanto maior o nível da habilidade Vending, mais itens você pode vender de uma só vez. Vending é dominado no Nível de Habilidade 10.";
+			next;
+			mes "[Guarnien]";
+			mes "O Vending Nível 1 permite que você";
+			mes "venda um total de 3 itens de uma vez. Cada vez que você aumenta o nível da habilidade Vending, o número total de itens que você pode vender";
+			mes "aumentará em um.";
+			next;
+			mes "[Guarnien]";
+			if((.@chk_vend > 3) && (.@chk_vend < 10)){
+				mes "Mas vejo que você já deve saber disso, hein? Bem, como você é tão esperto, acho que você ganhou este pequeno prêmio~";
+				getexp 186,60;
+			} else if(.@chk_vend == 10){
+				mes "Mas parece que eu acabei falando demais. Desculpe, não notei que você já havia dominado a habilidade Vending...";
+				next;
+				mes "[Guarnien]";
+				mes "Você é um";
+				mes "aluno excelente!";
+				mes "Por favor, aceite esta";
+				mes "pequena recompensa por";
+				mes "todo o seu esforço~";
+				getexp 199,69;
+			} else {
+				mes "Para sua tarefa final, pedirei que aprenda a habilidade Vending até o Nível de Habilidade 4. Claro, quando fizer isso, lhe darei uma pequena recompensa. Estarei esperando, então faça o seu melhor~";
+				tu_merchant = 16;
+				erasequest 8239;
+				setquest 8240;
+				close;
+			}
+			completequest 8239;
+		}
+		else {
+			mes "Então...";
+			mes "Quanto você";
+			mes "já aprendeu";
+			mes "sobre Vending?";
+			next;
+			mes "[Guarnien]";
+			if((.@chk_vend > 3) && (.@chk_vend < 10)){
+				mes "Excelente!";
+				mes "Você aprendeu muito bem. Aqui, você ganhou esta pequena recompensa~";
+				getexp 186,43;
+			} else if(.@chk_vend == 10){
+				mes "Oh, vejo que você leva muito a sério ser um Mercador. Estou orgulhoso de que você conseguiu dominar esta habilidade! Aqui, você merece esta recompensa!";
+				getexp 199,69;
+			} else {
+				mes "Hmm...";
+				mes "Ainda não aprendeu Vending Nível 4, hein? Lembre-se de que ser capaz de vender coisas é uma";
+				mes "das características que definem ser um Mercador!";
+				close;
+			}
+			completequest 8240;
+		}
+		tu_merchant = 17;
+		next;
+		mes "[Guarnien]";
+		mes "Ah, agora você dominou os fundamentos da classe Mercador. Continue praticando os princípios básicos, como pesquisar o mercado pelos preços dos itens, e você ficará bem.";
+		next;
+		mes "[Guarnien]";
+		mes "Embora tudo o que façamos seja por dinheiro, nunca esqueça das necessidades do cliente e venda sempre seus produtos a um preço justo. Caso contrário, ninguém poderá comprar seus bens!";
+		next;
+		mes "[Guarnien]";
+		mes "Bem, não há mais nada que eu possa lhe ensinar por enquanto. Vá para o mundo e deixe sua marca como Mercador.";
+		next;
+		mes "[Guarnien]";
+		mes "E sinta-se à vontade para";
+		mes "me visitar sempre que";
+		mes "tiver vontade.";
+		mes "Boa sorte para você~";
+		close;
+	case 13:
+	case 14:
+		.@chk_cart = getskilllv("MC_PUSHCART");
+		if (tu_merchant == 13) {
+			mes "Agora, falaremos sobre";
+			mes "^871F78Push Cart^000000. Primeiramente, você precisa conhecer o Nível 5 de Aumentar Capacidade de Carga antes de poder aprender a habilidade Push Cart.";
+			next;
+			mes "[Guarnien]";
+			mes "Push Cart pode ser dominado no";
+			mes "Nível de Habilidade 10. Esta habilidade permite que você carregue um Carrinho com você. Você pode carregar um máximo de 100 tipos diferentes de itens que pesem menos de 8.000.";
+			next;
+			mes "[Guarnien]";
+			mes "Como pode ver, esta habilidade é uma forma avançada da habilidade Aumentar Capacidade de Carga. Você pode obter um Carrinho da maioria das Kafra por uma certa taxa.";
+			next;
+			mes "[Guarnien]";
+			mes "Uma vez que tenha alugado um Carrinho, você pode mantê-lo contanto que não o retire. A desvantagem de usar um Carrinho é que sua velocidade de movimento é reduzida a";
+			mes "quase metade! Horrível, não é?";
+			next;
+			mes "[Guarnien]";
+			mes "Felizmente, quando você aumenta";
+			mes "o nível da habilidade Push Cart, sua velocidade de movimento será lentamente restaurada. Com Push Cart nível 10, um Carrinho não irá diminuir";
+			mes "sua velocidade em nada!";
+			next;
+			erasequest 8237;
+			.@chk_cart = getskilllv("MC_PUSHCART");
+			mes "[Guarnien]";
+			if(.@chk_cart > 3 && .@chk_cart < 10){
+				mes "Ah, e vejo que você tem se concentrado em aprender Push Cart. Embora você ainda possa ter um problema com sua velocidade";
+				mes "de movimento, não deve ser grande coisa.";
+				mes "Muito bem~";
+				getexp 162,52;
+			} else if(.@chk_cart == 10){
+				mes "Maravilhoso! Você já";
+				mes "dominou a habilidade Push Cart.";
+				mes "Você realmente merece uma pequena recompensa~";
+				getexp 186,60;
+			} else {
+				mes "Por agora, por que você";
+				mes "não aprende a habilidade";
+				mes "Push Cart até o Nível 4? Depois que";
+				mes "você fizer isso, eu posso passar";
+				mes "para minha próxima palestra.";
+				tu_merchant = 14;
+				setquest 8238;
+				close;
+			}
+			setquest 8239;
+		}
+		else {
+			mes "Então, você";
+			mes "aprendeu Push Cart até";
+			mes "o Nível 4 como pedi?";
+			next;
+			mes "[Guarnien]";
+			if(.@chk_cart > 3 && .@chk_cart < 10){
+				mes "Muito bem~";
+				mes "Você tem sido um aluno muito";
+				mes "cooperativo.";
+				mes "Você merece uma pequena";
+				mes "recompensa pelo seu esforço~";
+				getexp 162,52;
+			} else if(.@chk_cart == 10){
+				mes "Excelente!";
+				mes "Você realmente foi além e dominou a habilidade Push Cart. Ótimo trabalho!";
+				getexp 186,60;
+			} else {
+				mes "Ainda não chegou lá, hein?";
+				mes "Bem, lembre-se de que você precisa";
+				mes "do Nível 5 de Aumentar Capacidade de Carga antes de poder aprender a";
+				mes "habilidade Push Cart. Espero que isso ajude.";
+				close;
+			}
+			erasequest 8238;
+			setquest 8239;
+		}
+		tu_merchant = 15;
+		next;
+		mes "[Guarnien]";
+		mes "Na próxima vez, falarei sobre a habilidade que diferencia os Mercadores de todas as outras classes: ^871F78Vending^000000. Então não perca!";
+		close;
+	case 11:
+	case 12:
+		.@chk_over = getskilllv("MC_OVERCHARGE");
+		if (tu_merchant == 11) {
+			mes "Ah, pronto para";
+			mes "aprender já,";
+			mes "está? Tudo bem,";
+			mes "deixe-me falar sobre";
+			mes "^871F78Over Charge^000000.";
+			next;
+			mes "[Guarnien]";
+			mes "Assim como Desconto, Over Charge é uma habilidade Passiva que pode ser dominada no Nível de Habilidade 10. Portanto, não requer SP para usá-la.";
+			next;
+			mes "[Guarnien]";
+			mes "Over Charge permite que você venda itens para lojas de NPCs por mais Zenys. Quanto maior o seu Nível de Habilidade Over Charge, mais Zenys você receberá pelos itens vendidos aos NPCs.";
+			next;
+			mes "[Guarnien]";
+			erasequest 8235;
+			.@chk_over = getskilllv("MC_OVERCHARGE");
+			if(.@chk_over > 3 && .@chk_over < 10){
+				mes "Ah, você já aprendeu Over Charge Nível 4. Perfeito! Deixe-me lhe dar uma pequena recompensa~";
+				getexp 126,27;
+			} else if(.@chk_over == 10){
+				mes "Incrível! Você já dominou a habilidade Over Charge! Você deve ter desejado muito esta recompensa~";
+				getexp 142,33;
+			} else {
+				mes "Pessoalmente, acho que você definitivamente deveria aprender esta habilidade! Para sua próxima tarefa, aprenda Over Charge até o Nível 4. Não deve ser muito difícil de fazer.";
+				tu_merchant = 12;
+				setquest 8236;
+				next;
+				mes "[Guarnien]";
+				mes "Assim que fizer isso,";
+				mes "podemos conversar sobre";
+				mes "coisas mais avançadas.";
+				mes "Faça o seu melhor~";
+				close;
+			}
+			setquest 8237;
+		}
+		else {
+			mes "Então...";
+			mes "Como está indo";
+			mes "o aprendizado daquela";
+			mes "habilidade ^871F78Over Charge^000000?";
+			next;
+			mes "[Guarnien]";
+			if(.@chk_over > 3 && .@chk_over < 10){
+				mes "Bom trabalho!";
+				mes "Posso dizer que";
+				mes "você fez exatamente";
+				mes "como pedi. Por favor,";
+				mes "aceite esta pequena recompensa~";
+				getexp 126,27;
+			} else if(.@chk_over == 10){
+				mes "Uau...";
+				mes "Você realmente";
+				mes "dominou Over Charge?";
+				mes "Muito impressionante! Você merece uma pequena recompensa pelo seu trabalho!";
+				getexp 142,33;
+			} else {
+				mes "Mm? Você ainda não";
+				mes "aprendeu Over Charge";
+				mes "até o Nível de Habilidade 4?";
+				mes "Não há pressa, mas não poderei dar nenhuma palestra até que você termine esta pequena tarefa.";
+				close;
+			}
+			erasequest 8236;
+			setquest 8237;
+		}
+		tu_merchant = 13;
+		next;
+		mes "[Guarnien]";
+		mes "Na próxima vez, discutirei a";
+		mes "habilidade Push Cart. Esteja pronto para esta palestra, pois Push Cart é uma das habilidades mais importantes para um Mercador.";
+		close;
+	case 10:
+		mes "Deixe-me ver essas";
+		mes "Poções Vermelhas. Agora,";
+		mes "quanto você";
+		mes "pagou por elas...?";
+		next;
+		mes "[Guarnien]";
+		mes "Ah...!";
+		mes "Parece que...";
+		mes "Você foi enganado!";
+		mes "N-não se preocupe, no entanto,";
+		mes "Eu não contarei a ninguém.";
+		next;
+		mes "[Guarnien]";
+		mes "Bem, acontece até com os melhores de nós. Pense nisso apenas como uma experiência de aprendizado inestimável.";
+		next;
+		mes "[Guarnien]";
+		mes "Agora, por que você não vai a Prontera e tenta comprar 10 Poções Vermelhas de um NPC pelo preço mais barato novamente?";
+		tu_merchant = rand(6,8);
+		close;
+	case 9:
+		mes "Deixe-me ver essas";
+		mes "Poções Vermelhas. Ah, parece que você pesquisou o mercado e comprou as mais baratas! Ótimo trabalho!";
+		tu_merchant = 11;
+		changequest 8234,8235;
+		getexp 112,22;
+		next;
+		mes "[Guarnien]";
+		mes "Certo, na próxima vez, falaremos sobre a habilidade que você pode aprender depois de saber como usar Desconto:";
+		mes "^871F78Over Charge^000000.";
+		close;
+	case 6:
+	case 7:
+	case 8:
+		mes "Hmm...";
+		mes "Você encontrará alguns NPCs";
+		mes "vendendo 10 Poções Vermelhas";
+		mes "em Prontera. Sua tarefa";
+		mes "é comprar as poções";
+		mes "pelo preço mais barato.";
+		next;
+		mes "[Guarnien]";
+		mes "Primeiro, você provavelmente vai querer pesquisar o preço de mercado das Poções Vermelhas. E sempre, tome cuidado com golpistas e trapaceiros!";
+		close;
+	case 5:
+		mes "Muito bem...";
+		mes "Pensei um pouco sobre isso e criei um pequeno desafio para você. Traga-me... 10 Poções Vermelhas!";
+		next;
+		mes "[Guarnien]";
+		mes "Não é muito difícil, mas a condição que estou adicionando é que você tem que encontrar o mercador vendendo Poções Vermelhas pelo preço mais barato.";
+		next;
+		mes "[Guarnien]";
+		mes "Então primeiro, você precisará pesquisar o preço de mercado para Poções Vermelhas. Além disso, tome cuidado com golpistas! Se o preço for bom demais para ser verdade, geralmente é.";
+		next;
+		mes "[Guarnien]";
+		mes "Ha ha ha, deixe-me tornar seu objetivo um pouco menos confuso. Você precisará comprar 10 Poções Vermelhas de um NPC em Prontera.";
+		next;
+		mes "[Guarnien]";
+		mes "Prontera é um pouco longe daqui, não é? Vou apenas usar este Teleporte Kafra-- Mahnsoo tem vários por";
+		mes "algum motivo --para enviá-lo para lá agora mesmo. Prepare-se...!";
+		next;
+		tu_merchant = rand(6,8);
+		changequest 8233,8234;
+		warp "prontera",155,46;
+		end;
+	case 3:
+	case 4:
+		.@chk_disc = getskilllv("MC_DISCOUNT");
+		if (tu_merchant == 3) {
+			mes "Ah, você voltou!";
+			mes "Agora, eu ia";
+			mes "falar com você sobre";
+			mes "a habilidade Desconto, certo?";
+			next;
+			mes "[Guarnien]";
+			mes "A habilidade ^871F78Desconto^000000 permite que você compre itens por preços mais baixos em lojas de NPCs. É uma ^871F78Habilidade Passiva^000000 que está sempre em vigor e não consome SP.";
+			next;
+			mes "[Guarnien]";
+			mes "A habilidade Desconto é";
+			mes "dominada no ^871F78Nível 10^000000. Quanto maior o nível da habilidade, menos você tem que pagar por itens em lojas de NPCs.";
+			next;
+			mes "[Guarnien]";
+			if(.@chk_disc > 3 && .@chk_disc < 10){
+				mes "Oooh, bom trabalho.";
+				mes "Vejo que você";
+				mes "aumentou seu Desconto";
+				mes "para o Nível 4 já.";
+				mes "Aqui, aceite esta";
+				mes "pequena recompensa~";
+				getexp 83,11;
+			} else if(.@chk_disc == 10){
+				mes "Incrível!";
+				mes "Você realmente dominou a habilidade Desconto! Você é um ótimo aluno. Você merece um pouco de recompensa!";
+				getexp 97,18;
+			} else {
+				mes "Tudo bem! Agora, para se tornar mais próximo de se tornar um verdadeiro Mercador, quero que você aprenda a habilidade Desconto até o Nível 4.";
+				next;
+				mes "[Guarnien]";
+				mes "Seria melhor se você pudesse";
+				mes "dominá-la, mas talvez você esteja mais interessado em dedicar seu tempo a outras habilidades.";
+				next;
+				mes "[Guarnien]";
+				mes "Ainda assim, você não pode ignorar o fato de que pechinchar é uma habilidade essencial para um Mercador! Volte para mim quando estiver pronto~";
+				tu_merchant = 4;
+				erasequest 8231;
+				setquest 8232;
+				close;
+			}
+			erasequest 8231;
+			setquest 8233;
+		}
+		else {
+			mes "Então, como está indo o aprendizado da habilidade Desconto? Como sempre digo, se você não consegue fazer uma pechincha, não pode ser um Mercador!";
+			next;
+			mes "[Guarnien]";
+			if(.@chk_disc > 3 && .@chk_disc < 10){
+				mes "Ah, você aprendeu";
+				mes "como usar a habilidade Desconto";
+				mes "bem o suficiente. Bom, aqui está uma pequena recompensa pelo seu trabalho duro~";
+				getexp 83,11;
+			} else if(.@chk_disc == 10){
+				mes "Incrível!";
+				mes "Você realmente dominou a habilidade Desconto! Você é um ótimo aluno. Você merece um pouco de recompensa!";
+				getexp 97,18;
+			} else {
+				mes "Ainda não, hein?";
+				mes "Bem, você deve ser capaz de alcançar esse objetivo em breve. Afinal, é um dos fundamentos de ser um Mercador!";
+				close;
+			}
+			erasequest 8232;
+			setquest 8233;
+		}
+		tu_merchant = 5;
+		next;
+		mes "[Guarnien]";
+		mes "Certo, minha próxima lição espero que lhe ofereça um pouco mais de desafio. Volte quando achar que está pronto, certo?";
+		close;
+	case 2:
+		mes "Ah, você voltou para aprender mais. Vamos ver, sobre o que eu ia lhe falar... Certo, Mammonite!";
+		next;
+		mes "[Guarnien]";
+		mes "^871F78Mammonite^000000 é uma habilidade que permite causar grandes danos a alvos com Zenys. Dinheiro é realmente poder!";
+		next;
+		mes "[Guarnien]";
+		mes "O lado bom é que causa um grande dano e usa apenas um pouco de SP. No entanto, o lado ruim é que também consumirá seus Zenys!";
+		next;
+		mes "[Guarnien]";
+		mes "Então, se você usar essa habilidade com muita frequência, pode acabar falindo! Então seja muito cuidadoso. Além disso, à medida que o Nível de Habilidade de Mammonite aumenta, também aumentam a força de ataque e o consumo de Zenys.";
+		next;
+		mes "[Guarnien]";
+		.@chk_mam = getskilllv("MC_MAMMONITE");
+		if(.@chk_mam > 3 && .@chk_mam < 10){
+			mes "Ah, vejo que você já tentou esta habilidade. Quanto dinheiro você desperdiçou usando Mammonite? Não muito, espero.";
+			next;
+			mes "[Guarnien]";
+			mes "Bem, como você ainda é novato, sinto-me terrivelmente mal se você desperdiçou Zenys. Por que você não aceita isto como compensação?";
+			tu_merchant = 3;
+			erasequest 8230;
+			setquest 8231;
+			getexp 70,12;
+			next;
+			mes "[Guarnien]";
+			mes "Ok. Agora acho que estamos prontos para eu discutir a habilidade ^871F78Desconto^000000. Volte quando quiser que eu lhe fale mais sobre isso, ok?";
+			close;
+		} else {
+			mes "Ok. Agora acho que estamos prontos para eu discutir a habilidade ^871F78Desconto^000000. Volte quando quiser que eu lhe fale mais sobre isso, ok?";
+			tu_merchant = 3;
+			erasequest 8230;
+			setquest 8231;
+			close;
+		}
+	case 1:
+		mes "Então...";
+		mes "Você aprendeu a";
+		mes "Aumentar Capacidade de Carga";
+		mes "habilidade até o Nível 4";
+		mes "como pedi?";
+		next;
+		mes "[Guarnien]";
+		.@chk_soji = getskilllv("MC_INCCARRY");
+		if(.@chk_soji > 3 && .@chk_soji < 10){
+			mes "Ah. Posso dizer que sim. Nada mal! A esta altura, você deve ser capaz de aprender a habilidade ^871F78Desconto^000000, mas falarei sobre isso mais tarde.";
+			next;
+			mes "[Guarnien]";
+			mes "Existem algumas outras habilidades básicas que você pode aprender imediatamente sobre as quais falarei primeiro. Não vamos ter pressa~";
+			next;
+			mes "[Guarnien]";
+			mes "Primeiro, há a habilidade ^871F78Avaliar Item^000000. Esta habilidade, uma vez aprendida, permite que você ^871F78identifique itens desconhecidos^000000.";
+			next;
+			mes "[Guarnien]";
+			mes "Esta habilidade funciona exatamente como uma ^871F78Lupa^000000, então você não precisará gastar Zenys com elas. Além disso, esta habilidade é dominada no ^871F78Nível 1^000000.";
+			next;
+			if(getskilllv("MC_IDENTIFY")){
+				mes "[Guarnien]";
+				mes "Vejo em seus olhos que você já aprendeu a avaliar itens. Haha, embora ter esse conhecimento já seja uma recompensa por si só, deixe-me lhe dar algo extra!";
+				tu_merchant = 2;
+				erasequest 8229;
+				setquest 8230;
+				getexp 58,11;
+				getitem 1351,1; //Battle_Axe
+				next;
+				mes "[Guarnien]";
+				mes "Certo, na próxima vez";
+				mes "falarei sobre a habilidade Mammonite. Por agora, deixe-me fazer uma pequena pausa de toda essa palestra árdua. ^666666*Ufa!*^000000";
+				close;
+			}
+		} else {
+			mes "Não? Tudo bem.";
+			mes "Mas não posso lhe ensinar";
+			mes "muito mais se você não consegue compreender estes princípios básicos simples, então corra e aprenda essas habilidades, ok?";
+			close;
+		}
+		mes "Certo, na próxima vez";
+		mes "falarei sobre a habilidade Mammonite. Por agora, deixe-me fazer uma pequena pausa de toda essa palestra árdua. ^666666*Ufa!*^000000";
+		tu_merchant = 2;
+		erasequest 8229;
+		setquest 8230;
+		close;
+	}
+	mes "Você acabou de começar como Mercador, não é? O que acha de aprender os fundamentos dos negócios com um colega experiente?";
+	next;
+	if (select("Sure!:I'll make it on my own!") == 1){
+		if(getskilllv("MC_INCCARRY") < 4){
+			tu_merchant = 1;
+			setquest 8229;
+			mes "[Guarnien]";
+			mes callfunc("F_SexMes","Atta girl~!","Atta boy~!");
+			mes "Mas primeiro as coisas primeiro!";
+			mes "É melhor você aprender a";
+			mes "habilidade ^871F78Aumentar Capacidade de Carga^000000!";
+			next;
+			mes "[Guarnien]";
+			mes "Você não pode ser realmente um Mercador se não conseguir nem carregar mercadorias para vender. À medida que aumenta o nível desta habilidade, você pode carregar mais itens.";
+			next;
+			mes "[Guarnien]";
+			mes "Por que você não aprimora sua";
+			mes "habilidade Aumentar Capacidade de Carga até o Nível 4? Depois disso, podemos conversar mais sobre como se tornar um verdadeiro Mercador.";
+			close;
+		} else {
+			mes "[Guarnien]";
+			mes "Ótimo...!";
+			mes "Ah, e vejo que você aprendeu a habilidade ^871F78Aumentar Capacidade de Carga^000000 pelo menos até o Nível 4. Você é um verdadeiro batalhador, não é?";
+			next;
+			mes "[Guarnien]";
+			mes "Como sua Aumentar";
+			mes "Capacidade de Carga já está alta o suficiente, você deve ser capaz de ver uma nova habilidade na sua Janela de Habilidades: ^871F78Desconto^000000!";
+			next;
+			mes "[Guarnien]";
+			mes "Mas discutiremos a habilidade Desconto mais tarde. Existem algumas outras habilidades básicas que você pode aprender imediatamente sobre as quais falarei primeiro. Não vamos ter pressa~";
+			next;
+			mes "[Guarnien]";
+			mes "Primeiro, há a habilidade ^871F78Avaliar Item^000000. Esta habilidade, uma vez aprendida, permite que você ^871F78identifique itens desconhecidos^000000.";
+			next;
+			mes "[Guarnien]";
+			mes "Esta habilidade funciona exatamente como uma ^871F78Lupa^000000, então você não precisará gastar Zenys com elas. Além disso, esta habilidade é dominada no ^871F78Nível 1^000000.";
+			next;
+			mes "[Guarnien]";
+			if(getskilllv("MC_IDENTIFY")){
+				mes "Vejo em seus olhos que você já aprendeu a avaliar itens. Haha, embora ter esse conhecimento já seja uma recompensa por si só, deixe-me lhe dar algo extra!";
+				tu_merchant = 2;
+				erasequest 8229;
+				setquest 8230;
+				getexp 58,11;
+				getitem 1351,1; //Battle_Axe
+				next;
+				mes "[Guarnien]";
+				mes "Certo, na próxima vez";
+				mes "falarei sobre a habilidade Mammonite. Por agora, deixe-me fazer uma pequena pausa de toda essa palestra árdua. ^666666*Ufa!*^000000";
+				close;
+			}
+			mes "Certo, na próxima vez";
+			mes "falarei sobre a habilidade Mammonite. Por agora, deixe-me fazer uma pequena pausa de todo esse estudo árduo.";
+			next;
+			mes "[Guarnien]";
+			mes "Oh...";
+			mes "E falarei com você";
+			mes "mais sobre a habilidade";
+			mes "Desconto mais tarde. Eu sempre consigo";
+			mes "esquecer disso!";
+			tu_merchant = 2;
+			erasequest 8229;
+			setquest 8230;
+			close;
+		}
+	} else {
+		mes "[Guarnien]";
+		mes "Por conta própria?";
+		mes "Hahaha, esse é o espírito!";
+		mes "Mas ainda assim, o conselho que estou dando é gratuito. Não custaria nada pensar um pouco sobre o que digo.";
+		next;
+		mes "[Guarnien]";
+		mes "Bem, se você mudar de ideia, passe aqui e fale comigo a qualquer momento. E como Mercador, você deve saber que conselho de graça é o melhor!";
+		close;
+	}
+}
+
+// Sagle
+//============================================================
+prontera,66,111,3	script	Sagle	4_KID01,{
+	mes "[Sagle]";
+	if (tu_merchant == 6)
+		callsub L_Potions, 390,9;// <Zeny cost>, <next 'tu_merchant' value>
+	else if (tu_merchant == 7)
+		callsub L_Potions, 410,10;
+	else if (tu_merchant == 8)
+		callsub L_Potions, 420,10;
+	mes "Está na ponta";
+	mes "da minha língua, mas";
+	mes "não consigo me lembrar direito...";
+	next;
+	mes "[Sagle]";
+	mes "Você sabe, o nome da empresa que tem todas aquelas belas moças trabalhando para ela. Ka... Ka-alguma coisa. De qualquer forma, ouvi dizer que elas estão preocupadas com a crescente concorrência.";
+	next;
+	mes "[Sagle]";
+	mes "Não é da minha conta, mas é bom saber o que está acontecendo no";
+	mes "mundo, particularmente se isso afetar os mercados.";
+	close;
+
+L_Potions:
+	.@cost = getarg(0);
+	mes "Olá, olá~";
+	mes "Por que você não compra";
+	mes "algumas Poções Vermelhas?";
+	mes "Elas são essenciais para viagens, e essas Poções Vermelhas são as melhores para aventureiros mais novos~";
+	next;
+	mes "[Sagle]";
+	mes "I will sell you 10 Red Potions for ^871F78"+ .@cost +" zeny^000000. You'd better get them now while they're still here!";
+	next;
+	switch(select("Buy:Cancel")){
+	case 1:
+		mes "[Sagle]";
+		mes "Excelente!";
+		mes "Você certamente tem olho para pechinchas. Aqui está, 10 Poções Vermelhas fresquinhas do... Poceiro...";
+		if(Zeny < .@cost){
+			next;
+			mes "[Sagle]";
+			mes "Uau, espere!";
+			mes "Você não pode pagar";
+			mes "por estas poções...";
+			mes "Por favor, volte";
+			mes "quando tiver Zenys";
+			mes "suficientes, certo?";
+			close;
+		}
+		if(MaxWeight - Weight < 71){
+			next;
+			mes "[Sagle]";
+			mes "Uau, espere!";
+			mes "Não há como você carregar tudo isso! Por que você não coloca algumas de suas coisas no Armazém Kafra antes de voltar?";
+		} else {
+			Zeny = Zeny - .@cost;
+			tu_merchant = getarg(1);
+			getitem 501,10; //Red_Potion
+		}
+		close;
+	case 2:
+		mes "[Sagle]";
+		mes "Muito bem...";
+		mes "Mas não";
+		mes "reclame se";
+		mes "essas poções";
+		mes "estiverem esgotadas!";
+		close;
+	}
+}
+
+// Kellion
+//============================================================
+prontera,93,330,3	script	Kellion	4W_M_01,{
+	mes "[Kellion]";
+	if (tu_merchant == 6)
+		callsub L_Potions, 400,10;// <Zeny cost>, <next 'tu_merchant' value>
+	else if (tu_merchant == 7)
+		callsub L_Potions, 390,9;
+	else if (tu_merchant == 8)
+		callsub L_Potions, 340,10;
+	mes "Recentemente, ouvi dizer que algo";
+	mes "aconteceu com a família real.";
+	next;
+	mes "[Kellion]";
+	mes "Provavelmente nem é um boato confiável, mas ouvi dizer que membros da família real têm morrido de alguma causa desconhecida.";
+	next;
+	mes "[Kellion]";
+	mes "Humm.";
+	mes "Essa sim é uma notícia mórbida!";
+	mes "Bem, espero que não haja verdade nisso de jeito nenhum. Nenhuma mesmo...";
+	close;
+
+L_Potions:
+	.@cost = getarg(0);
+	mes "Estou vendendo conjuntos de";
+	mes "10 Red Potions for "+ .@cost +" Zeny.";
+	mes "Você gostaria de alguns?";
+	next;
+	switch(select("Buy:Cancel")){
+	case 1:
+		mes "[Kellion]";
+		mes "Boa escolha~";
+		mes "Obrigado por";
+		mes "usar minha loja.";
+		if(Zeny < .@cost){
+			next;
+			mes "[Kellion]";
+			mes "Opa!";
+			mes "Sinto muito, mas você não tem Zenys suficientes. Tenho que me manter nos negócios de alguma forma, sabe?";
+			close;
+		}
+		if(MaxWeight - Weight < 71){
+			next;
+			mes "[Kellion]";
+			mes "...Humm?";
+			mes "É melhor você colocar algumas de suas coisas no Armazém Kafra, você não pode carregar muito mais!";
+		} else {
+			Zeny = Zeny - .@cost;
+			tu_merchant = getarg(1);
+			getitem 501,10; //Red_Potion
+		}
+		close;
+	case 2:
+		mes "[Kellion]";
+		mes "Bem, sinto muito";
+		mes "em ouvir isso. Mas";
+		mes "acho que verei";
+		mes "você mais tarde.";
+		close;
+	}
+}
+
+// Aigie
+//============================================================
+prt_in,169,11,3	script	Aigie	4_F_03,{
+	mes "[Aigie]";
+	if (tu_merchant == 6)
+		callsub L_Potions, 340,10;// <Zeny cost>, <next 'tu_merchant' value>
+	else if (tu_merchant == 7)
+		callsub L_Potions, 420,10;
+	else if (tu_merchant == 8)
+		callsub L_Potions, 390,9;
+	mes "É verdade que dinheiro não é tudo. Tenho certeza de que outras coisas são importantes para ser feliz.";
+	next;
+	mes "[Aigie]";
+	mes "No entanto, o dinheiro pode ser muito mais confiável do que algumas pessoas que conheço. Você pode contar com o dinheiro mais do que qualquer outra coisa neste mundo.";
+	close;
+
+L_Potions:
+	.@cost = getarg(0);
+	mes "Bem-vindo à minha loja.";
+	mes "Sou apenas uma jovem vítima das circunstâncias, forçada a vender poções na rua por preços extremamente baratos.";
+	next;
+	mes "[Aigie]";
+	mes "Você gostaria";
+	mes "de comprar 10 Poções Vermelhas";
+	mes "for "+ .@cost +" Zeny, kind adventurer?";
+	next;
+	switch(select("Buy:Cancel")){
+	case 1:
+		mes "[Aigie]";
+		mes "Muito obrigada.";
+		mes "Agora posso finalmente";
+		mes "comprar comida de novo...";
+		if(Zeny < .@cost){
+			next;
+			mes "[Aigie]";
+			mes "Espere, espere!";
+			mes "Sinto muito, mas você não tem dinheiro suficiente. Por favor, você poderia conseguir mais Zenys antes de voltar?";
+			close;
+		}
+		if(MaxWeight - Weight < 71){
+			next;
+			mes "[Aigie]";
+			mes "Espere, espere!";
+			mes "Você não pode carregar mais nenhum item. Por que você não coloca suas coisas no Armazém Kafra primeiro?";
+		} else {
+			Zeny = Zeny - .@cost;
+			tu_merchant = getarg(1);
+			getitem 501,10; //Red_Potion
+		}
+		close;
+	case 2:
+		mes "[Aigie]";
+		mes "Eu entendo.";
+		mes "Mas espero que você";
+		mes "veja que estou lhe";
+		mes "oferecendo um preço muito bom.";
+		mes "^666666*Snif Snif*^000000";
+		close;
+	}
+}
+
+// Jayon
+//============================================================
+prontera,247,129,3	script	Jayon	4_M_03,{
+	mes "[Jayon]";
+	if (tu_merchant == 6)
+		callsub L_Potions, 410,10;// <Zeny cost>, <next 'tu_merchant' value>
+	else if (tu_merchant == 7)
+		callsub L_Potions, 400,10;
+	else if (tu_merchant == 8)
+		callsub L_Potions, 410,10;
+	mes "A República de Schwarzwald...";
+	mes "É um país realmente interessante. Tem Juno e alguns outros lugares que vale a pena conhecer.";
+	next;
+	mes "[Jayon]";
+	mes "Eles podem não ser os melhores lugares";
+	mes "para turismo, mas tenho certeza de que oferecerão algo de interesse para vocês, aventureiros.";
+	close;
+
+L_Potions:
+	.@cost = getarg(0);
+	mes "If you've checked out the market for Red Potions, you know that my price is the best. I'm offering 10 Red Potions for only "+ .@cost +" Zeny!";
+	next;
+	switch(select("Buy:Cancel")){
+	case 1:
+		mes "[Jayon]";
+		mes "Heh heh...!";
+		mes "Parece que";
+		mes "você entende do";
+		mes "assunto. Você é um";
+		mes "Mercador também,";
+		mes "não é?";
+		if(Zeny < .@cost){
+			next;
+			mes "[Jayon]";
+			mes "Mas desculpe amigão.";
+			mes "Regras são regras.";
+			mes "Você tem que pagar meu preço";
+			mes "se você quiser essas poções.";
+			close;
+		}
+		if(MaxWeight - Weight < 71){
+			next;
+			mes "[Jayon]";
+			mes "Mas desculpe amigão. Não posso deixar você carregar mais do que aguenta.";
+			mes "Você deveria liberar algum espaço no seu inventário quando tiver a chance.";
+		} else {
+			Zeny = Zeny - .@cost;
+			tu_merchant = getarg(1);
+			getitem 501,10; //Red_Potion
+		}
+		close;
+	case 2:
+		mes "[Jayon]";
+		mes "Apenas dando uma";
+		mes "olhada, hein?";
+		mes "Eu entendo.";
+		mes "Mas é melhor você aproveitar";
+		mes "um negócio de verdade";
+		mes "quando vir um!";
+		close;
+	}
+}
+
+// Maos
+//============================================================
+prt_in,251,129,3	script	Maos	4_M_SEAMAN,{
+	mes "[Maos]";
+	if (tu_merchant == 6)
+		callsub L_Potions, 400,10;// <Zeny cost>, <next 'tu_merchant' value>
+	else if (tu_merchant == 7)
+		callsub L_Potions, 340,10;
+	else if (tu_merchant == 8)
+		callsub L_Potions, 420,10;
+	mes "Vejo muitas pessoas lutando para juntar cada centavo e colocar tudo em suas economias...";
+	next;
+	mes "[Maos]";
+	mes "Agora, não me entenda mal. É uma boa ideia investir no futuro. Mas dinheiro existe para ser gasto! Aproveite cada momento, é o que eu digo~";
+	next;
+	mes "[Maos]";
+	mes "Além disso...";
+	mes "Você não pode levar";
+	mes "seu dinheiro com você";
+	mes "quando sua hora chegar,";
+	mes "sabe?";
+	close;
+
+L_Potions:
+	.@cost = getarg(0);
+	mes "Não diga nada.";
+	mes "Eu sei o que você quer.";
+	mes "10 Poções Vermelhas, certo?";
+	mes "Eu venderei para você";
+	mes "for the low price of "+ .@cost +" Zeny~";
+	next;
+	switch(select("Buy:Cancel")){
+	case 1:
+		mes "[Maos]";
+		mes "Excelente escolha!";
+		mes "Bons produtos a preços acessíveis! Essa é a minha ética como mercador.";
+		if(Zeny < .@cost){
+			next;
+			mes "[Maos]";
+			mes "Ooh, mas você não tem nem Zenys suficientes para comprar essas poções. Sinto muito, mas não posso vendê-las apenas para perder dinheiro, sabe?";
+			close;
+		}
+		if(MaxWeight - Weight < 71){
+			next;
+			mes "[Maos]";
+			mes "Ooh, mas não parece que você tem espaço de inventário suficiente para carregar mais itens.";
+		} else {
+			Zeny = Zeny - .@cost;
+			tu_merchant = getarg(1);
+			getitem 501,10; //Red_Potion
+		}
+		close;
+	case 2:
+		mes "[Maos]";
+		mes "Bem, não posso forçá-lo a comprar, mas estou lhe dizendo que você está perdendo um verdadeiro negócio!";
+		close;
+	}
+}

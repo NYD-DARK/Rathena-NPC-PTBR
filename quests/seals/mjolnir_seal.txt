@@ -1,0 +1,2793 @@
+//===== rAthena Script ======================================= 
+//= God Item Quest - Mjolnir Seal
+//===== By: ================================================== 
+//= SinSloth
+//===== Current Version: ===================================== 
+//= 1.9
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Quest for breaking the seal of Mjolnir.
+//===== Additional Comments: =================================
+//= 1.0 First version. Thanks to SinSloth for scripting it. [MasterOfMuppets]
+//= 1.1 Fixed wrong label names [Luups]
+//= 1.1a Corrected a a typo error ";;". [Samuray22]
+//= 1.2 Updated several aspects of the script. [L0ne_W0lf]
+//= 1.3 Minor Touchups to quest. [L0ne_W0lf]
+//= 1.4 Optimizing refine method and wrong close2. [Zephyrus]
+//= 1.5 Fixed Trans classes being assigned random reward. [L0ne_W0lf]
+//= 1.6 Fixed checking for Oridecon Hammer. [L0ne_W0lf]
+//=     Corrected Sudi's and player's HP settings.
+//= 1.7 Fixed a copy/paste error in Nordri. [L0ne_W0lf]
+//= 1.8 Fixed item check for Oridecon. [L0ne_W0lf]
+//= 1.8a Added 'disable_items' command. [Euphy]
+//= 1.9 Renewal script update. [Euphy]
+//============================================================
+
+prontera,124,297,3	script	Tialfi	706,{
+	if (checkweight(1301,3) == 0) {
+		mes "- Você está carregando itens demais! -";
+		close;
+	}
+	if ($God3 < $@god_check1) {
+		cutin "god_tialpi01",2;
+		mes "[Tialfi]";
+		mes "Hmmm...";
+		mes "Eu sinto uma força estranha ficando cada vez mais forte em algum lugar de Midgard.";
+		next;
+		mes "[Tialfi]";
+		mes "Você consegue sentir?";
+		mes "Algo deve estar";
+		mes "acontecendo!";
+	}
+	else {
+		if (god_mjo_0 == 11) {
+			cutin "god_tialpi01",2;
+			mes "[Tialfi]";
+			mes "Estou esperando pelo dia em que finalmente verei o trovão de Thor com meus próprios olhos. Acredito que, um dia desses, meu sonho se tornará realidade.";
+		}
+		else if (god_mjo_1 == 2 && god_mjo_2 == 2 && god_mjo_3 == 2 && god_mjo_4 == 2) {
+			if (god_mjo_0 == 10) {
+				if ((countitem(756) > 49) && (countitem(757) > 49)) {
+					set .@gift,0;
+					if (BaseJob == Job_Knight) {
+						set .@gift,1;
+					}
+					else if (BaseJob == Job_Priest) {
+						set .@gift,2;
+					}
+					else if (BaseJob == Job_Wizard){
+						set .@gift,3;
+					}
+					else if (BaseJob == Job_Blacksmith){
+						set .@gift,4;
+					}
+					else if (BaseJob == Job_hunter){
+						set .@gift,5;
+					}
+					else if (BaseJob == Job_Assassin){
+						set .@gift,6;
+					}
+					else if (BaseJob == Job_Crusader){
+						set .@gift,7;
+					}
+					else if (BaseJob == Job_Monk){
+						set .@gift,8;
+					}
+					else if (BaseJob == Job_Sage){
+						set .@gift,9;
+					}
+					else if (BaseJob == Job_Alchemist){
+						set .@gift,10;
+					}
+					else if (BaseJob == Job_Rogue){
+						set .@gift,11;
+					}
+					else if (BaseJob == Job_Bard){
+						set .@gift,12;
+					}
+					else if (BaseJob == Job_Hunter){
+						set .@gift,13;
+					}
+					else {
+						set .@gift,rand(1,13);
+					}
+					cutin "god_tialpi01",2;
+					mes "[Tialfi]";
+					mes "Você voltou!";
+					mes "Em troca dos minérios que você me trouxe, eu lhe darei um dos tesouros da minha família.";
+					next;
+					mes "[Tialfi]";
+					mes "Você tem duas opções ao escolher um tesouro. Você pode escolher um tesouro que seja útil para você, ou algo que possa servir para um de seus amigos.";
+					next;
+					mes "[Tialfi]";
+					mes "Então, qual tesouro";
+					mes "você gostaria de ter?";
+					next;
+					switch(select("An item that I can use.:An item that my friend can use.")) {
+					case 1:
+						mes "[Tialfi]";
+						mes "Entendo...";
+						mes "Dê-me um momento";
+						mes "para encontrar um item";
+						mes "adequado para você.";
+						break;
+					case 2:
+						set .@gift,rand(1,13);
+						mes "[Tialfi]";
+						mes "Entendo...";
+						mes "Dê-me um momento";
+						mes "para encontrar um item";
+						mes "adequado para o seu amigo.";
+						break;
+					}
+					next;
+					mes "[Tialfi]";
+					mes "Certo, vamos ver...";
+					mes "Parece que me lembro de ter colocado em algum lugar por aqui... Hmm.";
+					mes "Deve estar por--Ah!";
+					mes "Aqui está~";
+					next;
+					delitem 756,50; //Oridecon_Stone
+					delitem 757,50; //Elunium_Stone
+					set god_mjo_0,11;
+					if (.@gift == 1) {
+						getitem 1471,1; // Hell_Fire
+					}
+					else if (.@gift == 2) {
+						getitem 1526,1; // Slash
+					}
+					else if (.@gift == 3) {
+						getitem 1231,1; // Bazerald
+					}
+					else if (.@gift == 4) {
+						getitem 1367,1; // Slaughter
+					}
+					else if (.@gift == 5) {
+						getitem 1722,1; // Balistar
+					}
+					else if (.@gift == 6) {
+						getitem 1230,1; // House_Auger
+					}
+					else if (.@gift == 7) {
+						getitem 1141,1; // Immaterial_Sword
+					}
+					else if (.@gift == 8) {
+						getitem 1813,1; // Kaiser_Knuckle
+					}
+					else if (.@gift == 9) {
+						getitem 1557,1; // Book_Of_The_Apocalypse
+					}
+					else if (.@gift == 10) {
+						getitem 1235,1; // Azoth
+					}
+					else if (.@gift == 11) {
+						getitem 1227,1; // Weeder_Knife
+					}
+					else if (.@gift == 12) {
+						getitem 1913,1; // Electronic_Guitar
+					}
+					else if (.@gift == 13) {
+						getitem 1963,1; // Rapture_Rose
+					}
+					else {
+						mes "Ocorreu um erro desconhecido.";
+						close2;
+						cutin "god_tialpi01",255;
+						end;
+					}
+					cutin "god_tialpi01",2;
+					mes "[Tialfi]";
+					mes "Mais uma vez, agradeço pelo esforço que você teve por mim. Não tenho certeza de como isso funciona, mas espero que seja útil para você. Pelo que sei, acredito que este seja um item raro.";
+					next;
+					mes "[Tialfi]";
+					mes "Estarei esperando pelo dia em que verei o trovão de Thor com meus próprios olhos. Acredito que o sonho que tive se tornará realidade, um dia desses.";
+				}
+				else {
+					cutin "god_tialpi01",2;
+					mes "[Tialfi]";
+					mes "Eu preciso de";
+					mes "50 Oridecon Bruto";
+					mes "e 50 Elunium Bruto.";
+					next;
+					mes "[Tialfi]";
+					mes "Não tenho muito tempo, então vá em frente e continue sua jornada se não puder trazê-los para mim.";
+				}
+			}
+			else {
+				if ($God4 >= $@god_check2) {
+					mes "[Tialfi]";
+					mes "Sinto uma energia estranha ficando mais poderosa em algum lugar deste continente...";
+					next;
+					mes "[Tialfi]";
+					mes "Você consegue sentir?";
+					mes "Algo deve estar acontecendo!";
+					next;
+					mes "[Tialfi]";
+					mes "Acho melhor esperarmos para ver o que está acontecendo. Alguém nos trará as notícias. Embora eu não tenha certeza se serão boas ou más notícias...";
+				}
+				else {
+					set $God4,$God4 +1;
+					if ($God4 == $@god_check1)
+						announce "The 4th seal of [Mjolnir] has appeared.",bc_all;
+					else if ($God4 == $@god_check2) {
+						if ($God4 == $@god_check2 && $God2 == $@god_check2 && $God3 == $@god_check2 && $God1 == $@god_check2)
+							announce "Four seals have been released at the same time with the seal of [Mjolnir].",bc_all;
+						else
+							announce "The 4th seal of [Mjolnir] has been released.",bc_all;
+					}
+					set god_mjo_0,10;
+					mes "[Tialfi]";
+					mes "Você conheceu os quatro Ferreiros Anões. Ouvi dizer que eles raramente falam com humanos. Então você deve ser especial se conseguiu conversar com eles.";
+					next;
+					mes "[Tialfi]";
+					mes "Você acha que meu sonho se tornará realidade? Você acredita que o Mjolnir de Thor aparecerá diante dos olhos dos humanos? Receio que uma grande mudança virá a este mundo.";
+					next;
+					mes "[Tialfi]";
+					mes "Obrigado por passar por tantos problemas em meu nome. Desejo lhe dar um dos tesouros da minha família como prova da minha gratidão.";
+					next;
+					mes "[Tialfi]";
+					mes "No entanto, espero que entenda que minha família ficaria desconfiada se um dos tesouros simplesmente desaparecesse.";
+					next;
+					mes "[Tialfi]";
+					mes "Hmm, no entanto, não acho que eles reclamarão se eu trocasse um dos tesouros por outra coisa. Deixe-me pensar...";
+					next;
+					mes "[Tialfi]";
+					mes "Eu poderei lhe dar";
+					mes "uma das relíquias da nossa família se você puder me trazer 50 Oridecons Brutos e 50 Eluniums Brutos.";
+					next;
+					mes "[Tialfi]";
+					mes "Você não precisa fazer isso se não quiser. Mas parece que nossas relíquias de família seriam mais úteis para um aventureiro como você...";
+				}
+			}
+		}
+		else if (god_mjo_1 == 3 || god_mjo_2 == 3 || god_mjo_3 == 3 || god_mjo_4 == 3) {
+			mes "[Tialfi]";
+			mes "Hmm...";
+			mes "Os Ferreiros Anões";
+			mes "devem estar chateados com";
+			mes "você por algum motivo.";
+			next;
+			mes "[Tialfi]";
+			mes "Lembre-se da sugestão";
+			mes "da minha irmã e fale";
+			mes "com eles com muita cortesia.";
+			mes "Escolha cuidadosamente palavras";
+			mes "de respeito para que não";
+			mes "se sintam insultados.";
+			next;
+			set god_mjo_1,0;
+			set god_mjo_2,0;
+			set god_mjo_3,0;
+			set god_mjo_4,0;
+			mes "[Tialfi]";
+			mes "Você deve estar bem agora.";
+			mes "A esta altura, eles provavelmente já esqueceram o insulto. Mas certifique-se de falar com minha irmã para obter conselhos primeiro.";
+		}
+		else if (god_mjo_0 == 2 || god_mjo_0 == 1) {
+			cutin "god_tialpi01",2;
+			mes "[Tialfi]";
+			mes "Desculpe pelo transtorno.";
+			mes "Desejo-lhe boa sorte";
+			mes "em encontrar os Anões!";
+			mes "Só... Não os insulte!";
+		}
+		else if (god_mjo_0 == 0) {
+			if ($God4 >= $@god_check2) {
+				cutin "god_tialpi01",2;
+				mes "[Tialfi]";
+				mes "Sinto uma energia estranha ficando mais poderosa em algum lugar deste continente...";
+				next;
+				mes "[Tialfi]";
+				mes "Você consegue sentir?";
+				mes "Algo deve estar acontecendo!";
+				next;
+				mes "[Tialfi]";
+				mes "Acho melhor esperarmos para ver o que está acontecendo. Alguém nos trará as notícias. Embora eu não tenha certeza se serão boas ou más notícias...";
+				close3;
+			}
+			else if (BaseLevel < 70) {
+				cutin "god_tialpi02",2;
+				mes "[Tialfi]";
+				mes "Supostamente, um dos meus ancestrais foi servo de Thor. Ainda assim, acho difícil de acreditar.";
+				next;
+				mes "[Tialfi]";
+				mes "Se os deuses têm todos esses poderes, como um mero humano poderia ser de alguma ajuda real?";
+			}
+			else {
+				cutin "god_tialpi01",2;
+				mes "[Tialfi]";
+				mes "Ontem à noite, tive o sonho mais incrível onde eu era o servo de Thor, deus do trovão.";
+				next;
+				mes "[Tialfi]";
+				mes "Neste sonho, eu viajei";
+				mes "com Thor para Jotunnheim, a terra dos gigantes. Durante nossa jornada, ele me contou muitas histórias interessantes sobre deuses e heróis.";
+				next;
+				mes "[Tialfi]";
+				mes "Claro, não consigo me lembrar de tudo com clareza, mas foi verdadeiramente fantástico.";
+				next;
+				mes "[Tialfi]";
+				mes "Por alguma razão, consigo recordar vividamente o que Thor me disse sobre sua arma, Mjolnir. Mjolnir é uma obra-prima dos Anões.";
+				next;
+				mes "[Tialfi]";
+				mes "Thor me disse que os Anões são artesãos extremamente talentosos, e seus trabalhos são supremos. Então, enquanto";
+				mes "eu estava pensando no meu sonho,";
+				mes "eu me lembrei...";
+				next;
+				mes "[Tialfi]";
+				mes "Existe uma montanha que";
+				mes "tem o mesmo nome da arma";
+				mes "de Thor. Certamente, as duas têm";
+				mes "alguma relação entre si.";
+				next;
+				mes "[Tialfi]";
+				mes "Recentemente, também ouvi um boato de que Ferreiros Anões também residem no Monte Mjolnir.";
+				mes "Eu entendo que a montanha é perigosa, e que não estou em posição de pedir tal coisa...";
+				next;
+				mes "[Tialfi]";
+				mes "Não posso deixar de querer saber por mim mesmo se há verdade no meu sonho. É possível que o Mjolnir reapareça?";
+				next;
+				mes "[Tialfi]";
+				mes "Se não se importar, eu gostaria de pedir que explore esta montanha e procure por esses Ferreiros Anões.";
+				next;
+				switch(select("No.:Okay.")) {
+				case 1:
+					cutin "god_tialpi02",2;
+					mes "[Tialfi]";
+					mes "Entendo. Mas eu ainda agradeço por você ter tirado um tempo para me ouvir.";
+					mes "Espero que algum dia eu descubra a verdade sobre os meus sonhos e sobre o próprio Mjolnir.";
+					break;
+				case 2:
+					cutin "god_tialpi01",2;
+					mes "[Tialfi]";
+					mes "Obrigado,";
+					mes "muito obrigado!";
+					mes "Embora não vá ser fácil, eu tenho fé que, se os Ferreiros Anões realmente existirem, você será capaz de encontrá-los.";
+					next;
+					mes "[Tialfi]";
+					mes "Ah, e por favor, fale primeiro com minha irmã Roskva. Ela está do lado de fora da Entrada Norte de Prontera.";
+					next;
+					mes "[Tialfi]";
+					mes "Tenho certeza de que ela poderá";
+					mes "lhe dar informações úteis se você tiver a sorte de encontrar os Anões.";
+					next;
+					set god_mjo_0,rand(1,2);
+					mes "[Tialfi]";
+					mes "Tenho muita sorte de conhecer um aventureiro como você. Desejo-lhe a melhor das sortes.";
+				}
+			}
+		}
+		else {
+			cutin "god_tialpi01",2;
+			mes "[Tialfi]";
+			mes "Eu acredito em você.";
+			mes "Apenas tenha coragem!";
+		}
+	}
+	close2;
+	cutin "god_tialpi01",255;
+	end;
+}
+
+prt_fild01,196,47,3	script	Roskva	703,{
+	if (god_mjo_0 == 1) {
+		mes "[Roskva]";
+		mes "Você deve saber que os Ferreiros Anões ficam extremamente ofendidos se você não falar com eles com o máximo de respeito.";
+		next;
+		mes "[Roskva]";
+		mes "Por isso é muito";
+		mes "importante que você";
+		mes "fale com os Anões";
+		mes "o mais educadamente que puder.";
+		mes "O primeiro Anão que você deve visitar";
+		mes "pode ser encontrado ao Leste.";
+		next;
+		mes "[Roskva]";
+		mes "Viaje no sentido horário ao redor de Midgard e procure os outros Anões em ordem. Seu destino final será ao Norte.";
+		next;
+		mes "[Roskva]";
+		mes "Se por acaso você falar com eles na ordem errada, por favor, vá falar com meu irmão Tialfi novamente.";
+		close;
+	}
+	else if (god_mjo_0 == 2) {
+		mes "[Roskva]";
+		mes "Você deve saber que os Ferreiros Anões ficam extremamente ofendidos se você não falar com eles com o máximo de respeito.";
+		next;
+		mes "[Roskva]";
+		mes "Por isso é muito";
+		mes "importante que você";
+		mes "fale com os Anões";
+		mes "o mais educadamente que puder.";
+		mes "O primeiro Anão que você deve visitar";
+		mes "pode ser encontrado ao Norte.";
+		next;
+		mes "[Roskva]";
+		mes "Viaje no sentido anti-horário ao redor de Midgard e procure os outros Anões em ordem. Seu destino final será ao Leste.";
+		next;
+		mes "[Roskva]";
+		mes "Se por acaso você falar com eles na ordem errada, por favor, vá falar com meu irmão Tialfi novamente.";
+		close;
+	}
+	else {
+		mes "[Roskva]";
+		mes "Há muito tempo, muitas pessoas costumavam frequentar esta área. Amigos e famílias viviam aqui, compartilhando felicidade e tristeza.";
+		next;
+		mes "[Roskva]";
+		mes "Mas todos se foram agora. Meus pais e meus amigos foram todos para um lugar cujo nome eu nem sequer conheço.";
+		next;
+		mes "[Roskva]";
+		mes "Não consigo evitar";
+		mes "mas me sinto tão só...";
+		close;
+	}
+}
+
+mjolnir_11,149,247,5	script	Dwarf Blacksmith#east	826,{
+	if ($God3 < $@god_check1) {
+		mes "[Austri]";
+		mes "Algo está acontecendo em algum lugar deste continente. Você pode não acreditar em mim, mas continuo tendo visões do Lobo-Fenrir.";
+		close;
+	}
+	else {
+		if ($God4 >= $@god_check2) {
+			mes "[Austri]";
+			mes "Algo está acontecendo em algum lugar deste continente. Você pode não acreditar em mim, mas continuo tendo visões do Lobo-Fenrir.";
+			close;
+		}
+		else if (god_mjo_0 == 11) {
+			mes "[Austri]";
+			mes "Quando meu povo finalmente recuperar as memórias do seu passado, seremos capazes de conceder o poder dos deuses aos humanos.";
+			next;
+			mes "[Austri]";
+			mes "Acredito que esse";
+			mes "tempo está chegando...";
+			close;
+		}
+		else if (god_mjo_0 == 10) {
+			mes "[Austri]";
+			mes "Hm? Sinto que lhe pediram para fazer um favor para aquele humano. Se eu fosse você, terminaria essa tarefa o mais rápido que pudesse. De alguma forma, o destino daquele humano, assim como o dos Anões, estão entrelaçados...";
+			close;
+		}
+		else if (god_mjo_0 == 1) {
+			if (god_mjo_1 == 3 || god_mjo_2 == 3 || god_mjo_3 == 3 || god_mjo_4 == 3) {
+				mes "[Austri]";
+				mes "O que é isso?! Eu me recuso a falar com um humano tão rude e desprezível";
+				mes "quanto você! Agora, saia da minha frente!";
+				close;
+			}
+			else if (god_mjo_1 == 2) {
+				mes "[Austri]";
+				mes "O quê...?";
+				mes "Não tenho nada";
+				mes "a dizer a você.";
+				close;
+			}
+			else if (god_mjo_2 != 0 || god_mjo_3 != 0 || god_mjo_4 != 0) {
+				mes "[Austri]";
+				mes "Hm...?";
+				mes "Por que você";
+				mes "veio a mim, humano?";
+				next;
+				switch(select("Nothing.:Hey, 'sup!")) {
+				case 1:
+					mes "[Austri]";
+					mes "...";
+					close;
+				case 2:
+					set god_mjo_1,3;
+					mes "[Austri]";
+					mes "O quê...?!";
+					mes "Não cumprimente os";
+					mes "Anões levianamente,";
+					mes "mortal!";
+					close;
+				}
+			}
+			else if (god_mjo_1 == 1) {
+				mes "[Austri]";
+				mes "O que fez";
+				mes "você vir até mim?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Austri]";
+					mes "...";
+					close;
+				case 2:
+					if (countitem(1005) > 0) { //Hammer_Of_Blacksmith 
+						mes "[Austri]";
+						mes "Ah, vejo que nem toda a raça humana é digna de desprezo. Ao contrário de muitos da sua espécie, vejo que você respeita os seus mais velhos.";
+						next;
+						while(1) {
+							if (.@talk_to == 0) {
+								mes "[Austri]";
+								mes "Então, sobre o que";
+								mes "você queria";
+								mes "me perguntar?";
+								next;
+								switch(select("...:About Mjolnir.")) {
+								case 1:
+									set .@talk_not,1;
+									break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 1) {
+								mes "[Austri]";
+								mes "Mjolnir...?";
+								mes "A arma lendária de Thor?";
+								mes "O martelo que pode abalar a terra e rasgar o céu? De todas as armas lendárias, o Mjolnir é talvez a maior.";
+								next;
+								mes "[Austri]";
+								mes "Na verdade, ele foi forjado pelo meu ancestral. Mjolnir era a arma perfeita, exceto por uma pequena falha.";
+								next;
+								mes "[Austri]";
+								mes "O cabo do Mjolnir foi forjado mais curto do que o pretendido. Você ainda está me ouvindo?";
+								next;
+								switch(select("...:Yes, sir!:Huh?")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 2) {
+								mes "[Austri]";
+								mes "Um dia, Loki veio à nossa vila e exibiu seus tesouros. Ele se gabou de que não poderíamos criar nada que superasse a qualidade deles.";
+								next;
+								mes "[Austri]";
+								mes "Francamente, os tesouros dele foram";
+								mes "feitos por outra tribo de Anões, mas não pudemos tolerar seu insulto. Então, meus ancestrais criaram três tesouros próprios.";
+								next;
+								switch(select("...:Boooring!:Oh, wow.")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 3:
+									break;
+								}
+							}
+							else if (.@talk_to == 3) {
+								mes "[Austri]";
+								mes "Dos três tesouros que meus ancestrais criaram, o Mjolnir foi o último e o maior.";
+								next;
+								mes "[Austri]";
+								mes "No entanto, enquanto ele estava sendo criado, uma mosca estranha picou a mão do meu ancestral. Por causa dessa interrupção, o cabo do Mjolnir ficou um pouco defeituoso.";
+								next;
+								mes "[Austri]";
+								mes "É muito triste. Embora o Mjolnir seja a maior arma de todas, ele esteve muito perto de ser o epítome do artesanato.";
+								next;
+								switch(select("...:Epito--what?:Yes sir, I agree.")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 3:
+									break;
+								}
+							}
+							else if (.@talk_to == 4) {
+								mes "[Austri]";
+								mes "Apesar desse pequeno defeito, o Mjolnir ainda é considerado a maior das armas lendárias.";
+								next;
+								mes "[Austri]";
+								mes "Mjolnir era a arma de confiança que Thor empunhava no campo de batalha, e cada gigante temia seu poder.";
+								next;
+								mes "[Austri]";
+								mes "Devo dizer, o maior orgulho de um Ferreiro surge quando ele cria a arma e a armadura que podem ser consideradas a obra de sua vida.";
+								next;
+								switch(select("...:I agree, sir!:Um, yeah.")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 5) {
+								mes "[Austri]";
+								mes "A razão pela qual esta montanha se chama Monte Mjolnir é porque ela foi realmente criada pelo martelo.";
+								next;
+								mes "[Austri]";
+								mes "Em uma batalha contra demônios há mil anos, Thor golpeou a terra com o Mjolnir. O impacto fez o chão se elevar, criando esta montanha.";
+								next;
+								mes "[Austri]";
+								mes "Você pode imaginar apenas";
+								mes "quão poderoso o Mjolnir é.";
+								mes "No entanto, os humanos nunca podem esperar ver ou até mesmo empunhar o Mjolnir. Apenas um deus pode lidar com esse tipo de força.";
+								next;
+								switch(select("...:Wah wah wah~!:Ah, I understand sir!")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 3:
+									break;
+								}
+							}
+							else if (.@talk_to == 6) {
+								mes "[Austri]";
+								mes "Hmm... Mas talvez um anão ambicioso possa forjar algo semelhante ao Mjolnir para que ele possa realmente ser usado por humanos. Teria menos poder, mas seria perfeitamente fabricado.";
+								next;
+								mes "[Austri]";
+								mes "Sim, é possível criar";
+								mes "um Mjolnir adequado para humanos. Ainda assim, não seria muito fácil.";
+								next;
+								switch(select("...:Yes, sir!:Yeah, whatever.")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 7) {
+								mes "[Austri]";
+								mes "Bem, por acaso falei muito mais do que pretendia. Mas espero que você tenha aprendido o que desejava";
+								mes "saber sobre o Mjolnir.";
+								next;
+								mes "[Austri]";
+								mes "Sinto que uma grande mudança está chegando. Não sei que tipo";
+								mes "de efeito isso terá em nosso mundo, mas algo importante acontecerá...";
+								next;
+								mes "[Austri]";
+								mes "Talvez apenas os deuses possam ter";
+								mes "certeza do que o futuro trará. Em todo caso, devemos nos preparar para o que acontecerá.";
+								next;
+								switch(select("...:Yes?:Yes, sir!")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 3:
+									break;
+								}
+							}
+							else if (.@talk_to == 8) {
+								set god_mjo_1,2;
+								mes "[Austri]";
+								mes "Tudo bem então...";
+								mes "Se você deseja aprender mais, deve falar com meus irmãos.";
+								mes "Cuide-se, humano.";
+								close;
+							}
+							if (.@talk_not == 1) {
+								set god_mjo_1,3;
+								mes "[Austri]";
+								mes "Grrr...!";
+								mes "Você não está ouvindo, está?! Que perda de tempo!";
+								next;
+								mes "[Austri]";
+								mes "É por isso que não quero me associar com humanos. Eles sempre me ignoram quando estou falando!";
+								close;
+							}
+							else {
+								set .@talk_to,.@talk_to + 1;
+							}
+						}
+					}
+					else {
+						mes "[Austri]";
+						mes "Você não parece";
+						mes "entender. Se você";
+						mes "deseja provar para mim que entende os ferreiros, deve trazer algo relacionado ao meu trabalho!";
+						close;
+					}
+				}
+			}
+			else if (god_mjo_1 == 0) {
+				mes "[Austri]";
+				mes "O que fez";
+				mes "você vir até mim?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Austri]";
+					mes "...";
+					close;
+				case 2:
+					mes "[Austri]";
+					mes "Um ferreiro respeitável estima suas ferramentas e fabrica com diligência e cuidado.";
+					next;
+					mes "[Austri]";
+					mes "Quando se trata de humanos, acredito que aqueles que conseguem apreciar minha linha de trabalho são os únicos com quem vale a pena conversar.";
+					next;
+					set god_mjo_1,1;
+					mes "[Austri]";
+					mes "Todo bom ferreiro sabe o valor de um bom martelo. Se você puder entender isso, considerarei falar com você.";
+					next;
+					mes "[Austri]";
+					mes "Agora vá, humano.";
+					mes "Desejo-lhe segurança";
+					mes "em suas viagens.";
+					close;
+				}
+			}
+			else {
+				mes "[Austri]";
+				mes "Zzzz Zzzz...";
+				close;
+			}
+		}
+		else if (god_mjo_0 == 2) {
+			if (god_mjo_1 == 3 || god_mjo_2 == 3 || god_mjo_3 == 3 || god_mjo_4 == 3) {
+				mes "[Austri]";
+				mes "O que é?! Recuso-me a falar com um humano tão rude e desprezível";
+				mes "quanto você! Agora, saia da minha frente!";
+				close;
+			}
+			else if (god_mjo_4 == 2) {
+				mes "[Austri]";
+				mes "O que foi...?";
+				mes "Não tenho nada";
+				mes "a dizer a você.";
+				close;
+			}
+			else if (god_mjo_1 == 0 || god_mjo_1 == 1 || god_mjo_2 == 0 || god_mjo_2 == 1 || god_mjo_3 == 0 || god_mjo_3 == 1) {
+				mes "[Austri]";
+				mes "O que fez você vir até mim?";
+				next;
+				switch(select("Nothing.:Hey, sup!")) {
+				case 1:
+					mes "[Austri]";
+					mes "...";
+					close;
+				case 2:
+					set god_mjo_4,3;
+					mes "[Austri]";
+					mes "O quê?!";
+					mes "Saia imediatamente e vá estudar seu inglês adequadamente!";
+					close;
+				}
+			}
+			else if (god_mjo_4 == 1) {
+				mes "[Austri]";
+				mes "O que fez";
+				mes "você vir até mim?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Austri]";
+					mes "...";
+					close;
+				case 2:
+					if (countitem(1005) > 0) {
+						mes "[Austri]";
+						mes "Ah, vejo que toda a raça humana não é digna de desprezo. Ao contrário de muitos de sua espécie, vejo que você respeita os mais velhos.";
+						next;
+						while(1) {
+							if (.@talk_to == 0) {
+								mes "[Austri]";
+								mes "Então, o que você";
+								mes "queria me";
+								mes "perguntar?";
+								next;
+								switch(select("...:About Mjolnir.")) {
+								case 1:
+									set .@talk_not,1;
+									break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 1) {
+								mes "[Austri]";
+								mes "Mjolnir...?";
+								mes "A arma lendária de Thor?";
+								mes "O martelo que pode sacudir a terra e rasgar o céu ao meio? De todas as armas lendárias, o Mjolnir é talvez a maior.";
+								next;
+								mes "[Austri]";
+								mes "Na verdade, ele foi forjado pelo meu ancestral. Mjolnir era a arma perfeita, exceto por um pequeno defeito.";
+								next;
+								mes "[Austri]";
+								mes "O cabo do Mjolnir foi forjado mais curto do que o pretendido. Você ainda está me ouvindo?";
+								next;
+								switch(select("...:Yes, sir!:Huh?")) {
+								default:
+									set .@talk_not,1;
+								break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 2) {
+								mes "[Austri]";
+								mes "Um dia, Loki veio à nossa vila e exibiu seus tesouros. Ele se gabou de que não poderíamos criar algo que superasse a qualidade deles.";
+								next;
+								mes "[Austri]";
+								mes "Francamente, os tesouros dele foram";
+								mes "feitos por outra tribo de Anões, mas não pudemos tolerar o insulto dele. Então, meus ancestrais criaram três tesouros próprios.";
+								next;
+								switch(select("...:Boooring!:Oh, wow.")) {
+								case 1:
+									set .@talk_not,1;
+								break;
+								case 2:
+									set .@talk_not,1;
+								break;
+								case 3:
+								break;
+								}
+							}
+							else if (.@talk_to == 3) {
+								mes "[Austri]";
+								mes "Dos três tesouros que meus ancestrais criaram, o Mjolnir foi o último e o maior.";
+								next;
+								mes "[Austri]";
+								mes "No entanto, enquanto ele era criado, uma mosca estranha picou a mão do meu ancestral. Por causa dessa interrupção, o cabo do Mjolnir ficou um pouco defeituoso.";
+								next;
+								mes "[Austri]";
+								mes "É muito triste. Embora o Mjolnir seja a maior arma de todas, ele esteve muito perto de ser o ápice da perfeição artesanal.";
+								next;
+								switch(select("...:Epito--what?:Yes sir, I agree.")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 3:
+									break;
+								}
+							}
+							else if (.@talk_to == 4) {
+								mes "[Austri]";
+								mes "Apesar desta pequena falha, o Mjolnir ainda é considerado a maior das armas lendárias.";
+								next;
+								mes "[Austri]";
+								mes "O Mjolnir era a arma de confiança que Thor empunhava no campo de batalha, e cada gigante temia seu poder.";
+								next;
+								mes "[Austri]";
+								mes "Devo dizer, o maior orgulho de um Ferreiro vem quando ele cria a arma e a armadura que podem ser consideradas o trabalho de sua vida.";
+								next;
+								switch(select("...:I agree, sir!:Um, yeah.")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 5) {
+								mes "[Austri]";
+								mes "A razão pela qual esta montanha se chama Monte Mjolnir é porque ela foi realmente criada pelo martelo.";
+								next;
+								mes "[Austri]";
+								mes "Em uma batalha contra demônios há mil anos, Thor golpeou a terra com o Mjolnir. O impacto fez o chão se elevar, criando esta montanha.";
+								next;
+								mes "[Austri]";
+								mes "Você pode imaginar o quão";
+								mes "poderoso é o Mjolnir.";
+								mes "No entanto, os humanos nunca podem esperar ver ou até mesmo empunhar o Mjolnir. Apenas um deus pode lidar com esse tipo de força.";
+								next;
+								switch(select("...:Wah wah wah~!:Ah, I understand sir!")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 3:
+									break;
+								}
+							}
+							else if (.@talk_to == 6) {
+								mes "[Austri]";
+								mes "Hum... Mas talvez um anão ambicioso possa forjar algo semelhante ao Mjolnir para que ele possa ser realmente usado por humanos. Teria menos poder, mas seria perfeitamente fabricado.";
+								next;
+								mes "[Austri]";
+								mes "Sim, é possível criar";
+								mes "um Mjolnir adequado para humanos. Ainda assim, não seria muito fácil.";
+								next;
+								switch(select("...:Yes, sir!:Yeah, whatever.")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 2:
+									break;
+								}
+							}
+							else if (.@talk_to == 7) {
+								mes "[Austri]";
+								mes "Bem, acabei falando muito mais do que pretendia. Mas espero que você tenha aprendido o que desejava";
+								mes "saber sobre o Mjolnir.";
+								next;
+								mes "[Austri]";
+								mes "Sinto que uma grande mudança está por vir. Não sei que tipo";
+								mes "de efeito terá em nosso mundo, mas algo importante acontecerá...";
+								next;
+								mes "[Austri]";
+								mes "Talvez apenas os deuses possam ter";
+								mes "certeza do que o futuro trará. Em qualquer caso, devemos nos preparar para o que acontecerá.";
+								next;
+								switch(select("...:Yes?:Yes, sir!")) {
+								default:
+									set .@talk_not,1;
+									break;
+								case 3:
+									break;
+								}
+							}
+							else if (.@talk_to == 8) {
+								set god_mjo_4,2;
+								mes "[Austri]";
+								mes "Tudo bem então...";
+								mes "Cuide-se,";
+								mes "humano.";
+								close;
+							}
+							if (.@talk_not == 1) {
+								set god_mjo_4,3;
+								mes "[Austri]";
+								mes "Grrr...!";
+								mes "Você não está ouvindo, está?! Que perda do meu tempo!";
+								next;
+								mes "[Austri]";
+								mes "É por isso que não quero me associar aos humanos. Eles sempre me ignoram quando estou falando!";
+								close;
+							} else {
+								set .@talk_to,.@talk_to + 1;
+							}
+						}
+					}
+					else {
+						mes "[Austri]";
+						mes "Você não parece";
+						mes "entender. Se você";
+						mes "deseja me provar que entende de ferreiros, deveria trazer algo relacionado ao meu trabalho!";
+						close;
+					}
+				}
+			}
+			else if (god_mjo_4 == 0) {
+				mes "[Austri]";
+				mes "O que fez você vir até mim?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Austri]";
+					mes "...";
+					close;
+				case 2:
+					mes "[Austri]";
+					mes "Um ferreiro respeitável estima suas ferramentas e trabalha com diligência e cuidado.";
+					next;
+					mes "[Austri]";
+					mes "Quando se trata de humanos, acredito que aqueles que conseguem apreciar minha linha de trabalho são os únicos com quem vale a pena conversar.";
+					next;
+					set god_mjo_4,1;
+					mes "[Austri]";
+					mes "Todo bom ferreiro conhece o valor de um bom martelo. Se você puder entender isso, considerarei falar com você.";
+					next;
+					mes "[Austri]";
+					mes "Agora vá, humano.";
+					mes "Desejo-lhe segurança";
+					mes "em suas viagens.";
+					close;
+				}
+			}
+			else {
+				mes "[Austri]";
+				mes "Zzzz Zzzz...";
+				close;
+			}
+		}
+		else if (god_mjo_0 == 0) {
+			mes "[Austri]";
+			mes "Ah...";
+			mes "Parece que hoje será um ótimo dia.";
+			next;
+			mes "[Austri]";
+			mes "Tenho o sol quente, o ar puro da floresta, e meu martelo e bigorna estão prontos. É um dia perfeito para forjar!";
+			close;
+		}
+		else {
+			mes "[Austri]";
+			mes "Zzzz Zzzz...";
+			close;
+		}
+	}
+}
+
+mjolnir_09,209,341,3	script	Dwarf Blacksmith#south	826,{
+	if ($God3 < $@god_check1) {
+		mes "[Sudri]";
+		mes "Eu quero competir";
+		mes "e lutar com oponentes cada vez mais fortes!";
+		next;
+		mes "[Sudri]";
+		mes "Um dia, voltarei para Svartalfaheimr e derrotarei Ivaldi! Mwahahaha!";
+		close;
+	}
+	else {
+		if ($God4 >= $@god_check2) {
+			mes "[Sudri]";
+			mes "Espere, este";
+			mes "não é o momento certo";
+			mes "para lutar...";
+			next;
+			mes "[Sudri]";
+			mes "Algo que estava escondido está prestes a nascer do suor da determinação e das lágrimas do sacrifício. Devemos esperar até lá.";
+			close;
+		}
+		else if (god_mjo_0 == 11) {
+			mes "[Sudri]";
+			mes "Eu quero competir com alguém mais forte!";
+			mes "Serei cada vez mais forte,";
+			mes "um dia, quando eu voltar para Svartalfaheimr";
+			mes "eu derrotarei Ivaldi!";
+			mes "Muhahahaha...!";
+			close;
+		}
+		else if (god_mjo_10 == 10) {
+			mes "[Sudri]";
+			mes "Devo admitir que você é um humano muito forte. Vamos lutar novamente quando tivermos a chance. Da próxima vez, você pode não ter tanta sorte!";
+			close;
+		}
+		else if (god_mjo_0 == 1) {
+			if (god_mjo_1 == 3 || god_mjo_2 == 3 || god_mjo_3 == 3 || god_mjo_4 == 3) {
+				mes "[Sudri]";
+				mes "Volte para onde você pertence antes que eu o espanque até a morte!";
+				next;
+				mes "[Sudri]";
+				mes "Tudo o que você pode ganhar aqui são algumas ervas.";
+				close;
+			}
+			else if (god_mjo_2 == 2) {
+				mes "[Sudri]";
+				mes "Foi uma ótima luta!";
+				mes "Mwahahaha! Estou satisfeito com os resultados. Posso ter perdido, mas lutamos honradamente com tudo o que tínhamos.";
+				close;
+			}
+			else if (god_mjo_1 == 0 || god_mjo_1 == 1 || god_mjo_3 != 0 || god_mjo_4 != 0) {
+				mes "[Sudri]";
+				mes "Então...";
+				mes "O que traz";
+				mes "você aqui?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Sudri]";
+					mes "Você tem muito tempo sobrando. Por que você não desloga e vai sair com seus amigos em vez disso?";
+					close;
+				case 2:
+					set god_mjo_2,3;
+					mes "[Sudri]";
+					mes "Por que eu";
+					mes "deveria te desculpar?";
+					next;
+					mes "[Sudri]";
+					mes "Se há";
+					mes "algo que eu odeio,";
+					mes "é insinceridade e";
+					mes "sarcasmo. O que, você";
+					mes "quer lutar?!";
+					close;
+				}
+			}
+			else if (god_mjo_2 == 1) {
+				set .@n_vit,200;
+				set .@p_vit,100;
+				while(1) {
+					mes "Sudri : " + .@n_vit + " HP";
+					mes "" + strcharinfo(0) + " : " + .@p_vit + " HP";
+					mes "--------------------";
+					mes "" + strcharinfo(0) + "";
+					mes "iniciou";
+					mes "um ataque!";
+					next;
+					switch(select("...?!:Strike Head!:Strike Chest!:Strike Legs!:Take a break.")) {
+					case 1:
+						set .@p_atk,0;
+						break;
+					case 2:
+						set .@p_atk,1;
+						break;
+					case 3:
+						set .@p_atk,2;
+						break;
+					case 4:
+						set .@p_atk,3;
+						break;
+					case 5:
+						set .@p_atk,4;
+						break;
+					}
+					set .@n_def,rand(1,3);
+					set .@damage,rand(15,25);
+					if (.@p_atk == 1) {
+						mes "" + strcharinfo(0) + "";
+						mes "ataca a cabeça de Sudri!";
+					}
+					else if (.@p_atk == 2) {
+						mes "" + strcharinfo(0) + "";
+						mes "ataca o peito de Sudri!";
+					}
+					else if (.@p_atk == 3) {
+						mes "" + strcharinfo(0) + "";
+						mes "mira nas pernas de Sudri!";
+					}
+					else if (.@p_atk == 4) {
+						mes "" + strcharinfo(0) + "";
+						mes "pede uma pausa!";
+					}
+					else {
+						mes "" + strcharinfo(0) + "'s";
+						mes "ponto fraco revelado!";
+					}
+					if (.@p_atk == .@n_def) {
+						specialeffect EF_GUARD;
+						if (.@n_def == 1) {
+							mes "--------------------";
+							mes "Sudri esquiva facilmente";
+							mes "do seu ataque girando";
+							mes "seu corpo pequeno, porém esbelto.";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " misses!";
+						}
+						else if (.@n_def == 2) {
+							mes "--------------------";
+							mes "Sudri bloqueia seu";
+							mes "ataque cruzando";
+							mes "seus braços fortes.";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + "'s attack is blocked!";
+						}
+						else if (.@n_def == 3) {
+							mes "--------------------";
+							mes "Sudri esquiva do seu";
+							mes "ataque com um gracioso";
+							mes "salto para os céus.";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " misses!";
+						}
+					}
+					else if (.@p_atk == 4) {
+						specialeffect2 EF_HEAL;
+						set .@p_vit,.@p_vit + 10;
+						mes "--------------------";
+						mes "" + strcharinfo(0) + "";
+						mes "ganhou 10 de HP!";
+					}
+					else if (.@p_atk == 1) {
+						specialeffect EF_HIT5;
+						set .@n_vit,.@n_vit - .@damage;
+						mes "--------------------";
+						mes "Você atingiu com sucesso";
+						mes "a cabeça de Sudri!";
+						mes "--------------------";
+						mes "Sudri has lost " + .@damage + " HP!";
+					}
+					else if (.@p_atk == 2) {
+						specialeffect EF_HIT2;
+						set .@n_vit,.@n_vit - .@damage;
+						mes "--------------------";
+						mes "Você atingiu com sucesso";
+						mes "o peito de Sudri!";
+						mes "--------------------";
+						mes "Sudri tem";
+						mes "lost " + .@damage + " HP!";
+					}
+					else if (.@p_atk == 3) {
+						specialeffect EF_HIT4;
+						set .@n_vit,.@n_vit - .@damage;
+						mes "--------------------";
+						mes "Você atingiu com sucesso";
+						mes "as pernas de Sudri!";
+						mes "--------------------";
+						mes "Sudri tem";
+						mes "lost " + .@damage + " HP!";
+					}
+					else if (.@p_atk == 0) {
+						specialeffect2 EF_HIT5;
+						set .@p_vit,.@p_vit - 10;
+						mes "--------------------";
+						mes "Você foi atingido pelo";
+						mes "contra-ataque de Sudri!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost 10 HP!";
+						if (.@p_vit < 1) {
+							mes "Derrotado...";
+							next;
+							break;
+						}
+					}
+					else {
+						mes "--------------------";
+						mes "Algo aconteceu";
+						mes "e a luta parou!";
+						close;
+					}
+					if (.@n_vit < 1) {
+						mes "" + strcharinfo(0) + " wins!";
+						next;
+						break;
+					}
+					next;
+					mes "Sudri : " + .@n_vit + " HP";
+					mes "" + strcharinfo(0) + " : " + .@p_vit + " HP";
+					mes "--------------------";
+					mes "Sudri ataca...!";
+					next;
+					switch(select("...?!:Dodge!:Block!:Jump!:Counter back!")) {
+					case 1:
+						set .@p_def,0;
+						break;
+					case 2:
+						set .@p_def,1;
+						break;
+					case 3:
+						set .@p_def,2;
+						break;
+					case 4:
+						set .@p_def,3;
+						break;
+					case 5:
+						set .@p_def,4;
+						break;
+					}
+					set .@n_atk,rand(1,3);
+					set .@damage,rand(20,25);
+					if (.@n_atk == 1) {
+						mes "Sudri mira na cabeça!";
+					}
+					else if (.@n_atk == 2) {
+						mes "Sudri ataca o peito!";
+					}
+					else {
+						mes "Sudri ataca as pernas!";
+					}
+					if (.@n_atk == .@p_def) {
+						specialeffect2 EF_GUARD;
+						if (.@p_def == 1) {
+							mes "--------------------";
+							mes "" + strcharinfo(0) + "";
+							mes "esquivou rapidamente!";
+							mes "Os braços de Sudri eram";
+							mes "muito curtos e ele errou!";
+							mes "--------------------";
+							mes "Sudri falhou no ataque.";
+						}
+						else if (.@p_def == 2) {
+							mes "--------------------";
+							mes "" + strcharinfo(0) + "";
+							mes "bloqueou por pouco";
+							mes "o ataque de Sudri.";
+							mes "--------------------";
+							mes "Sudri falhou no ataque.";
+						}
+						else if (.@p_def == 3) {
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " jumped,";
+							mes "esquivou do ataque de Sudri com facilidade.";
+							mes "--------------------";
+							mes "Sudri falhou no ataque.";
+						}
+					}
+					else if (.@p_def == 4) {
+						set .@count,rand(1,4);
+						mes "--------------------";
+						mes "" + strcharinfo(0) + "";
+						mes "contra-ataca!";
+						if (.@count == 1) {
+							specialeffect2 EF_AUTOCOUNTER;
+							specialeffect EF_MAGNUMBREAK;
+							set .@n_vit,.@n_vit - 20;
+							mes "Você realizou um";
+							mes "contra-ataque com sucesso!";
+							mes "--------------------";
+							mes "Sudri perdeu 20 de HP!";
+							if (.@n_vit < 1) {
+								mes "" + strcharinfo(0) + " won!";
+								next;
+								break;
+							}
+						}
+						else {
+							specialeffect2 EF_CRASHEARTH;
+							set .@p_vit,.@p_vit - 30;
+							mes "Você recebeu";
+							mes "dano crítico";
+							mes "em seu ponto fraco!";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " has lost 30 HP!";
+						}
+					}
+					else if (.@n_atk == 1) {
+						specialeffect2 EF_HIT5;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri atingiu com sucesso";
+						mes "hit " + strcharinfo(0) + "";
+						mes "a cabeça!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else if (.@n_atk == 2) {
+						specialeffect2 EF_HIT2;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri atingiu com sucesso";
+						mes "hit " + strcharinfo(0) + "";
+						mes "o peito!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else if (.@n_atk == 3) {
+						specialeffect2 EF_HIT4;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri atingiu com sucesso";
+						mes "hit " + strcharinfo(0) + "";
+						mes "as pernas!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else if (.@n_atk == 0) {
+						specialeffect2 EF_HIT5;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri atingiu com sucesso";
+						mes "hits "+ strcharinfo(0) +"";
+						mes "durante um momento de";
+						mes "distração!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else {
+						mes "--------------------";
+						mes "Algo aconteceu";
+						mes "e a luta parou!";
+						close;
+					}
+					if (.@p_vit < 1) {
+						mes "Sudri venceu!";
+						next;
+						break;
+					}
+					next;
+				}
+				if (.@p_vit < n_vit) {
+					mes "[Sudri]";
+					mes "Muhahahaha!";
+					mes "Você não é forte o suficiente para me derrotar! Eu quero alguém que possa me oferecer";
+					mes "um desafio!";
+					next;
+					mes "[Sudri]";
+					mes "Vá lá fora, treine um pouco e fique mais forte antes mesmo de pensar em voltar!";
+					close;
+				}
+				else if (.@n_vit < p_vit) {
+					set god_mjo_2,2;
+					mes "[Sudri]";
+					mes "Você é mais forte do que eu. Nunca pensei que encontraria um humano tão forte quanto você.";
+					next;
+					mes "[Sudri]";
+					mes "Estou impressionado! Tudo bem, direi coisas boas sobre você aos meus amigos. Espero que meus irmãos lhe deem a ajuda que você está procurando.";
+					next;
+					mes "[Sudri]";
+					mes "Tudo bem então,";
+					mes "fique em segurança em";
+					mes "suas viagens!";
+					close;
+				}
+			}
+			else if (god_mjo_2 == 0) {
+				mes "[Sudri]";
+				mes "Então...";
+				mes "O que traz";
+				mes "você aqui, humano?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Sudri]";
+					mes "Você tem tempo demais sobrando. Por que não se desloga e sai com seus amigos por um tempo?";
+					close;
+				case 2:
+					mes "[Sudri]";
+					mes "Hã. Você é diferente de outros humanos. Mas ainda assim, confiar em você só porque sabe falar com respeito não é muito sensato.";
+					next;
+					mes "[Sudri]";
+					mes "Se tem algo que eu amo,";
+					mes "é briga de rua com as mãos nuas,";
+					mes "estilo moda antiga.";
+					next;
+					mes "[Sudri]";
+					mes "Palavras podem ser enganosas,";
+					mes "mas se você puder me vencer em";
+					mes "uma luta, acho que eu talvez";
+					mes "fale com você.";
+					mes "Que tal?";
+					next;
+					switch(select("...:Yes, I accept your challenge.:No, I'm scared!")) {
+					case 1:
+						set god_mjo_2,3;
+						mes "[Sudri]";
+						mes "Você nem";
+						mes "me respondeu!";
+						mes "Tudo bem! Tanto faz!";
+						close;
+					case 2:
+						set god_mjo_2,1;
+						mes "[Sudri]";
+						mes "Ah, já gostei de você, humano! Agora por que não vai fazer um aquecimento, e lutaremos quando você estiver pronto.";
+						close;
+					case 3:
+						set god_mjo_2,1;
+						mes "[Sudri]";
+						mes "Hã...?";
+						mes "Por que você está sendo";
+						mes "tão covarde?";
+						mes "Você tem medo";
+						mes "deste velho e minúsculo Anão?";
+						next;
+						mes "[Sudri]";
+						mes "Vamos lá, deixarei até você dar o primeiro golpe. Apenas venha até mim quando estiver pronto para lutar!";
+						close;
+					}
+				}
+			}
+			else {
+				mes "[Sudri]";
+				mes "Zzzz Zzzz...";
+				close;
+			}
+		}
+		else if (god_mjo_0 == 2) {
+			if (god_mjo_1 == 3 || god_mjo_2 == 3 || god_mjo_3 == 3 || god_mjo_4 == 3) {
+				mes "[Sudri]";
+				mes "[Sudri]";
+				mes "Saia daqui antes que eu te espanque até a morte! Tudo o que você pode ganhar por aqui são algumas ervas, de qualquer forma!";
+				close;
+			}
+			else if (god_mjo_3 == 2) {
+				mes "[Sudri]";
+				mes "Essa foi uma ótima luta!";
+				mes "Hahahahahahahahahaah!";
+				mes "Não me arrependo de nada.";
+				mes "Posso ter perdido, mas";
+				mes "dei o meu melhor!";
+				close;
+			}
+			else if (god_mjo_1 == 0 || god_mjo_1 == 1 || god_mjo_2 == 0 || god_mjo_2 == 1 || god_mjo_4 != 0) {
+				mes "[Sudri]";
+				mes "O que fez você vir até mim?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Sudri]";
+					mes "Você tem tempo";
+					mes "demais sobrando.";
+					mes "Por que não se desloga e sai com seus amigos em vez disso?";
+					close;
+				case 2:
+					set god_mjo_3,3;
+					mes "[Sudri]";
+					mes "Por que eu";
+					mes "deveria te desculpar?";
+					mes "Você quer";
+					mes "lutar comigo, hein?";
+					close;
+				}
+			}
+			else if (god_mjo_3 == 1) {
+				mes "[Sudri]";
+				mes "Legal, vamos lutar!";
+				next;
+				set .@n_vit,200;
+				set .@p_vit,100;
+				while(1) {
+					mes "Sudri : " + .@n_vit + " HP";
+					mes "" + strcharinfo(0) + " : " + .@p_vit + " HP";
+					mes "--------------------";
+					mes "" + strcharinfo(0) + "";
+					mes "iniciou";
+					mes "um ataque!";
+					next;
+					switch(select("...?!:Strike Head!:Strike Chest!:Strike Legs!:Take a break.")) {
+					case 1:
+						set .@p_atk,0;
+						break;
+					case 2:
+						set .@p_atk,1;
+						break;
+					case 3:
+						set .@p_atk,2;
+						break;
+					case 4:
+						set .@p_atk,3;
+						break;
+					case 5:
+						set .@p_atk,4;
+						break;
+					}
+					set .@n_def,rand(1,3);
+					set .@damage,rand(15,25);
+					if (.@p_atk == 1) {
+						mes "" + strcharinfo(0) + "";
+						mes "ataca a cabeça de Sudri!";
+					}
+					else if (.@p_atk == 2) {
+						mes "" + strcharinfo(0) + "";
+						mes "atinge o peito de Sudri!";
+					}
+					else if (.@p_atk == 3) {
+						mes "" + strcharinfo(0) + "";
+						mes "mira nas pernas de Sudri!";
+					}
+					else if (.@p_atk == 4) {
+						mes "" + strcharinfo(0) + "";
+						mes "pede uma pausa!";
+					}
+					else {
+						mes "" + strcharinfo(0) + "'s";
+						mes "ponto fraco revelado!";
+					}
+					if (.@p_atk == .@n_def) {
+						specialeffect EF_GUARD;
+						if (.@n_def == 1) {
+							mes "--------------------";
+							mes "Sudri esquiva facilmente";
+							mes "do seu ataque torcendo";
+							mes "seu corpo pequeno, mas esbelto.";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " misses!";
+						}
+						else if (.@n_def == 2) {
+							mes "--------------------";
+							mes "Sudri bloqueia seu";
+							mes "ataque cruzando";
+							mes "seus braços robustos.";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + "'s attack is blocked!";
+						}
+						else if (.@n_def == 3) {
+							mes "--------------------";
+							mes "Sudri esquiva do seu";
+							mes "ataque com um salto";
+							mes "gracioso para os céus.";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " misses!";
+						}
+					}
+					else if (.@p_atk == 4) {
+						specialeffect2 EF_HEAL;
+						set .@p_vit,.@p_vit + 10;
+						mes "--------------------";
+						mes "" + strcharinfo(0) + "";
+						mes "ganhou 10 HP!";
+					}
+					else if (.@p_atk == 1) {
+						specialeffect EF_HIT5;
+						set .@n_vit,.@n_vit - .@damage;
+						mes "--------------------";
+						mes "Você atingiu com sucesso";
+						mes "a cabeça de Sudri!";
+						mes "--------------------";
+						mes "Sudri has lost " + .@damage + " HP!";
+					}
+					else if (.@p_atk == 2) {
+						specialeffect EF_HIT2;
+						set .@n_vit,.@n_vit - .@damage;
+						mes "--------------------";
+						mes "Você atingiu com sucesso";
+						mes "o peito de Sudri!";
+						mes "--------------------";
+						mes "Sudri tem";
+						mes "lost " + .@damage + " HP!";
+					}
+					else if (.@p_atk == 3) {
+						specialeffect EF_HIT4;
+						set .@n_vit,.@n_vit - .@damage;
+						mes "--------------------";
+						mes "Você atingiu com sucesso";
+						mes "as pernas de Sudri!";
+						mes "--------------------";
+						mes "Sudri tem";
+						mes "lost " + .@damage + " HP!";
+					}
+					else if (.@p_atk == 0) {
+						specialeffect2 EF_HIT5;
+						set .@p_vit,.@p_vit - 10;
+						mes "--------------------";
+						mes "Você foi atingido pelo";
+						mes "contra-ataque de Sudri!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost 10 HP!";
+						if (.@p_vit < 1) {
+							mes "Derrotado...";
+							next;
+							break;
+						}
+					}
+					else {
+						mes "--------------------";
+						mes "Algo aconteceu";
+						mes "e a luta parou!";
+						close;
+					}
+					if (.@n_vit < 1) {
+						mes "" + strcharinfo(0) + " wins!";
+						next;
+						break;
+					}
+					next;
+					mes "Sudri : " + .@n_vit + " HP";
+					mes "" + strcharinfo(0) + " : " + .@p_vit + " HP";
+					mes "--------------------";
+					mes "Sudri ataca...!";
+					next;
+					switch(select("...?!:Dodge!:Block!:Jump!:Counter back!")) {
+					case 1:
+						set .@p_def,0;
+						break;
+					case 2:
+						set .@p_def,1;
+						break;
+					case 3:
+						set .@p_def,2;
+						break;
+					case 4:
+						set .@p_def,3;
+						break;
+					case 5:
+						set .@p_def,4;
+						break;
+					}
+					set .@n_atk,rand(1,3);
+					set .@damage,rand(20,25);
+					if (.@n_atk == 1) {
+						mes "Sudri mira na cabeça!";
+					}
+					else if (.@n_atk == 2) {
+						mes "Sudri ataca o peito!";
+					}
+					else {
+						mes "Sudri ataca as pernas!";
+					}
+					if (.@n_atk == .@p_def) {
+						specialeffect2 EF_GUARD;
+						if (.@p_def == 1) {
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " quickly dodged,";
+							mes "Os braços de Sudri eram";
+							mes "curtos demais para te alcançar.";
+							mes "--------------------";
+							mes "Sudri falhou no ataque.";
+						}
+						else if (.@p_def == 2) {
+							mes "--------------------";
+							mes "" + strcharinfo(0) + "";
+							mes "bloqueou por pouco";
+							mes "o ataque de Sudri.";
+							mes "--------------------";
+							mes "Sudri falhou no ataque.";
+						}
+						else if (.@p_def == 3) {
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " jumped,";
+							mes "esquivou-se do ataque de Sudri com facilidade.";
+							mes "--------------------";
+							mes "Sudri falhou no ataque.";
+						}
+					}
+					else if (.@p_def == 4) {
+						set .@count,rand(1,4);
+						mes "--------------------";
+						mes "" + strcharinfo(0) + "";
+						mes "contra-ataca!";
+						if (.@count == 1) {
+							specialeffect2 EF_AUTOCOUNTER;
+							specialeffect EF_MAGNUMBREAK;
+							set .@n_vit,.@n_vit - 20;
+							mes "Você contra-atacou";
+							mes "com sucesso!";
+							mes "--------------------";
+							mes "Sudri perdeu 20 HP!";
+							if (.@n_vit < 1) {
+								mes "" + strcharinfo(0) + " won!";
+								next;
+								break;
+							}
+						}
+						else {
+							specialeffect2 EF_CRASHEARTH;
+							set .@p_vit,.@p_vit - 30;
+							mes "Você recebeu";
+							mes "dano crítico";
+							mes "no seu ponto fraco!";
+							mes "--------------------";
+							mes "" + strcharinfo(0) + " has lost 30 HP!";
+						}
+					}
+					else if (.@n_atk == 1) {
+						specialeffect2 EF_HIT5;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri acertou";
+						mes "hit " + strcharinfo(0) + "";
+						mes "na cabeça com sucesso!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else if (.@n_atk == 2) {
+						specialeffect2 EF_HIT2;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri acertou";
+						mes "hit " + strcharinfo(0) + "";
+						mes "no peito com sucesso!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else if (.@n_atk == 3) {
+						specialeffect2 EF_HIT4;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri acertou";
+						mes "hit " + strcharinfo(0) + "";
+						mes "nas pernas com sucesso!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else if (.@n_atk == 0) {
+						specialeffect2 EF_HIT5;
+						set .@p_vit,.@p_vit - .@damage;
+						mes "--------------------";
+						mes "Sudri acertou com sucesso";
+						mes "hits "+ strcharinfo(0) +"";
+						mes "durante um momento de";
+						mes "distração!";
+						mes "--------------------";
+						mes "" + strcharinfo(0) + " has lost " + .@damage + " HP!";
+					}
+					else {
+						mes "--------------------";
+						mes "Algo aconteceu";
+						mes "e a luta parou!";
+						close;
+					}
+					if (.@p_vit < 1) {
+						mes "Sudri venceu!";
+						next;
+						break;
+					}
+					next;
+				}
+				if (.@p_vit < .@n_vit) {
+					mes "[Sudri]";
+					mes "Muhahahaha!";
+					mes "Você não é forte o suficiente para me vencer! Eu quero alguém que possa me";
+					mes "oferecer um desafio!";
+					next;
+					mes "[Sudri]";
+					mes "Vá lá fora, treine um pouco e fique mais forte antes mesmo de pensar em voltar!";
+					close;
+				}
+				else if (.@n_vit < .@p_vit) {
+					set god_mjo_3,2;
+					mes "[Sudri]";
+					mes "Você é mais forte do que eu. Eu nunca pensei que encontraria um humano tão forte quanto você.";
+					next;
+					mes "[Sudri]";
+					mes "Estou impressionado! Tudo bem, direi boas coisas sobre você aos meus amigos. Espero que meus irmãos lhe deem a ajuda que você está procurando.";
+					next;
+					mes "[Sudri]";
+					mes "Tudo bem então,";
+					mes "fique seguro em";
+					mes "suas viagens!";
+					close;
+				}
+			}
+			else if (god_mjo_3 == 0) {
+				mes "[Sudri]";
+				mes "O que te trouxe até mim?";
+				next;
+				switch(select("Nothing.:Excuse me, sir.")) {
+				case 1:
+					mes "[Sudri]";
+					mes "Você tem tempo";
+					mes "demais sobrando.";
+					mes "Por que você não desloga e sai com seus amigos em vez disso?";
+					close2;
+				case 2:
+					mes "[Sudri]";
+					mes "Huh. Você é diferente dos outros humanos. Mas, ainda assim, confiar em você só porque sabe falar com respeito não é muito sensato.";
+					next;
+					mes "[Sudri]";
+					mes "Se há algo que eu amo,";
+					mes "é briga de punhos limpos,";
+					mes "no estilo clássico.";
+					next;
+					mes "[Sudri]";
+					mes "Palavras podem enganar,";
+					mes "mas se você puder me vencer em";
+					mes "uma luta, acho que eu";
+					mes "poderia falar com você.";
+					mes "Que tal?";
+					next;
+					switch(select("...:Yes, I accept your challenge.:No, I'm scared!")) {
+					case 1:
+						set god_mjo_3,3;
+						mes "[Sudri]";
+						mes "Você nem";
+						mes "me respondeu!";
+						mes "Tudo bem! Tanto faz!";
+						close;
+					case 2:
+						set god_mjo_3,1;
+						mes "[Sudri]";
+						mes "Ah, já gostei de você, humano! Agora por que você não vai fazer um aquecimento? Lutaremos quando você estiver pronto.";
+						close;
+					case 3:
+						set god_mjo_3,1;
+						mes "[Sudri]";
+						mes "Eh...?";
+						mes "Por que você está sendo";
+						mes "tão covarde?";
+						mes "Você está com medo";
+						mes "deste anão velho e minúsculo?";
+						next;
+						mes "[Sudri]";
+						mes "Vamos lá, eu até deixo você dar o primeiro golpe. Apenas venha até mim quando estiver pronto para lutar!";
+						close;
+					}
+				}
+			}
+			else {
+				mes "[Sudri]";
+				mes "Zzzz Zzzz...";
+				close;
+			}
+		}
+		else if (god_mjo_0 == 0) {
+			mes "[Sudri]";
+			mes "Em uma luta um contra um, você coloca tudo em jogo para mostrar seu poder ao seu oponente.";
+			next;
+			mes "[Sudri]";
+			mes "Você já se sentiu da mesma forma que eu, humano? Ganhando ou perdendo, apenas dar o seu melhor é a conquista mais satisfatória.";
+			close;
+		}
+		else {
+			mes "[Sudri]";
+			mes "Zzzz Zzzz...";
+			close;
+		}
+	}
+}
+
+mjolnir_01,35,136,7	script	Dwarf Blacksmith#west	826,{
+	if ($God3 < $@god_check1) {
+		mes "[Vestri]";
+		mes "Se você quer algo, deve conquistá-lo através dos seus próprios esforços.";
+		next;
+		mes "[Vestri]";
+		mes "Não importa o que os outros digam, se você estiver confiante e sua vontade for inabalável, você sempre ficará satisfeito com os resultados.";
+		next;
+		mes "[Vestri]";
+		mes "O que você acha?";
+		mes "Crianças de hoje em dia...";
+		close;
+	}
+	else {
+		if ($God4 >= $@god_check2) {
+			mes "[Vestri]";
+			mes "Eu não sinto";
+			mes "vontade de fazer nada";
+			mes "hoje. Absolutamente nada...";
+			next;
+			mes "[Vestri]";
+			mes "Alguém deve ter forjado algo realmente monstruoso, caso contrário eu não estaria me sentindo tão inútil!";
+			next;
+			mes "[Vestri]";
+			mes "Sim, acho que preciso de uma folga! Você não acha que eu preciso de uma folga, humano?";
+			close;
+		}
+		else if (god_mjo_0 == 11) {
+			mes "[Vestri]";
+			mes "Não há nada como fazer uma pausa relaxante depois de colocar seu coração em seu trabalho.";
+			next;
+			mes "[Vestri]";
+			mes "O que você acha,";
+			mes "humano? Esse não é um";
+			mes "dos prazeres simples da vida?";
+			close;
+		}
+		else if (god_mjo_0 == 10) {
+			mes "[Vestri]";
+			mes "Se você quer algo, deve conquistá-lo através dos seus próprios esforços.";
+			next;
+			mes "[Vestri]";
+			mes "Não importa o que os outros digam, se você estiver confiante e sua vontade for inabalável, você sempre ficará satisfeito com os resultados.";
+			next;
+			mes "[Vestri]";
+			mes "O que você acha?";
+			mes "Crianças de hoje em dia...";
+			close;
+		}
+		else if (god_mjo_0 == 1) {
+			if (god_mjo_1 == 3 || god_mjo_2 == 3 || god_mjo_3 == 3 || god_mjo_4 == 3) {
+				mes "[Vestri]";
+				mes "Eu realmente espero encontrar um ser humano decente da próxima vez. Até agora, não encontrei um humano útil.";
+				close;
+			}
+			else if (god_mjo_3 == 2) {
+				mes "[Vestri]";
+				mes "Uma preparação perfeita nem sempre resulta em sucesso. Chega um ponto em que você simplesmente tem que ir lá e fazer.";
+				next;
+				mes "[Vestri]";
+				mes "Eu não sei quão";
+				mes "grandes são seus objetivos,";
+				mes "mas coloque seu coração em";
+				mes "qualquer coisa que você";
+				mes "planeje realizar na vida.";
+				close;
+			}
+			else if (god_mjo_1 == 0 || god_mjo_1 == 1 || god_mjo_2 == 0 || god_mjo_2 == 1 || god_mjo_4 != 0) {
+				mes "[Vestri]";
+				mes "O que você quer?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Vestri]";
+					mes "Se você quer algo, deve conquistá-lo através dos seus próprios esforços.";
+					next;
+					mes "[Vestri]";
+					mes "Não importa o que os outros digam, se você estiver confiante e sua vontade for inabalável, você sempre ficará satisfeito com os resultados.";
+					close;
+				case 2:
+					set god_mjo_3,3;
+					mes "[Vestri]";
+					mes "Você não respondeu à pergunta! Agora, você provavelmente veio ao Anão errado aqui...";
+					next;
+					mes "[Vestri]";
+					mes "Saia daqui e vá até seus Ferreiros humanos se quiser aprimoramentos de equipamento!";
+					close;
+				}
+			}
+			else if (god_mjo_3 == 1) {
+				disable_items;
+				mes "[Vestri]";
+				mes "Ótimo...!";
+				mes "Qual eu devo aprimorar primeiro, hein? Meu coração está batendo forte de antecipação...";
+				next;
+
+				setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
+				for(set .@i,1; .@i <= 10; set .@i,.@i+1) {
+					if (getequipisequiped(.@indices[.@i]))
+						set .@menu$, .@menu$ + F_getpositionname(.@indices[.@i]) + "-[" + getequipname(.@indices[.@i]) + "]";
+					set .@menu$, .@menu$ + ":";
+				}
+				set .@part, .@indices[ select(.@menu$) ];
+
+				if (getequipisequiped(.@part) == 0)
+					close;
+
+				if (getequipisenableref(.@part) == 0) {
+					mes "[Vestri]";
+					mes "O quê...?!";
+					mes "Isto não pode ser aprimorado!";
+					mes "O que diabos você quer";
+					mes "que eu faça com isso?";
+					close;
+				}
+				.@equip_id = getequipid(.@part);
+				.@itemtype = getiteminfo( .@equip_id, ITEMINFO_TYPE );
+				.@equip_refine = getequiprefinerycnt(.@part);
+				setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+				if (.@equip_refine >= 10) {
+					mes "[Vestri]";
+					mes "Oh, isso é excelente! Esta peça aqui foi refinada perfeitamente! Mas não é isso que eu quero. Eu não posso trabalhar nela de jeito nenhum.";
+					close;
+				}
+				if (GetEquipPercentRefinery(.@part) == 100) {
+					mes "[Vestri]";
+					mes "Este item não é nem um desafio para aprimorar. Você pode pedir para humanos fazerem esse tipo de coisa para iniciantes. Peça para eles refinarem primeiro.";
+					next;
+					mes "[Vestri]";
+					mes "Vamos...";
+					mes "Traga-me algo";
+					mes "que apresente um";
+					mes "elemento de risco!";
+					close;
+				}
+				if( .@itemtype != IT_WEAPON ){
+					mes "[Vestri]";
+					mes "Armadura?!";
+					mes "Eu não te disse";
+					mes "que eu só trabalho";
+					mes "em armas de Nível 4?";
+					next;
+					mes "[Vestri]";
+					mes "Você pode levar para um";
+					mes "Ferreiro humano trabalhar nesse tipo de coisa! Agora, um Anão como eu precisa de algo que seja mais um desafio!";
+					close;
+				}
+				if( getequipweaponlv( .@part ) != 4 ){
+					mes "[Vestri]";
+					mes "Ei...";
+					mes "Não me insulte esperando que eu trabalhe em qualquer coisa inferior a uma arma de Nível 4.";
+					next;
+					mes "[Vestri]";
+					mes "Traga-me uma arma de Nível 4 para eu trabalhar na próxima vez, entendeu?";
+					close;
+				}
+
+				mes "[Vestri]";
+				mes "Ok, deixe-me dar o aviso obrigatório. Se sua arma for destruída por acaso durante o aprimoramento, você nunca mais verá a arma.";
+				next;
+				mes "[Vestri]";
+				mes "Isso também significa que se a arma for destruída, quaisquer ^FF0000Cartas^000000 inseridas na arma também desaparecerão.";
+				next;
+				mes "[Vestri]";
+				mes "Se você entendeu,";
+				mes "então vamos em frente com isso!";
+				next;
+				if(select("Sure, let's do it!:N-no, I changed my mind!") == 2) {
+					mes "[Vestri]";
+					mes "Bah...!";
+					mes "Como você sobrevive";
+					mes "neste mundo com esse";
+					mes "tipo de covardia?!";
+					next;
+					mes "[Vestri]";
+					mes "Ah, esqueça.";
+					mes "Eu sei que você só está sendo cuidadoso. Droga, eu estava tão ansioso para começar";
+					mes "a trabalhar!";
+					close;
+				}
+
+				if (countitem(984) > 0) {
+					delitem 984,1; //Oridecon
+				}
+				else {
+					mes "[Vestri]";
+					mes "Hã...";
+					mes "Você esqueceu de";
+					mes "trazer um Oridecon.";
+					mes "Ande logo e consiga um.";
+					close;
+				}
+				// anti-hack
+				if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+					close;
+
+				if (getequippercentrefinery(.@part) > rand(100)) {
+					mes "^3355FF*Clang Clang!*^000000";
+					successrefitem .@part;
+					next;
+					emotion ET_SMILE;
+					mes "[Vestri]";
+					mes "Mwahahaha~";
+					mes "Eu ainda dou conta do recado!";
+					mes "Então, você não está feliz";
+					mes "com uma arma ainda mais";
+					mes "poderosa?";
+					next;
+				}
+				else {
+					mes "[Vestri]";
+					mes "^3355FF*Clang Clang!*^000000";
+					failedrefitem .@part;
+					next;
+					emotion ET_HUK;
+					mes "[Vestri]";
+					mes "Uaaaaahhhhh!";
+					mes "Meu Deus, não!";
+					next;
+					mes "[Vestri]";
+					mes "E-Está tudo bem!";
+					mes "Coisas ruins acontecem";
+					mes "às vezes. Vamos apenas";
+					mes "pensar nisso como se ambos";
+					mes "tivéssemos tido um dia ruim.";
+					mes "É, sem arrependimentos!";
+					next;
+				}
+				set god_mjo_3,2;
+				mes "[Vestri]";
+				mes "Bem, meu amigo,";
+				mes "se você algum dia visitar meus irmãos, por favor, mande lembranças.";
+				mes "Cuide-se.";
+				close;
+			}
+			else if (god_mjo_3 == 0) {
+				mes "[Vestri]";
+				mes "O que você quer?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Vestri]";
+					mes "Se você quer algo, deve conquistá-lo através de seus próprios esforços.";
+					next;
+					mes "[Vestri]";
+					mes "Não importa o que as outras pessoas digam, se você estiver confiante e sua vontade for inabalável, você sempre ficará satisfeito com os resultados.";
+					close;
+				case 2:
+					mes "[Vestri]";
+					mes "Hã...";
+					mes "Não sei como posso ser de muita ajuda para um aventureiro como você. Além de ser um Ferreiro...";
+					next;
+					mes "[Vestri]";
+					mes "Não há nada que eu goste mais do que aprimorar armas de nível alto que estão prestes a quebrar.";
+					next;
+					mes "[Vestri]";
+					mes "Você não gosta da ideia de desafiar o limite? Para mim, aprimorar é como escalar montanhas nunca antes conquistadas!";
+					next;
+					mes "[Vestri]";
+					mes "Certo. Talvez eu deva ajudá-lo, então vou aprimorar uma arma para você. Tudo o que você precisa fazer é me trazer a arma e o material.";
+					next;
+					set god_mjo_3,1;
+					mes "[Vestri]";
+					mes "Aqui está a condição: você deve me trazer uma Arma de Nível 4 que tenha sido aprimorada até o ponto em que possa quebrar. Ah, e traga um Oridecon!";
+					close;
+				}
+			}
+			else {
+				mes "[Vestri]";
+				mes "Zzzz Zzzz Zzzz...";
+				close;
+			}
+		}
+		else if (god_mjo_0 == 2) {
+			if (god_mjo_1 == 3 || god_mjo_2 == 3 || god_mjo_3 == 3 || god_mjo_4 == 3) {
+				mes "[Vestri]";
+				mes "Realmente espero encontrar um ser humano decente da próxima vez. Até agora, não encontrei um humano útil.";
+				close;
+			}
+			else if (god_mjo_2 == 2) {
+				mes "[Vestri]";
+				mes "Uma preparação perfeita nem sempre resulta em sucesso. Há um ponto em que você tem que simplesmente ir lá e fazer.";
+				next;
+				mes "[Vestri]";
+				mes "Não sei quão";
+				mes "grandes são seus objetivos,";
+				mes "mas coloque seu coração em";
+				mes "tudo o que você";
+				mes "planeja realizar na vida.";
+				close;
+			}
+			else if (god_mjo_1 == 0 || god_mjo_1 == 1 || god_mjo_3 != 0 || god_mjo_4 != 0) {
+				mes "[Vestri]";
+				mes "O que você quer?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Vestri]";
+					mes "Se você quer algo, deve conquistá-lo através de seus próprios esforços.";
+					next;
+					mes "[Vestri]";
+					mes "Não importa o que as outras pessoas digam, se você estiver confiante e sua vontade for inabalável, você sempre ficará satisfeito com os resultados.";
+					close;
+				
+				case 2:
+					set god_mjo_2,3;
+					mes "[Vestri]";
+					mes "Você não respondeu à pergunta! Agora, você provavelmente pegou o Anão errado aqui...";
+					next;
+					mes "[Vestri]";
+					mes "Saia daqui e vá até seus Ferreiros humanos se quiser aprimoramentos de equipamentos!";
+					close;
+				}
+			}
+			else if (god_mjo_2 == 1) {
+				disable_items;
+				mes "[Vestri]";
+				mes "Ótimo...!";
+				mes "Qual eu devo aprimorar primeiro, hein? Meu coração está batendo forte de antecipação...";
+				next;
+
+				setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
+				for(set .@i,1; .@i <= 10; set .@i,.@i+1) {
+					if (getequipisequiped(.@indices[.@i]))
+						set .@menu$, .@menu$ + F_getpositionname(.@indices[.@i]) + "-[" + getequipname(.@indices[.@i]) + "]";
+					set .@menu$, .@menu$ + ":";
+				}
+				set .@part, .@indices[ select(.@menu$) ];
+
+				if (getequipisequiped(.@part) == 0)
+					close;
+
+				if (getequipisenableref(.@part) == 0) {
+					mes "[Vestri]";
+					mes "O quê...?!";
+					mes "Isto não é aprimorável!";
+					mes "O que diabos você quer";
+					mes "que eu faça com isso?";
+					close;
+				}
+				.@equip_id = getequipid(.@part);
+				.@itemtype = getiteminfo( .@equip_id, ITEMINFO_TYPE );
+				.@equip_refine = getequiprefinerycnt(.@part);
+				setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+				if (.@equip_refine >= 10) {
+					mes "[Vestri]";
+					mes "Oh, isto é excelente! Esta peça aqui foi refinada perfeitamente! Mas não é isso que eu quero. Não posso fazer trabalho algum nela.";
+					close;
+				}
+				if (GetEquipPercentRefinery(.@part) == 100) {
+					mes "[Vestri]";
+					mes "Este item não é nem mesmo um desafio para aprimorar. Você pode pedir a humanos para fazerem esse tipo de coisa para iniciantes. Peça para eles refinarem primeiro.";
+					next;
+					mes "[Vestri]";
+					mes "Vamos...";
+					mes "Traga-me algo";
+					mes "que apresente um";
+					mes "elemento de risco!";
+					close;
+				}
+				if( .@itemtype != IT_WEAPON ){
+					mes "[Vestri]";
+					mes "Armadura?!";
+					mes "Eu não disse a";
+					mes "você que só trabalho";
+					mes "em armas de Nível 4?";
+					close;
+				}
+				if( getequipweaponlv( .@part ) != 4 ){
+					mes "[Vestri]";
+					mes "Ei...";
+					mes "Não me insulte esperando que eu trabalhe em qualquer coisa inferior a uma arma de Nível 4.";
+					next;
+					mes "[Vestri]";
+					mes "Traga-me uma arma de Nível 4 para eu trabalhar na próxima vez, entendeu?";
+					close;
+				}
+				mes "[Vestri]";
+				mes "Tudo bem, deixe-me dar o aviso obrigatório. Se sua arma for destruída por acaso durante o aprimoramento, você nunca mais verá a arma.";
+				next;
+				mes "[Vestri]";
+				mes "Isso também significa que, se a arma for destruída, qualquer ^FF0000Carta^000000 inserida nela também desaparecerá.";
+				next;
+				mes "[Vestri]";
+				mes "Se você entendeu,";
+				mes "então vamos prosseguir com isso!";
+				next;
+				if(select("Sure, let's do it!:...no, I am out.") == 2) {
+					mes "[Vestri]";
+					mes "Bah...!";
+					mes "Como você sobrevive";
+					mes "neste mundo com esse";
+					mes "tipo de covardia?!";
+					next;
+					mes "[Vestri]";
+					mes "Ah, esqueça.";
+					mes "Eu sei que você só está sendo cuidadoso. Droga, eu estava tão ansioso para começar";
+					mes "o trabalho!";
+					close;
+				}
+				if (countitem(984) > 0) {
+					delitem 984,1; //Oridecon
+				}
+				else {
+					mes "[Vestri]";
+					mes "Hã...";
+					mes "Você esqueceu de";
+					mes "trazer um Oridecon.";
+					mes "Apresse-se e consiga um.";
+					close;
+				}
+				// anti-hack
+				if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+					close;
+
+				if (getequippercentrefinery(.@part) > rand(100)) {
+					mes "^3355FF*Clang Clang!*^000000";
+					successrefitem .@part;
+					next;
+					emotion ET_SMILE;
+					mes "[Vestri]";
+					mes "Mwahahaha~";
+					mes "Eu ainda dou conta!";
+					mes "Então não está feliz";
+					mes "com uma arma ainda";
+					mes "mais poderosa?";
+					next;
+				}
+				else {
+					mes "[Vestri]";
+					mes "^3355FF*Clang Clang!*^000000";
+					failedrefitem .@part;
+					next;
+					emotion ET_HUK;
+					mes "[Vestri]";
+					mes "Uaaaaahhhhh!";
+					mes "Meu Deus, não!";
+					next;
+					mes "[Vestri]";
+					mes "E-Está tudo bem!";
+					mes "Coisas ruins acontecem";
+					mes "às vezes. Vamos apenas";
+					mes "pensar nisso como se nós";
+					mes "dois tivéssemos um dia ruim.";
+					mes "É, sem arrependimentos!";
+					next;
+				}
+				set god_mjo_2,2;
+				mes "[Vestri]";
+				mes "Bem, meu amigo,";
+				mes "se você algum dia visitar meus irmãos, por favor, dê lembranças minhas a eles.";
+				mes "Cuide-se.";
+				close;
+			}
+			else if (god_mjo_2 == 0) {
+				mes "[Vestri]";
+				mes "O que você quer?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Vestri]";
+					mes "Se você quer algo, deve conquistá-lo por meio de seus próprios esforços.";
+					next;
+					mes "[Vestri]";
+					mes "Não importa o que as outras pessoas digam, se você estiver confiante e sua vontade for inabalável, você sempre ficará satisfeito com os resultados.";
+					close;
+				case 2:
+					mes "[Vestri]";
+					mes "Hã...";
+					mes "Eu não sei como posso ser de grande ajuda para um aventureiro como você. Além de ser um Ferreiro...";
+					next;
+					mes "[Vestri]";
+					mes "Não há nada que eu goste mais do que aprimorar armas de nível alto que estão prestes a quebrar.";
+					next;
+					mes "[Vestri]";
+					mes "Você não gosta da ideia de desafiar o limite? Para mim, aprimorar é como escalar montanhas nunca antes conquistadas!";
+					next;
+					mes "[Vestri]";
+					mes "Tudo bem. Talvez eu deva ajudá-lo, então vou aprimorar uma arma para você. Tudo o que precisa fazer é me trazer a arma e o material.";
+					next;
+					set god_mjo_2,1;
+					mes "[Vestri]";
+					mes "Aqui está a condição: Você tem que me trazer uma Arma de Nível 4 que tenha sido aprimorada até o ponto em que possa quebrar. Ah, e traga um Oridecon!";
+					close;
+				}
+			}
+			else {
+				mes "[Vestri]";
+				mes "Zzzz Zzzz Zzzz...";
+				close;
+			}
+		}
+		else if (god_mjo_0 == 0) {
+			mes "[Vestri]";
+			mes "É sempre um prazer me dedicar ao trabalho duro, especialmente à ferraria.";
+			next;
+			mes "[Vestri]";
+			mes "Aprimorar é sempre gratificante!";
+			mes "Não tenho arrependimentos na falha, e fico sempre contente quando tenho sucesso. Vou aprimorar todos os dias para aproveitar ao máximo minha vida~";
+			close;
+		}
+		else {
+			mes "[Vestri]";
+			mes "Zzzz Zzzz Zzzz...";
+			close;
+		}
+	}
+}
+
+mjolnir_12,18,18,7	script	Dwarf Blacksmith#north	826,{
+	if ($God3 < $@god_check1) {
+		mes "[Nordri]";
+		mes "O quê...?";
+		mes "Eu não tenho nenhum";
+		mes "Elunium ou Oridecon!";
+		next;
+		mes "[Nordri]";
+		mes "Vestri pegou todos eles. ^333333*Suspiro*^000000 Aqueles eram meus tesouros, sabe...";
+		close;
+	}
+	else {
+		if ($God4 >= $@god_check2) {
+			mes "[Nordri]";
+			mes "O que está acontecendo?";
+			mes "Sinto uma mudança nos ventos, mas que mudança pode ser essa, eu não sei dizer.";
+			next;
+			mes "[Nordri]";
+			mes "Devo ir até a caverna para descobrir? Hã. Isso é muito peculiar.";
+			close;
+		}
+		else if (god_mjo_0 == 11) {
+			mes "[Nordri]";
+			mes "Bwahahah!";
+			mes "Até os deuses sabem que nós, Anões, somos os artesãos mais talentosos! Talvez não pareça assim agora, mas um dia retornaremos.";
+			close;
+		}
+		else if (god_mjo_0 == 10) {
+			mes "[Nordri]";
+			mes "O quê...?";
+			mes "Eu não tenho nenhum";
+			mes "Elunium ou Oridecon!";
+			next;
+			mes "[Nordri]";
+			mes "Vestri pegou todos eles.";
+			mes "Você não entende?";
+			close;
+		}
+		else if (god_mjo_0 == 1) {
+			if ((god_mjo_1 == 3) || (god_mjo_2 == 3) || (god_mjo_3 == 3) || (god_mjo_4 == 3)){
+				mes "[Nordri]";
+				mes "He he he~";
+				mes "É bom estar na Floresta de Mjolnir. Estar cercado pelo ar calmo e pacífico e não ter que me preocupar com nada...";
+				close;
+			}
+			else if (god_mjo_4 == 2) {
+				mes "[Nordri]";
+				mes "Você já não deveria estar a caminho? Bem, não é da minha conta.";
+				next;
+				mes "[Nordri]";
+				mes "Se você tiver Zeny sobrando, por que não compra alguns lanches para suas viagens? Talvez algumas Bananas deliciosas, ou até algumas Abóboras...";
+				close;
+			}
+			else if ((god_mjo_1 == 0) || (god_mjo_1 == 1) || (god_mjo_2 == 0) || (god_mjo_2 == 1) || (god_mjo_3 == 0) || (god_mjo_3 == 1)){
+				mes "[Nordri]";
+				mes "Que assuntos";
+				mes "você tem";
+				mes "comigo, humano?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Nordri]";
+					mes "Hã.";
+					mes "Se esse for o caso,";
+					mes "então me deixe em paz.";
+					close;
+				case 2:
+					set god_mjo_4,3;
+					mes "[Nordri]";
+					mes "Hã.";
+					mes "Tudo bem. Ainda assim...";
+					mes "estou surpreso em ver";
+					mes "um humano tão educado.";
+					close;
+				}
+			}
+			else if (god_mjo_4 == 1) {
+				if (countitem(501) > 0) {
+					delitem 501,1;  //Red_Potion
+					mes "[Nordri]";
+					mes "Ah, você me trouxe";
+					mes "uma Poção Vermelha,";
+					mes "exatamente como pedi. Em troca,";
+					mes "vou lhe contar uma história antiga.";
+					mes "Tenho certeza de que você vai gostar.";
+					next;
+					while(1) {
+						if (.@talk_to == 0) {
+							mes "[Nordri]";
+							mes "Esta é uma lenda sobre uma";
+							mes "das viagens de Thor a Utgard,";
+							mes "a terra dos gigantes.";
+							next;
+							mes "[Nordri]";
+							mes "Lá, ele fez uma aposta com o rei deles, na qual desafiaria";
+							mes "os gigantes de suas terras em testes de habilidade e força.";
+							next;
+							mes "[Nordri]";
+							mes "O primeiro foi um concurso de comida. Thor comeu toda a carne em sua mesa, mas seu oponente, Utgardaloki, comeu sua carne, os ossos e até os pratos.";
+							next;
+							mes "[Nordri]";
+							mes "Na verdade, Thor foi enganado, e o oponente que o derrotou não era";
+							mes "realmente um gigante. Uma ilusão foi usada para disfarçar o oponente de Thor, mas esqueci o que era. Você sabe?";
+							next;
+							switch(select("Greed:Sea:Blaze:Hog")) {
+							default:
+								set .@talk_not,1;
+								break;
+							case 3:
+								break;
+							}
+						}
+						else if (.@talk_to == 1) {
+							mes "[Nordri]";
+							mes "Sim, apenas uma Chama poderia ter consumido carne, ossos e pratos sem esforço através da queima. Com certeza!";
+							mes "Lembrei agora!";
+							next;
+							mes "[Nordri]";
+							mes "A próxima disputa foi uma corrida. Nessa partida, o servo de Thor, Tialfi, competiu com o servo do rei, Hugi. No entanto, não importa quantas partidas eles tivessem, Hugi vencia todas as vezes.";
+							next;
+							mes "[Nordri]";
+							mes "Mais uma vez, magia de ilusão foi";
+							mes "usada para disfarçar o competidor. Você sabe contra o que Tialfi estava realmente correndo?";
+							next;
+							switch(select("Language:Thoughts:Turtle:Wolf")) {
+							default:
+								set .@talk_not,1;
+								break;
+							case 2:
+								break;
+							}
+						}
+						else if (.@talk_to == 2) {
+							mes "[Nordri]";
+							mes "Sim, exato! Tialfi estava correndo contra o 'pensamento!' Nada pode se mover mais rápido do que a velocidade do pensamento, então não é de admirar que Tialfi sempre perdesse.";
+							next;
+							mes "[Nordri]";
+							mes "Para a disputa final, Thor desafiaria uma velha em uma luta livre. A princípio, Thor achou que sua vitória estava garantida, mas aprendeu que não poderia derrotar a velha senhora.";
+							next;
+							mes "[Nordri]";
+							mes "Mais uma vez, Thor foi a vítima";
+							mes "da magia de ilusão. Ele não percebeu que não estava lutando de verdade contra uma velha. Você sabe quem era realmente seu oponente?";
+							next;
+							switch(select("Curse:Earth:Heart:Old Age")) {
+							default:
+								set .@talk_not,1;
+								break;
+							case 4:
+								break;
+							}
+						}
+						else if (.@talk_to == 3) {
+							mes "[Nordri]";
+							mes "Sim, Thor estava lutando contra a 'Velhice!' Não importa o quão forte alguém seja, você não pode lutar contra o envelhecimento.";
+							next;
+							mes "[Nordri]";
+							mes "Depois que Thor perdeu todas as partidas,";
+							mes "o rei lhe contou a verdade sobre as disputas. Thor ficou furioso, mas era tarde demais. O rei e os gigantes já haviam desaparecido.";
+							next;
+							mes "[Nordri]";
+							mes "Há duas lições";
+							mes "a serem aprendidas com este conto. Primeiro, não acredite em tudo o que vê. Segundo, nunca confie demais no seu próprio poder.";
+							next;
+							mes "[Nordri]";
+							mes "Sempre haverá alguém ou algo mais poderoso que você. É importante sempre dar o seu melhor e ter uma atitude de humildade.";
+							next;
+							mes "[Nordri]";
+							mes "Tente viver uma vida tão boa quanto puder. Lembre-se de que você não pode ter tudo o que deseja. Obsessão e irracionalidade andam de mãos dadas.";
+							next;
+							set god_mjo_4,2;
+							mes "[Nordri]";
+							mes "Obrigado por ouvir minha longa história. Se você encontrar alguém com uma obsessão perigosa, por favor, conte esta história de Thor e as ilusões do rei gigante.";
+							close;
+						}
+						if (.@talk_not == 1) {
+							mes "[Nordri]";
+							mes "Hã...?";
+							mes "Acho que não está certo. Deixe-me pensar, talvez eu consiga me lembrar. Com sorte, virá à mente mais cedo ou mais tarde...";
+							next;
+							mes "[Nordri]";
+							mes "Vamos conversar mais sobre isso novamente depois de desfrutarmos de outra Poção Vermelha? Hahahahaha~";
+							close;
+						}
+						else {
+							set .@talk_to,.@talk_to + 1;
+						}
+					}
+				}
+				else {
+					mes "[Nordri]";
+					mes "Oooh...";
+					mes "Estou com muuuita sede!";
+					next;
+					mes "[Nordri]";
+					mes "Hm, eu não pedi para você trazer uma Poção Vermelha? Não tem como eu contar nenhuma história com a garganta tão seca~";
+					close;
+				}
+			}
+			else if (god_mjo_4 == 0) {
+				mes "[Nordri]";
+				mes "O que você";
+				mes "quer";
+				mes "comigo, humano?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Nordri]";
+					mes "Humpf.";
+					mes "Se for esse o caso,";
+					mes "então me deixe em paz.";
+					close;
+				case 2:
+					mes "[Nordri]";
+					mes "Estranho. Recentemente, muitos humanos têm se interessado em conhecer a mim e aos meus irmãos. Ainda assim, não posso dizer que as visitas deles tenham sido desagradáveis.";
+					next;
+					set god_mjo_4,1;
+					mes "[Nordri]";
+					mes "Estou com um pouco de sede. Você poderia me trazer uma Poção Vermelha? Se fizer isso por mim, eu lhe contarei uma história importante. Heh heh heh~";
+					close;
+				}
+			}
+			else {
+				mes "[Nordri]";
+				mes "Zzzz Zzzz...";
+				close2;
+			}
+		}
+		else if (god_mjo_0 == 2) {
+			if ((god_mjo_1 == 3) || (god_mjo_2 == 3) || (god_mjo_3 == 3) || (god_mjo_4 == 3)){
+				mes "[Nordri]";
+				mes "Eh heh heh~";
+				mes "É bom estar na Floresta de Mjolnir. Estar cercado pelo ar calmo e pacífico e não ter que me preocupar com nada...";
+				close;
+			}
+			else if (god_mjo_1 == 2) {
+				mes "[Nordri]";
+				mes "Você não deveria estar seguindo seu caminho agora? Eh, não é da minha conta.";
+				next;
+				mes "[Nordri]";
+				mes "Se você tiver Zeny de sobra, por que não compra alguns lanches para suas viagens? Talvez algumas bananas deliciosas, ou até algumas abóboras...";
+				close;
+			}
+			else if ((god_mjo_2 != 0) || (god_mjo_3 != 0) || (god_mjo_4 != 0)) {
+				mes "[Nordri]";
+				mes "O que você";
+				mes "quer";
+				mes "comigo, humano?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Nordri]";
+					mes "Humpf.";
+					mes "Se for esse o caso,";
+					mes "então me deixe em paz.";
+					close;
+				case 2:
+					set god_mjo_1,3;
+					mes "[Nordri]";
+					mes "Humpf.";
+					mes "Tudo bem. Ainda assim...";
+					mes "Estou surpreso em ver";
+					mes "um humano tão educado.";
+					close;
+				}
+			}
+			else if (god_mjo_1 == 1) {
+				if (countitem(501) > 0) {
+
+					delitem 501,1;  //Red_Potion
+					mes "[Nordri]";
+					mes "Ah, você trouxe";
+					mes "uma Poção Vermelha para mim...?";
+					mes "Em troca, eu lhe";
+					mes "contarei uma velha história.";
+					mes "Tenho certeza de que você vai gostar.";
+					next;
+					while(1) {
+						if (.@talk_to == 0) {
+							mes "[Nordri]";
+							mes "Existe a história de um Anão chamado Alvis que possuía mais conhecimento do que uma biblioteca e era mais corajoso do que Siegfried, o guerreiro.";
+							next;
+							mes "[Nordri]";
+							mes "Infelizmente...";
+							mes "Ele era ambicioso demais.";
+							mes "Ele se apaixonou por Thrud, a primeira filha de Thor, à primeira vista.";
+							next;
+							mes "[Nordri]";
+							mes "Ele pediu permissão a Thor para se casar com Thrud, mas, como era de se esperar, Thor recusou. Alvis deveria ter desistido ali, mas não desistiu.";
+							next;
+							mes "[Nordri]";
+							mes "Então Thor decidiu testar seus conhecimentos fazendo-lhe algumas perguntas. A primeira pergunta foi: 'Qual é o nome do chão em termos humanos?' Você sabe a resposta?";
+							next;
+							switch(select("Ymir's body:Earth:Lane:Universe")) {
+							default:
+								set .@talk_not,1;
+								break;
+							case 2:
+								break;
+							}
+						}
+						else if (.@talk_to == 1) {
+							mes "[Nordri]";
+							mes "Sim, está certo, 'Terra'. Alvis também foi capaz de responder corretamente à pergunta de Thor.";
+							next;
+							mes "[Nordri]";
+							mes "Thor então fez outra pergunta a Alvis. Qual é o termo dos gigantes para a concha redonda que cobre a terra?";
+							next;
+							switch(select("Ymir's Head:Sky:Cloud Factory:High House")) {
+							default:
+								set .@talk_not,1;
+								break;
+							case 4:
+								break;
+							}
+						}
+						else if (.@talk_to == 2) {
+							mes "[Nordri]";
+							mes "É isso aí, 'Casa Alta'. Como os gigantes são tão grandes, deve ter parecido assim para eles.";
+							next;
+							mes "[Nordri]";
+							mes "Então Thor fez outra pergunta. Qual é o termo para a bola que nasce no céu à noite, usado pelos deuses?";
+							next;
+							switch(select("Circling Wheel:Moon:False Sun:Fast Stranger")) {
+							default:
+								set .@talk_not,1;
+								break;
+							case 3:
+								break;
+							}
+						}
+						else if (.@talk_to == 3) {
+							mes "[Nordri]";
+							mes "Sim! Os deuses referem-se à";
+							mes "lua como o 'falso sol'.";
+							mes "Embora Alvis tenha respondido a todas as perguntas de Thor, ele não percebeu que o sol estava nascendo.";
+							next;
+							mes "[Nordri]";
+							mes "Sim...";
+							mes "Thor prolongou seu teste para que Alvis fosse transformado em pedra";
+							mes "assim que o sol nascesse.";
+							next;
+							mes "[Nordri]";
+							mes "Há duas";
+							mes "coisas que podemos aprender";
+							mes "com esta história. Primeiro, não cobice algo a ponto de desafiar o destino ou os deuses.";
+							next;
+							mes "[Nordri]";
+							mes "Segundo, não tenha muito orgulho de si mesmo. No importa quanta habilidade ou talento você tenha, você não pode conseguir tudo";
+							mes "o que deseja.";
+							next;
+							mes "[Nordri]";
+							mes "É extremamente";
+							mes "importante viver uma";
+							mes "vida boa e virtuosa. É ótimo realizar seus desejos, mas esteja ciente de que alguns desejos não foram feitos para serem realizados.";
+							next;
+							set god_mjo_1,2;
+							mes "[Nordri]";
+							mes "Obrigado por ouvir minha longa história. Se você encontrar alguém aflito por um desejo insaciável, por favor, conte a ele esta história de Thor e Alvis, um Anão corajoso, mas muito desafiador.";
+							close;
+						}
+						if (.@talk_not == 1) {
+							mes "[Nordri]";
+							mes "Hã...?";
+							mes "Acho que não está certo. Deixe-me pensar, talvez eu consiga me lembrar. Com sorte, virá à mente mais cedo ou mais tarde...";
+							next;
+							mes "[Nordri]";
+							mes "Vamos conversar mais sobre isso novamente depois de desfrutarmos de outra Poção Vermelha? Hahahahaha~";
+							close;
+						}
+						else {
+							set .@talk_to,.@talk_to + 1;
+						}
+					}
+				}
+				else {
+					mes "[Nordri]";
+					mes "Oooh...";
+					mes "Estou com muuuita sede!";
+					next;
+					mes "[Nordri]";
+					mes "Hm, eu não pedi para você trazer uma Poção Vermelha? Não tem como eu contar nenhuma história com a garganta tão seca~";
+					close;
+				}
+			}
+			else if (god_mjo_1 == 0) {
+				mes "[Nordri]";
+				mes "O que você";
+				mes "quer";
+				mes "comigo, humano?";
+				next;
+				switch(select("Nothing.:Excuse me.")) {
+				case 1:
+					mes "[Nordri]";
+					mes "Você é engraçado, me deixe em paz.";
+					close;
+				case 2:
+					mes "[Nordri]";
+					mes "Estranho. Recentemente, muitos humanos têm se interessado em conhecer a mim e aos meus irmãos. Ainda assim, não posso dizer que as visitas deles tenham sido desagradáveis.";
+					next;
+					set god_mjo_1,1;
+					mes "[Nordri]";
+					mes "Estou com um pouco de sede. Você poderia me trazer uma Poção Vermelha? Se fizer isso por mim, eu lhe contarei uma história importante. Heh heh heh~";
+					close;
+				}
+			}
+			else {
+				mes "[Nordri]";
+				mes "Zzzz Zzzz Zzzz...";
+				close;
+			}
+		}
+		else if (god_mjo_0 == 0) {
+			mes "[Nordri]";
+			mes "Eu sou Nordri,";
+			mes "Ferreiro Anão.";
+			next;
+			mes "[Nordri]";
+			mes "Estou encarregado desta parte norte do Monte Mjolnir. Se desejar passar, primeiro deve obter minha aprovação!";
+			next;
+			mes "[Nordri]";
+			mes "Ho ho ho...";
+			mes "Acalme-se, era";
+			mes "apenas uma piada.";
+			mes "Hahahahaha!";
+			close;
+		}
+		else {
+			mes "[Nordri]";
+			mes "Zzzz Zzzz Zzzz...";
+			close;
+		}
+	}
+}

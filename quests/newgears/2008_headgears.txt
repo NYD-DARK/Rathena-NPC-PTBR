@@ -1,0 +1,823 @@
+//===== rAthena Script =======================================
+//= 2008 Headgear Quests
+//===== By: ==================================================
+//= Masao
+//= Credits: Muad_Dib
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Cats Footprint, Cute Ribbon Dyer and Brides Corolla.
+//===== Additional Comments: =================================
+//= 1.0 First Version. [Masao]
+//============================================================
+
+gef_fild05,80,149,3	script	Myu#08_hat	877,{
+	mes "[Myu]";
+	mes "Miau...";
+	emotion ET_HUK;
+	next;
+	if(hatcat2008 == 0) {
+		mes "[Myu]";
+		mes "Oh? Você não é um aventureiro?";
+		mes "O que te traz aqui? Ho, você não veio machucar as Rosas Selvagens, veio?";
+		mes "(Miau!)";
+		next;
+		select("Meow..?");
+		mes "[Myu]";
+		mes "Ah, esqueça isso.";
+		mes "Este lugar é a vila dos Desabrigados.";
+		mes "Lar daqueles que andam nas sombras e se escondem.";
+		next;
+		mes "[Myu]";
+		mes "....E ainda assim, nossa paz está sendo perturbada por aqueles cães latindo.";
+		mes "Isso mesmo, Aventureiro.";
+		mes "Você seria tão gentil e puniria aqueles Arqueiros Kobold?";
+		next;
+		mes "[Myu]";
+		mes "Eles têm seu próprio território ao sul daqui, mas ainda estão tentando invadir o nosso.";
+		next;
+		mes "[Myu]";
+		mes "Que insolente. Tentei falar com eles pacificamente, ou até mesmo afastá-los, mas foi em vão.";
+		next;
+		mes "[Myu]";
+		mes "Então o que estou pedindo é... para expulsá-los do nosso território usando todos os meios necessários..";
+		next;
+		mes "[Myu]";
+		mes "Se você conseguir fazer isso, darei a você algo precioso que eu realmente adoro.";
+		next;
+		switch(select("That sounds troublesome..:What should I do?")){
+		case 1:
+			mes "[Myu]";
+			mes "Hmph, sim, foi meio engraçado, né?";
+			mes "Qualquer um que venha aqui.... todos vêm para machucar as Rosas Selvagens..";
+			mes "Eu não percebi isso.";
+			next;
+			mes "[Myu]";
+			mes "...Foi um esforço inútil Miau...";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "(Miau de novo... Que esquisito.)";
+			close;
+		case 2:
+			mes "[Myu]";
+			mes "Claro, cuide daqueles Arqueiros Kobold, Miau!";
+			mes " ";
+			mes "(Miau!)";
+			next;
+			select("Meow again?!");
+			mes "[Myu]";
+			mes "Hmm Hmm Eu disse para você esquecer isso.";
+			mes "Então, como eu estava dizendo...";
+			mes "Quero dizer... miau... er...";
+			next;
+			mes "[Myu]";
+			mes "Exatamente 1.000 vezes, nem mais, nem menos.";
+			mes "Dê a eles 1.000 avisos e eles recuarão.";
+			next;
+			select("What do you mean by 1,000 warnings...?");
+			mes "[Myu]";
+			mes "Hu~Eu tenho que soletrar para você?";
+			next;
+			mes "Enquanto ela diz isso, Myu desliza o pescoço zombando como se estivesse cortando a própria garganta.";
+			next;
+			switch(select("Isn't that too much?:That's easy")){
+			case 1:
+				mes "[Myu]";
+				mes "..Mas eles não vão desistir se não lhes ensinarmos uma lição.";
+				mes "Bem, se você acha que é demais para você, que assim seja.";
+				close;
+			case 2:
+				mes "[Myu]";
+				mes "Mas você tem que ter uma coisa em mente e é";
+				mes "obviamente, NUNCA JAMAIS machuque as Rosas Selvagens.";
+				next;
+				mes "[Myu]";
+				mes "Se fizer isso, acabou para você.";
+				mes "Então é melhor você ter cuidado..";
+				mes "Miau Miau Miau..";
+				set hatcat2008,1;
+				setquest 7054;
+				setquest 7055;
+				close;
+			}
+		}
+	} else if(hatcat2008 == 1) {
+		if(checkquest(7055,HUNTING) == 2) {
+			mes "[Myu]";
+			mes "Você achou que eu não sabia o que você fez?";
+			mes "Huh?";
+			next;
+			mes "[Myu]";
+			mes "Como... como você pôde matar essas crianças preciosas..?";
+			mes "E você disse que está do nosso lado?!";
+			next;
+			mes "[Myu]";
+			mes "Nosso negócio acabou!!!";
+			mes " ";
+			mes "(Miau..)";
+			set hatcat2008,0;
+			erasequest 7054;
+			erasequest 7055;
+			close;
+		} else if(checkquest(7054,HUNTING) == 2) {
+			mes "[Myu]";
+			mes "Oh..uau, inacreditável!";
+			mes "Agora, aqueles Kobolds deveriam ter aprendido uma lição, não é mesmo?";
+			mes "Miau Miau Miau!";
+			next;
+			mes "[Myu]";
+			mes "Aqui, pegue isto.";
+			mes "Este é o Selo dos nossos 'Gatinhos Corajosos'.";
+			mes "Isto é tão valioso, então não o perca.";
+			next;
+			select("This is it?");
+			mes "[Myu]";
+			mes "O que mais você esperava?";
+			mes "Esse poder é realmente uma coisa valiosa!";
+			mes "Agora, apenas pegue e vá embora. As Rosas Selvagens se sentem desconfortáveis com um aventureiro por perto.";
+			set hatcat2008,2;
+			getitem 5446,1;
+			erasequest 7054;
+			erasequest 7055;
+			close;
+		}
+		mes "[Myu]";
+		mes "Você entendeu agora, hein?";
+		mes "MIL VEZES! -risos-";
+		mes "(Miau Miau Miau~)";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "(Que esquisito.. De qualquer forma.. o que é esse som de miau miau?)";
+		mes "Apenas cumpra suas promessas.";
+		mes "depois que o trabalho estiver feito... Ok?";
+		next;
+		mes "[Myu]";
+		mes "Claro! Não se preocupe com isso~";
+		close;
+	} else if(hatcat2008 == 2) {
+		mes "[Myu]";
+		mes "Este lugar é a vila dos Desabrigados.";
+		mes "Lar daqueles que andam nas sombras e se escondem.";
+		next;
+		mes "[Myu]";
+		mes "Oh, você não é o Aventureiro que pegou o Selo dos nossos 'Gatinhos Corajosos'.";
+		mes "O que te traz aqui?";
+		next;
+		mes "[Myu]";
+		mes "Ah sim, certo, mesmo depois de todas as ameaças que demos aos Kobolds..";
+		mes "nossa situação não mudou em nada. Você se importaria de nos ajudar mais uma vez?";
+		next;
+		mes "Myu desliza o pescoço zombando como se estivesse cortando a própria garganta.";
+		mes "A boca dela parece estar dizendo.";
+		mes "'M.I.L.'";
+		next;
+		switch(select("NO!:Sure.")) {
+		case 1:
+			mes "[Myu]";
+			mes "...!...";
+			mes ".. Ah.. que pena.";
+			mes "Bem, parece que a isca estragou....";
+			mes "Está tudo bem. É assim que as coisas são. Miau.";
+			close;
+		case 2:
+			mes "[Myu]";
+			mes "Você sabe como é, certo?";
+			mes "Nunca toque nas Rosas Selvagens, Apenas cace os Arqueiros Kobold.";
+			mes "Dê a eles 1.000 vezes de desespero!";
+			set hatcat2008,1;
+			setquest 7054;
+			setquest 7055;
+			close;
+		}
+	}
+	mes "[Myu]";
+	mes "Miau..";
+	mes "Este sol... me deixa com sono..";
+	close;
+}
+
+morocc_in,137,102,5	script	Trainee#2008hat01	82,{
+	mes "[Elgo Aprendiz]";
+	mes "Bem-vindo.";
+	mes "Por favor, fale com nosso professor se você veio fazer tinturas.";
+	mes "E fale com meu amigo ao meu lado se for sobre a entrega.";
+	next;
+	switch(select("And just what are you doing?:I see.")){
+	case 1:
+		mes "[Elgo]";
+		mes "Bem, eu tingo roupas.";
+		mes "como lenços ou fitas.";
+		next;
+		mes "[Elgo]";
+		mes "Eu consigo tingir pequenas coisas muito bonitas..";
+		mes "Como uma ^4d4dffFita Fofa^000000.";
+		mes "Traga-me uma Fita Fofa se você quiser tingi-la.";
+		next;
+		mes "[Elgo]";
+		mes "Seria uma boa chance para eu praticar uma,";
+		mes "e você não terá que pagar um único zeny.";
+		mes "Ah sim, mas eu precisarei pelo menos dos^4d4dffcorantes^000000 necessários.";
+		next;
+		mes "[Elgo]";
+		mes "Claro, eu não vou falhar.";
+		mes "Colocarei todo o meu esforço nisso.";
+		mes "Quero desafiar minhas habilidades!!";
+		next;
+		if (countitem(2250) > 0 || countitem(5441) > 0 || countitem(5439) > 0 || countitem(5440) > 0 || countitem(5438) > 0) {
+			mes "["+strcharinfo(0)+"]";
+			mes "(Eu tenho uma Fita Fofa... o que devo fazer..?)";
+			next;
+			switch(select("Ask Elgo to dye it.:Leave it alone.")){
+			case 1:
+				mes "[Elgo]";
+				mes "Oh, então você quer tingir sua Fita Fofa, não é?";
+				mes "Qual a cor da sua Fita Fofa?";
+				mes "Qual delas você quer que seja tingida?";
+				next;
+				switch(select("Yellow one..:White one..:Blue one..:Red one..:Green one..:Never mind.")){
+				case 1:
+					if(countitem(2250) > 0) {
+						mes "[Elgo]";
+						mes "Ok Ok, Fita Fofa Amarela, hein?";
+						mes "De que cor você quer que ela seja tingida?";
+						next;
+						switch(select("White:Blue:Red:Green")){
+						case 1:
+							if(countitem(982) > 0) {
+								mes "[Elgo]";
+								mes "Uau, branco puro e inocente!";
+								mes "Ok, vamos fazer isso.";
+								next;
+								mes "- Elgo começa a dissolver corantes e produtos químicos na água, depois começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve ser o suficiente.";
+								mes "O que você acha?";
+								mes "Essa cor saiu bonita?";
+								delitem 2250,1;
+								delitem 982,1;
+								getitem 5441,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de branco, traga-me ^4d4dff1 Tinturas Brancas^000000.";
+							close;
+						case 2:
+							if(countitem(978) > 0) {
+								mes "[Elgo]";
+								mes "Azul refrescante!!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 2250,1;
+								delitem 978,1;
+								getitem 5440,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de azul, traga-me ^4d4dff1 Tinturas Azuis^000000.";
+							close;
+						case 3:
+							if(countitem(975) > 0) {
+								mes "[Elgo]";
+								mes "Vermelho Fofo!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 2250,1;
+								delitem 975,1;
+								getitem 5439,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de vermelho, traga-me ^4d4dff1 Tinturas Vermelhas^000000.";
+							close;
+						case 4:
+							if(countitem(979) > 0) {
+								mes "[Elgo]";
+								mes "Verde da Natureza!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 2250,1;
+								delitem 979,1;
+								getitem 5438,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de verde, traga-me ^4d4dff1 Tinturas Verdes^000000.";
+							close;
+						}
+					}
+					mes "[Elgo]";
+					mes "Amarelo é a cor básica de uma Fita Fofa.";
+					mes "Mas você nem tem uma.";
+					close;
+				case 2:
+					if(countitem(5441) > 0) {
+						mes "[Elgo]";
+						mes "Ok, ok, esta Fita Fofa branca, hein?";
+						mes "De que cor você quer que ela seja tingida?";
+						next;
+						switch(select("Yellow:Blue:Red:Green")) {
+						case 1:
+							if(countitem(976) > 0) {
+								mes "[Elgo]";
+								mes "Amarelo Básico!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5441,1;
+								delitem 976,1;
+								getitem 2250,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de amarelo, traga-me ^4d4dff1 Tinturas Amarelas^000000.";
+							close;
+						case 2:
+							if(countitem(978) > 0) {
+								mes "[Elgo]";
+								mes "Azul refrescante!!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5441,1;
+								delitem 978,1;
+								getitem 5440,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de azul, traga-me ^4d4dff1 Tinturas Azuis^000000.";
+							close;
+						case 3:
+							if(countitem(975) > 0) {
+								mes "[Elgo]";
+								mes "Vermelho Fofo!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5441,1;
+								delitem 975,1;
+								getitem 5439,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de vermelho, traga-me ^4d4dff1 Tinturas Vermelhas^000000.";
+							close;
+						case 4:
+							if(countitem(979) > 0) {
+								mes "[Elgo]";
+								mes "Verde da Natureza!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5441,1;
+								delitem 979,1;
+								getitem 5438,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de verde, traga-me ^4d4dff1 Tinturas Verdes^000000.";
+							close;
+						}
+					}
+					mes "[Elgo]";
+					mes "Você quer tingir uma Fita Fofa branca, certo?";
+					mes "Mas você nem tem uma.";
+					close;
+				case 3:
+					if(countitem(5440) > 0) {
+						mes "[Elgo]";
+						mes "Ok, ok, esta Fita Fofa azul, hein?";
+						mes "De que cor você quer que ela seja tingida?";
+						next;
+						switch(select("White:Yellow:Red:Green")) {
+						case 1:
+							if(countitem(982) > 0) {
+								mes "[Elgo]";
+								mes "Uau, branco puro e inocente!";
+								mes "Ok, vamos lá.";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5440,1;
+								delitem 982,1;
+								getitem 5441,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de branco, traga-me ^4d4dff1 Tinturas Brancas^000000.";
+							close;
+						case 2:
+							if(countitem(976) > 0) {
+								mes "[Elgo]";
+								mes "Amarelo Básico!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5440,1;
+								delitem 976,1;
+								getitem 2250,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de amarelo, traga-me ^4d4dff1 Tinturas Amarelas^000000.";
+							close;
+						case 3:
+							if(countitem(975) > 0) {
+								mes "[Elgo]";
+								mes "Vermelho Fofo!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5440,1;
+								delitem 975,1;
+								getitem 5439,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de vermelho, traga-me ^4d4dff1 Tinturas Vermelhas^000000.";
+							close;
+						case 4:
+							if(countitem(979) > 0) {
+								mes "[Elgo]";
+								mes "Verde da Natureza!";
+								mes "Vamos lá!";
+								next;
+								mes "- Elgo começa a dissolver corantes e químicos na água, então ele começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hmm..";
+								mes "Isso deve funcionar.";
+								mes "O que você acha?";
+								mes "Essa cor ficou boa?";
+								delitem 5440,1;
+								delitem 979,1;
+								getitem 5438,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de verde, traga-me ^4d4dff1 Tintura Verde^000000.";
+							close;
+						}
+					}
+					mes "[Elgo]";
+					mes "Você quer tingir uma Fita Fofa azul, certo?";
+					mes "Mas você nem tem uma.";
+					close;
+				case 4:
+					if(countitem(5439) > 0) {
+						mes "[Elgo]";
+						mes "Ok, ok, esta Fita Fofa vermelha, é?";
+						mes "Qual cor você quer que ela seja tingida?";
+						next;
+						switch(select("White:Blue:Yellow:Green")){
+						case 1:
+							if (countitem(982) > 0){
+								mes "[Elgo]";
+								mes "Uau, branco puro e inocente!";
+								mes "Ok, vamos fazer isso.";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5439,1;
+								delitem 982,1;
+								getitem 5441,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de branco, traga-me ^4d4dff1 Tintura Branca^000000.";
+							close;
+						case 2:
+							if(countitem(978) > 0) {
+								mes "[Elgo]";
+								mes "Azul vibrante!!";
+								mes "Vamos fazer isso!";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5439,1;
+								delitem 978,1;
+								getitem 5440,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de azul, traga-me ^4d4dff1 Tintura Azul^000000.";
+							close;
+						case 3:
+							if(countitem(976) > 0) {
+								mes "[Elgo]";
+								mes "Amarelo básico!";
+								mes "Vamos fazer isso!";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5439,1;
+								delitem 976,1;
+								getitem 2250,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de amarelo, traga-me ^4d4dff1 Tintura Amarela^000000.";
+							close;
+						case 4:
+							if(countitem(979) > 0) {
+								mes "[Elgo]";
+								mes "Verde da natureza!";
+								mes "Vamos fazer isso!";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5439,1;
+								delitem 979,1;
+								getitem 5438,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de verde, traga-me ^4d4dff1 Tintura Verde^000000.";
+							close;
+						}
+					}
+					mes "[Elgo]";
+					mes "Você quer tingir uma Fita Fofa vermelha, certo?";
+					mes "Mas você nem tem uma.";
+					close;
+				case 5:
+					if(countitem(5438) > 0) {
+						mes "[Elgo]";
+						mes "Ok, ok, esta Fita Fofa verde, é?";
+						mes "Qual cor você quer que ela seja tingida?";
+						next;
+						switch(select("White:Blue:Red:Yellow")) {
+						case 1:
+							if(countitem(982) > 0) {
+								mes "[Elgo]";
+								mes "Uau, branco puro e inocente!";
+								mes "Ok, vamos fazer isso.";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5438,1;
+								delitem 982,1;
+								getitem 5441,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de branco, traga-me ^4d4dff1 Tintura Branca^000000.";
+							close;
+						case 2:
+							if(countitem(978) > 0) {
+								mes "[Elgo]";
+								mes "Azul vibrante!!";
+								mes "Vamos fazer isso!";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5438,1;
+								delitem 978,1;
+								getitem 5440,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de azul, traga-me ^4d4dff1 Tintura Azul^000000.";
+							close;
+						case 3:
+							if(countitem(975) > 0) {
+								mes "[Elgo]";
+								mes "Vermelho fofo!";
+								mes "Vamos fazer isso!";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5438,1;
+								delitem 975,1;
+								getitem 5439,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de vermelho, traga-me ^4d4dff1 Tintura Vermelha^000000.";
+							close;
+						case 4:
+							if(countitem(976) > 0) {
+								mes "[Elgo]";
+								mes "Amarelo básico!";
+								mes "Vamos fazer isso!";
+								next;
+								mes "- Elgo começa a dissolver tinturas e produtos químicos na água, e então começa a tingir a Fita Fofa. -";
+								next;
+								mes "[Elgo]";
+								mes ".. Hum..";
+								mes "Isso deve resolver.";
+								mes "O que você acha?";
+								mes "Esta cor ficou boa?";
+								delitem 5438,1;
+								delitem 976,1;
+								getitem 2250,1;
+								close;
+							}
+							mes "[Elgo]";
+							mes "Se quiser tingir de amarelo, traga-me ^4d4dff1 Tintura Amarela^000000.";
+							close;
+						}
+					}
+					mes "[Elgo]";
+					mes "Você quer tingir uma Fita Fofa verde, certo?";
+					mes "Mas você nem tem uma.";
+					close;
+				case 6:
+					mes "["+strcharinfo(0)+"]";
+					mes "Ah, não tenho certeza desta vez. Voltarei na próxima.";
+					mes "Cuide-se.";
+					next;
+					mes "[Elgo]";
+					mes "Ok. Tudo bem. Vejo você depois~ Tchau tchau~!";
+					close;
+				}
+			case 2:
+				mes "["+strcharinfo(0)+"]";
+				mes "Hum, trarei uma na próxima vez.";
+				mes "Cuide-se.";
+				next;
+				mes "[Elgo]";
+				mes "Ok, Adeus!";
+				close;
+			}
+		}
+	case 2:
+		mes "[Elgo]";
+		mes "Uh... Você poderia, por favor, ir embora?";
+		mes "Preciso voltar ao trabalho...";
+		close;
+	}
+}
+
+in_orcs01,119,106,3	script	Orc Lady#2008hat03	1273,2,2,{
+
+OnTouch:
+	mes "["+strcharinfo(0)+"]";
+	mes "Esta Senhora Orc está absorta em algo.";
+	mes "Não sei o que ela está fazendo... mas ela não me notaria nem se eu chegasse perto.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Devo falar com ela?... Uh.. Nós sequer nos entendemos?";
+	next;
+	mes "A Senhora Orc de repente se vira, surpresa.";
+	mes "Uma Flor Maneater caiu no chão de suas mãos.";
+	next;
+	switch(select("Pick up the flowers for Orc Lady.:Run away!")) {
+	case 1:
+		mes "[Senhora Orc]";
+		mes ".. ...";
+		mes "Aventureiro com arma ajuda Orc?";
+		mes "Você é estranho.";
+		mes "Meu nome é Aite-Nah-Zir-Be.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Surpreendentemente, a Senhora Orc se apresentou para mim.";
+		mes "Como devo reagir?";
+		next;
+		switch(select("Ask her what she was up to.:Say good bye.")){
+		case 1:
+			mes "[Aite]";
+			mes "Estou fazendo uma Coroa.";
+			mes "Tecendo a flor... com uma fita..";
+			mes "Noivas... usam... Coroas..";
+			next;
+			select("Would you make one for me?");
+			if((countitem(10007) > 0) && (countitem(1032) > 999)) {
+				mes "[Aite]";
+				mes ".. Materiais..você..tem..";
+				mes "..Muito tempo para fazer uma.";
+				next;
+				mes "[Aite]";
+				mes "Trocar com você.. esta que acabei de fazer.";
+				mes "Mas você, estranho.";
+				mes "Vocês humanos são difíceis...de...entender.";
+				delitem 10007,1;
+				delitem 1032,1000;
+				getitem 5436,1;
+				close;
+			}
+			mes "[Aite]";
+			mes "Preciso de... Fita... de Seda.";
+			mes "1.000 Flores Maneater..";
+			mes "Traga-me....";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "(^4d4dff Fita de Seda e 1.000 Flores Maneater^000000, hein..)";
+			mes "Entendido. Irei buscar os materiais.";
+			close;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Acenei para ela em despedida com um sorriso no rosto, sem dizer nada.";
+			mes "Ela acenou de volta, como se entendesse que era a minha despedida.";
+			close;
+		}
+	case 2:
+		mes "["+strcharinfo(0)+"]";
+		mes "Vamos fugir enquanto ela ainda está em choque.";
+		close2;
+		warp "gef_fild10",223,203;
+		end;
+	}
+	end;
+}

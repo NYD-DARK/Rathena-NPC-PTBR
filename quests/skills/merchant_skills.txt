@@ -1,0 +1,736 @@
+//===== rAthena Script =======================================
+//= Merchant Skills Quests
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.8
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Quests for skills: Crazy Uproar, Change Cart, Cart Revolution
+//===== Additional Comments: =================================
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Updated to latest available official file. [Masao]
+//= 1.7 Fixed JobLevel requirements. [Euphy]
+//= 1.8 Moved Alberta NPC to pre-re/re paths. [Euphy]
+//============================================================
+
+alberta,83,96,5	script	Necko	98,7,7,{
+	if (BaseClass == Job_Merchant) {
+		if (getskilllv("MC_LOUD") == 1) {
+			mes "[Necko]";
+			mes "Desculpe. A loja do Necko está...";
+			mes "Oh? Quem é você?";
+			mes "Pukakakakakakakakakaka!!!";
+			mes "Quanto tempo!";
+			mes "Como vai você?";
+			mes "É bom te ver de novo!!";
+			mes "Alguma novidade?";
+			mes "Uau~ Fico muito feliz em te ver!";
+			mes "Você! Apareça de vez em quando!";
+			mes "Eu posso acabar esquecendo o seu rosto!";
+			mes "Pukakakakakakakakaka!!!";
+			mes "Muito, muito bom te ver!!";
+			mes "É tão bom te ver assim!";
+			mes "Venha a Alberta com frequência!";
+			mes "Matando dois coelhos com uma cajadada só!!";
+			mes "Eu consigo te ver, e gritar também!!";
+			mes "Como poderia ser melhor!!!";
+			mes "Keuhahahahahahahaha!!";
+			mes "Pukakakakakakakakakaka!!!";
+			mes "Ppyakikakikakakakakakakaka!!";
+			close;
+		}
+		else if (JobLevel < 15 && Class == Job_Merchant ) {
+			mes "[Necko]";
+			mes "Oh, você veio porque";
+			mes "está fascinado pela minha voz?";
+			mes "Minha voz é alta, não é!";
+			mes "considerando que você pode ouvi-la de longe.";
+			mes "E também.";
+			mes "(olha em volta)";
+			next;
+			mes "[Necko]";
+			mes "Minha voz não é apenas alta!";
+			mes "!";
+			mes "Quando você for um Mercador nível 15";
+			mes "eu lhe contarei o segredo!";
+			mes "Então, volte novamente!!!";
+			next;
+			mes "[Necko]";
+			mes "Uahahahahahahahahahahahaha!";
+			mes "Kyukwakakakakakakakakakaka!";
+			close;
+		}
+		else if ((countitem(722) > 6) && (countitem(532) > 0) && (countitem(921) > 49) && (JobLevel >= 15 || (BaseJob == Job_Blacksmith || BaseJob == Job_Alchemist))) {
+			mes "[Necko]";
+			mes "Oh! Você!";
+			mes "Você está qualificado para aprender a gritar!";
+			mes "Aprenda a gritar com a minha ajuda.";
+			mes "Você gostaria de aprender o Grito Selvagem?";
+			next;
+			switch (select("Yes!!!!:No.:What is that?")) {
+			case 1:
+				mes "[Necko]";
+				mes "Ahahahahaha!! Muito bem!!!";
+				mes "Esse é o espírito!";
+				mes "Lá vamos nós!";
+				next;
+				delitem 722,7; //Scarlet_Jewel
+				delitem 532,1; //Banana_Juice
+				delitem 921,50; //Mushroom_Spore
+				skill "MC_LOUD",1,SKILL_PERM;
+				mes "[Necko]";
+				mes "Você aprendeu o Grito Selvagem!!";
+				mes "Grite o quanto quiser!";
+				mes "Hahahahahahaha!";
+				close;
+			case 2:
+				mes "[Necko]";
+				mes "Eh... ok.";
+				mes "Pooooh...";
+				close;
+			case 3:
+				mes "[Necko]";
+				mes "O Grito Selvagem usa sua voz alta";
+				mes "para aumentar o espírito de batalha";
+				mes "Com 8 de SP, você recebe um adicional de";
+				mes "4 de FOR por 5 minutos!!!!!";
+				mes "Se você usá-lo repetidamente";
+				mes "serão 5 minutos a partir daquele momento.";
+				next;
+				mes "[Necko]";
+				mes "Mantenha a calma no dia a dia,";
+				mes "e quando precisar lutar";
+				mes "ele reunirá seu espírito.";
+				mes "Muito útil, devo dizer!!!!";
+				close;
+			}
+		}
+		mes "[Necko]";
+		mes "Oh, você ficou encantado";
+		mes "pela minha voz?";
+		mes "De fato, minha voz é alta!";
+		mes "Você pode ouvi-la de tão longe.";
+		mes "E também.";
+		mes "(olha em volta)";
+		next;
+		mes "[Necko]";
+		mes "Minha voz não é APENAS alta!";
+		mes "Eu aprendi a habilidade";
+		mes "que me permite gritar..";
+		mes "A habilidade Grito Selvagem!";
+		next;
+		mes "[Necko]";
+		mes "O Grito Selvagem usa sua voz alta";
+		mes "para aumentar o espírito de batalha";
+		mes "Com 8 de sp, você recebe um adicional de";
+		mes "4 de FOR por 5 minutos!!!!!";
+		mes "Se você usá-lo repetidamente";
+		mes "serão 5 minutos a partir daquele ponto.";
+		next;
+		mes "[Necko]";
+		mes "Mantenha a calma no dia a dia,";
+		mes "mas grite para reunir mais";
+		mes "força quando for lutar.";
+		mes "É muito útil!!!!";
+		mes "Para aprender esta habilidade, primeiro você precisa";
+		mes "aprender os fundamentos do som!!!";
+		next;
+		mes "[Necko]";
+		mes "Você pode aprender isso em Payon";
+		mes "com um cantor que só tinha uma voz alta";
+		mes "Você pode ter aulas com ele!";
+		next;
+		mes "[Necko]";
+		mes "Mas aquela pessoa morreu!";
+		mes "Então você não pode mais aprender!";
+		mes "Hahahahahahahaha!!!!";
+		mes "..............................";
+		mes "...Aww, você parece decepcionado?";
+		mes "Você quer aprender o Grito Selvagem?";
+		next;
+		mes "[Necko]";
+		mes "Hmm... Devo te ensinar?";
+		mes "Se você realmente quiser, é claro.";
+		mes "Primeiro, preciso queimar as cordas vocais.";
+		mes "Há algumas coisas necessárias para isso.";
+		next;
+		mes "[Necko]";
+		mes "7 Pérolas, 1 garrafa de Suco de Banana,";
+		mes "e 50 Esporos de Cogumelo!";
+		mes "Então, eu queimarei suas cordas vocais!";
+		next;
+		mes "[Necko]";
+		mes "Nos vemos quando estiver pronto!";
+		mes "Eu prepararei minha garganta para esse momento também!!";
+		mes "Bboowuuuuuuuuuuuuuuuuh~~~!!";
+		close;
+	}
+	mes "[Necko]";
+	mes "A loja do Necko está fechada agora.";
+	mes "volte mais tarde. Hehe~";
+	close;
+
+OnTouch_:
+	mes "[!?]";
+	mes "Muahahahahahahahahahahahaha!!";
+	mes "Pukakakakakakakakakakakakaka!";
+	close;
+}
+
+alberta,119,221,6	script	Charlron	107,{
+	if (BaseClass == Job_Merchant) {
+		if (getskilllv("MC_CHANGECART") == 1) {
+			mes "[Charlron]";
+			mes "Hmm? Eu estava me perguntando quem estava fazendo todo";
+			mes "aquele barulho por aí com um carrinho.";
+			mes "Era você.";
+			mes "Sim, eu me lembro de você.";
+			mes "O que acha? O novo carrinho... bom, hein?";
+			next;
+			mes "[Charlron]";
+			mes "Aproveite a vida.";
+			mes "A vida não é apenas seguir";
+			mes "em frente... Lentamente, olhando ao redor,";
+			mes "arrastando um carrinho pesado é";
+			mes "como nós, Mercadores, vivemos.";
+			mes "Então, até a próxima.";
+			next;
+			mes "[Charlron]";
+			mes "Fique bem~";
+			close;
+		}
+		else if (JobLevel >= 30|| (BaseJob == Job_Blacksmith || BaseJob == Job_Alchemist)) {
+			mes "[Charlron]";
+			mes "É bom ver você, colega Mercador.";
+			mes "Se bem me lembro,";
+			mes "você é aquele Mercador famoso";
+			mes "ultimamente.";
+			next;
+			mes "Mas seu carrinho não";
+			mes "parece condizer com sua fama.";
+			mes "Que lamentável.";
+			next;
+			switch (select("That's why I came here.:What about my cart?:Two pairs is pitiful?")) {
+			case 1:
+				if ((countitem(1019) > 49) && (countitem(998) > 9) && (countitem(919) > 19)) {
+					mes "[Charlron]";
+					mes "Haha! Ok, ok!";
+					mes "Com as coisas que você trouxe";
+					mes "eu vou trocar seu carrinho.";
+					next;
+					delitem 1019,50; //Wooden_Block
+					delitem 998,10; //Iron
+					delitem 919,20; //Animal's_Skin
+					skill "MC_CHANGECART",1,SKILL_PERM;
+					mes "[Charlron]";
+					mes "Parabéns.";
+					mes "Você pode escolher um carrinho";
+					mes "de acordo com o seu gosto.";
+					mes "E agora você nem precisa";
+					mes "da minha ajuda. Tudo que você";
+					mes "precisa é de um pouco de SP.";
+					next;
+					mes "[Charlron]";
+					mes "Conveniente, não acha?";
+					mes "Ah, e mais uma coisa!";
+					mes "Cada vez que subir de nível, você pode";
+					mes "ter um carrinho novo e diferente.";
+					mes "Então trabalhe duro.";
+					next;
+					mes "[Charlron]";
+					mes "Mas enfim, ficou muito bom em você!";
+					mes "Hahaha! Tenha um bom dia!";
+					close;
+				}
+				mes "[Charlron]";
+				mes "Hmm... É verdade que eu";
+				mes "troco carrinhos, mas...";
+				mes "Para fazer isso, preciso de";
+				mes "alguns materiais.";
+				next;
+				mes "[Charlron]";
+				mes "50 Troncos.";
+				mes "10 Ferros.";
+				mes "20 Peles de Animal.";
+				mes "Preciso pelo menos dessas coisas";
+				mes "para trocar seu carrinho.";
+				next;
+				mes "[Charlron]";
+				mes "Então venha me ver quando";
+				mes "tiver preparado tudo.";
+				close;
+			case 2:
+				mes "[Charlron]";
+				mes "Ah, não, você não sabe de nada?(muda de tom)";
+				mes "Uma nova maneira de exibir o ego de um Mercador!";
+				mes "Uma expressão de uma mente brilhante!";
+				mes "Trocar Carrinho é uma habilidade que";
+				mes "faz um Mercador se destacar!";
+				next;
+				mes "[Charlron]";
+				mes "Uma habilidade divertida que permite que você";
+				mes "use um carrinho de acordo com seu";
+				mes "nível com apenas 40 de SP!";
+				next;
+				mes "[Charlron]";
+				mes "Isso é Trocar Carrinho!";
+				mes "Uma habilidade básica para qualquer Mercador.";
+				mes "Vou te ensinar como fazer";
+				mes "um, então observe com atenção e";
+				mes "faça exatamente o que eu faço para criar";
+				mes "o seu no futuro!";
+				next;
+				mes "[Charlron]";
+				mes "Mas, como é a primeira vez,";
+				mes "você precisa preparar alguns materiais.";
+				mes "50 Troncos!";
+				mes "10 Ferros!";
+				mes "20 Peles de animal!";
+				mes "-traga isso, por favor!";
+				next;
+				mes "[Charlron]";
+				mes "Tudo o que temos que fazer é";
+				mes "fazer um usando esses materiais,";
+				mes "então volte quando estiver pronto.";
+				mes "Ok?";
+				close;
+			case 3:
+				mes "[Charlron]";
+				mes "...não é 'CARTA'!";
+				close;
+			}
+		}
+		mes "[Charlron]";
+		mes "Bem-vindo, jovem.";
+		mes "Vender é divertido? Eu sou o";
+		mes "Mercador Charlron. Tenho feito";
+		mes "algumas pesquisas sobre";
+		mes "carrinhos ultimamente.";
+		next;
+		mes "[Charlron]";
+		mes "Não está cansado desse carrinho?";
+		mes "Venha até mim se quiser";
+		mes "trocar seu carrinho. Farei um bom trabalho.";
+		mes "Mas existem algumas condições.";
+		next;
+		mes "[Charlron]";
+		mes "Sou um Mercador bastante famoso,";
+		mes "então não lido com iniciantes.";
+		mes "Assim que você atingir o nível 30,";
+		mes "posso considerar fazer";
+		mes "um negócio com você.";
+		close;
+	}
+	mes "[Charlron]";
+	mes "Eu sou um Mercador que";
+	mes "lida com muitas coisas, Charlron.";
+	mes "Se encontrar algo interessante,";
+	mes "volte e tente";
+	mes "negociar um acordo comigo.";
+	close;
+}
+
+-	script	::Gershaun_alberta	-1,{
+	if (BaseClass == Job_Merchant) {
+		if (getskilllv("MC_CARTREVOLUTION") == 1) {
+			mes "[Gershaun]";
+			mes "Ah, quanto tempo!";
+			mes "Ohh, as marcas vermelhas no seu carrinho.";
+			mes "Devem ser as marcas disso...";
+			mes "Parece que te ensinei a habilidade corretamente!";
+			next;
+			mes "[Gershaun]";
+			mes "Você tem sangue como o meu!";
+			mes "Hmm! Afinal de contas!!";
+			mes "Estou feliz! Coce minhas costas!";
+			mes "Aqui! Depressa!";
+			close;
+		}
+		else if (JobLevel >= 35 || (BaseJob == Job_Blacksmith || BaseJob == Job_Alchemist)) {
+			mes "[Gershaun]";
+			mes "Ooh. Você tem um corpo firme";
+			mes "para um Mercador. Você deve ser";
+			mes "muito bom em carregar coisas!?";
+			mes "Hmm, você deveria ser capaz de aprender";
+			mes "Fúria do Furacão!";
+			next;
+			switch (select("Hey~ that's why I came.:What's that?")) {
+			case 1:
+				set .@care_random,rand(1,3);
+				if (.@care_random == 1) {
+					if ((countitem(533) > 1) && (countitem(998) > 19) && (countitem(938) > 29) && (countitem(601) > 19) && (countitem(962) > 4)) {
+						mes "[Gershaun]";
+						mes "Hoho!";
+						mes "Entendido! Vou te ensinar";
+						mes "Fúria do Furacão!";
+						next;
+						mes "[Gershaun]";
+						mes "Ah, que dia lindo!";
+						mes "Vou recompensar aqueles que";
+						mes "balançam seus carrinhos com entusiasmo!";
+						next;
+						delitem 533,2; //Grape_Juice
+						delitem 998,20; //Iron
+						delitem 938,30; //Sticky_Mucus
+						delitem 601,20; //Wing_Of_Fly
+						delitem 962,5; //Tentacle
+						skill "MC_CARTREVOLUTION",1,SKILL_PERM;
+						mes "Agora você pode usar o Revolução no Carrinho";
+						mes "Eu espero que você torne os Mercadores";
+						mes "famosos usando este incrível";
+						mes "poder de destruição. Muahahahahaha!!!";
+						next;
+						mes "[Gershaun]";
+						mes "Tenha um ótimo dia!!";
+						close;
+					}
+					else if (countitem(532) > 0) {
+						mes "[Gershaun]";
+						mes "Ooh!";
+						mes "É suco de banana!";
+						mes "Muito obrigado!";
+						mes "...............Ahhh!";
+						delitem 532,1; //Banana_Juice
+						mes "Muito refrescante! Obrigado! Adeus!";
+						next;
+						mes "[Gershaun]";
+						mes "Hmm?";
+						mes "Você ainda não foi embora?";
+						mes "Ah! Você ainda está interessado";
+						mes "no Revolução no Carrinho!";
+						mes "Ok então. Considerando que você trouxe";
+						mes "o Suco de Banana, eu vou te ensinar.";
+						next;
+						mes "[Gershaun]";
+						mes "Não é difícil te ensinar";
+						mes "Revolução no Carrinho, mas eu preciso que você prepare";
+						mes "os materiais para modificar seu carrinho.";
+						mes "Os itens que eu preciso são...";
+						next;
+						mes "[Gershaun]";
+						mes "Primeiro, preciso de 20 Ferros para deixar o carrinho";
+						mes "durável. Depois, 30 Muco Pegajoso para absorver";
+						mes "o impacto.";
+						mes "E cerca de 20 Asas de Mosca e 5 Tentáculos?";
+						mes "E 2 garrafas de Suco de Uva para mim!";
+						next;
+						mes "[Gershaun]";
+						mes "Apenas traga isso.";
+						mes "Não estou dizendo APENAS 30 ou 20.";
+						mes "Depende da minha condição!";
+						mes "Hahahaha!";
+						mes "Estarei esperando. Então, tchau tchau~";
+						close;
+					}
+					mes "[Gershaun]";
+					mes "Mmm!";
+					mes "Nada pode ser feito sem uma bebida refrescante!";
+					mes "Que tal começar uma conversa";
+					mes "com pelo menos uma garrafa de Suco de Banana?";
+					close;
+				}
+				if (.@care_random == 2) {
+					if ((countitem(533) > 1) && (countitem(998) > 14) && (countitem(938) > 24) && (countitem(601) > 14) && (countitem(962) > 4)) {
+						mes "[Gershaun]";
+						mes "Mmm, isso é bom!";
+						mes "Ótimo! Eu vou te ensinar";
+						mes "...Revolução no Carrinho!";
+						next;
+						mes "[Gershaun]";
+						mes "Ah, que dia maravilhoso!";
+						mes "Eu recompensarei aqueles que";
+						mes "balançam seus carrinhos com entusiasmo!";
+						next;
+						delitem 533,2; //Grape_Juice
+						delitem 998,15; //Iron
+						delitem 938,25; //Sticky_Mucus
+						delitem 601,15; //Wing_Of_Fly
+						delitem 962,5; //Tentacle
+						skill "MC_CARTREVOLUTION",1,SKILL_PERM;
+						mes "Agora você pode usar o Revolução no Carrinho";
+						mes "Eu espero que você torne os Mercadores";
+						mes "famosos usando seu incrível";
+						mes "poder de destruição. Muahahahahaha!!!";
+						next;
+						mes "[Gershaun]";
+						mes "Tenha um bom dia!!";
+						close;
+					}
+					else if (countitem(532) > 0) {
+						mes "[Gershaun]";
+						mes "Ooh!";
+						mes "É suco de banana!";
+						mes "Muito obrigado!";
+						mes "...............Ahhh!";
+						delitem 532,1; //Banana_Juice
+						mes "Muito bom! Obrigado! Adeus!";
+						next;
+						mes "[Gershaun]";
+						mes "Mmm?";
+						mes "Você ainda não foi embora?";
+						mes "Ah! Você ainda está interessado";
+						mes "no Revolução no Carrinho!";
+						mes "Ok então. Considerando que você trouxe";
+						mes "o suco de banana, eu vou te ensinar.";
+						next;
+						mes "[Gershaun]";
+						mes "Não é difícil te ensinar";
+						mes "Revolução no Carrinho, mas eu preciso que você prepare";
+						mes "os materiais para modificar seu carrinho.";
+						mes "Os itens que eu preciso são...";
+						next;
+						mes "[Gershaun]";
+						mes "Primeiro, preciso de 20 Ferros para deixar o carrinho";
+						mes "durável. Depois, 30 Muco Pegajoso para absorver";
+						mes "o impacto.";
+						mes "E cerca de 20 Asas de Mosca e 5 Tentáculos?";
+						mes "E 2 garrafas de Suco de Uva para mim!";
+						next;
+						mes "[Gershaun]";
+						mes "Traga isso para mim.";
+						mes "Mas isso não significa que eu quero apenas 30 e 20.";
+						mes "Tudo depende da minha condição!";
+						mes "Apenas me traga isso por enquanto.";
+						mes "Hahahaha!";
+						mes "Estou ansioso por isso. Tchau então~";
+						close;
+					}
+					mes "[Gershaun]";
+					mes "Mmm!";
+					mes "Nada é de graça hoje em dia!";
+					mes "Que tal tentar começar uma conversa";
+					mes "oferecendo uma garrafa de Suco de Banana ou algo do tipo?";
+					close;
+				}
+				if (.@care_random == 3) {
+					if ((countitem(533) > 1) && (countitem(998) > 22) && (countitem(938) > 31) && (countitem(601) > 22) && (countitem(962) > 5)) {
+						mes "[Gershaun]";
+						mes "Mmm, isso é bom!";
+						mes "Ótimo! Eu vou te ensinar";
+						mes "...Revolução no Carrinho!";
+						next;
+						mes "[Gershaun]";
+						mes "Ah, que dia maravilhoso!";
+						mes "Eu recompensarei aqueles que";
+						mes "balançam seus carrinhos com entusiasmo!";
+						next;
+						delitem 533,2; //Grape_Juice
+						delitem 998,23; //Iron
+						delitem 938,32; //Sticky_Mucus
+						delitem 601,23; //Wing_Of_Fly
+						delitem 962,6; //Tentacle
+						skill "MC_CARTREVOLUTION",1,SKILL_PERM;
+						mes "Agora você pode usar o Revolução no Carrinho";
+						mes "Eu espero que você torne os Mercadores";
+						mes "famosos usando seu incrível";
+						mes "poder de destruição. Muahahahahaha!!!";
+						next;
+						mes "[Gershaun]";
+						mes "Tenha um bom dia!!";
+						close;
+					}
+					else if (countitem(532) > 0) {
+						mes "[Gershaun]";
+						mes "Ooh!";
+						mes "É Suco de Banana!";
+						mes "Muito obrigado!";
+						mes "...............Ahhh!";
+						delitem 532,1; //Banana_Juice
+						mes "Muito bom! Obrigado! Adeus!";
+						next;
+						mes "[Gershaun]";
+						mes "Mmm?";
+						mes "Você ainda não foi embora?";
+						mes "Ah! Você ainda está interessado";
+						mes "no Revolução no Carrinho!";
+						mes "Ok então. Considerando que você trouxe";
+						mes "o suco de banana, eu vou te ensinar.";
+						next;
+						mes "[Gershaun]";
+						mes "Não é difícil te ensinar";
+						mes "Revolução no Carrinho, mas eu preciso que você prepare";
+						mes "os materiais para modificar seu carrinho.";
+						mes "Os itens que eu preciso são...";
+						next;
+						mes "[Gershaun]";
+						mes "Primeiro, preciso de 20 Ferros para deixar o carrinho";
+						mes "durável. Depois, 30 Muco Pegajoso para absorver";
+						mes "o impacto.";
+						mes "E cerca de 20 Asas de Mosca e 5 Tentáculos?";
+						mes "E 2 garrafas de Suco de Uva para mim!";
+						next;
+						mes "[Gershaun]";
+						mes "Apenas traga isso.";
+						mes "Não estou dizendo APENAS 30 ou 20.";
+						mes "Depende da minha condição!";
+						mes "Hahahaha!";
+						mes "Estarei esperando. Então, tchau tchau~";
+						close;
+					}
+					mes "[Gershaun]";
+					mes "Mmm!";
+					mes "Nada pode ser feito sem uma bebida refrescante!";
+					mes "Que tal começar uma conversa";
+					mes "com pelo menos uma garrafa de Suco de Banana?";
+					close;
+				}
+			case 2:
+				mes "[Gershaun]";
+				mes "... você parece não saber";
+				mes "sobre o Mammonita.";
+				mes "Ok, vou te contar uma história";
+				mes "que nunca contei a ninguém.";
+				mes "Ouça com atenção.";
+				next;
+				mes "[Gershaun]";
+				mes "Eu pesquisei sobre uma maneira";
+				mes "diferente de usar o carrinho.";
+				mes "Tentei cozinhar lámen";
+				mes "e até tentei pular corda.";
+				mes "Mas nenhuma delas foi capaz";
+				mes "de me satisfazer.";
+				next;
+				mes "[Gershaun]";
+				mes "Em desespero, vaguei pelos";
+				mes "campos com meu carrinho.";
+				mes "Após vagar atordoado dia após dia...";
+				mes "Encontrei um monstro muito forte.";
+				mes "Minha vida estava em perigo!";
+				mes "Por que eu - um Mercador sem armas e sem armadura!";
+				next;
+				mes "[Gershaun]";
+				mes "Eu estava morrendo de medo... pensando";
+				mes "e esperando que aquele não fosse";
+				mes "meu fim. Com pouca esperança restante";
+				mes "tentei a última coisa possível.";
+				mes "Usei meu carrinho para acertar o monstro!";
+				next;
+				mes "[Gershaun]";
+				mes "O monstro morreu com um golpe.";
+				mes "Foi então que percebi algo.";
+				mes "Carrinhos também podem ser armas!";
+				mes "Finalmente percebi que podemos";
+				mes "atacar com carrinhos!";
+				next;
+				mes "[Gershaun]";
+				mes "Mammonita!";
+				mes "Essa é a nova habilidade de ataque que desenvolvi.";
+				mes "Usando 12 de SP, você levanta seu carrinho";
+				mes "para atingir seu oponente...";
+				mes "bem na cabeça!";
+				next;
+				mes "[Gershaun]";
+				mes "Quanto mais pesado seu carrinho estiver, mais";
+				mes "forte será seu ataque! Com um golpe,";
+				mes "seu oponente ficará ferido e";
+				mes "forçado a recuar!";
+				mes "Isso é o Mammonita!";
+				close;
+			}
+		}
+		mes "[Gershaun]";
+		mes "Mmm, um jovem Mercador.";
+		mes "Você deve usar carrinhos também.";
+		mes "Já que você precisa fazer negócios.";
+		mes "Mas é só isso?";
+		next;
+		mes "[Gershaun]";
+		mes "Eu pesquisei sobre uma maneira";
+		mes "diferente de usar o carrinho.";
+		mes "Tentei cozinhar lámen";
+		mes "e até tentei pular corda.";
+		mes "Mas nenhuma delas foi capaz";
+		mes "de me satisfazer.";
+		next;
+		switch (select("I know, I know.:...?")) {
+		case 1:
+			mes "[Gershaun]";
+			mes "...não, o que estou dizendo é.";
+			close;
+		case 2:
+			mes "[Gershaun]";
+			mes "Em desespero, vaguei pelos";
+			mes "campos com meu carrinho.";
+			mes "Após vagar atordoado dia após dia...";
+			mes "Encontrei um monstro muito forte.";
+			mes "Minha vida estava em perigo!";
+			mes "Por que eu - um Mercador sem armas e sem armadura!";
+			next;
+			mes "[Gershaun]";
+			mes "Eu estava morrendo de medo... pensando";
+			mes "e esperando que aquele não fosse";
+			mes "meu fim. Com pouca esperança restante";
+			mes "tentei a última coisa possível.";
+			mes "Usei meu carrinho para acertar o monstro!";
+			mes "E então! E então!";
+			next;
+			mes "[Gershaun]";
+			mes "O monstro morreu com um golpe.";
+			mes "Foi então que percebi algo.";
+			mes "Carrinhos também podem ser armas!";
+			mes "Finalmente percebi que podemos";
+			mes "atacar com carrinhos!";
+			next;
+			mes "[Gershaun]";
+			mes "Mammonita!";
+			mes "Essa é a nova habilidade de ataque que desenvolvi.";
+			mes "Usando 12 de SP, você levanta seu carrinho";
+			mes "para atingir seu oponente...";
+			mes "bem na cabeça!";
+			next;
+			mes "[Gershaun]";
+			mes "Quanto mais pesado seu carrinho estiver, mais";
+			mes "forte será seu ataque! Com um golpe,";
+			mes "seu oponente ficará ferido e";
+			mes "forçado a recuar!";
+			next;
+			mes "[Gershaun]";
+			mes "Você gostaria de aprender esta habilidade?";
+			next;
+			switch (select("Yes!!:I want to learn sushi skills...")) {
+			case 1:
+				mes "[Gershaun]";
+				mes "Ok!";
+				mes "Vou te dar um treinamento especial!";
+				mes "Primeiro você precisa de saúde!";
+				mes "Chegue ao nível de Classe 35";
+				mes "como Mercador!";
+				mes "Conversaremos depois disso!";
+				close;
+			case 2:
+				mes "[Sushi King Gershaun]";
+				if (Sex == SEX_FEMALE) {
+					mes "Garota estúpida!";
+				}
+				else {
+					mes "Garoto estúpido!";
+				}
+				mes "É muito cedo para você";
+				mes "sequer colocar as mãos em sushi!";
+				close;
+			}
+		}
+	}
+	mes "[Gershaun]";
+	mes "Se não funciona, faça funcionar.";
+	mes "Se não funciona, faça funcionar.";
+	mes "Se não funciona, faça funcionar.";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= Fully working
+//= 1.1 Bug fixes
+//= 1.a Now using functions found in "Global_Functions.txt"
+//=     for class checks.[kobra_k88]
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed exploits [Lupus]
+//= 1.4a Fixed some typos [IVBela] 1.4b  Gershaun -> Gershuan
+//=     changed perm. variables to temp ones [Lupus]
+//= 1.4b Added missing 1 Banana Juice requirement to Cart Revolution [DracoRPG]
+//============================================================
