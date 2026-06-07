@@ -1,0 +1,535 @@
+//===== rAthena Script ======================================= 
+//= RWC 2011 Golden Poring
+//===== By: ================================================== 
+//= Euphy
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Collect blue cards dropped by Golden Porings to spell out
+//= 'RWC2011' and win a prize!
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Euphy]
+//============================================================ 
+
+prontera,114,81,5	script	RWC2011 Agent#2	407,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 500) {
+		mes "[Novo Agente]";
+		mes "Você tem itens demais. Por favor, libere espaço em seu inventário e volte.";
+		close;
+	}
+	if (oversea_event == 0) {
+		mes "[Novo Agente]";
+		mes "Uau~ Finalmente!! É a temporada que todos nós estávamos esperando!";
+		emotion ET_BIGTHROB;
+		next;
+		mes "[Novo Agente]";
+		mes "É hora do RWC!";
+		next;
+		set .@loop,1;
+		while(.@loop) {
+			switch(select("What is RWC?:Are you a New Agent?:I don't care.")) {
+			case 1:
+				mes "[Novo Agente]";
+				if (BaseLevel < 70)
+					mes "Você deve ser um aventureiro novo. Explicarei gentilmente para você.";
+				else
+					mes "Parece que você já viajou bastante, mas não é muito bom em ouvir as notícias ao redor do mundo.";
+				next;
+				mes "[Novo Agente]";
+				mes "Existem poucos aventureiros em Midgard cujas vidas são dedicadas à batalha, que nunca pulam seu treinamento, vivem em isolamento e são especialistas em sua arte.";
+				next;
+				mes "[Novo Agente]";
+				mes "O RWC é o festival onde esses aventureiros podem competir entre si e descobrir quem é o melhor!";
+				next;
+				mes "[Novo Agente]";
+				mes "Mas isso não pode ser alcançado sozinho. Seus amigos terão um papel enorme na competição.";
+				next;
+				mes "[Novo Agente]";
+				mes "Se você estiver interessado neste festival, comece a procurar amigos em quem possa confiar!";
+				next;
+				break;
+			case 2:
+				mes "[Novo Agente]";
+				mes "Muitos eventos são organizados para a promoção do RWC todos os anos.";
+				next;
+				mes "[Novo Agente]";
+				mes "E este ano, uma missão especial foi confiada a um novo agente... eu mesmo!";
+				next;
+				mes "[Novo Agente]";
+				mes "Eu deveria afixar cartões azuis com as letras RWC2011 por todo o mundo para promover o evento. Mas... mas...";
+				next;
+				mes "- Ele pensou em algo e então olhou para seus olhos. -";
+				next;
+				mes "[Novo Agente]";
+				mes "Você gostaria de ouvir minha história?";
+				next;
+				if(select("Sure, let me hear it.:No, thank you.") == 2) {
+					mes "[Novo Agente]";
+					mes "Arrgg!! Você está me ignorando porque sou novo? Geralmente as pessoas ouvem...";
+					next;
+					mes "- O Novo Agente está olhando para você com olhos piedosos. -";
+					next;
+					mes "- Seus pequenos olhos transbordantes parecem lhe dizer algo. ^FF0000Por favor, fale comigo novamente...^000000 -";
+					close;
+				}
+				set .@loop,0;
+				break;
+			case 3:
+				mes "[Novo Agente]";
+				mes "Esta é minha primeira missão, mas a reação das pessoas não é boa.";
+				next;
+				mes "- O Novo Agente está olhando para você com olhos piedosos. -";
+				next;
+				mes "- Seus pequenos olhos cintilantes parecem lhe dizer algo. ^FF0000Por favor, fale comigo novamente...^000000 -";
+				close;
+			}
+		}
+		mes "[Novo Agente]";
+		mes "Eu costumava ser um garoto muito normal em Morroc.";
+		mes "Eu não sou um aventureiro e nem sei como comprar/vender coisas. Às vezes, fico muito feliz em ver aventureiros. Sabe... eu sou apenas um garoto comum.";
+		next;
+		mes "[Novo Agente]";
+		mes "As pessoas costumavam me dizer isso, já que eu era muito tímido.";
+		mes "Eu passaria minha vida nos subúrbios.";
+		next;
+		mes "[Novo Agente]";
+		mes "Mas, eventualmente, minha paciência e personalidade contida me motivaram a me tornar um agente para o RWC2011!";
+		mes "Eu estava tão feliz que não conseguia dormir! Finalmente teria a chance de conhecer muitos aventureiros e me familiarizar com eles.";
+		next;
+		mes "[Novo Agente]";
+		mes "Esta missão era tão importante para mim,";
+		mes "Eu estava com medo de ser atacado por monstros ao afixar os cartões azuis para o RWC2011 nas ruas.";
+		next;
+		mes "[Novo Agente]";
+		mes "......";
+		next;
+		mes "[Novo Agente]";
+		mes "E sabe de uma coisa?";
+		mes "^FF0000Realmente aconteceu!^000000";
+		next;
+		select("Are you serious!?");
+		mes "[Novo Agente]";
+		mes "Eu tinha apagado a luz e estava tentando dormir, então vi essa luz brilhante através da janela.";
+		mes "De repente, a janela foi quebrada e ele apareceu!";
+		next;
+		select("It?");
+		mes "[Novo Agente]";
+		mes "Era um Poring brilhante! E ele comeu todos os cartões azuis que eu tinha preparado em menos de um segundo!";
+		next;
+		mes "[Novo Agente]";
+		mes "Fiquei tão chocado, tentei me acalmar e pensar... Eu nunca tinha ouvido falar nem visto nenhum Poring brilhante!";
+		next;
+		mes "[Novo Agente]";
+		mes "^FF0000Sim! Deve ser um sonho!^000000 Essa foi a conclusão que tirei e voltei a dormir.";
+		next;
+		mes "[Novo Agente]";
+		mes "Mas não era um sonho. Quando acordei, percebi que todos os cartões azuis tinham sumido...";
+		next;
+		mes "[Novo Agente]";
+		mes "Se eu estragar essa promoção, posso perder o emprego e ter que voltar para onde eu vivia sozinho...";
+		next;
+		mes "[Novo Agente]";
+		mes "Se você vir o Poring Dourado, poderia encontrar os preciosos cartões azuis para mim?";
+		next;
+		emotion ET_CRY;
+		mes "- Ele olha para você com olhos suplicantes. -";
+		next;
+		if(select("Ok, I will help you!:How much money can you offer me?") == 2) {
+			mes "[Novo Agente]";
+			mes "Você decidiu me ajudar? Bem, vou preparar alguns presentes. Tenho certeza de que você vai gostar deles.";
+			next;
+		}
+		mes "[Novo Agente]";
+		mes "O que você está procurando são cartões grandes com as letras ^FF0000RWC2011^000000. Alguns deles podem já ter sido digeridos, no entanto.";
+		next;
+		mes "[Novo Agente]";
+		mes "Tente reunir os cartões restantes até formar a palavra, 'RWC2011'.";
+		next;
+		mes "[Novo Agente]";
+		mes "Por favor, me ajude!! Minha vida está em suas mãos!";
+		set oversea_event,1;
+		setquest 13000;
+		close;
+	} else if (oversea_event == 1) {
+		if (countitem(6485) && countitem(6486) && countitem(6487) > 1 && countitem(7602) && countitem(7470) && countitem(6012)) {
+			mes "[Agente RWC2011]";
+			mes "Você reuniu todos os cartões?";
+			next;
+			mes "[Agente RWC2011]";
+			mes "Uau~ Você trouxe luz para minha vida novamente!";
+			next;
+			mes "[Agente RWC2011]";
+			mes "Aqui estão os presentes que prometi... Vamos ver...";
+			next;
+			delitem 6485,1; //BlueCard_2
+			delitem 6486,1; //BlueCard_0
+			delitem 6487,2; //BlueCard_1
+			delitem 7602,1; //BlueCard_R
+			delitem 7470,1; //BlueCard_W
+			delitem 6012,1; //Blue_Card_C
+			//SavePPL BlueCard_2
+			set oversea_event,2;
+			erasequest 13000;
+			setquest 13001;
+			set .@i, rand(1,100);
+	 		     if (.@i == 1) getitem 12690,1; //Old_C_Album_Helm
+	 		else if (.@i == 2) getitem 12691,1; //Old_C_Album_Armor
+	 		else if (.@i == 3) getitem 12693,1; //Old_C_Album_Garment
+	 		else if (.@i == 4) getitem 12694,1; //Old_C_Album_Shoes
+	 		else if (.@i == 5) getitem 12698,1; //Old_C_Album_Weapon
+	 		else if (.@i == 6) getitem 12695,1; //Old_C_Album_Acc
+	 		else if (.@i == 7) getitem 12692,1; //Old_C_Album_Shield
+	 		else if (.@i < 28) getitem 547,10; //White_Slim_Potion
+	 		else if (.@i < 38) getitem 607,1; //Yggdrasilberry
+	 		else if (.@i < 51) getitem 608,1; //Seed_Of_Yggdrasil
+	 		else {
+				getitem 12696,5; //RWC_Cele_Fire
+				getitem 12697,5; //RWC_Cele_Fire2
+	 		}
+	 		mes "[Agente RWC2011]";
+	 		mes "Não é muito, mas por favor, fique com isso! Haha, ainda temos muitos cartões para encontrar. Espero que você possa me ajudar amanhã também.";
+	 		next;
+	 		mes "[Agente RWC2011]";
+	 		mes "Obrigado!! Posso continuar trabalhando agora. Nada é impossível quando temos grandes aventureiros como você neste mundo!";
+	 		next;
+	 		mes "[Agente RWC2011]";
+	 		mes "ADIOS!";
+	 		next;
+	 		mes "- O agente murmurou algo para si mesmo. -";
+	 		close;
+		} else {
+			mes "[Agente RWC2011]";
+			mes "Mmmm~ ainda não? Estamos com falta de pessoal... Por favor, me ajude.";
+			next;
+			mes "[Agente RWC2011]";
+			mes "I'm just saying that out of concern for you. You need TWO ^FF0000Blue 1 Card^000000. It's \"2011\"... Got it?";
+			close;
+		}
+	} else if (oversea_event == 2) {
+		set .@playtime, checkquest(13001,PLAYTIME);
+		if (.@playtime == 0 || .@playtime == 1) {
+			mes "[Agente RWC2011]";
+			mes "Primeiro, vou começar a afixar os cartões que você encontrou... Vou pegar o restante dos cartões amanhã.";
+			mes "Por favor, volte amanhã.";
+			close;
+		} else if (.@playtime == 2)
+			erasequest 13001;
+		mes "[Agente RWC2011]";
+		mes "Obrigado pela última vez.";
+		mes "Devo continuar promovendo o evento, então quero pedir sua ajuda novamente~!";
+		set oversea_event,3;
+		close;
+	} else if (oversea_event == 3) {
+		mes "[Agente RWC2011]";
+		mes "Você veio novamente~";
+		mes "Obrigado pela última vez! Ainda temos muitos cartões para encontrar. Você poderia me ajudar?";
+		next;
+		switch(select("Ok!:I'm busy now.")) {
+		case 1:
+			mes "[Agente RWC2011]";
+			mes "É a mesma missão de antes.";
+			mes "Tente reunir cartões azuis e formar a palavra, ^FF0000R W C 2 0 1 1 ^000000.";
+			mes "Boa sorte!";
+			set oversea_event,1;
+			setquest 13000;
+			close;
+		case 2:
+			mes "[Agente RWC2011]";
+			mes "... Entendo...";
+			mes "Ainda tenho muitos cartões para encontrar, então, se tiver tempo, por favor, volte e ajude novamente.";
+			close;
+		}
+	} else {
+		mes "[Agente RWC2011]";
+		mes "... huh...?";
+		mes "Eu sou... um novo agente.";
+		close;
+	}
+}
+
+// Monster Spawns
+//============================================================
+dic_dun03,0,0	monster	Golden Poring	2248,3,5000
+dew_fild01,0,0	monster	Golden Poring	2248,3,5000
+dew_dun01,0,0	monster	Golden Poring	2248,3,5000
+dew_dun02,0,0	monster	Golden Poring	2248,3,5000
+mal_dun01,0,0	monster	Golden Poring	2248,3,5000
+iz_dun05,0,0	monster	Golden Poring	2248,3,5000
+man_fild01,0,0	monster	Golden Poring	2248,3,5000
+man_fild03,0,0	monster	Golden Poring	2248,3,5000
+spl_fild02,0,0	monster	Golden Poring	2248,3,5000
+spl_fild03,0,0	monster	Golden Poring	2248,3,5000
+man_fild02,0,0	monster	Golden Poring	2248,3,5000
+spl_fild01,0,0	monster	Golden Poring	2248,3,5000
+nyd_dun01,0,0	monster	Golden Poring	2248,3,5000
+bra_fild01,0,0	monster	Golden Poring	2248,3,5000
+bra_dun01,0,0	monster	Golden Poring	2248,3,5000
+bra_dun02,0,0	monster	Golden Poring	2248,3,5000
+dic_fild01,0,0	monster	Golden Poring	2248,3,5000
+dic_fild02,0,0	monster	Golden Poring	2248,3,5000
+dic_dun01,0,0	monster	Golden Poring	2248,3,5000
+dic_dun02,0,0	monster	Golden Poring	2248,3,5000
+bif_fild01,0,0	monster	Golden Poring	2248,3,5000
+bif_fild02,0,0	monster	Golden Poring	2248,3,5000
+abbey01,0,0	monster	Golden Poring	2248,3,5000
+abbey02,0,0	monster	Golden Poring	2248,3,5000
+abbey03,0,0	monster	Golden Poring	2248,3,5000
+abyss_01,0,0	monster	Golden Poring	2248,3,5000
+abyss_02,0,0	monster	Golden Poring	2248,3,5000
+abyss_03,0,0	monster	Golden Poring	2248,3,5000
+alde_dun01,0,0	monster	Golden Poring	2248,3,5000
+alde_dun02,0,0	monster	Golden Poring	2248,3,5000
+alde_dun03,0,0	monster	Golden Poring	2248,3,5000
+alde_dun04,0,0	monster	Golden Poring	2248,3,5000
+ama_dun01,0,0	monster	Golden Poring	2248,3,5000
+ama_dun02,0,0	monster	Golden Poring	2248,3,5000
+ama_dun03,0,0	monster	Golden Poring	2248,3,5000
+ama_fild01,0,0	monster	Golden Poring	2248,3,5000
+anthell01,0,0	monster	Golden Poring	2248,3,5000
+anthell02,0,0	monster	Golden Poring	2248,3,5000
+ayo_dun01,0,0	monster	Golden Poring	2248,3,5000
+ayo_dun02,0,0	monster	Golden Poring	2248,3,5000
+ayo_fild01,0,0	monster	Golden Poring	2248,3,5000
+ayo_fild02,0,0	monster	Golden Poring	2248,3,5000
+beach_dun,0,0	monster	Golden Poring	2248,3,5000
+beach_dun2,0,0	monster	Golden Poring	2248,3,5000
+beach_dun3,0,0	monster	Golden Poring	2248,3,5000
+c_tower1,0,0	monster	Golden Poring	2248,3,5000
+c_tower2,0,0	monster	Golden Poring	2248,3,5000
+c_tower3,0,0	monster	Golden Poring	2248,3,5000
+c_tower4,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild01,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild02,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild03,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild04,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild06,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild07,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild08,0,0	monster	Golden Poring	2248,3,5000
+cmd_fild09,0,0	monster	Golden Poring	2248,3,5000
+ein_dun01,0,0	monster	Golden Poring	2248,3,5000
+ein_dun02,0,0	monster	Golden Poring	2248,3,5000
+ein_fild03,0,0	monster	Golden Poring	2248,3,5000
+ein_fild04,0,0	monster	Golden Poring	2248,3,5000
+ein_fild05,0,0	monster	Golden Poring	2248,3,5000
+ein_fild06,0,0	monster	Golden Poring	2248,3,5000
+ein_fild07,0,0	monster	Golden Poring	2248,3,5000
+ein_fild08,0,0	monster	Golden Poring	2248,3,5000
+ein_fild09,0,0	monster	Golden Poring	2248,3,5000
+gef_dun00,0,0	monster	Golden Poring	2248,3,5000
+gef_dun01,0,0	monster	Golden Poring	2248,3,5000
+gef_dun02,0,0	monster	Golden Poring	2248,3,5000
+gef_fild00,0,0	monster	Golden Poring	2248,3,5000
+gef_fild01,0,0	monster	Golden Poring	2248,3,5000
+gef_fild02,0,0	monster	Golden Poring	2248,3,5000
+gef_fild03,0,0	monster	Golden Poring	2248,3,5000
+gef_fild04,0,0	monster	Golden Poring	2248,3,5000
+gef_fild05,0,0	monster	Golden Poring	2248,3,5000
+gef_fild06,0,0	monster	Golden Poring	2248,3,5000
+gef_fild07,0,0	monster	Golden Poring	2248,3,5000
+gef_fild08,0,0	monster	Golden Poring	2248,3,5000
+gef_fild09,0,0	monster	Golden Poring	2248,3,5000
+gef_fild10,0,0	monster	Golden Poring	2248,3,5000
+gef_fild11,0,0	monster	Golden Poring	2248,3,5000
+gef_fild13,0,0	monster	Golden Poring	2248,3,5000
+gefenia01,0,0	monster	Golden Poring	2248,3,5000
+gefenia02,0,0	monster	Golden Poring	2248,3,5000
+gefenia03,0,0	monster	Golden Poring	2248,3,5000
+gefenia04,0,0	monster	Golden Poring	2248,3,5000
+gl_cas01,0,0	monster	Golden Poring	2248,3,5000
+gl_cas02,0,0	monster	Golden Poring	2248,3,5000
+gl_church,0,0	monster	Golden Poring	2248,3,5000
+gl_chyard,0,0	monster	Golden Poring	2248,3,5000
+gl_dun01,0,0	monster	Golden Poring	2248,3,5000
+gl_dun02,0,0	monster	Golden Poring	2248,3,5000
+gl_in01,0,0	monster	Golden Poring	2248,3,5000
+gl_knt01,0,0	monster	Golden Poring	2248,3,5000
+gl_knt02,0,0	monster	Golden Poring	2248,3,5000
+gl_prison,0,0	monster	Golden Poring	2248,3,5000
+gl_prison1,0,0	monster	Golden Poring	2248,3,5000
+gl_sew01,0,0	monster	Golden Poring	2248,3,5000
+gl_sew02,0,0	monster	Golden Poring	2248,3,5000
+gl_sew03,0,0	monster	Golden Poring	2248,3,5000
+gl_sew04,0,0	monster	Golden Poring	2248,3,5000
+gl_step,0,0	monster	Golden Poring	2248,3,5000
+glast_01,0,0	monster	Golden Poring	2248,3,5000
+gon_dun01,0,0	monster	Golden Poring	2248,3,5000
+gon_dun02,0,0	monster	Golden Poring	2248,3,5000
+gon_dun03,0,0	monster	Golden Poring	2248,3,5000
+gon_fild01,0,0	monster	Golden Poring	2248,3,5000
+hu_fild01,0,0	monster	Golden Poring	2248,3,5000
+hu_fild02,0,0	monster	Golden Poring	2248,3,5000
+hu_fild04,0,0	monster	Golden Poring	2248,3,5000
+hu_fild05,0,0	monster	Golden Poring	2248,3,5000
+hu_fild06,0,0	monster	Golden Poring	2248,3,5000
+ice_dun01,0,0	monster	Golden Poring	2248,3,5000
+ice_dun02,0,0	monster	Golden Poring	2248,3,5000
+ice_dun03,0,0	monster	Golden Poring	2248,3,5000
+in_sphinx1,0,0	monster	Golden Poring	2248,3,5000
+in_sphinx2,0,0	monster	Golden Poring	2248,3,5000
+in_sphinx3,0,0	monster	Golden Poring	2248,3,5000
+in_sphinx4,0,0	monster	Golden Poring	2248,3,5000
+in_sphinx5,0,0	monster	Golden Poring	2248,3,5000
+iz_dun00,0,0	monster	Golden Poring	2248,3,5000
+iz_dun01,0,0	monster	Golden Poring	2248,3,5000
+iz_dun02,0,0	monster	Golden Poring	2248,3,5000
+iz_dun03,0,0	monster	Golden Poring	2248,3,5000
+iz_dun04,0,0	monster	Golden Poring	2248,3,5000
+jupe_core,0,0	monster	Golden Poring	2248,3,5000
+juperos_01,0,0	monster	Golden Poring	2248,3,5000
+juperos_02,0,0	monster	Golden Poring	2248,3,5000
+kh_dun01,0,0	monster	Golden Poring	2248,3,5000
+kh_dun02,0,0	monster	Golden Poring	2248,3,5000
+lhz_dun01,0,0	monster	Golden Poring	2248,3,5000
+lhz_dun02,0,0	monster	Golden Poring	2248,3,5000
+lhz_dun03,0,0	monster	Golden Poring	2248,3,5000
+lhz_fild01,0,0	monster	Golden Poring	2248,3,5000
+lhz_fild02,0,0	monster	Golden Poring	2248,3,5000
+lhz_fild03,0,0	monster	Golden Poring	2248,3,5000
+lou_dun01,0,0	monster	Golden Poring	2248,3,5000
+lou_dun02,0,0	monster	Golden Poring	2248,3,5000
+lou_dun03,0,0	monster	Golden Poring	2248,3,5000
+lou_fild01,0,0	monster	Golden Poring	2248,3,5000
+mag_dun01,0,0	monster	Golden Poring	2248,3,5000
+mag_dun02,0,0	monster	Golden Poring	2248,3,5000
+man_fild02,0,0	monster	Golden Poring	2248,3,5000
+mjo_dun01,0,0	monster	Golden Poring	2248,3,5000
+mjo_dun02,0,0	monster	Golden Poring	2248,3,5000
+mjo_dun03,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_01,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_02,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_03,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_04,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_05,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_06,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_07,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_08,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_09,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_10,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_11,0,0	monster	Golden Poring	2248,3,5000
+mjolnir_12,0,0	monster	Golden Poring	2248,3,5000
+moc_fild01,0,0	monster	Golden Poring	2248,3,5000
+moc_fild02,0,0	monster	Golden Poring	2248,3,5000
+moc_fild03,0,0	monster	Golden Poring	2248,3,5000
+moc_fild04,0,0	monster	Golden Poring	2248,3,5000
+moc_fild05,0,0	monster	Golden Poring	2248,3,5000
+moc_fild06,0,0	monster	Golden Poring	2248,3,5000
+moc_fild07,0,0	monster	Golden Poring	2248,3,5000
+moc_fild08,0,0	monster	Golden Poring	2248,3,5000
+moc_fild09,0,0	monster	Golden Poring	2248,3,5000
+moc_fild10,0,0	monster	Golden Poring	2248,3,5000
+moc_fild11,0,0	monster	Golden Poring	2248,3,5000
+moc_fild12,0,0	monster	Golden Poring	2248,3,5000
+moc_fild13,0,0	monster	Golden Poring	2248,3,5000
+moc_fild14,0,0	monster	Golden Poring	2248,3,5000
+moc_fild15,0,0	monster	Golden Poring	2248,3,5000
+moc_fild16,0,0	monster	Golden Poring	2248,3,5000
+moc_fild17,0,0	monster	Golden Poring	2248,3,5000
+moc_fild18,0,0	monster	Golden Poring	2248,3,5000
+moc_pryd01,0,0	monster	Golden Poring	2248,3,5000
+moc_pryd02,0,0	monster	Golden Poring	2248,3,5000
+moc_pryd03,0,0	monster	Golden Poring	2248,3,5000
+moc_pryd04,0,0	monster	Golden Poring	2248,3,5000
+moc_pryd05,0,0	monster	Golden Poring	2248,3,5000
+moc_pryd06,0,0	monster	Golden Poring	2248,3,5000
+nameless_n,0,0	monster	Golden Poring	2248,3,5000
+nif_fild01,0,0	monster	Golden Poring	2248,3,5000
+nif_fild02,0,0	monster	Golden Poring	2248,3,5000
+nyd_dun01,0,0	monster	Golden Poring	2248,3,5000
+odin_tem01,0,0	monster	Golden Poring	2248,3,5000
+odin_tem02,0,0	monster	Golden Poring	2248,3,5000
+odin_tem03,0,0	monster	Golden Poring	2248,3,5000
+orcsdun01,0,0	monster	Golden Poring	2248,3,5000
+orcsdun02,0,0	monster	Golden Poring	2248,3,5000
+pay_dun00,0,0	monster	Golden Poring	2248,3,5000
+pay_dun01,0,0	monster	Golden Poring	2248,3,5000
+pay_dun02,0,0	monster	Golden Poring	2248,3,5000
+pay_dun03,0,0	monster	Golden Poring	2248,3,5000
+pay_dun04,0,0	monster	Golden Poring	2248,3,5000
+pay_fild01,0,0	monster	Golden Poring	2248,3,5000
+pay_fild02,0,0	monster	Golden Poring	2248,3,5000
+pay_fild03,0,0	monster	Golden Poring	2248,3,5000
+pay_fild04,0,0	monster	Golden Poring	2248,3,5000
+pay_fild06,0,0	monster	Golden Poring	2248,3,5000
+pay_fild07,0,0	monster	Golden Poring	2248,3,5000
+pay_fild08,0,0	monster	Golden Poring	2248,3,5000
+pay_fild09,0,0	monster	Golden Poring	2248,3,5000
+pay_fild10,0,0	monster	Golden Poring	2248,3,5000
+prt_fild00,0,0	monster	Golden Poring	2248,3,5000
+prt_fild01,0,0	monster	Golden Poring	2248,3,5000
+prt_fild02,0,0	monster	Golden Poring	2248,3,5000
+prt_fild03,0,0	monster	Golden Poring	2248,3,5000
+prt_fild04,0,0	monster	Golden Poring	2248,3,5000
+prt_fild05,0,0	monster	Golden Poring	2248,3,5000
+prt_fild06,0,0	monster	Golden Poring	2248,3,5000
+prt_fild07,0,0	monster	Golden Poring	2248,3,5000
+prt_fild08,0,0	monster	Golden Poring	2248,3,5000
+prt_fild09,0,0	monster	Golden Poring	2248,3,5000
+prt_fild10,0,0	monster	Golden Poring	2248,3,5000
+prt_fild11,0,0	monster	Golden Poring	2248,3,5000
+prt_maze01,0,0	monster	Golden Poring	2248,3,5000
+prt_maze02,0,0	monster	Golden Poring	2248,3,5000
+prt_maze03,0,0	monster	Golden Poring	2248,3,5000
+prt_sewb1,0,0	monster	Golden Poring	2248,3,5000
+prt_sewb2,0,0	monster	Golden Poring	2248,3,5000
+prt_sewb3,0,0	monster	Golden Poring	2248,3,5000
+prt_sewb4,0,0	monster	Golden Poring	2248,3,5000
+ra_fild01,0,0	monster	Golden Poring	2248,3,5000
+ra_fild03,0,0	monster	Golden Poring	2248,3,5000
+ra_fild04,0,0	monster	Golden Poring	2248,3,5000
+ra_fild05,0,0	monster	Golden Poring	2248,3,5000
+ra_fild06,0,0	monster	Golden Poring	2248,3,5000
+ra_fild08,0,0	monster	Golden Poring	2248,3,5000
+ra_fild12,0,0	monster	Golden Poring	2248,3,5000
+ra_san01,0,0	monster	Golden Poring	2248,3,5000
+ra_san02,0,0	monster	Golden Poring	2248,3,5000
+ra_san03,0,0	monster	Golden Poring	2248,3,5000
+ra_san04,0,0	monster	Golden Poring	2248,3,5000
+ra_san05,0,0	monster	Golden Poring	2248,3,5000
+spl_fild01,0,0	monster	Golden Poring	2248,3,5000
+tha_t01,0,0	monster	Golden Poring	2248,3,5000
+tha_t02,0,0	monster	Golden Poring	2248,3,5000
+tha_t03,0,0	monster	Golden Poring	2248,3,5000
+tha_t04,0,0	monster	Golden Poring	2248,3,5000
+tha_t05,0,0	monster	Golden Poring	2248,3,5000
+tha_t06,0,0	monster	Golden Poring	2248,3,5000
+tha_t07,0,0	monster	Golden Poring	2248,3,5000
+tha_t08,0,0	monster	Golden Poring	2248,3,5000
+tha_t09,0,0	monster	Golden Poring	2248,3,5000
+tha_t10,0,0	monster	Golden Poring	2248,3,5000
+tha_t11,0,0	monster	Golden Poring	2248,3,5000
+tha_t12,0,0	monster	Golden Poring	2248,3,5000
+thor_v01,0,0	monster	Golden Poring	2248,3,5000
+thor_v02,0,0	monster	Golden Poring	2248,3,5000
+thor_v03,0,0	monster	Golden Poring	2248,3,5000
+treasure01,0,0	monster	Golden Poring	2248,3,5000
+treasure02,0,0	monster	Golden Poring	2248,3,5000
+tur_dun01,0,0	monster	Golden Poring	2248,3,5000
+tur_dun02,0,0	monster	Golden Poring	2248,3,5000
+tur_dun03,0,0	monster	Golden Poring	2248,3,5000
+tur_dun04,0,0	monster	Golden Poring	2248,3,5000
+um_fild01,0,0	monster	Golden Poring	2248,3,5000
+um_fild02,0,0	monster	Golden Poring	2248,3,5000
+um_fild03,0,0	monster	Golden Poring	2248,3,5000
+um_fild04,0,0	monster	Golden Poring	2248,3,5000
+ve_fild01,0,0	monster	Golden Poring	2248,3,5000
+ve_fild02,0,0	monster	Golden Poring	2248,3,5000
+ve_fild03,0,0	monster	Golden Poring	2248,3,5000
+ve_fild04,0,0	monster	Golden Poring	2248,3,5000
+ve_fild05,0,0	monster	Golden Poring	2248,3,5000
+ve_fild07,0,0	monster	Golden Poring	2248,3,5000
+xmas_dun01,0,0	monster	Golden Poring	2248,3,5000
+xmas_dun02,0,0	monster	Golden Poring	2248,3,5000
+xmas_fild01,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild01,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild02,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild03,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild04,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild06,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild07,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild08,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild09,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild10,0,0	monster	Golden Poring	2248,3,5000
+yuno_fild12,0,0	monster	Golden Poring	2248,3,5000

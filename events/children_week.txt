@@ -1,0 +1,86 @@
+//===== rAthena Script =======================================
+//= Children Week Event
+//===== By: ==================================================
+//= Samuray22
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Indian Ro: Children Week Event
+//===== Additional Comments: =================================
+//= 1.1 First Beta. [Samuray22]
+//============================================================
+
+prontera,146,91,5	script	Pandit chacha#child07	61,{
+	if (BaseLevel > 50) {
+		mes "[Pandit chacha]";
+		mes "Hahaha~";
+		mes "É um dia especial, que acontece apenas uma vez por ano.";
+		mes "Se você vir pequenos aventureiros ao seu redor, envie-os para mim~";
+		mes "Eu darei um presente especial.";
+		close;
+	} else if (BaseLevel < 20) {
+		mes "[Pandit chacha]";
+		mes "Hahaha~";
+		mes "Você é um Aventureiro Bebê, não um pequeno aventureiro.";
+		mes "Quando você crescer mais, volte aqui. Hahaha.";
+		close;
+	} else if (oversea_event9 < 1) {
+		mes "[Pandit chacha]";
+		mes "Hahaha~";
+		mes "Bem-vindos, pequenos aventureiros!";
+		mes "Hoje é um dia especial, não é~?";
+		mes "Eu gostaria de dar um pequeno presente para um pequeno aventureiro...";
+		mes "E você? Gostaria de recebê-lo?";
+		next;
+		if(select("No. I will take it later.:Sure, I want.") == 1) {
+			mes "[Pandit chacha]";
+			mes "Que pena.... hum...";
+			mes "Eu juntei algumas coisas de um mundo distante para fazer isso....";
+			mes "Volte quando quiser se mudar de ideia...";
+			close;
+		}
+		set oversea_event9,1;
+		getitem 11705,10; //Special_White_Potion
+		mes "[Pandit chacha]";
+		mes "Olhe. Esta é uma Poção Infantil.";
+		mes "O peso é apenas 1, mas recupera bastante HP.";
+		mes "Se quiser mais, traga 1 Buquê de Casamento e 1 Rosa Eterna.";
+		close;
+	} else if (oversea_event9 == 1) {
+		if (countitem(745) > 0 && countitem(748) > 0) {
+			mes "[Pandit chacha]";
+			mes "Ahha!!";
+			mes "Você se lembrou da minha bela composição.";
+			mes "Você fez um bom trabalho.";
+			mes "Você poderia me dar 1 Buquê de Casamento e 1 Rosa Eterna?";
+			next;
+			if(select("Not yet.:Sure, take it.") == 1) {
+				mes "[Pandit chacha]";
+				mes "Se ainda não estiver preparado, fale comigo quando estiver pronto.";
+				close;
+			}
+			mes "[Pandit chacha]";
+			mes "Hahaha~";
+			mes "Oh~ você conseguiu.";
+			mes "Aqui está, vou trocar por 50 Poções Infantis.";
+			mes "Assim que receber estas 50 Poções Infantis, não darei mais nenhuma.";
+			close2;
+			delitem 745,1; //Wedding_Bouquet
+			delitem 748,1; //Witherless_Rose
+			set oversea_event9,2;
+			getitem 11705,50; //Special_White_Potion
+			end;
+		}
+		mes "[Pandit chacha]";
+		mes "Pequenos aventureiros, vocês devem trazer 1 Buquê de Casamento e 1 Rosa Eterna.";
+		mes "Se trouxerem estes itens, eu os trocarei por uma Poção Infantil.";
+		close;
+	}
+	mes "[Pandit chacha]";
+	mes "Hahaha~";
+	mes "Vocês estão aproveitando a Semana das Crianças~?";
+	close;
+}

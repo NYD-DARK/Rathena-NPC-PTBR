@@ -1,0 +1,109 @@
+//===== rAthena Script ======================================= 
+//= Official Skill Resetter Event in Juno (kRO & idRO)
+//===== By: ================================================== 
+//= $ephiroth
+//===== Current Version: ===================================== 
+//= 1.02
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= 2006 - Edition Skill Reset NPC
+//= 2006/11/16: 1.0 Release and fully working. [$ephiroth]
+//= 1.01 Checked, fixed typos, now uses MISC_QUEST var [Lupus]
+//= 1.02 Added missing message,comment,etc. [$ephiroth]
+//===== Additional Comments: =================================
+//= Skill Reset with payment, minimum BaseLv.60 to reset skill.
+//= Each 1 BaseLv need 20.000 Zeny, so be careful to use skill.
+//============================================================
+yuno,138,187,4	script	Hypnotist Teacher	124,{
+	set @npcname$,"[^D5A500Hypnotist^000000]";
+	mes @npcname$;
+
+	if(MISC_QUEST & 1024){
+		mes "Eu já disse que você só pode completar este evento uma vez.";
+		close;
+	}
+	if(BaseLevel < 60) {
+		mes "Por favor, volte quando atingir o Nível Base 60 ou superior.";
+		close;
+	}
+	if(SkillPoint != 0) {
+		mes "Você precisará gastar todos os seus pontos de habilidade se quiser que eu continue.";
+		mes "Por favor, volte em breve!";
+		close;
+	}
+	if(Weight || checkfalcon() || checkcart() || checkriding()) {
+		mes "Você gostaria de resetar suas habilidades?";
+		mes "Sinto muito, mas...";
+		next;
+		mes @npcname$;
+		if(Weight) {
+			mes "Você não pode resetar habilidades";
+			mes "enquanto estiver portando";
+			mes "alguns itens.";
+		} else if(checkcart())
+			mes "Por favor, guarde seu carrinho para continuarmos.";
+		else if(checkfalcon())
+			mes "Por favor, dispense seu Falcão para continuarmos.";
+		else if(checkriding())
+			mes "Por favor, dispense seu PecoPeco para continuarmos.";
+		next;
+		mes @npcname$;
+		mes "Volte logo!";
+		close;
+	}
+	mes "Olá, eu sou o Resetador de Habilidades.";
+	mes "Your name is ^0080FF"+strcharinfo(0)+"^000000.";
+	mes "Como posso te ajudar?";
+	next;
+	menu "^009500Information about Reset skills.^000000",L_Info,"^00B6FFReset skills.^000000",L_Reset,"^000088Nevermind^000000",-;
+
+	mes @npcname$;
+	mes "Você sabe onde me encontrar,";
+	mes "se algum dia quiser um reset!!"; 
+	close;
+
+L_Info:
+	mes @npcname$;
+	mes "Este reset de habilidades não é DE GRAÇA!!";
+	mes "O custo para o reset de habilidades é ^D5A50020000 Zenys x NvBase^000000.";
+	mes "É... cada Nível Base custa 20.000 Zenys para resetar habilidades.";
+	next;
+	mes @npcname$;
+	mes "Ah, sim, mais uma coisa!";
+	mes "Qualquer carrinho, falcão ou peco que você tiver equipado";
+	mes "será removido se você resetar suas habilidades.";
+	next;
+	mes @npcname$;
+	mes "Apenas uma vez é o suficiente para reorganizar os pontos de habilidade";
+	mes "Cuidado com suas habilidades daqui em diante.";
+	close;
+	
+L_Reset:
+	mes @npcname$;
+	mes "Antes de iniciar o reset de habilidades.";
+	mes "Você deve primeiro me dizer seu Nível Base."; 
+	next;
+	mes "^D5A500[" + strcharinfo(0) + "]^000000";
+	mes "My Base level is ^AA00AALevel " + BaseLevel + "BaseLv.^000000"; 
+	next;
+	set @zeny,BaseLevel*20000;
+	mes @npcname$;
+	mes "Total zeny to the reset of skill amount ^529DFF" + @zeny + "Zeny^000000  for the skill reset service.";
+	next;
+	if(Zeny < @zeny) {
+		mes @npcname$;
+		mes "Parece que você não tem dinheiro suficiente.";
+		mes "Além disso, aguardamos a oportunidade.";
+		emotion ET_SCRATCH;
+		close;
+	}
+	set Zeny, Zeny-@zeny;
+	set MISC_QUEST,MISC_QUEST | 1024;
+	resetskill;
+	mes @npcname$;
+	mes "Obrigado.";
+	emotion ET_THANKS;
+//	logmes "SKILL RESET EVENT";
+	close;
+}

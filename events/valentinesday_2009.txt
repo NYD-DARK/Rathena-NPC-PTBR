@@ -1,0 +1,635 @@
+//===== rAthena Script =======================================
+//= iRO Valentine's Day Event (2009)
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.3
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= iRO Valentine's Day Event. (2009)
+//= Make Chocolate/Chocolate Boxes/Home-Made Chocolate.
+//= Make Valentine's Rings/Boxes.
+//= Trade rings to those of opposite gender.
+//= Register rings you have gotten for votes.
+//=
+//= The male and female with the most votes at the end of
+//= the event will receive item (14466) from GM team.
+//=
+//= Must enable the event items in item_db2 and item_trade!
+//===== Additional Comments: =================================
+//= 1.0 First version. [Kisuka]
+//= 1.1-1.2 Fixed exploits with unlimited rings and non deleting choco [Lupus]
+//= 1.3 Some Changes. [Kisuka]
+//============================================================
+
+// Marco Bassinio (Chocolate/Chocolate Box maker)
+//============================================================
+prontera,164,174,4	script	Trader#Val09	58,{
+	mes "[Marco Bassinio]";
+	mes "Ei, pessoal! Aqui está algo que vocês não veem todo dia!";
+	mes "Algo que vocês nunca encontrarão em Rune-Midgard!";
+	mes "Algo que te faz feliz com apenas uma mordida!";
+	next;
+	mes "[Marco Bassinio]";
+	mes "É a sobremesa perfeita e o presente ideal para as pessoas amadas.";
+	mes "Chocolate artesanal tradicional de alta qualidade por apenas 5000z cada!";
+	next;
+	switch(select("I'll take it, please!:I want to wrap the chocolate!:End trading.")) {
+		case 1:
+			mes "[Marco Bassinio]";
+			mes "Ahaha, minha querida.";
+			mes "Este chocolate não se parece com nenhum outro.";
+			mes "Cada pedaço carrega a devoção da pessoa que o fez!";
+			next;
+			mes "[Marco Bassinio]";
+			mes "É por isso que não posso vender mais de 5 de uma vez.";
+			mes "Se você realmente, realmente quiser mais, fale comigo novamente.";
+			mes "Quantos você quer, afinal?";
+			next;
+			while(.@input <= 0 || .@input > 5) {
+				input .@input;
+				if (.@input < 1) {
+					mes "[Marco Bassinio]";
+					mes "Oh, que pena!";
+					mes "Tenho certeza de que você perderá esta oportunidade e se arrependerá de não ter comprado.";
+					next;
+					mes "[Marco Bassinio]";
+					mes "Lembre-se, você nunca encontrará isso em nenhum outro lugar!";
+					mes "Volte quando quiser, quando mudar de ideia.";
+					close;
+				}
+				if (.@input > 5) {
+					mes "[Marco Bassinio]";
+					mes "Ugh... Eu não te avisei?";
+					mes "5 é o máximo!";
+					mes "Não posso vender mais do que isso para a mesma pessoa.";
+					next;
+					mes "[Marco Bassinio]";
+					mes "E você sabe que não é uma refeição comum do dia a dia.";
+					mes "Comer demais não faz bem para você.";
+					next;
+				}
+			}
+			if (!checkweight(558, .@input)) {
+				mes "[Marco Bassinio]";
+				mes "Você está carregando itens demais.";
+				mes "Por favor, utilize os Serviços Kafra.";
+				close;
+			}
+			set .@price, .@input * 5000;
+			if (Zeny < .@price) {
+				mes "[Marco Bassinio]";
+				mes "Parece que você não tem zeny suficiente com você.";
+				mes "Talvez você deva pegar algum zeny emprestado com um amigo.";
+				mes "Porque não estarei aqui todos os dias.";
+				close;
+			} else {
+				mes "[Marco Bassinio]";
+				mes "Muito bem!";
+				mes "Também é perfeito como um presente!";
+				mes "Você sabe que não consegue esse tipo de chocolate normalmente.";
+				next;
+				mes "[Marco Bassinio]";
+				mes "Se quiser mais, deve voltar.";
+				mes "Talvez seja uma boa ideia comprar mais enquanto você tem a chance...!";
+				set Zeny,Zeny - .@price;
+				getitem 558,.@input;
+				close;
+			}
+		case 2:
+			mes "[Marco Bassinio]";
+			mes "Se quiser embrulhar o chocolate para presente, é claro, você precisa do chocolate, além de papel de embrulho, fita de embrulho e uma caixa.";
+			next;
+			mes "[Marco Bassinio]";
+			mes "Você também precisa pagar 500 zeny para gravar seu nome na caixa.";
+			mes "Você está totalmente preparado...?";
+			next;
+			if (countitem(7175) < 1 || countitem(7174) < 1 || countitem(7948) < 1 || Zeny < 500) {
+				mes "[Marco Bassinio]";
+				mes "Hmm... Parece que você não tem materiais suficientes para decorar a caixa de presente...";
+				mes "Você não pode simplesmente colocar seu presente em uma caixa sem graça...";
+				mes "Não acha?";
+				next;
+				mes "[Marco Bassinio]";
+				mes "Você precisa trazer papel de embrulho, fita de embrulho e uma caixa.";
+				mes "Oh, também traga 500 zeny, e não se esqueça de trazer seu verdadeiro coração amoroso com você!!";
+				close;
+			}
+			if (countitem(558) < 1) {
+				mes "[Marco Bassinio]";
+				mes "Ei, olhe, aventureiro!";
+				mes "Eu não posso criar algo imediatamente!";
+				mes "Você sabe que não sou um Alquimista ou algo do tipo.";
+				next;
+				mes "[Marco Bassinio]";
+				mes "Você não está dizendo que quer uma caixa de chocolate vazia, sem nenhum chocolate dentro, estou certo?";
+				close;
+			}
+			if (!checkweight(12744,1)) {
+				mes "[Marco Bassinio]";
+				mes "Você está carregando itens demais.";
+				mes "Por favor, utilize os Serviços Kafra.";
+				close;
+			}
+			mes "[Marco Bassinio]";
+			mes "Aqui, olhe!";
+			mes "É sua caixa de chocolate com seu nome nela.";
+			mes "Não é fabuloso?";
+			mes "Veja, seu nome ficou ótimo na caixa!";
+			next;
+			delitem 558,1;
+			delitem 7175,1;
+			delitem 7174,1;
+			delitem 7948,1;
+			set Zeny,Zeny-500;
+			getnameditem 12744,strcharinfo(0);
+			mes "[Marco Bassinio]";
+			mes "Feliz Dia dos Namorados!";
+			mes "O Dia dos Namorados é a razão pela qual voltei.";
+			close;
+		case 3:
+			mes "[Marco Bassinio]";
+			mes "Oh, que pena!";
+			mes "Tenho certeza de que você perderá esta oportunidade e se arrependerá de não ter comprado.";
+			next;
+			mes "[Marco Bassinio]";
+			mes "Lembre-se, você nunca encontrará isso em nenhum outro lugar!";
+			mes "Volte quando quiser, quando mudar de ideia.";
+			close;
+	}
+}
+
+// Packs Trader (Sells Wrapping Paper, Lace, and Box)
+//============================================================
+prontera,147,171,5	script	Packs Trader#Val09	58,{
+	mes "[Comerciante de Pacotes]";
+	mes "Olá.";
+	mes "Eu sou um Comerciante de Pacotes, vendo caixas de papel e suprimentos para embrulhar presentes.";
+	next;
+	while(1) {
+		mes "[Comerciante de Pacotes]";
+		mes "Você tem algo para comprar?";
+		next;
+		switch(select("Packing Paper:Packing Ribbon:Box:Cancel.")) {
+			case 1:
+				mes "[Comerciante de Pacotes]";
+				mes "São 200 zeny por 1 Papel de Embrulho.";
+				mes "Quantos você quer?";
+				mes "Você não pode comprar mais de 10 itens de uma vez.";
+				next;
+				input .@input;
+				if (.@input <= 0) {
+					mes "[Comerciante de Pacotes]";
+					mes "Nada para comprar.";
+					mes "Volte quando precisar de algo.";
+					close;
+				}
+				if (.@input > 10) {
+					mes "[Comerciante de Pacotes]";
+					mes "Eu te disse para não comprar mais de 10...";
+					next;
+					break;
+				}
+				if (!checkweight(7175,.@input)) {
+					mes "[Comerciante de Pacotes]";
+					mes "Você está carregando itens demais.";
+					mes "Por favor, utilize os Serviços Kafra.";
+					close;
+				}
+				set .@price, .@input * 200;
+				if (Zeny < .@price) {
+					mes "[Comerciante de Pacotes]";
+					mes "Você não tem dinheiro suficiente.";
+					mes "Por favor, verifique sua carteira.";
+					next;
+					break;
+				} else {
+					mes "[Comerciante de Pacotes]";
+					mes "Aqui estão.";
+					mes "Espero que isso torne seu Dia dos Namorados mais agradável!";
+					set Zeny,Zeny-.@price;
+					getitem 7175,.@input;
+					next;
+					break;
+				}
+			case 2:
+				mes "[Comerciante de Pacotes]";
+				mes "São 200 zeny por 1 Fita de Embrulho.";
+				mes "Quantos você quer?";
+				mes "Você não pode comprar mais de 10 itens de uma vez.";
+				next;
+				input .@input;
+				if (.@input <= 0) {
+					mes "[Comerciante de Pacotes]";
+					mes "Nada para comprar.";
+					mes "Volte quando precisar de algo.";
+					close;
+				}
+				if (.@input > 10) {
+					mes "[Comerciante de Pacotes]";
+					mes "Eu te disse para não comprar mais de 10...";
+					next;
+					break;
+				}
+				if (!checkweight(7174,.@input)) {
+					mes "[Comerciante de Pacotes]";
+					mes "Você está carregando itens demais.";
+					mes "Por favor, utilize os Serviços Kafra.";
+					close;
+				}
+				set .@price, .@input * 200;
+				if (Zeny < .@price) {
+					mes "[Comerciante de Pacotes]";
+					mes "Você não tem dinheiro suficiente.";
+					mes "Por favor, verifique sua carteira.";
+					next;
+					break;
+				} else {
+					mes "[Comerciante de Pacotes]";
+					mes "Aqui estão.";
+					mes "Espero que isso torne seu Dia dos Namorados mais agradável!";
+					set Zeny,Zeny-.@price;
+					getitem 7174,.@input;
+					next;
+					break;
+				}
+			case 3:
+				mes "[Comerciante de Pacotes]";
+				mes "São 600 zeny por 1 Caixa.";
+				mes "Quantos você quer?";
+				mes "Você não pode comprar mais de 10 itens de uma vez.";
+				next;
+				input .@input;
+				if (.@input <= 0) {
+					mes "[Comerciante de Pacotes]";
+					mes "Nada para comprar.";
+					mes "Volte quando precisar de algo.";
+					close;
+				}
+				if (.@input > 10) {
+					mes "[Comerciante de Pacotes]";
+					mes "Eu te disse para não comprar mais de 10...";
+					next;
+					break;
+				}
+				if (!checkweight(7948,.@input)) {
+					mes "[Comerciante de Pacotes]";
+					mes "Você está carregando itens demais.";
+					mes "Por favor, utilize os Serviços Kafra.";
+					close;
+				}
+				set .@price, .@input * 600;
+				if (Zeny < .@price) {
+					mes "[Comerciante de Pacotes]";
+					mes "Você não tem dinheiro suficiente.";
+					mes "Por favor, verifique sua carteira.";
+					next;
+					break;
+				} else {
+					mes "[Comerciante de Pacotes]";
+					mes "Aqui estão.";
+					mes "Espero que isso torne seu Dia dos Namorados mais agradável!";
+					set Zeny,Zeny-.@price;
+					getitem 7948,.@input;
+					next;
+					break;
+				}
+			case 4:
+				mes "[Comerciante de Pacotes]";
+				mes "Adeus!";
+				mes "E aproveite seu Dia dos Namorados.";
+				close;
+		}
+	}
+}
+
+// Event Ring Maker (Makes ring for players)
+//============================================================
+prontera,154,185,5	script	Event Ring Maker#Val09	721,{
+	if (BaseLevel < 75) {
+		mes "[Criador de Anéis de Evento]";
+		mes "Olá, eu apenas faço os anéis de Dia dos Namorados para aventureiros experientes de nível 75 ou superior.";
+		next;
+		mes "[Criador de Anéis de Evento]";
+		mes "Você ainda não é totalmente experiente.";
+		mes "Volte quando estiver experiente o suficiente para lidar com as missões.";
+		close;
+	}
+	
+	if (iROval09ring >= 1) {
+		mes "[Criador de Anéis de Evento]";
+		mes "A caixa com o anel, gravada com seu nome, é para quem você ama.";
+		next;
+		mes "[Criador de Anéis de Evento]";
+		mes "Quanto aos anéis que você recebe de outros, todos devem ser registrados com o Gerente de Votação.";
+		mes "Ela está parada perto da Fonte de Prontera.";
+		next;
+		mes "[Criador de Anéis de Evento]";
+		mes "Apenas o homem e a mulher mais populares estão sujeitos a receber recompensas.";
+		mes "Esteja ciente, e sempre tente se manter popular!";
+		close;
+	}
+	
+	mes "[Criador de Anéis de Evento]";
+	mes "Olá, como vai?";
+	mes "Venha até mim se estiver interessado no evento, 'Quem é o mais atraente no Dia dos Namorados?'";
+	next;
+	mes "[Criador de Anéis de Evento]";
+	mes "Eu faço os anéis mais preciosos que você pode dar para seus namorados.";
+	mes "Esses anéis são muito especiais porque gravo seus nomes neles!";
+	next;
+	mes "[Criador de Anéis de Evento]";
+	mes "Não é emocionante?";
+	mes "Não é uma ideia brilhante?";
+	mes "Dê esses anéis especiais para seus namorados!";
+	next;
+	mes "[Criador de Anéis de Evento]";
+	mes "Você deve se apressar porque este evento durará apenas duas semanas.";
+	mes "Dê para aquela pessoa especial um anel de Dia dos Namorados.";
+	next;
+	mes "[Criador de Anéis de Evento]";
+	mes "Lembre-se, você só pode gerar o anel uma vez.";
+	mes "Você também precisa de Papel de Embrulho, Fita de Embrulho e uma Caixa para fazer o anel.";
+	next;
+	mes "[Criador de Anéis de Evento]";
+	mes "Então é melhor ter certeza de para quem você dará isso.";
+	mes "A propósito, custa 1.000 zeny.";
+	mes "Gostaria de fazer um?";
+	next;
+	if(select("Hmm.. I gotta give it a second thought...:Sure.") == 1) {
+		mes "[Criador de Anéis de Evento]";
+		mes "Certo!";
+		mes "Você não pode ter pressa em algo assim.";
+		mes "Pense sobre o que você realmente quer.";
+		mes "Apenas siga seu coração!";
+		close;
+	}
+	if (countitem(7175) < 1 || countitem(7174) < 1 || countitem(7948) < 1 || Zeny < 1000) {
+		mes "[Criador de Anéis de Evento]";
+		mes "Bem, você não tem materiais suficientes para fazer uma caixa de presente.";
+		mes "Verifique o que você tem e volte mais tarde com todos os materiais.";
+		close;
+	}
+	mes "[Criador de Anéis de Evento]";
+	mes "Okie Dokie!";
+	mes "Farei isso imediatamente.";
+	next;
+	delitem 7175,1;
+	delitem 7174,1;
+	delitem 7948,1;
+	set Zeny,Zeny-1000;
+	set iROval09ring,1;
+	if (Sex == SEX_MALE) {
+		getnameditem 12742,strcharinfo(0);
+	} else {
+		getnameditem 12743,strcharinfo(0);
+	}
+	mes "[Criador de Anéis de Evento]";
+	mes "Aqui, o anel mais precioso do mundo!";
+	mes "Não se esqueça, você nunca poderá fazer este anel novamente.";
+	next;
+	mes "[Criador de Anéis de Evento]";
+	mes "Você deve escolher a pessoa que você realmente ama, e dar este anel a essa pessoa.";
+	next;
+	mes "[Criador de Anéis de Evento]";
+	mes "Claro, você tem que receber anéis de outros, essa é a maneira como você pode participar da votação, certo?";
+	mes "Desafie-se para se tornar o mais atraente no Dia dos Namorados!";
+	close;
+}
+
+// Valentine Vote Manager (Registers votes)
+//============================================================
+prontera,157,185,4	script	Valentine Vote Manager#v	113,{
+	mes "[Gerente de Votação de Dia dos Namorados]";
+	mes "Olá, eu sou o Gerente de Votação de Dia dos Namorados.";
+	mes "Estou encarregado de coletar anéis para este evento!";
+	next;
+	mes "[Gerente de Votação de Dia dos Namorados]";
+	mes "Eu registro os anéis que você recebe de outros e calculo o número total de anéis.";
+	next;
+	mes "[Gerente de Votação de Dia dos Namorados]";
+	mes "Você sabe o que eu faço além de apenas contar esses anéis?";
+	mes "Posso te dizer o nome do aventureiro que obteve o maior número de votos.";
+	next;
+	mes "[Gerente de Votação de Dia dos Namorados]";
+	mes "Além disso, você também pode descobrir quantos votos ele/ela obteve.";
+	next;
+	while (1) {
+		mes "[Gerente de Votação de Dia dos Namorados]";
+		mes "Então, o que você quer?";
+		next;
+		switch(select("Please register my rings.:Please count my votes.:Nothing, for now.")) {
+			case 1:
+				mes "[Gerente de Votação de Dia dos Namorados]";
+				mes "Por favor, me diga quantos anéis você deseja registrar.";
+				next;
+				mes "[Gerente de Votação de Dia dos Namorados]";
+				mes "Ao escrever o número de anéis, o número não deve ser maior do que a quantidade de anéis que você realmente possui.";
+				mes "'0', cancela tudo.";
+				next;
+				input .@input;
+
+				if (.@input <= 0) {
+					mes "[Gerente de Votação de Dia dos Namorados]";
+					mes "Você inseriu 0.";
+					mes "O registro foi cancelado.";
+					next;
+					break;
+				}
+				
+				if (Sex == SEX_MALE) {
+					if (countitem(7947) > .@input) {
+						mes "[Gerente de Votação de Dia dos Namorados]";
+						mes "Parece que o valor que você inseriu é muito pequeno.";
+						mes "Eu sei que você tem mais. Seja honesto, querido.";
+						next;
+						break;
+					}
+					
+					if (countitem(7947) < .@input) {
+						mes "[Gerente de Votação de Dia dos Namorados]";
+						mes "Parece que o valor que você inseriu é muito grande.";
+						mes "Eu sei que você tem menos. Seja honesto, querido.";
+						next;
+						break;
+					}
+					
+					mes "[Gerente de Votação de Dia dos Namorados]";
+					mes "Eu levarei esses anéis de prata e contarei os votos para você.";
+					mes "Obrigado por participar.";
+					delitem 7947,.@input;
+					set Val09Rings,Val09Rings+.@input;
+					if (Val09Rings > $Val09votes_M) {
+						set $Val09votes_M,Val09Rings;
+						set $Val09name_M$,strcharinfo(0);
+					}
+					next;
+					break;
+				} else {
+					if (countitem(7946) > .@input) {
+						mes "[Gerente de Votação de Dia dos Namorados]";
+						mes "Parece que o valor que você inseriu é muito pequeno.";
+						mes "Eu sei que você tem mais. Seja honesto, querido.";
+						next;
+						break;
+					}
+					
+					if (countitem(7946) < .@input) {
+						mes "[Gerente de Votação de Dia dos Namorados]";
+						mes "Parece que o valor que você inseriu é muito grande.";
+						mes "Eu sei que você tem menos. Seja honesto, querido.";
+						next;
+						break;
+					}
+					
+					mes "[Gerente de Votação de Dia dos Namorados]";
+					mes "Eu levarei esses anéis de ouro e contarei os votos para você.";
+					mes "Obrigado por participar.";
+					delitem 7946,.@input;
+					set Val09Rings,Val09Rings+.@input;
+					if (Val09Rings > $Val09votes_F) {
+						set $Val09votes_F,Val09Rings;
+						set $Val09name_F$,strcharinfo(0);
+					}
+					next;
+					break;
+				}
+			case 2:
+				mes "[Gerente de Votação de Dia dos Namorados]";
+				mes "Vamos ver...";
+				mes "You have registered...."+Val09Rings+" rings so far.";
+				mes "e...";
+				next;
+				mes "[Gerente de Votação de Dia dos Namorados]";
+				mes "The current record shows... "+$Val09name_M$+" is the male vote leader who's registered the total of "+$Val09votes_M+" rings.";
+				next;
+				mes "[Gerente de Votação de Dia dos Namorados]";
+				mes "The current record shows... "+$Val09name_F$+" is the female vote leader who's registered the total of "+$Val09votes_F+" rings.";
+				next;
+				break;
+
+			case 3:
+				mes "[Gerente de Votação de Dia dos Namorados]";
+				mes "Ei, você pode ser popular também!";
+				mes "Qualquer um pode... realmente!";
+				mes "Embora você tenha que se esforçar muito mais, mas ainda assim~ Hahaha!";
+				close;
+		}
+	}
+}
+
+// Charles Orleans (Makes Home-Made Chocolates)
+//============================================================
+prt_castle,42,35,3	script	Dessert Manager#Val09	47,{
+	if (Sex == SEX_MALE) {
+		mes "[Charles Orleans]";
+		mes "Monsieur~! O que o traz ao meu belo ateliê?";
+		mes "O que você quer?";
+		mes "Bem, meus olhos brilhantes secam e perdem o brilho se não for pela bela senhorita.";
+		next;
+		mes "[Charles Orleans]";
+		mes "Por favor, me deixe em paz, a menos que tenha assuntos comigo.";
+		mes "Haaaa~ Sou uma pessoa ocupada.";
+		mes "Não me incomode....";
+		mes "Irritante, irritante, irritante~~!";
+		close;
+	}
+	
+	mes "[Charles Orleans]";
+	mes "Oh, Mademoiselle!";
+	mes "Este pequeno espaço insignificante pareceu o paraíso no minuto em que você entrou!";
+	mes "Posso ajudá-la com alguma coisa, se não houver problema?";
+	next;
+	if(select("Please, make me some chocolate.:Don't bother. I'm just passing by.") == 2) {
+		mes "[Charles Orleans]";
+		mes "Ahhh, isso é tão de partir o coração.";
+		mes "Como você pôde dizer isso?";
+		mes "Você é tão má.";
+		mes "Não incomodar? Apenas de passagem?";
+		next;
+		mes "[Charles Orleans]";
+		mes "O que posso fazer para você";
+		mes "me dar um pouco de atenção?";
+		mes "Por favor.. sinto como se minha alma estivesse perdida..";
+		close;
+	}
+	if (countitem(558) < 3) {
+		mes "[Charles Orleans]";
+		mes "Ahhh, Mademoiselle.";
+		mes "Não sou um Alquimista ou um mágico.";
+		mes "Eu não faço chocolate de qualquer coisa.";
+		next;
+		mes "[Charles Orleans]";
+		mes "Eu sempre penso em fazer chocolate como um trabalho artístico.";
+		mes "Você vê, não sou um cozinheiro comum...";
+		mes "Eu faço chocolate com sentimentos..";
+		mes "mensagens de corações amorosos..";
+		next;
+		mes "[Charles Orleans]";
+		mes "Eu faço obras-primas.";
+		mes "Ninguém pode imitar a aparência e o sabor.";
+		mes "Sim, não é nada como o chocolate comum!";
+		next;
+		mes "[Charles Orleans]";
+		mes "Receio não poder fazer isso e provar para você agora.";
+		mes "Isso é realmente uma pena!";
+		next;
+		mes "[Charles Orleans]";
+		mes "Eu realmente quero agradecer por me visitar e se você apenas trouxer ^3152ff3 3 Chocolates^000000, farei para você um chocolate como você nunca viu...";
+		next;
+		mes "[Charles Orleans]";
+		mes "nunca provou antes...";
+		mes "Mademoiselle, com seu espírito, tenho certeza de que você pode trazer 3 pedaços de chocolate.";
+		mes "Não tenho dúvida alguma.";
+		next;
+		mes "[Charles Orleans]";
+		mes "Então... o que você acha?";
+		mes "Você pode trazer ^3152ff3 3 Chocolates^000000?";
+		mes "Eu poderia pegá-los, mas estou atolado com tanto trabalho como você vê agora.";
+		next;
+		mes "[Charles Orleans]";
+		mes "Adios, Mademoiselle.....";
+		mes "Estarei esperando por você.";
+		close;
+	} else {
+		if (!checkweight(559,1)) {
+			mes "[Charles Orleans]";
+			mes "Você está carregando itens demais.";
+			mes "Por favor, utilize os Serviços Kafra.";
+			close;
+		}
+		mes "[Charles Orleans]";
+		mes "Oh, Mademoiselle!";
+		mes "Farei o melhor chocolate com os pedaços que você trouxe.";
+		mes "Vou colocar a luz dos seus olhos neste chocolate que ninguém pode resistir.";
+		next;
+		mes "[Charles Orleans]";
+		mes "Será mais forte do que uma doce, doce poção do amor.....";
+		next;
+		mes "[Charles Orleans]";
+		mes "Un, Deux, Trois, Quatre.....";
+		mes "Assim como o patinho feio que se transformou em um belo cisne-";
+		mes "Pedaços de chocolate comuns estão se tornando uma obra de arte!";
+		next;
+		mes "[Charles Orleans]";
+		mes "Eles estão mudando!";
+		mes "Eles estão ficando quentes, mudando suavemente a forma, ficando mais fortes novamente!";
+		mes "Oh, é uma obra-prima ou";
+		mes "o que...!!";
+		next;
+		mes "[Charles Orleans]";
+		mes "Aqui está, Mademoiselle!";
+		mes "Ahahahaha, apenas olhe para isto!";
+		mes "Não acredito que fiz isto.";
+		mes "Oh, não consigo tirar os olhos..!!";
+		delitem 558,3;
+		getitem 559,1;
+		next;
+		mes "[Charles Orleans]";
+		mes "Muito bem. Mademoiselle,";
+		mes "Espero que seja exatamente o que você queria, pois carrega seu lindo coração dentro.";
+		close;
+	}
+	
+}

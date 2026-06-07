@@ -1,0 +1,430 @@
+//===== rAthena Script =======================================
+//= In Memory of Heroes
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= iRO Memorial Day (2008)
+//===== Additional Comments: =================================
+//= 1.0 First version. [Kisuka]
+//= 1.1 Many Many Fixes. [Kisuka]
+//= 1.2 Some changes. [Kisuka]
+//============================================================
+
+// Lauds
+//============================================================
+prontera,182,214,4	script	Lauds#Memorial	58,{
+	if (Memorial08 < 1) {
+		mes "[Louco Sago Lauds]";
+		mes "Ei, você!";
+		mes "O que você está fazendo aí!?";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Você sabe que dia é hoje!?";
+		mes "É uma data muito importante!";
+		mes "Uma data muito importante para se lembrar!";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "O que é isso!?";
+		emotion ET_SURPRISE;
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Cadê a sua toalha!?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Minha o quê?";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Como você pretende viajar sem a sua toalha!?";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Se você acha que este é apenas mais um feriado, não vou desperdiçar meu fôlego.";
+		mes "Mas se você deseja prestar uma homenagem aos grandes soldados, eu ajudarei você a se preparar.";
+		next;
+		if (select("I guess so...:Are you crazy or something?") == 2) {
+			mes "[Louco Sago Lauds]";
+			mes "Tudo bem, continue despreparado!";
+			next;
+			mes "[Louco Sago Lauds]";
+			mes "^FF0000VOCÊ VAI SE ARREPENDER!^000000";
+			close;
+		}
+		mes "[Louco Sago Lauds]";
+		mes "Ótimo!";
+		mes "Então me escute com atenção.";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Agora, antes de prestar homenagem aos soldados caídos, você deve estar equipado adequadamente.";
+		mes "Sem sua toalha você estará perdido!";
+		mes "Se você me trouxer os materiais, posso fazer uma toalha para você.";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Escute com atenção.";
+		mes "Traga-me ^FF000030 Tecidos e 20 Felpas^000000.";
+		set Memorial08,1;
+		close;
+	}
+
+	else if (Memorial08 == 1) {
+		if (countitem(1059) < 30 || countitem(914) < 20) {
+			mes "[Louco Sago Lauds]";
+			mes "O que é isso? Não é o suficiente?!";
+			mes "*Suspiro* Eu realmente preciso te dizer de novo?!";
+			mes "Traga-me ^FF000030 Tecidos e 20 Felpas^000000.";
+			close;
+		} else {
+			mes "***Louco Sago Lauds parece estar murmurando sozinho***";
+			next;
+			mes "[Louco Sago Lauds]";
+			mes "Então, você trouxe os materiais da toalha?";
+			next;
+			mes "[Louco Sago Lauds]";
+			mes "Excelente; você trouxe todos eles.";
+			mes "Então farei para você uma Toalha da Memória, como prometi.";
+			mes "Dê-me um momento.";
+			next;
+			mes "[Louco Sago Lauds]";
+			mes "Aqui está!";
+			delitem 1059,30;
+			delitem 914,20;
+			getitem 6025,1;
+			getnameditem 6025,strcharinfo(0);
+			set Memorial08,2;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 2) {
+		mes "[Louco Sago Lauds]";
+		mes "Ah, você tem uma toalha nova e macia agora, eu até coloquei seu nome nela";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Diga-me, que tal partir em uma jornada para prestar homenagem ao Memorial Day?";
+		next;
+		if (select("Sure.:No, I'm Busy.") == 2) {
+			mes "[Louco Sago Lauds]";
+			mes "Não venha chorar para mim se alguém decidir construir uma rodovia através da sua casa!";
+			close;
+		}
+		mes "[Louco Sago Lauds]";
+		mes "Bom. A propósito, você sabe para que serve a toalha?";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Parece que você está apenas carregando-a sem entender seu significado.";
+		mes "Que vergonha! Você deveria ir falar com o ^FF0000Grast em Prontera^000000.";
+		set Memorial08,3;
+		close;
+	}
+
+	else if (Memorial08 == 3) {
+		mes "[Louco Sago Lauds]";
+		mes "O que você ainda está fazendo aqui?";
+		mes "Eu disse para você ir falar com o Grast em Prontera!";
+		close;
+	}
+
+	else if (Memorial08 == 4 || Memorial08 == 5 || Memorial08 == 6) {
+		mes "[Louco Sago Lauds]";
+		mes "Vá ajudar o Grast e depois volte.";
+		close;
+	}
+
+	else if (Memorial08 == 7) {
+		mes "[Louco Sago Lauds]";
+		mes "Oh, você trouxe todos eles.";
+		mes "Hahaha!";
+		mes "HAHAHAHAHAHA!!!! tosse tosse";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Por favor, dê-os para mim. Obrigado pelo seu trabalho duro, a propósito.";
+		mes "Diga-me, você aprendeu algo com a jornada?";
+		mes "Agora, vá visitar a placa na direção das 12 horas em Prontera.";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "Como assim você acabou de estar lá?";
+		next;
+		mes "[Louco Sago Lauds]";
+		mes "O quê? Por que você está me dando o seu lixo!";
+		mes "Esses itens não me são úteis de forma alguma.";
+		mes "Você deveria estar indo para a placa!";
+		set Memorial08,8;
+		close;
+	}
+
+	else if (Memorial08 == 8) {
+		mes "[Louco Sago Lauds]";
+		mes "Pare de tentar me dar o seu lixo!";
+		mes "Vá para a placa na direção das 12 horas em Prontera para sua jornada!";
+		close;
+	}
+	
+	else if (Memorial08 >= 9) {
+		set .@RandomMsg, rand(1,5);
+		if (.@RandomMsg == 1) {
+			mes "[Louco Sago Lauds]";
+			mes "Não entre em pânico!";
+			emotion ET_SURPRISE;
+			close;
+		}
+		else if (.@RandomMsg == 2) {
+			mes "[Louco Sago Lauds]";
+			mes "A vida... é como uma toranja.";
+			mes "É laranja e macia, tem algumas sementes dentro, e algumas pessoas comem metade no café da manhã.";
+			close;
+		}
+		else if (.@RandomMsg == 3) {
+			mes "[Louco Sago Lauds]";
+			mes "Havia um propósito nesta história, mas ele escapou temporariamente da mente do cronista.";
+			close;
+		}
+		else if (.@RandomMsg == 4) {
+			mes "[Louco Sago Lauds]";
+			mes "42!";
+			close;
+		}
+		else if (.@RandomMsg == 5) {
+			mes "[Louco Sago Lauds]";
+			mes "É um erro pensar que você pode resolver grandes problemas apenas com batatas.";
+			close;
+		}
+	}
+}
+		
+// Memorial Plaque
+//============================================================
+prontera,153,286,4	script	Memorial Plaque#Memorial	857,{
+	if (Memorial08 < 8) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "- É uma placa velha e empoeirada. -";
+		close;
+	}
+	
+	else if (Memorial08 == 8) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "- É uma placa velha e empoeirada. -";
+		mes "'Deve ser disso que Lauds estava falando.'";
+		mes "'Vamos limpá-la com a toalha.'";
+		next;
+		set Memorial08,9;
+		getexp 93750,43750;
+		goto L_CleanPlaque;
+	}
+	
+	else if (Memorial08 >= 9) {
+		goto L_CleanPlaque;
+	}
+	
+	L_CleanPlaque:
+		mes "- Você vê uma mensagem da placa limpa. -";
+		next;
+		mes "-Embora nenhum mármore esculpido deva se erguer em sua memória,-";
+		mes "-nem pedra gravada registre seus feitos,-";
+		mes "-ainda assim, sua lembrança será tão duradoura quanto a terra que honraram.-";
+		mes "-Daniel Webster-";
+		if (Memorial08 == 9) {
+			getexp 93750,43750;
+		}
+		next;
+		mes "-Há outra mensagem. -";
+		next;
+		mes "-Eu talvez não tenha ido para onde pretendia ir,-";
+		mes "-mas acho que acabei onde precisava estar.-";
+		mes "- Douglas Adams. -";
+		if (Memorial08 == 9) { 
+			getexp 93750,43750;
+		}
+		next;
+		mes "-Esta é a última mensagem. -";
+		next;
+		mes "-O verdadeiro heroísmo é notavelmente sóbrio, muito pouco dramático.-";
+		mes "-Não é o desejo de superar todos os outros a qualquer custo,-";
+		mes "- mas o desejo de servir aos outros a qualquer custo. -";
+		mes "- Arthur Ashe -";
+		if (Memorial08 == 9) { 
+			getexp 93750,43750;
+			set Memorial08,10;
+		}
+		close;
+}
+
+// Grast
+//============================================================
+prontera,150,270,4	script	Grast#Memorial	900,{
+	if (Memorial08 < 3) {
+		mes "[Grast]";
+		mes "O Memorial Day é um dia triste, porém glorioso.";
+		mes "Eu me pergunto quantas pessoas se lembram deles...";
+		close;
+	}
+	
+	else if (Memorial08 == 3) {
+		mes "[Grast]";
+		mes "Oh, essa não é uma Toalha da Memória?";
+		mes "Estou muito feliz em conhecer alguém que entende o significado do Memorial Day.";
+		next;
+		mes "[Grast]";
+		mes "É muito importante saber o que estamos celebrando hoje, você não acha?";
+		next;
+		mes "[Grast]";
+		mes "Se você deseja partir em uma jornada para prestar homenagem ao Memorial Day, você deve me trazer alguns materiais que solicitarei.";
+		next;
+		mes "[Grast]";
+		mes "Por favor, traga-me ^FF0000uma unidade de cada: Poção Vermelha, Poção Verde, Poção da Fúria Selvagem e Asa de Borboleta^000000.";
+		mes "Estarei esperando seu retorno.";
+		set Memorial08,4;
+		close;
+	}
+
+	else if (Memorial08 == 4) {
+		if (countitem(501) < 1 || countitem(506) < 1 || countitem(656) < 1 || countitem(602) < 1) {
+			mes "[Grast]";
+			mes "Ops, você não trouxe todos os materiais.";
+			mes "Por favor, certifique-se de me trazer";
+			mes "^FF0000uma unidade de cada: Poção Vermelha, Poção Verde, Poção da Fúria Selvagem e Asa de Borboleta^000000.";
+			next;
+			mes "[Grast]";
+			mes "Você terá que me trazer mais materiais depois.";
+			mes "Se você se sentir sobrecarregado para reunir todos eles,";
+			mes "Eu posso fornecer todos os materiais para você.";
+			next;
+			if (select("I'll gather the rest.:Give me the materials.") == 2) {
+				goto L_GiveUp;
+			}
+			goto L_Continue;
+		} else {
+			mes "[Grast]";
+			mes "Oh, você trouxe os materiais que pedi.";
+			next;
+			mes "[Grast]";
+			mes "Hmm, você ainda precisará de mais algumas coisas...";
+			next;
+			mes "[Grast]";
+			mes "Por favor, traga-me ^FF0000uma unidade de cada: Armadilha, Folha de Yggdrasil, Pedra Azul, Espelho de Cristal, Carne e Cenoura^000000.";
+			mes "Estarei esperando seu retorno.";
+			set Memorial08,5;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 5) {
+		if (countitem(1065) < 1 || countitem(610) < 1 || countitem(717) < 1 || countitem(747) < 1 || countitem(517) < 1 || countitem(515) < 1) {
+			mes "[Grast]";
+			mes "Ops, você não trouxe todos os materiais.";
+			mes "Por favor, certifique-se de que você me trará";
+			mes "^FF0000uma unidade de cada: Armadilha, Folha de Yggdrasil, Pedra Azul, Espelho de Cristal, Carne e Cenoura^000000.";
+			next;
+			mes "[Grast]";
+			mes "Você terá que me trazer mais materiais depois.";
+			mes "Se você se sentir sobrecarregado para reunir todos eles, eu posso fornecer todos os materiais.";
+			next;
+			if (select("I'll gather the rest.:Give me the materials.") == 2) {
+				goto L_GiveUp;
+			}
+			goto L_Continue;
+		} else {
+			mes "[Grast]";
+			mes "Oh, você trouxe tudo o que pedi.";
+			mes "Hmm, acho que você precisa de apenas um pouco mais.";
+			next;
+			mes "[Grast]";
+			mes "Por favor, traga-me ^FF0000uma unidade de cada: Incubadora, Fogos de Artifício, Boneco de Poring e Buquê de Flores^000000.";
+			set Memorial08,6;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 6) {
+		if (countitem(643) < 1 || countitem(12018) < 1 || countitem(741) < 1 || countitem(745) < 1) {
+			mes "[Grast]";
+			mes "Ops, você não trouxe todos os materiais.";
+			mes "Por favor, certifique-se de me trazer";
+			mes "^FF0000uma unidade de cada: Incubadora, Fogos de Artifício, Boneco de Poring e Buquê de Flores";
+			next;
+			mes "[Grast]";
+			mes "Estes são o último lote de materiais.";
+			mes "Se você se sentir sobrecarregado para reunir todos eles, eu posso fornecer todos os materiais.";
+			next;
+			mes "[Grast]";
+			mes "Se eu fornecer todos os materiais para você, no entanto, não terei como agradecer pelo seu serviço.";
+			mes "It's your call, " + strcharinfo(0) + ".";
+			next;
+			if (select("I'll gather the rest.:Give me the materials.") == 2) {
+				goto L_GiveUp;
+			}
+			goto L_Continue;
+		} else {
+			mes "[Grast]";
+			mes "Você trouxe os materiais que pedi?";
+			mes "Ah, obrigado pelo seu trabalho duro, você trouxe todos eles.";
+			next;
+			mes "[Grast]";
+			mes "Espero que você aprenda uma lição valiosa enquanto reúne esses materiais.";
+			mes "Gostaria de lhe dar um pequeno presente pelo seu serviço.";
+			next;
+			mes "[Grast]";
+			mes "Veja bem, tenho dois presentes diferentes em cada uma das minhas mãos.";
+			mes "O ideal seria lhe dar ambos, mas...";
+			mes "How do you like to test your luck, " + strcharinfo(0) + "?";
+			next;
+			mes "[Grast]";
+			mes "Ok, qual mão você gostaria de escolher?";
+			next;
+			if (select("Left hand.:Right hand.") == 2) {
+				mes "[Grast]";
+				mes "Você selecionou minha mão direita.";
+				mes "Aqui está o presente para você.";
+				mes "Agora, por favor, leve todos esses materiais ao Lauds.";
+				set Memorial08, 7;
+				getitem 617,1;
+				close;
+			}
+			mes "[Grast]";
+			mes "Você selecionou minha mão esquerda.";
+			mes "Aqui está o presente para você.";
+			mes "Agora, por favor, leve todos esses materiais ao Lauds.";
+			set Memorial08, 7;
+			getitem 12109,1;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 7) {
+		mes "[Grast]";
+		mes "Você conheceu o Lauds?";
+		mes "Espero que você se lembre de que sua liberdade e felicidade foram construídas sobre milhares de vidas sacrificadas na guerra.";
+		close;
+	}
+
+	else if (Memorial08 >= 8) {
+		mes "[Grast]";
+		mes "Uma toalha é a coisa mais massivamente útil que um aventureiro pode ter.";
+		close;
+	}
+
+	L_GiveUp:
+		mes "[Grast]";
+		mes "Oh, entendo. Acho que você está bem ocupado hoje em dia, hein?";
+		mes "Sem problemas; eu lhe darei todos os suprimentos...";
+		next;
+		mes "[Grast]";
+		mes "Aqui está.";
+		mes "Eu amassei todos os itens em uma forma mais compacta para você.";
+		mes "Você pode me agradecer mais tarde por esse serviço extra.";
+		mes "Por favor, leve-os ao Lauds.";
+		set Memorial08,7;
+		getitem 7126,1;
+		next;
+		mes "[Grast]";
+		mes "A propósito, ele teve um acidente infeliz e meio que perdeu a cabeça.";
+		mes "Por favor, não se assuste mesmo se ele começar a balbuciar.";
+		close;
+	
+	L_Continue:
+		mes "[Grast]";
+		mes "Essa é uma boa ideia.";
+		mes "Então estarei esperando seu retorno.";
+		close;
+}
