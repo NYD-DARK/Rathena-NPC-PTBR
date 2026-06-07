@@ -1,0 +1,66 @@
+//===== rAthena Script =======================================
+//= Jewel Case Quest
+//===== By: ==================================================
+//= Lupus
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= A quest for players at base level 99,
+//= with Jewel Case as a reward.
+//===== Additional Comments: =================================
+//= 1.0 First Version.
+//============================================================
+
+lighthalzen,108,229,2	script	La Fenn	766,{
+	mes "[La Fenn]";
+	if(BaseLevel<99) {
+		if(Q_99LVL) {
+			mes "Você... Você ficou mais jovem!!! Mas você é definitivamente VOCÊ!";
+			mes "Eu não achei que você seria capaz de cumprir a minha condição...";
+			emotion ET_SCRATCH;
+			next;
+			mes "[La Fenn]";
+			mes "Aqui está o seu prêmio. É seu para sempre.";
+			set Q_99LVL,0;
+			getitem 12106,1; //Jewel Case
+			emotion ET_CONGRATULATION;
+		} else {
+			mes callfunc("F_Hi");
+			mes "...";
+			emotion ET_SLEEPY;
+			next;
+			mes "[La Fenn]";
+			mes "Tenho um enigma para um homem forte de 2ª Classe e Nível de Base 99.";
+			mes "*Bocejo* Se você encontrar alguém assim, por favor, fale sobre o meu enigma.";
+		}
+		close;
+	}
+	if(BaseLevel==99 && Upper==0) {
+		if(Q_99LVL) {
+			mes "Agora vá em frente e fique mais jovem!";
+			mes "Se você decifrar o meu enigma, eu lhe darei uma Caixa de Joias mágica com um acessório raro.";
+		} else {
+			mes callfunc("F_Hi")+" The Hero!";
+			if(BaseExp<1000000) {
+				mes "Agora você está forte.";
+				mes "Mas... não forte o suficiente para o meu enigma.";
+				if(rand(2)) {
+					mes "Kill "+((1000000-BaseExp)/3765+1)+" more Seals and return.";
+				} else {
+					mes "Kill "+((1000000-BaseExp)/81+1)+" more Poporings and come back.";
+				}
+			} else {
+				mes "Agora você está REALMENTE forte.";
+				mes "E se você ficar mais jovem do que agora, eu lhe darei o meu tesouro.";
+				set Q_99LVL,1;
+				emotion ET_BEST;
+			}
+		}
+		close;
+	}
+	emotion ET_SCRATCH;
+	mes "...";
+	close;
+}

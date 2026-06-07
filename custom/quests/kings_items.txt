@@ -1,0 +1,79 @@
+//===== rAthena Script ======================================= 
+//= Event King Items
+//===== By: ================================================== 
+//= $ephiroth
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Grand Circlet Quest combined with Excalibur Quest.
+//===== Additional Comments: =================================
+//= 2006/09/27: 1.0 Release and fully working. [$ephiroth]
+//= 1.1 Optimized. [Euphy]
+//============================================================
+
+prt_castle,80,170,4	script	King of Prontera	108,{
+	mes "[Rei de Prontera]";
+	mes "Olá, você pode me ajudar?";
+	next;
+	if(select("Sure, what can I do?:Sorry, I'm busy.")==2) {
+		mes "[Rei de Prontera]";
+		mes "Ok, tudo bem, tenho certeza de que outra pessoa irá ajudar.";
+		close; }
+	mes "[Rei de Prontera]";
+	mes "Obrigado. Bem, a minha filha ao meu lado é um pouco agitada...";
+	mes "Se você conseguir estes itens para ela, tenho certeza de que ela vai se acalmar.";
+	mes "Eu lhe darei a minha coroa ou a minha espada como recompensa.";
+	next;
+	setarray .@Items1[0],5007,742,30,741,50,753,20,732,1,710,20,629,20;
+	setarray .@Items2[0],1137,2254,1,2282,1,714,1;
+	switch(select("What do you need?:I have the items!:Forget it.")) {
+		case 1:
+			for(set .@i,1; .@i<3; set .@i,.@i+1) {
+				mes "[Rei de Prontera]";
+				mes "Se você pudesse me conseguir:";
+				for(set .@j,1; .@j<getarraysize(getd(".@Items"+.@i)); set .@j,.@j+2)
+					mes " ~ ^0055FF"+getd(".@Items"+.@i+"["+(.@j+1)+"]")+"^000000x "+getitemname(getd(".@Items"+.@i+"["+.@j+"]"));
+				mes "I'll give my "+((.@i == 2 )?"sword.":"crown.");
+				if (.@i==2) close;
+				next; }
+		case 2:
+			mes "[Rei de Prontera]";
+			mes "Qual item você deseja?";
+			next;
+			set .@i, select("Crown:Sword");
+			for(set .@j,1; .@j<getarraysize(getd(".@Items"+.@i)); set .@j,.@j+2)
+				if (countitem(getd(".@Items"+.@i+"["+.@j+"]")) < getd(".@Items"+.@i+"["+(.@j+1)+"]")) set .@nr,1;
+			mes "[Rei de Prontera]";
+			if (.@nr) { 
+				mes "Está lhe faltando algo.";
+				mes "Volte depois de conseguir TODOS os itens.";
+				close; }
+			for(set .@j,1; .@j<getarraysize(getd(".@Items"+.@i)); set .@j,.@j+2)
+				delitem getd(".@Items"+.@i+"["+.@j+"]"), getd(".@Items"+.@i+"["+(.@j+1)+"]");
+			getitem getd(".@Items"+.@i+"[0]"),1;
+			mes "MUITO OBRIGADO!!";
+			mes "Isso com certeza vai acalmá-la.";
+			mes "As promised, here is my "+((.@i==1)?"crown.":"sword.");
+			close;
+		case 3:
+			mes "[Rei de Prontera]";
+			mes "Ok, tudo bem, tenho certeza de que outra pessoa irá ajudar.";
+			close;
+	}
+}
+
+prt_castle,84,170,4	script	King's Daughter	62,{
+	mes "[Filha do Rei]";
+	mes "Hmph, eu odeio o meu pai agora mesmo!!";
+	next;
+	if(select("Why?:Whatever...")==2) {
+		mes "[Filha do Rei]";
+		mes "TUDO BEM ENTÃO! Hmph!!";
+		close; }
+	mes "[Filha do Rei]";
+	mes "Bem, ele não me dá o que eu quero!!";
+	mes "Ele é o Rei de Prontera. Ele deveria ser capaz de me conseguir QUALQUER COISA!!!";
+	close;
+}

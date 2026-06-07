@@ -1,0 +1,64 @@
+//===== rAthena Script =======================================
+//= Berzebub Card Quest
+//===== By: ==================================================
+//= jabs
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Quest to get the Berzebub Card
+//===== Additional Comments: =================================
+//= 1.1 Fixed ingredients. Was too exploitable [Lupus]
+//= 1.2 Optimized. [Euphy]
+//============================================================
+
+prontera,165,178,8	script	Old Woman	103,{
+
+	setarray .@Items[0],714,25,1061,100,1095,200,618,10,1551,2,1614,1,727,20;
+	set .@n$,"[Old Woman]";
+
+	mes .@n$;
+	if(BerzQuest == 1) {
+		mes "Ei, eu me lembro de você! Já lhe disse que você só pode completar esta missão uma vez.";
+		close; }
+	mes "Saudações, rapaz. Encontrei um item muito bacana enquanto colhia cogumelos perto de Glast Heim.";
+	next;
+	if(select("Keep Talking:Leave")==2) goto M_Leave;
+
+	mes .@n$;
+	mes "Eu nunca vi um item como este antes. Me disseram que ele pode ser colocado dentro de qualquer acessório com um slot disponível.";
+	next;
+	mes .@n$;
+	mes "Se estiver interessado neste item, eu lhe direi o que precisa trazer para eu fazer um para você. Só posso dar um destes para cada jogador, então assim que terminar esta missão, não poderá fazê-la novamente.";
+	next;
+	if(select("Tell me more about it:Nah, I don't care about it")==2) goto M_Leave;
+
+	mes .@n$;
+	mes "Acredito que o item se chama ^FF0000Carta Belzebu^000000. Ela faz você conjurar feitiços muito rápido!";
+	next;
+	mes .@n$;
+	mes "Preciso de todos os seguintes itens:";
+	for(set .@i,0; .@i<getarraysize(.@Items); set .@i,.@i+2) {
+		mes " ~ "+.@Items[.@i+1]+"x "+getitemname(.@Items[.@i]);
+		if (countitem(.@Items[.@i]) < .@Items[.@i+1]) set .@nr,1; }
+	next;
+	if(select("I have all of that!:I'll get those ASAP")==2) goto M_Leave;
+
+	mes .@n$;
+	if (.@nr) {
+		mes "Você está mentindo! Saia daqui e consiga esses itens, sua desculpa esfarrapada de astro do rock.";
+		close; }
+	for(set .@i,0; .@i<getarraysize(.@Items); set .@i,.@i+2)
+		delitem .@Items[.@i], .@Items[.@i+1];
+	getitem 4145,1;
+	set BerzQuest, 1;
+	mes "Parabéns! Você tem todos os itens. Aqui está sua ^FF0000Carta Belzebu^000000, como prometido.";
+	emotion ET_CONGRATULATION;
+	close;
+
+M_Leave:
+	mes .@n$;
+	mes "Um item tão incrível que tenho bem aqui...";
+	close;
+}

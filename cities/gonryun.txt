@@ -1,0 +1,424 @@
+//===== rAthena Script =======================================
+//= Kunlun Town
+//===== By: ==================================================
+//= x[tsk], KarLaeda
+//===== Current Version: =====================================
+//= 1.6
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Kunlun Town Script
+//===== Additional Comments: =================================
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=     Moved Lost Knife mini-quest to quest file.
+//= 1.6 Moved Alberta NPC to pre-re/re paths. [Euphy]
+//============================================================
+
+// Kunlun Transportation
+//============================================================
+-	script	::Kunlun_Envoy_gonryun	-1,{
+	mes "[Wa Bai Hu]";
+	mes "Bom dia~";
+	mes "Permitam-me convidá-los";
+	mes "à minha terra natal, Kunlun.";
+	mes "É uma honra para mim guiar";
+	mes "aventureiros tão ilustres do";
+	mes "reino de Rune-Midgard.";
+	next;
+	switch(select("About Kunlun:Visit Kunlun:Cancel")) {
+	case 1:
+		mes "[Wa Bai Hu]";
+		mes "Kunlun é um lugar lindo,";
+		mes "rico em história, e com suas";
+		mes "próprias tradições. Eu também acho que";
+		mes "Kunlun é o melhor lugar para";
+		mes "turismo.";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Ao chegar no porto de";
+		mes "Kunlun, você poderá ver";
+		mes "réplicas em miniatura de";
+		mes "edifícios encontrados em Alberta";
+		mes "e Prontera.";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Depois de aproveitar um agradável";
+		mes "passeio, entre na bela";
+		mes "coluna de luz que o levará";
+		mes "até as nuvens para";
+		mes "Vila de Kunlun.";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Ouvi dizer que no";
+		mes "continente de Rune-Midgard,";
+		mes "existe outra cidade que";
+		mes "é mantida no céu por";
+		mes "um poder antigo e misterioso...";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Bem, minha Kunlun também flutua";
+		mes "no ar, mas sem nenhuma";
+		mes "suposta tecnologia ou";
+		mes "fonte de energia. Consideramos";
+		mes "nossa terra especialmente abençoada...";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Quando estiver em Kunlun, não";
+		mes "esqueça de provar nossas especialidades";
+		mes "como o bolinho gigante ou o pêssego celestial.";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "É melhor se preparar";
+		mes "se estiver planejando visitar";
+		mes "a dungeon de Kunlun. Devo";
+		mes "dizer, não é um lugar seguro para ir por diversão.";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Se estiver interessado em visitar";
+		mes "Kunlun, não hesite em me";
+		mes "avisar. É um grande prazer";
+		mes "servi-lo, ilustre convidado.";
+		close;
+	case 2:
+		mes "[Wa Bai Hu]";
+		mes "Excelente escolha, fico feliz";
+		mes "em tê-lo como nosso convidado~";
+		mes "No entanto, uma pequena taxa é necessária";
+		mes "para embarcar no navio para Kunlun.";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Pedimos que pague 10.000 zenys";
+		mes "antes da partida. Essa taxa também";
+		mes "cobre o custo do retorno";
+		mes "para Alberta. Estou pronto para guiá-lo";
+		mes "para Kunlun a qualquer momento.";
+		next;
+		mes "[Wa Bai Hu]";
+		mes "Gostaria de embarcar?";
+		next;
+		if (select("To Kunlun~!:No.") == 1) {
+			if (Zeny > 9999) {
+				mes "[Wa Bai Hu]";
+				mes "Obrigado, deixe-me guiá-lo até lá imediatamente.";
+				close2;
+				set Zeny, Zeny-10000;
+				warp "gon_fild01",258,82;
+				end;
+			}
+			mes "[Wa Bai Hu]";
+			mes "Sinto muito, mas você precisa ter";
+			mes "10.000 zenys para viajar para Kunlun.";
+			mes "Por favor, certifique-se de que tenha";
+			mes "zenys suficientes. Obrigado, e";
+			mes "volte sempre.";
+			close;
+		}
+		mes "[Wa Bai Hu]";
+		mes "Entendo. No entanto, sempre que";
+		mes "mudar de ideia, por favor";
+		mes "me avise. Seria um grande";
+		mes "prazer servi-lo, ilustre";
+		mes "convidado.";
+		close;
+	case 3:
+		mes "[Wa Bai Hu]";
+		mes "Entendo. No entanto, sempre que";
+		mes "mudar de ideia, por favor me";
+		mes "avise. Seria um grande prazer servi-lo, ilustre convidado.";
+		close;
+	}
+}
+
+gon_fild01,255,79,7	script	Kunlun Envoy#gon2	776,{
+	mes "[Wa Bai Hu]";
+	mes "Então, gostou da sua viagem?";
+	mes "Acho que é hora de você";
+	mes "voltar para casa. O navio para Rune-Midgard está pronto para partir a qualquer momento.";
+	next;
+	if (select("Go back to Alberta:Cancel") == 1) {
+		mes "[Wa Bai Hu]";
+		mes "Volte sempre.";
+		mes "Espero que você conte aos seus amigos";
+		mes "sobre Kunlun quando você voltar";
+		mes "para casa. Agora, deixe-me guiá-lo";
+		mes "de volta para Alberta.";
+		close2;
+		if (checkre(0))
+			warp "alberta",245,87;
+		else
+			warp "alberta",243,67;
+		end;
+	}
+	mes "[Wa Bai Hu]";
+	mes "Não tenha pressa, meu convidado.";
+	mes "Deve haver muitos lugares";
+	mes "que você pode ter perdido.";
+	close;
+}
+
+gon_fild01,187,239,7	script	Kunlun Envoy#gon3	776,{
+	mes "[Zhang Quing Long]";
+	mes "Por favor, siga para o norte para entrar em Kunlun.";
+	mes "Espero que você se divirta muito";
+	mes "enquanto estiver em Kunlun.";
+	close;
+}
+
+gonryun,153,64,7	script	Kunlun Envoy#gon4	776,{
+	mes "[Zhang Quing Long]";
+	mes "Por favor, fique à vontade.";
+	mes "Se quiser voltar, terei";
+	mes "o maior prazer em guiá-lo";
+	mes "até o navio para Alberta.";
+	next;
+	if (select("Go back to the harbor:Cancel") == 1) {
+		mes "[Zhang Quing Long]";
+		mes "Espero que tenha gostado da sua viagem.";
+		mes "Agora, deixe-me guiá-lo de volta";
+		mes "ao porto.";
+		close2;
+		warp "gon_fild01",258,82;
+		end;
+	}
+	mes "[Zhang Quing Long]";
+	mes "Não tenha pressa, meu convidado.";
+	mes "Deve haver muitos lugares";
+	mes "que você pode ter perdido.";
+	close;
+}
+
+// Generic Kunlun NPCs
+//============================================================
+gonryun,200,82,3	script	Jian Chung Xun#gon	774,{
+	mes "[Jian Chung Xun]";
+	mes "Eu simplesmente adoro festivais.";
+	mes "É por isso que amo esta cidade.";
+	mes "Esta cidade me faz sentir como se estivesse";
+	mes "no meio de um festival o ano todo.";
+	close;
+}
+
+gonryun,268,88,3	script	Liang Zhun Bu#gon	776,{
+	mes "[Liang Zhun Bu]";
+	mes "Temos orgulho de ser uma nação";
+	mes "independente, e temos lutado";
+	mes "contra os invasores malignos que";
+	mes "quiseram conquistar esta terra abençoada por muitos anos...";
+	next;
+	mes "[Liang Zhun Bu]";
+	mes "Mas nós vencemos e repelimos";
+	mes "cada invasão! Enquanto";
+	mes "acreditarmos em nós mesmos,";
+	mes "jamais esqueceremos a";
+	mes "Canção Triunfal que nos ajudou em nossas lutas.";
+	close;
+}
+
+gonryun,118,111,5	script	Qian Yuen Shuang#gon	89,{
+	mes "[Qian Yuen Shuang]";
+	mes "O chefe desta cidade é um homem";
+	mes "que abre seu coração para os outros.";
+	mes "No entanto, ouvi dizer que há";
+	mes "algumas pessoas que não gostam da personalidade dele...";
+	next;
+	mes "[Qian Yuen Shuang]";
+	mes "Bem, eu gosto da minha cidade. Os esforços";
+	mes "do Chefe tornaram nossa cidade mais segura.";
+	mes "Só espero que outras pessoas sintam o";
+	mes "mesmo em relação ao que ele fez.";
+	close;
+}
+
+gonryun,181,161,3	script	Jing Wen Zhen#gon	773,{
+	mes "[Jing Wen Zhen]";
+	mes "Os homens em nossa cidade, Kunlun, são";
+	mes "todos corajosos e valentes.";
+	mes "Mas, eles não conseguem";
+	mes "se casar. É uma pena, na verdade...";
+	next;
+	mes "[Jing Wen Zhen]";
+	mes "É tudo porque há";
+	mes "mais homens do que mulheres.";
+	mes "Nem tenho certeza se";
+	mes "meu filho conseguirá";
+	mes "encontrar uma nora para mim.";
+	close;
+}
+
+gonryun,113,135,6	script	Gatekeeper#gon	780,{
+	mes "[Guarda de Kunlun]";
+	mes "Bem-vindo.";
+	mes "Esta é a residência de Shi Yan Wen, o chefe de Kunlun.";
+	next;
+	mes "[Guarda de Kunlun]";
+	mes "É melhor se comportar enquanto";
+	mes "estiver aqui. Se virmos algo";
+	mes "suspeito, o prenderemos em um piscar de olhos.";
+	next;
+	mes "[Guarda de Kunlun]";
+	mes "No entanto, fique tranquilo, você parece";
+	mes "ser uma pessoa de confiança.";
+	mes "Tenho certeza de que nada acontecerá. Aproveite sua visita.";
+	close;
+}
+
+gonryun,113,127,6	script	Gatekeeper#gon2	780,{
+	mes "[Guarda de Kunlun]";
+	mes "Bem-vindo.";
+	mes "Esta é a residência de Shi Yan Wen, o chefe de Kunlun.";
+	next;
+	mes "[Guarda de Kunlun]";
+	mes "É melhor se comportar enquanto";
+	mes "estiver aqui. Se virmos algo";
+	mes "suspeito, o prenderemos em um piscar de olhos.";
+	next;
+	mes "[Guarda de Kunlun]";
+	mes "No entanto, fique tranquilo, você parece";
+	mes "ser uma pessoa de confiança.";
+	mes "Tenho certeza de que nada acontecerá. Aproveite sua visita.";
+	close;
+}
+
+gon_in,73,82,5	script	Ji Chung Zhe#gon	778,{
+	if (nakha >= 0 && nakha <= 2) {
+		mes "[Ji Chung Zhe]";
+		mes "............";
+		next;
+		mes "[Ji Chung Zhe]";
+		mes "puuuuu....Isso com certeza é";
+		mes "algo com que se preocupar.";
+		close;
+	}
+	if (nakha == 3) {
+		// set cha,1;// unused
+		mes "[Ji Chung Zhe]";
+		mes "Eu sou Ji Chung Zhe, um renomado preparador";
+		mes "de chás. Todos os dias, eu dedico todos os";
+		mes "meus esforços em fazer chás maravilhosos e deliciosos.";
+		next;
+		mes "[Ji Chung Zhe]";
+		mes "*Suspiro* Mas ultimamente, o chá que";
+		mes "tenho feito não tem estado tão";
+		mes "bom... Se eu ao menos tivesse alguns ingredientes especiais...";
+		next;
+		mes "[Ji Chung Zhe]";
+		mes "Me disseram que se você usar";
+		mes "uma cobra, pode criar uma bebida";
+		mes "verdadeiramente extraordinária~";
+		mes "Mas... onde posso encontrar uma";
+		mes "e como posso capturá-la?";
+		mes "Hmm...";
+		close;
+	}
+}
+
+gon_in,173,27,3	script	Yu Jiu Xia#gon	774,{
+	mes "[Yu Jiu Xia]";
+	mes "Poxa, exatamente como eu pensei.";
+	mes "Eles não vão me vender álcool.";
+	mes "Talvez seja porque sou muito jovem...";
+	mes "Hmmm... Eu me pergunto qual o gosto...";
+	next;
+	mes "[Yu Jiu Xia]";
+	mes "No entanto, sei que eles estão fazendo";
+	mes "um chá saboroso que até crianças";
+	mes "como eu podem aproveitar.";
+	mes "Fico com água na boca só";
+	mes "de pensar nesse novo chá.";
+	close;
+}
+
+gonryun,166,196,3	script	Soldier#gon	780,{
+	if (b_sword < 7) {
+		mes "[Wa Qiu Wu]";
+		mes "Deixe-me contar algo";
+		mes "interessante sobre este lugar~";
+		mes "Há muito tempo, toda esta área costumava ser um santuário.";
+		next;
+		mes "[Wa Qiu Wu]";
+		mes "Naquela época, eremitas taoístas";
+		mes "costumavam se reunir aqui para";
+		mes "alcançar o Reino Celestial. No entanto,";
+		mes "eles falharam miseravelmente... lentamente os monstros começaram a aparecer...";
+		close;
+	}
+	else if ((b_sword > 6) && (b_sword < 10)) {
+		mes "[Wa Qiu Wu]";
+		mes "Você não acha que estava bem barulhento";
+		mes "ontem à noite? Foi tudo por causa";
+		mes "daquele ladrão. Ele fez";
+		mes "uma cena... Foi tão barulhento que";
+		mes "eu não consegui dormir nada...";
+		next;
+		mes "[Wa Qiu Wu]";
+		mes "Ahh~~~~!";
+		mes "No meio de toda aquela";
+		mes "comoção, eu vi";
+		mes "algo correndo direto";
+		mes "para dentro do santuário.";
+		next;
+		mes "[Wa Qiu Wu]";
+		mes "Movia-se tão rápido que";
+		mes "eu nem consegui dizer o que era.";
+		mes "Pelo que pude reconhecer, ele";
+		mes "parecia humano. Eu me pergunto";
+		mes "o que era...";
+		next;
+		mes "[Wa Qiu Wu]";
+		mes "Pode ter sido o";
+		mes "ladrão, mas ele se moveu";
+		mes "tão rápido que parecia";
+		mes "apenas um vulto.";
+		close;
+	}
+	mes "[Wa Qiu Wu]";
+	mes "Deixe-me contar algo";
+	mes "interessante~ Toda esta área";
+	mes "costumava ser um santuário.";
+	next;
+	mes "[Wa Qiu Wu]";
+	mes "Há muito tempo, eremitas taoístas";
+	mes "costumavam se reunir aqui para";
+	mes "alcançar o Reino Celestial. No entanto,";
+	mes "eles falharam miseravelmente... lentamente os monstros começaram a aparecer.";
+	next;
+	mes "[Wa Qiu Wu]";
+	mes "A cidade está se preparando para o";
+	mes "Festival, mas algo está atrasando";
+	mes "o evento. Isso nunca aconteceu antes...";
+	close;
+}
+
+gonryun,169,71,3	script	Guidev#gon	770,{
+	mes "[Li Xi Jiao]";
+	mes "Bem-vindo a Kunlun!";
+	mes "Você aproveitou toda a paisagem";
+	mes "incrível no seu caminho até aqui?";
+	mes "Os edifícios podem ser pequenos, mas";
+	mes "todos nós trabalhamos duro para construir esta cidade.";
+	next;
+	mes "[Li Xi Jiao]";
+	mes "Eu tenho algumas miniaturas do";
+	mes "Reino de Rune-Midgard.";
+	mes "Você pode ver toda Prontera em";
+	mes "um relance. O trabalho artesanal";
+	mes "nestas obras-primas é realmente impressionante!";
+	next;
+	mes "[Li Xi Jiao]";
+	mes "Se você olhar ao redor com atenção,";
+	mes "você encontrará todos os tipos de vistas";
+	mes "lindas por toda a cidade.";
+	close;
+}
+
+//============================================================
+// Old changelog
+//============================================================
+// May be missing npc's and dialogue.
+//= 1.1 Fixed Typos [Nexon]
+//= 1.2 Removed Duplicates [Silent]
+//= 1.3 Max NPC Name is 23 [Toms]
+//= 1.3a Removed temp NPC plugs due Broken Sword quest [Lupus]
+//= 1.4 Added missing NPC [KarLaeda]
+//============================================================

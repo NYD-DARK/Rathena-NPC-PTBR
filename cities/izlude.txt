@@ -1,0 +1,518 @@
+//===== rAthena Script =======================================
+//= Izlude Town
+//===== By: ==================================================
+//= kobra_k88
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.9a
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Izlude town NPCs
+//===== Additional Comments: =================================
+//= Fully working
+//= 1.1 fixed 2 zeny bugs/checks [Lupus]
+//= 1.2 Fixed a lot of typos [Nexon]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Added a Jawaii related npc. 1.4a Fixed a small bug to
+//=     the Jawaii warper, thanks to reddozen and Silent [MasterOfMuppets]
+//= 1.5 Replaced iz_move_alberta with MISC_QUEST & 16 [Lupus]
+//= 1.6 Removed Duplicates [Silent]
+//= 1.7 Split quest to quests/quests_izlude.txt [Evera]
+//= 1.71 Optimized. Also thanks to CAHTEXHuK [Lupus]
+//= 1.72 Small bugfix [Paradox924X]
+//= 1.8 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
+//=     Removed Honeymoon Helper, as she is a Jawaii NPC.
+//=     Moved Signs to the msg_boards file.
+//= 1.8a Made Red/Cebalis as a single NPC + duplicate [Lupus]
+//= 1.9 Fixed a small problem with Dega. (Ne default case) [L0ne_W0lf]
+//=     Re-added NPC dialog for Cebalis. The dialog differs
+//=     (even if slightly,) after the five or so lines.
+//= 1.9a A part of Kylick's dialogue is Pre-Renewal only. [Euphy]
+//============================================================
+
+// Izlude
+//============================================================
+-	script	::Sailor_izlude	-1,{
+	mes "[Marinheiro]";
+	mes "Olá a todos!";
+	mes "Atenção, atenção!";
+	mes "Venham aproveitar o vento";
+	mes "em um navio fascinante!";
+	mes "Depressa, depressa!";
+	next;
+	switch(select("Byalan Island -> 150 Zeny.:Alberta Marina  -> 500 Zeny.:Cancel.")) {
+	case 1:
+		if (Zeny < 150) {
+			mes "[Marinheiro]";
+			mes "150 Zenys!";
+			mes "Apenas 150 Zenys para viajar!";
+			close;
+		}
+		set Zeny, Zeny - 150;
+		warp "izlu2dun",107,50;
+		end;
+	case 2:
+		if (Zeny < 500) {
+			mes "[Marinheiro]";
+			mes "500 Zenys!";
+			mes "Apenas 500 Zenys para viajar!";
+			close;
+		}
+		set Zeny, Zeny - 500;
+		warp "alberta",188,169;
+		end;
+	case 3:
+		close;
+	}
+}
+
+-	script	::Bonne_izlude	-1,{
+	mes "[Bonne]";
+	mes "Saudações!";
+	mes "Izlude lhe dá as boas-vindas.";
+	next;
+	mes "[Bonne]";
+	mes "Izlude é a cidade satélite de Prontera, capital do reino de Rune-Midgard.";
+	next;
+	mes "[Bonne]";
+	mes "Izlude é fundamental para nosso reino devido à Associação de Espadachins localizada aqui, além de ser a responsável por proteger a costa de Rune-Midgard.";
+	next;
+	mes "[Bonne]";
+	mes "Eu sei, esta ponte pode parecer fraca e frágil, mas na verdade é de ponta, construída com a tecnologia mais sofisticada.";
+	next;
+	mes "[Bonne]";
+	mes "Não importa quão fortes sejam as tempestades, ou quantas pessoas fiquem nela, esta ponte NUUUNCA vai desabar.";
+	next;
+	mes "[Bonne]";
+	mes "Por favor, aproveite";
+	mes "sua visita";
+	mes "aqui em Izlude.";
+	close;
+}
+
+-	script	::Charfri_izlude	-1,{
+	mes "[Charfri]";
+	switch(rand(2)) {
+	case 1:
+		mes "Algumas pessoas podem pensar que Izlude é apenas uma cidade satélite de Prontera, e que não é tão importante assim...";
+		next;
+		mes "[Charfri]";
+		mes "Mas Izlude é uma bela cidade bem ao lado do oceano, assim como a bela Ilha de Byalan.";
+		next;
+		mes "[Charfri]";
+		mes "Você terá que embarcar em um navio no porto para chegar à Ilha de Byalan. Existem calabouços perigosos naquela ilha, então não saia bisbilhotando por aí.";
+		close;
+	default:
+		mes "Embora seja muito bonita, a Ilha de Byalan tem um calabouço misterioso que se estende profundamente sob o mar.";
+		next;
+		mes "[Charfri]";
+		mes "Pessoas que estiveram lá disseram que, se você descer fundo o suficiente, o calabouço vai para debaixo d'água.";
+		next;
+		mes "[Charfri]";
+		mes "Surpreendentemente, uma vez debaixo d'água, você consegue respirar como um peixe. Talvez algum tipo de força sobrenatural esteja em ação.";
+		next;
+		mes "[Charfri]";
+		mes "Ah...";
+		mes "As pessoas que viram a vista subaquática dizem que é tão fantástica que continuam sonhando com ela desde então.";
+		next;
+		mes "[Charfri]";
+		mes "Mas infelizmente, os monstros são fortes demais para pessoas comuns apenas passearem por lá. Ainda assim, só por uma vez, eu gostaria de descer lá...";
+		close;
+	}
+}
+
+-	script	::Cuskoal_izlude	-1,{
+	mes "[Cuskoal]";
+	switch(rand(2)) {
+	case 1:
+		mes "A Arena aqui é O lugar para jovens capazes de todo o Reino de Rune-Midgard se desafiarem e testarem suas habilidades.";
+		next;
+		mes "[Cuskoal]";
+		mes "Você pode batalhar contra monstros de diferentes níveis. Portanto, o número de estágios que você sobreviver será um testemunho de sua proeza em batalha.";
+		next;
+		mes "[Cuskoal]";
+		mes "E então, o que me diz?";
+		close;
+	default:
+		mes "Os bares em Prontera estão sempre cheios de pessoas locais e de fora da cidade. Pode ficar bem movimentado.";
+		next;
+		mes "[Cuskoal]";
+		mes "É um lugar muito bom para passar por informações gerais e ouvir rumores.";
+		next;
+		mes "[Cuskoal]";
+		mes "Então, se você ouvir com atenção, pode ter sorte e aprender algumas informações muito úteis para si mesmo.";
+		close;
+	}
+}
+
+-	script	::Dega_izlude	-1,{
+	mes "[Dega]";
+	switch(rand(3)) {
+	case 1:
+		mes "O Monte Mjolnir, localizado ao norte de Prontera, é uma subida difícil";
+		mes "e íngreme.";
+		next;
+		mes "[Dega]";
+		mes "Além dos perigos da própria montanha, insetos insanamente cruéis vivem lá também. Quero dizer, eles simplesmente atacam você sem motivo.";
+		next;
+		mes "[Dega]";
+		mes "Se você quiser visitar algum lugar além do Monte Mjolnir, prepare-se para o desafio. Ou você pode dar a volta.";
+		close;
+	case 2:
+		mes "Alguns monstros no mundo têm a habilidade única de sentir energia mística e podem detectar feitiços mágicos antes de serem lançados.";
+		next;
+		mes "[Dega]";
+		mes "O Golem do deserto é um deles. Não o subestime devido à sua lentidão...";
+		next;
+		mes "[Dega]";
+		mes "Se você tentar conjurar magia perto dele, ele notará e caminhará até você para esmagá-lo. Então é melhor tomar cuidado com o Golem.";
+		close;
+	default:
+		mes "Existe um lugar muito agradável onde você pode encontrar todos";
+		mes "os tipos de Poring.";
+		next;
+		mes "[Dega]";
+		mes "Fica em algum lugar perto da ponte que conecta a floresta e o deserto, no caminho para a cidade de Payon, que fica a sudeste daqui.";
+		next;
+		mes "[Dega]";
+		mes "Não existem apenas Porings rosas, mas também Drops, que podem ser encontrados no deserto, e o Poporing verde.";
+		next;
+		mes "[Dega]";
+		mes "Mas tenha cuidado, antes que perceba, você pode dar de cara com o Ghostring, um Poring mortal que flutua no ar como um fantasma.";
+		next;
+		mes "[Dega]";
+		mes "Bem, claro, todos eles são muito fofos, mas o Ghostring é uma EXCEÇÃO. Ele é muito, muito perigoso.";
+		next;
+		mes "[Dega]";
+		mes "Se você tiver sorte o suficiente, pode até esbarrar com o Angeling, o Poring com asas de anjo.";
+		next;
+		while(1) {
+			switch(select("Ghostring?:Angeling?:End Conversation.")) {
+			case 1:
+				mes "[Dega]";
+				mes "Ghostring é um Poring acinzentado que flutua no ar como um fantasma. Assim como outros fantasmas, ataques físicos não causam dano a ele.";
+				next;
+				mes "[Dega]";
+				mes "Aqueles cujos principais métodos de ataque são físicos, como Espadachins e Arqueiros, podem ter que correr por suas vidas ao enfrentar Ghostrings.";
+				next;
+				mes "[Dega]";
+				mes "Mas não vá embora ainda~! Há ótimas notícias para pessoas com essas classes. Criar uma arma com alguma propriedade elemental é a chave.";
+				next;
+				mes "[Dega]";
+				mes "Dessa forma, até mesmo um Espadachim ou um Arqueiro pode causar dano, da mesma forma que a Magia, aos Ghostrings.";
+				next;
+				break;
+			case 2:
+				mes "[Dega]";
+				mes "Angelings são imunes a ataques mágicos. Se pessoas que só podem atacar com Magia enfrentarem um Angeling, é hora de";
+				mes "elas correrem.";
+				next;
+				mes "[Dega]";
+				mes "Se você tiver uma adaga ou espada extra, pode tentar. Mas será muito difícil sozinho, não acha?";
+				next;
+				break;
+			case 3:
+				mes "[Dega]";
+				mes "Boa sorte~";
+				close;
+			}
+		}
+	}
+}
+
+-	script	::Kylick_izlude	-1,{
+	if (!checkre(0) && rand(2)) {
+		mes "[Kylick]";
+		mes "Eu estava pensando, embora o povo de Izlude viva tão perto do oceano...";
+		next;
+		mes "[Kylick]";
+		mes "Existem outras culturas que se desenvolveram completamente vivendo do mar. Claro, estou falando de Amatsu.";
+		next;
+		mes "[Kylick]";
+		mes "Ouvi dizer que a culinária de lá é muito boa! Embora a ideia de comer peixe cru seja nova para mim, eu adoraria ir lá e experimentar só uma vez!";
+		close;
+	} else {
+		mes "[Kylick]";
+		mes "Você não acha que Binóculos";
+		mes "são muito LEGAIS?! Você pode";
+		mes "ver todos os tipos de lugares...!";
+		next;
+		mes "[Kylick]";
+		mes "Aqui em Izlude, somos responsáveis por manter a paz não apenas em terra, mas também no mar. É por isso que esta cidade tem um telescópio enorme.";
+		next;
+		mes "[Kylick]";
+		mes "Este telescópio vigia constantemente o mar, para que possamos prevenir que qualquer problema sério aconteça. Sabe...";
+		next;
+		mes "[Kylick]";
+		mes "Mais vale prevenir";
+		mes "do que remediar,";
+		mes "afinal, não é";
+		mes "mesmo?";
+		close;
+	}
+}
+
+-	script	::Red_izlude	-1,{
+	mes "[Red]";
+	mes "A única habilidade necessária para um Espadachim é ^FF2400Golpe Fulminante^000000! Golpe Fulminante, Golpe Fulminante e APENAS ^FF2400Golpe Fulminante^000000! Não há necessidade de perder tempo e esforço com habilidades menores! Todo o resto é para covardes e fracotes!";
+	next;
+	mes "[Cebalis]";
+	mes "Do que você está falando!? O Espadachim ideal fica sozinho, resolutamente, cercado por incontáveis inimigos e esmagando todos eles com um ataque incrível.";
+	next;
+	mes "[Cebalis]";
+	mes "^EE0000Impacto Explosivo!^000000";
+	mes "É isso mesmo, Impacto Explosivo";
+	mes "é a habilidade que faz";
+	mes "o trabalho direito~!!";
+	next;
+	mes "[Cebalis]";
+	mes "Bem... Às vezes o dano explosivo pode atingir acidentalmente alguns monstros que estão vagando, e esses caras acabam vindo atrás de você, mas esse é um risco que um Espadachim deve estar disposto a correr!!";
+	next;
+	mes "[Red]";
+	mes "É exatamente por isso que você é burro, seu idiota! E o que é essa história de 'Espadachim ideal'? Eu ainda me lembro da última vez que você usou Impacto Explosivo...";
+	next;
+	mes "[Red]";
+	mes "Você acabou fugindo de todos aqueles monstros que atingiu com aquela habilidade estúpida! Fracote! Todos aqueles Porings ao seu redor foram atingidos e tentaram te matar.";
+	next;
+	mes "[Cebalis]";
+	mes "Humpf. Que eu me lembre, você também estava fugindo, aparentemente ocupado demais para usar seu precioso Golpe Fulminante. De qualquer forma, Impacto Explosivo é A habilidade para um Espadachim~!!";
+	next;
+	mes "[Cebalis]";
+	mes "Algo simplista como o Golpe Fulminante";
+	mes "é apenas um dos pequenos passos em direção ao Impacto Explosivo.";
+	next;
+	mes "[Red]";
+	mes "Ah cara~";
+	mes "Ei, eu sei que você";
+	mes "ouviu tudo.";
+	mes "Então, o que você acha?";
+	next;
+	mes "[Red]";
+	mes "Qual você acha melhor? A habilidade de dano crítico, ^FF2400Golpe Fulminante^000000, ou a habilidade de dano em área, ^EE0000Impacto Explosivo^000000?";
+	next;
+	if (select("Bash:Magnum Break") == 1)  {
+		if (BaseClass == Job_Swordman) {
+			mes "[Red]";
+			mes "Hahahaha!!! Eu sabia que você veria as coisas do meu jeito!! Você É um ótimo cara!! Sem dúvida, apenas ^FF2400Golpe Fulminante^000000 combina com um Espadachim. Por favor, diga isso para esse CABEÇA-DURA aqui~ Hahaha!";
+			next;
+			mes "[Red]";
+			mes "Hmm, deixe-me te dar um conselho. Depois que você atingir o nível 5 de 'Golpe Fulminante', a quantidade de SP consumida pela habilidade aumenta muito, então cuide do seu SP.";
+			close;
+		}
+		mes "[Red]";
+		mes "Hahahaha!! Viu!? Alguém que segue outra profissão concorda comigo~! Você realmente é um cara legal! Hahaha!! Sem dúvida, apenas ^FF2400Golpe Fulminante^000000 combina com um Espadachim. Por favor, diga isso para esse IMBECIL aqui~ Hahaha!";
+		close;
+	}
+	if (BaseClass == Job_Swordman) {
+		mes "[Cebalis]";
+		mes "Muito bem!! ^EE0000Impacto Explosivo^000000 é a MELHOR!! Agora sim estamos nos entendendo~!! Você entende do assunto~ HaHaHa!";
+		next;
+		mes "[Cebalis]";
+		mes "Quer saber algumas informações úteis? Ok, ok, deixa eu te contar! Impacto Explosivo tem a Propriedade Fogo.";
+		next;
+		mes "[Cebalis]";
+		mes "Então, não será muito eficaz contra monstros com a propriedade Água, mas esta é A habilidade para usar contra monstros da propriedade Morto-Vivo e Terra!";
+		next;
+		mes "[Cebalis]";
+		mes "E o mais importante, olhe em volta antes de usar. Caso contrário, você estará em GRANDES apuros~";
+		close;
+	}
+	mes "[Cebalis]";
+	mes "Viu?! ^EE0000Impacto Explosivo^000000 é A MELHOR!!! Você sabe do que está falando, hein? Não sei por que esse babaca está sendo tão teimoso.";
+	close;
+}
+
+-	script	::Cebalis_izlude	-1,{
+	mes "[Red]";
+	mes "A única habilidade necessária para um Espadachim é ^FF2400Golpe Fulminante^000000! Golpe Fulminante, Golpe Fulminante e APENAS ^FF2400Golpe Fulminante^000000! Não há necessidade de perder tempo e esforço com habilidades menores~~ Todo o resto é para covardes e fracotes!";
+	next;
+	mes "[Cebalis]";
+	mes "Do que você está falando!? O Espadachim ideal fica sozinho, resolutamente, cercado por incontáveis inimigos, esmagando todos eles com um ataque incrível...";
+	next;
+	mes "[Cebalis]";
+	mes "^EE0000Impacto Explosivo!^000000";
+	mes "É isso mesmo, Impacto Explosivo";
+	mes "é a habilidade";
+	mes "perfeita para um Espadachim.";
+	next;
+	mes "[Cebalis]";
+	mes "Bem...";
+	mes "Às vezes a explosão atinge acidentalmente alguns monstros que estão apenas vagando por perto.";
+	next;
+	mes "[Cebalis]";
+	mes "Então todos eles acabam vindo atrás de você, mas esse é um risco que um verdadeiro Espadachim deve estar disposto a correr.";
+	next;
+	mes "[Red]";
+	mes "É exatamente por isso que você é burro, seu idiota! E o que foi aquela história de 'Espadachim ideal'? Você se lembra da última vez que usou Impacto Explosivo?!";
+	next;
+	mes "[Red]";
+	mes "Você teve que fugir de todos aqueles Porings atingidos por aquela habilidade estúpida! Seu fracote! Todos aqueles Porings que você atingiu tentaram te matar!";
+	next;
+	mes "[Cebalis]";
+	mes "Ah, cala a boca. E aqueles eram Poporings. Que eu me lembre, você também estava fugindo, aparentemente ocupado demais para usar seu precioso Golpe Fulminante.";
+	next;
+	mes "[Cebalis]";
+	mes "De qualquer forma, Impacto Explosivo é A habilidade para um Espadachim~!! Algo simplista como o Golpe Fulminante é apenas um daqueles pequenos passos em direção ao Impacto Explosivo.";
+	next;
+	mes "[Red]";
+	mes "Ah cara~";
+	mes "Ei, eu sei que você";
+	mes "ouviu tudo.";
+	mes "Então, o que você acha?";
+	next;
+	mes "[Red]";
+	mes "Qual você acha melhor? A habilidade de dano crítico, ^FF2400Golpe Fulminante^000000, ou a habilidade de dano em área, ^EE0000Impacto Explosivo^000000?";
+	next;
+	if (select("Bash:Magnum Break") == 1) {
+		if (BaseClass == Job_Swordman) {
+			mes "[Red]";
+			mes "Hahahaha!!! Eu sabia que você veria as coisas do meu jeito!! Você É um ótimo cara!! Sem dúvida, apenas ^FF2400Golpe Fulminante^000000 combina com um Espadachim. Por favor, diga isso para esse PALHAÇO aqui!! Hahaha.";
+			next;
+			mes "[Red]";
+			mes "Hmm, deixe-me te dar um conselho. Depois que você atingir o nível 5 de Golpe Fulminante, a quantidade de SP consumida pela habilidade aumenta muito, então cuide do seu SP.";
+			close;
+		}
+		mes "[Red]";
+		mes "Hahahaha!!";
+		mes "Viu!? Alguém que segue outra profissão concorda comigo~! Você realmente é um cara legal! Hahaha!!";
+		next;
+		mes "[Red]";
+		mes "Sem dúvida, apenas ^FF2400Golpe Fulminante^000000 combina com um Espadachim. Por favor, diga isso para esse IDIOTA aqui!! Hahaha~";
+		close;
+	}
+	if (BaseClass == Job_Swordman) {
+		mes "[Cebalis]";
+		mes "Muito bem!! ^EE0000Impacto Explosivo^000000 é a MELHOR!! Agora sim estamos nos entendendo~!! Você entende do assunto, garoto. HaHaHa~!";
+		next;
+		mes "[Cebalis]";
+		mes "Quer saber algumas informações úteis? Ok, ok, deixa eu te contar! A explosão do 'Impacto Explosivo' tem a Propriedade Fogo.";
+		next;
+		mes "[Cebalis]";
+		mes "Então, não será muito eficaz contra monstros da propriedade Água, mas esta é A habilidade para usar contra monstros da propriedade Morto-Vivo e Terra!";
+		next;
+		mes "[Cebalis]";
+		mes "E o mais importante, olhe em volta antes de usar. Caso contrário, você estará em GRANDES apuros~";
+		close;
+	}
+	mes "[Cebalis]";
+	mes "Eu estou certo, não estou?! ^EE0000Impacto Explosivo^000000 é A MELHOR!!! Você sabe do que está falando, hein? Não sei por que esse BALEIA está sendo tão teimoso.";
+	close;
+}
+
+-	script	::Soldier_izlude	-1,{
+	mes "[Soldado]";
+	mes "HeHeHeHe..HaHaHaHa";
+	mes "Huh? Por que estou tão feliz?";
+	mes "Quer saber?";
+	next;
+	if (select("Sure, why?:Not really, I don't care.") == 1) {
+		mes "[Soldado]";
+		mes "Ah~~ Não há muito o que fazer hoje em dia. Veja bem, Mercadores compram itens derrubados por monstros. Mas você sabia disso, certo?";
+		next;
+		if (select("Of course:Eh? Really?") == 1) {
+			mes "[Soldado]";
+			mes "HaHa~ Na verdade, isso era parte do nosso trabalho. Mas cada vez mais caçadores vinham até nós para receber o pagamento e tornou-se impossível lidar com tudo.";
+			next;
+			mes "[Soldado]";
+			mes "Tínhamos que fazer hora extra todos os dias. Ah, foi um pesadelo...! De qualquer forma, o governo acabou tomando uma decisão sábia ao criar o Sistema de Registro.";
+			next;
+			mes "[Soldado]";
+			mes "O Escritório de Compensação de Prêmios só paga aqueles que possuem o Registro. Claro, você teria que ser um mercador e ficar no mesmo lugar o dia todo.";
+			next;
+			mes "[Soldado]";
+			mes "O Escritório dá o registro a qualquer mercador que cumpra esses requisitos. Então, hoje em dia, os caçadores vendem seus bens aos mercadores registrados.";
+			next;
+			mes "[Soldado]";
+			mes "Então hoje em dia, os caçadores vendem seus bens aos mercadores registrados. Não vem mais muita gente nos procurar para isso.";
+			next;
+			mes "[Soldado]";
+			mes "Quero dizer, ainda estamos ocupados, mas não é nada comparado a como era antes. Pessoas que sentiram sofrimento sabem como apreciar até o menor conforto.";
+			close;
+		}
+		mes "[Soldado]";
+		mes "O quê?! Como assim você não sabia?! Bem, você sabe que pode obter itens matando monstros. Se você levar e vender esses itens para um mercador, você pode ganhar algum dinheiro.";
+		next;
+		mes "[Soldado]";
+		mes "HaHa, na verdade, isso costumava ser parte do nosso trabalho. Mas cada vez mais caçadores vinham para receber o pagamento, então tornou-se impossível lidar com tudo.";
+		next;
+		mes "[Soldado]";
+		mes "Tínhamos que fazer hora extra todos os dias. Ah, foi um pesadelo...! De qualquer forma, o governo acabou tomando uma decisão sábia ao criar o Sistema de Registro.";
+		next;
+		mes "[Soldado]";
+		mes "O Escritório de Compensação de Prêmios só paga aqueles que possuem o Registro. Claro, você teria que ser um mercador e ficar no mesmo lugar o dia todo.";
+		next;
+		mes "[Soldado]";
+		mes "O Escritório dá o registro a qualquer mercador que cumpra esses requisitos. Então, hoje em dia, os caçadores vendem seus bens aos mercadores registrados.";
+		next;
+		mes "[Soldado]";
+		mes "Então hoje em dia, os caçadores vendem seus bens aos mercadores registrados. Não vem mais muita gente nos procurar para isso.";
+		next;
+		mes "[Soldado]";
+		mes "Quero dizer, ainda estamos ocupados, mas não é nada comparado a como era antes. Pessoas que sentiram sofrimento sabem como apreciar até o menor conforto.";
+		close;
+	}
+	mes "[Soldado]";
+	mes "Ok, tchau~~";
+	close;
+}
+
+// Inside Izlude
+//============================================================
+izlude_in,125,164,2	script	Aaron#izlude	65,{
+	mes "[Aaron]";
+	mes "Você não acha que uma VIT alta e o treinamento em um método de respiração único que permite uma rápida recuperação de HP são as maiores vantagens para um Espadachim?";
+	next;
+	mes "[Aaron]";
+	mes "Se você treinar suas habilidades com afinco, poderá até ver seu HP se recuperando. A quantidade";
+	mes "recuperada depende";
+	mes "da vitalidade, ou VIT.";
+	next;
+	mes "[Aaron]";
+	mes "Então, se você investir mais pontos de atributos em VIT, você recuperará mais HP no geral ao descansar.";
+	next;
+	mes "[Aaron]";
+	mes "Mas, claro, seria bom ter um Ataque alto, não seria? Você pode adquirir uma boa arma ou aumentar sua STR para dar suporte ao seu Ataque.";
+	next;
+	mes "[Aaron]";
+	mes "Você sabe que precisará de um pouco de força de qualquer maneira para empunhar boas armas facilmente.";
+	next;
+	mes "[Aaron]";
+	mes "Outra coisa importante é a precisão com que você acerta seus oponentes. A DES é a chave aqui. Se você treinar DES, a diferença entre o dano MÍNIMO e MÁXIMO também diminuirá.";
+	next;
+	mes "[Aaron]";
+	mes "Hm...";
+	mes "Você está entediado com toda essa conversa? Ou quer que eu continue?";
+	next;
+	if (select("Tell me more please.:End conversation.") == 1) {
+		mes "[Aaron]";
+		mes "Hmm...";
+		mes "Nesse caso, explicarei brevemente sobre os outros atributos. Para atacar e desviar rapidamente, você tem que prestar atenção na AGI.";
+		next;
+		mes "[Aaron]";
+		mes "Caso queira causar mais acertos críticos, é uma boa ideia investir em SOR. A INT também aumenta o SP Máximo, o que é necessário para usar várias habilidades... Mas a decisão é sua.";
+		close;
+	}
+	mes "[Aaron]";
+	mes "Ok então,";
+	mes "treine bastante~~";
+	close;
+}
+
+// Izlude Dungeon
+//============================================================
+izlu2dun,108,27,0	script	Sailor#2izlude	100,{
+	mes "[Marinheiro]";
+	mes "Quer";
+	mes "voltar?";
+	next;
+	if (select("Yeah, I'm tired to death.:Nope, I love this place!") == 1) {
+		if(checkre(0))
+			warp "izlude",197,210;
+		else
+			warp "izlude",176,182;
+		end;
+	}
+	close;
+}

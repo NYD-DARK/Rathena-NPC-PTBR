@@ -1,0 +1,937 @@
+//===== rAthena Script =======================================
+//= Lutie Town
+//===== Description: =========================================
+//= Lutie - City NPCs
+//===== Additional Comments: =================================
+//= 1.1 Edited some text and updated/enabled some triggers
+//=     for the quest.[kobra_k88]
+//= 1.2 Fixed exploit. Checked for Bard Job Quest compatibility [Lupus]
+//= 1.3 Fixed typos [Nexon]
+//= 1.4 Fixed exploit [Lupus]
+//= 1.5 Fixed a bug that could reset Lutie quest state [Lupus]
+//= 1.6 Heavy optimization to all the NPCs [DZeroX]
+//= 1.7 Updated to match AEGIS script. [Kisuka]
+//= 1.8 Split Mr. Claus to pre-re and re [Lemongrass]
+//============================================================
+
+// Teleport to Lutie
+//============================================================
+-	script	Mr. Claus	718,{
+	mes "[Sr. Claus]";
+	mes "Ho Ho Ho~";
+	mes "Feliz Natal!!";
+	mes "Desejo a todos vocês alegria";
+	mes "e espírito natalino!";
+	next;
+	switch(select("Info about Lutie:Move to 'Lutie':Cancel")) {
+	case 1:
+		mes "[Sr. Claus]";
+		mes "^3355FFLutie^000000, a fantástica Cidade do Natal! Sempre repleta do espírito de doação, Lutie está cheia de bolos apetitosos, soldadinhos de brinquedo e todos os tipos de coisas maravilhosas~!";
+		next;
+		mes "[Sr. Claus]";
+		mes "Ho Ho Ho~";
+		mes "É uma terra incrível abençoada com a beleza do inverno e uma atmosfera festiva o ano todo!";
+		next;
+		mes "[Sr. Claus]";
+		mes "Sou um Papai Noel que guiará as pessoas até Lutie, a Cidade do Natal. Peça-me a qualquer momento e eu magicamente lhe enviarei para lá~";
+		close;
+	case 2:
+		mes "[Sr. Claus]";
+		mes "Ho Ho Ho~";
+		mes "O único jeito de chegar a Lutie é por aqui, em Al de Baran!";
+		next;
+		mes "[Sr. Claus]";
+		mes "Eu cuido deste lugar e transporte pessoalmente as pessoas que querem visitar Lutie. Por favor, peça ao Papai Noel ali se você quiser sair da cidade. Ele lhe mostrará o caminho para sair de Lutie.";
+		next;
+		mes "[Sr. Claus]";
+		mes "Ho Ho Ho~";
+		mes "Bem, você está pronto?";
+		mes "Tenha uma boa viagem!";
+		mes "Feeeeeliz Natal!";
+		close2;
+		warp "xmas_fild01",78,68;
+		end;
+	case 3:
+		mes "[Sr. Claus]";
+		mes "Ho Ho Ho~";
+		mes "Sempre que quiser visitar Lutie, fique à vontade. Apenas me avise quando quiser sair.";
+		next;
+		mes "[Sr. Claus]";
+		mes "Ho ho hooooo!!";
+		mes "Feeeeeliz Festas!";
+		close;
+	}
+}
+
+// Inside Lutie
+//============================================================
+xmas_in,100,96,4	script	Santa Claus	718,{
+	mes "[Papai Noel]";
+	mes "Ho Ho Ho~";
+	mes "Feeeeeliz Natal !!";
+	next;
+	mes "^3355FFÉ...^000000";
+	mes "^3355FFÉ o verdadeiro Papai Noel!^000000";
+	next;
+	mes "[Papai Noel]";
+	mes "Ho Ho Ho~";
+	mes "Eu sou o Papai Noel, e trago presentes para todos os meninos e meninas bons no Natal!";
+	next;
+	mes "[Papai Noel]";
+	mes "Se você quiser sair de Lutie, vá para fora da cidade e siga para o sul até o primeiro campo que encontrar. Você poderá encontrar um portal mágico que o levará para Al de Baran.";
+	next;
+	mes "[Papai Noel]";
+	mes "Ho ho ho~";
+	mes "Feeeeeliz Natal!";
+	close;
+}
+
+xmas_in,167,173,4	script	Duffle	711,{
+	if (xmas_npc == 1) {
+		mes "[Duffle]";
+		mes "Feliz Natal!";
+		mes "Bem-vindo a Lutie!";
+		next;
+		mes "[Duffle]";
+		mes "Você ganhou um presente";
+		mes "do Papai Noel?!";
+		mes "Ha ha, você deve";
+		mes "estar muito empolgado!";
+		next;
+		mes "[Duffle]";
+		mes "Ei, você já ouviu falar que aqui em Lutie temos uma atração tão famosa quanto o próprio Papai Noel?";
+		next;
+		mes "[Duffle]";
+		mes "É o ^3355FFSnowysnow^000000,";
+		mes "o mágico";
+		mes "boneco de neve falante!";
+		next;
+		mes "[Duffle]";
+		mes "Antes de ir embora, você realmente deveria conhecer e conversar com o Snowysnow, mesmo que apenas uma vez. Ele é um cara muito legal e divertido de conversar.";
+		next;
+		mes "[Duffle]";
+		mes "Bem, então...";
+		mes "Feliz Natal!!";
+		set xmas_npc,2;
+		close;
+	}
+	else if (xmas_npc > 1) {
+		mes "[Duffle]";
+		mes "Você já conversou com o boneco de neve na frente desta cidade? O boneco de neve solitário que permanece lá...";
+		next;
+		mes "[Duffle]";
+		mes "Mas ele é tão caloroso~! Às vezes, eu converso com o boneco de neve Snowysnow. Por algum motivo estranho, ele consegue falar como nós!";
+		next;
+		mes "[Duffle]";
+		mes "Quando converso com o Snowysnow, fico imaginando como ele surgiu. Acho que se você conversar com ele também, sentirá o mesmo.";
+		next;
+		mes "[Duffle]";
+		mes "Como ele foi criado, e como ele pensa e fala como um humano é um mistério...";
+		next;
+		mes "[Duffle]";
+		mes "De onde ele veio e que tipo de lugar era? E como ele chegou a Lutie sem pernas...?";
+		next;
+		mes "[Duffle]";
+		mes "Ultimamente, parece que mais e mais pessoas estão vindo a esta cidade para ver o Snowysnow.";
+		next;
+		mes "[Duffle]";
+		mes "Acho que você deveria conversar com as outras pessoas que vivem em Lutie se quiser aprender mais sobre o mistério do Snowysnow...";
+		close;
+	}
+	else {
+		mes "[Duffle]";
+		mes "Ah...!";
+		mes "Enquanto estiver aqui, não se esqueça de visitar o verdadeiro Papai Noel aqui em Lutie.";
+		close;
+	}
+}
+
+xmas_in,27,103,4	script	Lenient Aunt	701,{
+	switch (xmas_npc) {
+	case 5:
+		mes "[Thachentze]";
+		mes "Hmm? O cara peludo";
+		mes "falou bem de mim,";
+		mes "é mesmo? Ora, ora...";
+		next;
+		mes "[Thachentze]";
+		mes "Eu sei o que ele pensa... Ho ho ho~! Ele pretende me deixar feliz para que eu lhe dê alguns potes de picles de graça! Ah, bem~!";
+		next;
+		mes "[Thachentze]";
+		mes "Ele me conhece bem demais. Eu quase não consigo parar de dar picles para aquele homem. Sim, até eu sei que meus picles são os melhores da cidade!";
+		next;
+		mes "[Thachentze]";
+		mes "Hmmm~?";
+		mes "Você quer saber";
+		mes "sobre o ^3355FFSnowysnow^000000?";
+		mes "Oh. Sim, sim, entendo...";
+		next;
+		mes "[Thachentze]";
+		mes "Bem, não posso simplesmente deixar qualquer um saber algo tão importante sobre o Snowysnow. Hmmm...";
+		next;
+		mes "[Thachentze]";
+		mes "O Snowysnow tem guardado algo para mim como um favor, o ^3355FFsal mais grosso do mundo^000000, que uso para fazer picles de repolho.";
+		next;
+		mes "[Thachentze]";
+		mes "Suponho que se você for realmente amigo do Snowysnow, ele confiará em você o suficiente para lhe dar para que você possa me entregar. E, de qualquer forma, precisarei de mais em breve.";
+		next;
+		mes "[Thachentze]";
+		mes "Agora seja um querido";
+		mes "e apresse-se.";
+		mes "Volte logo~";
+		set xmas_npc,6;
+		close;
+	case 6:
+		mes "[Thachentze]";
+		mes "Hohohoho~";
+		mes "Você voltou!";
+		next;
+		mes "[Thachentze]";
+		mes "Você trouxe?";
+		mes "Oh, céus...!";
+		mes "Meus repolhos vão";
+		mes "ficar azedos logo!";
+		next;
+		mes "[Thachentze]";
+		mes "Você...";
+		mes "Não tem?";
+		next;
+		mes "[Thachentze]";
+		mes "*Suspiro*";
+		mes "Você é realmente uma pessoa distraída, meu querido. Agora corra até o Snowysnow e traga-me o ^3355FFsal mais grosso do mundo^000000.";
+		next;
+		mes "[Thachentze]";
+		mes "Apresse-se agora, querido,";
+		mes "Rápido, rápido~!";
+		close;
+	case 7:
+		mes "[Thachentze]";
+		mes "Hohohohoh hohohohoho !";
+		mes "Vamos ver, vamos ver...";
+		mes "Obrigada, querido, obrigada.";
+		next;
+		set xmas_npc,8;
+		mes "^3355FFVocê entregou a ela o";
+		mes "sal mais grosso do mundo.^000000";
+		next;
+		mes "[Thachentze]";
+		mes "Agora posso fazer meus picles de repolho adequadamente. Obrigada, meu querido. Obrigada...";
+		next;
+		mes "...";
+		next;
+		mes "...";
+		mes "......";
+		next;
+		mes "[Thachentze]";
+		mes "Ah sim, sinto muito. Quase esqueci o que lhe prometi. Você me perguntou sobre a bolsa de presentes mágica do Snowysnow, não foi?";
+		next;
+		mes "[Thachentze]";
+		mes "Se você já conheceu o Tio Cantata, já deve saber que o Snowysnow foi feito de uma neve misteriosa que cobria um campo denso de flores mágicas.";
+		next;
+		mes "[Thachentze]";
+		mes "Não posso lhe dizer como, mas quando o Snowysnow foi revivido, houve uma reação entre os materiais do Alquimista e as energias da neve do Snowysnow.";
+		next;
+		mes "[Thachentze]";
+		mes "Por algum motivo, a bolsa de presentes do Snowysnow agora pode criar quantos presentes o Snowysnow quiser, assim como o Papai Noel.";
+		next;
+		mes "[Thachentze]";
+		mes "Claro, se esse poder caísse nas mãos do mal, todos estaríamos em apuros.";
+		next;
+		mes "[Thachentze]";
+		mes "No entanto, todos sabem que o Snowysnow é gentil e amoroso com os outros. Portanto, nunca nos preocupamos com os poderes do Snowysnow.";
+		next;
+		mes "[Thachentze]";
+		mes "Ah, e acabei de ouvir algumas notícias chocantes do palhaço ^3355FFHashokii^000000. É uma história bastante interessante, na verdade. Por que você não pergunta mais a ele sobre isso?";
+		close;
+	default:
+		mes "[Thachentze]";
+		mes "Feliz Natal~";
+		mes "Ho! Ho! Ho!";
+		next;
+		mes "[Thachentze]";
+		mes "Posso sentir o espírito natalino ao meu redor! Está até nos olhos dos jovens viajantes que vieram até aqui, em Lutie. Hoho, desejo-lhe um Feliz Natal!";
+		next;
+		mes "[Thachentze]";
+		mes "Temos uma masmorra chamada";
+		mes "'Masmorra de Natal' por aqui. Bem, acho que não preciso lhe contar muito se você já ouviu falar dela.";
+		mes "Ah, bem...";
+		next;
+		mes "[Thachentze]";
+		mes "Descobri algo há alguns dias. Na masmorra de Natal, você encontrará criaturas semelhantes às que estão fora da cidade.";
+		next;
+		mes "[Thachentze]";
+		mes "Suponho que os monstros vagaram para cá de fora da cidade, e foram transformados pelo clima frio daqui. Então, os monstros se adaptaram para viver neste ambiente.";
+		next;
+		mes "[Thachentze]";
+		mes "...";
+		mes "Certo, agora acho que é melhor eu me preparar para fazer picles de repolho. Se você ainda não sabe, eu faço os melhores picles da região! Por que você não me visita mais tarde e experimenta um pouco?";
+		close;
+	}
+}
+
+// Lutie
+//============================================================
+xmas,117,304,4	script	Poze	713,{
+	if (xmas_npc == 3 || xmas_npc == 4) {
+		mes "[Poze]";
+		mes "Você foi até o";
+		mes "^3355FFSnowysnow^000000 e ele";
+		mes "mencionou a mim?";
+		next;
+		mes "[Poze]";
+		mes "Oh, entendo...";
+		mes "Ele é um boneco de neve que não tem pernas. Não é de admirar que ele não tenha vindo me visitar. Que pena, que pena. Acho melhor eu ir visitá-lo.";
+		next;
+		mes "[Poze]";
+		mes "Ah, tem alguém que sabe como o Snowysnow conseguiu falar. Essa pessoa seria o ^3355FFTio Cantata Peludo^000000...";
+		next;
+		mes "[Poze]";
+		mes "Um dia, quando um aprendiz do grande alquimista visitou Lutie, eu vim ouvir uma conversa entre ele e o Tio Peludo.";
+		next;
+		mes "[Poze]";
+		mes "Muito tempo atrás, um grande alquimista passou pela cidade natal do Snowysnow e acabou encontrando o Snowysnow morrendo, derretendo em água. No entanto, Snowysnow foi milagrosamente revivido por aquele Alquimista.";
+		next;
+		mes "[Poze]";
+		mes "Mas isso é praticamente tudo o que sei. Para os detalhes reais, você deve perguntar ao ^3355FFTio Cantata Peludo^000000.";
+		set xmas_npc,4;
+		close;
+	} else {
+		mes "[Poze]";
+		mes "Bem-vindo a Lutie,";
+		mes "a cidade que abençoa";
+		mes "todos os seus visitantes com";
+		mes "o espírito do Natal!";
+		mes "Feliz Natal !";
+		next;
+		mes "[Poze]";
+		mes "Aqui nesta terra mágica de diversão e fantasia, você pode aproveitar o espírito do Natal o ano todo~! Não é maravilhoso?";
+		next;
+		mes "[Poze]";
+		mes "Lutie não é apenas uma simples atração. Temos instalações convenientes como as outras cidades, mas em um ambiente festivo.";
+		next;
+		mes "[Poze]";
+		mes "Portanto, se você decidir ficar aqui por um tempo, deverá ter todos os confortos de que precisa. Feliz Natal~";
+		close;
+	}
+}
+
+xmas,176,236,4	script	Uncle Hairy	712,{
+	if (xmas_npc == 4) {
+		if (countitem(1024) > 0 && countitem(938) > 0) {
+			mes "[Cantata]";
+			mes "Oh? V-v-você conseguiu as coisas? Ótimo. Faz tanto tempo desde que pude ter um pouco disso... D-dê para mim!";
+			next;
+			delitem 1024,1;// Chinese_Ink
+			delitem 938,1;// Sticky_Mucus
+			mes "^3355FFVocê rapidamente entregou a ele a Tinta de Polvo e o Muco Pegajoso e observou com um pouco de nojo enquanto ele saboreava o gosto.^000000";
+			next;
+			mes "[Cantata]";
+			mes "*Arrrrrotou~*";
+			mes "Bem, agora é hora da minha história. Tenha em mente que esta é a história completa do que eu sei. Não tenho certeza do quanto você já ouviu, no entanto...";
+			next;
+			mes "[Cantata]";
+			mes "Muito tempo atrás,";
+			mes "havia um grande";
+			mes "Alquimista vivendo";
+			mes "no extremo norte.";
+			mes "Seu nome era";
+			mes "^3355FFPhilip Varsez^000000!";
+			next;
+			mes "[Cantata]";
+			mes "Ele estava sempre na vanguarda da pesquisa da alquimia e precisava de materiais raros para conduzir seus estudos. Por causa disso, ele teve que viajar o mundo em busca de materiais contendo energias mágicas...";
+			next;
+			mes "[Cantata]";
+			mes "Um dia, suas viagens o levaram a uma vila do norte conhecida por seu clima congelante. Mas quando chegou, foi recebido por uma cidade fumegante que havia sido destruída recentemente.";
+			next;
+			mes "[Cantata]";
+			mes "Era uma visão sombria: pessoas estavam deitadas na beira da estrada, gemendo de agonia. Enquanto Varsez passava, cada habitante implorava: 'M-mate-me...' e pedia que ele acabasse com seu sofrimento.";
+			next;
+			mes "[Cantata]";
+			mes "Em meio aos gritos de desespero, o choro de dois bebês chegou aos ouvidos de Philip Varsez. Ele correu para investigar e encontrou dois bebês aconchegados no peito de um boneco de neve que estava derretendo.";
+			next;
+			mes "[Cantata]";
+			mes "Aquele boneco de neve...";
+			mes "era o ^3355FFSnowysnow^000000.";
+			next;
+			mes "[Cantata]";
+			mes "Sendo o Alquimista sábio que é, Varsez deduziu que o Snowysnow se sacrificou para proteger aqueles dois bebês do grande desastre que havia destruído a vila.";
+			next;
+			mes "[Cantata]";
+			mes "Varsez ficou comovido e estava determinado a salvar a vida deste boneco de neve com sua alquimia. Ele então o transportaria para Lutie, o lugar mais seguro do mundo.";
+			next;
+			mes "[Cantata]";
+			mes "Claro, havia outro boato de que, além da misericórdia daquele Alquimista, Snowysnow conseguiu sobreviver devido às propriedades especiais de sua neve.";
+			next;
+			mes "[Cantata]";
+			mes "Acredita-se que a neve do Snowysnow costumava cobrir um campo misterioso que seria preenchido com o florescimento de flores mágicas.";
+			next;
+			mes "[Cantata]";
+			mes "Muhahaha~";
+			mes "Bem, isso é praticamente tudo o que sei. Espero que você tenha conseguido aprender o que queria da minha história! Haw haw haw!";
+			next;
+			mes "[Cantata]";
+			mes "Bem...";
+			mes "Agora que penso nisso...";
+			next;
+			mes "[Cantata]";
+			mes "Snowysnow não só consegue falar, mas também parece ser capaz de criar um suprimento infinito de presentes de Natal. Ou, pelo menos, é o que ouvi dizer.";
+			next;
+			mes "[Cantata]";
+			mes "^3355FFThachentze^000000, aquela adorável fabricante de picles, sabe mais sobre isso. Então, se você estiver curioso, deve ir conversar com ela. Tudo bem então, Feliz Natal!";
+			set xmas_npc,5;
+			close;
+		} else {
+			mes "[Cantata]";
+			mes "Ah é? Ouviu falar de mim pelo Poze, foi? Haw haw haw! Sim, sei um pouco sobre o Snowysnow. Na verdade, posso até ser seu ponto fraco, já que...";
+			next;
+			mes "[Cantata]";
+			mes "Eu conheço";
+			mes "o segredo do";
+			mes "^3355FFnascimento do Snowysnow^000000!!";
+			next;
+			mes "[Cantata]";
+			mes "Você está curioso?";
+			mes "Heh heh heh~ Bem, não pense que lhe contarei a menos que me dê algo em troca!";
+			next;
+			mes "[Cantata]";
+			mes "Viver nesta";
+			mes "cidade não me dá";
+			mes "muita chance de desfrutar";
+			mes "de uma bebida de homem. Hmmm, traga-me...";
+			next;
+			mes "[Cantata]";
+			mes "^3355FF1 Tinta de Polvo^000000 e";
+			mes "^3355FF1 Muco Pegajoso^000000!";
+			next;
+			mes "[Cantata]";
+			mes "Wahhahaha! Que diabos de olhar é esse?! Não se preocupe com meu senso de paladar gourmet! Agora vá trabalhar~!";
+			close;
+		}
+	}
+	else {
+		mes "[Cantata]";
+		mes "Feliz Natal!";
+		mes "Bem-vindo a Lutie!";
+		next;
+		mes "[Cantata]";
+		mes "Parece que o frio deixou suas bochechas rosadas.";
+		mes "Haw haw haw!";
+		next;
+		mes "[Cantata]";
+		mes "Tenha cuidado, não seria bom para você pegar a Gripe de Lutie.";
+		mes "...";
+		next;
+		mes "[Cantata]";
+		mes "*Suspiro* Isso me lembra...";
+		mes "Meu filhinho teve um caso terrível de Gripe de Lutie há algum tempo.";
+		next;
+		mes "[Cantata]";
+		mes "Foi durante a noite, e não havia lugar onde eu pudesse conseguir remédios. Parecia que eu não podia fazer nada pelo meu filhinho.";
+		next;
+		mes "[Cantata]";
+		mes "Pensei que o mínimo que poderia fazer pelo meu filho era conseguir algo frio para baixar a febre dele, mas a neve de Lutie continuava derretendo após ser colocada em sua testa. Ele estava queimando de febre, e eu não estava conseguindo aliviá-lo.";
+		next;
+		mes "[Cantata]";
+		mes "Foi então que";
+		mes "soube que precisava de";
+		mes "algum gelo mágico.";
+		next;
+		mes "[Cantata]";
+		mes "Eventualmente, encontrei-me na masmorra de Natal sem nenhum objetivo em mente. Lá dentro encontrei, graças a Deus, uma certa criatura feita inteiramente de gelo!";
+		next;
+		mes "[Cantata]";
+		mes "Era um ^3355FFIceporing^000000! O pessoal local costumava chamá-lo de 'Icepantzering'. De qualquer forma, consegui salvar a vida do meu filho com ele. Graças a Deus algo assim existia nesta cidade.";
+		next;
+		mes "[Cantata]";
+		mes "Opa, acho que falei um pouco demais. Feliz Natal~!";
+		close;
+	}
+}
+
+xmas,134,112,4	script	Snowman	710,{
+	if (checkweight(1201,1) == 0 ) {
+		cutin "rutie_snownow01.bmp",2;
+		mes "- Espere um minuto !! -";
+		mes "- Atualmente você está carregando -";
+		mes "- itens demais com você. -";
+		mes "- Por favor, tente novamente -";
+		mes "- depois de perder um pouco de peso. -";
+		close2;
+		cutin "",255;
+		end;
+	}
+	cutin "rutie_snownow03.bmp",2;
+	mes "[Snowysnow]";
+	mes "Eu estou...";
+	mes "Estou tão solitário!";
+	next;
+	mes "[Snowysnow]";
+	mes "Sempre preso aqui...";
+	mes "No mesmo lugar...";
+	mes "Dia após dia após dia após dia após dia após dia após dia após dia após dia após dia...";
+	next;
+	switch(select("^3355FFSnowysnow?^000000:Info about the Christmas dungeon:Quit this conversation")) {
+	case 1:
+		if (xmas_npc < 2) {
+			cutin "rutie_snownow01.bmp",2;
+			mes "[Snowysnow]";
+			mes "Nasci em uma área ao norte onde nevava o tempo todo, e era muito mais frio do que em Lutie, se você puder acreditar nisso.";
+			next;
+			mes "[Snowysnow]";
+			mes "Fui feito com amor por um humano, e eu era muito feliz lá. A vida era simples, mas cheia de uma felicidade silenciosa.";
+			next;
+			mes "[Snowysnow]";
+			mes "Pensei que poderia viver o resto da minha vida naquele tipo de contentamento. Mas... Não era para ser.";
+			next;
+			cutin "rutie_snownow01.bmp",2;
+			mes "[Snowysnow]";
+			mes "Num dia fatídico, uma velha mulher feia veio à nossa cidade. As pessoas dizem que seu nome era 'Merlophechum' e que ela vinha de alguma estranha cidade em uma caverna onde o clima era sempre quente.";
+			next;
+			mes "[Snowysnow]";
+			mes "Na terceira noite em que ela esteve lá, ela incendiou a cidade com magia assustadora. Todos corriam em pânico entre o medo e o caos. E, de alguma forma, eu fui nocauteado.";
+			next;
+			cutin "rutie_snownow02.bmp",2;
+			mes "[Snowysnow]";
+			mes "Não notei quanto tempo passou depois disso, mas quando acordei, eu estava aqui. Bem, posso dizer que este lugar, Lutie, é praticamente como o paraíso.";
+			next;
+			mes "[Snowysnow]";
+			mes "Ninguém aqui nunca está preocupado, e sempre ouço canções de Natal e coisas do tipo.";
+			next;
+			cutin "rutie_snownow03.bmp",2;
+			mes "[Snowysnow]";
+			mes "Mas ainda assim...";
+			mes "Às vezes, toda aquela alegria natalina de alguma forma não cura a escura solidão que surge profundamente dentro de mim.";
+			next;
+			mes "[Snowysnow]";
+			mes "Então, você quer ser meu amigo? Se você quiser, eu serei seu amigo também~";
+			close2;
+			cutin "",255;
+			end;
+		} else {
+			switch(xmas_npc) {
+			case 2:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "Oh...?";
+				mes "Então você conheceu a Duffle?";
+				mes "Sim, às vezes ela";
+				mes "passa por aqui e diz 'oi...'";
+				next;
+				mes "[Snowysnow]";
+				mes "É estranho que o povo de Lutie me chame de um boneco de neve misterioso e mágico. Quer dizer, por dentro, não sou exatamente como as pessoas comuns?";
+				next;
+				mes "[Snowysnow]";
+				mes "*Snif* Às vezes,";
+				mes "Eu nem sei o que sou. Mas mesmo assim, o povo de Lutie tenta me aceitar não importa o que aconteça.";
+				next;
+				mes "[Snowysnow]";
+				mes "^3355FFPoze^000000 me deu sua foto glamorosa com seu endereço nela, e me disse para visitá-lo sempre que eu me sentir triste. Fiquei tão feliz em ouvir isso...";
+				next;
+				mes "[Snowysnow]";
+				mes "Mas então o destino pregou sua peça cruel em mim mais uma vez, e percebi que não tinha pernas para visitá-lo.";
+				next;
+				mes "[Snowysnow]";
+				mes "Como eu cheguei a esta cidade? E como diabos consigo falar?! N-não é natural, não é? Isso... Isso me torna um monstro?";
+				next;
+				mes "^3355FFSnowysnow está imerso em seus pensamentos profundos e parece^000000";
+				mes "^3355FFfixado na lembrança de Poze.^000000";
+				set xmas_npc,3;
+				close2;
+				cutin "",255;
+				end;
+			case 3:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "...";
+				next;
+				mes "^3355FFSnowysnow está imerso em seus pensamentos profundos e parece^000000";
+				mes "^3355FFfixado na lembrança de Poze.^000000";
+				close2;
+				cutin "",255;
+				end;
+			case 4:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "Oh, que bom!";
+				mes "Você conheceu o Poze!";
+				next;
+				mes "[Snowysnow]";
+				mes "Ele é um cara tão honesto e de bom coração. Espero que ele e Duffle fiquem juntos algum dia.";
+				next;
+				mes "[Snowysnow]";
+				mes "...Oh não~!";
+				mes "Eu disse isso em voz alta? Era para ter ficado na minha cabeça! Sinto muitíssimo! Nossa, eu posso ser um verdadeiro bobão, né?";
+				next;
+				mes "[Snowysnow]";
+				mes "Sim...";
+				mes "Poze está apaixonado por Duffle. E ela é gentil com todos, exceto com Poze.";
+				next;
+				mes "[Snowysnow]";
+				mes "Mas eu sei que é porque ela gosta muito, muito dele! Hee hee hee!";
+				close2;
+				cutin "",255;
+				end;
+			case 5:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "Oh...?";
+				mes "Você conheceu o";
+				mes "^3355FFTio Cantata Peludo^000000?";
+				next;
+				cutin "rutie_snownow02.bmp",2;
+				mes "[Snowysnow]";
+				mes "Claro, ele tem uma voz alta, não toma banho e cheira a comida podre. Mas ele é um cara engraçado com um coração caloroso. Todos o amam!";
+				next;
+				mes "[Snowysnow]";
+				mes "Claro, ele ainda gosta de beber coisas estranhas. Dizem que é um milagre ele não ter dor de barriga. Hee hee~! Oh, eu adoro esse cara!";
+				close2;
+				cutin "",255;
+				end;
+			case 6:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "Oh...?";
+				mes "Você conheceu a";
+				mes "^3355FFTia Thachentze^000000?";
+				next;
+				mes "[Snowysnow]";
+				mes "Sim, ela é uma especialista em picles, sem dúvida. Ah, certo, você poderia dar isto para ela? Tenho guardado o sal mais grosso do mundo para ela como um favor.";
+				next;
+				set xmas_npc,7;
+				mes "^3355FFSnowysnow lhe entregou o sal mais grosso do mundo^000000.";
+				next;
+				mes "[Snowysnow]";
+				mes "Gosto da comida dela porque é tãoooo deliciosa! Às vezes, ela me dá xarope de uva sobre flocos de neve. De qualquer forma, por favor, entregue esse sal para mim, amigo~!";
+				close2;
+				cutin "",255;
+				end;
+			case 7:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "'^3355FFO sal mais";
+				mes "grosso do mundo^000000...'";
+				mes "Uau. Agora, isso é grosso! Tia Thachentze está sempre fazendo picles, então ela certamente poderia usar isso em breve!";
+				close2;
+				cutin "",255;
+				end;
+			case 8:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "Hashokii, o palhaço entediante? A princípio, ele parece meio bobo e não muito engraçado. Mas, no fundo, ele se importa muito com as outras pessoas.";
+				next;
+				mes "[Snowysnow]";
+				mes "Ele está sempre tentando o seu melhor para fazer aqueles dois órfãos rirem e esquecerem seus problemas...";
+				close2;
+				cutin "",255;
+				end;
+			case 9:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "Ah...";
+				mes "Então você conheceu o Charu Charu? Aquele menino é tão cheio de otimismo e sempre olhando para frente. Quando crescer, ele vai ser um figurão!";
+				next;
+				mes "[Snowysnow]";
+				mes "Tenho certeza disso!";
+				mes "Hee hee hee~!";
+				close2;
+				cutin "",255;
+				end;
+			case 10:
+				cutin "rutie_snownow01.bmp",2;
+				mes "[Snowysnow]";
+				mes "Obrigado por me ouvir até agora. Eu realmente aprecio que você tente me entender, mesmo sendo um estranho aqui.";
+				next;
+				mes "[Snowysnow]";
+				mes "Agora, você me conhece melhor do que qualquer outra pessoa nesta cidade. Então, em troca, quero lhe dar um pequeno presente.";
+				next;
+				mes "[Snowysnow]";
+				mes "Ta-dá!";
+				mes "Escolha qualquer coisa";
+				mes "que você quiser aqui dentro~";
+				next;
+				mes "^3355FFVocê mexe cuidadosamente";
+				mes "a mão dentro da";
+				mes "bolsa de presentes mágica do Snowysnow^000000.";
+				next;
+				switch(rand(1,8)) {
+				case 1:
+					set xmas_npc,11;
+					getitem 529,5;// Candy
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "Uau~!";
+					mes "^3355FF5 Doces^000000!";
+					mes "Parabéns!";
+					break;
+				case 2:
+					set xmas_npc,11;
+					getitem 529,10;// Candy
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "Ooh~!";
+					mes "^3355FF10 Doces^000000!";
+					break;
+				case 3:
+					set xmas_npc,11;
+					getitem 530,5;// Candy_Striper
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "Ebaaa~!";
+					mes "^3355FF5 Bengalas Doces^000000!";
+					break;
+				case 4:
+					set xmas_npc,11;
+					getitem 530,10;// Candy_Striper
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "Uau, isso é muito bom!";
+					mes "^3355FF10 Bengalas Doces^000000!";
+					break;
+				case 5:
+					set xmas_npc,11;
+					getitem 539,1;// Piece_Of_Cake
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "Você não é sortudo!";
+					mes "^3355FF1 Pedaço de Bolo^000000!";
+					break;
+				case 6:
+					set xmas_npc,11;
+					getitem 539,2;// Piece_Of_Cake
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "Agora, isso não é legal?";
+					mes "^3355FF2 Pedaços de Bolo^000000!";
+					break;
+				case 7:
+					set xmas_npc,11;
+					getitem 538,5;// Well_Baked_Cookie
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "Oh, uaaaaau~!";
+					mes "^3355FF5 Biscoitos^000000!";
+					break;
+				case 8:
+					set xmas_npc,11;
+					getitem 538,10;// Well_Baked_Cookie
+					cutin "rutie_snownow02.bmp",2;
+					mes "[Snowysnow]";
+					mes "*Ofegante!* Ooh~";
+					mes "^3355FF10 Biscoitos^000000!";
+					break;
+				}
+				next;
+				mes "[Snowysnow]";
+				mes "Meu caro amigo, por favor me visite de vez em quando, para que possamos bater um papo, ok? Até breve! E Feliz Natal!";
+				close2;
+				cutin "",255;
+				end;
+			case 11:
+				cutin "rutie_snownow02.bmp",2;
+				mes "[Snowysnow]";
+				mes "Olá, olá!";
+				next;
+				mes "[Snowysnow]";
+				mes "Você é sempre bem-vindo em Lutie, especialmente por mim, Snowysnow! Feliz Kwanzaa, Feliz Hanukkah e Feliz Natal~!";
+				close2;
+				cutin "",255;
+				end;
+			}
+		}
+		case 2:
+			cutin "rutie_snownow01.bmp",2;
+			mes "[Snowysnow]";
+			mes "Ao redor desta cidade maravilhosa, eternamente abençoada com o Natal, existe uma masmorra horrível, eternamente amaldiçoada com o Natal.";
+			next;
+			mes "[Snowysnow]";
+			mes "Ouvi dizer que ela é bem decorada e parece uma Fábrica de Brinquedos por dentro, onde tudo é tão fofo e bonito. Há Soldadinhos de Brinquedo e Caixas de Presente até onde a vista alcança!";
+			next;
+			cutin "rutie_snownow01.bmp",2;
+			mes "[Snowysnow]";
+			mes "Isso não é tãoooo empolgante?! *Suspiro* Mesmo sendo uma masmorra, eu gostaria de entrar apenas para dar uma olhada. Se ao menos eu fosse um menino de verdade, ou tivesse pernas...";
+			close2;
+			cutin "",255;
+			end;
+		case 3:
+			cutin "rutie_snownow03.bmp",2;
+			mes "[Snowysnow]";
+			mes "Tchau tchau, amigo~!";
+			mes "Obrigado por me ouvir~";
+			mes "Eu verei você de novo, algum dia! Você sempre estará no meu coração~";
+			close2;
+			cutin "",255;
+			end;
+		}
+}
+
+xmas,146,136,4	script	Hashokii	715,{
+	mes "[Hashokii]";
+	mes "Feeee~Liiiz Natal~!";
+	mes "Lá lá lá~!";
+	mes "Dum di Dum di Dum!";
+	next;
+	switch(select("Yo Clown boy, what's up?:About Snowysnow:Quit conversation")) {
+	case 1:
+		mes "[Hashokii]";
+		mes "Lá lá lá~!";
+		mes "Dum di Dum di Dum!";
+		mes "Ooh, estou tentando pensar em um bom show para apresentar para Charu Charu e Marcell!";
+		next;
+		mes "[Hashokii]";
+		mes "Eles estão ficando mais espertos e espirituosos a cada dia, e agora parece que eles não riem mais das minhas melhores piadas. Como eles ficaram tão inteligentes?";
+		next;
+		mes "[Hashokii]";
+		mes "Bem, se eu me esforçar o suficiente, eles não poderão evitar rir das minhas piadas hilárias! Então... é melhor eu começar a inventar piadas melhores. Tipo, pra ontem.";
+		next;
+		mes "[Hashokii]";
+		mes "Lá lá lá~!";
+		mes "Dum di Dum di Dum";
+		mes "Feliz Natal!";
+		close;
+	case 2:
+		if (xmas_npc == 8) {
+			mes "[Hashokii]";
+			mes "Dum di Dum di Dum";
+			mes "Ah ha! Então você quer aprender mais sobre o Snowysnow! Vamos ver...";
+			next;
+			mes "[Hashokii]";
+			mes "Bem, existem duas crianças travessas,";
+			mes "^3355FF' Charu Charu '^000000 e";
+			mes "^3355FF' Marcell '^000000. Elas assistem ao meu show regularmente. Suponho que você tenha ouvido a história do Cantata?";
+			next;
+			mes "[Hashokii]";
+			mes "De qualquer forma, os dois bebês que foram protegidos no peito do Snowysnow? Sim, são eles. Mas Charu Charu e Marcell parecem não saber que o Snowysnow os salvou.";
+			next;
+			mes "[Hashokii]";
+			mes "Snowysnow me contou a história de como ele deixou seu corpo voar para o ar para bloquear a bola de fogo gigante que estava prestes a atingi-los quando eram bebês. Por causa deles, ele estava disposto a se sacrificar.";
+			next;
+			mes "[Hashokii]";
+			mes "Por que você não vai conhecer essas duas crianças? Elas podem lhe contar a história que nunca tivemos a chance de ouvir. Tudo bem então, boa sorte~! Tchau tchau!";
+			set xmas_npc,9;
+			close;
+		} else {
+			mes "[Hashokii]";
+			mes "Ah... ^3355FFSnowysnow^000000?";
+			mes "Claro que o conheço! Qualquer um que não conheça o Snowysnow é um completo estranho por aqui! Às vezes, ele e eu compartilhamos uma boa conversa...";
+			next;
+			mes "[Hashokii]";
+			mes "Ele é um ótimo público para o meu show. Mas, para ser sincero, não tenho certeza se ele realmente gosta ou não. A maioria das pessoas parece não se importar com minhas piadas.";
+			next;
+			mes "[Hashokii]";
+			mes "Isso me deixa totalmente confuso! Como elas poderiam não gostar das melhores piadas do mundo?! Sheeeeesh~";
+			next;
+			mes "[Hashokii]";
+			mes "Hmmm, desculpe!";
+			mes "De qualquer forma, Snowysnow";
+			mes "é um ótimo cara!";
+			mes "Lá lá lá~!";
+			mes "Dum di Dum di Dum";
+			mes "Feliz Natal- !!";
+			close;
+		}
+	case 3:
+		mes "[Hashokii]";
+		mes "Lá lá lá~!";
+		mes "Dum di Dum di Dum";
+		mes "Feliz Natal~!";
+		close;
+	}
+}
+
+xmas,206,168,4	script	Little Boy	706,{
+	if (xmas_npc == 9) {
+		mes "[Charu Charu]";
+		mes "Hummm?";
+		mes "Snowysnow?";
+		next;
+		mes "[Charu Charu]";
+		mes "Hmmm, bem...";
+		mes "Ele é um boneco de neve legal!";
+		mes "Você quer saber mais sobre o Snowysnow? Hummm, eu não sou tão inteligente! Pergunte ao Marcell!";
+		close;
+	} else {
+		mes "[Charu Charu]";
+		mes "Feliz Feliz Natal!";
+		mes "Heheheheheh~!";
+		next;
+		mes "[Charu Charu]";
+		mes "Você falou com aquele palhaço ali? Ele não é tããão chatooo? (-.-)";
+		next;
+		mes "[Charu Charu]";
+		mes "Quando Marcell e eu assistimos ao show dele, sentimos que estamos ficando cada vez mais burros~";
+		next;
+		mes "[Marcell]";
+		mes "Charu Charu!! Cuidado com a boca! Como você ousa dizer isso sobre o pobre Hashokii?! Ele está sempre se esforçando para nos fazer felizes!";
+		next;
+		mes "[Charu Charu]";
+		mes "Sim, sim.";
+		mes "Tanto faz~";
+		mes "Eu já sei disso!";
+		mes "Mas ele não tem graça nenhuma!";
+		mes "Eu prefiro ficar com o ^3355FFSnowysnow^000000~";
+		next;
+		mes "[Charu Charu]";
+		mes "Ah bem, se você ainda não visitou o Snowysnow, você deveria vê-lo pelo menos uma vez. Ele é engraçado!";
+		next;
+		mes "[Charu Charu]";
+		mes "Feliz Natal!";
+		mes "Aproveite seu feriado em Lutie~!";
+		close;
+	}
+}
+
+xmas,208,168,4	script	Little Girl	703,{
+	if (xmas_npc == 9 || xmas_npc == 10) {
+		switch(xmas_npc) {
+		case 9:
+			mes "[Marcell]";
+			mes "Você quer dizer o Snowysnow?";
+			mes "Claro que o conheço!";
+			next;
+			mes "[Marcell]";
+			mes "Ele é um cara legal e engraçado!";
+			mes "E como Charu Charu sempre insiste, ele é mais engraçado que o Hashokii~ (Mas por favor, não deixe o Hashokii saber!)";
+			next;
+			mes "[Marcell]";
+			mes "Bem, Charu Charu e eu somos órfãos e não nos lembramos de nossos pais de jeito nenhum. Fomos criados pelo pessoal aqui em Lutie.";
+			next;
+			mes "[Marcell]";
+			mes "Tio Cantata e Tia Thachentze nos trataram como seus próprios filhos, e Poze e Duffle têm sido como um irmão e uma irmã para nós!";
+			next;
+			mes "[Marcell]";
+			mes "Eles são todos legais e generosos, e sempre agradecemos o que fizeram para cuidar de nós.";
+			next;
+			mes "[Marcell]";
+			mes "Também ouvi dizer que o Snowysnow também não tem mamãe nem papai. E também ouvi dizer que o Snowysnow e nós não nascemos aqui, mas em outro lugar.";
+			next;
+			mes "[Marcell]";
+			mes "Ouvi dizer que Snowysnow e nós realmente viemos do mesmo lugar, embora eu ainda não tenha certeza. Mas sei que Snowysnow e eu temos o mesmo tipo de queimaduras em nossos corpos.";
+			next;
+			mes "[Marcell]";
+			mes "Charu Charu e eu temos essas queimaduras antigas em nossas costas, e Snowysnow tem uma mancha escura na barriga. Então acho que fomos queimados todos ao mesmo tempo...";
+			next;
+			mes "[Marcell]";
+			mes "Oh, agora entendo . . . . .";
+			mes "Você quer aprender tudo sobre o Snowysnow porque quer se tornar amigo dele! Ele ficará tão feliz em saber disso! Ooh! Talvez ele lhe dê um presente! Boa sorte!";
+			set xmas_npc,10;
+			close;
+		case 10:
+			mes "[Marcell]";
+			mes "Mais do que qualquer outra pessoa, você é quem mais sabe sobre o Snowysnow! Por favor, fale com o Sr. Snowysnow, ele ficará feliz em saber que você se importa com ele. Feliz Natal!";
+			close;
+		}
+	} else {
+		mes "[Marcell]";
+		mes "Feliz Natal~!";
+		next;
+		mes "[Marcell]";
+		mes "Está congelando aqui fora...! E Charu Charu me deixa com mais frio com suas piadas insuportáveis. E o vento está soprando tão forte!";
+		next;
+		mes "[Marcell]";
+		mes "Você sabia? Snowysnow tem um poder especial. Ele pode fazer tantos presentes quanto o Papai Noel! Não é ótimo?";
+		next;
+		mes "[Marcell]";
+		mes "Hã? Por que essa cara? Snowysnow tem uma grande bolsa de presentes dentro do corpo, e dá presentes sempre que tem vontade. O que há de tão difícil de acreditar nisso?";
+		close;
+	}
+}

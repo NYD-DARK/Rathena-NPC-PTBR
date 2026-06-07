@@ -1,0 +1,208 @@
+//===== rAthena Script ======================================= 
+//= Custom Umbalian Language Quest
+//===== By: ================================================== 
+//= sabernet09
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= 1.1 Removed it from offical Umbala Quests [Lupus]
+//============================================================ 
+
+prontera,145,290,5	script	Mason	742,{
+	mes "[Mason]";
+	if(umb_lang==0) goto L_NOT_GOT_QUEST;
+	if(umb_lang==2 || umb_mason==1) goto L_AGAIN;
+
+	mes "Olá, vim aqui para Prontera em busca de uma velha senhora que consegue remover cartas de slots. Você sabe onde posso encontrá-la?";
+	menu "Yes",-, "No",M_NO;
+
+	mes "Oooo, você poderia por favor me dizer onde ela está? Eu ficaria muito grato.";
+	menu "Swordsman Association",-, "Sanctuary",M_Boo1,"Prontera Chivalry",M_Boo2,"Trading Post",M_Boo3,"Kit Shop",M_Boo4,"Inn",M_Boo5,"Armory",M_DONE,"Library",M_Boo6,"Job Agency",M_Boo7,"Prontera Castle",M_Boo8,"City Hall",M_Boo9;
+
+	next;
+	mes "[Mason]";
+	mes "Hmm... Não sei por que ela estaria lá... acho que vou dar uma olhada.";
+	close;
+M_Boo1:
+	next;
+	mes "[Mason]";
+	mes "Nossa, eu nunca soube que ela era uma pessoa religiosa... Vou verificar isso, obrigado.";
+	close;
+M_Boo2:
+	next;
+	mes "[Mason]";
+	mes "Hmm.... você tem certeza disso?";
+	close;
+M_Boo3:
+	next;
+	mes "[Mason]";
+	mes "Por que ela precisaria ir lá? Acho que você pode estar enganado.";
+	close;
+M_Boo4:
+	next;
+	mes "[Mason]";
+	mes "A única coisa que ela precisaria em uma loja de utilidades é remédio para o reumatismo dela. Ela provavelmente já foi embora de lá há muito tempo.";
+	close;
+M_Boo5:
+	next;
+	mes "[Mason]";
+	mes "Não acho que ela precise estar lá, ela MORA aqui em Prontera.";
+	close;
+M_Boo6:
+	next;
+	mes "[Mason]";
+	mes "Ah entendi, se ela está estudando, então não quero incomodá-la. Obrigado de qualquer forma.";
+	close;
+M_Boo7:
+	next;
+	mes "[Mason]";
+	mes "Agência de Empregos? Acho que não. Não me faça rodar por toda Prontera, por favor! Ela já é professora aqui.";
+	close;
+M_Boo8:
+	next;
+	mes "[Mason]";
+	mes "O castelo, hein? Não quero pisar lá... simplesmente não faz o meu estilo. Não gosto desse tipo de sentimento nobre de importância.";
+	close;
+M_Boo9:
+	next;
+	mes "[Mason]";
+	mes "Nossa, ela se tornou uma parte importante de Prontera? Acho que ela deve estar ocupada demais para eu visitá-la. Tentarei novamente mais tarde.";
+	close;
+M_DONE:
+	next;
+	mes "[Mason]";
+	mes "Ah, ouvi dizer que a classe dela era por ali... muito obrigado! Aqui está um agradinho pela sua ajuda.";
+	getitem 7117,1;//Items: Torn Spell Book,
+	set umb_mason,1;
+	close;
+
+L_AGAIN:
+	emotion ET_THANKS;
+	mes "Eba, eu a encontrei! Muito obrigado pela sua ajuda!";
+	close;
+
+L_NOT_GOT_QUEST:
+	mes "Oi! Vim aqui para Prontera em busca de uma velha senhora... Mas...";
+	close;
+M_NO:
+	mes "Ah.. Ok.. Obrigado de qualquer forma.";
+	close;
+}
+
+aldebaran,153,212,1	script	Mojo	740,{
+	mes "[Mojo]";
+	if(umb_lang!=1) goto L_NOT_GOT_QUEST;
+	mes "Ah não! Eu perdi o ^FF0000livro mágico antigo^000000 da minha professora!";
+	mes "O que eu vou fazer... aquelas Bathory idiotas...";
+	if(umb_lang==1) set umb_mojo,1;
+	close;
+L_NOT_GOT_QUEST:
+	emotion ET_QUESTION;
+	mes "Perdi o livro da minha professora! O que eu vou fazer...";
+	close;
+}
+
+amatsu,267,189,4	script	Marie	744,{
+	mes "[Marie]";
+	if(umb_lang==0) goto L_NOT_GOT_QUEST;
+	if(umb_lang==2 || umb_marie==1) goto L_AGAIN;
+	if(countitem(9001)>0 && countitem(643)>0) goto L_DONE;//Items: Poring Egg, Pet Incubator,
+	mes "Olá, tem algo que você precisa?";
+	next;
+	menu "No nothing at all.",M_NO,"Your teacher sent me.",-;
+
+	mes "[Marie]";
+	mes "O que ele quer de mim?";
+	emotion ET_QUESTION;
+	next;
+	mes "[Marie]";
+	mes "Ah espere, entendi... ele quer o pergaminho de referência dele de volta, acertei? Bem, eu ainda estou usando um pouco, maaaas... eu o devolvo se você me der um ovo de poring e uma incubadora. Essas coisas são tão fofas!";
+	close;
+
+L_NOT_GOT_QUEST:
+	emotion ET_QUESTION;
+	mes "Oi! O que você quer de mim?";
+	close;
+
+M_NO:
+	mes "[Marie]";
+	mes "Hrrmm tudo bem? Até mais então..";
+	close;
+
+L_DONE:
+	mes "Olha só, você tem um ovo de poring e a incubadora de mascotes para acompanhar! São para mim?";
+	menu "Yep!",-, "Sorry, no.",M_DOH;
+
+	mes "[Marie]";
+	if(countitem(9001)==0 && countitem(643)==0) goto M_DOH;//Items: Poring Egg, Pet Incubator,
+	mes "Eba! Aqui está um agradinho em troca.";
+	delitem 9001,1;//Items: Poring Egg,
+	delitem 643,1;//Items: Pet Incubator,
+	getitem 7118,1;//Items: Torn Scroll,
+	set umb_marie,1; //got Torn Scroll
+	close;
+
+M_DOH:
+	mes "Ah.. que pena... *suspiro*...";
+	close;
+
+L_AGAIN:
+	emotion ET_THANKS;
+	mes "Eba! Eu amo Porings!";
+	close;
+}
+
+yuno,157,366,2	script	Wise Man Fabius	743,{
+	mes "[Fabius]";
+	if(event_umbala >= 3) set umb_lang,2; //You already learned Umbalian language from Umbalian Chief. So this Quest is disabled
+	if(umb_lang<2) goto L_QUEST;
+	mes "Você fala Umbaliano fluentemente! Assim você nunca esquecerá o idioma de Umbala!";
+	close;
+L_QUEST:
+	if((countitem(1006) < 1) || (countitem(7118) < 1) || (countitem(7117) < 1)) goto L_DONE;//Items: Old Magic Book, Torn Scroll, Torn Spell Book,
+	delitem 1006,1;	//Items: Old Magic Book,
+	delitem 7118,1;	//Items: Torn Scroll,
+	delitem 7117,1;//Items: Torn Spell Book,
+	emotion ET_THANKS;
+	mes "Ah, você se saiu bem em recuperar minhas referências. Esses artefatos contêm informações sobre ruínas ao redor do mundo, desde o inferno ardente do Labirinto de Magma, até a estranha e misteriosa Floresta Oculta de Yggdrasil.";
+	next;
+	mes "[Fabius]";
+	mes "Mas chega de conversa, você está ansioso para receber sua recompensa, não está? Bem, pode não parecer muito, mas minha recompensa para você é o conhecimento...";
+	next;
+	mes "[Fabius]";
+	mes "Na verdade, é o conhecimento do povo de Umbala. Eles estão conectados a este mundo de Midgard de alguma forma especial, mas ainda não podemos confirmar. Existe uma teoria de que eles possam ser como os elfos e proteger a árvore ancestral de Yggdrasil.";
+	next;
+	mes "[Fabius]";
+	mes "E eu, um grande sábio de Juno, vou lhe ensinar o idioma deles!";
+	next;
+	mes "^0000FF Aprendeu o idioma de Umbala! ^000000";
+	set umb_lang,2;
+	//clear subquests
+	set umb_marie,0;
+	set umb_mason,0;
+	set umb_mojo,0;
+	//make you understand Umbalian people
+	//it's an alternative way to learn Umbalian Language
+	if(event_umbala < 3) set event_umbala,3;
+	close;
+L_DONE:
+	set umb_lang,1; //got Quest
+	mes "Argh! Meus três alunos fugiram com minhas referências! Ei, você! Pode recuperá-las para mim? Terei o prazer de recompensá-lo.";
+	next;
+	mes "[Fabius]";
+	mes "Pelo que sei, eles estão em cidades diferentes tentando a vida.";
+	if(umb_marie==0 && umb_mason==0 && umb_mojo==0) goto L_NOT_MET;
+	if(umb_marie==1) mes "Oh... You found Marie in Amatsu.";
+	if(umb_mojo==1) mes "You saw Mojo in Aldebaran?";
+	if(umb_mason==1) mes "So... Mason's in Prontera now... Well...";
+	if(umb_marie==0) mes "I wonder where is our sea girl Marie?";
+	if(umb_mojo==0) mes "Mojo should be somewhere near water...";
+	if(umb_mason==0) mes "Where'd Mason go then...";
+	mes "Ah sim, diga a eles que eu o enviei.";
+	close;
+L_NOT_MET:
+	mes "Ah sim, diga a eles que eu o enviei, os nomes deles são Marie, Mason e Mojo.";
+	close;
+}
