@@ -1,0 +1,153 @@
+//===== rAthena Script =======================================
+//= Merchant Skills Quests
+//===== Description: =========================================
+//= [Official Conversion]
+//- NPC for skills Pushcart Decoration.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+alberta,47,37,5	script	Cart Remodel Expert	4_M_REPAIR,{
+	.@max_skill_lvl = 1;
+	if (cart_remodel == 0) {
+		mes "[Jason]";
+		mes "O carrinho original é lindo!";
+		next;
+		mes "[Jason]";
+		mes "O carrinho na cor cinza sólido.";
+		next;
+		mes "[Jason]";
+		mes "Eu posso remodelá-lo para novos designs fofos.";
+		next;
+		switch( select( "What is Pushcart Decoration?", "Learn Pushcart Decoration", "End Dialog" ) ) {
+		case 1:
+			mes "[Jason]";
+			mes "Eu gostaria de remodelar completamente o pobre carrinho.";
+			next;
+			mes "[Jason]";
+			mes "Uma pequena remodelação não é o bastante, não concorda?";
+			next;
+			mes "[Jason]";
+			mes "Portanto, eu inventei alguns novos designs.";
+			next;
+			mes "[Jason]";
+			mes "É fofo e refrescante!";
+			close;
+		case 2:
+			if (BaseClass != Job_Merchant) {
+				mes "[Jason]";
+				mes "Por que você quer aprender Decoração de Carrinho? Não me perturbe!";
+				close;
+			}
+			if (countitem(6606) == 0) {
+				mes "[Jason]";
+				mes "É difícil aprender a Decoração de Carrinho.";
+				next;
+				mes "[Jason]";
+				mes "Eu te ensinarei se você me trouxer o ^3131FFCupom de Remodelação de Carrinho Fofo^000000.";
+				close;
+			}
+			mes "[Jason]";
+			mes "Você trouxe o Cupom de Remodelação de Carrinho Fofo. Tem certeza de que deseja aprender Decoração de Carrinho?";
+			next;
+			if (select("YES", "NO") == 2) {
+				mes "[Jason]";
+				mes "Volte quando mudar de ideia!";
+				close;
+			}
+			mes "[Jason]";
+			mes "Certo! Siga-me.";
+			next;
+			mes "[Jason]";
+			mes "Este design";
+			mes "precisa pegar o carrinho...";
+			next;
+			mes "[Jason]";
+			mes "Este design";
+			mes "precisa pegar o carrinho.";
+			mes "Então adicione isso....";
+			mes "...";
+			next;
+			mes "[Jason]";
+			mes "Você é um gênio! Você aprendeu!";
+			next;
+			mes "[Jason]";
+			mes "Agora é a sua vez de fazer isso.";
+			mes "Press Alt+S to change your pushcart!";
+			next;
+			mes "[Jason]";
+			mes "Este é o novo carrinho com design fofo. Você agora é um de nós...!";
+			delitem 6606,1;	// P_Cart_C
+			cart_remodel = 1;
+			skill "MC_CARTDECORATE",1,SKILL_PERM;
+			close;
+		case 3:
+			close;
+		}
+	}
+	mes "[Jason]";
+	mes "Você decorou o carrinho?";
+	next;
+	switch( select( "Is there more to learn?", "I forgot how to decorate my pushcart" ) ) {
+	case 1:
+		if (cart_remodel == .@max_skill_lvl) {
+			mes "[Jason]";
+			mes "Não. Ainda estou explorando novos designs. Eu te ensinarei assim que eu aprender.";
+			close;
+		}
+		mes "[Jason]";
+		mes "Eu tenho algo para ensinar, você quer aprender?";
+		next;
+		mes "[Jason]";
+		mes "Eu preciso de um ^3131FFCupom de Remodelação de Carrinho Fofo^000000.";
+		next;
+		if (select("I want to learn", "No") == 2) {
+			mes "[Jason]";
+			mes "Você pode voltar a qualquer momento.";
+			close;
+		}
+		if (countitem(6606) < 0) {
+			mes "[Jason]";
+			mes "Você não tem nenhum Cupom de Remodelação de Carrinho Fofo?";
+			close;
+		}
+		mes "[Jason]";
+		mes "Ok, vamos começar!";
+		next;
+		mes "[Jason]";
+		mes "Fazer assim é melhor.";
+		mes "Faça isso assim também...";
+		next;
+		mes "[Jason]";
+		mes "....";
+		mes "Vamos fazer isso!";
+		next;
+		mes "[Jason]";
+		mes "Eu te ensinei a habilidade, você pode tentar agora.";
+		delitem 6606,1;	// P_Cart_C
+		cart_remodel++;
+		skill "MC_CARTDECORATE", cart_remodel ,SKILL_PERM;
+		close;
+	case 2:
+		mes "[Jason]";
+		mes "Oh? Deixe-me ver.";
+		next;
+		if (BaseClass != Job_Merchant) {
+			mes "[Jason]";
+			mes "Por favor, volte depois que você puder usar o carrinho!";
+			close;
+		}
+		mes "[Jason]";
+		mes "Você não se lembra do que eu te ensinei?";
+		mes "Eu te ensinei este método.";
+		next;
+		mes "[Jason]";
+		mes "Você esqueceu?";
+		mes "Vamos relembrar agora!";
+		next;
+		mes "[Jason]";
+		mes "Pense com cuidado, você vai se lembrar novamente.";
+		skill "MC_CARTDECORATE",1,SKILL_PERM;
+		close;
+	}
+}

@@ -1,0 +1,587 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [131-140]
+//===== By: ==================================================
+//= Capuche
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Repeatable quests for players between BaseLevel 131 - 140.
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//= 1.1 Added support to Para_Team_Mark_ in Eden Group. [Ragno]
+//= 1.2 Added use of F_HasEdenGroupMark function. [Ragno]
+//============================================================
+
+moc_para01,41,76,3	script	Ragi#1	4_M_RAGI,{
+	cutin "ragi01",0;
+	mes "[Ragi]";
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "Apenas aventureiros do Grupo do Éden são bem-vindos aqui.";
+		mes "Estou dando pedidos apenas para aventureiros de nível base ^FF0000130-140^000000.";
+	}
+	else if (para_130lv01 == 0) {
+		mes "Olá. Eu sou o novo membro da banda Dandelion, Ragi. Estou compondo músicas em nome de Aigu. Você tem interesse em uma história?";
+		next;
+		mes "[Ragi]";
+		mes "Haha. Sinto muito por pedir ajuda a aventureiros, mesmo sendo novo.";
+		next;
+		mes "[Ragi]";
+		mes "Dê uma olhada na lista. Você pode me ajudar, se estiver tudo bem para você?";
+		para_130lv01 = 1;
+	}
+	else {
+		mes "Estou coletando histórias para compor uma música em nome de Aigu.";
+		next;
+		if (select( "Request to collect stories", "Conversation" ) == 1) {
+			mes "[Ragi]";
+			if (BaseLevel < 131) {
+				cutin "ragi02",0;
+				mes "Este é o pedido de Aigu, mas é perigoso. Você deveria crescer mais.";
+			}
+			else if (BaseLevel < 141) {
+				mes "Esta música e história são sobre monstros. ^FF0000Conte-me como você se sentiu enquanto lutava contra eles.^000000";
+				next;
+				switch( select( "The story of the lost", "Story of devil", "Story from far away distance" ) ) {
+					mes "[Ragi]";
+				case 1:
+					mes "Lighthalzen tem muitas histórias que tenho certeza de que são tristes e perdidas. Suas histórias não devem ser esquecidas, então, por favor, conte-me o que puder.";
+					next;
+					switch( select( "Egnigem Cenia (Swordman Monster)",
+									"Armeyer Dinze (Merchant Monster)",
+									"Wickebine Tres (Thief Monster)",
+									"Kavach Icarus (Archer Monster)",
+									"Errende Ebecee (Acolyte Monster)",
+									"Laurell Weinder (Mage Monster)" ) ) {
+						mes "[Ragi]";
+					case 1:
+						if (checkquest(13144,PLAYTIME) == 0)
+							mes "Alguns aventureiros me contam um pouco de suas histórias, mas não é o suficiente para criar uma música.";
+						else if (checkquest(13143,HUNTING) == 1) {
+							cutin "ÀÌ±×´ÏÁª¼¼´Ï¾ÆÄ«µå",3;  //ygnizem_card
+							mes "Ela é uma Espadachim triste em um lugar tão distante. O que você acha que a levou até lá?";
+							next;
+							mes "[Ragi]";
+							mes "Essas são histórias muito importantes para alguém. Quero compor uma música com elas. Por favor, me ajude.";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13143,HUNTING) == 2) {
+							mes "Você ouviu alguma história nova? Por favor, me conte se tiver alguma de sua jornada.";
+							callsub S_Quest,13143,13144,1100000,300000;
+						}
+						else {
+							cutin "ÀÌ±×´ÏÁª¼¼´Ï¾ÆÄ«µå",3;  //ygnizem_card
+							mes "Uma mulher espadachim que é mais forte do que qualquer Espadachim. Egnigem Cenia. Esse é o nome dela. Não tenho certeza se é ela ou outra pessoa.";
+							next;
+							mes "[Ragi]";
+							mes "Não posso perder a história dela. Eu realmente gostaria que você passasse por lá.";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Será mais perigoso do que você pensa. Mas a história precisa ser transmitida para todos.";
+								callsub S_Quest,13144,13143;
+							}
+						}
+						break;
+					case 2:
+						if (checkquest(13146,PLAYTIME) == 0)
+							mes "Alguns aventureiros me contam um pouco de suas histórias, mas não é o suficiente para criar uma música.";
+						else if (checkquest(13145,HUNTING) == 1) {
+							cutin "¾Æ¸£¸¶ÀÌ¾îµòÁ¦Ä«µå",3;  //armaia_card
+							mes "Até onde ela poderia ter continuado sua jornada? Acho que ela não conseguiria sozinha.";
+							next;
+							mes "[Ragi]";
+							mes "Você não se pergunta por que essa jornada deveria ter parado?";
+							next;
+							mes "[Ragi]";
+							mes "Quero compor uma música com essas histórias. Por favor, me ajude.";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13145,HUNTING) == 2) {
+							mes "Você ouviu alguma história nova? Por favor, me conte se tiver alguma de sua jornada.";
+							callsub S_Quest,13145,13146,1100000,300000;
+						}
+						else {
+							cutin "¾Æ¸£¸¶ÀÌ¾îµòÁ¦Ä«µå",3;  //armaia_card
+							mes "Uma filha de um Mercador. Armeyer Dinze, ela parece uma mulher rica. Mas parece insegura.";
+							next;
+							mes "[Ragi]";
+							mes "O que a fez desaparecer? Ou para quê? Por favor, ouça a história dela.";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Será mais perigoso do que você pensa. Mas a história precisa ser transmitida.";
+								callsub S_Quest,13146,13145;
+							}
+						}
+						break;
+					case 3:
+						if (checkquest(13148,PLAYTIME) == 0)
+							mes "Alguns aventureiros me contam um pouco de suas histórias, mas não é o suficiente para criar uma música.";
+						else if (checkquest(13147,HUNTING) == 1) {
+							cutin "ÈÖÄÉ¹ÙÀÎÆ®¸®½ºÄ«µå",3;  //whikebain_card
+							mes "O que poderia ter movido o coração dela? Ela só se importava com dinheiro.";
+							next;
+							mes "[Ragi]";
+							mes "Fico imaginando até onde o coração dela foi alcançado? Por favor, ouça a história dela. Por favor, me conte.";
+							next;
+							mes "[Ragi]";
+							mes "Por favor, faça uma música para nós.";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13147,HUNTING) == 2) {
+							mes "Você ouviu alguma história nova? Por favor, me conte se tiver alguma de sua jornada.";
+							callsub S_Quest,13147,13148,1100000,300000;
+						}
+						else {
+							cutin "ÈÖÄÉ¹ÙÀÎÆ®¸®½ºÄ«µå",3;  //whikebain_card
+							mes "Ninguém sabe como começou. Wickebine Tres é o nome de quem poderia ter encontrado um verdadeiro companheiro.";
+							next;
+							mes "[Ragi]";
+							mes "Ela era aquela que só se importava com dinheiro. Até onde a jornada dela continuou? Por favor, ouça a história dela em Lighthalzen.";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Será mais perigoso do que você pensa. Mas a história precisa ser transmitida.";
+								emotion ET_BEST;
+								callsub S_Quest,13148,13147;
+							}
+						}
+						break;
+					case 4:
+						if (checkquest(13150,PLAYTIME) == 0)
+							mes "Alguns aventureiros me contam um pouco de suas histórias, mas não é o suficiente para criar uma música.";
+						else if (checkquest(13149,HUNTING) == 1) {
+							cutin "Ä«¹ÙÅ©ÀÌÄ«·ç½ºÄ«µå",3;  //kavac_card
+							mes "Sim. Parece que ouvi o mesmo nome em Payon. Não tenho certeza se significa a mesma coisa.";
+							next;
+							mes "[Ragi]";
+							mes "Por favor, tente encontrar ele ou um arco em Lighthalzen.";
+							next;
+							mes "[Ragi]";
+							mes "Por favor, não se esqueça de me contar qualquer história que você ouvir.";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13149,HUNTING) == 2) {
+							mes "Você ouviu alguma história nova? Por favor, me conte se tiver alguma de sua jornada.";
+							callsub S_Quest,13149,13150,1100000,300000;
+						}
+						else {
+							cutin "Ä«¹ÙÅ©ÀÌÄ«·ç½ºÄ«µå",3;  //kavac_card
+							mes "Kavach Icarus é o nome de alguém cujas mãos são mais rápidas que os olhos e dispara flechas rapidamente.";
+							next;
+							mes "[Ragi]";
+							mes "Ouvi dizer que sua sombra e sua flecha estão vagando em algum lugar. Por favor, vá a Lighthalzen e me conte a história dele.";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Por favor, tenha cuidado com as flechas dele. Você pode acabar deitado no chão frio antes que esta história termine.";
+								callsub S_Quest,13150,13149;
+							}
+						}
+						break;
+					case 5:
+						if (checkquest(13152,PLAYTIME) == 0)
+							mes "Alguns aventureiros me contam um pouco de suas histórias, mas não é o suficiente para criar uma música.";
+						else if (checkquest(13151,HUNTING) == 1) {
+							cutin "ÀÌ·»µå¿¡º£½ÃÄ«µå",3;  //erend_card
+							mes "Não importa se foi por amizade ou uma missão. Se aquela jornada foi por alguém, não seria fácil pará-la.";
+							next;
+							mes "[Ragi]";
+							mes "O que fez a jornada deles parar? Que tipo de história há nisso?";
+							next;
+							mes "[Ragi]";
+							mes "Por favor, verifique essa história em Lighthalzen.";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13151,HUNTING) == 2) {
+							mes "Você ouviu alguma história nova? Por favor, me conte se tiver alguma de sua jornada.";
+							callsub S_Quest,13151,13152,1100000,300000;
+						}
+						else {
+							cutin "ÀÌ·»µå¿¡º£½ÃÄ«µå",3;  //erend_card
+							mes "Errende Ebecee é aquele que começou uma jornada para procurar alguém.";
+							next;
+							mes "[Ragi]";
+							mes "Mas eu acho... Que a jornada dele também pode ter parado em algum lugar em Lighthalzen. Por favor, ouça a história dele.";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Por favor, tenha cuidado para não se perder como essas ^FF0000pobres almas^000000.";
+								callsub S_Quest,13152,13151;
+							}
+						}
+						break;
+					case 6:
+						if (checkquest(13154,PLAYTIME) == 0)
+							mes "Alguns aventureiros me contam um pouco de suas histórias, mas não é o suficiente para criar uma música.";
+						else if (checkquest(13153,HUNTING) == 1) {
+							cutin "¶ó¿ì·¼ºá´õÄ«µå",3;  //rawrel_card
+							mes "A propósito. Eu li um livro chamado ^FF0000Como ser um Mago^000000...";
+							next;
+							mes "[Ragi]";
+							mes "De acordo com esse livro, algumas magias de pessoas de 25 anos podem ser mais fortes do que as de magos mais velhos.";
+							next;
+							mes "[Ragi]";
+							mes "O que você está ouvindo tão seriamente? Vamos terminar o pedido sobre a história de Laurell Weinder!";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13153,HUNTING) == 2) {
+							mes "Você ouviu alguma história nova? Por favor, me conte se tiver alguma de sua jornada.";
+							callsub S_Quest,13153,13154,1100000,300000;
+						}
+						else {
+							cutin "¶ó¿ì·¼ºá´õÄ«µå",3;  //rawrel_card
+							mes "Laurell Weinder, que decidiu fazer uma jornada difícil para retribuir a gratidão por algum feito de magos.";
+							next;
+							mes "[Ragi]";
+							mes "Mas... Esses magos talentosos não puderam retornar? Quem os fez? Encontre uma pista em Lighthalzen.";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Eu gosto dessa história, mas tenha cuidado se você não quiser acabar sendo parte de uma história você mesmo.";
+								callsub S_Quest,13154,13153;
+							}
+						}
+					}
+					break;
+				case 2:
+					mes "Você conhece a história sobre Satan Morocc? Quero cantar uma música sobre a história deles mesmo com o passar do tempo.";
+					next;
+					switch( select( "Angel Incarnation", "Black Nightmare Incarnation", "Ghost Incarnation" ) ) {
+						mes "[Ragi]";
+					case 1:
+						if (checkquest(13156,PLAYTIME) == 0) {
+							mes "Um monstro de Morroc tem asas como um anjo. Talvez Satan Morocc queira ser um anjo?";
+							next;
+							mes "[Ragi]";
+							mes "Haha, por favor, não ligue. É apenas uma piada de um contador de histórias. Por favor, me dê outra história na próxima vez.";
+						}
+						else if (checkquest(13155,HUNTING) == 1) {
+							mes "A aparência parece boa, mas por dentro... Tenho certeza de que eles são de carne e osso!";
+							next;
+							mes "[Ragi]";
+							mes "Claro, eu não verifiquei por mim mesmo. Mas eu sou apenas um contador de histórias, como você pode ver.";
+							next;
+							mes "[Ragi]";
+							mes "Mas não é seguro... Então tome cuidado! Por favor, me dê mais histórias! Talvez eu possa encontrar Satan Morocc em algum lugar por aqui?";
+						}
+						else if (checkquest(13155,HUNTING) == 2) {
+							mes "Uau. Há tantas histórias chegando até mim! Graças a você!";
+							callsub S_Quest,13155,13156,1100000,200000;
+						}
+						else {
+							mes "Bem... Esta música não é sobre o príncipe das trevas, mas foi extraída de pessoas que afirmam tê-lo visto.";
+							next;
+							mes "[Ragi]";
+							mes "Por favor, me ajude a criar uma história pesquisando as Encarnações de Morocc voadoras.";
+							next;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Certifique-se de conseguir pelo menos 30 Encarnações de Morocc com aparência de anjo.";
+								emotion ET_KEK;
+								callsub S_Quest,13156,13155;
+							}
+						}
+						break;
+					case 2:
+						if (checkquest(13158,PLAYTIME) == 0) {
+							mes "A história ainda não foi criada, então pedirei na próxima vez!";
+							cutin "ragi02",0;
+						}
+						else if (checkquest(13157,HUNTING) == 1) {
+							mes "A forma não está completa, mas tem um dente muito afiado.";
+							next;
+							mes "[Ragi]";
+							mes "Você não acha que essa vai ser uma história muito engraçada?";
+						}
+						else if (checkquest(13157,HUNTING) == 2) {
+							mes "Uau. Há tantas histórias chegando até mim! Graças a você!";
+							callsub S_Quest,13157,13158,1100000,200000;
+						}
+						else {
+							mes "Não sei se tudo saiu do próprio Satan Morocc, mas coisas assim parecem horríveis.";
+							next;
+							mes "[Ragi]";
+							mes "Mas acho que também haverá uma história nisso. É por isso que essas criaturas são feitas. Por favor, procure por algo preto e parecido com alcatrão.";
+							next;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Encontre e elimine 30 Encarnações de Morocc Sombrias.";
+								callsub S_Quest,13158,13157;
+							}
+						}
+						break;
+					case 3:
+						if (checkquest(13160,PLAYTIME) == 0)
+							mes "A criatura sem roupas tem uma forma muito estranha. Haha, não leve a sério. Eu sou apenas um contador de histórias.";
+						else if (checkquest(13159,HUNTING) == 1) {
+							mes "Esta história deveria ser espalhada para aventureiros fracos como eu! Porque nem todos podem ser aventureiros.";
+							next;
+							mes "[Ragi]";
+							mes "Talvez os aventureiros tenham o mérito de conhecer esse tipo de história. Então, você pode, por favor, procurar por essas criaturas perto de Morocc?";
+						}
+						else if (checkquest(13159,HUNTING) == 2) {
+							mes "Uau. Há tantas histórias chegando até mim! Graças a você!";
+							callsub S_Quest,13159,13160,1100000,200000;
+						}
+						else {
+							mes "Esta é estranha... Mas ele também é uma Encarnação de Morocc.";
+							next;
+							mes "[Ragi]";
+							mes "Mas estou curioso porque parece um fantasma e ataques não funcionam.";
+							next;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Por favor, crie uma história após caçar pelo menos 30 Encarnações de Morocc Fantasmagóricas!";
+								callsub S_Quest,13160,13159;
+							}
+						}
+					}
+					break;
+				case 3:
+					mes "Eu nunca estive no Ash Vacuum, mas ouvi dizer que há muitas criaturas interessantes lá no Salão Scaraba.";
+					next;
+					switch( select( "Uni-Horn Scaraba Story", "Horn Scaraba Story", "Antler Scaraba Story", "Rake Horn Scaraba Story" ) ) {
+						mes "[Ragi]";
+					case 1:
+						if (checkquest(13162,PLAYTIME) == 0)
+							mes "Estou criando uma história sobre o Scaraba de um chifre. Um significa menos que dois!~ Eu comecei, mas é difícil terminar. Você pode me ajudar?";
+						else if (checkquest(13161,HUNTING) == 1) {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "Eles também têm algumas histórias, certo? Primeiro, estou curioso sobre a forma daquele com um chifre.";
+							next;
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13161,HUNTING) == 2) {
+							mes "Fico imaginando o que os Scarabas de um chifre pensam? Quero fazer uma música. Obrigado pela sua ajuda!";
+							callsub S_Quest,13161,13162,1100000,200000;
+						}
+						else {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "O novo mundo está cheio de monstros incríveis. Eles se tornarão um sonho para as crianças que querem ser aventureiras.";
+							next;
+							mes "[Ragi]";
+							mes "Quero compor uma música sobre o ^FF0000Scaraba de um chifre^000000!? As crianças vão realmente gostar.";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Você pode encontrá-los perto de algum lugar no leste, no Salão Scaraba.";
+								callsub S_Quest,13162,13161;
+							}
+						}
+						break;
+					case 2:
+						if (checkquest(13164,PLAYTIME) == 0)
+							mes "Estou criando uma história... Dois significam menos que três~ Comecei a criar uma história, mas não consigo terminar. Você vai me ajudar?";
+						else if (checkquest(13163,HUNTING) == 1) {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "Aquela coisa do chifre me incomoda um pouco. Qual é a diferença entre um e dois chifres? Apenas a aparência?";
+							next;
+							mes "[Ragi]";
+							mes "Talvez seja desnecessário. Mas a curiosidade é importante para os contadores de histórias. Hahaha.";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13163,HUNTING) == 2) {
+							mes "Você voltou em segurança! Como foi? O Scaraba de chifre parecia ser uma história divertida. Você realmente fez um bom trabalho.";
+							callsub S_Quest,13163,13164,1100000,200000;
+						}
+						else {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "Nós falamos sobre o Scaraba de chifre? Há mais um que devemos mencionar... Esse é o Scaraba de chifre!";
+							next;
+							mes "[Ragi]";
+							mes "Eu não sei por quê. Eu apenas ouvi das pessoas. Preciso compor uma música, então, por favor, dê uma olhada no mundo deles!";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Você pode encontrá-los perto de algum lugar no leste, no Salão Scaraba.";
+								callsub S_Quest,13164,13163;
+							}
+						}
+						break;
+					case 3:
+						if (checkquest(13166,PLAYTIME) == 0)
+							mes "Parece haver mais histórias sobre o Scaraba de galhada! Por favor, me ajude se tiver tempo.";
+						else if (checkquest(13165,HUNTING) == 1) {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "Parecia haver mais Scarabas especiais de acordo com os rumores. Mais fortes e mais assustadores.";
+							next;
+							mes "[Ragi]";
+							mes "Você acha que o Scaraba de galhada pode ser um deles?";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13165,HUNTING) == 2) {
+							mes "Deve ser cansativo viajar longas distâncias! Por favor, conte-me se houver histórias mais interessantes!";
+							callsub S_Quest,13165,13166,1100000,200000;
+						}
+						else {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "Este é muito único! Os chifres parecem com os de um cervo, por isso é chamado de Scaraba de galhada.";
+							next;
+							mes "[Ragi]";
+							mes "Você não está curioso sobre o porquê dele ter aquele chifre? Acho que ele tem uma história interessante que as pessoas gostariam. Devo pedir a você, aventureiro?";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Você pode, por favor, encontrar uma história sobre o Scaraba de galhada? Experiência própria é o melhor, eu acho!";
+								callsub S_Quest,13166,13165;
+							}
+						}
+						break;
+					case 4:
+						if (checkquest(13168,PLAYTIME) == 0)
+							mes "Sinto que o Scaraba de chifre ancinho tem mais história. Por favor, me ajude se tiver tempo.";
+						else if (checkquest(13167,HUNTING) == 1) {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "Aqui está meu plano. Estou criando 4 passagens para cada Scaraba.";
+							next;
+							mes "[Ragi]";
+							mes "Quem ouvir ou cantar ficará confuso ao cantar um troll. Parece divertido, não é?";
+							cutin "ragi01",0;
+						}
+						else if (checkquest(13167,HUNTING) == 2) {
+							mes "Obrigado! Tenho certeza de que posso compor uma ótima música.";
+							callsub S_Quest,13167,13168,1100000,200000;
+						}
+						else {
+							cutin "½ºÄ«¶ó¹ÙÄ«µå",3;  //scaraba_card
+							mes "Estou começando a ficar confuso. Vou compor uma música sobre a história dos Scarabas de chifre ancinho.";
+							next;
+							mes "[Ragi]";
+							mes "Uma música começa com o Scaraba de um chifre e depois canta junto com o Scaraba de chifre ancinho. Você vai me ajudar?";
+							next;
+							cutin "ragi01",0;
+							if (select( "Take the request", "Quit." ) == 1) {
+								mes "[Ragi]";
+								mes "Por favor, encontre uma história sobre o Scaraba de chifre ancinho no Salão Scaraba. Histórias de batalha ou experiências são aceitáveis.";
+								callsub S_Quest,13168,13167;
+							}
+						}
+						break;
+					}
+				}
+			}
+			else {
+				mes "Continuarei criando histórias ou músicas. Mas os aventureiros devem partir para uma nova aventura.";
+				next;
+				callsub S_Erasequest,
+					13143,1,"Egnigem Cenia",
+					13145,1,"Armeyer Dinze",
+					13147,1,"Wickebine Tres",
+					13149,1,"Kavach Icarus",
+					13151,1,"Errende Ebecee",
+					13153,1,"Laurell Weinder",
+					13155,2,"the Angel-looking Incarnation of Morocc",
+					13157,2,"Dark Incarnation of Morocc",
+					13159,2,"Ghost Incarnation of Morocc",
+					13161,3,"Uni-Horn Scaraba",
+					13163,3,"Horn Scaraba",
+					13165,3,"Antler Scaraba",
+					13167,3,"Rake Horn Scaraba";
+				mes "[Ragi]";
+				mes "Espero vê-lo novamente enquanto nos despedimos com um sorriso.";
+			}
+		}
+		else {
+			mes "[Ragi]";
+			mes "Bem, estou meio ocupado fazendo um serviço para o Sr. Aigu. Você tem alguma pergunta?";
+			next;
+			switch( select( "Where did you get your hair-do?", "Please sing a song for me.", "Do you have a girl friend?", "About Aigu" ) ) {
+				mes "[Ragi]";
+			case 1:
+				mes "Há um bom artista capilar em Alberta. Ele retalhou meu cabelo com tesouras de cozinha. Parece ilegal.";
+				next;
+				mes "[Ragi]";
+				mes "Às vezes, os penteados ou a cor são estranhos... mas tive sorte de não morrer.";
+				break;
+			case 2:
+				mes "Ainda não compus uma música como membro da banda. Algum dia, farei uma ótima música para você!";
+				break;
+			case 3:
+				cutin "ragi03",0;
+				mes "......";
+				next;
+				cutin "ragi02",0;
+				mes "[Ragi]";
+				mes "Aigu está apenas na minha mente. Não consigo pensar em mais nada. Estou bem, mesmo que seja apenas um amor não correspondido...";
+				break;
+			case 4:
+				mes "Nunca esquecerei o primeiro dia em que a conheci. Ela olhou para mim entre todas as pessoas no porto de Izlude. Agora eu a ajudo fazendo pequenos serviços.";
+				next;
+				mes "[Ragi]";
+				mes "Mas, infelizmente, acho que Aigu gosta de outra pessoa. ^FF0000Nós nunca nos conhecemos... Mas eu o odeio.^000000";
+				next;
+				mes "[Ragi]";
+				mes "Mas odeio mais a mim mesmo porque quero ficar perto dela, mesmo que ela nunca me note. Haha, fui muito sério?";
+				next;
+				mes "[Ragi]";
+				mes "Sou apenas um contador de histórias... Qualquer história pode ser inventada. Na maioria das vezes, contém a verdade.";
+			}
+		}
+	}
+	close2;
+	cutin "",255;
+	end;
+S_Quest:
+	if (isbegin_quest(getarg(0)))
+		erasequest getarg(0);
+	setquest getarg(1);
+	if (getarg(2,0))
+		getexp getarg(2),getarg(3);
+	return;
+S_Erasequest:
+	.@total = getargcount();
+	for ( .@i = 0; .@i < .@total; .@i += 3 ) {
+		.@quest_id = getarg(.@i);
+		switch( checkquest(.@quest_id,HUNTING) ) {
+		case -1:
+			if (checkquest(.@quest_id+1) > -1)
+				erasequest (.@quest_id+1);
+			continue;
+		case 0:
+		case 1:
+			mes "[Ragi]";
+			switch( getarg(.@i+1) ) {
+			case 1:
+				mes "The rest of the story of "+ getarg(.@i+2) +" is Okay, I will ask to someone else.";
+				break;
+			case 2:
+			case 3:
+				mes "I will ask to other adventurers about the story of "+ getarg(.@i+2) +".";
+				break;
+			}
+			break;
+		case 2:
+			mes "[Ragi]";
+			switch( getarg(.@i+1) ) {
+			case 1:
+				mes "Did you hear the story of "+ getarg(.@i+2) +"? Thanks you. I promise to make a good song.";
+				getexp 1100000,300000;
+				break;
+			case 2:
+				mes "A história de Morocc é boa o suficiente para músicas? Você fez um bom trabalho.";
+				getexp 1100000,200000;
+				break;
+			case 3:
+				mes "Como foi sua aventura? Foi divertida? Por favor, deixe-me ouvir a história da sua aventura algum dia.";
+				getexp 1100000,200000;
+				break;
+			}
+		}
+		erasequest .@quest_id;
+		next;
+	}
+	return;
+}

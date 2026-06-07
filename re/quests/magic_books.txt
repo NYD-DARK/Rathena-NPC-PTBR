@@ -1,0 +1,734 @@
+//===== rAthena Script ======================================= 
+//= Magic Book Seller
+//===== By: ================================================== 
+//= Masao, Muad_Dib (translation)
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= An NPC which sells you different kinds of Magic Books.
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Masao]
+//= 1.1 Optimized. [Euphy]
+//= 1.1a Updated NPC name to "Master Velofos". [Euphy]
+//= 1.1b Fixed the rand part in "Mysterious Documents" to match
+//=	 Aegis & fixed a bracket issue. [Capuche]
+//= 1.2 Updates Magic Books gained from Lea. [Aleos]
+//= 1.3 Fixes checkquest calls. [Everade]
+//= 1.4 Added EAJ_WARLOCK so that jobs after Warlock such as 
+//      Arch Mage can enter. [Mazvi]
+//============================================================ 
+
+// Main Quest :: war_book
+//============================================================
+geffen_in,176,105,4	script	Master Velofos	1_M_WIZARD,{
+	if (checkweight(1201,1) == 0) {
+		mes "Você está carregando itens demais. Por favor, libere um pouco de espaço na sua mochila primeiro.";
+		close;
+	}
+	if ((MaxWeight - Weight) < 1000) {
+		mes "Você está sobrecarregado de itens. Por favor, diminua o peso dos seus itens primeiro.";
+		close;
+	}
+	if ((Upper == 2) && (Class != Job_Baby_Warlock)) {
+		mes "[Mestre Velofos]";
+		mes "O que você é, um bebê?";
+		mes "Eu não estou aqui para ser babá. Vá embora!";
+		close;
+	}
+	if ((eaclass()&EAJ_THIRDMASK)!=EAJ_WARLOCK) {
+		mes "[Mestre Velofos]";
+		mes "Ha ha, você também está em busca de novos conhecimentos?";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Sinto muito, mas meu conhecimento não lhe diz respeito.";
+		close;
+	}
+	if (getskilllv(2230) < 1) {
+		mes "[Mestre Velofos]";
+		mes "Bem, você cumpriu todos os requisitos, exceto um: você precisa da habilidade Liberar.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Aprenda a habilidade primeiro. Tenho muitas coisas para lhe contar.";
+		close;
+	}
+	mes "[Mestre Velofos]";
+	mes "Bem-vindo, meu amigo.";
+	mes "Parabéns por entrar em um mundo totalmente novo de magia.";
+	next;
+	mes "[Mestre Velofos]";
+	mes "Nós, praticantes de magia, estamos sempre sedentos por novos conhecimentos e poder.";
+	next;
+	mes "[Mestre Velofos]";
+	mes "Nós suportamos grandes dificuldades e dores para alcançar o que queremos. Quando finalmente conseguimos, a sensação de conquista é indescritível. É por isso que tanto você quanto eu escolhemos o caminho da magia.";
+	next;
+	mes "[Mestre Velofos]";
+	mes "A propósito, o que o traz até mim hoje?";
+	next;
+	switch (select("Nothing.:Do you know the Reading Spell Book?:What's the Freezing Spell?:Can I have a Magic Book?:Can I use the Reading Spell Book without the Freezing Spell?:About the Ultimate Magic Book")) {
+	case 1:
+		mes "[Mestre Velofos]";
+		mes "Hah! Você é engraçado.";
+		close;
+	case 2:
+		mes "[Mestre Velofos]";
+		mes "Ler Livro de Magia significa literalmente 'ler um livro de magia'. Você sabe como usar Livros de Magia?";
+		next;
+		switch (select("Yes, I do.:No, I don't.")) {
+		case 1:
+			mes "[Mestre Velofos]";
+			mes "Bem, então você não precisa de uma aula adicional.";
+			close;
+		case 2:
+			mes "[Mestre Velofos]";
+			mes "Livros de Magia são um tipo avançado de pergaminho mágico. Enquanto feitiços em pergaminhos desaparecem após um uso, aqueles em Livros de Magia podem ser conjurados várias vezes.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Vamos comparar um feitiço em um pergaminho a um fio de metal. Quando o fio é usado para abrir uma porta ou fazer outra coisa, ele é dobrado e amassado, perdendo sua forma original. Um feitiço de um Livro de Magia é mais como uma liga com memória de forma.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Hã, você não sabe o que é uma liga com memória de forma? Eh, apenas lembre-se disto: um fio feito de liga com memória de forma restaura sua forma com o tempo.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Assim como a liga, um feitiço em um Livro de Magia permanece após o uso, embora o reuso do feitiço tenha um tempo de espera para sua restauração.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "...Oh, eu não pretendia falar por tanto tempo. De qualquer forma, você pode usar Livros de Magia para conjurar feitiços que você já aprendeu. O conceito é diferente dos feitiços normais.";
+			next;
+			select("What's the difference?");
+			mes "[Mestre Velofos]";
+			mes "Por que você precisa escrever seus feitiços existentes em Livros de Magia, você perguntou?";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Essa é uma boa pergunta. Está relacionada à Vínculo Mágico.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Você já aprendeu Liberar, que lhe permite segurar a energia dos quatro elementos diferentes antes da conjuração real. Vínculo Mágico é semelhante ao Liberar.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Já que você aprendeu Liberar, você é capaz de usar Vínculo Mágico também. Bem, vamos falar sobre isso mais tarde.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Você sabe como segurar um feitiço existente e então conjurá-lo no momento desejado através do Liberar.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Carregar os globos dos quatro elementos também está relacionado ao Vínculo Mágico.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Como você sabe, os quatro elementos são Fogo, Água, Vento e Terra. Ser capaz de empregá-los livremente é o princípio essencial da magia.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Nós, humanos, usamos tochas para manter o fogo, leques para soprar vento e tigelas para conter água. Também usamos argila para fazer cerâmica.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Essas atividades podem diferir da magia, mas ambas são iguais no sentido de empregar os quatro elementos.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Quando você usa feitiços complexos para invocar uma tempestade, soltar raios ou queimar uma área, isso consome muita de sua energia, tanto física quanto mental.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Quando você falha ao vincular tais feitiços mágicos poderosos ou falha em controlá-los, você pode sofrer danos irreparáveis à sua mente e ao seu corpo.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "É por isso que usamos Livros de Magia para reduzir essa carga. Isso ajuda a invocar feitiços pré-conjurados enquanto você se concentra em vincular seu poder mágico.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Há uma desvantagem, no entanto: Livros de Magia não podem ser usados para feitiços que você não aprendeu.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Como eu disse anteriormente, os feitiços nos Livros de Magia tendem a voltar ao que eram.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Dito isso, como um Circler, você não pode alterar ou criar feitiços em Livros de Magia.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Mesmo se você criar um, seu poder estará além de sua capacidade.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Para usar a Leitura de Livro de Magia, você deve aprender o Feitiço de Congelamento para vincular magia.";
+			close;
+		}
+	case 3:
+		mes "[Mestre Velofos]";
+		mes "O Feitiço Congelante é usado para o Vinculo Mágico. Ele ajuda você a inserir um feitiço mágico em um círculo.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Círculos mágicos funcionam organicamente uns com os outros. Quando você usa o Feitiço Congelante para vincular um feitiço, ele não será ativado até que você lance o feitiço de liberação.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Claro, vincular um feitiço consome seu mana continuamente, mas consome menos mana do que feitiços mágicos convencionais.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "O Vinculo Mágico se torna mais difícil quando você usa feitiços mágicos mais poderosos.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Para feitiços fracos, você pode vincular dois ou três deles ao seu círculo. Para feitiços mais poderosos, talvez um ou dois seja possível.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Isso tudo depende da sua habilidade de controlar seus feitiços. Você terá que tentar e experimentar o Vinculo Mágico depois de aprendê-lo para entender de verdade.";
+		close;
+	case 4:
+		mes "[Mestre Velofos]";
+		mes "Sinto muito, mas eu só tenho Livros Mágicos para iniciantes, mas eles obviamente não são adequados para você. Você ainda quer um?";
+		next;
+		switch (select("Sure thing.:Where can I find advanced books?")) {
+		case 1:
+			mes "[Mestre Velofos]";
+			mes "Por favor, vá falar com a [Lea] no Arquivo. Diga a ela que você precisa de um dos Livros Mágicos que armazenei lá.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Para sua informação, ela não lhe dará nada sem algo em troca. Espere que ela peça algo a você!";
+			if (wm_book < 1) set wm_book, 1;
+			close;
+		case 2:
+			mes "[Mestre Velofos]";
+			mes "Sinto muito, mas nossa administração decidiu recentemente limitar a disponibilidade de Livros Mágicos para os Multi-Circlers. É porque os números deles estão aumentando mais rapidamente do que esperávamos.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Você poderia encontrar um se se esforçasse, mas não tenho nenhum comigo.";
+			next;
+			mes "[Mestre Velofos]";
+			mes "Se nossa administração remover a restrição, você será o primeiro a saber. Não se preocupe.";
+			close;
+		}
+	case 5:
+		mes "[Mestre Velofos]";
+		mes "Nada acontecerá quando você tentar vincular magia sem usar o Vinculo Mágico porque você não tem nada para segurar a magia.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "É como água, que precisa de uma tigela para ficar no lugar.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "O problema é quando você tenta forçar o lançamento de um feitiço que não aprendeu. Isso definitivamente sairá pela culatra.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Claro, o dano não será severo: você cairá no sono ou ficará confuso. Isso acontece porque há um conflito entre seu Livro Mágico e a força do Vinculo Mágico quando você tenta invocar e manter um feitiço não aprendido.";
+		next;
+		mes "[Mestre Velofos]";
+		mes "Não tente fazer isso só para ver o que acontece! Cair no sono enquanto conjura um feitiço? Não há nada mais humilhante do que isso para praticantes de magia como nós.";
+		close;
+	case 6:
+		if ((BaseLevel > 139) && (getskilllv(2217) > 0 || getskilllv(2213) > 0)) {
+			if (mac_book < 1) {
+				mes "[Mestre Velofos]";
+				mes "Sinto muito, mas você poderia pedir a outra pessoa? Estou meio ocupado agora.";
+				close;
+			}
+			if (mac_book == 1) {
+				mes "[Mestre Velofos]";
+				mes "Huh, você está procurando pelo Livro Mágico Supremo? Quem te enviou?";
+				next;
+				select("Ms. Lea.");
+				mes "[Mestre Velofos]";
+				mes "Sinto muito, mas não resta muita informação sobre o Livro Mágico Supremo.";
+				next;
+				mes "[Mestre Velofos]";
+				mes "Alguns estudiosos no Continente de Midgard tentaram coletar Livros Mágicos antigos e reproduzir aquele livro, mas...";
+				next;
+				select("But what?");
+				mes "[Mestre Velofos]";
+				mes "Oh sim, talvez ele saiba de algo.";
+				next;
+				select("Yes, I knew this was coming!");
+				mes "[Mestre Velofos]";
+				mes "Meu irmão é igual a você. Ele está muito interessado em recriar o Livro Mágico Supremo.";
+				next;
+				mes "[Mestre Velofos]";
+				mes "O nome dele é Galfos.";
+				mes "Ele tem tido um grande interesse nos Livros Mágicos antigos.";
+				next;
+				mes "[Mestre Velofos]";
+				mes "Eu não o apoiei nem dei conselhos para sua pesquisa, pois pensei que ele desistiria rapidamente, mas...";
+				next;
+				mes "[Mestre Velofos]";
+				mes "Se ele descobriu algo útil, talvez possa ser útil para você.";
+				next;
+				select("Where's Galfos now?");
+				mes "[Mestre Velofos]";
+				mes "Ouvi dizer que ele está perto do Acampamento da Expedição além da Fenda Dimensional para buscar informações sobre os Livros Mágicos antigos.";
+				next;
+				mes "[Mestre Velofos]";
+				mes "Se você quiser vê-lo, deve se preparar para uma longa jornada.";
+				set mac_book,2;
+				close;
+			}
+			if (mac_book > 1) {
+				mes "[Mestre Velofos]";
+				mes "Galfos está perto do Acampamento da Expedição além da Fenda Dimensional.";
+				next;
+				mes "[Mestre Velofos]";
+				mes "Se você quiser vê-lo, deve se preparar para uma longa jornada.";
+				close;
+			}
+		}
+		mes "[Mestre Velofos]";
+		mes "Ha ha, sinto muito, mas você deveria focar em fortalecer seu corpo em vez de criar Livros Mágicos.";
+		close;
+	}
+}
+
+geffen_in,175,112,4	script	Lea	2_F_MAGICMASTER,{
+	if (checkweight(1201,1) == 0) {
+		mes "Você está carregando muitos itens. Por favor, libere espaço em sua mochila primeiro.";
+		close;
+	}
+	if ((MaxWeight - Weight) < 1000) {
+		mes "Você está sobrecarregado com itens. Por favor, diminua o peso dos seus itens primeiro.";
+		close;
+	}
+	if (wm_book > 0 && ((eaclass()&EAJ_THIRDMASK)==EAJ_WARLOCK)) {
+		mes "[Lea]";
+		mes "Como posso ajudar?";
+		next;
+		select("Master Velofos asked me to bring his Magic Book.");
+		mes "[Lea]";
+		mes "Você está pegando um livro emprestado?";
+		next;
+		switch (select("Let me think.:I want the Intermediate Magic Books.:I want the Superior Magic Books.:I want the Ultimate Magic Books.")) {
+		case 1:
+			mes "[Lea]";
+			mes "Sem problemas.";
+			close;
+		case 2:
+			mes "[Lea]";
+			mes "Ah, então você quer os Livros de Magia Intermediários. Se você pagar um ^4d4dffdepósito de empréstimo de 100.000z^000000, nós lhe emprestaremos os Livros de Magia Intermediários.";
+			next;
+			mes "[Lea]";
+			mes "Que tipo de Livro de Magia você deseja?";
+			next;
+			set .@i, select("Let me think.:Magic Book (Storm Gust):Magic Book (Lord of Vermillion):Magic Book (Meteor Storm)")-1;
+			mes "[Lea]";
+			if (!.@i) {
+				mes "Sem problemas.";
+				close;
+			}
+			setarray .@Books[0],100065,100066,100067;
+			if (countitem(.@Books[.@i-1])) {
+				mes "Você já possui esse Livro de Magia. Você não pode pegar um novo livro emprestado até devolver o atual.";
+				next;
+				mes "[Lea]";
+				mes "Você não sabe quantos outros gostariam do livro que você já tem? É um pouco egoísta querer mais de um, sabe.";
+				close;
+			}
+			if (Zeny > 99999) {
+				mes "Obrigado pelo seu depósito. A data de devolução do livro está escrita no cartão de empréstimo na contracapa do livro. Por favor, tente não perder ou danificar o livro para evitar pagar indenização.";
+				next;
+				mes "[Lea]";
+				mes "Os Livros de Magia Intermediários e Superiores devem ser devolvidos ao pegar o Livro de Magia Supremo emprestado. Lembre-se de que você está apenas emprestando-os, então certifique-se de cuidar bem desses livros.";
+				Zeny -= 100000;
+				getitem .@Books[.@i-1],1; //WL_MB_SG, WL_MB_LOV, WL_MB_MS
+				close;
+			}
+			mes "O ^4d4dffdepósito de empréstimo é de 100.000z^000000. O depósito foi ajustado conforme o Livro de Magia mudou.";
+			close;
+		case 3:
+			mes "[Lea]";
+			mes "Oh, você quer os Livros de Magia Superiores? A política foi alterada para aceitar depósitos de empréstimo incondicionalmente, em vez das exigentes condições de empréstimo existentes.";
+			mes "O ^4d4dffdepósito de empréstimo do Livro de Magia Superior é de 500.000z^000000.";
+			next;
+			mes "[Lea]";
+			mes "Que tipo de Livro de Magia você deseja?";
+			next;
+			set .@i, select("Let me think.:Magic Book (Drain Life):Magic Book (Jack Frost):Magic Book (Earth Strain):Magic Book (Crimson Rock):Magic Book (Chain Lightning)")-1;
+			mes "[Lea]";
+			if (!.@i) {
+				mes "Sem problemas.";
+				close;
+			}
+			setarray .@Books[0],100068,100069,100070,100071,100072;
+			if (countitem(.@Books[.@i-1])) {
+				mes "Você já possui esse Livro de Magia. Você não pode pegar um novo livro emprestado até devolver o atual.";
+				next;
+				mes "[Lea]";
+				mes "Você não sabe quantos outros gostariam do livro que você já tem? É um pouco egoísta querer mais de um, sabe.";
+				close;
+			}
+			if (Zeny > 499999) {
+				mes "Obrigado pelo seu depósito. A data de devolução do livro está escrita no cartão de empréstimo na contracapa do livro. Por favor, tente não perder ou danificar o livro para evitar pagar indenização.";
+				next;
+				mes "[Lea]";
+				mes "Os Livros de Magia Intermediários e Superiores devem ser devolvidos ao pegar o Livro de Magia Supremo emprestado. Lembre-se de que você está apenas emprestando-os, então certifique-se de cuidar bem desses livros.";
+				Zeny -= 500000;
+				getitem .@Books[.@i-1],1; //WL_MB_DL, WL_MB_JF, WL_MB_ES, WL_MB_CR, WL_MB_CL
+				close;
+			}
+			mes "O ^4d4dffdepósito de empréstimo é de 500.000z^000000. O depósito foi ajustado conforme o Livro de Magia mudou.";
+			close;
+		case 4:
+			if ((BaseLevel > 139) && (mac_book < 1) && ((getskilllv(2217) > 0) || (getskilllv(2213) > 0))) {
+				mes "[Lea]";
+				mes "Você... Você acabou de dizer o Livro de Magia Supremo?";
+				next;
+				mes "[Lea]";
+				mes "Oh, meu Deus...";
+				mes "Não acredito que alguém realmente queira esse livro.";
+				next;
+				select("Please don't say that you don't have it.");
+				mes "[Lea]";
+				mes "Francamente, eu nunca nem vi o Livro de Magia Supremo.";
+				next;
+				mes "[Lea]";
+				mes "Você deveria perguntar ao Mestre Velofos se quiser saber mais sobre esse livro.";
+				next;
+				mes "[Lea]";
+				mes "Sinto muito por não poder ajudá-lo mais do que isso.";
+				set mac_book,1;
+				close;
+			}
+			if ((BaseLevel > 139) && (mac_book > 0) && ((getskilllv(2217) > 0) || (getskilllv(2213) > 0))) {
+				mes "[Lea]";
+				mes "Você deveria perguntar ao Mestre Velofos por informações sobre esse livro.";
+				close;
+			}
+			mes "[Lea]";
+			mes "Bem... por que você não pratica um pouco mais antes disso?";
+			next;
+			mes "[Lea]";
+			mes "Para obter o Livro de Magia Supremo, você deve atingir o nível 140 e aprender Tetera Bolt e Cometa.";
+			next;
+			mes "[Lea]";
+			mes "Esse livro não pode ser usado por qualquer um, sabe?";
+			close;
+		}
+	}
+	mes "[Lea]";
+	mes "Bem-vindo ao Arquivo Mágico. Você pode ler e pegar livros emprestados aqui sob certas condições.";
+	close;
+}
+
+mid_camp,255,244,4	script	Galfos	4_M_JOB_WIZARD,{
+	if (checkweight(1201,1) == 0) {
+		mes "Você está carregando muitos itens. Por favor, libere espaço em sua mochila primeiro.";
+		close;
+	}
+	if ((MaxWeight - Weight) < 1000) {
+		mes "Você está sobrecarregado com itens. Por favor, diminua o peso dos seus itens primeiro.";
+		close;
+	}
+	if ((Upper == 2) && (Class != Job_Baby_Warlock)) {
+		mes "[Galfos]";
+		mes "O que você é, um bebê?";
+		mes "Não estou aqui para babá. Caia fora!";
+		close;
+	}
+	if ((eaclass()&EAJ_THIRDMASK)!=EAJ_WARLOCK) {
+		mes "[Galfos]";
+		mes "Meu braço direito parece quente enquanto meu braço esquerdo parece frio. Nunca vou me acostumar com esse clima estranho!";
+		close;
+	}
+	if (getskilllv(2230) < 1) {
+		mes "[Galfos]";
+		mes "Ah, eu vou me meter em encrenca se ficar aqui por mais tempo. Talvez eu já esteja...";
+		close;
+	}
+	if (BaseLevel < 140 || (getskilllv(2217) < 1 && getskilllv(2213) < 1)) {
+		mes "[Galfos]";
+		mes "Sinto muito, mas não converso com pessoas que nem estão prontas para isso.";
+		close;
+	}
+	if (mac_book < 2) {
+		mes "[Galfos]";
+		mes "Você parece forte, mas não parece ter nada para tratar comigo.";
+		close;
+	}
+	if (mac_book == 2) {
+		mes "[Galfos]";
+		mes "O que o traz até mim?";
+		next;
+		select("I heard that you've studied the Ultimate Magic Book.");
+		mes "[Galfos]";
+		mes "Por que, você também está interessado?";
+		mes "Eu não sabia que alguém realmente se interessaria por aquele livro. Sim, estou estudando aquele livro de magia. Como você descobriu isso?";
+		next;
+		select("You're Velof's brother, right?");
+		mes "[Galfos]";
+		mes "Sim, eu sou Galfos, e Velofos é meu irmão.";
+		next;
+		mes "[Galfos]";
+		mes "Espere um minuto,";
+		mes "o velho recomendou você para mim?";
+		next;
+		select("That's right.");
+		mes "[Galfos]";
+		mes "Uau!";
+		mes "Isso é surpreendente. Ele nunca levou minha pesquisa muito a sério. Fico feliz que ele finalmente tenha mudado de ideia.";
+		next;
+		mes "[Galfos]";
+		mes "Heh! Seu timing não poderia ser melhor: eu estava procurando um objeto de teste.";
+		next;
+		select("A test object?");
+		mes "[Galfos]";
+		mes "Francamente, só estou interessado em criar o Livro de Magia Supremo.";
+		next;
+		mes "[Galfos]";
+		mes "Não sou bom em usar magia, sem mencionar que prefiro usar os punhos em combate. No entanto, acho os Livros de Magia incrivelmente intrigantes.";
+		next;
+		mes "[Galfos]";
+		mes "O problema é que não consigo usar o Livro de Magia Supremo, mesmo que eu faça um. É por isso que não consigo testá-lo por conta própria.";
+		next;
+		mes "[Galfos]";
+		mes "É por isso que estou esperando por um verdadeiro praticante de magia como você, que possa me ajudar a testar meu Livro de Magia Supremo.";
+		next;
+		select("(What is he talking about?)");
+		mes "[Galfos]";
+		mes "Minha pesquisa está quase concluída,";
+		mes "e preciso resolver um último problema para criar o Livro de Magia.";
+		next;
+		mes "[Galfos]";
+		mes "Para fazer o antigo Livro de Magia Supremo, preciso de um artefato e alguns feitiços para fundir nele.";
+		next;
+		mes "[Galfos]";
+		mes "Restaurei perfeitamente os feitiços com base nos documentos antigos, mas ainda não tenho nenhuma informação sobre o artefato necessário.";
+		next;
+		mes "[Galfos]";
+		mes "Ah, mas há um lado positivo!";
+		next;
+		select("(Now we're getting somewhere!)");
+		mes "[Galfos]";
+		mes "Ha ha...";
+		mes "Existe um grande arquivo em El Dicastes, a Capital dos Gigantes Malignos, onde todo o conhecimento deste mundo está armazenado.";
+		next;
+		mes "[Galfos]";
+		mes "Talvez esse seja o lugar para encontrar alguma informação sobre o artefato para este Livro de Magia Supremo.";
+		next;
+		mes "[Galfos]";
+		mes "Você sabe o que fazer, não sabe? Encontre informações sobre o artefato no arquivo de El Dicastes, usando tudo o que estiver ao seu alcance.";
+		next;
+		mes "[Galfos]";
+		mes "Depois, crie e traga-me o artefato. Falaremos sobre a criação do Livro de Magia depois.";
+		set mac_book,3;
+		close;
+	}
+	if (mac_book == 3) {
+		mes "[Galfos]";
+		mes "Você sabe o que fazer, não sabe? Encontre informações sobre o artefato no arquivo de El Dicastes, usando tudo o que estiver ao seu alcance.";
+		next;
+		mes "[Galfos]";
+		mes "Depois, crie e traga-me o artefato. Falaremos sobre a criação do Livro de Magia depois.";
+		close;
+	}
+	if (mac_book == 4) {
+		mes "[Galfos]";
+		mes "Oh, você encontrou";
+		mes "algo útil?";
+		next;
+		set .@i, select("I've discovered everything about Comet.:I've mastered the zenith of Tetra Vortex.");
+		mes "[Galfos]";
+		if ((.@i == 1 && countitem(100073)) || (.@i == 2 && countitem(100074))) {
+			mes "Você está brincando comigo? Você já tem o livro!";
+			close;
+		}
+		if ((.@i == 1 && checkquest(12218) == 2) || (.@i == 2 && checkquest(12219) == 2 && checkquest(12220) == 2 && checkquest(12221) == 2 && checkquest(12222) == 2)) {
+			mes "Oh céus, sinto uma energia incrível vindo de você. Isso é ótimo! Agora estamos prontos para fazer o Livro de Magia Supremo.";
+			next;
+			mes "[Galfos]";
+			mes "Há um problema, no entanto: estou tão falido que não tenho nem dinheiro suficiente para comprar as ferramentas para fazer o livro.";
+			next;
+			mes "[Galfos]";
+			mes "Preciso de pelo menos ^0000aa500.000 zenys^000000 para comprar todas as ferramentas necessárias. Você tem o dinheiro?";
+			next;
+			if(select("Wh-what? No!:Sure.") == 1) {
+				mes "[Galfos]";
+				mes "Ah, você não tem? É decepcionante, mas não há nada que eu possa fazer. Volte quando tiver dinheiro suficiente, ok?";
+				close;
+			}
+			mes "[Galfos]";
+			if (Zeny >= 500000) {
+				mes "Muito bem, vamos começar!";
+				next;
+				specialeffect2 EF_DISPELL;
+				progressbar "ffff00",4;
+				specialeffect2 EF_LORD;
+				set Zeny, Zeny - 500000;
+				getitem 100072+.@i,1; //WL_MB_CM, WL_MB_TV
+				mes "[Galfos]";
+				mes "Cara, quase perdi o controle com a incrível energia mágica! Aqui está o seu Livro de Magia.";
+				next;
+				mes "[Galfos]";
+				mes "Obrigado por tornar meu sonho realidade. Sinta-se à vontade para voltar se precisar de outro desses livros.";
+				close;
+			}
+			mes "Ei, o que eu te falei? Não consigo comprar as ferramentas para fazer o livro sem dinheiro!";
+			close;
+		}
+		mes "Tem certeza de que encontrou algo? Não parece que você aprendeu o que precisamos...";
+		close;
+	}
+	mes "[Galfos]";
+	mes "Há mais alguma coisa que você precise?";
+	close;
+}
+
+dic_in01,25,190,0	script	Mysterious Documents	CLEAR_NPC,{
+	if (isequipped(2782) < 1) {
+		mes "É melhor eu não me esquecer de equipar meu anel.";
+		close;
+	}
+	if (ep13_3_invite < 5) {
+		mes "Ao se aproximar dos documentos, um Gigante Maligno que parece o gerente do arquivo tenta chamar o Guarda Galton. Você deve sair daqui rapidamente.";
+		close;
+	}
+	if (checkquest(12165,PLAYTIME) == 1) {
+		mes "Os documentos estão fazendo você sentir náuseas. Você deve voltar mais tarde, depois que seu estômago se acalmar.";
+		close;
+	}
+	if (checkquest(12165,PLAYTIME) == 2) {
+		mes "Você não sente mais tanta náusea. Deve ser seguro prosseguir agora.";
+		erasequest 12165;
+		close;
+	}
+	if ((BaseLevel < 140) || (getskilllv(2217) < 1) && (getskilllv(2213) < 1)) {
+		mes "Os documentos neste recipiente não estão legíveis. Não adianta tentar lê-los.";
+		close;
+	}
+	specialeffect2 EF_DISPELL;
+	progressbar "ffff00",4;
+	if (mac_book < 3) {
+		mes "Você descobriu registros sobre magia, aceleração e ondas de partículas.";
+		close;
+	}
+	if (mac_book == 3) {
+		mes "Você descobriu registros sobre magia, aceleração e ondas de partículas. Estes documentos devem ser os que Galfos está procurando.";
+		set mac_book, 4;
+		close;
+	}
+	if (mac_book == 4) {
+		set .@r, rand(1,10);
+		if (.@r == 1) {
+			if (getskilllv(2213) > 0) {
+				if (checkquest(12218) == 1) {
+					mes "Você já possui este documento.";
+					close;
+				}
+				mes "^660066Para criar a essência de lava, você deve refinar 40 Corações Ardentes no lugar mais quente do 2º andar do Calabouço do Vulcão de Thor.^000000";
+				mes "^660066Você deve fazer isso usando o maior poder daquele local. Os Humanos usam este método para estudar a aceleração de partículas mágicas desde os tempos antigos.^000000";
+				next;
+				mes "Você descobriu o ^990099Método de Criação de Essência de Lava^000000. Por favor, verifique sua janela de Missões para mais detalhes.";
+				specialeffect2 EF_STEAL;
+				close2;
+				setquest 12218;
+				end;
+			}
+			mes "Nada neste documento parece útil.";
+			close;
+		}
+		if (.@r == 2) {
+			if (getskilllv(2217) > 0) {
+				if (checkquest(12219) == 1) {
+					mes "Você já possui este documento.";
+					close;
+				}
+				mes "^660066A essência de chama pode ser refinada em solo estável no 1º andar do Calabouço do Vulcão de Thor. 10 Carvões de Amor são necessários para refinar a essência.^000000";
+				mes "^660066De acordo com as informações dos Humanos, esta essência constitui um dos quatro elementos naturais.^000000";
+				next;
+				mes "Você descobriu o ^990099Método de Criação de Essência de Chama^000000. Por favor, verifique sua janela de Missões para mais detalhes.";
+				specialeffect2 EF_STEAL;
+				close2;
+				setquest 12219;
+				end;
+			}
+			mes "Nada neste documento parece útil.";
+			close;
+		}
+		if (.@r == 3) {
+			if (getskilllv(2217) > 0) {
+				if (checkquest(12220) == 1) {
+					mes "Você já possui este documento.";
+					close;
+				}
+				mes "^660066Consegui refinar a essência de geleira no fundo do 3º andar da Caverna de Gelo. Se quiser tentar, prepare 10 Corações Gélidos e vá para o local a seguir.^000000";
+				next;
+				mes "Você descobriu o ^990099Método de Criação de Essência de Geleira^000000. Por favor, verifique sua janela de Missões para mais detalhes.";
+				specialeffect2 EF_STEAL;
+				close2;
+				setquest 12220;
+				end;
+			}
+			mes "Nada neste documento parece útil.";
+			close;
+		}
+		if (.@r == 4) {
+			if (getskilllv(2217) > 0) {
+				if (checkquest(12221) == 1) {
+					mes "Você já possui este documento.";
+					close;
+				}
+				mes "^660066Consegui refinar a essência de fóssil a partir de rochas antigas no 2º andar da Mina. Até agora, esse local é o mais estável entre todos os campos de teste.";
+				mes "Se você quiser tentar, prepare 10 Jubileus e vá até o calabouço. Boa sorte.^000000";
+				next;
+				mes "Você descobriu o ^990099Método de Criação de Essência de Fóssil^000000. Por favor, verifique sua janela de Missões para mais detalhes.";
+				specialeffect2 EF_STEAL;
+				close2;
+				setquest 12221;
+				end;
+			}
+			mes "Nada neste documento parece útil.";
+			close;
+		}
+		if (.@r == 5) {
+			if (getskilllv(2217) > 0) {
+				if (checkquest(12222) == 1) {
+					mes "Você já possui este documento.";
+					close;
+				}
+				mes "^660066Para refinar a essência de tempestade, visitei o Tabuleiro do Eremita em Kunlun, onde reside o espírito do vento.";
+				mes "O processo de refino foi fácil, mas tive dificuldade em encontrar o catalisador, Dentes de Dragão.^000000";
+				next;
+				mes "Você descobriu o ^990099Método de Criação de Essência de Tempestade^000000. Por favor, verifique sua janela de Missões para mais detalhes.";
+				specialeffect2 EF_STEAL;
+				close2;
+				setquest 12222;
+				end;
+			}
+			mes "Nada neste documento parece útil.";
+			close;
+		}
+		if (.@r == 10) {
+			mes "Você de repente se sente mal, e essa náusea não vai embora facilmente. Você deve tentar encontrar os documentos de que precisa mais tarde.";
+			setquest 12165;
+			close;
+		}
+		mes "Nada aqui parece especial.";
+		close;
+	}
+	mes "Você não precisa mais pesquisar este lugar.";
+	close;
+}
+
+function	script	Magic_Book_Essence	{
+	if (MaxWeight - Weight < 1000) {
+		mes "Por favor, alivie o peso da sua mochila.";
+		close;
+	}
+	.@item_req = getarg(1);
+	.@req_amount = getarg(2);
+	if (checkquest(getarg(0)) == 1 && countitem(.@item_req) >= .@req_amount) {
+		specialeffect2 EF_BLIND;
+		specialeffect2 EF_BEGINSPELL;
+		progressbar "ffff00",4;
+		delitem .@item_req,.@req_amount;
+		if (rand(2)) {
+			mes "You have used "+ callfunc("F_InsertPlural",.@req_amount,getitemname(.@item_req)) +" to create ^999900"+ getarg(3) +" Essence^000000.";
+			next;
+			mes "^008800The "+getarg(3)+" Essence will last permanently, unless there's a problem.^000000";
+			completequest getarg(0);
+			specialeffect2 EF_LORD;
+			close;
+		}
+		mes "^008888You have failed to refine the essence using "+ callfunc("F_InsertPlural",.@req_amount,getitemname(.@item_req)) +".^000000";
+		close;
+	}
+	if (checkquest(getarg(0)) == 2) {
+		mes "You've already created "+getarg(3)+" Essence in this area.";
+		close;
+	}
+	mes "Alguém já usou esta área.";
+	close;
+}
+thor_v02,163,104,0	script	Powerful Lava Energy#33	CLEAR_NPC,{ callfunc "Magic_Book_Essence",12218,7097,40,"Lava"; end; }
+thor_v01,185,91,0	script	Powerful Flame Energy#33	CLEAR_NPC,{ callfunc "Magic_Book_Essence",12219,7098,10,"Flame"; end; }
+ice_dun03,137,148,0	script	Powerful Glacier Energy	CLEAR_NPC,{ callfunc "Magic_Book_Essence",12220,7561,10,"Glacier"; end; }
+ein_dun02,181,124,0	script	Powerful Fossil Energy	CLEAR_NPC,{ callfunc "Magic_Book_Essence",12221,7312,10,"Fossil"; end; }
+gon_dun02,252,198,0	script	Powerful Storm Energy#33	CLEAR_NPC,{ callfunc "Magic_Book_Essence",12222,7266,10,"Storm"; end; }

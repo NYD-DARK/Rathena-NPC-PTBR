@@ -1,0 +1,2218 @@
+//===== rAthena Script =======================================
+//= Dewata Quest NPCs
+//===== By: ==================================================
+//= Gennosuke Kouga, Muad_Dib
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Quest NPCs related to Dewata:
+//== "Dewata Legend"
+//== "Help Out the Old Man"
+//== "Traditional Weapon"
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//= 1.1 Standardized. [Euphy]
+//= 1.2 Updated to match the official script. [Lemongrass/Euphy]
+//============================================================
+
+// Dewata Legend Quest :: dewata_legend
+//============================================================
+dew_fild01,57,274,0	script	#hideout_legend	111,6,6,{
+OnTouch:
+	if (BaseLevel > 59 && dew_legend < 1) {
+		mes "- Você ouve uma conversa baixa vinda de dentro. -";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Mais uma vez, eu falhei em";
+		mes "fazer a ^8B4513Coroa de Jaty^000000...";
+		mes "Eu tinha certeza de que conseguiria desta vez.";
+		mes "Por que não funciona?";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "A ^006400Coroa de Jaty^000000 é conhecida por ter um poder milagroso desde o tempo dos antigos.";
+		mes "Mas dizem que apenas aqueles que conquistaram uma honra tribal";
+		mes "seriam capazes de usá-la.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "^0000FFKasyapa^000000!!";
+		mes "Você está dizendo que, mesmo eu sendo o líder da nossa tribo, ainda não recebi essa honra?";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Acalme-se, ^0000FFChefe Paiko^000000...";
+		mes "Como o Grande e Poderoso Chefe, você deve ter requisitos mais do que suficientes.";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Na minha juventude, eu teria resolvido facilmente esse problema, mas a mente deste velho não consegue descobrir o que está faltando.";
+		next;
+		mes "A conversa vai sumindo e você não ouve mais nada.";
+		set dew_legend,1;
+		close;
+	}
+	end;
+}
+
+dew_in01,15,33,0	script	#hidein_legend	111,5,5,{
+OnTouch:
+	if (dew_legend == 3) {
+		mes "Kasyapa e o Chefe Paiko começam a conversar quando você está prestes a sair...";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Não tenho certeza do que está faltando, mas aquele viajante poderia ser de grande ajuda na criação da ^006400Coroa de Jaty^000000.";
+		mes "Disto eu tenho certeza.";
+		mes "O motivo é...";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Qual é o motivo?";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Esta ^8B4513Pena de Cendrawasih^000000 pertencia ao nosso primeiro líder da tribo quando a coroa foi originalmente criada.";
+		mes "Ela foi guardada como uma relíquia preciosa da nossa tribo.";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Mas quando o viajante se aproximou, esta pena começou a brilhar, e fiquei pensando que isso não é apenas uma coincidência.";
+		mes "Esta pessoa será a chave para nos ajudar a fazer a coroa.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Isso poderia mesmo acontecer?";
+		mes "Se for assim, darei tudo de mim";
+		mes "para apoiá-lo...";
+		set dew_legend,4;
+		close;
+	}
+	end;
+}
+
+dew_in01,22,48,3	script	Sage Kasyapa#dew	541,{
+	if (dew_legend == 0) {
+		mes "[Sábio Kasyapa]";
+		mes "Ah, um estranho em nossa terra.";
+		mes "Você está perdido?";
+		mes "Espero que não tenha enfrentado muitos perigos em sua jornada até aqui.";
+		close;
+	} else if (dew_legend == 1) {
+		mes "[Sábio Kasyapa]";
+		mes "Sua expressão sincera me diz";
+		mes "que você tem algo a dizer";
+		mes "então você bem que poderia me dizer o que é.";
+		next;
+		if(select("I overheard talk about a crown?:Just looking for the gift shop.") == 2) {
+			mes "[Chefe Tribal Paiko]";
+			mes "Sério?";
+			mes "Parecia que seus olhos";
+			mes "queriam dizer algo.";
+			close;
+		}
+		mes "[Sábio Kasyapa]";
+		mes "Oh, você ouviu falar sobre a coroa, não é?";
+		mes "Ah, este velho tem a língua solta";
+		mes "deveríamos ter sido um pouco mais discretos...";
+		next;
+		select("Anything I can do to help?");
+		mes "[Sábio Kasyapa]";
+		mes "Posso ver em seus olhos";
+		mes "que você é do tipo confiável... mas...";
+		next;
+		mes "Há um breve brilho de luz e, de repente, ^0000FFKasyapa^000000 parece ficar surpreso.";
+		specialeffect2 EF_PNEUMA;
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Ah, a pena......!";
+		mes "Em vez de falar comigo, por que não fala com o líder da nossa tribo, ^0000FFPaiko^000000.";
+		set dew_legend,2;
+		close;
+	} else if (dew_legend == 2) {
+		mes "[Sábio Kasyapa]";
+		mes "Em vez de falar comigo, por que não fala com o líder da nossa tribo, o ^0000FFChefe Paiko^000000.";
+		close;
+	} else if (dew_legend == 3) {
+		mes "[Sábio Kasyapa]";
+		mes "Se é isso que o Chefe ^0000FFPaiko^000000 quer";
+		mes "não tenho mais nada a dizer.";
+		mes "Hmm....";
+		mes "mas...... isto....";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Esqueça, tenha uma boa viagem.";
+		close;
+	} else if (dew_legend == 4) {
+		mes "[Sábio Kasyapa]";
+		mes "Eu estava esperando por você, viajante.";
+		mes "O líder da nossa tribo tem um favor";
+		mes "a lhe pedir.";
+		mes "Por favor, fale com o Chefe ^0000FFPaiko^000000.";
+		close;
+	} else if (dew_legend == 5) {
+		mes "[Sábio Kasyapa]";
+		mes "Ouvi dizer que você poderia ajudar a fazer uma coroa";
+		mes "para o líder da nossa tribo.";
+		mes "Você certamente será";
+		mes "uma grande ajuda para nós...";
+		mes "Eu confio nos meus próprios olhos!";
+		mes "E também na luz brilhante...";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "O símbolo da Tribo Dayak";
+		mes "e uma famosa criatura mística.";
+		mes "Encontre 15 ^006400Penas de Cendrawasih^000000";
+		mes "e traga-as para o Chefe ^0000FFPaiko^000000.";
+		close;
+	} else if (dew_legend == 6) {
+		mes "[Sábio Kasyapa]";
+		mes "Com as penas que você trouxe, a criação da ^006400Coroa de Jaty^000000 está progredindo de forma muito mais suave.";
+		mes "Vá ver o Chefe ^0000FFPaiko^000000.";
+		close;
+	} else if (dew_legend == 7) {
+		mes "[Sábio Kasyapa]";
+		mes "Há algo";
+		mes "que desejo lhe dar";
+		mes "como recompensa pela sua ajuda.";
+		mes "Por favor, seria uma honra para nós se você aceitasse.";
+		next;
+		if (checkweight(6406,1) == 0) {
+			if (Weight + getiteminfo(6406, ITEMINFO_WEIGHT) > MaxWeight) {
+				mes "[Sábio Kasyapa]";
+				mes "Você está carregando peso demais acima do limite.";
+				mes "Não posso lhe entregar a sua recompensa a menos que reduza a quantidade de itens pesados que está carregando.";
+				close;
+			} else {
+				mes "[Sábio Kasyapa]";
+				mes "Você está carregando itens demais em seu inventário.";
+				mes "Eu lhe darei a recompensa assim que você liberar espaço e retornar.";
+				close;
+			}
+		}
+		set dew_legend,8;
+		getitem 6406,1; //Cendrawasih_SF
+		completequest 9157;
+		erasequest 9157;
+		mes "[Sábio Kasyapa]";
+		mes "A razão pela qual pedi que embarcasse nesta missão importante é por causa desta pena.";
+		mes "Passada de geração em geração, a origem lendária da coroa é esta pena...";
+		specialeffect2 EF_PNEUMA;
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Vi esta pena começar a brilhar quando você chegou aqui.";
+		mes "Eu sabia que você era uma pessoa que";
+		mes "se esforçaria para nos ajudar.";
+		mes "Em nome do meu povo";
+		mes "eu lhe agradeço.";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Além disso, a pena que você recebeu não é apenas valiosa por si só, ela também é um reconhecimento da nossa tribo.";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Como o Vulcão ^8B4513Krakatau^000000, quando você se aventurar em áreas perigosas como aquela, se você mostrar esta pena, poderá obter ajuda da tribo.";
+		mes "De qualquer forma, eu realmente lhe agradeço.";
+		close;
+	} else {
+		mes "[Sábio Kasyapa]";
+		mes "Além disso, a pena que você recebeu não é apenas valiosa por si só, ela também é um reconhecimento da nossa tribo.";
+		next;
+		mes "[Sábio Kasyapa]";
+		mes "Como o Vulcão ^8B4513Krakatau^000000, quando você se aventurar em áreas perigosas como aquela, se você mostrar esta pena, poderá obter ajuda da tribo.";
+		mes "De qualquer forma, eu realmente lhe agradeço.";
+		close;
+	}
+}
+
+dew_in01,15,49,4	script	Tribal Chief Paiko#dew	540,{
+	if (dew_legend < 2) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Eu sou o líder desta tribo";
+		mes "^0000FFPaiko^000000";
+		close;
+	} else if (dew_legend == 2) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Posso ver que você é um viajante,";
+		mes "de outra terra.";
+		mes "O que o traz aqui?";
+		next;
+		if(select("I overheard the story by accident:I have nothing to say.") == 2) {
+			mes "[Chefe Tribal Paiko]";
+			mes "Você está perdendo seu tempo aqui.";
+			mes "Existem muitas outras atrações ao redor da nossa vila.";
+			close;
+		}
+		mes "[Chefe Tribal Paiko]";
+		mes "O que você quer dizer?";
+		mes "Você ouviu a história sobre uma coroa?";
+		mes "Você deve ter ouvido errado.";
+		mes "Eu não tenho nada a dizer a você";
+		mes "a respeito de tais coisas.";
+		next;
+		select("Kasyapa was talking about a crown...");
+		mes "[Chefe Tribal Paiko]";
+		mes "Parece que ^0000FFKasyapa^000000 lhe contou uma história exagerada e aprecio sua preocupação com nossos assuntos.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Não é algo que um estranho como você pudesse entender, então faça como uma árvore e dê o fora daqui.";
+		set dew_legend,3;
+		close;
+	} else if (dew_legend == 3) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Existem muitas outras atrações ao redor da nossa vila.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Se é sobre a coroa, quero que pare de perguntar sobre ela.";
+		mes "Por favor, vá embora.";
+		close;
+	} else if (dew_legend == 4) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Eu estava esperando por você, viajante";
+		mes "de acordo com o Sábio ^0000FFKasyapa^000000";
+		mes "Você está disposto a nos ajudar a fazer uma coroa para nossa tribo.";
+		select("Crown-a-whatsis?");
+		mes "[Chefe Tribal Paiko]";
+		mes "O líder da tribo tem o dever de fazer e proteger a ^006400Coroa Jaty^000000 para manter o orgulho e a honra da tribo.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Mas, desde que me tornei o líder da tribo, tem sido difícil fazê-la.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "De acordo com o Sábio ^0000FFKasyapa^000000, você pode nos ajudar a criar uma ^006400Coroa Jaty^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Você acha que pode ajudar?";
+		mes "Seus esforços não ficarão sem recompensa.";
+		next;
+		if(select("Ok, I will help:I am sorry, I cannot help now.") == 2) {
+			mes "[Chefe Tribal Paiko]";
+			mes "Isso é muito triste.";
+			mes "Se você mudar";
+			mes "de ideia, por favor";
+			mes "volte novamente.";
+			mes "Estarei esperando.";
+			close;
+		}
+		mes "[Chefe Tribal Paiko]";
+		mes "Muito obrigado a você, estranho";
+		mes "Se Kasyapa confia em você, então eu sei que você pode nos ajudar a fazer uma";
+		mes "^006400Coroa Jaty^000000";
+		mes "O que você pode fazer para";
+		mes "nos ajudar é muito simples.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "O símbolo da tribo Jaty também é uma criatura mística famosa.";
+		mes "Encontre 15 ^006400Penas de Cendrawasih^000000 e traga-as para mim.";
+		mes "Nossa fé está em você, estranho.";
+		set dew_legend,5;
+		setquest 9155;
+		close;
+	} else if (dew_legend == 5) {
+		if (countitem(6405) < 15) {
+			mes "[Chefe Tribal Paiko]";
+			mes "Parece que você ainda não encontrou os materiais para fazer a ^006400Coroa Jaty^000000.";
+			next;
+			mes "[Chefe Tribal Paiko]";
+			mes "O símbolo da tribo Dayak também é uma criatura mística famosa.";
+			mes "Encontre 15 ^006400Penas de Cendrawasih^000000 e traga-as para mim.";
+			close;
+		}
+		set dew_legend,6;
+		delitem 6405,15; //Cendrawasih_F
+		changequest 9155,9156;
+		mes "[Chefe Tribal Paiko]";
+		mes "Oh! Você encontrou todas elas. Olhe! As penas que você encontrou estão brilhando. Não estão?";
+		mes "Muito bem, deixe-me começar a fabricar a ^006400Coroa Jaty^000000, sinto que estou pronto.";
+		next;
+		mes "De repente, um grande barulho começa a ecoar enquanto você e ^0000FFPaiko^000000 são cercados por uma energia calorosa, brilhante e cintilante como mil vaga-lumes.";
+		specialeffect2 EF_BASH3D2;
+		close;
+	} else if (dew_legend == 6) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Com a sua ajuda, a ^006400Coroa Jaty^000000 está progredindo muito bem.";
+		mes "Levará algum tempo até que a tarefa seja concluída, então, por favor, espere um pouco.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Após a conclusão da ^006400Coroa Jaty^000000, há um presente que quero lhe dar.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Ah, também, você deveria ir ver o Sábio ^0000FFKasyapa^000000, que realmente quer recompensá-lo com algo.";
+		set dew_legend,7;
+		changequest 9156,9157;
+		close;
+	} else if (dew_legend == 7) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Ah, você deveria falar com o Sábio ^0000FFKasyapa^000000, que realmente quer recompensá-lo com algo.";
+		close;
+	} else if (dew_legend == 8) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Com o seu apoio, não estou preocupado em criar a ^006400Coroa Jaty^000000.";
+		mes "Eu realmente agradeço por isso.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Um dia encantador como hoje deve ser celebrado. Você não acha?";
+		mes "Então, preparei para provar a comida especial da nossa tribo, chamada ^006400Satay^000000";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Mas, este ^006400Satay^000000 é gostoso demais para apenas nós dois compartilharmos, então gostaríamos de compartilhar com as pessoas da vila.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "O que você acha?";
+		mes "Para compartilhar a notícia de que";
+		mes "a ^006400Coroa Jaty^000000 está sendo fabricada com sucesso e para compartilhar o delicioso ^006400Satay^000000 com nossos amigos, preciso da sua ajuda.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Você está disposto a fazer um pequeno trabalho de entrega?";
+		next;
+		if(select("Of course, I can help:Sorry, I am too busy to help.") == 2) {
+			mes "[Chefe Tribal Paiko]";
+			mes "Eu acreditava que você definitivamente me ajudaria...";
+			mes "É um pouco decepcionante.";
+			mes "Se você mudar de ideia algum dia,";
+			mes "venha falar comigo novamente.";
+			close;
+		}
+		mes "[Chefe Tribal Paiko]";
+		mes "Oh!, eu sabia que você ajudaria.";
+		mes "Os guerreiros da nossa tribo vêm à minha mente antes de compartilharmos com qualquer outra pessoa.";
+		mes "Por favor, compartilhe o Satay com os guerreiros na vila.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Por enquanto, vou lhe dar 2 ^006400Satay^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Você pode ficar tentado pelo aroma do nosso ^006400Satay^000000 e pode comer um, mas se comer mais do que isso, não conseguirá compartilhar o ^006400Satay^000000";
+		mes "com os nossos amigos da vila.";
+		set dew_legend,9;
+		getitem 11533,2; //Satay
+		setquest 9158;
+		close;
+	} else if (dew_legend == 9) {
+		callsub L_Delivery,0;
+		mes "[Chefe Tribal Paiko]";
+		mes "Estou pensando em entregar comida aos nossos guerreiros da tribo para compartilhar Satay com os guerreiros na vila.";
+		close;
+	} else if (dew_legend == 10) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Ah, a próxima pessoa para quem quero que o ^006400Satay^000000 seja entregue é alguém que fica do outro lado do rio, o ^0000FFGerente da Tribo^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Para este fim, lhe darei mais 2 porções de ^006400Satay^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Se você se sentir atraído pelo aroma do ^006400Satay^000000, você pode comer um, mas se comer mais, não conseguirá compartilhar o ^006400Satay^000000 com nossos amigos.";
+		set dew_legend,11;
+		getitem 11533,2; //Satay
+		changequest 9159,9160;
+		close;
+	} else if (dew_legend == 11) {
+		callsub L_Delivery,0;
+		mes "[Chefe Tribal Paiko]";
+		mes "A segunda pessoa a receber o ^006400Satay^000000 é alguém que fica do outro lado do rio.";
+		next;
+		mes "Trata-se do ^0000FFGerente da Tribo^000000.";
+		mes "Por favor, entregue a ele antes que esfrie.";
+		close;
+	} else if (dew_legend == 12) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Oh, você já entregou?";
+		mes "A terceira pessoa para quem entregar o ^006400Satay^000000 é o ^0000FFGuardião do Vulcão Krakatau^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Vou lhe dar mais 2 porções de ^006400Satay^000000 para esta entrega.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "E como antes, não se entregue ao cheiro e tente não comer o ^006400Satay^000000.";
+		set dew_legend,13;
+		getitem 11533,2; //Satay
+		changequest 9161,9162;
+		close;
+	} else if (dew_legend == 13) {
+		callsub L_Delivery,1;
+		mes "[Chefe Tribal Paiko]";
+		mes "A terceira pessoa para quem entregar o ^006400Satay^000000 é o ^0000FFGuardião do Vulcão Krakatau^000000.";
+		mes "Por favor, entregue antes que esfrie.";
+		close;
+	} else if (dew_legend == 14) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Oh, você já entregou.";
+		mes "A última pessoa a receber o ^006400Satay^000000 é o ^0000FFGerente do Templo Borobudur^000000 que está na ^8B4513Ilha de Dewata^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Eu lhe darei mais 2 ^006400Satay^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "E como antes, não se entregue ao cheiro e tente não comer o ^006400Satay^000000.";
+		set dew_legend,15;
+		getitem 11533,2; //Satay
+		changequest 9163,9164;
+		close;
+	} else if (dew_legend == 15) {
+		callsub L_Delivery,1;
+		mes "[Chefe Tribal Paiko]";
+		mes "A última pessoa a receber o ^006400Satay^000000 é o";
+		mes "^0000FFGerente do Templo Borobudur^000000 que está na";
+		mes "^8B4513Ilha de Dewata^000000.";
+		mes "Por favor, entregue antes que esfrie.";
+		close;
+	} else if (dew_legend == 16) {
+		mes "[Chefe Tribal Paiko]";
+		mes "Oh, você já entregou.";
+		mes "Você fez um bom trabalho.";
+		mes "Foi um bom momento para todos nós compartilharmos e aproveitarmos esta ocasião feliz juntos. Obrigado.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Enquanto você estava voltando de entregar o ^006400Satay^000000,";
+		mes "a Coroa Jaty foi feita. Sua ambientação e radiância a tornam uma coroa verdadeiramente impecável.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Além disso, você trouxe materiais mais do que suficientes, então, depois de fazer a ^006400Coroa Jaty^000000, conseguimos criar uma similar para você guardar.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Não é a mesma que a original, mas tem sua própria especialidade. É minha recompensa para agradecer pelo que você fez.";
+		next;
+		if (checkweight(18520,1) == 0) {
+			mes "[Chefe Tribal Paiko]";
+			mes "Você está carregando muito peso para receber sua recompensa.";
+			mes "Por favor, reduza seu peso carregado e volte novamente.";
+			close;
+		}
+		mes "[Chefe Tribal Paiko]";
+		mes "Feito com a marinada secreta de nossa tribo, experimente o ^006400Satay^000000.";
+		mes "Foi feito com todo o nosso coração, especialmente para você, mas não se esqueça de compartilhar com os amigos.";
+		set dew_legend,17;
+		getitem 18520,1; //Jaty_C
+		getitem 11533,5; //Satay
+		completequest 9165;
+		erasequest 9165;
+		next;
+	}
+	mes "[Chefe Tribal Paiko]";
+	mes "Você fez um bom trabalho.";
+	mes "Seja o que for que você faça no futuro, desejo que você tenha uma vida cheia de sorte e alegria.";
+	mes "Como Chefe da ^8B4513Tribo Jaty^000000, desejo-lhe boa sorte!!";
+	close;
+L_Delivery:
+	mes "[Chefe Tribal Paiko]";
+	if (getarg(0) == 0) {
+		mes "Parece que você ainda não entregou o ^006400Satay^000000.";
+		mes "Você encontrou algum problema?";
+	} else {
+		mes "Você ainda não entregou o ^006400Satay^000000?";
+		mes "Algo deu errado?";
+	}
+	next;
+	switch(select("I ate them all.:Deliver to whom.:Nothing.")) {
+	case 1:
+		mes "[Chefe Tribal Paiko]";
+		mes "Huh... então você não conseguiu resistir, hein?";
+		mes "Não se culpe demais. É difícil resistir ao aroma viciante do ^006400Satay^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Nossa tribo está com pouco suprimento de comida, então não podemos distribuir mais do nosso ^006400Satay^000000, mas há um boato de que o dono do restaurante na Ilha de Dewata está fazendo e vendendo seu próprio ^006400Satay^000000.";
+		next;
+		mes "[Chefe Tribal Paiko]";
+		mes "Não é tão saboroso quanto a receita da nossa tribo, mas esta é uma tarefa urgente, então apenas encontre-o e entregue.";
+		close;
+	case 2:
+		return;
+	case 3:
+		mes "[Chefe Tribal Paiko]";
+		mes "Certo! Entregue agora mesmo!";
+		close;
+	}
+}
+
+dew_fild01,78,288,6	script	Jaty Tribe Warrior#dew	541,{
+	mes "[Guerreiro da Tribo Jaty]";
+	mes "Nós reverenciamos a força e a bravura.";
+	mes "Nós somos a Tribo ^FF0000Jaty^000000.";
+	if (dew_legend != 9 || !countitem(11533))
+		close;
+	next;
+	mes "[Guerreiro da Tribo Jaty]";
+	mes "Meus olhos treinados veem que";
+	mes "você parece prestes a dizer algo.";
+	mes "Fale e declare o seu negócio.";
+	next;
+	select("^0000FFTribal Chief Paiko^000000");
+	mes "[Guerreiro da Tribo Jaty]";
+	mes "Ouvi sobre seus";
+	mes "feitos úteis...";
+	mes "Como representante da minha tribo";
+	mes "expresso meus agradecimentos a você.";
+	next;
+	mes "[Guerreiro da Tribo Jaty]";
+	mes "Além disso, obrigado pelo ^006400Satay^000000";
+	mes "Minha boca já está salivando, obrigado.";
+	mes "Há algo que eu gostaria de compartilhar com você sobre nossa tribo.";
+	delitem 11533,1; //Satay
+	set dew_legend,10;
+	changequest 9158,9159;
+	next;
+	mes "[Guerreiro da Tribo Jaty]";
+	mes "Diferente dos tempos antigos, quando os guerreiros da nossa tribo lutavam e derramavam seu sangue, o mundo se tornou mais pacífico hoje em dia, mas o território da nossa tribo encolheu drasticamente.";
+	next;
+	mes "[Guerreiro da Tribo Jaty]";
+	mes "No entanto, continuaremos mantendo a tradição guerreira da nossa tribo viva e preservaremos o orgulho que conquistamos através do sacrifício daqueles guerreiros do passado.";
+	next;
+	mes "[Guerreiro da Tribo Jaty]";
+	mes "Espero que sua perseverança e orgulho permaneçam com você em suas viagens.";
+	close;
+}
+
+dew_fild01,185,300,6	script	Tribe Manager#dew	541,{
+	mes "[Gerente da Tribo]";
+	mes "Manter nossa cultura e tradição é muito importante.";
+	if (dew_legend != 11 || !countitem(11533)) {
+		if (dew_legend < 11)
+			mes "Embora seja um pouco entediante...";
+		close;
+	}
+	next;
+	mes "[Gerente da Tribo]";
+	mes "Parece-me que você tem algo";
+	mes "a dizer, não tem?";
+	next;
+	select("^0000FFTribal Chief Paiko^000000");
+	mes "[Gerente da Tribo]";
+	mes "Eu não sabia que havia";
+	mes "tal esforço sendo feito";
+	mes "e que você teve um papel fundamental no esforço...";
+	mes "Você é o herói da ^8B4513Tribo Jaty^000000.";
+	next;
+	mes "[Gerente da Tribo]";
+	mes "Uau~ o aroma saboroso do";
+	mes "delicioso ^006400Satay^000000 caseiro!!";
+	mes "Obrigado pela refeição.";
+	mes "Por favor, dê meus cumprimentos";
+	mes "ao nosso Líder da Tribo.";
+	delitem 11533,1; //Satay
+	set dew_legend,12;
+	changequest 9160,9161;
+	next;
+	mes "[Gerente da Tribo]";
+	mes "Há poucos contatos entre";
+	mes "a ^8B4513Ilha de Dewata^000000 e a ^8B4513Tribo Jaty^000000.";
+	mes "Costumávamos ter um vínculo mais forte";
+	mes "nos tempos antigos.";
+	next;
+	mes "[Gerente da Tribo]";
+	mes "Mas com a nova cultura e estrangeiros chegando";
+	mes "a ^8B4513Ilha de Dewata^000000 se tornou uma atração turística e perdemos o contato com eles.";
+	next;
+	mes "[Gerente da Tribo]";
+	mes "A atração turística se expandiu continuamente, mas a razão pela qual não nos influenciou aqui é devido a este pequeno templo que estou gerenciando.";
+	next;
+	mes "[Gerente da Tribo]";
+	mes "Eu não podia deixar nossa tradição desaparecer tão facilmente.";
+	mes "Espero que manter nossa tradição e cultura vivas faça as pessoas saberem o quão importantes essas coisas são para nós.";
+	next;
+	mes "[Gerente da Tribo]";
+	mes "De agora em diante, espero que as pessoas da ^8B4513Ilha de Dewata^000000 e da ^8B4513Tribo Jaty^000000 possam se dar bem e interagir com mais frequência.";
+	close;
+}
+
+//Original name: Gatekeeper of Krakatau Volcano
+dewata,235,56,4	script	Gatekeeper of Krakatau#1	534,{
+	mes "[Guardião do Vulcão Krakatau]";
+	mes "O ^8B4513Vulcão Krakatau^000000 é";
+	mes "uma área muito perigosa";
+	mes "Não posso permitir que ninguém entre lá.";
+	next;
+	if (dew_legend == 13 && countitem(11533))
+		set .@menu$, ":^0000FFTribal Chief Paiko^000000";
+	switch(select("Allow me through:I don't want to go in"+.@menu$)) {
+	case 1:
+		if (dew_legend < 8) {
+			mes "[Guardião do Vulcão Krakatau]";
+			mes "O ^8B4513Vulcão Krakatau^000000 é";
+			mes "uma área muito perigosa";
+			mes "então não posso permitir sua entrada";
+			mes "a menos que você esteja qualificado.";
+			close;
+		}
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Você é o viajante que foi reconhecido pelo líder da tribo como um amigo da tribo e recebeu uma ^006400Pena de Cendrawasih Brilhante^000000.";
+		next;
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Bem, vou deixar você passar, mas o ^8B4513Vulcão Krakatau^000000 é perigoso, então, por favor, tome cuidado.";
+		close2;
+		warp "dew_dun01",289,160;
+		end;
+	case 2:
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Você escolheu sabiamente.";
+		mes "O ^8B4513Vulcão Krakatau^000000 é";
+		mes "uma área extremamente perigosa.";
+		close;
+	case 3:
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Oh! Eu não sabia disso!";
+		mes "Essa é uma das melhores notícias";
+		mes "que ouvi recentemente.";
+		next;
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Hum, que cheiro maravilhoso é este?";
+		mes "Claro, é o nosso ^006400Satay^000000!";
+		mes "Eu estava um pouco com fome";
+		mes "então isso deve me satisfazer.";
+		delitem 11533,1; //Satay
+		set dew_legend,14;
+		changequest 9162,9163;
+		next;
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Já que você veio até aqui";
+		mes "vou compartilhar uma história interessante com você.";
+		next;
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Tornou-se uma tradição perdida nos últimos anos, mas até 10 ou mais anos atrás, para se tornar um guerreiro da ^8B4513Tribo Jaty^000000, você precisava escalar o Vulcão Krakatau para provar sua resistência.";
+		next;
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Os olhos daqueles guerreiros estavam ansiosos, porém determinados antes de subir o ^8B4513Vulcão Krakatau^000000.";
+		next;
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Ainda não consigo esquecer aquele olhar em seus olhos; sinto um pouco da mesma emoção vindo de você, Aventureiro.";
+		next;
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "Eu quero que você viva muito e prospere.";
+		mes "Seja saudável e fique seguro, viajante, para que você possa viver para contar a história de suas aventuras.";
+		close;
+	}
+}
+
+//Original name: Gatekeeper of Krakatau Volcano
+dew_dun01,292,164,4	script	Gatekeeper of Krakatau#2	541,{
+	mes "[Guardião do Vulcão Krakatau]";
+	mes "Quer voltar";
+	mes "para Dewata?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		close2;
+		warp "dewata",232,53;
+		end;
+	case 2:
+		mes "[Guardião do Vulcão Krakatau]";
+		mes "O ^8B4513Vulcão Krakatau^000000 é";
+		mes "um lugar perigoso.";
+		mes "Você deveria voltar agora.";
+		close;
+	}
+}
+
+dewata,78,192,6	script	Borobudur Temple Manager	536,{
+	mes "[Gerente do Templo Borobudur]";
+	mes "O clima hoje está tão bonito.";
+	if (dew_legend != 15 || !countitem(11533))
+		close;
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "A propósito, você tem";
+	mes "algo a me contar...?";
+	next;
+	select("^0000FFTribal Chief Paiko^000000");
+	mes "[Gerente do Templo Borobudur]";
+	mes "Eu nunca soube que tal coisa havia acontecido.";
+	mes "Se você tivesse me avisado com antecedência, eu poderia ter ajudado pelo menos um pouco.";
+	mes "Ainda assim, as coisas correram bem com a sua ajuda.";
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "Ah, é o ^006400Satay^00000 que experimentei quando a tribo me convidou algum tempo atrás.";
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "Bom~~ Este é o mesmo sabor de que me lembro.";
+	mes "Para agradecer, vou contar uma história que pode lhe interessar";
+	delitem 11533,1; //Satay
+	set dew_legend,16;
+	changequest 9164,9165;
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "A lenda fala de um pássaro estranho chamado ^FF0000Garuda^000000.";
+	mes "Ele tem o torso, braços e pernas de um humano, mas a cabeça e o bico de uma águia.";
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "A história deste pássaro o descreve ajudando os deuses a exterminar demônios perversos e serpentes.";
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "O conto tem sido passado de geração em geração.";
+	mes "Bastante interessante, não é?";
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "Tenho certeza de que na vila da ^8B4513Tribo Jaty^000000 existem muitas histórias lendárias.";
+	mes "Quando eu encontrar o Chefe, certamente ouvirei muitas dessas histórias.";
+	next;
+	mes "[Gerente do Templo Borobudur]";
+	mes "Não tenho certeza de quando nossos caminhos se cruzarão novamente, mas espero que nos encontremos algum dia.";
+	mes "Desejo-lhe uma viagem agradável, jovem viajante.";
+	close;
+}
+
+// Help Out the Old Man :: dewata_drink
+//============================================================
+dewata,109,262,4	script	Memo#dew_drink	534,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 5000) {
+		if (dew_drink) {
+			mes "[Memo]";
+			mes "Por que você está carregando tanto? Isso não machuca suas costas?";
+			close;
+		} else {
+			mes "[Memo]";
+			mes "É uma moda entre os jovens carregar coisas pesadas?";
+			close;
+		}
+	}
+	set .@playtime, checkquest(5044,PLAYTIME);
+	if (.@playtime == 0) {
+		mes "[Memo]";
+		mes "Você me ajudará novamente amanhã?";
+		mes "Poby ainda está com dor nas costas.";
+		mes "Dores nas costas não desaparecem apenas após um dia.";
+		close;
+	} else if (.@playtime == 1) {
+		erasequest 5044;
+	} else if (.@playtime == 2) {
+		completequest 5044;
+		erasequest 5044;
+	}
+	if (BaseLevel < 60) {
+		mes "[Memo]";
+		mes "Dewata está sempre lotada, mas hoje está quieta.";
+		close;
+	}
+	if (dew_drink == 0) {
+		if (rand(3)) {
+			mes "[Memo]";
+			mes "Oh, céus! Ainda não recebemos uma mensagem da tribo Jaty.";
+			emotion ET_PROFUSELY_SWEAT;
+			next;
+			mes "[Memo]";
+			mes "Eles nunca quebraram uma promessa em 10 anos, não sei o motivo. O que está acontecendo?";
+			next;
+			mes "[Memo]";
+			mes "Posso estragar todo o líquido se continuar assim.";
+			emotion ET_CRY;
+			close;
+		}
+		mes "[Memo]";
+		mes "O que devo fazer? Ainda não tenho notícias da tribo Jaty.";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		mes "[Memo]";
+		mes "Oh, não~ Todo o líquido vai estragar...";
+		next;
+		select("What happened?");
+		mes "[Memo]";
+		mes "Quem é você?";
+		emotion ET_QUESTION;
+		next;
+		mes "[Memo]";
+		mes "Você é um aventureiro, certo?";
+		mes "Como você pode ver pelos jarros ao meu redor, estou fazendo ^0000FFvinho tradicional^000000 para sobreviver.";
+		next;
+		mes "[Memo]";
+		mes "Todo mundo sabe disso, então a ^0000FFilha de Dewata^000000 atrai muitos turistas.";
+		next;
+		mes "[Memo]";
+		mes "Especialmente este vinho tradicional, que é feito há quatro gerações! Mas ^FF0000Ark^000000 está com falta de estoque.";
+		mes "Ark precisa de ^0000FFÓleos de Palma^000000, feitos do Fruto da Palmeira de Óleo.";
+		next;
+		mes "[Memo]";
+		mes "Infelizmente, não temos recebido ^0000FFÓleo de Palma^000000 da vila da tribo Jaty ultimamente.";
+		mes "Os ingredientes podem se tornar inúteis se forem entregues tarde demais.";
+		next;
+		select("Sounds like a big problem.");
+		mes "[Memo]";
+		mes "É um problema maior do que você pensa. As vendas são a crédito, mas se não cumprirmos hoje, perderemos o crédito, os ingredientes e os turistas que não receberão o Ark. Então é bem prejudicial.";
+		next;
+		mes "[Memo]";
+		mes "... ...";
+		emotion ET_THINK;
+		next;
+		emotion ET_SURPRISE;
+		mes "[Memo]";
+		mes "Ah, certo! Você está ocupado agora?";
+		next;
+		if(select("Sorry, I am busy.:No, I am not busy.") == 1) {
+			mes "[Memo]";
+			mes "Hmm, não tenho escolha.";
+			mes "Você não se importa que outros estejam em apuros. A que ponto este mundo chegou?";
+			emotion ET_HNG;
+			close;
+		}
+		mes "[Memo]";
+		mes "É bom saber disso.";
+		mes "Então, já que você está vagando por aqui...";
+		next;
+		mes "[Memo]";
+		mes "Você se importaria se eu lhe pedisse um favor~? Na verdade, eu preciso visitar a Tribo Jaty, mas este ^FF0000Ark^000000 imaturo não me deixa sair.";
+		next;
+		mes "[Memo]";
+		mes "Você poderia ir até a vila Jaty e perguntar ao ^0000FFLero^000000 o que aconteceu?";
+		next;
+		mes "[Memo]";
+		mes "Este sujeito nunca quebrou uma promessa em 10 anos, então ele deve ter um motivo muito bom para não vir.";
+		set dew_drink,1;
+		setquest 5035;
+		next;
+		mes "[Memo]";
+		mes "Encontre o melhor mestre de óleo.";
+		mes "O nome dele, novamente, é ^0000FFLero^000000.";
+		close;
+	} else if (dew_drink < 5) {
+		mes "[Memo]";
+		mes "Então, o que o Lero disse?";
+		next;
+		mes "[Memo]";
+		mes "... ... ... ...";
+		emotion ET_THINK;
+		next;
+		mes "[Memo]";
+		mes "Você não descobriu o que aconteceu?";
+		next;
+		mes "[Memo]";
+		mes "Encontre o melhor mestre de óleo. O nome dele é ^0000FFLero^000000.";
+		close;
+	} else if (dew_drink == 5) {
+		mes "[Memo]";
+		mes "Então, o que o Lero disse?";
+		next;
+		select("Palm tree... became.");
+		mes "- Você explica a situação ao Sr. Memo -";
+		next;
+		mes "[Memo]";
+		mes "Lero pediu desculpas?";
+		mes "Hmm, tudo bem.";
+		next;
+		mes "[Memo]";
+		mes "Deve ser o ^0000FFPoby^000000. Se ele se machucou, é por isso que não houve nenhuma mensagem. O Lero realmente se importa muito com ele...";
+		next;
+		mes "[Memo]";
+		mes "Ele pode ser problemático, mas, por favor, visite a vila Jaty. Lero precisa terminar o óleo.";
+		next;
+		mes "[Memo]";
+		mes "Se não for isso, espere lá e traga ^FF000030 garrafas de óleo^000000 para mim.";
+		set dew_drink,6;
+		changequest 5040,5041;
+		close;
+	} else if (dew_drink == 6) {
+		mes "[Memo]";
+		mes "Ele pode ser problemático, mas, por favor, visite a vila Jaty. Lero precisa terminar o óleo.";
+		next;
+		mes "[Memo]";
+		mes "Se não for isso, espere lá e traga ^FF000030 garrafas de óleo^000000 para mim.";
+		close;
+	} else if (dew_drink == 7) {
+		if (countitem(6401) < 30) {
+			mes "[Memo]";
+			mes "Oh, eu não lhe disse para trazer 30 garrafas de óleo? Você esqueceu?";
+			next;
+			mes "[Memo]";
+			mes "Volte ao Lero e pegue mais, ele lhe dará mais se o erro foi seu.";
+			close;
+		}
+		mes "[Memo]";
+		mes "Você trouxe o óleo. Bom trabalho, e obrigado.";
+		next;
+		mes "[Memo]";
+		mes "Com licença, mas tenho um assunto urgente para resolver. Você pode esperar um pouco e falar comigo quando eu terminar?";
+		delitem 6401,30; //Palm_O
+		changequest 5042,5043;
+		set dew_drink,8;
+		close;
+	} else if (dew_drink == 8) {
+		if (checkquest(5043,PLAYTIME) == 0) {
+			mes "[Memo]";
+			mes "... ... ...";
+			emotion ET_PROFUSELY_SWEAT;
+			next;
+			mes "- Memo está fabricando um Ark. -";
+			close;
+		} else if (checkquest(5043,PLAYTIME) == -1) {
+			mes "- Há um erro na missão. -";
+			close;
+		}
+		mes "[Memo]";
+		mes "Eu fiz você esperar demais?";
+		next;
+		mes "[Memo]";
+		mes "Minha família fabrica Arks há quatro gerações.";
+		next;
+		mes "[Memo]";
+		mes "Meu avô teve uma vida difícil, já que ele não conseguia muitas vendas boas.";
+		next;
+		mes "[Memo]";
+		mes "O povo da ilha de Dewata não bebe muito no clima quente.";
+		next;
+		mes "[Memo]";
+		mes "Quando eu era jovem, Dewata se desenvolveu como uma atração turística e foi aí que o Ark de ^FF00FFpacote turístico^000000 começou a vender bem.";
+		next;
+		mes "[Memo]";
+		mes "Líquido bom precisa de óleo fresco. Eu consegui fabricar líquido por dez anos e entregá-lo todo na hora certa.";
+		next;
+		mes "[Memo]";
+		mes "Como o óleo de hoje não chegou na hora, acho que terei dificuldades.";
+		next;
+		mes "[Memo]";
+		mes "Você me ajudou a fazer o líquido corretamente.";
+		next;
+		mes "[Memo]";
+		mes "Este provérbio ^0000FF'Mengatakan mudah, mengerjakan susah.'^000000 significa que é fácil dizer algo, mas difícil fazer qualquer coisa.";
+		next;
+		mes "[Memo]";
+		mes "Em outras palavras, é fácil dizer que ajudaremos os outros, mas é difícil realizar a ação.";
+		next;
+		emotion ET_THANKS;
+		mes "[Memo]";
+		mes "Você realmente fez um ótimo trabalho. Gosto de você porque você é diferente dos jovens de hoje.";
+		changequest 5043,5044;
+		set dew_drink,10;
+		getexp 50000,10000;
+		getitem 617,1; //Old_Violet_Box
+		next;
+		mes "[Memo]";
+		mes "Você me ajudará com meu trabalho de vez em quando?";
+		mes "Eu lhe pagarei pelo que fizer por mim.";
+		close;
+	} else if (dew_drink == 10) {
+		for(set .@i,0; .@i<7; set .@i,.@i+1)
+			if (checkquest(5045+.@i) > -1)
+				set .@j, .@j | (1<<.@i);
+		if (.@j == 0) {
+			mes "[Memo]";
+			mes strcharinfo(0)+", to what do I owe the pleasure?";
+			next;
+			switch(select("Just came by to say hello.:I will help you.")) {
+			case 1:
+				mes "[Memo]";
+				mes "Suponho que você esteja ocupado.";
+				mes "Se possível, você pegaria o óleo com o Lero? Eu agradeceria...";
+				close;
+			case 2:
+				mes "[Memo]";
+				mes "Obrigado. Eu sei que você está ocupado e que me ajudar pode ser uma tarefa árdua.";
+				next;
+				mes "[Memo]";
+				mes "Você pode ajudar o Lero e trazer de volta o óleo de palma...?";
+				setquest 5045;
+				close;
+			}
+		} else if ((.@j & 1) || (.@j & 2) || (.@j & 8) || (.@j & 32)) {
+			mes "[Memo]";
+			mes "Você pode ajudar o Lero e trazer de volta o óleo de palma...?";
+			close;
+		} else if ((.@j & 4) || (.@j & 16) || (.@j & 64)) {
+
+			// .@i[]: <required amount>,<quest ID>,<reward amount>
+			if (.@j & 4)
+				setarray .@i[0],10,5047,1;
+			else if (.@j & 16)
+				setarray .@i[0],15,5049,2;
+			else
+				setarray .@i[0],20,5051,3;
+
+			if (countitem(6401) < .@i[0]) {
+				mes "[Memo]";
+				mes "Você não trouxe óleo suficiente.";
+				next;
+				mes "... ... ... ...";
+				next;
+				mes "[Memo]";
+				mes "Poby me deve algumas coisas, ele lhe dará um pouco.";
+				close;
+			}
+			mes "[Memo]";
+			mes "Oh, você trouxe o óleo, bom trabalho.";
+			next;
+			mes "[Memo]";
+			mes "Você deve ter passado por dificuldades para trazer o óleo, então tome esta bebida.";
+			delitem 6401,.@i[0]; //Palm_O
+			erasequest .@i[1];
+			setquest 5044;
+			getitem 11534,.@i[2]; //Coco_Juice
+			next;
+			switch(rand(4)) {
+			case 0:
+				mes "[Memo]";
+				mes "Ark é famoso entre os turistas, um cara comprou muitas garrafas sozinho.";
+				next;
+				mes "[Memo]";
+				mes "Preocupado que ele vá beber sozinho? Beber demais sempre se torna venenoso.";
+				break;
+			case 1:
+				mes "[Memo]";
+				mes "O sol sempre nasce no Leste. A famosa preguiça acorda cedo de manhã.";
+				next;
+				mes "[Memo]";
+				mes "Será que ele encara a realidade? Ele é bom, mas preguiçoso.";
+				break;
+			case 2:
+				mes "[Memo]";
+				mes "O primeiro golpe é metade da batalha.";
+				next;
+				mes "[Memo]";
+				mes "Eu acho que você está destinado a fazer grandes coisas.";
+				break;
+			case 3:
+				mes "[Memo]";
+				mes "Há um homem dizendo para soprar quente e frio, parece que falar é fácil, mas não é.";
+				next;
+				mes "[Memo]";
+				mes "Eu acredito que você cumprirá sua promessa.";
+				break;
+			}
+			next;
+			mes "[Memo]";
+			mes "Eu quero que você me ajude desta vez.";
+			next;
+			mes "[Memo]";
+			mes "Poby ainda está com dores nas costas e levará alguns dias para ele se recuperar.";
+			close;
+		}
+	} else { // Should never happen.
+		mes "[Memo]";
+		mes "A ilha de Dewata está sempre cheia, mas hoje está quieta.";
+		close;
+	}
+}
+
+dew_fild01,114,275,4	script	Lero#dew_drink	536,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 5000) {
+		mes "[Lero]";
+		mes "Você está carregando coisas demais...";
+		close;
+	}
+	if (dew_drink == 1) {
+		mes "[Lero]";
+		mes "Oh não! Tenho tantos pedidos e estou ficando sem ingredientes.";
+		mes "Ainda não? O que está acontecendo, Poby? Onde ele foi?";
+		emotion ET_FRET;
+		next;
+		select("Excuse me, but are you Lero?");
+		mes "[Lero]";
+		mes "Quando o Poby voltar aqui, vou dar uma surra nele que ele nunca vai esquecer!";
+		emotion ET_ANGER;
+		next;
+		mes "- Lero parece bem irritado com alguém e ignora você -";
+		next;
+		mes "[Lero]";
+		mes "Ops. Quem é você?";
+		emotion ET_QUESTION;
+		next;
+		select("Memo sent me here.");
+		mes "[Lero]";
+		mes "Ah, é verdade! Eu esqueci do Memo porque os trabalhadores que colhem nozes ainda não vieram. Desculpe.";
+		next;
+		mes "[Lero]";
+		mes "Para fazer óleos de palma frescos, preciso de Fruto de Óleo de Palma fresco. Então poderei obter mais óleo fresco de seu fruto fresco.";
+		next;
+		mes "[Lero]";
+		mes "Entre nós, o Sr. Memo é tão exigente que não usará nenhum óleo que não seja fresco.";
+		next;
+		mes "[Lero]";
+		mes "Para fazer óleo fresco, ele sempre envia os trabalhadores para a floresta de palmeiras, mas... os caras enviados ao amanhecer ainda não voltaram.";
+		next;
+		mes "[Lero]";
+		mes "Primeiro, pensei que ele estivesse com preguiça e isso me deixou muito inquieto.";
+		mes "Você pode encontrar os trabalhadores na floresta de palmeiras?";
+		next;
+		select("Yes, I will find them.");
+		mes "[Lero]";
+		mes "Muito obrigado.";
+		mes "Encontre o Poby.";
+		next;
+		mes "[Lero]";
+		mes "Poby pode estar na ^0000FFFloresta de Palmeiras^000000. A colheita é melhor na parte sul da floresta.";
+		set dew_drink,2;
+		changequest 5035,5036;
+		close;
+	} else if (dew_drink == 2) {
+		mes "[Lero]";
+		mes "Você encontrou o Poby?";
+		emotion ET_QUESTION;
+		next;
+		mes "[Lero]";
+		mes "... ... ...";
+		next;
+		mes "[Lero]";
+		mes "Oh, você ainda não visitou o leste da ^0000FFFloresta de Palmeiras^000000. Estou bem preocupado.";
+		close;
+	} else if (dew_drink == 3) {
+		mes "[Lero]";
+		mes "Você voltou... e... Poby...";
+		mes "Como está o Poby?";
+		emotion ET_QUESTION;
+		next;
+		select("Poby.....");
+		mes "[Lero]";
+		mes "Ah! Eu não sabia disso. Eu sempre digo ao Poby ^0000FF'Kemarau setahun rusak sehari.'^000000";
+		next;
+		mes "[Lero]";
+		mes "Ele subiu na árvore sem nenhum equipamento de segurança, então ele pode ter caído e se ferido.";
+		next;
+		mes "[Lero]";
+		mes "Hmm... Desculpe, não pude obter o Óleo de Palma agora.";
+		next;
+		mes "[Lero]";
+		mes "Você vai entregar a mensagem ao Sr. Memo de que é impossível obter o óleo devido à falta de ingredientes?";
+		mes "Nenhum artesão pode criar nada sem ingredientes.";
+		next;
+		select("Why don't I get the ingredients?");
+		mes "[Lero]";
+		mes "Ah, essa pode ser uma boa maneira, mas será difícil colher nozes como iniciante.";
+		next;
+		mes "[Lero]";
+		mes "Hmm!!!";
+		mes "Tenho uma boa ideia.";
+		next;
+		mes "[Lero]";
+		mes "Você pode perguntar ao Poby sobre o melhor método de colher nozes onde você o encontrou na floresta. Ele deve ser capaz de lhe ensinar a técnica.";
+		set dew_drink,4;
+		changequest 5037,5038;
+		next;
+		mes "[Lero]";
+		mes "Embora ele seja preguiçoso e um pouco descuidado, ele é o melhor trabalhador.";
+		close;
+	} else if (dew_drink == 4) {
+		if (checkquest(5038) > -1) {
+			mes "[Lero]";
+			mes "Você pode perguntar ao Poby sobre o melhor método de colher nozes onde você o encontrou na floresta. Ele deve ser capaz de lhe ensinar a técnica.";
+			next;
+			mes "[Lero]";
+			mes "Embora ele seja preguiçoso e um pouco descuidado, ele é o melhor trabalhador.";
+			close;
+		} else if (checkquest(5039) > -1) {
+			if (countitem(6402) < 60) {
+				mes "[Lero]";
+				mes "Você já colheu as nozes?";
+				next;
+				mes "[Lero]";
+				mes "Um, dois...";
+				next;
+				mes "[Lero]";
+				mes "Este não é o número que eu encomendei ao Poby.";
+				next;
+				mes "[Lero]";
+				mes "Vai ser difícil se atrasar mais, então apresse-se e traga-me 60.";
+				close;
+			}
+			mes "[Lero]";
+			mes "Um, dois, três, quatro, . . . .";
+			next;
+			mes "[Lero]";
+			mes "60 unidades de nozes, exatamente. Vou prensar o óleo agora mesmo.";
+			next;
+			emotion ET_SORRY;
+			mes "[Lero]";
+			mes "Leva algum tempo, então volte ao Sr. Memo e conte a ele a situação. Também diga a ele que sinto muito pelo atraso.";
+			delitem 6402,60; //Oil_Palm_F
+			set dew_drink,5;
+			changequest 5039,5040;
+			close;
+		}
+	} else if (dew_drink == 5) {
+		mes "[Lero]";
+		mes "Leva algum tempo, então volte ao Sr. Memo e conte a ele a situação. Também diga a ele que sinto muito pelo atraso.";
+		close;
+	} else if (dew_drink == 6) {
+		if (checkweight(1201,1) == 0 || MaxWeight - Weight < 15000) {
+			mes "[Lero]";
+			mes "Você está carregando coisas demais agora para continuar.";
+			close;
+		}
+		mes "[Lero]";
+		mes "Você veio na hora certa. Acabei de terminar de fazer o óleo de palmeira.";
+		next;
+		mes "[Lero]";
+		mes "É mais pesado do que você pode imaginar, então tome cuidado ao carregá-lo.";
+		next;
+		emotion ET_SORRY;
+		mes "[Lero]";
+		mes "Oh, diga ao Sr. Memo que sinto muito pela entrega atrasada, e explique que não foi minha culpa.";
+		changequest 5041,5042;
+		set dew_drink,7;
+		getitem 6401,30; //Palm_O
+		close;
+	} else if (dew_drink == 7) {
+		if (checkquest(5042) > -1 && countitem(6401) > 29) {
+			mes "[Lero]";
+			mes "É mais pesado do que você pode imaginar, então tome cuidado ao carregá-lo.";
+			next;
+			emotion ET_SORRY;
+			mes "[Lero]";
+			mes "Oh, diga ao Sr. Memo que sinto muito pela entrega atrasada, e explique que não foi minha culpa.";
+			close;
+		} else {
+			set .@num, 30 - countitem(6401);
+			if (checkweight(6401,.@num) == 0) {
+				mes "[Lero]";
+				mes "Você está carregando coisas demais agora para continuar.";
+				close;
+			}
+			mes "[Lero]";
+			mes "Eu me lembro claramente de ter te dado 30 garrafas de óleo de palmeira, você perdeu tudo?";
+			next;
+			select("Sorry, it's my fault...");
+			emotion ET_FRET;
+			mes "[Lero]";
+			mes "Este é o óleo de palmeira que estava em falta. Por favor, tenha cuidado. Foi muito difícil conseguir isso...";
+			getitem 6401,.@num; //Palm_O
+			close;
+		}
+	} else if (dew_drink == 8) {
+		mes "[Lero]";
+		mes "O que o Sr. Memo disse?";
+		emotion ET_QUESTION;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		emotion ET_BLABLA, playerattached();
+		mes "... ... ... ...";
+		next;
+		mes "[Lero]";
+		mes "Ah... eu entendo...";
+		emotion ET_OK;
+		close;
+	} else if (dew_drink == 10) {
+		for(set .@i,0; .@i<7; set .@i,.@i+1)
+			if (checkquest(5045+.@i) > -1)
+				set .@j, .@j | (1<<.@i);
+		if (.@j == 0) {
+			mes "[Lero]";
+			mes "O que aconteceu? Eu não recebi um memorando do Sr. Memo de que ele ia enviar alguém aqui.";
+			close;
+		} else if (.@j & 1) {
+			mes "[Lero]";
+			mes "Ei, eu estive esperando por você. Eu não sabia que o ferimento do Poby tornaria minha vida tão difícil.";
+			next;
+			set .@quest,rand(3);
+			mes "[Lero]";
+			mes "I'm ashamed to ask you this, but can you bring ^0000FF"+(20+(.@quest*10))+" pieces of oil palm nuts^000000 please?";
+			changequest 5045,5046+(.@quest*2);
+			next;
+			mes "[Lero]";
+			mes "Assim que você trouxer as nozes de palma, o Sr. Memo as trocará por óleo.";
+			close;
+		} else if ((.@j & 2) || (.@j & 8) || (.@j & 32)) {
+			
+			// .@i[]: <required amount>,<quest ID>,<reward amount>,<free weight>
+			if (.@j & 2)
+				setarray .@i[0],20,5046,10,5000;
+			else if (.@j & 8)
+				setarray .@i[0],30,5048,15,7500;
+			else
+				setarray .@i[0],40,5050,20,10000;
+
+			if (countitem(6402) < .@i[0]) {
+				mes "[Lero]";
+				mes "Once you bring the "+.@i[0]+" pieces of oil palm nuts, Mr. Memo will exchange them with oil.";
+				close;
+			}
+			if (checkweight(1201,1) == 0 || MaxWeight - Weight < .@i[3]) {
+				mes "[Lero]";
+				mes "Você está carregando peso demais no momento para continuar.";
+				close;
+			}
+			mes "[Lero]";
+			mes "Um, dois, três, quatro, . . . .";
+			next;
+			mes "[Lero]";
+			mes "Exactly "+.@i[0]+" pieces of oil palm nuts. Let you exchange them with oil right now.";
+			changequest .@i[1], .@i[1]+1;
+			delitem 6402,.@i[0]; //Oil_Palm_F
+			getitem 6401,.@i[2]; //Palm_O
+			next;
+			mes "[Lero]";
+			mes "Como eu disse antes, é mais pesado do que você imagina, então tenha cuidado ao carregar isso.";
+			close;
+		} else if ((.@j & 4) || (.@j & 16) || (.@j & 64)) {
+			mes "[Lero]";
+			mes "Como eu disse antes, é mais pesado do que você imagina, então tenha cuidado ao carregar isso.";
+			close;
+		}
+	}
+	mes "[Lero]";
+	mes "O que está acontecendo com o Poby...? Por que ele ainda não voltou...?";
+	next;
+	mes "- Parece que ele está esperando por alguém -";
+	close;
+}
+
+dew_fild01,259,48,4	script	Poby#dew_drink	538,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 500) {
+		if (dew_drink > 0) {
+			mes "[Poby]";
+			mes "Por que você está carregando tanta coisa?";
+			close;
+		} else {
+			mes "[Poby]";
+			mes "Você vai se arrepender se continuar carregando tanto peso.";
+			close;
+		}
+	}
+	if (dew_drink == 2) {
+		mes "[Poby]";
+		mes "Ah~ dor nas costas...";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		select("Are you Poby?");
+		mes "[Poby]";
+		mes "Quem é você?";
+		next;
+		mes "[Poby]";
+		mes "Eu não conheço você, mas";
+		mes "você é meu fã?";
+		mes "Eu sou Poby, o melhor caçador de frutas da tribo Jaty.";
+		next;
+		mes "[Poby]";
+		mes "Veio aqui pedir um autógrafo?";
+		emotion ET_QUESTION;
+		next;
+		select("Lero made me come here.");
+		mes "[Poby]";
+		mes "Ah! O Sr. Lero mandou você vir aqui. Eu não consigo me mover porque machuquei minhas costas subindo em uma árvore.";
+		next;
+		mes "[Poby]";
+		mes "!#@$*&%!@$&!$%!$#*&!@#$";
+		emotion ET_CRY;
+		next;
+		mes "[Poby]";
+		mes "E eu nunca tive uma namorada...";
+		next;
+		mes "[Poby]";
+		mes "!#@$*&%!@$&!$%!$#*&!@#$";
+		emotion ET_CRY;
+		next;
+		mes "[Poby]";
+		mes "Ah! Desculpe. Diga ao Sr. Lero que eu voltarei se conseguir um jeito de me mover.";
+		changequest 5036,5037;
+		set dew_drink,3;
+		next;
+		mes "[Poby]";
+		mes "Eu não consigo me mexer de jeito nenhum por causa dessa dor nas costas...";
+		close;
+	} else if (dew_drink == 3) {
+		mes "[Poby]";
+		mes "Ah! Desculpe. Diga ao Sr. Lero que eu voltarei se conseguir um jeito de me mover.";
+		next;
+		mes "[Poby]";
+		mes "Eu não consigo me mexer de jeito nenhum por causa dessa dor nas costas...";
+		emotion ET_PROFUSELY_SWEAT;
+		close;
+	} else if (dew_drink == 4) {
+		if (checkquest(5039) > -1) {
+			if (countitem(6402) > 59) { // Oil_Palm_F
+				mes "[Poby]";
+				mes "Você pegou todas as frutas. Leve-as para o Sr. Lero.";
+				close;
+			} else {
+				mes "[Poby]";
+				mes "É mais fácil para iniciantes como você chacoalhar ou chutar a árvore.";
+				next;
+				mes "[Poby]";
+				mes "Pode ser perigoso, então sempre use um ^0000FFCapacete de Segurança^000000.";
+				next;
+				mes "[Poby]";
+				mes "Colete ^FF000060 ^0000FFFruto de Palma de Óleo^000000 e leve-os para o Sr. Lero.";
+				close;
+			}
+		}
+		mes "[Poby]";
+		mes "Ah~ dor nas costas...";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		mes "[Poby]";
+		mes "Oh!! Você é... Deixa eu adivinhar...";
+		next;
+		mes "[Poby]";
+		mes "... ... ... ...";
+		emotion ET_THINK;
+		next;
+		mes "[Poby]";
+		mes "...você voltou! Você planeja colher ^0000FFFruto de Palma de Óleo^000000 no meu lugar, certo?";
+		next;
+		mes "[Poby]";
+		mes "É difícil para iniciantes colherem a fruta como eu faço. Não, é impossível.";
+		next;
+		mes "[Poby]";
+		mes "Os mestres costumam subir na árvore para colher a fruta, mas você é um iniciante...";
+		next;
+		mes "[Poby]";
+		mes "É mais fácil para iniciantes chacoalhar ou chutar a árvore. Pode ser perigoso, então lembre-se de usar um ^0000FFCapacete de Segurança^000000.";
+		changequest 5038,5039;
+		next;
+		mes "[Poby]";
+		mes "Ok! Colete ^FF000060^0000FF ^0000FFFruto de Palma de Óleo^000000 e leve essa quantidade para o Sr. Lero.";
+		emotion ET_SURPRISE;
+		close;
+	} else if (dew_drink == 10) {
+		mes "[Poby]";
+		mes "Oh! "+strcharinfo(0)+", we meet again. What's going on?";
+
+		if (checkquest(5047) > -1)
+			set .@count,10;
+		else if (checkquest(5049) > -1)
+			set .@count,15;
+		else if (checkquest(5051) > -1)
+			set .@count,20;
+		if (.@count) {
+			if (countitem(6401) >= .@count) {
+				// Custom translation
+				mes "[Poby]";
+				mes "Bom trabalho! Tenha cuidado ao entregá-las~";
+				close;
+			}
+			set .@new_count, .@count-countitem(6401);
+			mes "- Você explica a situação. -";
+			next;
+			mes "[Poby]";
+			mes "Certo... Eu devia ao avô do Memo. Espere, eu escondi um pouco de óleo por aqui.";
+			next;
+			if (checkweight(6401,.@new_count) == 0) {
+				mes "[Poby]";
+				mes "Eu tenho um pouco, mas parece que você já está carregando muita coisa.";
+				close;
+			}
+			mes "- remexendo... remexendo... -";
+			next;
+			mes "[Poby]";
+			mes "Ah! Aqui está outro. Tome cuidado para não perdê-lo de novo. E mantenha segredo sobre isso com o Sr. Lero.";
+			getitem 6401,.@new_count; //Palm_O
+			next;
+			mes "[Poby]";
+			mes "Please~ "+strcharinfo(0)+".";
+			close;
+		}
+		next;
+		switch(select("Why'd you come here?:I want to know how to get fruit.")) {
+		case 1:
+			mes "[Poby]";
+			mes "Estou dando uma volta porque acho que isso fará minha dor nas costas diminuir.";
+			close;
+		case 2:
+			mes "[Poby]";
+			mes "É mais fácil para iniciantes chacoalhar ou chutar a árvore.";
+			next;
+			mes "[Poby]";
+			mes "Pode ser perigoso, então sempre use um ^0000FFCapacete de Segurança^000000.";
+			close;
+		}
+	}
+	mes "[Poby]";
+	mes "Ah~ essa dor nas costas maldita está me matando.";
+	emotion ET_CRY;
+	close;
+}
+
+-	script	::DewataPalm	-1,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 5000) {
+		mes "Você está carregando peso demais.";
+		close;
+	}
+
+	if (checkquest(5039) > -1) set .@count,60;
+	else if (checkquest(5046) > -1) set .@count,20;
+	else if (checkquest(5048) > -1) set .@count,30;
+	else if (checkquest(5050) > -1) set .@count,40;
+	if (.@count == 0) {
+		mes "Há uma palmeira";
+		mes "de frente para o vento fresco.";
+		close;
+	} else if (countitem(6402) >= .@count) {
+		mes "A palmeira nega";
+		mes "suas mãos gananciosas.";
+		close;
+	}
+
+	if (isequipped(5009)) { // Safety_Helmet
+		mes "Há uma palmeira com frutas e flores penduradas em seus galhos.";
+		mes "Certifique-se de usar um Capacete de Segurança ao tentar colher a fruta.";
+	} else {
+		mes "Há uma palmeira.";
+		mes "Você pode chutá-la ou chacoalhá-la.";
+		mes "O que você deseja fazer?";
+	}
+	next;
+	switch(select("Shake the tree:Kick the tree")) {
+	case 1:
+		specialeffect EF_HITLINE2;
+		set .@message$, "As you shake the palm tree...";
+		mes "Você chacoalha a palmeira.";
+		break;
+	case 2:
+		specialeffect EF_BASH;
+		set .@message$, "As you give the palm tree a quick kick to its proverbial shin...";
+		mes "Você chuta a palmeira rapidamente com toda a sua força.";
+		break;
+	}
+	next;
+	mes "... ... ...";
+	next;
+	mes .@message$;
+	switch(rand(1,20)) {
+	case 1:
+	case 2:
+	case 3:
+		mes "uma ^FF0000Pedra^000000 cai.";
+		getitem 7049,1; //Stone
+		break;
+	case 6:
+	case 7:
+		mes "uma ^FF0000Folha Grande^000000 cai.";
+		getitem 7198,1; //Great_Leaf
+		break;
+	case 8:
+	case 9:
+		mes "uma ^FF0000Pele de Minhoca^000000 cai.";
+		getitem 955,1; //Worm_Peelings
+		break;
+	case 4:
+	case 5:
+	case 11:
+	case 12:
+	case 13:
+		mes "um ^0000FFFruto de Palma de Óleo^000000 cai.";
+		getitem 6402,1; //Oil_Palm_F
+		break;
+	case 14:
+	case 16:
+	case 20:
+		specialeffect2 EF_BASH;
+		if (isequipped(5009)) { //Safety_Helmet
+			mes "algo cai na sua cabeça, mas como você está usando um Capacete de Segurança, você está são e salvo.";
+			emotion ET_BEST, playerattached();
+			break;
+		} else {
+			mes "something smashes down on your head, right where that soft spot is, $#*@! that's a one in a million shot.";
+			percentheal -30,0;
+			close2;
+			donpcevent strnpcinfo(0)+"::OnDisable";
+			warp "dew_fild01",371,211;
+			end;
+		}
+	case 10:
+	case 17:
+		if (countitem(6402) <= .@count-5) {
+			mes "toneladas de ^0000FFFruto de Palma de Óleo^000000 despencam da árvore.";
+			getitem 6402,1; //Oil_Palm_F
+			getitem 6402,1; //Oil_Palm_F
+			getitem 6402,1; //Oil_Palm_F
+			getitem 6402,1; //Oil_Palm_F
+			getitem 6402,1; //Oil_Palm_F
+		} else {
+			mes "um ^0000FFFruto de Palma de Óleo^000000 cai.";
+			getitem 6402,1; //Oil_Palm_F
+		}
+		break;
+	default:
+		mes "mas nada acontece.";
+		break;
+	}
+	close2;
+	donpcevent strnpcinfo(0)+"::OnDisable";
+	end;
+OnEnable:
+	enablenpc();
+	stopnpctimer;
+	end;
+OnDisable:
+	disablenpc();
+	initnpctimer;
+	end;
+OnTimer60000:
+OnTimer180000:
+OnTimer120000:
+OnTimer240000:
+	if(rand(2))
+		donpcevent strnpcinfo(0)+"::OnEnable";
+	end;
+OnTimer300000:
+	donpcevent strnpcinfo(0)+"::OnEnable";
+	end;
+}
+dew_fild01,247,62,0	duplicate(DewataPalm)	Palm Tree#drink01	844
+dew_fild01,276,73,0	duplicate(DewataPalm)	Palm Tree#drink02	844
+dew_fild01,278,63,0	duplicate(DewataPalm)	Palm Tree#drink03	844
+dew_fild01,301,88,0	duplicate(DewataPalm)	Palm Tree#drink04	844
+dew_fild01,314,72,0	duplicate(DewataPalm)	Palm Tree#drink05	844
+dew_fild01,320,68,0	duplicate(DewataPalm)	Palm Tree#drink06	844
+dew_fild01,334,107,0	duplicate(DewataPalm)	Palm Tree#drink07	844
+dew_fild01,345,88,0	duplicate(DewataPalm)	Palm Tree#drink08	844
+dew_fild01,344,71,0	duplicate(DewataPalm)	Palm Tree#drink09	844
+dew_fild01,358,93,0	duplicate(DewataPalm)	Palm Tree#drink10	844
+dew_fild01,338,121,0	duplicate(DewataPalm)	Palm Tree#drink11	844
+dew_fild01,358,136,0	duplicate(DewataPalm)	Palm Tree#drink12	844
+dew_fild01,326,147,0	duplicate(DewataPalm)	Palm Tree#drink13	844
+dew_fild01,307,146,0	duplicate(DewataPalm)	Palm Tree#drink14	844
+dew_fild01,325,159,0	duplicate(DewataPalm)	Palm Tree#drink15	844
+dew_fild01,339,163,0	duplicate(DewataPalm)	Palm Tree#drink16	844
+dew_fild01,346,193,0	duplicate(DewataPalm)	Palm Tree#drink17	844
+dew_fild01,355,193,0	duplicate(DewataPalm)	Palm Tree#drink18	844
+dew_fild01,363,219,0	duplicate(DewataPalm)	Palm Tree#drink19	844
+dew_fild01,341,261,0	duplicate(DewataPalm)	Palm Tree#drink20	844
+dew_fild01,289,302,0	duplicate(DewataPalm)	Palm Tree#drink21	844
+dew_fild01,70,196,0	duplicate(DewataPalm)	Palm Tree#drink22	844
+dew_fild01,97,145,0	duplicate(DewataPalm)	Palm Tree#drink23	844
+dew_fild01,119,42,0	duplicate(DewataPalm)	Palm Tree#drink24	844
+dew_fild01,188,72,0	duplicate(DewataPalm)	Palm Tree#drink25	844
+dew_fild01,238,80,0	duplicate(DewataPalm)	Palm Tree#drink26	844
+dew_fild01,252,97,0	duplicate(DewataPalm)	Palm Tree#drink27	844
+dew_fild01,256,98,0	duplicate(DewataPalm)	Palm Tree#drink28	844
+dew_fild01,279,93,0	duplicate(DewataPalm)	Palm Tree#drink29	844
+dew_fild01,299,107,0	duplicate(DewataPalm)	Palm Tree#drink30	844
+dew_fild01,355,113,0	duplicate(DewataPalm)	Palm Tree#drink31	844
+dew_fild01,278,136,0	duplicate(DewataPalm)	Palm Tree#drink32	844
+dew_fild01,258,128,0	duplicate(DewataPalm)	Palm Tree#drink33	844
+dew_fild01,240,125,0	duplicate(DewataPalm)	Palm Tree#drink34	844
+dew_fild01,225,117,0	duplicate(DewataPalm)	Palm Tree#drink35	844
+dew_fild01,219,121,0	duplicate(DewataPalm)	Palm Tree#drink36	844
+dew_fild01,226,99,0	duplicate(DewataPalm)	Palm Tree#drink37	844
+dew_fild01,209,137,0	duplicate(DewataPalm)	Palm Tree#drink38	844
+dew_fild01,206,156,0	duplicate(DewataPalm)	Palm Tree#drink39	844
+dew_fild01,209,201,0	duplicate(DewataPalm)	Palm Tree#drink40	844
+
+// Traditional Weapon Quest :: dewata_weapon
+//============================================================
+dew_fild01,127,240,4	script	Gatti#weapon	813,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 10000) {
+		mes "- Espere aí!! -";
+		mes "- Você está carregando itens demais e não tem espaço no inventário para receber as recompensas. -";
+		mes "- Por favor, libere espaço no inventário e volte para participar deste desafio. -";
+		close;
+	}
+	if (BaseLevel < 60) {
+		mes "[Gatti]";
+		mes "Onde diabos eu estou? Todos aqui estão me evitando.";
+		close;
+	}
+	if (dew_weapon == 0) {
+		mes "[Gatti]";
+		mes "Hey there, young "+((Sex == SEX_MALE)?"man":"lady")+"~ Are you from around here?";
+		next;
+		select("No, I'm not.");
+		mes "[Gatti]";
+		mes "Eu gostaria de lhe fazer";
+		mes "uma pergunta.";
+		mes "Que lugar é este?";
+		next;
+		mes "- Ele parece estar perguntando o nome da Ilha. -";
+		next;
+		input .@island_name$;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "It's called "+ .@island_name$ +". What's wrong?";
+		next;
+		if (.@island_name$ == "Dewata Island") {
+			mes "[Gatti]";
+			mes "Esta é a Ilha de Dewata? Você tem certeza de que esta é a Ilha de Dewata?";
+			next;
+			mes "[Gatti]";
+			mes "Hahahahahahahahaha...!!!";
+			next;
+			mes "- O velho começou a rir como um louco depois de ouvir o nome da ilha. Você decide perguntar um pouco mais tarde. -";
+			set dew_weapon,1;
+			close;
+		} else {
+			mes "[Gatti]";
+			mes "Is that so... "+ .@island_name$ +"? "+ .@island_name$ +"... "+ .@island_name$ +"... "+ .@island_name$ +"...";
+			next;
+			mes "- O velho deu um suspiro profundo de resignação e continuou a falar. -";
+			next;
+			mes "[Gatti]";
+			mes "Droga... Meu plano foi arruinado. Investi toda a minha fortuna para chegar aqui, mas falhei. Não posso fazer nada agora, meu barco foi destruído.";
+			next;
+			mes "- O velho começa a chorar. -";
+			mes "- Sentindo-se constrangido, você se retira rapidamente. -";
+			close;
+		}
+	} else if (dew_weapon == 1) {
+		select("Well... Sir...");
+		mes "[Gatti]";
+		mes "Tosse... tosse...";
+		next;
+		mes "[Gatti]";
+		mes "Oh... Desculpe~ Desculpe. Eu estava tão feliz por ter finalmente chegado à Ilha de Dewata.";
+		next;
+		mes "[Gatti]";
+		mes "Esta não é uma história curta. Ah! Primeiro preciso me apresentar. Sou o Mestre Ferreiro Gatti, e também um Aventureiro.";
+		next;
+		mes "[Gatti]";
+		mes "Encontrei um projeto de arma misterioso, mas não me lembro exatamente de quando o adquiri.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Projeto de Arma?";
+		next;
+		mes "[Gatti]";
+		mes "Sim! Viajei por toda parte para encontrar os materiais para a arma, mas...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Mas?";
+		next;
+		mes "[Gatti]";
+		mes "Não consegui encontrar o último material em lugar nenhum.";
+		next;
+		mes "[Gatti]";
+		mes "Eu estava prestes a desistir, mas havia um aviso no projeto dizendo que ele poderia ser encontrado na Ilha de Dewata.";
+		next;
+		mes "[Gatti]";
+		mes "Não sei por que alguém colocou algo tão importante em letras miúdas. De qualquer forma, depois de ler aquilo, investi toda a minha fortuna para encontrar esta ilha.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Oh... É mesmo?";
+		next;
+		mes "[Gatti]";
+		mes "Esta ilha é estranha. Cheguei aqui há uma semana e todos aqui têm me evitado.";
+		next;
+		mes "[Gatti]";
+		mes "A semana passada foi tão difícil, mas você me salvou ao me dizer que esta é a Ilha de Dewata.";
+		mes "Obrigado por me dizer, e obrigado por passar por aqui exatamente no momento certo.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Ah... Sem problemas.";
+		next;
+		mes "[Gatti]";
+		mes "Bem... Houve um pequeno problema com o meu navio sendo destruído, mas isso não vem ao caso agora.";
+		next;
+		mes "[Gatti]";
+		mes "Agora que descobri que esta é a Ilha de Dewata, devo encontrar o material para esta grande arma.";
+		next;
+		mes "[Gatti]";
+		mes "... ... ... ... ...";
+		next;
+		if (dew_legend < 9) {
+			mes "[Gatti]";
+			mes "Ah! O material que estou procurando é Couro de Comodo.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Couro de Comodo?";
+			next;
+			mes "[Gatti]";
+			mes "Sim. No projeto, está escrito que apenas os poucos nativos reconhecidos de Dewata são dignos o suficiente para lutar contra o Dragão de Comodo.";
+			next;
+			mes "[Gatti]";
+			mes "Para lutar contra o Dragão de Comodo, você precisa ser reconhecido pelos nativos. Suponho que será difícil conseguir esse reconhecimento.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Com certeza, deve ser...";
+			next;
+			mes "[Gatti]";
+			mes "Deixe-me pedir um favor. Se você conseguir o reconhecimento primeiro, por favor, não se esqueça de me visitar.";
+			close2;
+			setquest 5052;
+			set dew_weapon,2;
+			end;
+		}
+		mes "[Gatti]";
+		if(Sex == SEX_FEMALE)
+			mes "Senhorita, você possui uma energia forte.";
+		else
+			mes "Você possui uma energia forte.";
+		mes "Você viu um monstro chamado Dragão de Comodo nesta ilha?";
+		next;
+		select("Yes, I have.");
+		mes "[Gatti]";
+		mes "Oh! Sério?";
+		mes "Tenho muita sorte de ter te encontrado. Tudo está indo muito bem.";
+		next;
+		mes "[Gatti]";
+		mes "Você poderia me ajudar, por favor?";
+		next;
+		mes "[Gatti]";
+		mes "O material de arma que eu estava procurando é ^0000FFCouro de Comodo^000000. Traga-me 100 deles e eu farei uma arma chique para você.";
+		setquest 5053;
+		set dew_weapon,3;
+		next;
+		mes "[Gatti]";
+		mes "Ouvi dizer que os Dragões de Comodo são monstros muito poderosos. Por favor, tome cuidado.";
+		close;
+	} else if (dew_weapon == 2) {
+		if (dew_legend < 9) {
+			mes "[Gatti]";
+			mes "Você foi reconhecida pelos nativos?";
+			next;
+			mes "[Gatti]";
+			mes "... .... ...";
+			next;
+			mes "[Gatti]";
+			mes "Imagino que ainda não. Estou perguntando por toda parte, mas não consegui encontrar uma maneira de ser reconhecido pelos nativos. Não sei quando poderei terminar de fazer esta arma.";
+			next;
+			mes "[Gatti]";
+			mes "Se você conseguir o reconhecimento antes de mim, por favor, NÃO se esqueça de me visitar.";
+			close;
+		}
+		mes "[Gatti]";
+		mes "Então, você foi reconhecida pelos nativos?";
+		next;
+		mes "[Gatti]";
+		mes "... .... ...";
+		next;
+		mes "[Gatti]";
+		mes "Ah, sim! Finalmente.";
+		if (Sex == SEX_FEMALE)
+			mes "Senhorita, você também possui uma energia forte.";
+		else
+			mes "Você também possui uma energia forte.";
+		mes "Você finalmente conseguiu o reconhecimento dos nativos?";
+		next;
+		select("Yes.");
+		mes "[Gatti]";
+		mes "Oh! Exatamente como eu esperava!";
+		mes "Tive muita sorte de te encontrar. Tudo está indo muito bem.";
+		next;
+		mes "[Gatti]";
+		mes "Sei que não tenho o direito de pedir isso, mas nos encontrarmos assim é o destino...";
+		next;
+		mes "- Gatti resmunga. -";
+		next;
+		mes "[Gatti]";
+		mes "O material de arma que eu tanto desejei é ^0000FFCouro de Comodo^000000. Por favor, consiga 100 deles para mim.";
+		next;
+		mes "[Gatti]";
+		mes "Estou muito ansioso para fazer a arma que está no projeto.";
+		changequest 5052,5053;
+		set dew_weapon,3;
+		next;
+		mes "[Gatti]";
+		mes "Por favor, antes que minha paixão desapareça.";
+		next;
+		mes "[Gatti]";
+		mes "Ah! E o Dragão de Comodo é um monstro muito poderoso, então, por favor, tome cuidado.";
+		close;
+	} else if (dew_weapon == 3) {
+		if (countitem(6403) > 99) {
+			mes "[Gatti]";
+			mes "Pelo jeito que você caminha, você deve ter trazido os 100 Couros de Comodo. Entregue-os para mim.";
+			delitem 6403,100;
+			erasequest 5053;
+			set dew_weapon,4;
+			next;
+			mes "- Gatti retira o Couro de Comodo de você. -";
+			close;
+		} else if (countitem(6403)) {
+			mes "[Gatti]";
+			mes "Então, esse é o Couro de Comodo. Mas não é o suficiente.";
+			next;
+			mes "[Gatti]";
+			mes "Eu sei que estou te pedindo um favor, mas preciso de 100 deles.";
+			close;
+		} else {
+			mes "[Gatti]";
+			mes "Por favor, tome cuidado, porque o Dragão de Comodo é um monstro muito poderoso. E não se esqueça de me trazer 100 Couros de Comodo no seu caminho de volta.";
+			close;
+		}
+	} else if (dew_weapon == 4) {
+		mes "[Gatti]";
+		mes "Oh~ Olhe só para isto. Tão resiliente... Tão macio.";
+		next;
+		mes "[Gatti]";
+		mes "O Couro de Comodo é o melhor material de todos.";
+		next;
+		mes "[Gatti]";
+		mes "Sim, como eu devo processar isso?";
+		next;
+		mes "[Gatti]";
+		mes "Hmm... Assim?";
+		next;
+		mes "[Gatti]";
+		mes "Ou talvez assim? Sim! Esse é o jeito!";
+		next;
+		mes "- O Mestre Ferreiro Gatti está gostando de processar os Couros que você trouxe para fazer a arma. -";
+		mes "- Você deve esperar um pouco. -";
+		set dew_weapon,5;
+		close;
+	} else if (dew_weapon == 5) {
+		mes "["+strcharinfo(0)+"]";
+		mes "Bem... Gatti?";
+		next;
+		mes "[Gatti]";
+		mes "Oh! Desculpe, desculpe! Este couro é tão interessante.";
+		next;
+		mes "[Gatti]";
+		mes "Eu fiz um cabo a partir do couro que você me trouxe.";
+		next;
+		mes "[Gatti]";
+		mes ".... .... .... ....";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Cabo?";
+		next;
+		mes "[Gatti]";
+		mes "Você não sabe o que é um cabo? É assim que chamamos a empunhadura de uma arma.";
+		next;
+		mes "- Gatti mostra algo que parece com a empunhadura de uma arma. -";
+		next;
+		mes "[Gatti]";
+		mes "Tentei fazer conforme está escrito no projeto, mas preciso de mais material.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Sério?";
+		next;
+		mes "[Gatti]";
+		mes "... ... ... ...";
+		next;
+		mes "[Gatti]";
+		mes "Sim... Para ser franco com você, eu estraguei muitos deles tentando coisas diferentes.";
+		next;
+		mes "[Gatti]";
+		mes "Eu sei que é pedir muito, mas você pode me conseguir mais 100 Couros de Comodo, 20 Aços e 10 Oridecons?";
+		next;
+		mes "[Gatti]";
+		mes "Eu vou fazer a melhor arma de todas para você.";
+		setquest 5054;
+		set dew_weapon,6;
+		getitem 6404,1; //Caress_H
+		next;
+		mes "[Gatti]";
+		mes "Oh! Eu quase esqueci. Não se esqueça de trazer o cabo que acabei de fazer para você.";
+		next;
+		mes "[Gatti]";
+		mes "Uma arma precisa ter uma empunhadura.";
+		close;
+	} else if (dew_weapon == 6) {
+		disable_items;
+		mes "[Gatti]";
+		mes "Você já trouxe todo o material?";
+		mes "Você também estava curioso sobre a arma finalizada? Haha.";
+		next;
+		mes "[Gatti]";
+		mes ".... .... ....";
+		next;
+		if (countitem(6403) < 100 || countitem(999) < 20 || countitem(984) < 10 || countitem(6404) < 1) {
+			mes "[Gatti]";
+			mes "Hmm... Preciso de mais desses. Se o meu navio não tivesse naufragado, eu poderia ter feito por conta própria, mas...";
+			next;
+			mes "- Gatti murmura para si mesmo. -";
+			next;
+			mes "[Gatti]";
+			mes "100 Couros de Comodo, 20 Aços e 10 Oridecons é o que eu preciso.";
+			next;
+			mes "[Gatti]";
+			mes "Se você trouxer todos eles, farei a melhor arma de todas.";
+			close;
+		}
+		mes "[Gatti]";
+		mes "Ótimo! Temos o suficiente. Espere um pouco.";
+		next;
+		specialeffect2 EF_REPAIRWEAPON;
+		next;
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		mes "[Gatti]";
+		mes "Terminei de fazer a arma. Esta é chamada de Carícia, de acordo com o projeto.";
+		next;
+		mes "[Gatti]";
+		mes "Eu continuo descobrindo coisas novas quando olho para este projeto.";
+		next;
+		mes "[Gatti]";
+		mes "Agora que aprendi a fazer a arma, peça-me a qualquer momento se precisar dela.";
+		erasequest 5054;
+		set dew_weapon,7;
+		delitem 6403,100; //Comodo_L
+		delitem 999,20; //Steel
+		delitem 984,10; //Oridecon
+		delitem 6404,1; //Caress_H
+		getitem 13067,1; //Caress
+		close;
+	} else if (dew_weapon >= 7) {
+		mes "[Gatti]";
+		mes "You're "+strcharinfo(0)+",";
+		mes "Então, como está a Carícia que eu fiz para você?";
+		switch(select("It's great!:I need another Caress.:Can I make it stronger?")) {
+		case 1:
+			mes "[Gatti]";
+			mes "Sim, sim, claro que é ótima.";
+			mes "Eu fiz essa arma, então ela deve ser boa.";
+			close;
+		case 2:
+			disable_items;
+			if (countitem(6404)) {
+				if (countitem(6403) < 70 || countitem(984) < 10 || countitem(999) < 20 || countitem(6404) < 1) {
+					mes "[Gatti]";
+					mes "Você só tem um Cabo. Você precisará me trazer 10 Oridecons, 20 Aços e 70 Couros de Comodo.";
+					next;
+					mes "[Gatti]";
+					mes "Se você os trouxer, farei uma Carícia novinha em folha.";
+					close;
+				}
+				mes "[Gatti]";
+				mes "Você tem todos os materiais. Espere só um pouco.";
+				next;
+				specialeffect2 EF_REPAIRWEAPON;
+				next;
+				emotion ET_PROFUSELY_SWEAT;
+				next;
+				mes "[Gatti]";
+				mes "Aqui está a Carícia! Peça-me a qualquer momento.";
+				delitem 6403,70; //Comodo_L
+				delitem 999,20; //Steel
+				delitem 984,10; //Oridecon
+				delitem 6404,1; //Caress_H
+				getitem 13067,1; //Caress
+				close;
+			} else {
+				if (countitem(6403) < 50 || countitem(7201) < 1) {
+					mes "[Gatti]";
+					mes "Você quer que eu faça mais uma Carícia para você? Nesse caso, preciso de um Cabo. 50 Couros de Comodo e 1 Tronco. Esses são os itens que preciso para fazer um Cabo.";
+					close;
+				}
+				mes "[Gatti]";
+				mes "Você trouxe o material para o Cabo. Vou fazê-lo agora mesmo.";
+				next;
+				mes "[Gatti]";
+				mes "Coloque isso aqui e processe assim...";
+				next;
+				mes "[Gatti]";
+				mes "Aqui está. Posso fazer uma Carícia se você me trouxer 10 Oridecons, 20 Aços e 70 Couros de Comodo.";
+				delitem 6403,50; //Comodo_L
+				delitem 7201,1; //Log
+				getitem 6404,1; //Caress_H
+				close;
+			}
+		case 3:
+			mes "[Gatti]";
+			mes "Então, você quer reforçar sua arma? A arma acaba quebrando de vez em quando durante o processo, mas não acontece com tanta frequência.";
+			if(select("Please reinforce the weapon.:May be next time.") == 2) {
+				mes "[Gatti]";
+				mes "Sempre que você quiser reforçar a Carícia, basta trazer-me a Carícia e 100.000 zenys.";
+				close;
+			}
+			mes "[Gatti]";
+			mes "Se você quiser fazer isso, terei que lhe dar alguns avisos antes de reforçar a Carícia.";
+			next;
+			mes "[Gatti]";
+			mes "^FF0000Primeiro!^009977 Preciso de 1 Carícia e 100.000 zenys para reforçar a Carícia. Como você sabe, não tenho nenhum dinheiro agora porque meu navio naufragou.^000000";
+			next;
+			mes "[Gatti]";
+			mes "^FF0000Segundo!^009977 Se você tiver uma Carícia refinada ou com cartas inseridas no seu inventário que você não deseja reforçar, ela poderá ser destruída ou seus aprimoramentos poderão ser alterados durante o processo de reforço.";
+			next;
+			mes "[Gatti]";
+			mes "Se você não quer que isso aconteça, coloque a Carícia refinada em outro lugar antes do reforço.^000000";
+			next;
+			mes "[Gatti]";
+			mes "^FF0000Terceiro!^009977 Às vezes o reforço falha. A arma não é destruída toda vez que você falha. No entanto, você deve saber que a arma é destruída de vez em quando se você falhar.^000000";
+			next;
+			if(select("Please reinforce the weapon.:Maybe next time.") == 2) {
+				mes "[Gatti]";
+				mes "Sempre que você quiser reforçar a Carícia, basta trazer-me a Carícia e 100.000 zenys.";
+				close;
+			}
+			break;
+		}
+
+		if (countitem(13067) < 1 || Zeny < 100000) {
+			mes "[Gatti]";
+			mes "Você não tem todos os materiais. É impossível reforçar se você não os tiver todos. Se você quiser reforçar, traga 100.000 zenys e 1 Carícia.";
+			close;
+		}
+		specialeffect2 EF_REPAIRWEAPON;
+		progressbar "0xFFFF00",3;
+		set Zeny, Zeny - 100000;
+
+		// Socket 3
+		set .@i, rand(4300);
+		     if (.@i < 150)  set .@s3,4700; // STR + 1
+		else if (.@i < 300)  set .@s3,4730; // AGI + 1
+		else if (.@i < 450)  set .@s3,4740; // VIT + 1
+		else if (.@i < 600)  set .@s3,4710; // INT + 1
+		else if (.@i < 750)  set .@s3,4720; // DEX + 1
+		else if (.@i < 900)  set .@s3,4750; // LUK + 1
+		else if (.@i < 1050) set .@s3,4761; // MATK + 2%
+		else if (.@i < 1200) set .@s3,4764; // CRIT + 5
+		else if (.@i < 1350) set .@s3,4786; // MDEF + 2
+		else if (.@i < 1500) set .@s3,4791; // DEF + 3
+		else if (.@i < 1650) set .@s3,4795; // HP + 100
+		else if (.@i < 1750) set .@s3,4800; // SP + 50
+		else if (.@i < 1850) set .@s3,4797; // HP + 300
+		else if (.@i < 1950) set .@s3,4793; // DEF + 9
+		else if (.@i < 2050) set .@s3,4788; // MDEF + 6
+		else if (.@i < 2150) set .@s3,4752; // LUK + 3
+		else if (.@i < 2250) set .@s3,4722; // DEX + 3
+		else if (.@i < 2350) set .@s3,4712; // INT + 3
+		else if (.@i < 2450) set .@s3,4742; // VIT + 3
+		else if (.@i < 2550) set .@s3,4732; // AGI + 3
+		else if (.@i < 2650) set .@s3,4702; // STR + 3
+		else if (.@i < 2700) set .@s3,4703; // STR + 4
+		else if (.@i < 2750) set .@s3,4733; // AGI + 4
+		else if (.@i < 2800) set .@s3,4743; // VIT + 4
+		else if (.@i < 2850) set .@s3,4713; // INT + 4
+		else if (.@i < 2900) set .@s3,4723; // DEX + 4
+		else if (.@i < 2950) set .@s3,4753; // LUK + 4
+		else if (.@i < 3000) set .@s3,4789; // MDEF + 8
+		else if (.@i < 3001) set .@s3,4704; // STR + 5
+		else if (.@i < 3002) set .@s3,4734; // AGI + 5
+		else if (.@i < 3003) set .@s3,4744; // VIT + 5
+		else if (.@i < 3004) set .@s3,4714; // INT + 5
+		else if (.@i < 3005) set .@s3,4724; // DEX + 5
+		else if (.@i < 3006) set .@s3,4754; // LUK + 5
+		else if (.@i < 3007) set .@s3,4806; // MATK + 3%
+		else if (.@i < 3008) set .@s3,4765; // CRIT + 7
+		else if (.@i < 3009) set .@s3,4766; // ATK + 2%
+		else if (.@i < 3010) set .@s3,4801; // SP + 100
+		else if (.@i < 3140) set .@s3,4796; // HP + 200
+		else if (.@i < 3270) set .@s3,4792; // DEF + 6
+		else if (.@i < 3400) set .@s3,4787; // MDEF + 4
+		else if (.@i < 3530) set .@s3,4751; // LUK + 2
+		else if (.@i < 3660) set .@s3,4721; // DEX + 2
+		else if (.@i < 3790) set .@s3,4711; // INT + 1
+		else if (.@i < 3920) set .@s3,4741; // VIT + 2
+		else if (.@i < 4050) set .@s3,4731; // AGI + 2
+		else if (.@i < 4180) set .@s3,4701; // STR + 2
+		else set .@s3,0;
+
+		// Socket 4
+		set .@j, rand(4100);
+		     if (.@j < 130)  set .@s4,4700; // STR + 1
+		else if (.@j < 260)  set .@s4,4730; // AGI + 1
+		else if (.@j < 390)  set .@s4,4740; // VIT + 1
+		else if (.@j < 520)  set .@s4,4710; // INT + 1
+		else if (.@j < 650)  set .@s4,4720; // DEX + 1
+		else if (.@j < 780)  set .@s4,4750; // LUK + 1
+		else if (.@j < 910)  set .@s4,4760; // MATK + 1%
+		else if (.@j < 1040) set .@s4,4764; // CRIT + 5
+		else if (.@j < 1170) set .@s4,4766; // ATK + 2%
+		else if (.@j < 1300) set .@s4,4786; // MDEF + 2
+		else if (.@j < 1430) set .@s4,4791; // DEF + 3
+		else if (.@j < 1560) set .@s4,4795; // HP + 100
+		else if (.@j < 1690) set .@s4,4800; // SP + 50
+		else if (.@j < 1790) set .@s4,4796; // HP + 200
+		else if (.@j < 1890) set .@s4,4792; // DEF + 6
+		else if (.@j < 1990) set .@s4,4787; // MDEF + 4
+		else if (.@j < 2090) set .@s4,4767; // ATK + 3%
+		else if (.@j < 2190) set .@s4,4765; // CRIT + 7
+		else if (.@j < 2290) set .@s4,4751; // LUK + 2
+		else if (.@j < 2390) set .@s4,4721; // DEX + 2
+		else if (.@j < 2490) set .@s4,4711; // INT + 2
+		else if (.@j < 2590) set .@s4,4741; // VIT + 2
+		else if (.@j < 2690) set .@s4,4731; // AGI + 2
+		else if (.@j < 2790) set .@s4,4701; // STR + 2
+		else if (.@j < 2860) set .@s4,4702; // STR + 3
+		else if (.@j < 2930) set .@s4,4732; // AGI + 3
+		else if (.@j < 3000) set .@s4,4742; // VIT + 3
+		else if (.@j < 3140) set .@s4,4712; // INT + 3
+		else if (.@j < 3210) set .@s4,4722; // DEX + 3
+		else if (.@j < 3280) set .@s4,4788; // MDEF + 8
+		else if (.@j < 3350) set .@s4,4793; // DEF + 9
+		else if (.@j < 3420) set .@s4,4797; // HP + 300
+		else if (.@j < 3490) set .@s4,4801; // SP + 100
+		else if (.@j < 3540) set .@s4,4798; // HP + 400
+		else if (.@j < 3590) set .@s4,4789; // MDEF + 8
+		else if (.@j < 3640) set .@s4,4753; // LUK + 4
+		else if (.@j < 3690) set .@s4,4723; // DEX + 4
+		else if (.@j < 3740) set .@s4,4713; // INT + 4
+		else if (.@j < 3790) set .@s4,4743; // VIT + 4
+		else if (.@j < 3840) set .@s4,4733; // AGI + 4
+		else if (.@j < 3890) set .@s4,4703; // STR + 4
+		else if (.@j < 3900) set .@s4,4704; // STR + 5
+		else if (.@j < 3910) set .@s4,4734; // AGI + 5
+		else if (.@j < 3920) set .@s4,4744; // VIT + 5
+		else if (.@j < 3930) set .@s4,4714; // INT + 5
+		else if (.@j < 3940) set .@s4,4724; // DEX + 5
+		else if (.@j < 3950) set .@s4,4754; // LUK + 5
+		else set .@s4,0;
+
+		delitem 13067,1; //Caress
+		if (.@s3 == 0 && .@s4 == 0) {
+			mes "[Gatti]";
+			mes "Oh, céus~~ Quase consegui... Mas falhou. Desculpe, desculpe...";
+			emotion ET_HUK;
+			close;
+		}
+		getitem2 13067,1,1,0,0,0,0,.@s3,.@s4;
+		mes "[Gatti]";
+		mes "O reforço da Carícia foi bem-sucedido. Até mais.";
+		close;
+	}
+}
