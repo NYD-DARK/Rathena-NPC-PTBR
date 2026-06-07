@@ -1,0 +1,93 @@
+//===== rAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,47,3	script	Scholar#Valkyrie	743,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Sábio]";
+			mes "Parabéns.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		mes "[Sábio]";
+		mes "Leva uma vida inteira...";
+		mes "Literalmente uma vida inteira";
+		mes "para acumular o conhecimento";
+		mes "necessário para se tornar";
+		mes "um Sábio...";
+		next;
+		mes "[Sábio]";
+		mes "É avassalador.";
+		mes "Quanto mais você aprende, mais";
+		mes "você descobre o que";
+		mes "ainda não sabe.";
+		mes "Não há fim para o";
+		mes "processo de aprendizado...";
+		close;
+	}
+	else if (ADVJOB == Job_Professor && Class == Job_Mage_High && JobLevel > 39) {
+		mes "[Sábio]";
+		mes "Midgard não";
+		mes "tem Sábios suficientes para";
+		mes "ajudar a inaugurar uma nova era";
+		mes "de prosperidade. O";
+		mes "mundo precisa de você...";
+		next;
+		mes "[Sábio]";
+		mes "Você assumirá esta";
+		mes "responsabilidade incrível?";
+		mes "Você servirá a Midgard";
+		mes "como um Sábio?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Sábio]";
+			mes "Quando estiver pronto,";
+			mes "sinta-se à vontade para voltar.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Sábio]";
+			mes "Ainda é possível aprender mais habilidades. Por favor, use";
+			mes "todos os seus Pontos de Habilidade restantes antes de voltar a mim.";
+			close;
+		}
+		jobchange Job_Professor;
+		set ADVJOB,0;
+		mes "[Sábio]";
+		mes "Parabéns!";
+		mes "Como Professor, espero";
+		mes "que você assuma um";
+		mes "papel ativo em trazer";
+		mes "a luz do conhecimento";
+		mes "onde houver escuridão.";
+		close;
+	}
+	mes "[Sábio]";
+	mes "Bem-vindo";
+	mes "a Valhalla,";
+	mes "o Salão da Honra.";
+	next;
+	mes "[Sábio]";
+	mes "Por favor, sinta-se";
+	mes "à vontade";
+	mes "enquanto estiver aqui.";
+	mes "Honra aos guerreiros!";
+	close;
+}
+

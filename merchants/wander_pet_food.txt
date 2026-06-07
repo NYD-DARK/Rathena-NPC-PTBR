@@ -1,0 +1,75 @@
+//===== rAthena Script =======================================
+//= Spirit Liquor trader.
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Trade Broken Liquor Jars and alcohol for wanderer
+//= pet food, 'Spirit Liquor'
+//===== Additional Comments: =================================
+//= 1.0 First version 
+//============================================================
+
+prontera,218,218,3	script	Pet Enthusiast	96,{
+	mes "[Entusiasta de Pets Jenny]";
+	mes "Oh, Olá!";
+	mes "Você é um amante dos animais como eu?";
+	next;
+	mes "[Entusiasta de Pets Jenny]";
+	mes "Eu sei que é muito difícil manter seus pets fofos felizes.";
+	mes "Tudo o que é preciso é o tipo certo de comida.";
+	next;
+	mes "[Entusiasta de Pets Jenny]";
+	mes "Eu sei que às vezes é muito difícil conseguir a comida certa para seu pet.";
+	next;
+	mes "[Entusiasta de Pets Jenny]";
+	mes "Você tem alguma comida que está procurando?";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		if ((countitem(7158) > 19) && (countitem(970) > 0)) {
+			mes "[Entusiasta de Pets Jenny]";
+			mes "Oh, você tem ^ff000020 Frascos de Bebida Alcoólica Quebrados^000000 e ^ff00001 Álcool^000000!";
+			mes "Você quer trocá-los por";
+			mes "^ff000020 Bebidas Espirituais^000000 para seu pet Musa?";
+			next;
+			switch(select("Yes, please!:No thank you.")) {
+			case 1:
+				mes "[Entusiasta de Pets Jenny]";
+				mes "Ok, aqui está então.";
+				mes "Espero que isso mantenha seu";
+				mes "pet fofo feliz.";
+				delitem 7158,20; //Broken_Wine_Vessel
+				delitem 970,1; //Alchol
+				getitem 7824,20; //Spirit_Liquor
+				close;
+			case 2:
+				mes "[Entusiasta de Pets Jenny]";
+				mes "Hehe, bem, apenas me avise se mudar de ideia.";
+				close;
+			}
+		}
+		else {
+			mes "[Entusiasta de Pets Jenny]";
+			mes "Na verdade, agora eu posso te ajudar a conseguir Bebida Espiritual para pets Musa.";
+			next;
+			mes "[Entusiasta de Pets Jenny]";
+			mes "Tudo o que você precisa fazer é me trazer ^FF0000 20 Frascos de Bebida Alcoólica Quebrados^000000 e ^FF0000 1 Álcool^000000.";
+			mes "Eu posso te dar ^FF0000 20 Bebidas Espirituais^000000 por isso.";
+			next;
+			mes "Você pode conseguir os Frascos de Bebida Alcoólica Quebrados de monstros Tengu na masmorra de Amatsu.";
+			close;
+		}
+	case 2:
+		close;
+	}
+}
+
+prontera,220,218,3	script	Berry Toe	955,{
+	specialeffect EF_CHANGEDARK;
+	end;
+}

@@ -1,0 +1,1336 @@
+//===== rAthena Script ======================================= 
+//= Dungeon Teleport Service
+//===== By: ================================================== 
+//= Evera
+//===== Current Version: ===================================== 
+//= 2.9a
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Cool Event Corp NPCs vs. Kafra Dungeon Teleport Service and voting system.
+//= This is a special event on official servers where there's a
+//= big competition between Kafra Corp. and Cool Event Corp.
+//= To warp to selected levels of certain dungeons.
+//
+// Global Variables in use:
+//	Voting Time check:		$DTS_Time
+//	Cool Event Corp. Vote Numbers:	$DTS_JondaVotes
+//	Kafra Vote Numbers:		$DTS_KafraVotes
+//	Winner:				$DTS_Result
+//	Teleport Service Period Check:	$DTS_PeriodCheck
+//	Kafra Points:			$DTS_KafraWins
+//	Cool Event Corp. Points:	$DTS_JondaWins
+//	Setitem Check:			$DTS_VoteCount
+// For Detailed information on what each varibale does, see
+// the "Vote Globalvar Girl#yuno" NPC at the end of the file.
+// Character Variable in use: lhz_vote (how many times player has voted, keeps htem from re-voting.)
+//===== Additional Comments: ================================= 
+//= 1.0 Initial release [Evera]
+//= 1.1 SVN release, removed from major town (found true info after research),
+//=     put more arg(2) parameters, fixed a few bugs [Evera]
+//= 1.2 Mushed some variables together, optimized a bit [Evera]
+//= 1.3 Removed selfconfig [Evera]
+//= 1.4 Changed global variables to read from 3 global variables, updated names,
+//=      fixed array bug [Evera]
+//= 1.5 Mushed voting varialbes into 1 variable. [Evera]
+//= 1.6 Removed Duplicates [Silent]
+//= 1.7 Fixed bug of DTS_Admin not running by itself [Evera]
+//= 1.8 Changed requirement to lvl 60 [Evera]
+//= 1.9 Removed global eligibility option [Evera]
+//= 2.0 Fixed zeny bug [Evera]
+//= 2.1 Fixed headers with and updated with newer information [Evera]
+//= 2.2 Changed dtseligible 2 to MISC_QUEST|128, to clean up variable usage. [Evera]
+//=     Also added F_ClearGarbage function to the scripts. [Evera]
+//= 2.3 Changed dtseligible to be $dtsday when MISC_QUEST|128
+//=     Added $dtsday for vote session counter
+//=     Fixed bug that involved having both warpers enabled at the same time. [Evera]
+//=     New $dtsday system and bug fix[Evera]
+//= 2.3a fixed 2 bugs with comparision [Lupus]
+//= 2.3b corrected Glast warp coords [Lupus] 2.3c Bailand -> Bayalan
+//= 2.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 2.5 Converted from Aegis file. (11.3) [L0ne_W0lf]
+//= 2.6 Moved Morocc NPCs to Morocc Ruins. [L0ne_W0lf]
+//= 2.7 Fixed a typo, a - to a +. Not sure how that happened. [L0ne_w0lf]
+//= 2.8 Corrected another typo this time in a variable.
+//= 2.9 Added GM management function. [Euphy]
+//= 2.9a Tweaked NPC sprite & cutin used. [Liam]
+//============================================================ 
+
+einbroch,246,70,0	script	Vote Timer#ein	-1,{
+OnInit:
+	if ($dts) {
+		set $dts,0;
+		set $dtsvote,0;
+		set $dtsday,0;
+	}
+	initnpctimer;
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer60000:
+	// A part that keeps the same status even after a server shut down
+	if ($DTS_Result == 1) {
+		if ($DTS_JondaWins == 0) {
+			donpcevent "Vote Timer2#ein::OnEnable";
+		}
+		else if ($DTS_JondaWins == 1) {
+			if ($DTS_KafraWins < 2) {
+				donpcevent "Vote Timer2#ein::OnEnable";
+			}
+			else {
+				donpcevent "Vote Timer3#ein::OnEnable";
+			}
+		}
+		else {
+			if ($DTS_KafraWins < 2) {
+				donpcevent "Vote Timer2#ein::OnEnable";
+			}
+			else {
+				donpcevent "Vote Timer3#ein::OnEnable";
+			}
+		}
+		stopnpctimer;
+	}
+	else if ($DTS_Result == 2) {
+		if ($DTS_JondaWins == 0) {
+			donpcevent "Vote Timer2#ein::OnEnable";
+		}
+		else if ($DTS_JondaWins == 1) {
+			if ($DTS_KafraWins < 2) {
+				donpcevent "Vote Timer2#ein::OnEnable";
+			}
+			else {
+				donpcevent "Vote Timer4#ein::OnEnable";
+			}
+		}
+		else {
+			if ($DTS_KafraWins < 2) {
+				donpcevent "Vote Timer2#ein::OnEnable";
+			}
+			else {
+				donpcevent "Vote Timer4#ein::OnEnable";
+			}
+		}
+		stopnpctimer;
+	}
+	else {
+		if ($DTS_Time == 1440) {
+			if (($DTS_JondaVotes >= 20) || ($DTS_KafraVotes >= 20)) {
+				if ($DTS_JondaVotes > $DTS_KafraVotes) {
+					if ($DTS_JondaWins == 0) {
+						if ($DTS_KafraWins < 2) {
+							set $DTS_KafraWins,$DTS_KafraWins+1;
+							set $DTS_Result,1;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#6::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+						else if ($DTS_KafraWins == 2) {
+							set $DTS_Result,1;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#6::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+					}
+					else if ($DTS_JondaWins == 1) {
+						if ($DTS_KafraWins < 2) {
+							set $DTS_KafraWins,$DTS_KafraWins+1;
+							set $DTS_Result,1;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#6::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+						else {
+							set $DTS_Time,0;
+							set $DTS_Result,1;
+							donpcevent "Scrutiny Association#6::OnEnable";
+							donpcevent "Vote Timer3#ein::OnEnable";
+						}
+					}
+					else {
+						if ($DTS_KafraWins < 2) {
+							set $DTS_KafraWins,$DTS_KafraWins+1;
+							set $DTS_Result,1;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#6::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+						else {
+							set $DTS_Result,1;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#6::OnEnable";
+							donpcevent "Vote Timer3#ein::OnEnable";
+						}
+					}
+				}
+				else {
+					if ($DTS_KafraWins == 0) {
+						if ($DTS_JondaWins < 2) {
+							set $DTS_JondaWins,$DTS_JondaWins+1;
+							set $DTS_Result,2;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#7::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+						else {
+							set $DTS_Result,2;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#7::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+					}
+					else if ($DTS_KafraWins == 1) {
+						if ($DTS_JondaWins < 2) {
+							set $DTS_JondaWins,$DTS_JondaWins+1;
+							set $DTS_Result,2;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#7::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+						else {
+							set $DTS_Result,2;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#7::OnEnable";
+							donpcevent "Vote Timer4#ein::OnEnable";
+						}
+					}
+					else {
+						if ($DTS_JondaWins < 2) {
+							set $DTS_JondaWins,$DTS_JondaWins+1;
+							set $DTS_Result,2;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#7::OnEnable";
+							donpcevent "Vote Timer2#ein::OnEnable";
+						}
+						else {
+							set $DTS_Result,2;
+							set $DTS_Time,0;
+							donpcevent "Scrutiny Association#7::OnEnable";
+							donpcevent "Vote Timer4#ein::OnEnable";
+						}
+					}
+				}
+			}
+			else {
+				set $DTS_Result,3;
+				set $DTS_Time,0;
+				donpcevent "Vote Timer#ein::OnEnable";
+			}
+		}
+		else {
+			set $DTS_Time,$DTS_Time+1;
+			donpcevent "Vote Timer#ein::OnEnable";
+		}
+	}
+	end;
+}
+
+einbroch,245,71,0	script	Vote Timer2#ein	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer60000:
+	stopnpctimer;
+	if ($DTS_PeriodCheck == 8640) {
+		set $DTS_PeriodCheck,0;
+		set $DTS_Result,0;
+		set $DTS_KafraVotes,0;
+		set $DTS_JondaVotes,0;
+		set $DTS_VoteCount,$DTS_VoteCount+1;
+		donpcevent "Vote Timer#ein::OnEnable";
+	}
+	else {
+		set $DTS_PeriodCheck,$DTS_PeriodCheck+1;
+		donpcevent "Vote Timer2#ein::OnEnable";
+	}
+	end;
+}
+
+einbroch,246,71,0	script	Vote Timer3#ein	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer60000:
+	stopnpctimer;
+	if ($DTS_PeriodCheck == 8640) {
+		set $DTS_PeriodCheck,0; //Global Variable
+		set $DTS_Result,0; //Global Variable
+		set $DTS_KafraVotes,0; //Global Variable
+		set $DTS_JondaVotes,0; //Global Variable
+		set $DTS_JondaWins,$DTS_JondaWins-1;
+		set $DTS_VoteCount,$DTS_VoteCount+1;
+		donpcevent "Vote Timer#ein::OnEnable";
+	}
+	else {
+		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; //Global Variable
+		donpcevent "Vote Timer3#ein::OnEnable";
+	}
+	end;
+}
+
+einbroch,247,71,0	script	Vote Timer4#ein	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer60000:
+	stopnpctimer;
+	if ($DTS_PeriodCheck == 8640) {
+		set $DTS_PeriodCheck,0; //Global Variable
+		set $DTS_Result,0; //Global Variable
+		set $DTS_KafraVotes,0; //Global Variable
+		set $DTS_JondaVotes,0; //Global Variable
+		set $DTS_KafraWins,$DTS_KafraWins-1;
+		set $DTS_VoteCount,$DTS_VoteCount+1;
+		donpcevent "Vote Timer#ein::OnEnable";
+	}
+	else {
+		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; //Global Variable
+		donpcevent "Vote Timer4#ein::OnEnable";
+	}
+	end;
+}
+
+// Voting Poll NPCs Kafras and Cool Corp.
+// Cool Event Staff should actually be Cool Event Voting Staff
+// names had to be shortened to keep them unique.
+function	script	F_VoteKafra	{
+	callfunc "F_ClearGarbage";				//Clear outdated, unused variables
+	switch(getarg(0)){
+	case 1: cutin "kafra_01",2; break;
+	case 2: cutin "kafra_02",2; break;
+	case 3: cutin "kafra_03",2; break;
+	case 4: cutin "kafra_04",2; break;
+	case 5: cutin "kafra_05",2; break;
+	case 6: cutin "kafra_06",2; break;
+	case 7: cutin "kafra_07",2; break;
+	case 8: cutin "kafra_08",2; break;
+	case 9: cutin "kafra_09",2; break;
+	}
+	mes "[Equipe de Votação da Kafra]";
+	mes "Saudações, aventureiro.";
+	mes "Como você deve saber, nós";
+	mes "estamos realizando uma eleição para";
+	mes "determinar qual empresa irá";
+	mes "fornecer o Serviço de Teleporte";
+	mes "para Instancias. Como posso ajudá-lo?";
+	next;
+	switch(select("Reason for Election:Cast a Vote:Use Teleport Service:Cancel")) {
+	case 1:
+		mes "[Equipe de Votação da Kafra]";
+		mes "A Cool Event Corp. e a";
+		mes "Corporação Kafra planejaram ambas";
+		mes "oferecer um Serviço de Teleporte";
+		mes "para Instancias.";
+		next;
+		mes "[Equipe de Votação da Kafra]";
+		mes "Mas, devido a limitações";
+		mes "tecnológicas, apenas uma empresa";
+		mes "pode servir como provedora deste";
+		mes "Serviço de Teleporte para Instancias";
+		mes "por vez. Por isso, ambas as empresas concordaram em realizar eleições especiais.";
+		next;
+		mes "[Equipe de Votação da Kafra]";
+		mes "Cada empresa tem suas próprias";
+		mes "políticas e garantias em";
+		mes "relação ao Serviço de Teleporte para Instancias, e nesta eleição, os";
+		mes "clientes decidirão e escolherão o que é melhor para eles.";
+		next;
+		mes "[Equipe de Votação da Kafra]";
+		mes "Por enquanto, o Serviço de";
+		mes "Teleporte para Instancias será";
+		mes "fornecido em uma série de períodos de teste. Dessa forma, os clientes podem";
+		mes "ver os benefícios de ambas as empresas antes de tomar a decisão final.";
+		next;
+		mes "[Equipe de Votação da Kafra]";
+		mes "Se você estiver qualificado,";
+		mes "por favor, vote em cada eleição";
+		mes "para decidir qual empresa irá";
+		mes "fornecer o Serviço de Teleporte";
+		mes "para Instancias no próximo período de teste. Obrigado pelo seu apoio~";
+		break;
+	case 2:
+		//if (lhz_boss < 17) {
+		//	mes "[Kafra Voting Staff]";
+		//	mes "Oh, I'm so sorry, but you";
+		//	mes "are currently not qualified to";
+		//	mes "vote. For voting qualification";
+		//	mes "information, please visit the";
+		//	mes "Al De Baran Kafra Headquarters.";
+		//	mes "Thank you and have a nice day.";
+		//	close2;
+		//	cutin "",255;
+		//	end;
+		//}
+		//else {
+			if ($DTS_Result == 0) {
+				if (lhz_vote <= $DTS_VoteCount) {
+					mes "[Equipe de Votação da Kafra]";
+					mes "Nós, da Corporação Kafra,";
+					mes "estamos planejando fornecer o";
+					mes "Serviço de Teleporte para Instancias";
+					mes "para as seguintes instancias...";
+					next;
+					mes " ";
+					mes " ";
+					if ($DTS_KafraWins == 0) {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+					}
+					else if ($DTS_KafraWins == 1) {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+						mes "^FF0000Torre do Relógio de Al De Baran, Nível 3^000000";
+					}
+					else {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+						mes "^FF0000Torre do Relógio de Al De Baran, Nível 3, Masmorra de Lava, Nível 2^000000";
+					}
+					next;
+					mes "[Equipe de Votação da Kafra]";
+					mes "Se você estiver interessado em";
+					mes "um Serviço de Teleporte para esta";
+					mes "área, por favor, vote em";
+					mes "nós. Você gostaria de votar";
+					mes "na Corporação Kafra?";
+					next;
+					switch(select("No:Yes")) {
+					case 1:
+						mes "[Equipe de Votação da Kafra]";
+						mes "Eu entendo. Mas, se você";
+						mes "mudar de ideia,";
+						mes "sinta-se à vontade para voltar";
+						mes "a qualquer momento. Obrigado e";
+						mes "tenha um bom dia, aventureiro.";
+						break;
+					case 2:
+						set lhz_vote,$DTS_VoteCount+1;
+						set $DTS_KafraVotes,$DTS_KafraVotes+1;
+						mes "[Equipe de Votação da Kafra]";
+						mes "Obrigado pelo seu voto!";
+						mes "Continuaremos fazendo o nosso melhor";
+						mes "para fornecer serviços de alta";
+						mes "qualidade aos nossos clientes. Tenha";
+						mes "um bom dia e lembre-se que o serviço Kafra está ao seu lado~";
+						break;
+					}
+				}
+				else {
+					mes "[Equipe de Votação da Kafra]";
+					mes "Sinto muito, mas você já";
+					mes "participou desta eleição.";
+					mes "Quando a próxima eleição";
+					mes "chegar, você poderá";
+					mes "votar novamente.";
+					mes "Obrigado pelo seu apoio~";
+				}
+			}
+			else if ($DTS_Result == 3) {
+				if (lhz_vote <= $DTS_VoteCount) {
+					mes "[Equipe de Votação da Kafra]";
+					mes "Após somar o número de";
+					mes "votos da última eleição,";
+					mes "concluímos que a condição de";
+					mes "participação mínima de eleitores";
+					mes "não foi satisfeita.";
+					next;
+					mes "[Equipe de Votação da Kafra]";
+					mes "Portanto, outra eleição para";
+					mes "determinar qual empresa irá";
+					mes "fornecer o Serviço de Teleporte";
+					mes "para Instancias será realizada. A Corporação";
+					mes "Kafra irá teleportar para";
+					mes "as seguintes instancias...";
+					next;
+					mes " ";
+					mes " ";
+					if ($DTS_KafraWins == 0) {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+					}
+					else if ($DTS_KafraWins == 1) {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+						mes "^FF0000Torre do Relógio de Al De Baran, Nível 3^000000";
+					}
+					else {
+						mes "^FF0000Fábrica de Brinquedos, Nível 2^000000";
+						mes "^FF0000Torre do Relógio de Al De Baran, Nível 3, Masmorra de Lava, Nível 2^000000";
+					}
+					next;
+					mes "[Equipe de Votação da Kafra]";
+					mes "Se você estiver interessado em";
+					mes "um Serviço de Teleporte para estas";
+					mes "áreas, por favor, vote em";
+					mes "nós. Você gostaria de votar";
+					mes "na Corporação Kafra?";
+					next;
+					switch(select("No:Yes")) {
+					case 1:
+						mes "[Equipe de Votação da Kafra]";
+						mes "Eu entendo. Mas, se você";
+						mes "mudar de ideia,";
+						mes "sinta-se à vontade para voltar";
+						mes "a qualquer momento. Obrigado e";
+						mes "tenha um bom dia, aventureiro.";
+						break;
+					case 2:
+						set lhz_vote,$DTS_VoteCount+1;
+						set $DTS_KafraVotes,$DTS_KafraVotes+1;
+						mes "[Equipe de Votação da Kafra]";
+						mes "Obrigado pelo seu voto!";
+						mes "Continuaremos fazendo o nosso melhor";
+						mes "para fornecer serviços de alta";
+						mes "qualidade aos nossos clientes. Tenha";
+						mes "um bom dia e lembre-se que o serviço Kafra está ao seu lado~";
+						break;
+					}
+				}
+				else {
+					mes "[Equipe de Votação da Kafra]";
+					mes "Após somar o número de";
+					mes "votos da última eleição,";
+					mes "concluímos que a condição de";
+					mes "participação mínima de eleitores";
+					mes "não foi satisfeita.";
+					next;
+					mes "[Equipe de Votação da Kafra]";
+					mes "Portanto, outra eleição para";
+					mes "determinar qual empresa irá";
+					mes "fornecer o Serviço de Teleporte";
+					mes "para Instancias será realizada. Porém,";
+					mes "já que você votou, você não pode votar novamente nesta eleição.";
+					next;
+					mes "[Equipe de Votação da Kafra]";
+					mes "Sua participação nestas";
+					mes "eleições é muito apreciada,";
+					mes "e nós encorajamos você a votar";
+					mes "novamente durante a próxima eleição.";
+					mes "Obrigado e tenha um bom dia~";
+				}
+			}
+			else {
+				mes "[Equipe de Votação da Kafra]";
+				mes "Sinto muito, mas não há";
+				mes "eleições acontecendo neste";
+				mes "momento. Quando as urnas estiverem";
+				mes "abertas, encorajamos você a participar";
+				mes "e dar a sua opinião.";
+				mes "Obrigado pelo seu apoio~";
+			}
+		//}
+		break;
+	case 3:
+		if ($DTS_Result == 2) {
+			mes "[Equipe de Votação da Kafra]";
+			mes "Obrigado por escolher o";
+			mes "Serviço de Teleporte para Instancias.";
+			mes "Por favor, tenha em mente que os";
+			mes "Bilhetes de Teleporte Grátis e Kafra";
+			mes "Pontos de Reserva Especial não";
+			mes "se aplicam a este serviço especial.";
+			next;
+			if ($DTS_KafraWins == 0) {
+				switch(select("Toy Factory, Level 2 -> 4,000 z:Cancel")) {
+				case 1:
+					if (Zeny >= 4000) {
+						cutin "",255;
+						set Zeny, Zeny-4000;
+						warp "xmas_dun02",130,123;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Kafra]";
+						mes "Sinto muito, mas você não";
+						mes "tem dinheiro suficiente para pagar";
+						mes "a taxa de 4.000 zenys para teleportar";
+						mes "para a Fábrica de Brinquedos. Por favor,";
+						mes "verifique seus fundos novamente.";
+					}
+					break;
+				case 2:
+					mes "[Equipe de Votação da Kafra]";
+					mes "Nós, aqui na Corporação Kafra,";
+					mes "estamos sempre nos esforçando para oferecer os melhores serviços. Esperamos atender às suas necessidades de aventura e padrões de excelência.";
+					break;
+				}
+			}
+			else if ($DTS_KafraWins == 1) {
+				switch(select("Toy Factory, Level 2 -> 4,000 z:Clock Tower, Level 3 -> 4,000 z:Cancel")) {
+				case 1:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "kafra_09",255;
+						warp "xmas_dun02",130,123;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Kafra]";
+						mes "Sinto muito, mas você não";
+						mes "tem dinheiro suficiente para pagar";
+						mes "a taxa de 4.000 zenys para teleportar";
+						mes "para a Fábrica de Brinquedos. Por favor,";
+						mes "verifique seus fundos novamente.";
+					}
+					break;
+				case 2:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "kafra_09",255;
+						warp "alde_dun03",265,22;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Kafra]";
+						mes "Sinto muito, mas você não";
+						mes "tem dinheiro suficiente para pagar";
+						mes "a taxa de 4.000 zenys para teleportar";
+						mes "para a Torre do Relógio. Por favor,";
+						mes "verifique seus fundos novamente.";
+					}
+					break;
+				case 3:
+					mes "[Equipe de Votação da Kafra]";
+					mes "Nós, aqui na Corporação Kafra,";
+					mes "estamos sempre nos esforçando para oferecer os melhores serviços. Esperamos atender às suas necessidades de aventura e padrões de excelência.";
+					break;
+				}
+			}
+			else {
+				switch(select("Toy Factory, Level 2 -> 4,000 z:Clock Tower, Level 3 -> 4,000 z:Lava Dungeon, Level 2 -> 4,000 z:Cancel")) {
+				case 1:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "kafra_09",255;
+						warp "xmas_dun02",130,123;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Kafra]";
+						mes "Sinto muito, mas você não";
+						mes "tem dinheiro suficiente para pagar";
+						mes "a taxa de 4.000 zenys para teleportar";
+						mes "para a Fábrica de Brinquedos. Por favor,";
+						mes "verifique seus fundos novamente.";
+					}
+					break;
+				case 2:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "kafra_09",255;
+						warp "alde_dun03",265,22;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Kafra]";
+						mes "Sinto muito, mas você não";
+						mes "tem dinheiro suficiente para pagar";
+						mes "a taxa de 4.000 zenys para teleportar";
+						mes "para a Torre do Relógio. Por favor,";
+						mes "verifique seus fundos novamente.";
+					}
+					break;
+				case 3:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "kafra_09",255;
+						warp "mag_dun02",47,40;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Kafra]";
+						mes "Sinto muito, mas você não";
+						mes "tem dinheiro suficiente para pagar";
+						mes "a taxa de 4.000 zenys para teleportar";
+						mes "para a Masmorra de Lava. Por favor,";
+						mes "verifique seus fundos novamente.";
+					}
+					break;
+				case 4:
+					mes "[Equipe de Votação da Kafra]";
+					mes "Nós, aqui na Corporação Kafra,";
+					mes "estamos sempre nos esforçando para oferecer os melhores serviços. Esperamos atender às suas necessidades de aventura e padrões de excelência.";
+					break;
+				}
+			}
+		}
+		else if ($DTS_Result == 1) {
+			mes "[Equipe de Votação da Kafra]";
+			mes "Sinto muito, mas devido aos";
+			mes "resultados da eleição mais";
+			mes "recente, a Cool Event";
+			mes "Corp. está atualmente gerenciando";
+			mes "o Serviço de Teleporte para Instancias. Pedimos desculpas pelo inconveniente.";
+		}
+		else {
+			mes "[Equipe de Votação da Kafra]";
+			mes "Sinto muito, mas o";
+			mes "Serviço de Teleporte para Instancias";
+			mes "não está ativo durante o período";
+			mes "de votação. Assim que a eleição";
+			mes "terminar, o Serviço de Teleporte";
+			mes "para Instancias ficará disponível.";
+		}
+		break;
+	case 4:
+		mes "[Equipe de Votação da Kafra]";
+		mes "Nós, aqui na Corporação Kafra,";
+		mes "estamos sempre nos esforçando para oferecer os melhores serviços. Esperamos atender às suas necessidades de aventura e padrões de excelência.";
+		break;
+	}
+	close2;
+	cutin "",255;
+	end;
+}
+
+yuno,162,191,4	script	Kafra Voting Staff#yuno	861,{
+	callfunc "F_VoteKafra",9;
+}
+prontera,164,125,4	script	Kafra Voting Staff#prt	116,{
+	callfunc "F_VoteKafra",2;
+}
+moc_ruins,104,133,4	script	Kafra Voting Staff#moc	116,{
+	callfunc "F_VoteKafra",2;
+}
+geffen,122,37,4	script	Kafra Voting Staff#gef	116,{
+	callfunc "F_VoteKafra",2;
+}
+payon,158,182,4	script	Kafra Voting Staff#pay	116,{
+	callfunc "F_VoteKafra",2;
+}
+alberta,119,70,4	script	Kafra Voting Staff#alb	116,{
+	callfunc "F_VoteKafra",2;
+}
+aldebaran,145,102,4	script	Kafra Voting Staff#alde	116,{
+	callfunc "F_VoteKafra",2;
+}
+lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
+	callfunc "F_VoteKafra",9;
+}
+
+-	script	Cool Event Staff::VotingStaffCCE	874,{
+	callfunc "F_ClearGarbage";				//Clear outdated, unused variables
+	cutin "zonda_01",2;
+	mes "[Equipe de Votação da Cool Event Corp.]";
+	mes "Olá! Não se esqueça de fazer";
+	mes "sua voz ser ouvida e certifique-se";
+	mes "de votar nas eleições";
+	mes "entre a Cool Event Corp. e a";
+	mes "Corporação Kafra pelo controle do Serviço de Teleporte para Instancias!";
+	next;
+	switch(select("Reason for Election:Cast a Vote:Use Teleport Service:Cancel")) {
+	case 1:
+		mes "[Equipe de Votação da Cool Event Corp.]";
+		mes "A Cool Event Corp. tem";
+		mes "planejado fornecer um novo";
+		mes "Serviço de Teleporte para Instancias";
+		mes "aos seus clientes, um serviço que";
+		mes "não é oferecido pela Corporação";
+		mes "Kafra. No entanto...";
+		next;
+		mes "[Equipe de Votação da Cool Event Corp.]";
+		mes "A Corporação Kafra, que";
+		mes "já monopoliza o mercado";
+		mes "de teletransporte público,";
+		mes "na verdade também tinha planos de";
+		mes "fornecer um serviço semelhante.";
+		next;
+		mes "[Equipe de Votação da Cool Event Corp.]";
+		mes "Devido a limitações";
+		mes "tecnológicas, apenas uma empresa";
+		mes "pode ser escolhida como a provedora";
+		mes "deste Serviço de Teleporte para Instancias. Portanto, deixaremos os clientes";
+		mes "decidirem através destas eleições.";
+		next;
+		mes "[Equipe de Votação da Cool Event Corp.]";
+		mes "Múltiplas eleições serão";
+		mes "realizadas para que nossos clientes";
+		mes "possam testar por si mesmos os serviços especiais de cada empresa.";
+		mes "No entanto, tenha em mente que você deve ser elegível para votar.";
+		next;
+		mes "[Equipe de Votação da Cool Event Corp.]";
+		mes "Para detalhes sobre a elegibilidade";
+		mes "de eleitores, por favor, visite nossa";
+		mes "sede na cidade de";
+		mes "Lighthalzen, localizada na";
+		mes "República de Schwarzwald.";
+		mes "Obrigado pelo seu tempo.";
+		break;
+	case 2:
+		//if (lhz_boss < 17) {
+		//	mes "[Cool Event Corp. Voting Staff]";
+		//	mes "I'm sorry, but you are not";
+		//	mes "eligible to vote at this time.";
+		//	mes "Please visit our headquarters";
+		//	mes "in Lighthalzen for information";
+		//	mes "related to acquiring voting rights. Thank you for your time.";
+		//	close2;
+		//	cutin "zonda_01",255;
+		//	end;
+		//}
+		//else {
+			if ($DTS_Result == 0) {
+				if (lhz_vote <= $DTS_VoteCount) {
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "A Cool Event Corp.,";
+					mes "se escolhida para fornecer o";
+					mes "Serviço de Teleporte para Instancias,";
+					mes "teleportará aventureiros para";
+					mes "as seguintes instancias...";
+					next;
+					mes " ";
+					mes " ";
+					if ($DTS_JondaWins == 0) {
+						mes "^FF0000Masmorra de Byalan, Nível 3^000000";
+					}
+					else if ($DTS_JondaWins == 1) {
+						mes "^FF0000Masmorra de Byalan, Nível 3^000000";
+						mes "^FF0000Torre do Relógio, 3º Andar^000000";
+					}
+					else {
+						mes "^FF0000Masmorra de Byalan, Nível 3^000000";
+						mes "^FF0000Torre do Relógio, 3º Andar^000000";
+						mes "^FF0000Entrada de Glast Heim^000000";
+					}
+					next;
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Se você estiver interessado";
+					mes "nesses destinos, então";
+					mes "seria do seu melhor";
+					mes "interesse votar em nós.";
+					mes "Você gostaria de votar";
+					mes "na Cool Event Corp.?";
+					next;
+					switch(select("No:Yes")) {
+					case 1:
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Ah, entendo... Bem, se você";
+						mes "mudar de ideia,";
+						mes "sinta-se à vontade para voltar e";
+						mes "dar seu voto para a Cool Event";
+						mes "Corp., tudo bem? Tenha um bom dia~";
+						break;
+					case 2:
+						set lhz_vote,$DTS_VoteCount+1;
+						set $DTS_JondaVotes,$DTS_JondaVotes+1;
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Obrigado pelo seu voto!";
+						mes "São clientes como você que";
+						mes "garantem o sucesso e o ótimo";
+						mes "serviço que você espera";
+						mes "da Cool Event Corp.";
+						mes "Obrigado e tenha um bom dia~";
+						break;
+					}
+				}
+				else {
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Sinto muito, mas você";
+					mes "já deu seu voto";
+					mes "nesta eleição. No entanto,";
+					mes "por favor, não deixe que isso o impeça";
+					mes "de votar na Cool Event";
+					mes "Corp. na próxima eleição~";
+				}
+			}
+			else if ($DTS_Result == 3) {
+				if (lhz_vote <= $DTS_VoteCount) {
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Infelizmente, não houve";
+					mes "votação suficiente na";
+					mes "última eleição, então estamos realizando";
+					mes "outra eleição para determinar";
+					mes "qual empresa irá fornecer o";
+					mes "Serviço de Teleporte para Instancias.";
+					next;
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "A Cool Event Corp.,";
+					mes "se escolhida para fornecer o";
+					mes "Serviço de Teleporte para Instancias,";
+					mes "teleportará aventureiros para";
+					mes "as seguintes instancias...";
+					next;
+					mes " ";
+					mes " ";
+					if ($DTS_JondaWins == 0) {
+						mes "^FF0000Masmorra de Byalan, Nível 3^000000";
+					}
+					else if ($DTS_JondaWins == 1) {
+						mes "^FF0000Masmorra de Byalan, Nível 3^000000";
+						mes "^FF0000Torre do Relógio, 3º Andar^000000";
+					}
+					else {
+						mes "^FF0000Masmorra de Byalan, Nível 3^000000";
+						mes "^FF0000Torre do Relógio, 3º Andar^000000";
+						mes "^FF0000Entrada de Glast Heim^000000";
+					}
+					next;
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Se você estiver interessado";
+					mes "nesses destinos, então";
+					mes "seria do seu melhor";
+					mes "interesse votar em nós.";
+					mes "Você gostaria de votar";
+					mes "na Cool Event Corp.?";
+					next;
+					switch(select("No:Yes")) {
+					case 1:
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Ah, entendo... Bem, se você";
+						mes "mudar de ideia,";
+						mes "sinta-se à vontade para voltar e";
+						mes "dar seu voto para a Cool Event";
+						mes "Corp., tudo bem? Tenha um bom dia~";
+						break;
+					case 2:
+						set lhz_vote,$DTS_VoteCount+1;
+						set $DTS_JondaVotes,$DTS_JondaVotes+1;
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Obrigado pelo seu voto!";
+						mes "São clientes como você que";
+						mes "garantem o sucesso e o ótimo";
+						mes "serviço que você espera";
+						mes "da Cool Event Corp.";
+						mes "Obrigado e tenha um bom dia~";
+						break;
+					}
+				}
+				else {
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Infelizmente, não houve";
+					mes "votação suficiente na";
+					mes "última eleição, então estamos realizando";
+					mes "outra eleição para determinar";
+					mes "qual empresa irá fornecer o";
+					mes "Serviço de Teleporte para Instancias.";
+					next;
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Agradecemos que";
+					mes "você já participou";
+					mes "nesta segunda eleição";
+					mes "ao dar seu voto. Obrigado";
+					mes "pelo seu apoio~";
+				}
+			}
+			else {
+				mes "[Equipe de Votação da Cool Event Corp.]";
+				mes "Sinto muito, mas uma eleição";
+				mes "não está sendo realizada neste momento. Por favor, venha dar o seu";
+				mes "voto na próxima eleição para decidir qual empresa fornecerá o";
+				mes "Serviço de Teleporte para Instancias.";
+			}
+		//}
+		break;
+	case 3:
+		if ($DTS_Result == 1) {
+			mes "[Equipe de Votação da Cool Event Corp.]";
+			mes "Por favor, lembre-se de que nós";
+			mes "não podemos aceitar Bilhetes de";
+			mes "Teleporte Grátis ou conceder Pontos de";
+			mes "Reserva Especial para este serviço. Agora, por favor";
+			mes "escolha seu destino.";
+			next;
+			if ($DTS_JondaWins == 0) {
+				switch(select("Byalan Dungeon, Level 3 -> 4,000 z:Cancel")) {
+				case 1:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "zonda_01",255;
+						warp "iz_dun02",234,206;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Sinto muito, mas você";
+						mes "não tem zeny suficiente para";
+						mes "teleportar para este destino.";
+						mes "A taxa de teleporte é 4.000 zenys.";
+					}
+					break;
+				case 2:
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Esteja sempre certo de que";
+					mes "a Cool Event Corp. fará";
+					mes "tudo ao seu alcance para";
+					mes "garantir a satisfação de";
+					mes "seus clientes, jovens e velhos,";
+					mes "grandes e pequenos. Obrigado~";
+					break;
+				}
+			}
+			else if ($DTS_JondaWins == 1) {
+				switch(select("Byalan Dungeon, Level 3 -> 4,000 z:Clock Tower, 3rd Floor -> 4,000 z:Cancel")) {
+				case 1:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "zonda_01",255;
+						warp "iz_dun02",234,206;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Sinto muito, mas você";
+						mes "não tem zeny suficiente para";
+						mes "teleportar para este destino.";
+						mes "A taxa de teleporte é 4.000 zenys.";
+					}
+					break;
+				case 2:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "zonda_01",255;
+						warp "c_tower3",64,143;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Sinto muito, mas você";
+						mes "não tem zeny suficiente para";
+						mes "teleportar para este destino.";
+						mes "A taxa de teleporte é 4.000 zenys.";
+					}
+					break;
+				case 3:
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Esteja sempre certo de que";
+					mes "a Cool Event Corp. fará";
+					mes "tudo ao seu alcance para";
+					mes "garantir a satisfação de";
+					mes "seus clientes, jovens e velhos,";
+					mes "grandes e pequenos. Obrigado~";
+					break;
+				}
+			}
+			else {
+				mes "[Equipe de Votação da Cool Event Corp.]";
+				mes "Por favor, lembre-se de que nós";
+				mes "não podemos aceitar Bilhetes de";
+				mes "Teleporte Grátis ou conceder Pontos de";
+				mes "Reserva Especial para este serviço. Agora, por favor";
+				mes "escolha seu destino.";
+				next;
+				switch(select("Byalan Dungeon, Level 3 -> 4,000 z:Clock Tower, 3rd Floor -> 4,000 z:Glast Heim Entrance -> 4,000 z:Cancel")) {
+				case 1:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "zonda_01",255;
+						warp "iz_dun02",234,206;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Sinto muito, mas você";
+						mes "não tem zeny suficiente para";
+						mes "teleportar para este destino.";
+						mes "A taxa de teleporte é 4.000 zenys.";
+					}
+					break;
+				case 2:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "zonda_01",255;
+						warp "c_tower3",64,143;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Sinto muito, mas você";
+						mes "não tem zeny suficiente para";
+						mes "teleportar para este destino.";
+						mes "A taxa de teleporte é 4.000 zenys.";
+					}
+					break;
+				case 3:
+					if (Zeny >= 4000) {
+						set Zeny, Zeny-4000;
+						cutin "zonda_01",255;
+						warp "glast_01",368,303;
+						end;
+					}
+					else {
+						mes "[Equipe de Votação da Cool Event Corp.]";
+						mes "Sinto muito, mas você";
+						mes "não tem zeny suficiente para";
+						mes "teleportar para este destino.";
+						mes "A taxa de teleporte é 4.000 zenys.";
+					}
+					break;
+				case 4:
+					mes "[Equipe de Votação da Cool Event Corp.]";
+					mes "Esteja sempre certo de que";
+					mes "a Cool Event Corp. fará";
+					mes "tudo ao seu alcance para";
+					mes "garantir a satisfação de";
+					mes "seus clientes, jovens e velhos,";
+					mes "grandes e pequenos. Obrigado~";
+					break;
+				}
+			}
+		}
+		else if ($DTS_Result == 2) {
+			mes "[Equipe de Votação da Cool Event Corp.]";
+			mes "Sinto muito, mas a Cool Event";
+			mes "Corp. não oferece atualmente";
+			mes "o Serviço de Teleporte para Instancias";
+			mes "devido aos resultados da última";
+			mes "eleição. Por favor, vote em nós";
+			mes "na próxima vez, tudo bem? Tenha um bom dia~";
+		}
+		else {
+			mes "[Equipe de Votação da Cool Event Corp.]";
+			mes "Sinto muito, mas o";
+			mes "Serviço de Teleporte para Instancias";
+			mes "está indisponível durante eleições";
+			mes "e será reativado após os resultados da eleição serem anunciados.";
+			mes "Obrigado e tenha um bom dia.";
+		}
+		break;
+	case 4:
+		mes "[Equipe de Votação da Cool Event Corp.]";
+		mes "A Cool Event Corp. está sempre";
+		mes "trabalhando para garantir que";
+		mes "não apenas nossos clientes fiquem";
+		mes "satisfeitos, mas também que nós";
+		mes "superemos seus padrões mais elevados.";
+		mes "Obrigado e tenha um bom dia.";
+		break;
+	}
+	close2;
+	cutin "zonda_01",255;
+	end;
+}
+
+yuno,153,191,6	duplicate(VotingStaffCCE)	Cool Event Staff#yuno	874
+prontera,147,125,6	duplicate(VotingStaffCCE)	Cool Event Staff#prt	874
+moc_ruins,97,133,6	duplicate(VotingStaffCCE)	Cool Event Staff#moc	874
+geffen,117,37,6	duplicate(VotingStaffCCE)	Cool Event Staff#gef	874
+payon,153,182,6	duplicate(VotingStaffCCE)	Cool Event Staff#pay	874
+alberta,114,70,6	duplicate(VotingStaffCCE)	Cool Event Staff#alb	874
+aldebaran,138,102,6	duplicate(VotingStaffCCE)	Cool Event Staff#alde	874
+lighthalzen,154,60,6	duplicate(VotingStaffCCE)	Cool Event Staff#lhz	874
+
+yuno,103,225,0	script	Scrutiny Association#5	-1,{
+OnInit:
+	initnpctimer;
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer7200000:
+	stopnpctimer;
+	if (($DTS_Result == 0) || ($DTS_Result == 3)) {
+		announce "Currently, the Dungeon Teleport Service Provider Election is being held in all major cities. Your participation is appreciated.",bc_all,"0x70dbdb";
+	}
+	donpcevent "Scrutiny Association#5::OnEnable";
+	end;
+}
+
+einbroch,248,71,0	script	Scrutiny Association#6	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	announce "All the votes for the Dungeon Teleport Service Provider Election have been received and counted.",bc_all,"0x70dbdb";
+	end;
+
+OnTimer5000:
+	announce "The results are now in...",bc_all,"0x70dbdb";
+	end;
+
+OnTimer10000:
+	announce "This time, Cool Event Corp. will be the Dungeon Teleport Service Provider.",bc_all,"0x70dbdb";
+	end;
+
+OnTimer15000:
+	announce "Many thanks to all of you who have voted and shown your support.",bc_all,"0x70dbdb";
+	stopnpctimer;
+	end;
+}
+
+einbroch,249,71,0	script	Scrutiny Association#7	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	announce "All the votes for the Dungeon Teleport Service Provider Election have been received and counted.",bc_all,"0x70dbdb";
+	end;
+
+OnTimer5000:
+	announce "The results are now in...",bc_all,"0x70dbdb";
+	end;
+
+OnTimer10000:
+	announce "This time, Kafra Corporation will be the Dungeon Teleport Service Provider.",bc_all,"0x70dbdb";
+	end;
+
+OnTimer15000:
+	announce "Many thanks to all of you who have voted and shown your support.",bc_all,"0x70dbdb";
+	stopnpctimer;
+	end;
+}
+
+/*
+// GM only NPC used for modifying values related to the DTS system.
+// Disabled in official script.
+sec_in02,17,160,4	script	Vote Globalvar Girl#yuno	864,{
+	callfunc "F_GM_NPC";
+	mes "[Empregada da Christy]";
+	mes "Senhorita Christy!";
+	next;
+	if (callfunc("F_GM_NPC",1854,0) == 1) {
+		mes "[Empregada da Christy]";
+		mes "Eu sou a empregada da Senhorita Christy.";
+		next;
+		switch(select("Globalvar Check:Setitem Zero:Change Glbalvar")) {
+		case 1:
+			mes "As GlobalVar atuais são";
+			next;
+			mes "[Empregada da Christy]";
+			mes "Global 1 - Voting Time check : "+$DTS_Time+"";
+			mes "Global 2 - Cool Event Corp. Vote Numbers : "+$DTS_JondaVotes+"";
+			mes "Global 3 - Kafra Vote Numbers : "+$DTS_KafraVotes+"";
+			mes "Global 4 - Winner : "+$DTS_Result+"";
+			mes "Global 5 - Teleport Service Period Check: "+$DTS_PeriodCheck+"";
+			mes "Global 6 - Kafra Points : "+$DTS_KafraWins+"";
+			mes "Global 7 - Cool Event Corp. Points : "+$DTS_JondaWins+"";
+			mes "Global 8 - Setitem Check : "+$DTS_VoteCount+"";
+			next;
+			mes "[Empregada da Christy]";
+			mes "Current Setitem value is "+lhz_vote+".";
+			close;
+		case 2:
+			set lhz_vote,0;
+			close;
+		case 3:
+			mes "[Empregada da Christy]";
+			mes "Qual valor de GlobalVar você gostaria de alterar?";
+			next;
+			switch(select("1 - Voting Time:2 - Cool Event Corp. Vote Numbers:3 - Kafra Vote Numbers:4 - Winner:5 - Teleport Service Period:6 - Kafra Warp Number:7 - Cool Event Corp. Warp Number:8 - Setitem Value")) {
+			case 1:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 1000.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 1000)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_Time,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			case 2:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 1000.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 1000)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_JondaVotes,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			case 3:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 1000.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 1000)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_KafraVotes,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			case 4:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 3.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 3)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_Result,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			case 5:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 1000.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 1000)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_PeriodCheck,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			case 6:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 2.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 2)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_KafraWins,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			case 7:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 2.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 2)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_JondaWins,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			case 8:
+				mes "[Empregada da Christy]";
+				mes "Por favor, insira um número entre 0 e 10000.";
+				next;
+				input .@input;
+				if ((.@input < 0) || (.@input > 10000)) {
+					mes "[Empregada da Christy]";
+					mes "O valor está incorreto.";
+					close;
+				}
+				set $DTS_VoteCount,.@input;
+				mes "[Empregada da Christy]";
+				mes "O valor foi modificado.";
+				close;
+			}
+		}
+	}
+	else {
+		mes "[Empregada da Christy]";
+		mes "Senhorita Christy...";
+		close;
+	}
+}
+*/

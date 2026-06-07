@@ -1,0 +1,589 @@
+//===== rAthena Script ======================================= 
+//= Ninja Job Quest
+//===== By: ================================================== 
+//= Legionaire, Kisuka
+//===== Current Version: ===================================== 
+//= 1.7
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Ninja Job Change Quest
+//===== Additional Comments: ================================= 
+//= 1.1 Optimized, updated, checked [Lupus]
+//= 1.2 Added Akagi [Playtester]
+//= 1.3 Updated dialogs to official ones and optimized [SinSloth]
+//= 1.4 Fixed a minor bug [SinSloth]
+//= 1.5 Updated to match AEGIS script and Added Quest Log commands. [Kisuka]
+//= 1.6 Fixed AEGIS amatsu warp typo. [Kisuka]
+//= 1.7 Kagerou/Oboro support (Class -> BaseClass) [Euphy]
+//============================================================ 
+
+alberta,30,65,3	script	Akagi	730,{
+	if (Class == Job_Novice) {
+		if (JobLevel == 10) {
+			mes "[Akagi]";
+			mes "Hmm...";
+			mes "Você deve ter vindo,";
+			mes "sentindo que alguém";
+			mes "está esperando por você aqui.";
+			mes "Diga-me, você busca";
+			mes "o caminho da paciência?";
+			next;
+			if(select("No:Yes") == 1) {
+				mes "[Akagi]";
+				mes "Entendo.";
+				mes "Cada um com seu caminho,";
+				mes "eu suponho. Cuide";
+				mes "de si mesmo.";
+				close;
+			}
+			mes "[Akagi]";
+			mes "Muito bem.";
+			mes "Então, deixe-me";
+			mes "colocá-lo nesse";
+			mes "caminho imediatamente...";
+			close2;
+			switch(rand(3)) {
+				case 1:
+					warp "amatsu",170,229;
+					end;
+				case 2:
+					warp "amatsu",216,188;
+					end;
+				default:
+					warp "amatsu",178,176;
+					end;
+			}
+		} else {
+			mes "[Akagi]";
+			mes "Hm? Não posso ser";
+			mes "de qualquer utilidade para";
+			mes "você até que cresça";
+			mes "um pouco mais forte...";
+			close;
+		}
+	} else {
+		mes "[Akagi]";
+		mes "Hmm...";
+		mes "Você e eu...";
+		mes "Somos bastante iguais em";
+		mes "termos de habilidade de combate.";
+		mes "Talvez possamos treinar";
+		mes "juntos em algum momento.";
+		close;
+	}
+}
+
+que_ng,30,65,3	script	Kuuga Gai#nq	730,{
+	if (Upper == 2) {
+		mes "[Kuuga Gai]";
+		mes "Eu... eu nunca";
+		mes "vi um bebê tão";
+		mes "poderoso quanto você!";
+		mes "A-afaste-se, sua";
+		mes "aberração da natureza!";
+		close;
+	}
+	if (Class == Job_Novice) {
+		if (JobLevel < 10) {
+			mes "[Kuuga Gai]";
+			mes "Hm? Você veio para";
+			mes "aprender como ser um Ninja?";
+			mes "Você ainda não tem experiência";
+			mes "suficiente, então volte";
+			mes "depois que estiver mais familiarizado";
+			mes "com o combate a monstros.";
+			close;
+		}
+		if (NINJ_Q == 0) {
+			mes "["+strcharinfo(0)+"]";
+			mes "Com licença.";
+			mes "O-olá?";
+			next;
+			mes "[Kuuga Gai]";
+			mes "...............................";
+			mes "Como você fez isso?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Fazer o quê? Eu não";
+			mes "fiz nada, eu acho...";
+			next;
+			mes "[Kuuga Gai]";
+			mes "C-como você é capaz de";
+			mes "me ver? Eu deveria";
+			mes "estar invisível a olho nu.";
+			mes "Ah, agora entendi. Wildcat Joe";
+			mes "deve ter enviado você para me matar! Não cairei nos seus truques! Morra!";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "E-espere! E-eu nem";
+			mes "sei quem é o Wildcat Joe!";
+			mes "Acalme-se, não há";
+			mes "necessidade de ser violento!";
+			next;
+			mes "[Kuuga Gai]";
+			mes "O quê...?";
+			mes "Como você desviou";
+			mes "de todos os meus ataques?";
+			mes "Você tem talento,";
+			mes "tenho que admitir.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "...............................";
+			mes "Eu vim aqui na esperança";
+			mes "de mudar minha classe";
+			mes "para Ninja.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "...Oh. É só isso?";
+			mes "Hmm, você tem um grande";
+			mes "potencial, mas não posso ajudar";
+			mes "você agora. Tenho muitos";
+			mes "inimigos e não posso baixar";
+			mes "a guarda nem por um segundo.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Aquele Wildcat Joe é";
+			mes "completamente implacável...!";
+			mes "Ele pode atacar a qualquer momento!";
+			mes "Ele fará qualquer coisa para alcançar";
+			mes "a vitória sobre seus inimigos!";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Espere, espere, eu acabei";
+			mes "de pensar em algo.";
+			mes "Talvez você possa me ajudar.";
+			mes "Faça o que eu pedir, e eu vou te ensinar";
+			mes "algumas das minhas habilidades se você";
+			mes "realmente quiser ser um Ninja.";
+			next;
+			if(select("Sure.:No, thanks.") == 2) {
+				mes "[Kuuga Gai]";
+				mes "Hm? Bem, tudo bem.";
+				mes "Ainda assim, não vejo";
+				mes "por que não podemos ajudar";
+				mes "um ao outro neste";
+				mes "pequeno dilema...";
+				close;
+			}
+			mes "[Kuuga Gai]";
+			mes "Ótimo! Agora, eu queria";
+			mes "pedir ao Wildcat Joe se ele";
+			mes "concordaria com uma trégua temporária.";
+			mes "Estou ciente de que ambos";
+			mes "estamos sem armas, então";
+			mes "deveríamos estar bem equipados primeiro.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Por favor, leve esta carta";
+			mes "e entregue-a ao Wildcat";
+			mes "Joe em Einbroch. Ele é um mestre";
+			mes "do disfarce, então fique bem";
+			mes "atento. Ah, e procure";
+			mes "por ele em um lugar alto.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Sim, Wildcat Joe";
+			mes "sempre teve a mania";
+			mes "de se esconder em lugares altos.";
+			mes "De qualquer forma, depois que você entregar";
+			mes "a carta, volte e";
+			mes "me diga a resposta dele.";
+			set NINJ_Q,1;
+			setquest 6015;
+			close;
+		}
+		else if (NINJ_Q == 1) {
+			mes "[Kuuga Gai]";
+			mes "Mesmo que esta tarefa";
+			mes "não seja tão urgente,";
+			mes "por favor, apresse-se para";
+			mes "Einbroch e entregue";
+			mes "minha carta ao Wildcat Joe.";
+			close;
+		}
+		else if (NINJ_Q == 2) {
+			mes "[Kuuga Gai]";
+			mes "Você entregou aquela";
+			mes "carta ao Wildcat Joe?";
+			mes "Eu ainda preciso saber a";
+			mes "resposta dele para minha proposta";
+			mes "de trégua. Enfim, veja";
+			mes "se consegue arrancar isso dele.";
+			close;
+		}
+		else if (NINJ_Q == 3) {
+			mes "[Kuuga Gai]";
+			mes "Ah, você retornou.";
+			mes "Então o Wildcat Joe enviou";
+			mes "você de volta com a";
+			mes "resposta dele? Ótimo, ótimo,";
+			mes "por favor, deixe-me ler.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "O quê...?! Como ele pôde";
+			mes "rejeitar minha proposta de";
+			mes "trégua?! Isso só pode";
+			mes "significar que ele fez outra";
+			mes "Kunai. Droga! Preciso alcançar";
+			mes "ele, ou estarei morto!";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Escute, você tem que me ajudar";
+			mes "novamente! Preciso que você";
+			mes "recolha alguns materiais para que";
+			mes "eu possa fabricar minha própria Kunai para lutar contra o Wildcat Joe. Então, eu irei";
+			mes "e mudar sua classe para Ninja.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Tudo que você precisa";
+			mes "trazer para mim é";
+			mes "^3355FF5 Cyfar^000000 e";
+			mes "^3355FF1 Phracon^000000.";
+			mes "Por favor, consiga isso";
+			mes "o mais rápido que puder!";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Huh? Engraçado,";
+			mes "o Wildcat Joe realmente";
+			mes "me pediu para reunir";
+			mes "esses mesmos materiais.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Maldição! Então isso significa...";
+			mes "Você realmente ajudou o Joe";
+			mes "a fabricar a Kunai dele! Não!";
+			mes "Eu deveria ter pensado nisso";
+			mes "antes! Bem, agora é tarde";
+			mes "demais. Apenas a-apresse-se!";
+			set NINJ_Q,4;
+			changequest 6017,6018;
+			close;
+		}
+		else if (NINJ_Q == 4) {
+			if (countitem(7053) < 5 || countitem(1010) < 1) {
+				mes "[Kuuga Gai]";
+				mes "Apresse-se e traga";
+				mes "^3355FF5 Cyfar^000000 e";
+				mes "^3355FF1 Phracon^000000 para mim,";
+				mes "para que eu possa fabricar";
+				mes "minha própria Kunai para usar";
+				mes "contra o Wildcat Joe!";
+				close;
+			}
+			if (SkillPoint != 0) {
+				mes "[Kuuga Gai]";
+				mes "Opa, opa...";
+				mes "Você ainda tem alguns";
+				mes "Pontos de Habilidade sobrando.";
+				mes "É melhor você gastar todos";
+				mes "eles antes de";
+				mes "mudar de classe, certo?";
+				close;
+			}
+			mes "[Kuuga Gai]";
+			mes "Ah, você voltou com";
+			mes "tudo que eu preciso.";
+			mes "Você veio antes do que";
+			mes "eu esperava, hein? Ótimo,";
+			mes "como prometido, eu transformarei";
+			mes "você em um Ninja.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Deixe-me me apresentar";
+			mes "formalmente. Eu sou o Ninja Superior Kuuga Gai";
+			mes "do Corpo Ninja Touga, e";
+			mes "sou responsável pela equipe de busca";
+			mes "para encontrar o Sr. Kazma.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "O Sr. Kazma é o chefe";
+			mes "da minha vila, mas ele";
+			mes "fugiu. Isso resultou";
+			mes "em um conflito interno dentro";
+			mes "do Corpo Ninja. As coisas estão";
+			mes "bem instáveis agora...";
+			next;
+			mes "[Kuuga Gai]";
+			mes "Inicialmente eu não queria";
+			mes "aceitá-lo como Ninja porque";
+			mes "dessa situação complicada.";
+			mes "No entanto, você provou que";
+			mes "você é verdadeiramente digno de se juntar";
+			mes "às fileiras Ninja.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "De acordo com a carta dele, até";
+			mes "o Joe tem uma boa opinião sobre você. Apenas";
+			mes "lembre-se de que, como um Ninja, sua";
+			mes "missão é sua maior prioridade. Mas não deixe que os objetivos da missão";
+			mes "substituam sua consciência.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "''Sigilo acima de tudo.''";
+			mes "Para manter nossos segredos nas";
+			mes "sombras, você só pode comprar";
+			mes "ou vender armas Ninja com";
+			mes "revendedores autorizados. Por favor,";
+			mes "mantenha isso em mente.";
+			next;
+			mes "[Kuuga Gai]";
+			mes "A partir de hoje, você é";
+			mes "agora um membro orgulhoso do";
+			mes "Corpo Ninja Touga. Seja tão";
+			mes "ágil quanto o vento, e tão";
+			mes "silencioso quanto as sombras que caem.";
+			callfunc "Job_Change",Job_Ninja;
+			set NINJ_Q,5;
+			delitem 7053,5; // Cyfar
+			delitem 1010,1; // Phracon
+			getitem 13010,1;	// Asura
+			completequest 6018;
+			close;
+		}
+		else {
+			mes "[Kuuga Gai]";
+			mes "Como você tem passado?";
+			mes "Treine duro: você quer";
+			mes "ser capaz de desaparecer";
+			mes "sem deixar rastros. Se você";
+			mes "conseguir fazer isso, você terá";
+			mes "o respeito de qualquer Ninja~";
+			close;
+		}
+	} else {
+		if (BaseClass == Job_Ninja) {
+			mes "[Kuuga Gai]";
+			mes "Como você tem passado?";
+			mes "Treine duro: você quer";
+			mes "ser capaz de desaparecer";
+			mes "sem deixar rastros. Se você";
+			mes "conseguir fazer isso, você terá";
+			mes "o respeito de qualquer Ninja~";
+			close;
+		} else {
+			mes "[Kuuga Gai]";
+			mes "O quê...?";
+			mes "Como você foi capaz";
+			mes "de me encontrar escondido";
+			mes "nas sombras?!";
+			mes "Você deve ser mais do que";
+			mes "um aventureiro comum, hein?";
+			close;
+		}
+	}
+}
+
+einbroch,184,194,3	script	Suspicious Man#nq	881,{
+	if (NINJ_Q == 1) {
+		mes "[Homem Suspeito]";
+		mes "Eu viajei para muitos";
+		mes "países, mas eu nunca";
+		mes "estive em um prédio tão alto";
+		mes "quanto a Torre de Einbroch. Todos os";
+		mes "prédios da minha cidade natal";
+		mes "são minúsculos em comparação...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Oh, você é de";
+		mes "Amatsu? Estou procurando";
+		mes "por alguém chamado";
+		mes "Wildcat Joe de lá.";
+		next;
+		mes "[Homem Suspeito]";
+		mes "...Não. Não, eu na verdade";
+		mes "sou de Izlude, e estou apenas";
+		mes "aqui em Einbroch por alguns";
+		mes "minerais. Diga-me, por que";
+		mes "você está procurando por este Wildcat Joe?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Bem, eu preciso entregar";
+		mes "esta carta para ele e";
+		mes "obter sua resposta para que";
+		mes "eu possa me tornar um Ninja.";
+		next;
+		mes "[Homem Suspeito]";
+		mes "Sério? Agora que penso";
+		mes "nisso, acho que já";
+		mes "esbarrei uma ou duas vezes com ele";
+		mes "nesta cidade. Embora, ele prefira ser chamado de ''Red Leopard Joe,'',";
+		mes "em vez de ''Wildcat Joe.''";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Eu realmente quero te ajudar";
+		mes "a encontrá-lo, mas primeiro preciso";
+		mes "encontrar os minerais que";
+		mes "estou procurando. Se você";
+		mes "não se importar, você me ajudaria?";
+		mes "Assim, posso te ajudar a encontrar o Joe.";
+		next;
+		if(select("Don't worry, I'll find him alone.:Sure, I'll help you.") == 1) {
+			mes "[Homem Suspeito]";
+			mes "Você tem certeza disso...?";
+			mes "O Red Leopard Joe é um verdadeiro";
+			mes "mestre do disfarce. Você";
+			mes "vai precisar de toda ajuda possível";
+			mes "para encontrá-lo...";
+			close;
+		}
+		mes "[Homem Suspeito]";
+		mes "Ótimo, fico feliz";
+		mes "em ouvir isso. Por favor,";
+		mes "ajude-me a encontrar";
+		mes "^3355FF5 Cyfar^000000 e";
+		mes "^3355FF1 Phracon^000000.";
+		set NINJ_Q,2;
+		changequest 6015,6016;
+		close;
+	}
+	else if (NINJ_Q == 2) {
+		if (countitem(7053) < 5 || countitem(1010) < 1) {
+			mes "[Homem Suspeito]";
+			mes "Por favor, traga";
+			mes "^3355FF5 Cyfar^000000 e";
+			mes "^3355FF1 Phracon^000000 para mim o";
+			mes "mais rápido que puder. Então,";
+			mes "eu posso te ajudar a encontrar";
+			mes "o Red Leopard Joe.";
+			close;
+		}
+		mes "[Homem Suspeito]";
+		mes "Bom, bom. Você";
+		mes "trouxe os minerais...";
+		mes "Agora, é minha vez de";
+		mes "te ajudar agora. Aqui,";
+		mes "deixe-me ver essa carta.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "?????!!";
+		next;
+		mes "[Homem Suspeito]";
+		mes "Por quê? Você não trouxe a carta do Kuuga Gai para mim?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Você é...";
+		mes "Você é o Wildcat Joe?";
+		next;
+		mes "[Homem Suspeito]";
+		mes "...Sim, mas eu prefiro";
+		mes "ser chamado de Red Leopard Joe.";
+		mes "O Kuuga Gai te enviou para mim, certo?";
+		mes "Ele é o único que me chama";
+		mes "assim. Então você quer ser";
+		mes "um Ninja, hein? Hmm, tudo bem.";
+		next;
+		mes "[Red Leopard Joe]";
+		mes "Se você quer ser um Ninja,";
+		mes "você deve sempre tomar cuidado";
+		mes "com o que vê e em quem confia. Não se esqueça de que se seus";
+		mes "segredos forem descobertos, então você está acabado como Ninja.";
+		next;
+		mes "[Red Leopard Joe]";
+		mes "Lembre-se de se mover";
+		mes "rapidamente, e sempre";
+		mes "desaparecer sem deixar rastros.";
+		mes "Permanecer escondido nas";
+		mes "sombras é realmente nosso";
+		mes "poder supremo.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Entendo...";
+		mes "...........";
+		next;
+		mes "[Red Leopard Joe]";
+		mes "Por enquanto, deixe-me ler";
+		mes "esta carta. Vamos ver...";
+		mes "Hm. Pensei que o Kuuga Gai";
+		mes "queria me desafiar";
+		mes "novamente, mas ele na verdade quer";
+		mes "uma trégua temporária? Hah!";
+		next;
+		mes "[Red Leopard Joe]";
+		mes "Graças à sua ajuda,";
+		mes "agora tenho os minerais";
+		mes "que preciso para construir uma Kunai!";
+		mes "Hahaha! Não concordarei com uma trégua quando tenho a vantagem!";
+		next;
+		mes "[Red Leopard Joe]";
+		mes "Enfim, deixe-me escrever minha";
+		mes "resposta para ele. Eu também";
+		mes "vou lhe dar minha recomendação...";
+		mes "Acho que você será um ótimo";
+		mes "Ninja, mesmo que eu tenha te enganado";
+		mes "agora pouco. Heh heh heh!";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "......";
+		mes ".........";
+		mes "............";
+		next;
+		mes "[Red Leopard Joe]";
+		mes "Aqui está.";
+		mes "Por favor, leve esta";
+		mes "carta ao Kuuga Gai.";
+		mes "Vai demorar um pouco para";
+		mes "voltar para Amatsu, então deixe";
+		mes "que eu te envie direto para lá...";
+		delitem 1010,1;	// Phracon
+		delitem 7053,5;	// Cyfar
+		set NINJ_Q,3;
+		changequest 6016,6017;
+		close2;
+		warp "amatsu",113,127;
+		end;
+	}
+	else if (NINJ_Q == 3) {
+		mes "[Red Leopard Joe]";
+		mes "Eh? Não tenho certeza do que";
+		mes "aconteceu, mas parece";
+		mes "que você ainda não entregou";
+		mes "minha resposta ao Kuuga Gai.";
+		mes "Devo te enviar diretamente";
+		mes "para Amatsu agora mesmo?";
+		next;
+		if(select("No, thanks.:Yes, please.") == 1) {
+			mes "[Red Leopard Joe]";
+			mes "Tudo bem. Bem, eu só";
+			mes "estava tentando te economizar";
+			mes "um pouco de tempo.";
+			close;
+		}
+		mes "[Red Leopard Joe]";
+		mes "Ok, então.";
+		mes "Adeus por enquanto.";
+		close2;
+		warp "amatsu",113,127;
+		end;
+	}
+	else if (NINJ_Q == 4) {
+		mes "[Red Leopard Joe]";
+		mes "O Kuuga Gai te pediu para";
+		mes "reunir alguns materiais";
+		mes "também? Ah bem, suponho";
+		mes "que não posso culpá-lo.";
+		mes "Além disso, eu deveria ser capaz";
+		mes "de vencê-lo em uma luta justa~";
+		close;
+	}
+	else if (NINJ_Q == 5 && BaseClass == Job_Ninja) {
+		mes "[Red Leopard Joe]";
+		mes "Oh, você é um Ninja~";
+		mes "Espero que você continue a";
+		mes "treinar e dominar";
+		mes "todas as habilidades Ninja que";
+		mes "puder. Lembre-se sempre";
+		mes "de se misturar nas sombras.";
+		close;
+	}
+	else {
+		mes "[Turista]";
+		mes "Eu viajei para muitos";
+		mes "países, mas eu nunca";
+		mes "estive em um prédio tão alto";
+		mes "quanto a Torre de Einbroch. Todos os";
+		mes "prédios da minha cidade natal";
+		mes "são minúsculos em comparação...";
+		close;
+	}
+}

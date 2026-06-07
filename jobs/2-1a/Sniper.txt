@@ -1,0 +1,83 @@
+//===== rAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,44,55,5	script	Sniper#Valkyrie	727,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[Atirador de Elite]";
+			mes "Parabéns.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		mes "[Atirador de Elite]";
+		mes "Um disparo.";
+		mes "Uma morte.";
+		mes "Não é tão difícil";
+		mes "uma vez que você desenvolve a";
+		mes "visão para esse estilo";
+		mes "de combate.";
+		close;
+	}
+	else if (ADVJOB == Job_Sniper && Class == Job_Archer_High && JobLevel > 39) {
+		mes "[Atirador de Elite]";
+		mes "O mundo precisa";
+		mes "de arqueiros poderosos";
+		mes "como você. Você está pronto para";
+		mes "a incrível responsabilidade?";
+		next;
+		mes "[Atirador de Elite]";
+		mes "Você está disposto a";
+		mes "dar o próximo passo e";
+		mes "se tornar um Atirador de Elite?";
+		next;
+		if (select("No.:Yes.") == 1) {
+			mes "[Atirador de Elite]";
+			mes "Quando estiver pronto,";
+			mes "sinta-se à vontade para voltar.";
+			mes "Honra aos guerreiros!";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[Atirador de Elite]";
+			mes "Ainda é possível aprender mais habilidades. Por favor, use";
+			mes "todos os seus Pontos de Habilidade restantes antes de retornar a mim.";
+			close;
+		}
+		jobchange Job_Sniper;
+		set ADVJOB,0;
+		mes "[Atirador de Elite]";
+		mes "Parabéns!";
+		mes "Como um Atirador de Elite, espero";
+		mes "que os asseclas do mal";
+		mes "nunca estejam seguros enquanto";
+		mes "estiverem na mira";
+		mes "do seu olhar!";
+		close;
+	}
+	mes "[Atirador de Elite]";
+	mes "Bem-vindo";
+	mes "a Valhalla,";
+	mes "o Salão da Honra.";
+	next;
+	mes "[Atirador de Elite]";
+	mes "Por favor, fique";
+	mes "à vontade";
+	mes "enquanto estiver aqui.";
+	mes "Honra aos guerreiros!";
+	close;
+}
