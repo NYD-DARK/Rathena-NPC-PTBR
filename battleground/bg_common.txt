@@ -33,7 +33,7 @@ bat_room,160,141,3	script	Prince Croix	416,{
 	mes "[Príncipe Croix]";
 	mes "Sábio aventureiro, por que você não nos empresta seu poder para a vitória?";
 	next;
-	switch(select("What's the reason for the Battle?:Tell me about General Guillaume")) {
+	switch(select("Qual o motivo da Batalha?:Fale-me sobre o General Guillaume")) {
 	case 1:
 		cutin "bat_crua2",2;
 		mes "[Príncipe Croix]";
@@ -44,7 +44,7 @@ bat_room,160,141,3	script	Prince Croix	416,{
 		mes "O General Guillaume pode ter vantagem nesta batalha por ser o grande general de Maroll, mas isso não significa automaticamente que ele vencerá.";
 		mes "Quero vencer esta batalha para poder trazer prosperidade ao povo de Maroll. Eles já sofreram o suficiente com a guerra...";
 		next;
-		switch(select("Yes, I want to join you.:End Conversation")) {
+		switch(select("Sim, quero me juntar a você.:Encerrar Conversa")) {
 		case 1:
 			cutin "bat_crua1",2;
 			mes "[Príncipe Croix]";
@@ -72,7 +72,7 @@ bat_room,160,141,3	script	Prince Croix	416,{
 		mes "[Príncipe Croix]";
 		mes "Não desejo derramar sangue, mas não tenho outra escolha a não ser lutar pela possibilidade de paz e pelo bem do meu povo.";
 		next;
-		switch(select("Yes, I want to join you.:End Conversation")) {
+		switch(select("Sim, quero me juntar a você.:Encerrar Conversa")) {
 		case 1:
 			cutin "bat_crua1",2;
 			mes "[Príncipe Croix]";
@@ -100,7 +100,7 @@ bat_room,160,159,3	script	General Guillaume	420,{
 	mes "[General Guillaume]";
 	mes "Aventureiro de sangue quente, precisamos da sua habilidade para vencer esta batalha.";
 	next;
-	switch(select("What's the reason for the Battle?:Tell me about Prince Croix")) {
+	switch(select("Qual o motivo da Batalha?:Fale-me sobre o Príncipe Croix")) {
 	case 1:
 		cutin "bat_kiyom1",2;
 		mes "[General Guillaume]";
@@ -114,7 +114,7 @@ bat_room,160,159,3	script	General Guillaume	420,{
 		mes "Esta, porém, não é apenas uma batalha entre nós. Esta batalha determinará o futuro deste país.";
 		mes "Eu juro pela minha honra provar que sou aquele que pode proteger Maroll contra ameaças externas.";
 		next;
-		switch(select("Yes, I want to join you.:End Conversation")) {
+		switch(select("Sim, quero me juntar a você.:Encerrar Conversa")) {
 		case 1:
 			cutin "bat_kiyom2",2;
 			mes "[General Guillaume]";
@@ -149,7 +149,7 @@ bat_room,160,159,3	script	General Guillaume	420,{
 		mes "Suas crenças irreais vão afogar este país na pobreza e enfraquecer o povo. Se ele se tornar rei, Maroll nunca terá descanso dos ataques de outros países.";
 		mes "Quero ensiná-lo o que torna este pequeno país tão poderoso e próspero. É o poder militar!";
 		next;
-		switch(select("I want to join your army!:End Conversation")) {
+		switch(select("Quero me juntar ao seu exército!:Encerrar Conversa")) {
 		case 1:
 			cutin "bat_kiyom2",2;
 			mes "[General Guillaume]";
@@ -186,7 +186,7 @@ bat_room,148,150,5	script	Teleporter#Battlefield	124,{
 	mes "[Teletransportador]";
 	mes "Deseja deixar o campo de batalha? Use meus serviços para retornar à cidade.";
 	next;
-	switch(select("Leave:Don't Leave")) {
+	switch(select("Sair:Don't Sair")) {
 	case 1:
 		mes "[Teletransportador]";
 		switch(bat_return) {
@@ -224,7 +224,7 @@ bat_room,148,150,5	script	Teleporter#Battlefield	124,{
 			setarray .@xy[0],156,46;
 			break;
 		}
-		mes "You will be sent back to "+.@mapname$[0]+".";
+		mes "Você será enviado de volta para "+.@mapname$[0]+".";
 		close2;
 		warp .@mapname$[1],.@xy[0],.@xy[1];
 		break;
@@ -245,7 +245,7 @@ bat_room,148,150,5	script	Teleporter#Battlefield	124,{
 	mes "Os dois príncipes do reino estão agora batalhando pelo trono de Maroll, e precisam de soldados experientes como você.";
 	mes "Que tal emprestar seu poder a um dos príncipes do Reino de Maroll?";
 	next;
-	switch(select("Join:Don't Join")) {
+	switch(select("Participar:Don't Participar")) {
 	case 1:
 		mes "[Recrutador de Batalha de Maroll]";
 		mes "Que o deus da guerra o abençoe.";
@@ -342,7 +342,7 @@ bat_room,1,151,3	script	Switch#batgnd	81,{
 	} else {
 		mes "Posso ajudar?";
 		next;
-		switch(select("Close Battlefield:Open Battlefield:Reset a01:Reset b01:Reset a02:Reset b02")) {
+		switch(select("Fechar Campo de Batalha:Abrir Campo de Batalha:Resetar a01:Resetar b01:Resetar a02:Resetar b02")) {
 		case 1:
 			disablenpc "Tierra Gorge Officer#01a";
 			disablenpc "Tierra Gorge Officer#02a";
@@ -396,20 +396,20 @@ bat_room,160,150,3	script	Erundek	109,{
 	mes "Você tem os emblemas do campo de batalha?";
 	mes "Posso trocar Emblemas de Bravura e Emblemas de Valor por itens de recompensa.";
 	next;
-	switch(select("Exchange Badges:Check the Catalog")) {
+	switch(select("Trocar Emblemas:Verificar o Catálogo")) {
 	case 1:
 		mes "[Erundek]";
 		mes "Que tipo de itens você gostaria de trocar?";
 		mes "Para verificar mais informações sobre os itens de recompensa, por favor use o nosso ^3131FFCatálogo^000000.";
 		next;
-		switch(select("Weapon:Armor:Accessory:Consumable")) {
+		switch(select("Arma:Armadura:Acessório:Consumível")) {
 		case 1:
 			mes "[Erundek]";
 			mes "Você escolheu ^3131FFArma^000000.";
 			mes "As seguintes armas estão disponíveis para troca com os emblemas do campo de batalha.";
 			mes "Por favor note que itens por ^3131FFEmblemas de Bravura são indicados como (EB)^000000, e ^3131FFEmblemas de Valor como (EV)^000000.";
 			next;
-			switch(select("Dagger/OneSword/TwoSword/TwoSpear:Staff/Mace/TwoAxe/Shuriken:Bow/Katar/Music/Whip:Book/Knuckle:Revolver/Rifle/Gatling/Shotgun/Launcher")) {
+			switch(select("Adaga/Espada de Uma Mão/Espada de Duas Mãos/Lança de Duas Mãos:Cajado/Maça/Machado de Duas Mãos/Shuriken:Arco/Katar/Musical/Chicote:Livro/Soqueira:Revólver/Rifle/Gatling/Escopeta/Lançador")) {
 			case 1:
 				mes "[Erundek]";
 				mes "Os seguintes itens estão disponíveis na categoria ^3131FFAdaga, Espada de Uma Mão, Espada de Duas Mãos e Lança de Duas Mãos^000000.";
@@ -447,21 +447,21 @@ bat_room,160,150,3	script	Erundek	109,{
 			set .@i, (select(.@menu$)-1)*2;
 			set .@type$, ((.@Weapons[.@i+1]==7828)?"(BB)":"(VB)");
 			mes "[Erundek]";
-			mes "You chose ^3131FF"+getitemname(.@Weapons[.@i])+.@type$+"^000000.";
-			mes "You can exchange for this item with ^FF0000100 "+getitemname(.@Weapons[.@i+1])+"^000000.";
+			mes "Você escolheu ^3131FF"+getitemname(.@Weapons[.@i])+.@type$+"^000000.";
+			mes "Você pode trocar por este item com ^FF0000100 "+getitemname(.@Weapons[.@i+1])+"^000000.";
 			mes "Gostaria de realizar a troca?";
 			next;
-			switch(select("Do not exchange:Exchange")) {
+			switch(select("Não trocar:Trocar")) {
 			case 1:
 				break;
 			case 2:
 				mes "[Erundek]";
-				mes "Would you like to spend ^FF0000100 "+getitemname(.@Weapons[.@i+1])+"^000000 and receive a ^3131FF"+getitemname(.@Weapons[.@i])+.@type$+"^000000?";
+				mes "Você gostaria de gastar ^FF0000100 "+getitemname(.@Weapons[.@i+1])+"^000000 and receive a ^3131FF"+getitemname(.@Weapons[.@i])+.@type$+"^000000?";
 				next;
 				mes "[Erundek]";
 				mes "Lembre-se, os Itens de Recompensa do Campo de Batalha são ^FF0000Presos ao Personagem^000000. Tem certeza de que quer este item?";
 				next;
-				switch(select("Yes:No")) {
+				switch(select("Sim:Não")) {
 				case 1:
 					mes "[Erundek]";
 					if (countitem(.@Weapons[.@i+1]) >= 100) {
@@ -469,7 +469,7 @@ bat_room,160,150,3	script	Erundek	109,{
 						delitem .@Weapons[.@i+1],100;
 						getitem .@Weapons[.@i],1;
 					}
-					else mes "I'm sorry, but you don't have enough badges to exchange.";
+					else mes "Sinto muito, mas você não tem emblemas suficientes para a troca.";
 					close;
 				case 2:
 					break;
@@ -484,7 +484,7 @@ bat_room,160,150,3	script	Erundek	109,{
 			mes "Você escolheu ^3131FFArmadura^000000.";
 			mes "As seguintes armaduras estão disponíveis para troca com os emblemas do campo de batalha.";
 			next;
-			switch(select("Garments / Shoes:Armor")) {
+			switch(select("Capas / Sapatos:Armadura")) {
 			case 1:
 				setarray .@Items[0],2538,50,2539,50,2540,50,2435,50,2436,50,2437,50;
 				break;
@@ -523,21 +523,21 @@ bat_room,160,150,3	script	Erundek	109,{
 		set .@menu$, .@menu$+getitemname(.@Items[.@i])+":";
 	set .@i, (select(.@menu$)-1)*2;
 	mes "[Erundek]";
-	mes "You chose ^3131FF"+getitemname(.@Items[.@i])+"^000000.";
+	mes "Você escolheu ^3131FF"+getitemname(.@Items[.@i])+"^000000.";
 	switch(.@Items[.@i]) {
-		case 2720: mes "This item is for Swordman and Taekwon Master Class only."; break;
-		case 2721: mes "This item is for Thief Class only."; break;
-		case 2722: mes "This item is for Acolyte Class only."; break;
-		case 2723: mes "This item is for Magician Class only."; break;
-		case 2724: mes "This item is for Archer Class only."; break;
-		case 2725: mes "This item is for Merchant Class only."; break;
-		case 2733: mes "This item is for Gunslinger only."; break;
+		case 2720: mes "Este item é apenas para a Classe Espadachim e Mestre Taekwon."; break;
+		case 2721: mes "Este item é apenas para a Classe Gatuno."; break;
+		case 2722: mes "Este item é apenas para a Classe Noviço."; break;
+		case 2723: mes "Este item é apenas para a Classe Mago."; break;
+		case 2724: mes "Este item é apenas para a Classe Arqueiro."; break;
+		case 2725: mes "Este item é apenas para a Classe Mercador."; break;
+		case 2733: mes "Este item é apenas para Justiceiro."; break;
 		default: break;
 	}
-	mes "You can exchange for this item with ^FF0000"+.@Items[.@i+1]+" "+getitemname(7828)+" or "+.@Items[.@i+1]+" "+getitemname(7829)+"^000000.";
+	mes "Você pode trocar por este item com ^FF0000"+.@Items[.@i+1]+" "+getitemname(7828)+" or "+.@Items[.@i+1]+" "+getitemname(7829)+"^000000.";
 	mes "Gostaria de realizar a troca?";
 	next;
-	switch(select("Do not exchange:Exchange")) {
+	switch(select("Não trocar:Trocar")) {
 	case 1:
 		mes "[Erundek]";
 		mes "Você precisa de mais tempo para verificar os itens?";
@@ -545,14 +545,14 @@ bat_room,160,150,3	script	Erundek	109,{
 	case 2:
 		mes "[Erundek]";
 		mes "Qual Emblema você quer trocar?";
-		mes "You need ^3131FF"+.@Items[.@i+1]+" Badges^000000 to exchange.";
+		mes "Você precisa de ^3131FF"+.@Items[.@i+1]+" Badges^000000 to exchange.";
 		next;
 		if (.@item[0] < 12269 || .@item[0] > 12273 ) {
 			mes "[Erundek]";
 			mes "Lembre-se, os Itens de Recompensa do Campo de Batalha são ^FF0000Presos ao Personagem^000000. Tem certeza de que quer este item?";
 			next;
 		}
-		set .@j, select("Bravery Badge:Valor Badge:Cancel");
+		set .@j, select("Emblema de Bravura:Emblema de Valor:Cancelar");
 		mes "[Erundek]";
 		if (.@j == 3) {
 			mes "Você cancelou a troca.";
@@ -564,7 +564,7 @@ bat_room,160,150,3	script	Erundek	109,{
 			delitem .@cost, .@Items[.@i+1];
 			getitem .@Items[.@i],1;
 		}
-		else mes "You do not have enough "+getitemname(.@cost)+"s.";
+		else mes "Você não tem "+getitemname(.@cost)+"s.";
 		break;
 	}
 	close;

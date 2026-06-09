@@ -18,11 +18,11 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 		delitem 6376,.@pointstoadd;
 		set kvm_point,kvm_point+.@pointstoadd;
 		mes "[Logística]";
-		mes "Are those "+getitemname(6376)+"s I see?";
+		mes "São esses "+getitemname(6376)+"s I see?";
 		mes "Nós não aceitamos mais essa moeda,";
 		mes "mas eu posso trocá-las para você,";
-		mes "So you have "+.@pointstoadd+" "+getitemname(6376)+"s?";
-		mes "Alright, all set, you now have ^580080"+ kvm_point +"^000000 KVM Points.";
+		mes "Então você tem "+.@pointstoadd+" "+getitemname(6376)+"s?";
+		mes "Certo, tudo pronto, você agora tem ^580080"+ kvm_point +"^000000 KVM Points.";
 		next;
 	}
 	if (checkweight(1201,1) == 0) {
@@ -42,7 +42,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 	mes "Selecione o próximo passo, por favor.";
 	next;
 	set .@name$,strcharinfo(0);
-	switch(select("Read the KVM Catalogue.:Purchase KVM Items.:Confirm KVM Points.:Explanation of KVM Rewards.:Explanation of KVM Points.")) {
+	switch(select("Ler o Catálogo KVM.:Comprar Itens KVM.:Confirmar Pontos KVM.:Explicação das Recompensas KVM.:Explicação dos Pontos KVM.")) {
 	case 1:
 		mes "[Logística]";
 		mes "Aqui está o catálogo de itens de KVM.";
@@ -60,19 +60,19 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 		mes "itens, por favor, consulte o";
 		mes "^3131FFCatálogo^000000.";
 		next;
-		switch(select("Weapon:Armor/Accessory:Mass-Production Armor/Accessory:Popularized Armor/Accessory")) {
+		switch(select("Arma:Armadura/Acessório:Mass-Production Armadura/Acessório:Popularized Armadura/Acessório")) {
 		case 1:
 			mes "[Logística]";
 			mes "Você selecionou a Categoria de Armas.";
 			mes "Por favor, selecione uma subcategoria.";
 			next;
-			switch(select("Dagger/Sword/Spear:Staff/Mace/Axe/Shuriken:Bow/Katar/Instrument/Whip:Book/Knuckle:Revolver/Rifle/Gun/Grenade Launcher")) {
+			switch(select("Adaga/Espada/Lança:Cajado/Maça/Machado/Shuriken:Arco/Katar/Instrumento/Chicote:Livro/Garra:Revólver/Rifle/Espingarda/Lança-Granadas")) {
 			case 1:
 				mes "[Logística]";
 				mes "Você selecionou a categoria Adaga/Espada/Lança.";
 				mes "Por favor, selecione uma subcategoria.";
 				next;
-				switch(select("Dagger:One-handed Sword:Two-handed Sword:One-handed Spear:Two-handed Spear")) {
+				switch(select("Adaga:Espada de Uma Mão:Espada de Duas Mãos:Lança de Uma Mão:Lança de Duas Mãos")) {
 				case 1: callsub PurchaseItem,13042,0,1; //Krieger_Dagger1 
 				case 2:
 					mes "[Logística]";
@@ -81,7 +81,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 					mes "Se quiser os detalhes delas, por favor, consulte o Catálogo da KVM.";
 					mes "Por favor, selecione uma delas.";
 					next;
-					switch(select("Glorious Flamberge:Glorious Rapier:Glorious Holy Avenger")) {
+					switch(select("Flamberge Gloriosa:Rapiéra Gloriosa:Vingadora Sagrada Gloriosa")) {
 					case 1: callsub PurchaseItem,13416,0,0; //Krieger_Onehand_Sword1
 					case 2: callsub PurchaseItem,13417,0,0; //Krieger_Onehand_Sword2
 					case 3: callsub PurchaseItem,13418,0,0; //Krieger_Onehand_Sword3
@@ -95,7 +95,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 				mes "Você selecionou a categoria 'Cajado/Maça/Machado/Shuriken'.";
 				mes "Por favor, selecione uma subcategoria.";
 				next;
-				switch(select("Staff:Mace:One-handed Axe:Two-handed Axe:Shuriken")) {
+				switch(select("Cajado:Maça:Machado de Uma Mão:Machado de Duas Mãos:Shuriken")) {
 				case 1:
 					mes "[Logística]";
 					mes "Você selecionou a categoria 'Cajado'.";
@@ -103,7 +103,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 					mes "Se quiser os detalhes deles, por favor, consulte o Catálogo da KVM.";
 					mes "Por favor, selecione um deles.";
 					next;
-					switch(select("Glorious Destruction Staff:Glorious Arc Wand:Glorious Healing Staff")) {
+					switch(select("Cajado da Destruição Gloriosa:Cajado Arcano Glorioso:Cajado de Cura Glorioso")) {
 					case 1: callsub PurchaseItem,2002,0,0; //Krieger_Twohand_Staff1
 					case 2: callsub PurchaseItem,1640,0,0; //Krieger_Onehand_Staff1
 					case 3: callsub PurchaseItem,1641,0,0; //Krieger_Onehand_Staff2
@@ -118,7 +118,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 				mes "Você selecionou a categoria Arco/Katar/Instrumento/Chicote.";
 				mes "Por favor, selecione uma subcategoria.";
 				next;
-				switch(select("Bow:Katar:Instrument:Whip")) {
+				switch(select("Arco:Katar:Instrumento:Chicote")) {
 				case 1: callsub PurchaseItem,1743,0,1; //Krieger_Bow1
 				case 2:
 					mes "[Logística]";
@@ -127,7 +127,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 					mes "Se quiser os detalhes delas, por favor, consulte o Catálogo da KVM.";
 					mes "Por favor, selecione uma delas.";
 					next;
-					switch(select("Glorious Bloody Roar:Glorious Jamadhar")) {
+					switch(select("Rugido Sangrento Glorioso:Jamadhar Glorioso")) {
 					case 1: callsub PurchaseItem,1281,0,0; //Krieger_Katar1
 					case 2: callsub PurchaseItem,1282,0,0; //Krieger_Katar2
 					}
@@ -139,7 +139,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 				mes "Você selecionou a categoria Livro/Garra.";
 				mes "Por favor, selecione uma subcategoria.";
 				next;
-				switch(select("Book:Knuckle")) {
+				switch(select("Livro:Garra")) {
 				case 1:
 					mes "[Logística]";
 					mes "Você selecionou 'Livro'.";
@@ -147,7 +147,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 					mes "Se quiser os detalhes deles, por favor, consulte o Catálogo da KVM.";
 					mes "Por favor, selecione um deles.";
 					next;
-					switch(select("Glorious Tablet:Glorious Apocalypse")) {
+					switch(select("Tábua Gloriosa:Apocalipse Glorioso")) {
 					case 1: callsub PurchaseItem,1576,0,0; //Krieger_Book1
 					case 2: callsub PurchaseItem,1577,0,0; //Krieger_Book2
 					}
@@ -158,7 +158,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 					mes "Se quiser os detalhes delas, por favor, consulte o Catálogo da KVM.";
 					mes "Por favor, selecione uma delas.";
 					next;
-					switch(select("Glorious Claw:Glorious Fist")) {
+					switch(select("Garra Gloriosa:Punho Glorioso")) {
 					case 1: callsub PurchaseItem,1826,0,0; //Krieger_Knuckle1
 					case 2: callsub PurchaseItem,1827,0,0; //Krieger_Knuckle2
 					}
@@ -168,7 +168,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 				mes "Você selecionou a categoria 'Revólver/Rifle/Espingarda/Lança-Granadas'.";
 				mes "Por favor, selecione uma subcategoria.";
 				next;
-				switch(select("Revolver:Rifle:Gatling Gun:Shotgun:Grenade Launcher")) {
+				switch(select("Revólver:Rifle:Metralhadora Rotativa:Espingarda:Lança-Granadas")) {
 				case 1: callsub PurchaseItem,13110,0,1; //Krieger_Pistol1
 				case 2: callsub PurchaseItem,13176,0,1; //Krieger_Rifle1
 				case 3: callsub PurchaseItem,13177,0,1; //Krieger_Gatling1
@@ -181,7 +181,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 			mes "Você selecionou a categoria 'Armadura/Acessório'.";
 			mes "Por favor, selecione uma subcategoria.";
 			next;
-			switch(select("Armor:Cloak:Shoes:Accessory")) {
+			switch(select("Armadura:Capa:Sapatos:Acessório")) {
 			case 1: callsub PurchaseItem,2394,1,2; //Krieger_Suit1
 			case 2: callsub PurchaseItem,2549,2,2; //Krieger_Muffler1
 			case 3: callsub PurchaseItem,2444,3,2; //Krieger_Shoes1
@@ -192,7 +192,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 			mes "Você selecionou a categoria 'Armadura/Acessório de Produção em Massa'.";
 			mes "Por favor, selecione uma subcategoria.";
 			next;
-			switch(select("Mass-Production Armor:Mass-Production Shoes:Mass-Production Accessory")) {
+			switch(select("Armadura de Produção em Massa:Sapatos de Produção em Massa:Acessório de Produção em Massa")) {
 			case 1: callsub PurchaseItem,2395,5,3; //Krieger_Suit2
 			case 2: callsub PurchaseItem,2445,6,3; //Krieger_Shoes2
 			case 3: callsub PurchaseItem,2773,7,3; //Krieger_Ring2
@@ -202,7 +202,7 @@ bat_room,151,144,3	script	KVM Logistic Officer#a	734,{
 			mes "Você selecionou a categoria 'Armadura/Acessório Popularizado'.";
 			mes "Por favor, selecione uma subcategoria.";
 			next;
-			switch(select("Popularized Armor:Popularized Shoes:Popularized Accessory")) {
+			switch(select("Armadura Popularizada:Sapatos Popularizados:Acessório Popularizado")) {
 			case 1: callsub PurchaseItem,2396,8,4; //Krieger_Suit3
 			case 2: callsub PurchaseItem,2446,9,4; //Krieger_Shoes3
 			case 3: callsub PurchaseItem,2774,10,4; //Krieger_Ring3
@@ -250,32 +250,32 @@ PurchaseItem:
 	mes "[Logística]";
 
 	if (!.@item_type)
-		mes "You have selected ^ff0000"+ getitemname(.@item_id) +"^000000.";
+		mes "Você selecionou ^ff0000"+ getitemname(.@item_id) +"^000000.";
 	else if (.@item_type == 1)
-		mes "There is only one "+ callfunc("F_GetWeaponType",.@item_id) +": "+ getitemname(.@item_id) +".";
+		mes "Existe apenas um "+ callfunc("F_GetWeaponType",.@item_id) +": "+ getitemname(.@item_id) +".";
 	else if (.@item_type == 2) {
-		mes "You have selected '"+ callfunc("F_GetArmorType",.@item_id) +"'.";
-		mes "The armor for one whose Lvl is more than 80 is: ^ff0000"+ getitemname(.@item_id) +"^000000.";
+		mes "Você selecionou '"+ callfunc("F_GetArmorType",.@item_id) +"'.";
+		mes "A armadura para quem tem Nível acima de 80 é: ^ff0000"+ getitemname(.@item_id) +"^000000.";
 	}
 	else if (.@item_type == 3) {
-		mes "You have selected 'Mass-Production "+ callfunc("F_GetArmorType",.@item_id) +"'.";
-		mes "There is only one Mass-Production "+ callfunc("F_GetArmorType",.@item_id) +": ^ff0000"+ getitemname(.@item_id) +"^000000.";
+		mes "Você selecionou 'Produção em Massa "+ callfunc("F_GetArmorType",.@item_id) +"'.";
+		mes "Existe apenas um(a) Produção em Massa "+ callfunc("F_GetArmorType",.@item_id) +": ^ff0000"+ getitemname(.@item_id) +"^000000.";
 	}
 	else if (.@item_type == 4) {
-		mes "You have selected 'Popularized "+ callfunc("F_GetArmorType",.@item_id) +"'.";
-		mes "There is only one Popularized "+ callfunc("F_GetArmorType",.@item_id) +": ^ff0000"+ getitemname(.@item_id) +"^000000.";
+		mes "Você selecionou 'Popularizado(a) "+ callfunc("F_GetArmorType",.@item_id) +"'.";
+		mes "Existe apenas um(a) Popularizado(a) "+ callfunc("F_GetArmorType",.@item_id) +": ^ff0000"+ getitemname(.@item_id) +"^000000.";
 	}
 
 	if (!.@req_setting)
-		mes "It requires ^0000ff2,000^000000 KVM Points, and "+ .@name$ +", your points are: ^580080"+ kvm_point +"^000000.";
+		mes "Requer ^0000ff2.000^000000 Pontos KVM, e "+ .@name$ +", your points are: ^580080"+ kvm_point +"^000000.";
 	else if (.@req_setting == 4)
-		mes "It requires ^0000ff1,200^000000 KVM Points, and "+ .@name$ +", your points are: ^580080"+ kvm_point +"^000000.";
+		mes "Requer ^0000ff1.200^000000 Pontos KVM, e "+ .@name$ +", your points are: ^580080"+ kvm_point +"^000000.";
 	else
-		mes "It requires ^0000ff"+ .@prices[.@req_setting] +"^000000 KVM Points, and "+ .@name$ +", your points are: ^580080"+ kvm_point +"^000000.";
+		mes "Requer ^0000ff"+ .@prices[.@req_setting] +"^000000 KVM Points, and "+ .@name$ +", your points are: ^580080"+ kvm_point +"^000000.";
 
 	mes "Tem certeza de que deseja este item?";
 	next;
-	switch(select("No, I won't purchase it.:Yes, I will purchase it.")) {
+	switch(select("Não, não vou comprar.:Sim, vou comprar.")) {
 	case 1:
 		mes "[Logística]";
 		mes "Você selecionou 'Não vou comprar'.";
@@ -286,13 +286,13 @@ PurchaseItem:
 			kvm_point = kvm_point -.@prices[.@req_setting];
 			getitem .@item_id,1;
 			mes "[Logística]";
-			mes "You have purchased a "+ getitemname(.@item_id) +".";
+			mes "Você adquiriu um(a) "+ getitemname(.@item_id) +".";
 			if (!.@req_setting)
-				mes "Your KVM Points are reduced by ^0000ff"+ .@req_setting +"^000000 points, your KVM Points are now ^580080"+kvm_point+"^000000.";
+				mes "Seus Pontos KVM foram reduzidos em ^0000ff"+ .@req_setting +"^000000 points, your KVM Points are now ^580080"+kvm_point+"^000000.";
 			if (.@req_setting == 4)
-				mes "Your KVM Points are reduced by ^0000ff1,200^000000 points, your KVM Points are now ^580080"+kvm_point+"^000000.";
+				mes "Seus Pontos KVM foram reduzidos em ^0000ff1.200^000000 pontos, seus Pontos KVM agora são ^580080"+kvm_point+"^000000.";
 			else
-				mes "Your KVM Points are reduced by ^0000ff"+ .@prices[.@req_setting] +"^000000 points, your KVM Points are now ^580080"+kvm_point+"^000000.";
+				mes "Seus Pontos KVM foram reduzidos em ^0000ff"+ .@prices[.@req_setting] +"^000000 points, your KVM Points are now ^580080"+kvm_point+"^000000.";
 		}
 		else {
 			mes "[Logística]";
@@ -301,8 +301,8 @@ PurchaseItem:
 			else if (.@req_setting == 4)
 				mes "Você precisa de ^0000ff1.200^000000 Pontos de KVM para comprar este item.";
 			else
-				mes "You need ^0000ff"+ .@prices[.@req_setting] +"^000000 KVM Points to purchase this item.";
-			mes "However, your KVM Points are now ^580080"+ kvm_point +"^000000.";
+				mes "Você precisa de ^0000ff"+ .@prices[.@req_setting] +"^000000 KVM Points to purchase this item.";
+			mes "No entanto, seus Pontos KVM são atualmente ^580080"+ kvm_point +"^000000.";
 			mes "O que não é suficiente para comprá-lo.";
 			mes "Quando conseguir pontos suficientes, por favor, retorne.";
 		}
