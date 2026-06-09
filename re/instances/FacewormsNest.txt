@@ -58,7 +58,7 @@ payon,157,54,5	script	An Old Woman#pa0829	8_F_GRANDMOTHER,{
 		mes "^0000ffA senhora abaixou o rosto com os olhos avermelhados.^000000";
 		if (countitem(6650)) {// Shabby_Ring
 			next;
-			if (select("Stop talking.:Show the ring from the Faceworm's Nest.") == 2) {
+			if (select("Pare de falar.:Mostre o anel do Ninho do Faceworm.") == 2) {
 				mes "[Jeum-sun]";
 				mes "O que é isso sobre este anel?";
 				next;
@@ -126,7 +126,7 @@ payon,161,54,3	script	Exotic Merchant#pa0829	4W_M_03,{
 		mes "Eu apenas parei nesta cidade para possivelmente encontrar um registro da minha família e do grupo de mercadores armados, mas até agora não encontrei nada.";
 		if (countitem(6652)) {
 			next;
-			if (select("Stop talking.:Show him the Old Photo Album") == 2) {
+			if (select("Pare de falar.:Mostre a ele o Velho Álbum de Fotos.") == 2) {
 				mes "[Sergio]";
 				mes "Sim! Eu me lembrei. Este é o que costumava trabalhar para o grupo de mercadores armados do meu pai.";
 				next;
@@ -196,7 +196,7 @@ payon,161,50,1	script	Strong Looking Man#pa829	4_M_ORIENT01,{
 		mes "^0000ffVocê vislumbra uma mistura de raiva e tristeza nos olhos dele.^000000";
 		if (countitem(6653)) {
 			next;
-			if (select("Stop talking.:Show him the Old Pill.") == 2) {
+			if (select("Pare de falar.:Mostre a ele a Pílula Antiga.") == 2) {
 				mes "[Dol-Seoi]";
 				mes "Espere! Onde você conseguiu isso?";
 				next;
@@ -261,7 +261,7 @@ payon,139,68,4	script	A dreary man#pa0829	4_M_NFDEADMAN,{
 		mes "Keaton irá atrás de uma serpente para encontrar um bracelete. A serpente má matou Keaton.^000000";
 		if (countitem(6651)) {
 			next;
-			if (select("Stop talking.:Show him the Rusty Bracelet.") == 2) {
+			if (select("Pare de falar.:Mostre a ele o Bracelete Enferrujado.") == 2) {
 				mes "^999999[Keaton]";
 				mes "É o bracelete de Keaton!!^000000";
 				specialeffect EF_MAPPILLAR2;
@@ -304,8 +304,8 @@ dali,83,67,5	script	Old Sign#1	4_BOARD3,{
 	if (.@face_member > 0)
 		.@string$ =  " with ^ff0044" + .@face_member + " party " + ( .@face_member > 1 ? "members" : "members" )  + "^000000";
 	mes "-- Registros do Ninho do Faceworm --";
-	mes "Best time belongs to adventurer ^ff0044" + .@face_name$ + "^000000" + .@string$ + ".";
-	mes "Current record time is ^0000ff" + .@time_txt$ + "^000000.";
+	mes "O melhor tempo pertence ao aventureiro ^ff0044" + .@face_name$ + "^000000" + .@string$ + ".";
+	mes "O tempo recorde atual é ^0000ff" + .@time_txt$ + "^000000.";
 	close;
 
 OnInit:
@@ -337,7 +337,7 @@ dali,80,60,4	script	Magic Scholar	4_M_SAGE_C,{
 			mes "[Erudito Mágico]";
 			mes "O que posso fazer por você?";
 			next;
-			switch( select("Reserve Faceworm's Nest:What are you doing here?:Stop Talking.") ) {
+			switch( select("Reservar Ninho do Faceworm:O que você está fazendo aqui?:Pare de falar.") ) {
 			case 1:
 				switch( instance_create(.@md_name$) ) {
 				case -3:
@@ -455,7 +455,7 @@ dali,72,55,4	script	Interdimensional Device	CLEAR_NPC,{
 	next;
 	select("Wait! It's a misunderstanding.");
 	cutin "",255;
-	mes "[" + .@player_name$ + "]";
+	mes "[Caos]" + .@player_name$ + "]";
 	mes "Não! Acho que você está enganado! Nós não somos caçadores de recompensas...";
 	unittalk .@account_id, .@player_name$ + ": No! I think you're mistaken! We are not bounty hunters...";
 	next;
@@ -466,7 +466,7 @@ dali,72,55,4	script	Interdimensional Device	CLEAR_NPC,{
 	next;
 	select("Faceworm?");
 	cutin "",255;
-	mes "[" + .@player_name$ + "]";
+	mes "[Caos]" + .@player_name$ + "]";
 	mes "Faceworm? Nunca ouvi falar disso.";
 	unittalk .@account_id, .@player_name$ + ": Faceworm? I've never heard about it.";
 	close2;
@@ -693,7 +693,7 @@ OnInstanceInit:
 	next;
 	select("The big one, just right before...");
 	cutin "",255;
-	mes "[" + strcharinfo(0) + "]";
+	mes "[Caos]" + strcharinfo(0) + "]";
 	mes "O grandão que vimos logo antes é um chefe aqui?";
 	unittalk getcharid(3), strcharinfo(0) + ": The big one just right before we saw is a boss here?";
 	next;
@@ -2020,7 +2020,7 @@ OnInstanceInit:
 	mes "[Dispositivo Dimensional]";
 	mes "Seu tempo aqui acabou. Você pode olhar ao redor ou ir embora. O que você quer fazer?";
 	next;
-	if (select("Stop:Return to Dimensional Gap") == 2)
+	if (select("Parar:Retornar ao Vácuo Dimensional") == 2)
 		warp "dali",85,62;
 	end;
 
@@ -2743,7 +2743,7 @@ OnInstanceInit:
 		mes "[Gerente de Tempo]";
 		mes "Para que momento você gostaria de retornar?";
 		next;
-		switch( select("Cancel:1st Stage Start:2nd Stage Start:3rd Stage Start:4th Stage Start:Boss Start:Treasures")) {
+		switch( select("Cancelar:Início do 1º Estágio:Início do 2º Estágio:Início do 3º Estágio:Início do 4º Estágio:Início do Chefe:Tesouros")) {
 		case 1:
 			break;
 		case 2:
@@ -2803,7 +2803,7 @@ OnInstanceInit:
 		mes "[Gerente de Chefe]";
 		mes "Para que momento você gostaria de retornar?";
 		next;
-		switch( select("Cancel:1st Boss:2nd Boss:3rd Boss:4th Boss:Final Boss")) {
+		switch( select("Cancelar:1º Chefe:2º Chefe:3º Chefe:4º Chefe:Chefe Final")) {
 		case 1:
 			break;
 		case 2:

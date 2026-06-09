@@ -56,7 +56,7 @@ dali,130,107,6	script	Adventurer Leon	945,{
 		mes "[Aventureiro Leon]";
 		mes "Você deseja reviver o passado novamente?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("Sim:Não")) {
 		case 1:
 			mes "[Aventureiro Leon]";
 			mes "Por favor, aventure-se através do dispositivo dimensional e relate-me o que você encontrar lá dentro.";
@@ -86,7 +86,7 @@ dali,130,107,6	script	Adventurer Leon	945,{
 		mes "[Aventureiro Leon]";
 		mes "Não tenho certeza se você já explorou completamente a fenda no espaço e no tempo. Talvez você devesse investigar um pouco mais.";
 		next;
-		switch(select("Okay:Give up")) {
+		switch(select("Certo:Desistir")) {
 		case 1:
 			mes "[Aventureiro Leon]";
 			mes "Fico feliz em ouvir isso! Talvez um dia você possa ser tão corajoso quanto o velho Leon, o Leão!";
@@ -187,8 +187,8 @@ dali,139,118,4	script	Dimensional Device#sara	10007,{
 		switch(select(.@menu$)) {
 		case 1:
 			if (instance_create(.@md_name$) < 0) {
-				mes "Party Name: "+.@p_name$;
-				mes "Party Leader: "+strcharinfo(0);
+				mes "Nome do Grupo: "+.@p_name$;
+				mes "Líder do Grupo: "+strcharinfo(0);
 				mes "^0000ff"+.@md_name$+" ^000000- Reservation Failed!";
 				close;
 			}
@@ -200,11 +200,11 @@ dali,139,118,4	script	Dimensional Device#sara	10007,{
 				mes "Ocorreu um erro desconhecido.";
 				close;
 			case IE_NOINSTANCE:
-				mes "The memorial dungeon "+.@md_name$+" does not exist.";
+				mes "A masmorra memorial "+.@md_name$+" does not exist.";
 				mes "O líder do grupo ainda não gerou a masmorra.";
 				close;
 			case IE_NOMEMBER:
-				mes "Only the registered members can enter the instance "+.@md_name$+".";
+				mes "Apenas os membros registrados podem entrar na instância "+.@md_name$+".";
 				close;
 			case IE_OK:
 				mapannounce "dali",strcharinfo(0)+", member of the party "+.@p_name$+" entered the instance "+.@md_name$+".",bc_map,"0x00ff99";

@@ -38,8 +38,8 @@ gef_tower,57,170,3	script	Marry Jay	4_F_JOB_BLACKSMITH,{
 	case 0:
 	case 1:
 		mes "[Marry Jay]";
-		mes "Sorry, but the entry period to the " + .@md_name$ + " has expired.";
-		mes "Descanse enquanto espera a instância ficar disponível novamente.";
+		mes "de " + .@md_name$ + " has expired.";
+		mes "Descanse enquanto espera a Instância ficar disponível novamente.";
 		close;
 	case 2:
 		erasequest 12379;
@@ -130,7 +130,7 @@ gef_tower,57,170,3	script	Marry Jay	4_F_JOB_BLACKSMITH,{
 	}
 	if (BaseLevel < 'mob[0]) {
 		mes "[Marry Jay]";
-		mes "Your base level is too low to select this, you need to be level " + 'mob[0] + " or above.";
+		mes "Seu nível base é muito baixo para selecionar isso, você precisa estar no nível " + 'mob[0] + " or above.";
 		close;
 	}
 	close2;
@@ -356,12 +356,12 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 		close;
 	}
 	mes "[Colecionador Amador]";
-	mes "If you bring me a " + mesitemlink(25235, false) + ", I can enchant a wonderful effect on your accessory!";
+	mes "Se você me trouxer " + mesitemlink(25235, false) + ", I can enchant a wonderful effect on your accessory!";
 	next;
 	switch( select( "What can you do with the Crafting Stone?", "Accessory Enchantment", "Reset Enchant" ) ) {
 	case 1:
 		mes "[Colecionador Amador]";
-		mes "Eu troco pedras caras da instância em troca do meu trabalho artesanal. Ainda sou um iniciante, mas minhas habilidades são aceitáveis.";
+		mes "Eu troco pedras caras da Instância em troca do meu trabalho artesanal. Ainda sou um iniciante, mas minhas habilidades são aceitáveis.";
 		mes "Por favor, cuide de mim.";
 		next;
 		if (select( "I've heard this before.", "I'm listening." ) == 1) {
@@ -373,7 +373,7 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 		mes "Usando a Pedra de Artesanato, posso encantar um de seus acessórios com habilidades.";
 		next;
 		mes "[Colecionador Amador]";
-		mes "I need 10 x " + mesitemlink(25235, false) + " and 100,000 Zeny.";
+		mes "Preciso de 10 x " + mesitemlink(25235, false) + " and 100,000 Zeny.";
 		mes "Não há falha no processo de encantamento.";
 		next;
 		mes "[Colecionador Amador]";
@@ -537,7 +537,7 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 		break;
 	default:
 		mes "[Colecionador Amador]";
-		mes "I cannot " + .@type_name$ + " this " + mesitemlink(.@equip_id, false) + " accessory.";
+		mes "Não consigo " + .@type_name$ + " this " + mesitemlink(.@equip_id, false) + " accessory.";
 		close;
 	}
 
@@ -546,7 +546,7 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 		case 28483:	//Royal Ring Enchantment
 			if (.@equip_card[2] != 0) {
 				mes "[Colecionador Amador]";
-				mes "The " + mesitemlink(.@equip_id, false) + " already has maximum enchantment.";
+				mes "O " + mesitemlink(.@equip_id, false) + " already has maximum enchantment.";
 				mes "Não posso trabalhar nisso mais do que isso.";
 				close;
 			}
@@ -576,7 +576,7 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 			}
 			if (.@pos == 2) {
 				mes "[Colecionador Amador]";
-				mes "Are you sure to enhance the " + mesitemlink(.@equip_id, false) + "?";
+				mes "Tem certeza em aprimorar o " + mesitemlink(.@equip_id, false) + "?";
 				mes "^0000FFNão há chance de falha^000000.";
 				next;
 				if (select( "Yes, please proceed", "Cancel" ) == 2)
@@ -584,7 +584,7 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 			}
 			if (countitem(25235) < 10) {
 				mes "[Colecionador Amador]";
-				mes "Please bring me 10 x " + mesitemlink(25235, false) + ".";
+				mes "Por favor, traga-me 10 x " + mesitemlink(25235, false) + ".";
 				close;
 			}
 			if (Zeny < 100000) {
@@ -602,26 +602,26 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 			delequip .@slot;
 			specialeffect2 EF_REPAIRWEAPON;
 			mes "[Colecionador Amador]";
-			mes "The " + mesitemlink(.@equip_id, false) + " has been enchanted!!";
+			mes "O " + mesitemlink(.@equip_id, false) + " has been enchanted!!";
 			getitem2 .@equip_id,1,1,0,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
 			close;
 
 		default:	// Normal Accessory Enchantment
 			if (.@equip_card[3] != 0) {
 				mes "[Colecionador Amador]";
-				mes "The " + mesitemlink(.@equip_id, false) + " already has an enchant.";
+				mes "O " + mesitemlink(.@equip_id, false) + " already has an enchant.";
 				mes "Não posso trabalhar nisso mais do que isso.";
 				close;
 			}
 			mes "[Colecionador Amador]";
-			mes "Are you sure you want to enhance the " + mesitemlink(.@equip_id, false) + "?";
+			mes "Tem certeza que deseja aprimorar o " + mesitemlink(.@equip_id, false) + "?";
 			mes "^0000FFNão há chance de falha^000000.";
 			next;
 			if (select( "Yes, please proceed", "Cancel") == 2)
 				end;
 			if (countitem(25235) < 10) {
 				mes "[Colecionador Amador]";
-				mes "Please bring me 10 x " + mesitemlink(25235, false) + ".";
+				mes "Por favor, traga-me 10 x " + mesitemlink(25235, false) + ".";
 				close;
 			}
 			if (Zeny < 100000) {
@@ -640,7 +640,7 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 			.@enchant = F_enchant(1);
 			specialeffect2 EF_REPAIRWEAPON;
 			mes "[Colecionador Amador]";
-			mes "The " + mesitemlink(.@equip_id, false) + " has been enchanted with " + mesitemlink(.@enchant, false) + ".";
+			mes "O " + mesitemlink(.@equip_id, false) + " has been enchanted with " + mesitemlink(.@enchant, false) + ".";
 			getitem2 .@equip_id,1,1,0,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@enchant;
 			close;
 		}
@@ -656,19 +656,19 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 		}
 		if (.@equip_card[.@pos] == 0) {
 			mes "[Colecionador Amador]";
-			mes "The " + mesitemlink(.@equip_id, false) + " is not at its maximum enchantment.";
+			mes "O " + mesitemlink(.@equip_id, false) + " is not at its maximum enchantment.";
 			mes "Não posso redefinir este acessório.";
 			close;
 		}
 		mes "[Colecionador Amador]";
-		mes "All enchanted effects will be removed from the " + mesitemlink(.@equip_id, false) + "?";
-		mes "^FF0000There is a " + .@success + "% chance of success. The accessory will be destroyed if the reset fails!^000000";
+		mes "Todos os efeitos encantados serão removidos do " + mesitemlink(.@equip_id, false) + "?";
+		mes "^FF0000Há uma " + .@success + "% chance of success. The accessory will be destroyed if the reset fails!^000000";
 		next;
 		if (select( "I'll be back later", "Please proceed") == 1)
 			end;
 		if (countitem(25235) < 10) {
 			mes "[Colecionador Amador]";
-			mes "Please bring me 10 x " + mesitemlink(25235, false) + "";
+			mes "Por favor, traga-me 10 x " + mesitemlink(25235, false) + "";
 			close;
 		}
 		if (Zeny < 100000) {
@@ -694,7 +694,7 @@ gef_tower,57,167,3	script	Amateur Collector#pa0829	1_F_01,{
 		specialeffect2 EF_REPAIRWEAPON;
 		mes "[Colecionador Amador]";
 		mes "Eu tive sucesso.";
-		mes "The " + mesitemlink(.@equip_id, false) + " has been initialized.";
+		mes "O " + mesitemlink(.@equip_id, false) + " has been initialized.";
 		getitem2 .@equip_id,1,1,0,0,.@equip_card[0],.@equip_card[1],0,0;
 		close;
 	}

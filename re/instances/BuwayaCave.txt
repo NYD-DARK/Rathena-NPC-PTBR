@@ -41,7 +41,7 @@ ma_fild02,312,317,5	script	Guard#buwaya_cave	570,{
 		mes "Se você não tem negócios aqui, por favor, volte.";
 		next;
 		while(1) {
-			switch(select("Why is it so dangerous?:I'm here to hunt down Buwaya.:End conversation.")) {
+			switch(select("Por que é tão perigoso?:Estou aqui para caçar o Buwaya.:Encerrar conversa.")) {
 			case 1:
 				mes "[Guarda]";
 				mes "Recentemente, houve um caso";
@@ -77,14 +77,14 @@ ma_fild02,312,317,5	script	Guard#buwaya_cave	570,{
 				}
 				if (instance_create(.@md_name$) < 0) {
 					mes "[Guarda]";
-					mes "Party name is... "+getpartyname(.@party_id)+".";
-					mes "Party leader is... "+strcharinfo(0);
+					mes "O nome do grupo é... "+getpartyname(.@party_id)+".";
+					mes "O líder do grupo é... "+strcharinfo(0);
 					mes "^0000ff"+.@md_name$+"^000000 cannot be opened now.";
 					mes "Por favor, tente um momento mais tarde.";
 					close;
 				}
 				mes "[Guarda]";
-				mes "I will open up the tunnel to ^0000ff"+.@md_name$+"^000000.";
+				mes "Eu abrirei o túnel para ^0000ff"+.@md_name$+"^000000.";
 				mes "Desejo-lhe boa sorte.";
 				close;
 			case 3:
@@ -124,7 +124,7 @@ OnTouch:
 		erasequest 4229;
 		// fall through
 	}
-	switch(select("Enter.:Turn back.")) {
+	switch(select("Entrar.:Voltar.")) {
 	case 1:
 		switch(instance_enter("Buwaya Cave")) {
 		case IE_OTHER:
@@ -184,7 +184,7 @@ OnTouch:
 	mes "e novas pessoas foram pegas.";
 	mes "Ficaremos presos aqui pelo resto de nossas vidas.";
 	next;
-	switch(select("Get me outta here!!:Ca...can't escape?")) {
+	switch(select("Tire-me daqui!!:Nã...não dá para escapar?")) {
 	case 1:
 		mes "[Moradores Sequestrados]";
 		mes "Nós não temos força suficiente para destruí-lo, mas Buwaya tem um ponto fraco.";
@@ -215,7 +215,7 @@ OnEnable:
 	mes "Ah! Quem me dera ter um pouco mais de força...";
 	mes "Eu sei o ponto fraco dele...";
 	next;
-	switch(select("Tell me.:Do you really know?")) {
+	switch(select("Conte-me.:Você realmente sabe?")) {
 	case 1:
 		mes "[Moradores Sequestrados]";
 		mes "Você tem certeza de que pode fazer isso...?";
@@ -438,7 +438,7 @@ OnEnable:
 OnTouch:
 	mes "Gostaria de sair?";
 	next;
-	if(select("Yes!:No, I will stay.") == 1)
+	if(select("Sim!:Não, eu vou ficar.") == 1)
 		warp "ma_fild02",315,315;
 	close;
 }

@@ -25,14 +25,14 @@ OnTouch:
 	if (getd(".start" + strnpcinfo(1)) == 0) {
 		setd ".start" + strnpcinfo(1), 1;
 		initnpctimer;
-		mapannounce strnpcinfo(4), "[Tip] You can move to the desired point by clicking the ground with the left mouse button.", bc_map,0xFF0000;
+		mapannounce strnpcinfo(4), "[Dica] Você pode se mover para o ponto desejado clicando no chão com o botão esquerdo do mouse.", bc_map,0xFF0000;
 	}
 	end;
 OnTimer9000:
-	mapannounce strnpcinfo(4), "[Tip] While holding down the right mouse button, drag to rotate the screen.", bc_map,0xFF0000;
+	mapannounce strnpcinfo(4), "[Dica] Mantendo pressionado o botão direito do mouse, arraste para girar a tela.", bc_map,0xFF0000;
 	end;
 OnTimer18000:
-	mapannounce strnpcinfo(4), "[Tip] You can leave through the bluish warp gate.", bc_map,0xFF0000;
+	mapannounce strnpcinfo(4), "[Dica] Você pode sair pelo portal de teletransporte azulado.", bc_map,0xFF0000;
 	emotion ET_SURPRISE, getnpcid(0, "#room_out" + replacestr( strnpcinfo(4), "iz_int", "" ));
 	end;
 OnTimer21000:
@@ -71,9 +71,9 @@ iz_int,56,32,3	script	Wounded Swordsman#intro_npc01_iz_int	4_TOWER_01,5,5,{
 	end;
 
 OnTouch:
-	npctalk "Urgh... please... help me...", "", bc_self;
+	npctalk "Urgh... por favor... me ajude...", "", bc_self;
 	sleep2 500;
-	npctalk "In order to talk with me.. click my body..", "", bc_self;
+	npctalk "Para falar comigo, clique no meu corpo.", "", bc_self;
 	end;
 
 OnInit:
@@ -112,7 +112,7 @@ iz_int,56,32,3	script	Wounded Swordsman#intro_npc02_iz_int	4_TOWER_02,{
 		next;
 		mes "^4d4dff!- Informação -!^000000";
 	}
-	mes "^4d4dffQuestinfo Shortcut is Alt + U^000000";
+	mes "^4d4dffO Atalho para Informações da Missão é Alt + U^000000";
 	mes "Você pode verificar o status da sua missão lá a qualquer momento.";
 	close2;
 	cutin "",255;
@@ -138,7 +138,7 @@ int_land,78,103,5	script	Captain Carocc#intro_npc03	4_M_REINDEER,{
 		mes "Pelo menos você está a salvo.";
 		mes "Você está bem?";
 		next;
-		if (select("I'm alright, but others need help.", "I think I am the last?") == 1) {
+		if (select("Eu estou bem, mas outros precisam de ajuda.", "Eu acho que sou o último?") == 1) {
 			mes "[Capitão Carocc]";
 			mes "Há mais pessoas por aí?";
 			mes "Vou enviar uma equipe de resgate para elas.";
@@ -183,10 +183,10 @@ int_land,78,103,5	script	Captain Carocc#intro_npc03	4_M_REINDEER,{
 		cutin "tutorial03",4;
 		mes "!- Informação -!";
 		mes "^4d4dffVocê pode equipar equipamentos ou usar itens simplesmente dando um clique duplo neles.";
-		mes "The item window can be opened by pressing Alt + E or using the menu button.^000000";
+		mes "A janela de itens pode ser aberta pressionando Alt + E ou usando o botão de menu.^000000";
 		next;
 		mes "!- Informação -!";
-		mes "^4d4dffEquipped Items can be seen by pressing Alt + Q.";
+		mes "^4d4dffItens Equipados podem ser vistos pressionando Alt + Q.";
 		mes "Dê um clique duplo ou arraste e solte para equipar ou desequipar.^000000";
 		next;
 		cutin "",255;
@@ -221,7 +221,7 @@ int_land,78,103,5	script	Captain Carocc#intro_npc03	4_M_REINDEER,{
 	next;
 	mes "! - Informação -!";
 	mes "^4d4dffVocê recebe um bônus de atributos para cada nível que você sobe.";
-	mes "The status window can be opened and closed with the shortcut Alt + A^000000.";
+	mes "A janela de atributos pode ser aberta e fechada com o atalho Alt + A^000000.";
 	next;
 	mes "! - Informação -!";
 	mes "^4d4dffPor favor, distribua corretamente os atributos que você precisa para batalhar^000000.";
@@ -298,7 +298,7 @@ int_land,73,100,3	script	Lumin#new_ship	4_M_NOV_RUMIN,{
 	next;
 	select("Should I introduce myself?", "My name is ~!");
 	mes "[" + strcharinfo(0) + "]";
-	mes "I am " + strcharinfo(0) + "!";
+	mes "Eu sou " + strcharinfo(0) + "!";
 	next;
 	mes "[Lu]";
 	mes ".....";
@@ -454,7 +454,7 @@ izlude,198,213,3	script	Captain Carocc#iz	4_M_REINDEER,5,5,{
 						next;
 						mes "!- Informação -!";
 						mes "O ^4d4dffMinimapa pode ser visto no canto superior direito da tela.";
-						mes "You can zoom in with +, zoom out with -. The waypoint from the NPC will be marked on it. ^000000";
+						mes "Você pode dar zoom com +, tirar zoom com -. O ponto de referência do NPC será marcado nele. ^000000";
 						next;
 						cutin "tutorial02.bmp", 4;
 						mes "!- Informação -!";
@@ -462,7 +462,7 @@ izlude,198,213,3	script	Captain Carocc#iz	4_M_REINDEER,5,5,{
 						mes "O conteúdo da missão pode ser verificado na janela de missões.";
 						next;
 						mes "!- Informação -!";
-						mes "Quest window can be opened by pressing ^4d4dffAlt + u^000000 keys together.";
+						mes "A janela de missões pode ser aberta pressionando as teclas ^4d4dffAlt + U^000000 juntas.";
 						next;
 						cutin "", 255;
 						mes "[Carocc]";
@@ -496,7 +496,7 @@ izlude,198,213,3	script	Captain Carocc#iz	4_M_REINDEER,5,5,{
 						next;
 						mes "!- Informação -!";
 						mes "^4d4dff O minimapa pode ser visto no canto superior direito da tela.";
-						mes "You can zoom in with +, zoom out with -. The waypoint from the NPC will be marked on it. ^000000";
+						mes "Você pode dar zoom com +, tirar zoom com -. O ponto de referência do NPC será marcado nele. ^000000";
 						next;
 						mes "[Carocc]";
 						mes "Se precisar de mais ajuda com o mapa, pressione <NAVI>[Hun]<INFO>izlude,122,207</INFO></NAVI> aqui";
@@ -606,14 +606,14 @@ izlude,198,213,3	script	Captain Carocc#iz	4_M_REINDEER,5,5,{
 							next;
 							mes "!- Informação -!";
 							mes "^4d4dff O minimapa pode ser visto no canto superior direito da tela.";
-							mes "You can zoom in with +, zoom out with -. The waypoint from the NPC will be marked on it. ^000000";
+							mes "Você pode dar zoom com +, tirar zoom com -. O ponto de referência do NPC será marcado nele. ^000000";
 							next;
 							mes "!- Informação -!";
 							mes "Recebeu uma Missão do ^4d4dffCapitão Carocc.";
 							mes "O conteúdo da sua Missão pode ser monitorado na janela de informações de Missões.";
 							next;
 							mes "!- Informação -!";
-							mes "Quest window can be opened by pressing the ^4d4dffAlt + u^000000 key.";
+							mes "A janela de missões pode ser aberta pressionando a tecla ^4d4dffAlt + U^000000.";
 							next;
 							mes "[Carocc]";
 							mes "Se precisar de mais ajuda com o mapa, pressione <NAVI>[Hun]<INFO>izlude,122,207</INFO></NAVI> aqui";
@@ -647,7 +647,7 @@ izlude,198,213,3	script	Captain Carocc#iz	4_M_REINDEER,5,5,{
 							next;
 							mes "!- Informação -!";
 							mes "^4d4dff O minimapa pode ser visto no canto superior direito da tela.";
-							mes "You can zoom in with +, zoom out with -. The waypoint from the NPC will be marked on it. ^000000";
+							mes "Você pode dar zoom com +, tirar zoom com -. O ponto de referência do NPC será marcado nele. ^000000";
 							next;
 							mes "[Carocc]";
 							mes "Se precisar de mais ajuda com o mapa, pressione <NAVI>[Hun]<INFO>izlude,122,207</INFO></NAVI> aqui";
@@ -840,10 +840,10 @@ izlude,122,207,3	script	Criatura Academy Staff#0	4_M_KHKYEL,3,3,{
 			cutin "tutorial03.bmp", 4;
 			mes "!- Informação -!";
 			mes "^4d4dffItens podem ser usados ou equipados simplesmente com um clique duplo.";
-			mes "Item window can be opened with shortcut key Alt+E";
+			mes "A janela de itens pode ser aberta com o atalho Alt+E";
 			next;
 			mes "!- Informação -!";
-			mes "^4d4dff Equipped items can be checked with Alt+ Q";
+			mes "^4d4dff Itens equipados podem ser verificados com Alt+ Q";
 			mes "Itens também podem ser arrastados para o local onde você deseja equipá-los.";
 			next;
 			cutin "", 255;
@@ -1144,7 +1144,7 @@ izlude,120,207,4	script	Information Staff#0	8W_SOLDIER,{
 			mes "Você pode verificar sua localização através do minimapa no canto superior direito da tela";
 			next;
 			mes "[Equipe de Informações]";
-			mes "If you receive information on a town or a city, a waypoint ^4d4dff+^000000 can be marked on the map.";
+			mes "Se você receber informações sobre uma vila ou cidade, um ponto de referência ^4d4dff+^000000 pode ser marcado no mapa.";
 			next;
 			mes "[Equipe de Informações]";
 			mes "Pressione ^4d4dff[Ctrl] e [ ~ ] no seu teclado e você poderá ver o mapa-múndi^000000.";
@@ -1453,7 +1453,7 @@ izlude,120,207,4	script	Information Staff#0	8W_SOLDIER,{
 			switch(select("[ Main facilities ]", "[ Guide & Helper ]", "Mini map marking removal", "End Conversation")) {
 			case 1:
 				while (1) {
-					switch(select("[ Criatura Academy ]:[ Wharf ]:[ Airship (International) ]:[ Arena ]:[ Shop ]:[ Swordman Guild ]:[ Enchant Association ]:[ Blacksmith's Workshop ]:Go back to the previous menu")) {
+					switch(select("[ Academia Criatura ]:[ Cais ]:[ Dirigível (Internacional) ]:[ Arena ]:[ Loja ]:[ Guilda dos Espadachins ]:[ Associação de Encantamentos ]:[ Oficina do Ferreiro ]:Voltar ao menu anterior")) {
 					case 1:
 						mes "[Equipe de Informações]";
 						mes "Se você é um aventureiro de primeira viagem,";
@@ -1537,7 +1537,7 @@ izlude,120,207,4	script	Information Staff#0	8W_SOLDIER,{
 				break;
 			case 2:
 				while (1) {
-					switch(select("[ Eden Group Teleporter ]:[ Kafra Employee ]:[ Mesmerizer ]:[ Wedding Secretary ]:[ Mercenary Guild Official ]:[ Taming Merchant ]:Go back to the previous menu")) {
+					switch(select("[ Teletransportador do Grupo do Éden ]:[ Funcionária Kafra ]:[ Hipnotizador ]:[ Secretária de Casamentos ]:[ Oficial da Guilda de Mercenários ]:[ Mercador de Domesticação ]:Voltar ao menu anterior")) {
 					case 1:
 						mes "[Equipe de Informações]";
 						mes "Por enquanto, vou marcar a localização do";
@@ -2123,7 +2123,7 @@ iz_ac01,59,43,3	script	Therapist#ac	4_M_6THPRIN1,{
 			specialeffect2 EF_SPELLBREAKER;
 			next;
 			mes "[Terapeuta]";
-			mes "Press ^4d4dffALT + S^000000 to open your Skill window to see your skills.";
+			mes "Pressione ^4d4dffALT + S^000000 para abrir sua janela de Habilidades e ver suas habilidades.";
 			skill "NV_FIRSTAID", 1, 0;
 			skill_nov = 3;
 			getexp 1000,40;
@@ -2558,7 +2558,7 @@ izlude,140,260,3	script	Instructor Argos#iz	4_M_LIEMAN,{
 		mes "Se você tiver tamanha paciência, isso salvará sua vida. Não haverá monstros capazes de te ferir.";
 		next;
 		mes "[Instrutor Argos]";
-		mes "The <^ff0000Play Dead^000000> skill is in your skill list which you can open by pressing <Alt + S>, Please do not forget to use it, it will save you when you are in a danger.";
+		mes "A habilidade <^ff0000Fingir de Morto^000000> está na sua lista de habilidades, que você pode abrir pressionando <Alt + S>. Por favor, não se esqueça de usá-la, ela vai te salvar quando você estiver em perigo.";
 		next;
 		mes "[Instrutor Argos]";
 		mes "Se você crescer e adquirir outra Classe, não precisará mais desta habilidade, então não a desperdice! Use-a quando precisar e não hesite.";
@@ -2595,7 +2595,7 @@ iz_ac01,100,39,5	script	Academy Receptionist#1	4_F_01,{
 
 	if (isbegin_quest(4269) == 2) {
 		mes "[Recepcionista]";
-		mes "Hello, " + strcharinfo(0) +".";
+		mes "Olá, " + strcharinfo(0) +".";
 		mes "Como vai hoje?";
 		mes "Sou a responsável por orientá-lo aqui na Academia.";
 	} else {
@@ -2619,7 +2619,7 @@ iz_ac01,100,39,5	script	Academy Receptionist#1	4_F_01,{
 					close;
 				}
 				mes "[Recepcionista]";
-				mes "Let me see... Your name is... " + strcharinfo(0) + ".";
+				mes "Deixe-me ver... Seu nome é... " + strcharinfo(0) + ".";
 				mes "Farei um novo registro para você.";
 				mes "Você pode escolher o curso livremente e cada curso tem suas próprias características.";
 				next;
@@ -3768,7 +3768,7 @@ iz_ac01,53,74,3	script	Attribute Expert#ac	1_M_WIZARD,{
 					input .@input, 1, 100000;
 					if (.@input < 10) {
 						mes "[Especialista em Atributos]";
-						mes "Oh man, "+.@input+"! Are you even trying?";
+						mes "Ah, cara, "+.@input+"! Are you even trying?";
 						mes "Você mal está acertando.";
 						next;
 					} else if (.@input > 9 && .@input < 100001) {
@@ -4189,7 +4189,7 @@ iz_ac01,147,50,3	script	Dacquoise#ac	4_COOK,{
 				mes "Então, o que você quer cozinhar?";
 				next;
 				mes "[Mille Feuille]";
-				mes "Oh? That kid is back again. "+strcharinfo(0)+" right? So what do you want?";
+				mes "Oh? Aquele garoto está de volta. "+strcharinfo(0)+" right? So what do you want?";
 				next;
 			} else {
 				mes "[Dacquoise]";
@@ -4671,7 +4671,7 @@ L_Quest:
 		} else
 			mes getarg(5)+" "+getarg(6)+" at the ^ff0000West field of Izlude^000000.";
 		mes getarg(7)+" ^ff0000"+(.@quest_id==11344?"5":"10")+" "+getarg(5)+"s^000000 and bring ^ff0000"+getarg(4)+" "+getarg(8)+"^000000.";
-		mes "You can check received quests by pressing ^ff0000Alt + U^000000.";
+		mes "Você pode verificar as missões recebidas pressionando ^ff0000Alt + U^000000.";
 		setquest .@quest_id;
 		close;
 	} else if (checkquest(.@quest_id,HUNTING) == 1) {
@@ -4689,7 +4689,7 @@ L_Quest:
 	} else {
 		if (countitem(getarg(3)) < getarg(4)) {
 			mes "[Instrutor de Batalha Subino]";
-			mes "You don't have enough ^ff0000"+getarg(8)+"^000000.";
+			mes "Você não tem o suficiente ^ff0000"+getarg(8)+"^000000.";
 			mes "Faça melhor!";
 			next;
 			if (select("End Conversation", "Give up on the quest.") == 2) {
@@ -4767,7 +4767,7 @@ iz_ac01,45,80,5	script	Adept Adventurer#ac	4_M_JOB_BLACKSMITH,{
 				break;
 			case 3:
 				mes "[Aventureiro Experiente]";
-				mes "^3131FFRight-click^000000 on your pet and select ^3131ffCheck the Pet Status^000000 to check on its status. Or you can press ^3131FF<Alt+J>^000000.";
+				mes "^3131FFClique com o botão direito^000000 no seu pet e selecione ^3131ffVer Status do Pet^000000 para verificar o status dele. Ou você pode pressionar ^3131FF<Alt+J>^000000.";
 				next;
 				mes "[Aventureiro Experiente]";
 				mes "Isso abrirá a Janela de Status. Aqui você pode mudar o ^3131FFnome^000000 do mascote, além de verificar sua ^3131FFFome^000000 e ^3131FFIntimidade^000000.";
@@ -4962,7 +4962,7 @@ new_1-3,92,169,5	script	Adept Adventurer#new_1-3	4_M_JOB_BLACKSMITH,{
 				break;
 			case 3:
 				mes "[Aventureiro Experiente]";
-				mes "^3131FFRight-click^000000 on your pet and select ^3131ffCheck the Pet Status^000000 to check on its status. Or you can press ^3131FF<Alt+J>^000000.";
+				mes "^3131FFClique com o botão direito^000000 no seu pet e selecione ^3131ffVer Status do Pet^000000 para verificar o status dele. Ou você pode pressionar ^3131FF<Alt+J>^000000.";
 				next;
 				mes "[Aventureiro Experiente]";
 				mes "Isso abrirá a Janela de Status. Aqui você pode mudar o ^3131FFnome^000000 do mascote, além de verificar sua ^3131FFFome^000000 e ^3131FFIntimidade^000000.";
@@ -5021,7 +5021,7 @@ new_1-3,92,169,5	script	Adept Adventurer#new_1-3	4_M_JOB_BLACKSMITH,{
 	} else {
 		if (isbegin_quest(2296) == 1) {
 			mes "[Aventureiro Experiente]";
-			mes "If you are confused, Please check the quest status by pressing ^3131FF<Alt+U>^000000 anytime.";
+			mes "Se estiver confuso, por favor, verifique o status da missão pressionando ^3131FF<Alt+U>^000000 a qualquer momento.";
 			next;
 			if (select("How to gain Unripe Apples", "End Conversation") == 1) {
 				mes "[Aventureiro Experiente]";
@@ -5061,7 +5061,7 @@ new_1-3,92,169,5	script	Adept Adventurer#new_1-3	4_M_JOB_BLACKSMITH,{
 			close;
 		}
 		mes "[Aventureiro Experiente]";
-		mes "If you are confused, Please check the quest status by clicking ^3131FF<Alt+U>^000000 anytime.";
+		mes "Se estiver confuso, por favor, verifique o status da missão clicando ^3131FF<Alt+U>^000000 a qualquer momento.";
 		close;
 	}
 }
@@ -5074,7 +5074,7 @@ new_1-3,99,169,3	script	Friendly Poring#ac	4_PORING,{
 		mes "Você tem itens demais para continuar a missão.";
 		next;
 		mes "[Poring]";
-		mes "Open inventory with ^3131FFAlt+E^000000 key, if you find unnecessaty items, sell them to ^3131FFmerchant^000000 or put into ^3131FFwarehouse^000000 by using kafra service~.";
+		mes "Abra o inventário com a tecla ^3131FFAlt+E^000000, se encontrar itens desnecessários, venda-os para um ^3131FFmercador^000000 ou guarde-os no ^3131FFarmazém^000000 usando o serviço Kafra~.";
 		close;
 	}
 	if (!isbegin_quest(2294)) {
@@ -5870,10 +5870,10 @@ izlude,148,122,5	script	Refining Maniac#iz	4_M_SITDOWN,{
 	mes "Se você quebrá-la, você a perde.";
 	next;
 	mes "[Maníaco por Refino]";
-	mes "I'm trying to get to +10 right now... All my training is for this!";
+	mes "Estou tentando chegar a +10 agora... Todo o meu treinamento é para isso!";
 	next;
 	mes "[Maníaco por Refino]";
-	mes "Please ask to the owner of refining, I have a important mission +10!";
+	mes "Por favor, pergunte ao proprietário de refino, eu tenho uma missão importante +10!";
 	close;
 }
 
@@ -6124,7 +6124,7 @@ iz_ac01,69,36,3	script	Otter Samssoon#ac	4W_SAILOR,{
 			}
 			callsub L_cutin, .@style;
 			mes "[Otter Samssoon]";
-			mes "Style ("+.@style+")?";
+			mes "Estilo ("+.@style+")?";
 			mes "Parece assim.. O que achou?";
 			next;
 			if (select("Good.", "No.") == 1) {
@@ -6134,7 +6134,7 @@ iz_ac01,69,36,3	script	Otter Samssoon#ac	4W_SAILOR,{
 					mes "Querido! Que tal tingir o cabelo também?";
 					mes "Tingir o cabelo também está incluído neste serviço.";
 					next;
-					switch(select("Passionate Red:Sweet Yellow:Fatal Purple:Glamourous Orange:Comfortable Green:Clear Blue:Transparent White:Dark Black:Stop.")) {
+					switch(select("Vermelho Paixão:Amarelo Doce:Roxo Fatal:Laranja Glamouroso:Verde Confortável:Azul Claro:Branco Transparente:Preto Escuro:Parar.")) {
 						case 1:
 							.@pallete = 8;
 							break;
@@ -6181,7 +6181,7 @@ iz_ac01,69,36,3	script	Otter Samssoon#ac	4W_SAILOR,{
 				cutin "", 255;
 				mes "[Otter Samssoon]";
 				mes "Ah, meu Deus! Ah, meu Deus! Ah, meu Deus!";
-				mes "This hair style no.("+.@style+") suits to you looks good~";
+				mes "Este estilo de cabelo nº.("+.@style+") suits to you looks good~";
 				mes "O que você acha?";
 				setlook 1, .@style;
 				setlook 6, .@pallete;
@@ -6824,7 +6824,7 @@ iz_ac02,143,55,3	script	Cream Puff#ac	4_M_KID1,{
 	}
 	mes "A situação do encontro com a gangue foi assim";
 	next;
-	mes "You find out that "+.@question_02_01$+" is the "+.@question_02_02$+" of very rich family in Alberta and Punks attacked while "+.@question_02_01$+" was on an errand for the family";
+	mes "Você descobre que "+.@question_02_01$+" is the "+.@question_02_02$+" of very rich family in Alberta and Punks attacked while "+.@question_02_01$+" was on an errand for the family";
 	next;
 	mes "Que tipo de tarefa ele estava fazendo?";
 	next;
@@ -6842,8 +6842,8 @@ iz_ac02,143,55,3	script	Cream Puff#ac	4_M_KID1,{
 		.@acolyte_p = .@acolyte_p + 1;
 		break;
 	}
-	mes "For your bravery, "+.@question_02_01+" becomes your friend and decides to go on a trip.";
-	mes "Where is "+.@question_02_01+" going?";
+	mes "Pela sua bravura, "+.@question_02_01+" becomes your friend and decides to go on a trip.";
+	mes "Onde está "+.@question_02_01+" going?";
 	next;
 	switch(select("Capital city, Prontera", "Mountain city, Payon", "Port city, Alberta", "Magic city, Geffen", "Satelite city, Izlude", "Desert city, Morocc", "Industrial city, Einbroch", "World of natural life, Amatsu", "Garden city, Hugel")) {
 	case 1:
@@ -6876,7 +6876,7 @@ iz_ac02,143,55,3	script	Cream Puff#ac	4_M_KID1,{
 	}
 	mes "Você está se divertindo muito. Sente que algo vai acontecer ou não?";
 	next;
-	if (select("Happening:Not happening.") == 1) {
+	if (select("Acontecendo:Não acontecendo.") == 1) {
 		.@thief_p = .@thief_p + 1;
 		.@swordman_p = .@swordman_p + 1;
 		.@ninja_p = .@ninja_p + 1;
@@ -7236,7 +7236,7 @@ iz_ac02,143,55,3	script	Cream Puff#ac	4_M_KID1,{
 		end;
 	}
 	mes "[Cream Puff]";
-	mes "Your recommended job is "+.@job_name$+". I will send you to where you can talk to that job professional.";
+	mes "Sua Classe recomendada é "+.@job_name$+". I will send you to where you can talk to that job professional.";
 	close2;
 	switch(.@who_job) {
 	case 1:
@@ -7467,7 +7467,7 @@ iz_ac02,142,85,6	script	Lusa#ac	4_F_GUNSLINGER,{
 					mes "Oh... acho que sei qual é o problema,";
 					next;
 					mes "[Lusa]";
-					mes "Ta use the guide, first ya need to equip it. ^ff0000To open the equipment window the Shortcut key is Alt + E.^000000";
+					mes "Para usar o guia, primeiro você precisa equipá-lo. ^ff0000Para abrir a janela de equipamentos, a tecla de atalho é Alt + E.^000000";
 					next;
 					mes "[Lusa]";
 					mes "Às vezes eu esqueço de fazer isso também! ^ff0000Arraste o item do seu inventário para o slot apropriado na janela de equipamentos. Alternativamente, você pode dar um clique duplo no item no inventário.^000000";
@@ -7480,7 +7480,7 @@ iz_ac02,142,85,6	script	Lusa#ac	4_F_GUNSLINGER,{
 					mes "Vocês precisam aprender como usar a habilidade?";
 					next;
 					mes "[Lusa]";
-					mes "^ff0000To open the skill window use the short cut Alt + S. The skill will be located in the ETC tab.^000000";
+					mes "^ff0000Para abrir a janela de habilidades, use o atalho Alt + S. A habilidade estará localizada na aba ETC.^000000";
 					next;
 					mes "[Lusa]";
 					mes "^ff0000Você pode então arrastar a habilidade para sua barra de atalhos para facilitar o uso!.^000000";
@@ -8095,7 +8095,7 @@ iz_ac02,131,82,4	script	Lusa's Desk#ac	CLEAR_NPC,{
 				next;
 				if (select("Take Assignment", "Look at Other Assignments", "Cancel") == 1) {
 					setquest 5149;
-					mes "You have received ^A2563E<Assignment A>^000000 details. Please press ALT + U to check them.";
+					mes "Você recebeu os detalhes da ^A2563E<Tarefa A>^000000. Por favor, pressione ALT + U para verificá-los.";
 					next;
 				}
 			} else if (.@gun_quest_01 == 1) {
@@ -8116,7 +8116,7 @@ iz_ac02,131,82,4	script	Lusa's Desk#ac	CLEAR_NPC,{
 				next;
 				if (select("Take Assignment", "Look at Other Assignments", "Cancel") == 1) {
 					setquest 5150;
-					mes "You have received ^A2563E<Assignment B>^000000 details. Please press ALT + U to check them.";
+					mes "Você recebeu os detalhes da ^A2563E<Tarefa B>^000000. Por favor, pressione ALT + U para verificá-los.";
 					next;
 				}
 			} else if (.@gun_quest_02 == 1) {
@@ -8137,7 +8137,7 @@ iz_ac02,131,82,4	script	Lusa's Desk#ac	CLEAR_NPC,{
 				next;
 				if (select("Take Assignment", "Look at Other Assignments", "Cancel") == 1) {
 					setquest 5151;
-					mes "You have received ^A2563E<Assignment C>^000000 details. Please press ALT + U to check them.";
+					mes "Você recebeu os detalhes da ^A2563E<Tarefa C>^000000. Por favor, pressione ALT + U para verificá-los.";
 					next;
 				}
 			} else if (.@gun_quest_03 == 1) {
@@ -8158,7 +8158,7 @@ iz_ac02,131,82,4	script	Lusa's Desk#ac	CLEAR_NPC,{
 				next;
 				if (select("Take Assignment", "Look at Other Assignments", "Cancel") == 1) {
 					setquest 5152;
-					mes "You have received ^A2563E<Assignment D>^000000 details. Please press ALT + U to check them.";
+					mes "Você recebeu os detalhes da ^A2563E<Tarefa D>^000000. Por favor, pressione ALT + U para verificá-los.";
 					next;
 				}
 			} else if (.@gun_quest_04 == 1) {
@@ -8256,7 +8256,7 @@ iz_ac02,162,86,4	script	Guild Staff#ac	4W_M_02,{
 	mes "A arma parece estar em boas condições.";
 	next;
 	mes "[Presa de Serpente Afiada]";
-	mes "Please select the novice weapon you wish to exchange for your "+.@now_gun$+"!";
+	mes "Por favor, selecione a arma de Aprendiz que deseja trocar pela sua "+.@now_gun$+"!";
 	next;
 	setarray .@selection_item_id[0], 13116, 13180, 13181, 13182, 13183;
 	.@s = select("Exchange for Revolver", "Exchange for Rifle", "Exchange for Shotgun", "Exchange for Gatling Gun", "Exchange for Grenade Launcher", "Cancel") - 1;
@@ -8274,7 +8274,7 @@ iz_ac02,162,86,4	script	Guild Staff#ac	4W_M_02,{
 		getitem .@selection_item_id[.@s],1;
 	}
 	mes "[Presa de Serpente Afiada]";
-	mes "Gun control management number ^FF0000"+.@gun_code$+""+rand(9)+""+rand(9)+""+rand(9)+""+rand(9)+""+rand(9)+""+rand(9)+"^000000.";
+	mes "Número de controle da arma ^FF0000"+.@gun_code$+""+rand(9)+""+rand(9)+""+rand(9)+""+rand(9)+""+rand(9)+""+rand(9)+"^000000.";
 	next;
 	mes "[Presa de Serpente Afiada]";
 	mes "Existe algum problema?";
@@ -8308,14 +8308,14 @@ iz_ac02,70,85,5	script	Arang#ac	4_F_TAEKWON,{
 				if (JobLevel >= 10) {
 					cutin "arang01.bmp", 0;
 					mes "[Arang]";
-					mes "It's time to choose your job? How about Taekwon "+(Sex == SEX_MALE ? "boy" : "girl")+"? You may be a nice adult like me.";
+					mes "É hora de escolher sua Classe? Que tal Taekwon "+(Sex == SEX_MALE ? "boy" : "girl")+"? You may be a nice adult like me.";
 					next;
 				}
 				while (1) {
 					switch(select("People following the Taekwon way", "I want to follow the Taekwon way!!!", "Good morning! Now it is...", "End Conversation")) {
 					case 1:
 						mes "[Arang]";
-						mes "Você quer saber sobre o Taekwon? Você quer ser um cara legal como eu, né?";
+						mes "Você quer saber sobre Taekwon? Você quer ser um cara legal como eu, né?";
 						next;
 						mes "[Arang]";
 						mes "Torne o mundo maravilhoso construindo um corpo forte com o espírito correto. Esse é o lema do Taekwondo!";
@@ -8615,7 +8615,7 @@ iz_ac02,65,109,5	script	Archer Teacher#ac	4_M_ARCHER,{
 						next;
 						cutin "gnor.bmp", 2;
 						mes "[Marlbron]";
-						mes "If you want to know more about the role of other stats, ^0000cdopen the status window by pressing ALT+Q.^000000";
+						mes "Se você quiser saber mais sobre o papel de outros atributos, ^0000cdabra a janela de atributos pressionando ALT+Q.^000000";
 						next;
 						mes "[Marlbron]";
 						mes "Se você estiver curioso sobre atributos além de Des, você pode conferir.";
@@ -8645,7 +8645,7 @@ iz_ac02,65,109,5	script	Archer Teacher#ac	4_M_ARCHER,{
 						mes "Ao mesmo tempo, ela revelará inimigos ocultos por perto.";
 						next;
 						mes "[Marlbron]";
-						mes "If you want to know more anout skill, then open the skill window by pressing the key  ^0000cdALT+S^000000";
+						mes "Se você quiser saber mais sobre a habilidade, abra a janela de habilidades pressionando a tecla ^0000cdALT+S^000000";
 						next;
 						mes "[Marlbron]";
 						mes "Quando você passa o mouse sobre o ícone da habilidade, os detalhes sobre ela aparecem. Por favor, leia.";
@@ -9746,7 +9746,7 @@ iz_ac02,50,169,3	script	Salim Hamid#ac	1_M_MERCHANT,{
 			mes "Uau, você realmente voltou com 100 zenys na mão. Sinto claramente seu desejo de aprender.";
 			next;
 			mes "[Salim Hamid]";
-			mes "Now. I will give you a Merchant's manual. Equipped with it. Press Alt + S key and look at the skill window.";
+			mes "Agora. Eu vou te dar um manual de Mercador. Equipe-o. Pressione a tecla Alt + S e olhe a janela de habilidades.";
 			next;
 			mes "[Salim Hamid]";
 			mes "Clicando na aba [MISC] na janela de habilidades, você pode ver as habilidades manuais do Mercador.";
@@ -9804,14 +9804,14 @@ iz_ac02,50,169,3	script	Salim Hamid#ac	1_M_MERCHANT,{
 		next;
 		cutin "aca_salim02",2;
 		mes "[Salim Hamid]";
-		mes "By any chance, "+strcharinfo(0)+" do you have mind to learn more about Merchants here?";
+		mes "Por acaso, "+strcharinfo(0)+" do you have mind to learn more about Merchants here?";
 		next;
 		if (select("I will look around at more jobs.", "Let me do it a little more.") == 1) {
 			mes "[Salim Hamid]";
 			mes "Sim, sua mente aberta é boa para você. Já que esta academia tem muitos outros palestrantes além dos Mercadores.";
 			next;
 			mes "[Salim Hamid]";
-			mes "Whenever you feel like learning again, come back to me "+strcharinfo(0)+".";
+			mes "Sempre que sentir vontade de aprender novamente, volte para mim "+strcharinfo(0)+".";
 			close2;
 			cutin "", 255;
 			end;
@@ -9847,7 +9847,7 @@ iz_ac02,50,169,3	script	Salim Hamid#ac	1_M_MERCHANT,{
 				next;
 				if (select("I already know all of them.", "Please make another explanation.") == 1) {
 					mes "[Salim Hamid]";
-					mes "Yes, you are "+strcharinfo(0)+" I am pleased to meet a quick-to-learn student like you. It also saves my time.";
+					mes "Sim, você é "+strcharinfo(0)+" I am pleased to meet a quick-to-learn student like you. It also saves my time.";
 					next;
 				} else {
 					mes "[Salim Hamid]";
@@ -9908,7 +9908,7 @@ iz_ac02,50,169,3	script	Salim Hamid#ac	1_M_MERCHANT,{
 	}
 	if (isbegin_quest(12306) < 1) {
 		mes "[Salim Hamid]";
-		mes "You came back again. "+strcharinfo(0)+" this time, shall we have a practical training by doing a simple errand?";
+		mes "Você voltou novamente. "+strcharinfo(0)+" this time, shall we have a practical training by doing a simple errand?";
 		next;
 		mes "[Salim Hamid]";
 		mes "Você consegue ver a máquina de vendas barulhenta no canto desta sala de aula? Originalmente, ela era uma máquina de venda de refrigerantes, mas engole muitas moedas...";
@@ -9942,7 +9942,7 @@ iz_ac02,50,169,3	script	Salim Hamid#ac	1_M_MERCHANT,{
 		mes "[Salim Hamid]";
 		mes "Sim. Vamos ver os preços que você verificou.";
 		next;
-		switch(select("I will come back after rechecking them.:Garlet 39z Zargon 450z:Garlet 37z Zargon 448z:Garlet 37z Zargon 446z:Garlet 37z Zargon 444z")) {
+		switch(select("Voltarei depois de verificá-los novamente.:Garlet 39z Zargon 450z:Garlet 37z Zargon 448z:Garlet 37z Zargon 446z:Garlet 37z Zargon 444z")) {
 			case 1:
 				mes "[Salim Hamid]";
 				mes "OK. Você volta depois de verificá-los novamente em detalhes.";
@@ -9992,7 +9992,7 @@ iz_ac02,50,169,3	script	Salim Hamid#ac	1_M_MERCHANT,{
 	mes "Você pode experimentar totalmente a prática relacionada a batalha através dele.";
 	next;
 	mes "[Salim Hamid]";
-	mes "The guide for the next course "+strcharinfo(0)+" will be serviced when you reach job level 10. Good luck.";
+	mes "O guia para o próximo curso "+strcharinfo(0)+" will be serviced when you reach job level 10. Good luck.";
 	close2;
 	cutin "", 255;
 	end;
@@ -10065,7 +10065,7 @@ iz_ac02,53,171,3	script	Steward Aydin#ac	4_M_MANAGER,{
 					mes "É simples usar Superar o Preço e Desconto.";
 					next;
 					mes "[Administrador Aydin]";
-					mes "These two skills are passive skills. If you become familiar with these, "+strcharinfo(0)+" these will automatically perform in trading with merchant NPC without your operation.";
+					mes "Essas duas habilidades são passivas. Se você se familiarizar com elas, "+strcharinfo(0)+" these will automatically perform in trading with merchant NPC without your operation.";
 					next;
 					mes "[Administrador Aydin]";
 					mes "Uma vez que você aprendeu Superar o Preço, ao vender mercadorias para um NPC Mercador, você pode ganhar o dinheiro da venda composto pelo preço de venda regular mais o dinheiro adicional conforme o nível da habilidade Superar o Preço.";
@@ -10158,7 +10158,7 @@ iz_ac02,52,136,3	script	Guest Lecturer Mayssel#0	4_F_MAYSEL,{
 			mes "Ele também é um dos alunos desta classe.";
 			next;
 			mes "[Mayssel]";
-			mes "Hello " + strcharinfo(0) + "";
+			mes "Olá " + strcharinfo(0) + "";
 			mes "Eu sou Mayssel, a chefe da seção de Veins da guilda dos Mercenários.";
 			mes "Vim aqui para lhe dar algumas informações sobre a classe Gatuno.";
 			next;
@@ -11553,7 +11553,7 @@ iz_ac02,55,134,3	script	Verkhasel#ac	4_M_GUILLOTINE,{
 					mes "Agora, se você fosse um Mercenário, eu deveria deixar você testar as habilidades relacionadas a veneno que você pode continuar usando?";
 					next;
 					mes "[Verkhasel]";
-					mes "Load the thief guide receved by Mayssel and open the skill window by pressing Alt+S key,";
+					mes "Carregue o guia de Gatuno recebido por Mayssel e abra a janela de habilidades pressionando a tecla Alt+S,";
 					mes "Registre Perícia com Veneno no compartimento de ETC, pressionando a tecla de atalho^000000";
 					next;
 					mes "[Verkhasel]";
@@ -12275,7 +12275,7 @@ iz_ac02,152,165,5	script	A Nun#2	4_F_SISTER,{
 			} else {
 				mes "[Uma freira]";
 				mes "Então, faça bom proveito.";
-				mes "^ff0000Equip (double click or drag to equipment window)^000000 and open the ^ff0000skill window(Alt+S)^000000 to see the skills in manual.";
+				mes "^ff0000Equipe (clique duplo ou arraste para a janela de equipamentos)^000000 e abra a ^ff0000janela de habilidades (Alt+S)^000000 para ver as habilidades no manual.";
 				getitem 2821,1;// Acolyte_Manual
 				close;
 			}
@@ -12300,7 +12300,7 @@ iz_ac02,140,139,5	script	Ninja Guide#ac	4_M_NINJA_BLUE,{
 	if (Class != Job_Novice) {
 		if (Upper != 0) {
 			mes "[Guia Ninja]";
-			mes "Eu não desejo falar com você. Vá embora agora...";
+			mes "Eu não desejo falar com você. Saia agora...";
 			close2;
 			cutin "", 255;
 			end;
@@ -12411,7 +12411,7 @@ iz_ac02,140,139,5	script	Ninja Guide#ac	4_M_NINJA_BLUE,{
 					if (countitem(2940) > 0) {
 						mes "[Guia Ninja]";
 						mes "Você pode equipar este manual para experimentar algumas habilidades.";
-						mes "Open up your skill window by pressing <Alt+S> and find the skills in the Misc TAB.";
+						mes "Abra sua janela de habilidades pressionando <Alt+S> e encontre as habilidades na ABA Diversos.";
 						next;
 						mes "[Guia Ninja]";
 						mes "A Academia tem um instrutor no andar de baixo que lhe dará treinamento em campo de batalha. Encontre-o e treine suas habilidades.";
@@ -12425,7 +12425,7 @@ iz_ac02,140,139,5	script	Ninja Guide#ac	4_M_NINJA_BLUE,{
 						mes "[Guia Ninja]";
 						mes "Faça cada momento útil valer a pena.";
 						mes "Você pode equipar este manual para experimentar algumas habilidades.";
-						mes "Open up your skill window by pressing <Alt+S> and find the skills in the Misc TAB.";
+						mes "Abra sua janela de habilidades pressionando <Alt+S> e encontre as habilidades na ABA Diversos.";
 						getitem 2940,1;// Ninja_Manual
 						getitem 13295,10;// Light_Shuriken
 						next;
@@ -12796,7 +12796,7 @@ izlude_d,153,126,1	duplicate(Refinery Owner Han#iz)	Refinery Owner Han#iz_d	4_M_
 	.@part = .@indices[ select(.@menu$) ];
 	if (!getequipisequiped(.@part)) {
 		mes "[Máquina de Refino Wagjak]";
-		mes "^ff0000- Error number 000"+.@part+" -^000000";
+		mes "^ff0000- Erro número 000"+.@part+" -^000000";
 		mes "O item não está equipado.";
 		close;
 	}
@@ -12810,9 +12810,9 @@ izlude_d,153,126,1	duplicate(Refinery Owner Han#iz)	Refinery Owner Han#iz_d	4_M_
 		close;
 	}
 	// if (!getequipisidentify(.@part)) {// getequipisidentify command removed 
-		// mes "[Refining Machine Wagjak]";
-		// mes "^FF0000- error number 5555 -^000000";
-		// mes "This item has not yet been identified.";
+		// mes "[Máquina de Refino Wagjak]";
+		// mes "^FF0000- erro número 5555 -^000000";
+		// mes "Este item ainda não foi identificado.";
 		// close2;
 		// enable_items;
 		// end;
@@ -12918,8 +12918,8 @@ izlude_d,153,126,1	duplicate(Refinery Owner Han#iz)	Refinery Owner Han#iz_d	4_M_
 	}
 
 	mes "[Máquina de Refino Wagjak]";
-	mes "Type : "+ .@type$ +"";
-	mes "Charge : "+ getitemname(.@material) +", "+ .@price +" zeny";
+	mes "Tipo : "+ .@type$ +"";
+	mes "Custo : "+ getitemname(.@material) +", "+ .@price +" zeny";
 	mes "O valor acima será cobrado. Deseja refinar?";
 	next;
 	if (select("Refine.", "Don't Refine.") == 2) {
@@ -12949,7 +12949,7 @@ izlude_d,153,126,1	duplicate(Refinery Owner Han#iz)	Refinery Owner Han#iz_d	4_M_
 			emotion ET_FRET;
 			mes "Espere um segundo...";
 			mes "Você acha que sou estúpido?!";
-			mes "You switched the item while I wasn't looking! Get out of here!";
+			mes "Você trocou o item enquanto eu não estava olhando! Saia daqui!";
 			close;
 		}
 	} else {
@@ -13013,7 +13013,7 @@ izlude,145,122,7	script	Tadde#iz	4_M_04,{
 					switch(select("Level 1 Weapon", "Level 2 Weapon", "Level 3 Weapon", "Level 4 Weapon", "Armor", "Question finished")) {
 					case 1:
 						mes "[Tadde]";
-						mes "Level 1 weapons are safe when refined up to ^A20B09+7^000000. The lower the level of weapon is, the higher the figure of the refining is possible.";
+						mes "Armas de nível 1 são seguras quando refinadas até ^A20B09+7^000000. Quanto menor o nível da arma, maior a figura do refino é possível.";
 						next;
 						mes "[Tadde]";
 						mes "Claro, ela possui efeitos mais fortes do que uma arma de nível 1.";
@@ -13021,7 +13021,7 @@ izlude,145,122,7	script	Tadde#iz	4_M_04,{
 						continue;
 					case 2:
 						mes "[Tadde]";
-						mes "Level 2 weapons are safe when refined up to ^A20B09+6^000000, even though refining figure is lower than level 1 weapon.";
+						mes "Armas de nível 2 são seguras quando refinadas até ^A20B09+6^000000, mesmo que a figura de refino seja menor que a arma de nível 1.";
 						next;
 						mes "[Tadde]";
 						mes "Claro, ela possui efeitos mais fortes do que uma arma de nível 1.";
@@ -13029,15 +13029,15 @@ izlude,145,122,7	script	Tadde#iz	4_M_04,{
 						continue;
 					case 3:
 						mes "[Tadde]";
-						mes "Level 3 weapons are safe when refined up to ^A20B09+5^000000. Simply speaking, it looks like the safety refining goes down by 1 according to each weapon level.";
+						mes "Armas de nível 3 são seguras quando refinadas até ^A20B09+5^000000. Simplificando, parece que o refino seguro diminui em 1 a cada nível de arma.";
 						next;
 						mes "[Tadde]";
-						mes "The higher the weapon is, the increasing effect of +1 becomes higher as well.";
+						mes "Quanto maior o nível da arma, maior também se torna o efeito de aumento de +1.";
 						next;
 						continue;
 					case 4:
 						mes "[Tadde]";
-						mes "Level 4 weapons are safe up to ^A20B09+4^000000. Numbers of level 4 weapons are so rare that not so many customers bring them here.";
+						mes "Armas de nível 4 são seguras até ^A20B09+4^000000. Armas de nível 4 são tão raras que poucos clientes as trazem aqui.";
 						next;
 						mes "[Tadde]";
 						mes "Por ser uma das armas mais luxuosas, o efeito do refino é o mais potente.";
@@ -13045,7 +13045,7 @@ izlude,145,122,7	script	Tadde#iz	4_M_04,{
 						continue;
 					case 5:
 						mes "[Tadde]";
-						mes "Armors are safe when refined up to^A20B09+4^000000, just like a level 4 weapon.";
+						mes "Armaduras são seguras quando refinadas até ^A20B09+4^000000, assim como uma arma de nível 4.";
 						next;
 						mes "[Tadde]";
 						mes "Como a maioria dos ferreiros está acostumada a fazer armas, é difícil para eles aprimorarem armaduras com segurança.";
@@ -13171,35 +13171,35 @@ izlude,145,122,7	script	Tadde#iz	4_M_04,{
 					switch(select("Level 1 Weapon", "Level 2 Weapon", "Level 3 Weapon", "Level 4 Weapon", "Armor", "Question finished")) {
 					case 1:
 						mes "[Tadde]";
-						mes "Level 1 weapons are safe when refined up to ^A20B09+7^000000. The lower the level of weapon is, the higher the figure of the refining is possible.";
+						mes "Armas de nível 1 são seguras quando refinadas até ^A20B09+7^000000. Quanto menor o nível da arma, maior a figura do refino é possível.";
 						next;
 						mes "[Tadde]";
 						mes "Claro, ele tem um efeito mais forte que uma arma de nível 1.";
 						continue;
 					case 2:
 						mes "[Tadde]";
-						mes "Level 2 weapons are safe when refined up to ^A20B09+6^000000, even though refining figure is lower than level 1 weapon.";
+						mes "Armas de nível 2 são seguras quando refinadas até ^A20B09+6^000000, mesmo que a figura de refino seja menor que a arma de nível 1.";
 						next;
 						mes "[Tadde]";
 						mes "Claro, ele tem um efeito mais forte que uma arma de nível 1.";
 						continue;
 					case 3:
 						mes "[Tadde]";
-						mes "Level 3 weapons are safe when refined up to ^A20B09+5^000000. Simply speaking, it looks like the safety refining goes down by 1 according to each weapon level.";
+						mes "Armas de nível 3 são seguras quando refinadas até ^A20B09+5^000000. Simplificando, parece que o refino seguro diminui em 1 a cada nível de arma.";
 						next;
 						mes "[Tadde]";
-						mes "The higher the weapon is, the increasing effect of +1 becomes higher as well.";
+						mes "Quanto maior o nível da arma, maior também se torna o efeito de aumento de +1.";
 						continue;
 					case 4:
 						mes "[Tadde]";
-						mes "Level 4 weapons are safe up to ^A20B09+4^000000. Numbers of level 4 weapons are so rare that not so many customers bring them here.";
+						mes "Armas de nível 4 são seguras até ^A20B09+4^000000. Armas de nível 4 são tão raras que poucos clientes as trazem aqui.";
 						next;
 						mes "[Tadde]";
 						mes "Como é uma das armas mais luxuosas, o efeito do refino é o mais forte.";
 						continue;
 					case 5:
 						mes "[Tadde]";
-						mes "Armors are safe when refined up to^A20B09+4^000000, just like a level 4 weapon.";
+						mes "Armaduras são seguras quando refinadas até ^A20B09+4^000000, assim como uma arma de nível 4.";
 						next;
 						mes "[Tadde]";
 						mes "Como a maioria dos refinadores está acostumada a fazer armas, é difícil para eles aprimorarem armaduras com segurança.";
@@ -13335,14 +13335,14 @@ izlude,155,132,3	script	Locas#iz	4_M_02,{
 				mes "De qualquer forma, aqui estão as explicações. A partir da arma de nível 1,";
 				next;
 				mes "[Locas]";
-				mes "1 level weapon has ^A20B09the attacking power increased 2^000000 by each +1 refining. Do you understand?";
+				mes "Armas de nível 1 têm o ^A20B09poder de ataque aumentado em 2^000000 a cada +1 de refino. Você entende?";
 				next;
 				select("Well???");
 				mes "[Locas]";
 				mes "Pensei que minhas explicações para você fossem fáceis, mas não eram...";
 				next;
 				mes "[Locas]";
-				mes "So, if you refine a knife with 17 attacking power and by +1, it will become 19 attacking power.. Like this.";
+				mes "Então, se você refinar uma faca com 17 de poder de ataque para +1, ela se tornará 19 de poder de ataque.. Assim.";
 				next;
 				mes "[Locas]";
 				mes "Na verdade, não há necessidade de falar muito aqui. Você apenas experimentará mais tarde.";
@@ -13414,7 +13414,7 @@ izlude,155,132,3	script	Locas#iz	4_M_02,{
 				delitem 756,.@ston_full;// Oridecon_Stone
 				getitem 984,.@ston_max;// Oridecon
 				mes "[Locas]";
-				mes "Refined "+.@ston_full+" Rough Oridecon into "+.@ston_max+" Oridecon. Thank you for your business.";
+				mes "Refinado "+.@ston_full+" Rough Oridecon into "+.@ston_max+" Oridecon. Thank you for your business.";
 				close;
 			} else {
 				mes "[Locas]";
@@ -13447,7 +13447,7 @@ izlude,155,132,3	script	Locas#iz	4_M_02,{
 				delitem 757,.@ston_full;// Elunium_Stone
 				getitem 985,.@ston_max;// Elunium
 				mes "[Locas]";
-				mes "Refined "+.@ston_full+" Rough Elunium into "+.@ston_max+" Elunium. Thank you for your business.";
+				mes "Refinado "+.@ston_full+" Rough Elunium into "+.@ston_max+" Elunium. Thank you for your business.";
 				close;
 			} else {
 				mes "[Locas]";
@@ -13534,14 +13534,14 @@ izlude,155,132,3	script	Locas#iz	4_M_02,{
 				mes "Vamos começar pela arma de nível 1.";
 				next;
 				mes "[Locas]";
-				mes "1 level weapon has ^A20B09the attacking power increased 2^000000 by each +1 refining. Do you understand?";
+				mes "Armas de nível 1 têm o ^A20B09poder de ataque aumentado em 2^000000 a cada +1 de refino. Você entende?";
 				next;
 				select("Well???");
 				mes "[Locas]";
 				mes "Eu achei que minhas explicações seriam fáceis, mas não foi bem assim...";
 				next;
 				mes "[Locas]";
-				mes "So, if you refine a knife with 17 attacking power and by +1, it will become 19 attacking power.. Like this.";
+				mes "Então, se você refinar uma faca com 17 de poder de ataque para +1, ela se tornará 19 de poder de ataque.. Assim.";
 				next;
 				mes "[Locas]";
 				mes "Na verdade, não há necessidade de falar muito aqui. Você entenderá experimentando depois.";
@@ -14117,7 +14117,7 @@ izlude,108,139,7	script	Enchanter Almond J#iz	4_CAT_SAILOR3,{
 	case 13182: // Novice_Gatling
 	case 13183: // Novice_Grenade_Launcher
 	case 13415: // N_Falchion
-		mes "It is!! The ^142ceb"+ getequipname(.@part) +"^000000.";
+		mes "É!! O ^142ceb"+ getequipname(.@part) +"^000000.";
 		next;
 		break;
 	default:
@@ -14182,8 +14182,8 @@ izlude,158,130,4	script	Repair Man#iz	4_M_04,{
 		mes "[Reparador]";
 		mes "------------------------";
 		mes "Estimativa de Equipamento Danificado";
-		mes "Damaged Equipment: ^FF0000"+ .@broken +"^000000";
-		mes "Fee: ^0000FF"+ .@cost +" Zeny^000000";
+		mes "Equipamento Danificado: ^FF0000"+ .@broken +"^000000";
+		mes "Taxa: ^0000FF"+ .@cost +" Zeny^000000";
 		mes "------------------------";
 		mes "Você gostaria de prosseguir com o reparo?";
 		next;

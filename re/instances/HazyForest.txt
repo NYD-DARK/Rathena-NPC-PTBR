@@ -78,11 +78,11 @@ bif_fild01,158,340,5	script	Laphine Soldier#mist	447,{
 			mes "Você vai se aventurar na Floresta Nebulosa?";
 		}
 		next;
-		switch(select("Venture into the Hazy Forest.:Give up.")) {
+		switch(select("Aventurar-se na Floresta Nebulosa.:Desistir.")) {
 		case 1:
 			mes "[Soldado Laphine]";
-			mes "Party Name "+getpartyname(.@party_id)+"...";
-			mes "Party Leader "+strcharinfo(0)+"...";
+			mes "Nome do Grupo "+getpartyname(.@party_id)+"...";
+			mes "Líder do Grupo "+strcharinfo(0)+"...";
 			if (instance_create(.@md_name$) < 0) {
 				mes "Hum...";
 				next;
@@ -137,7 +137,7 @@ bif_fild01,161,355,0	script	Log Tunnel	844,{
 	mes "Eu vejo a floresta através do túnel de tronco.";
 	mes "Parece que posso entrar na floresta pelo túnel de tronco.";
 	next;
-	if(select("Enter the tunnel.:Give up.") == 2)
+	if(select("Entrar no túnel.:Desistir.") == 2)
 		close;
 	switch(instance_enter("Mistwood Maze")) {
 	case IE_OTHER:
@@ -202,9 +202,9 @@ function	script	F_Mora_Mist	{
 		mes "Obviamente, ninguém está cuidando disso.";
 		mes "Parece que você pode cortar a árvore do jardim.";
 		next;
-		if(select("Chop down the garden tree.:Give up.") == 2)
+		if(select("Cortar a árvore do jardim.:Desistir.") == 2)
 			close;
-		mes "You chop down the tree, which was blocking the path of the maze, "+((getarg(3,0))?"clearing the way out of the forest.":"so now you can continue.");
+		mes "Você corta a árvore que bloqueava o caminho do labirinto, "+((getarg(3,0))?"clearing the way out of the forest.":"so now you can continue.");
 		mapannounce .@map$,getarg(1),bc_map,"0xccffcc"; //FW_NORMAL 12 0 0
 		enablenpc instance_npcname(getarg(0));
 		disablenpc();
@@ -579,17 +579,17 @@ OnTimer3000:
 		mes "...."+strcharinfo(0)+" sir.";
 		next;
 		mes "[Loki]";
-		mes "I see. "+strcharinfo(0)+".";
+		mes "Entendo. "+strcharinfo(0)+".";
 		mes "Estou te perguntando novamente.";
 		mes "Você planeja passar por esta floresta?";
 		next;
-		switch(select("Yes, I do.:No, I don't.")) {
+		switch(select("Sim, eu planejo.:Não, eu não planejo.")) {
 		case 1:
 			mes "[Loki]";
 			mes "Então vou te fazer uma pergunta.";
 			mes "Você já viu uma guarda... uma garota com cabelo roxo?";
 			next;
-			switch(select("No, I haven't.:Yes, I might have...")) {
+			switch(select("Não, não vi.:Sim, talvez eu tenha visto...")) {
 			case 1:
 				mes "[Loki]";
 				mes "Então você não viu.";
@@ -625,7 +625,7 @@ OnTimer3000:
 		mes "Não é fácil atravessar a floresta.";
 		mes "Pode custar a sua vida.";
 		next;
-		switch(select("Okay.:What do you want?")) {
+		switch(select("Entendido.:O que você quer?")) {
 		case 1:
 			mes "- Quando você dá um passo atrás,";
 			mes "Loki acena levemente e então desvia o olhar. -";
@@ -635,7 +635,7 @@ OnTimer3000:
 			mes "Estou procurando alguém.";
 			mes "Você já viu uma guarda... uma garota com cabelo roxo?";
 			next;
-			switch(select("No, I haven't.:Yes, I might have...")) {
+			switch(select("Não, não vi.:Sim, talvez eu tenha visto...")) {
 			case 1:
 				mes "[Loki]";
 				mes "Então você não viu.";
@@ -699,7 +699,7 @@ OnDisable:
 		mes "Acho que tenho que te agradecer.";
 		mes "Você a acalmou.";
 		next;
-		select("What's happening?:This girl...?");
+		select("O que está acontecendo?:Esta garota...?");
 		mes "[Loki]";
 		mes "Você pode mudar sua aparência, mas não pode mudar sua luz única e inata.";
 		mes "Um cheiro forte o suficiente para queimar o nariz.";
@@ -882,7 +882,7 @@ mora,48,152,3	script	Sharp Eyed Man	512,{
 		mes "Agora eu sei. Vou destruir Morocc com minhas próprias mãos.";
 		mes "Cumprirei meus deveres como guardiã.";
 		next;
-		switch(select("You're not alone.:Those are very important duties.")) {
+		switch(select("Você não está sozinha.:Esses são deveres muito importantes.")) {
 		case 1:
 			mes "[Nydhogg a Guardiã]";
 			mes "Você tem razão.";
@@ -1011,7 +1011,7 @@ bif_fild01,38,374,0	script	Mysterious Flower#ep14_1	844,{
 	if (countitem(12561)) {
 		mes "Ela está reagindo às Sementes de Flor Misteriosas que você carrega.";
 		next;
-		switch(select("Observe the reaction.:Stop the reaction.")) {
+		switch(select("Observar a reação.:Parar a reação.")) {
 		case 1:
 			mes "A flor começou a tremer violentamente";
 			mes "e balançar para frente como se tentasse enviar as sementes o mais longe possível!!!";

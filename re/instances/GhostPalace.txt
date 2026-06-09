@@ -114,7 +114,7 @@ dali02,40,134,5	script	Interdimensional Device#dk	PORTAL,{
 		mes "^ff0000Dentro dos dispositivos você vê um buraco escuro. Se você deseja entrar, deve falar com o Guarda Real Desagradável primeiro.^000000";
 		close;
 	case IE_NOMEMBER:
-		mes "Only registered members can enter the " + .@md_name$ + " instance.";
+		mes "Apenas membros registrados podem entrar na " + .@md_name$ + " instance.";
 		close;
 	case IE_OK:
 		mapannounce "dali", "" + strcharinfo(0) + " of the party, " + getpartyname(.@party_id) + ", is entering the Ghost Palace.", bc_map, 0x00ff99;
@@ -885,14 +885,14 @@ OnTimer28500:
 	next;
 	.@item_name_req$ = getitemname(6672);// Gray_Shard
 	mes "[Rei]";
-	mes "Do you possibly have the ^006400" + .@item_name_req$ + "^000000?";
+	mes "Você por acaso tem os ^006400" + .@item_name_req$ + "^000000?";
 	mes "Você pode me dar isso?";
 	mes "As memórias do fiel guarda real";
 	mes "e as memórias de todos que ele amou";
 	mes "estão contidas dentro destes fragmentos.";
 	next;
 	mes "[Rei]";
-	mes "Will you give the ^006400" + .@item_name_req$ + "^000000 to me?";
+	mes "Você entregaria os ^006400" + .@item_name_req$ + "^000000 to me?";
 	mes "A culpa está devorando minha alma.";
 	mes "Minha alma está presa dentro do Palácio Fantasma.";
 	next;
@@ -900,7 +900,7 @@ OnTimer28500:
 	mes "Estou coletando as memórias abandonadas de Sakray a partir destes fragmentos.";
 	next;
 	mes "[Rei]";
-	mes "If you give any ^006400" + .@item_name_req$ + "^000000s to me, I can make equipment for you.";
+	mes "Se você me der qualquer ^006400" + .@item_name_req$ + "^000000s to me, I can make equipment for you.";
 	next;
 	mes "[Rei]";
 	mes "O cavaleiro amaldiçoado...";
@@ -930,8 +930,8 @@ OnTimer28500:
 		}
 		.@cost = ( .@s > 13 ? 100 : 200 );
 		mes "[Rei]";
-		mes "To make a ^FF0000" + .@item_name$[.@s] + "^000000";
-		mes "I need " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
+		mes "Para criar um ^FF0000" + .@item_name$[.@s] + "^000000";
+		mes "Eu preciso de " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
 		next;
 		if (select( "Cancel", "Hand over " + .@cost + " " + .@item_name_req$ + "." ) == 1) {
 			mes "[Rei]";
@@ -942,21 +942,21 @@ OnTimer28500:
 		}
 		if (countitem(6672) < .@cost) {
 			mes "[Rei]";
-			mes "You do not have enough ^006400" + .@item_name_req$ + "^000000";
-			mes "to make a ^FF0000" + .@item_name$[.@s] + "^000000.";
-			mes "I need " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
+			mes "Você não tem ^006400 o suficiente" + .@item_name_req$ + "^000000";
+			mes "para criar um ^FF0000" + .@item_name$[.@s] + "^000000.";
+			mes "Eu preciso de " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
 			next;
 			continue;
 		}
 		mes "[Rei]";
-		mes "I will make a ^FF0000" + .@item_name$[.@s] + "^000000";
-		mes "with " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
+		mes "Eu vou criar um ^FF0000" + .@item_name$[.@s] + "^000000";
+		mes "com " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
 		next;
 		mes "Você vê uma luz através das mãos cruzadas do rei e ela gradualmente ganha forma.";
 		next;
 		mes "[Rei]";
 		mes "Muito bem, está feito.";
-		mes "Take this ^FF0000" + .@item_name$[.@s] + "^000000";
+		mes "Pegue este ^FF0000" + .@item_name$[.@s] + "^000000";
 		mes "para confrontar Sakray e Tartanos.";
 		next;
 		mes "[Rei]";

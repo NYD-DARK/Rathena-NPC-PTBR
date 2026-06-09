@@ -61,8 +61,8 @@ moro_cav,41,73,4	script	Guardian Nidhogg#epeom01	4_F_NYDHOG,{
 			close3;
 		}
 		if (instance_create("Temple of the Demon God") < 1) {	// todo, custom text
-			mes "Party Name: " + getpartyname(.@party_id);
-			mes "Party Leader: " + strcharinfo(0);
+			mes "Nome do Grupo: " + getpartyname(.@party_id);
+			mes "Líder do Grupo: " + strcharinfo(0);
 			mes "^0000ff" + .@md_name$ + " ^000000 - Reservation Failed.";
 			close;
 		}
@@ -392,7 +392,7 @@ S_Globe:
 		mes "Se você quiser ativar os globos de alma, você precisa da alma de Shnaim.";
 		close;
 	}
-	mes "Inject " + .@visible_npc_name$ + "'s soul into the empty soul globe.";
+	mes "Injetar " + .@visible_npc_name$ + "'s soul into the empty soul globe.";
 	next;
 	specialeffect EF_SPHERE;
 	progressbar "000000",10;
@@ -404,7 +404,7 @@ S_Globe:
 		enablenpc instance_npcname("Filled Soul Globe#" + .@hidden_npc_name$);
 		specialeffect EF_ENTRY,AREA, instance_npcname("Filled Soul Globe#" + .@hidden_npc_name$);
 		specialeffect EF_LEVEL99_3,AREA, instance_npcname("Filled Soul Globe#" + .@hidden_npc_name$);
-		mes "Successfully activated " + .@visible_npc_name$ + "'s soul globe.";
+		mes "Ativado com sucesso " + .@visible_npc_name$ + "'s soul globe.";
 		if ('inject_soul == 3 && 'step == 2) {
 			'step = 3;
 			if (isbegin_quest(7596) == 1)

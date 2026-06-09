@@ -41,7 +41,7 @@ mal_dun01,151,235,5	script	Starfish	551,{
 	mes "Mas um dia esta caverna deve ser selada para sempre, hehe!";
 	next;
 	while(1) {
-		switch(select("Ask what's going on.:Ask to open the gate.:Go to other location.")) {
+		switch(select("Perguntar o que está acontecendo.:Pedir para abrir o portão.:Ir para outro local.")) {
 		case 1:
 			mes "[Starfish]";
 			mes "Ultimamente, nossa dama Estrela do Mar está";
@@ -86,14 +86,14 @@ mal_dun01,151,235,5	script	Starfish	551,{
 			if (rentalcountitem(6442)) {
 				if (instance_create(.@md_name$) < 0) {
 					mes "[Starfish]";
-					mes "Party name is... "+getpartyname(.@party_id)+".";
-					mes "Party leader is... "+strcharinfo(0)+".";
+					mes "O nome do grupo é... "+getpartyname(.@party_id)+".";
+					mes "O líder do grupo é... "+strcharinfo(0)+".";
 					mes "^0000ff"+.@md_name$+"^000000, I cannot open now, hehe.";
 					mes "Agora não é a hora, por favor, espere.";
 					close;
 				}
 				mes "[Starfish]";
-				mes "I will open the gate for a while to ^0000ff"+.@md_name$+"^000000.";
+				mes "Eu vou abrir o portão por um tempo para ^0000ff"+.@md_name$+"^000000.";
 				mes "Por favor, pegue aquele polvo pervertido,";
 				mes "e volte com ele espetado no espeto, hehe.";
 				close;
@@ -116,7 +116,7 @@ mal_dun01,153,237,5	script	Weird Entrance	844,{
 	mes "Há uma entrada estranha";
 	mes "bloqueada grosseiramente com algumas tábuas.";
 	next;
-	switch(select("Go in.:Stop.")) {
+	switch(select("Entrar.:Parar.")) {
 	case 1:
 		if (rentalcountitem(6442)) {
 			switch(instance_enter("Octopus Cave")) {
@@ -669,7 +669,7 @@ OnInstanceInit:
 OnTouch:
 	mes "Você quer sair da masmorra do polvo?";
 	next;
-	if(select("No!:Yes!") == 2)
+	if(select("Não!:Sim!") == 2)
 		warp "mal_dun01",153,233;
 	close;
 }

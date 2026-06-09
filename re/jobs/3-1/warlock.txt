@@ -34,7 +34,7 @@ OnTouch_:
 			end;
 		}
 		next;
-		switch(select("Extend your hand.:Ignore it.")) {
+		switch(select("Estenda sua mão.:Ignore-a.")) {
 		case 1:
 			mes "- Eu estendo meu braço enquanto um som intenso ressoa em meu ouvido e uma onda fria me envolve -";
 			close2;
@@ -48,11 +48,11 @@ OnTouch_:
 	if (BaseLevel > 94 && (strnpcinfo(0) == "#distorted_space_2" || BaseJob == Job_Wizard)) {
 		mes "- Há uma distorção estranha aqui -";
 		next;
-		switch(select("Search the area.:Ignore it.")) {
+		switch(select("Procurar na área.:Ignorar.")) {
 		case 1:
 			mes "- Não parece haver nada aqui. Mas eu definitivamente sinto algo por aqui... -";
 			next;
-			switch(select("Extend arm.:Leave it alone.")) {
+			switch(select("Estender braço.:Deixar como está.")) {
 			case 1:
 				mes "- Eu estendo meu braço enquanto um som intenso ressoa em meu ouvido e uma onda fria me envolve -";
 				close2;
@@ -161,7 +161,7 @@ function	script	F_Warlock	{
 			mes "[Mestre Egnoloria]";
 			mes "Se você ousa enfrentar a morte, pode tentar se tornar um.";
 			next;
-			switch(select("What do I need to do?:Cancel.")) {
+			switch(select("O que preciso fazer?:Cancelar.")) {
 			case 1:
 				if (VIP_SCRIPT) {
 					callfunc "VIP_Third_Class";
@@ -222,7 +222,7 @@ spl_in02,77,107,5	script	Assistant#Warlock1	446,{
 		mes "Consegue imaginar o quanto fui repreendido pelo meu mestre?!";
 		mes "Se você tem algum assunto comigo, apenas vá embora!";
 		next;
-		switch(select("Leave.:Stay.")) {
+		switch(select("Ir embora.:Ficar.")) {
 		case 1:
 			mes "[Yoop]";
 			mes "Deixe-me em paz...!";
@@ -339,7 +339,7 @@ spl_in02,60,231,5	script	Yoop#Warlock	446,{
 	} else if (job_wl == 4) {
 		mes "Você voltou?";
 		next;
-		switch(select("I brought the materials.:I've lost the Magical Stones.:Nothing.")) {
+		switch(select("Eu trouxe os materiais.:Eu perdi as Pedras Mágicas.:Nada.")) {
 		case 1:
 			mes "[Yoop]";
 			if (countitem(6152) == 0 || countitem(6151) == 0) {
@@ -394,7 +394,7 @@ spl_in02,60,231,5	script	Yoop#Warlock	446,{
 			mes "[Yoop]";
 			mes "Por favor, verifique se você as guardou em algum lugar ou se já as equipou.";
 			next;
-			switch(select("I found it.:Nah.")) {
+			switch(select("Eu encontrei.:Não.")) {
 			case 1:
 				mes "[Yoop]";
 				mes "Não me provoque!";
@@ -403,7 +403,7 @@ spl_in02,60,231,5	script	Yoop#Warlock	446,{
 			case 2:
 				if ((isequipped(2796) == 0 && countitem(2796) == 0) || (isequipped(2797) == 0 && countitem(2797) == 0)) {
 					if (countitem(732) > 0) {
-						switch(select("Give 3 carat diamond.:Just quit it.")) {
+						switch(select("Dar diamante de 3 quilates.:Desistir.")) {
 						case 1:
 							mes "[Yoop]";
 							mes "Vou ignorar sua falha.";
@@ -558,12 +558,12 @@ spl_in02,78,110,5	script	Assistant#Warlock3	437,{
 	mes "[Assistente]";
 	mes "......";
 	switch(job_wl) {
-		case 1: mes "If you don't have anything to say to me, would you just leave?"; break;
-		case 2: mes "I don't have a pony-tail..."; break;
-		default: mes "Please be quiet while my master is meditating."; break;
+		case 1: mes "Se você não tem nada a me dizer, poderia apenas ir embora?"; break;
+		case 2: mes "Eu não tenho um rabo de cavalo..."; break;
+		default: mes "Por favor, fique em silêncio enquanto minha mestra medita."; break;
 	}
 	next;
-	switch(select("Leave:Stay")) {
+	switch(select("Ir embora:Ficar")) {
 	case 1:
 		mes "[Assistente]";
 		mes "Então tenha cuidado.";
@@ -585,7 +585,7 @@ spl_in02,80,108,5	script	Guild Master#Warlock	465,{
 		mes "[Mestra Engoloria]";
 		mes "Você tem algo a me perguntar?";
 		next;
-		switch(select("How can I be a Warlock?:Cancel.")) {
+		switch(select("Como posso me tornar um Arcano?:Cancelar.")) {
 		case 1:
 			if (VIP_SCRIPT) {
 				callfunc "VIP_Third_Class";
@@ -740,7 +740,7 @@ job3_war01,29,25,0	script	Ebein#WRR	437,{
 	mes "[Ebein]";
 	mes "Se houver outras pessoas dentro da sala, você só precisa esperar um pouco.";
 	next;
-	switch(select("Go to the waiting room.:Go outside.")) {
+	switch(select("Ir para a sala de espera.:Ir para fora.")) {
 	case 1:
 		mes "[Ebein]";
 		mes "Então, por favor, entre na sala você mesmo.";
@@ -1072,7 +1072,7 @@ OnTimer6000:
 
 job3_war01,1,2,0	script	Button Girl#wl	66,{
 	callfunc "F_GM_NPC";
-	switch(select("Open Arena:Close Arena:Open the Chamber of Magic:Close the Chamber of Magic:Hollow Stone On:Hollow Stone Off:Cancel")) {
+	switch(select("Abrir Arena:Fechar Arena:Abrir a Câmara de Magia:Fechar a Câmara de Magia:Pedra Oca Ligada:Pedra Oca Desligada:Cancelar")) {
 	case 1:
 		mes "Abrindo a Arena.";
 		donpcevent "The chamber of magic#1::OnEnable";
