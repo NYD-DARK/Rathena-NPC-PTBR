@@ -53,7 +53,7 @@ mora,88,89,5	script	Keeper of Secrets#pa082	495,{
 	mes "[Artífice]";
 	mes "Tudo o que preciso são 10 Moedas de Mora suas para lhe conceder uma relíquia!";
 	next;
-	switch(select("I don't think I'm ready.:I'm ready to exchange my Mora Coins.:Exchange my Ring.")) {
+	switch(select("Não acho que estou pronto.:Estou pronto para trocar minhas Moedas de Mora.:Trocar meu Anel.")) {
 	case 1:
 		mes "[Artífice]";
 		mes "Vejo você na próxima!";
@@ -61,10 +61,10 @@ mora,88,89,5	script	Keeper of Secrets#pa082	495,{
 	case 2:
 		mes "[Artífice]";
 		// What does this even mean? (custom dialogue below)
-		//mes "You influence what part are you?";
+		//mes "Qual parte você deseja?";
 		mes "Que tipo de relíquia você quer?";
 		next;
-		switch(select("I'm not ready.:Ring:Shoes:Shawl:Robe:Shield:Weapon")) {
+		switch(select("Não estou pronto.:Anel:Sapatos:Xale:Túnica:Escudo:Arma")) {
 		case 1:
 			mes "[Artífice]";
 			mes "Siga com a luz.";
@@ -103,7 +103,7 @@ mora,88,89,5	script	Keeper of Secrets#pa082	495,{
 		delitem 6380,10; //Mora_Coin
 		getitem .@item,1;
 		mes "[Artífice]";
-		mes "You have obtained ^aa00aa"+getitemname(.@item)+"^000000. May the Blessing of the Light be with you.";
+		mes "Você obteve ^aa00aa"+getitemname(.@item)+"^000000. May the Blessing of the Light be with you.";
 		close;
 	case 3:
 		if (Class == Job_Arch_Bishop || Class == Job_Arch_Bishop_T || Class == Job_Baby_Arch_Bishop) {
@@ -123,7 +123,7 @@ mora,88,89,5	script	Keeper of Secrets#pa082	495,{
 			close;
 		}
 		mes "[Artífice]";
-		mes "You have a "+getitemname(.@item)+". Do you really want to trade it for 10 Mora Coins?";
+		mes "Você tem um "+getitemname(.@item)+". Do you really want to trade it for 10 Mora Coins?";
 		next;
 		switch(select("I'm not ready:Exchange my "+getitemname(.@item))) {
 		case 1:
@@ -153,7 +153,7 @@ mora,96,74,5	script	Master of Relics#pa0829	495,{
 	mes "[Reliquista]";
 	mes "Eu aprimoro Relíquias que Arcebispos sagrados usam; serão necessárias 2 Moedas de Mora e a relíquia para que eu tente aprimorá-la.";
 	next;
-	switch(select("More details please.:Please Enhance my Relic.")) {
+	switch(select("Mais detalhes, por favor.:Por favor, aprimore minha Relíquia.")) {
 	case 1:
 		mes "[Reliquista]";
 		mes "Deixe-me explicar brevemente: por 2 Moedas de Mora e a relíquia, posso lhe dar um único Encantamento nessa relíquia.";
@@ -174,7 +174,7 @@ mora,96,74,5	script	Master of Relics#pa0829	495,{
 		mes "[Reliquista]";
 		mes "Se você tem um ritual para dar sorte, deveria usá-lo agora!";
 		next;
-		set .@select, select("Wait a minute!:Light of Cure:Seal of Cathedral:Ring of Archbishop:Shoes of Affection:Shoes of Judgement:Shawl of Affection:Shawl of Judgement:Robe of Affection:Robe of Judgement:Bible of Promise 1st Vol:Wand of Affection:Mace of Judgement");
+		set .@select, select("Espere um pouco!:Luz da Cura:Selo da Catedral:Anel do Arcebispo:Sapatos da Afeição:Sapatos do Julgamento:Xale da Afeição:Xale do Julgamento:Túnica da Afeição:Túnica do Julgamento:Bíblia da Promessa (Vol. 1):Varinha da Afeição:Maça do Julgamento");
 		switch(.@select) {
 		case 1:
 			mes "[Reliquista]";
@@ -352,7 +352,7 @@ mora,104,76,4	script	Guardian of Artifacts#p	495,{
 	mes "[Guardião de Artefatos]";
 	mes "Você quer comprar um artefato com suas Moedas de Mora?";
 	next;
-	if(select("Maybe later... I have things to do.:Yes, I do.") == 1) {
+	if(select("Talvez mais tarde... tenho coisas a fazer.:Sim, eu quero.") == 1) {
 		mes "[Guardião de Artefatos]";
 		mes "Ok, nos vemos mais tarde então.";
 		close;
@@ -360,7 +360,7 @@ mora,104,76,4	script	Guardian of Artifacts#p	495,{
 	mes "[Guardião de Artefatos]";
 	mes "Que tipo de item você quer comprar?";
 	next;
-	switch(select("Quit:Shoes:Orbs:Robes:Staves")) {
+	switch(select("Sair:Sapatos:Orbes:Túnicas:Cajados")) {
 	case 1:
 		mes "[Guardião de Artefatos]";
 		mes "Ok, nos vemos mais tarde então.";
@@ -388,7 +388,7 @@ mora,104,76,4	script	Guardian of Artifacts#p	495,{
 	delitem 6380,10; //Mora_Coin
 	getitem .@item,1;
 	mes "[Guardião de Artefatos]";
-	mes "I have ^aa00aa"+getitemname(.@item)+"^000000 available today. I hope "+((.@plural)?"they":"it")+" will come in handy...";
+	mes "Eu tenho ^aa00aa"+getitemname(.@item)+"^000000 available today. I hope "+((.@plural)?"they":"it")+" will come in handy...";
 	close;
 }
 
@@ -405,7 +405,7 @@ mora,99,93,5	script	Artifact Crafter#pa0829	495,{
 	mes "[Artesão de Artefatos]";
 	mes "Meu trabalho é imbuir artefatos com novos poderes. Se você tiver Moedas suficientes, pode ter um dos seguintes itens reforçado.";
 	next;
-	if(select("Tell me more.:I want to have my item reinforced.") == 1) {
+	if(select("Conte-me mais.:Quero que meu item seja reforçado.") == 1) {
 		mes "[Artesão de Artefatos]";
 		mes "Deixe-me explicar. Um reforço custa duas Moedas.";
 		next;
@@ -422,7 +422,7 @@ mora,99,93,5	script	Artifact Crafter#pa0829	495,{
 	if (.@info_only)
 		close;
 	next;
-	set .@select, select("Maybe next time.:Golden Rod Staff:Aqua Staff:Crimson Staff:Forest Staff:Golden Rod Shoes:Aqua Shoes:Crimson Shoes:Forest Shoes:Golden Rod Orb:Aqua Orb:Crimson Orb:Forest Orb:Golden Rod Robe:Aqua Robe:Crimson Robe:Forest Robe");
+	set .@select, select("Talvez na próxima.:Cajado Dourado:Cajado Aquático:Cajado Carmesim:Cajado da Floresta:Sapatos Dourados:Sapatos Aquáticos:Sapatos Carmesins:Sapatos da Floresta:Orbe Dourado:Orbe Aquático:Orbe Carmesim:Orbe da Floresta:Túnica Dourada:Túnica Aquática:Túnica Carmesim:Túnica da Floresta");
 	switch(.@select) {
 	case 1:
 		mes "[Artesão de Artefatos]";
@@ -554,7 +554,7 @@ mora,152,97,5	script	Guardian of Power#pa082	515,{
 	mes "^ff0000Escolha com cuidado porque não é fácil conseguir esses artefatos^000000. Então, para qual classe você deseja?";
 	next;
 	setarray .@jobs$[0],"Rune Knight","Guillotine Cross","Ranger";
-	set .@job, select("Cancel:Rune Knight:Guillotine Cross:Ranger")-2;
+	set .@job, select("Cancelar:Cavaleiro Rúnico:Algoz:Sentinela")-2;
 	if (.@job == -1) {
 		mes "[Guardião do Poder]";
 		mes "Fale comigo mais tarde então.";
@@ -567,15 +567,15 @@ mora,152,97,5	script	Guardian of Power#pa082	515,{
 	switch(.@job) {
 	case 0: // Rune Knight
 		setarray .@items[0],2475,2476,2574,2575;
-		set .@i, select("Cancel:Ur's Greaves (Shoes):Peuz's Greaves (Shoes):Ur's Manteau (Garment):Peuz's Manteau (Garment)")-2;
+		set .@i, select("Cancelar:Grevas de Ur (Sapatos):Grevas de Peuz (Sapatos):Manteau de Ur (Capa):Manteau de Peuz (Capa)")-2;
 		break;
 	case 1: // Guillotine Cross
 		setarray .@items[0],2477,2478,2577,2578;
-		set .@i, select("Cancel:Sapha Shoes (Shoes):Nab Shoes (Shoes):Sapha Hood (Garment):Nab Hood (Garment)")-2;
+		set .@i, select("Cancelar:Sapatos da Sapha (Sapatos):Sapatos de Nab (Sapatos):Capuz da Sapha (Capa):Capuz de Nab (Capa)")-2;
 		break;
 	case 2: // Ranger
 		setarray .@items[0],2479,2480,2580,2581;
-		set .@i, select("Cancel:White Wing Boots (Shoes):Black Wing Boots (Shoes):White Wing Manteau (Garment):Black Wing Manteau (Garment)")-2;
+		set .@i, select("Cancelar:Botas da Asa Branca (Sapatos):Botas da Asa Negra (Sapatos):Manteau da Asa Branca (Capa):Manteau da Asa Negra (Capa)")-2;
 		break;
 	}
 	if (.@i == -1) {
@@ -591,7 +591,7 @@ mora,152,97,5	script	Guardian of Power#pa082	515,{
 	delitem 6380,10; //Mora_Coin
 	getitem .@items[.@i],1;
 	mes "[Guardião do Poder]";
-	mes "Thank you for the 10 Mora Coins. Here is your artifact for the "+.@jobs$[.@job]+" job. Come back whenever you get more Mora Coins.";
+	mes "Obrigado pelas 10 Moedas de Mora. Aqui está seu artefato para o "+.@jobs$[.@job]+" job. Come back whenever you get more Mora Coins.";
 	close;
 }
 
@@ -609,7 +609,7 @@ mora,148,98,3	script	Artifact Researcher#new	521,{
 	mes "Prazer em conhecê-lo.";
 	mes "Estou aqui em Mora estudando relíquias e artefatos antigos. As novas descobertas dos aventureiros tornaram esta vila muito empolgante para mim.";
 	next;
-	switch(select("Tell me more...:Give abilities to artifacts.:Reset Enhanced abilities.")) {
+	switch(select("Conte-me mais...:Dar habilidades a artefatos.:Resetar habilidades aprimoradas.")) {
 	case 1:
 		mes "[Pesquisador de Artefatos]";
 		mes "Novos artefatos foram encontrados aqui na vila de Mora, você não ouviu as notícias?";
@@ -641,7 +641,7 @@ mora,148,98,3	script	Artifact Researcher#new	521,{
 	mes "[Pesquisador de Artefatos]";
 	mes "Ok, então você está pronto? Antes de eu começar a trabalhar nisso, que tipo de equipamento você quer que eu aprimore?";
 	next;
-	set .@i, select("I'm not wearing the equipment:1. Weapon:2. Shoes:3. Garment:4. Armor:5. Accessory")-2;
+	set .@i, select("Não estou usando o equipamento:1. Arma:2. Sapatos:3. Capa:4. Armadura:5. Acessório")-2;
 	if (.@i == -1) {
 		mes "[Pesquisador de Artefatos]";
 		mes "Certifique-se de estar usando o equipamento primeiro.";
@@ -772,7 +772,7 @@ L_Socket:
 			close;
 		}
 		next;
-		if(select("I'll come back later.:Please continue!") == 1) {
+		if(select("Voltarei mais tarde.:Por favor, continue!") == 1) {
 			mes "[Pesquisador de Artefatos]";
 			mes "Se você mudar de ideia, por favor, volte.";
 			close;
@@ -1128,8 +1128,8 @@ L_Socket:
 			specialeffect2 EF_REPAIRWEAPON;
 			mes "[Pesquisador de Artefatos]";
 			// Replacing original dialogue since it doesn't make sense.
-			//mes "The artifact ^990000"+.@slot+" will have the first enhancement retained.";
-			mes "I've successfully enhanced the artifact ^990000"+.@equip_name$+"^000000 at socket "+.@slot+".";
+			//mes "O artefato ^990000"+.@slot+" will have the first enhancement retained.";
+			mes "Eu aprimorei o artefato com sucesso ^990000"+.@equip_name$+"^000000 at socket "+.@slot+".";
 		}
 
 //		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
@@ -1184,7 +1184,7 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 	mes "[Colecionador de Artefatos]";
 	mes "Saudações, Aventureiro. Seremos grandes amigos em um momento, depois que eu lhe contar como Potencializar seus Artefatos!";
 	next;
-	switch(select("Let's do this!:Empower Artifacts?:Nope, not for me!")) {
+	switch(select("Vamos lá!:Potencializar Artefatos?:Não, não para mim!")) {
 	case 1:
 		break;
 	case 2:
@@ -1193,7 +1193,7 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 		mes "Você parece ser um bom juiz de caráter.";
 		next;
 		mes "[Colecionador de Artefatos]";
-		mes "For over 200 years I've been working with Artifacts here in Mora. Toiling to get the perfect +9!";
+		mes "Por mais de 200 anos tenho trabalhado com Artefatos aqui em Mora. Me esforçando para conseguir o +9 perfeito!";
 		next;
 		select("Gulp... +9?!");
 		emotion ET_HUK, playerattached();
@@ -1240,11 +1240,11 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 		mes "Ah, como eu adoro como o destino funciona às vezes...";
 		next;
 		mes "[Colecionador de Artefatos]";
-		mes "+1, +2, +3, +4, +5, +6 those refinements are not strong enough to work on my craft.";
+		mes "+1, +2, +3, +4, +5, +6 esses refinamentos não são fortes o suficiente para o meu trabalho.";
 		next;
 		emotion ET_OTL;
 		mes "[Colecionador de Artefatos]";
-		mes "But +7! +7 is rare and just barely strong enough to work in my crafting attempts.";
+		mes "Mas +7! +7 é raro e mal é forte o suficiente para minhas tentativas de criação.";
 		next;
 		select("I'm gonna be abused again...");
 		emotion ET_SCRATCH, playerattached();
@@ -1266,10 +1266,10 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 		select("Anything else?");
 		emotion ET_QUESTION, playerattached();
 		mes "[Colecionador de Artefatos]";
-		mes "Well aside from the +7, there are very specific enchantments that need to be on the artifact that help catalyze the process.";
+		mes "Bem, além do +7, existem encantamentos muito específicos que precisam estar no artefato para ajudar a catalisar o processo.";
 		next;
 		mes "[Colecionador de Artefatos]";
-		mes "If either the +7 or the specific enchantment is missing I can't do it.";
+		mes "Se faltar o +7 ou o encantamento específico, não poderei fazer isso.";
 		next;
 		select("So the Refining will be preserved?");
 		emotion ET_HUK, playerattached();
@@ -1287,7 +1287,7 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 		setarray .@artifacts[0],1657,16013,2007,2008,2009,2010;
 		setarray .@empowered[0],1660,16018,2011,2012,2013,2014;
 		while(1) {
-			set .@i, select("I don't think I'm interested:Staff of Mercy:Mace of Judgement:Golden Rod Staff:Aqua Staff:Crimson Staff:Forest Staff")-2;
+			set .@i, select("Não acho que estou interessado:Cajado da Misericórdia:Maça do Julgamento:Cajado Dourado:Cajado Aquático:Cajado Carmesim:Cajado da Floresta")-2;
 			if (.@i == -1) {
 				emotion ET_QUESTION;
 				mes "[Colecionador de Artefatos]";
@@ -1312,7 +1312,7 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 				break;
 			}
 			mes "[Colecionador de Artefatos]";
-			mes "It must also carry any of these enchantments: "+.@str$+" to be craftable by me.";
+			mes "Ele também deve possuir qualquer um destes encantamentos: "+.@str$+" to be craftable by me.";
 			next;
 			select(getitemname(.@empowered[.@i])+" attributes?");
 			callsub L_ShowInfo, .@empowered[.@i];
@@ -1368,7 +1368,7 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 	if (.@equip_refine < 7) {
 		emotion ET_FRET;
 		mes "[Colecionador de Artefatos]";
-		mes "I must insist that the refine level of the Artifact be at least +7!";
+		mes "Devo insistir que o nível de refinamento do Artefato seja pelo menos +7!";
 		close;
 	}
 	if (!.@empowered) {
@@ -1384,12 +1384,12 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 	next;
 	emotion ET_OK;
 	mes "[Colecionador de Artefatos]";
-	mes "If you are ready I am about to show you what I can do with your +" + .@equip_refine + " Artifact!";
+	mes "Se estiver pronto, estou prestes a mostrar o que posso fazer com seu +" + .@equip_refine + " Artifact!";
 	next;
 	mes "[Colecionador de Artefatos]";
-	mes "I'm going to take your ^FF0000"+getequipname(EQI_HAND_R)+"^000000 and exchange it, are you ready?";
+	mes "Vou levar seu ^FF0000"+getequipname(EQI_HAND_R)+"^000000 and exchange it, are you ready?";
 	next;
-	switch(select("NOOO!:Yes, I'm ready!:What will it be after?")) {
+	switch(select("NÃOOO!:Sim, estou pronto!:O que ele se tornará depois?")) {
 	case 1:
 		emotion ET_FRET;
 		mes "[Colecionador de Artefatos]";
@@ -1402,7 +1402,7 @@ mora,124,82,4	script	Artifact Collector#blan	522,{
 		mes "[Colecionador de Artefatos]";
 		mes "Com certeza você quer continuar?";
 		next;
-		if(select("No, I don't.:Yes, do it!") == 1) {
+		if(select("Não, eu não quero.:Sim, faça isso!") == 1) {
 			emotion ET_FRET;
 			mes "[Colecionador de Artefatos]";
 			mes "Você só pode estar brincando... você me deu esperanças...";
@@ -1431,7 +1431,7 @@ L_ShowInfo:
 		mes "Peso : 50 / Qualquer Sexo";
 		mes "Apenas Arcebispo";
 		mes "Nível da Arma : 4 / ^ff0000Nível Necessário: 130^000000";
-		mes "MATK + 180, INT + 4.";
+		mes "ATQM + 180, INT + 4.";
 		mes "Adiciona 20% de Bônus de Cura.";
 		mes "Se equipado com Túnicas, Sapatos e Túnica da Misericórdia, aumenta o Bônus de Cura em 45% adicionais e o consumo de SP de 'Curar' em 50.";
 		mes "Ao receber ataques físicos de curto alcance, há uma chance de conjurar o Nv.1 de Silêncio.";
@@ -1442,7 +1442,7 @@ L_ShowInfo:
 		mes "Peso : 120 / Qualquer Sexo";
 		mes "Apenas Arcebispo";
 		mes "Nível da Arma : 4 / ^ff0000Nível Necessário: 130^000000";
-		mes "MATK + 180, STR + 2, INT + 2.";
+		mes "ATQM + 180, FOR + 2, INT + 2.";
 		mes "Ataques físicos e mágicos têm uma chance de aumentar o dano contra monstros Demônios em 40% por 7 segundos.";
 		mes "Se equipado com Luvas, Sapatos e Xale do Julgamento, aumenta o Dano contra Mortos-Vivos em 30%.";
 		mes "Aumenta o dano de Adoramus em 200% e aumenta o custo de SP de Adoramus em 30.";
@@ -1452,7 +1452,7 @@ L_ShowInfo:
 		mes "Peso : 90 / Qualquer Sexo";
 		mes "Apenas Arcano";
 		mes "Nível da Arma : 4 / ^ff0000Nível Necessário : 130^000000";
-		mes "INT + 5, MATK + 270.";
+		mes "INT + 5, ATQM + 270.";
 		mes "Aumenta o dano de Trovão de Júpiter em 30%.";
 		mes "Se equipado com Túnica, Sapatos e Orbe Dourados, aumenta o dano mágico de Vento em 60%.";
 		mes "Reduz o dano mágico de Terra em 60% e a resistência a Terra em 50%.";
@@ -1462,7 +1462,7 @@ L_ShowInfo:
 		mes "Peso : 90 / Qualquer Sexo";
 		mes "Apenas Arcano";
 		mes "Nível da Arma : 4 / ^ff0000Nível Necessário: 130^000000";
-		mes "INT + 5, MATK + 270.";
+		mes "INT + 5, ATQM + 270.";
 		mes "Aumenta o dano de Lanças de Gelo e Nevasca em 30%.";
 		mes "Se equipado com Túnica, Sapatos e Orbe Aquáticos, aumenta o dano mágico de Água em 60%.";
 		mes "Reduz o dano mágico de Vento em 60% e a resistência a Vento em 50%.";
@@ -1472,7 +1472,7 @@ L_ShowInfo:
 		mes "Peso : 90 / Qualquer Sexo";
 		mes "Apenas Arcano";
 		mes "Nível da Arma : 4 / ^ff0000Nível Necessário: 130^000000";
-		mes "INT + 5, MATK + 270.";
+		mes "INT + 5, ATQM + 270.";
 		mes "Aumenta o dano de Lanças de Fogo e Bolas de Fogo em 30%.";
 		mes "Se equipado com Túnica, Sapatos e Orbe Carmesins, aumenta o dano mágico de Fogo em 60%.";
 		mes "Reduz o dano mágico de Água em 60% e a resistência a Água em 50%.";
@@ -1482,7 +1482,7 @@ L_ShowInfo:
 		mes "Peso : 90 / Qualquer Sexo";
 		mes "Apenas Arcano";
 		mes "Nível da Arma : 4 / ^ff0000Nível Necessário: 130^000000";
-		mes "INT + 5, MATK + 270.";
+		mes "INT + 5, ATQM + 270.";
 		mes "Aumenta o dano de Espinhos da Terra e Impacto Espiritual em 30%.";
 		mes "Se equipado com Túnica, Sapatos e Orbe da Floresta, aumenta o dano mágico de Terra em 60%.";
 		mes "Reduz o dano mágico de Fogo em 60% e a resistência a Fogo em 50%.";
@@ -1549,7 +1549,7 @@ mora,105,176,4	script	Master Tailor#pa0829	509,{
 			mes "[Mestre Alfaiate]";
 			mes "Por acaso tenho alguns acolchoados militares em estoque. Gostaria de comprar um? O preço é 1 Moeda de Mora. Tão barato.";
 			next;
-			switch(select("Maybe next time.:I'll buy one now.")) {
+			switch(select("Talvez na próxima.:Vou comprar um agora.")) {
 	 		case 1:
 				mes "[Mestre Alfaiate]";
 				mes "Ok, eu entendo.";
@@ -1569,7 +1569,7 @@ mora,105,176,4	script	Master Tailor#pa0829	509,{
 	mes "[Mestre Alfaiate]";
 	mes "Você veio para adicionar arte a um de seus acolchoados militares?";
 	next;
-	switch(select("Please tell me more.:Yes, I have.")) {
+	switch(select("Por favor, conte-me mais.:Sim, eu vim.")) {
 	case 1:
 		mes "[Mestre Alfaiate]";
 		mes "Um acolchoado militar comum não é quente o suficiente. Ele parece áspero na sua pele e não tem uma boa aparência. E valor artístico? Ele quase não tem nenhum.";
@@ -1590,7 +1590,7 @@ mora,105,176,4	script	Master Tailor#pa0829	509,{
 		mes "[Mestre Alfaiate]";
 		mes "E mais uma coisa - se eu falhar ao tentar adicionar arte a ele, ele se tornará inutilizável... nesse caso, você precisará comprar um novo.";
 		next;
-		switch(select("Come on, what's the rush?:Okay! Let's do it!!")) {
+		switch(select("Calma, qual é a pressa?:Ok! Vamos fazer isso!!")) {
 		case 1:
 			mes "[Mestre Alfaiate]";
 			mes "O que há de errado com você?";
@@ -1645,7 +1645,7 @@ mora,123,177,6	script	Pendant Crafter#pa0829	509,{
 	mes "[Artesão de Pingentes]";
 	mes "Você veio para aprimorar seu Pingente do Guardião?";
 	next;
-	switch(select("Please tell me more.:Yes, I have.")) {
+	switch(select("Por favor, conte-me mais.:Sim, eu vim.")) {
 	case 1:
 		mes "[Artesão de Pingentes]";
 		mes "Meu trabalho é polir a pedra em um Pingente do Guardião e depois esculpir um símbolo com poder especial nele.";
@@ -1658,13 +1658,13 @@ mora,123,177,6	script	Pendant Crafter#pa0829	509,{
 		close;
 	case 2:
 		mes "[Artesão de Pingentes]";
-		mes "Estou te avisando só por precaução - ";
+		mes "Estou te avisando só por precaução -";
 		mes "Se eu trabalhar em um Pingente do Guardião que já foi aprimorado antes, ele perde seu poder original.";
 		next;
 		mes "[Artesão de Pingentes]";
 		mes "E pior, ele pode perder seu poder e se tornar um pingente comum. Claro, a pedra não é tão suscetível a danos quanto o tecido, então você não perderá o pingente em si.";
 		next;
-		switch(select("Come on, what's the rush?:Okay! Let's do it!!")) {
+		switch(select("Calma, qual é a pressa?:Ok! Vamos fazer isso!!")) {
 		case 1:
 			mes "[Artesão de Pingentes]";
 			mes "Volte quando não estiver com pressa. Sempre tenho muito tempo livre.";
@@ -1719,7 +1719,7 @@ mora,134,166,4	script	Bulberry Westhood#pa0829	509,{
 	mes "[Bulberry Westhood]";
 	mes "Então você tem um Cachecol de Loki 1042 Edição Especial. Você realmente tem olho para a qualidade. Posso começar a trabalhar nele agora mesmo?";
 	next;
-	switch(select("I don't get it.:Yes, please.")) {
+	switch(select("Eu não entendi.:Sim, por favor.")) {
 	case 1:
 		mes "[Bulberry Westhood]";
 		mes "Como eu disse, só lido com itens de qualidade - não lenços aleatórios de mercado.";
@@ -1736,7 +1736,7 @@ mora,134,166,4	script	Bulberry Westhood#pa0829	509,{
 		close;
 	case 2:
 		mes "[Bulberry Westhood]";
-		mes "Estou te avisando só por precaução - ";
+		mes "Estou te avisando só por precaução -";
 		mes "Se eu trabalhar em um Cachecol de Loki que já foi aprimorado antes, ele perde seu poder original.";
 		next;
 		mes "[Bulberry Westhood]";
@@ -1745,7 +1745,7 @@ mora,134,166,4	script	Bulberry Westhood#pa0829	509,{
 		mes "[Bulberry Westhood]";
 		mes "Claro, o Cachecol de Loki é um item de qualidade, então você não perderá o cachecol em si no processo.";
 		next;
-		switch(select("Maybe later, sir...:I'd like to own a quality item!")) {
+		switch(select("Talvez mais tarde, senhor...:Eu gostaria de ter um item de qualidade!")) {
 		case 1:
 			mes "[Bulberry Westhood]";
 			mes "Ah...!";

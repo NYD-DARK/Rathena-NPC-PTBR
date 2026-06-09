@@ -41,14 +41,14 @@
 				setarray .@status$, "Stun", "Petrify", "Frozen", "Sleep", "Curse", "Silence", "Blind";
 				.@size = getarraysize(.@status$);
 				for(.@i = 0; .@i < .@size; ++.@i) {
-					mes "= Fairy's Tear (" + .@status$[.@i] + ") =";
+					mes "= Lágrima de Fada (" + .@status$[.@i] + ") =";
 					mes "Uma poção desenvolvida por Vicent, um gênio farmacêutico. Confere ao usuário poderes sobrenaturais por um curto período de tempo.";
-					mes "^4d4dffDrains 3000 HP, but allows the user to become immune to " + (.@i == 1 ? "Petrification" : .@status$[.@i]) + " status for 10 seconds.^000000";
+					mes "^4d4dffDrena 3000 de HP, mas permite que o usuário se torne imune a " + (.@i == 1 ? "Petrification" : .@status$[.@i]) + " status for 10 seconds.^000000";
 					next;
 				}
 				mes "= Boina de Penas [1] =";
 				mes "Um chapéu confortável, de cor azul-celeste, decorado com penas.";
-				mes "^4d4dffMDEF + 1, Decreases the damage taken from the user's counterpart players by 10%.";
+				mes "^4d4dffDEFM + 1, reduz o dano recebido de jogadores oponentes em 10%.";
 				mes "Slot de Carta [1], disponível para todas as classes exceto Aprendizes.";
 				next;
 				mes "= Boina de Penas Visual =";
@@ -229,7 +229,7 @@
 					case 1:
 						mes "= Anel de Kvasir (Azul) =";
 						mes "Um anel que dizem estar preenchido com o poder de Kvasir, um deus sábio.";
-						mes "^4d4dffMSP + 30. 'Snow Flip' 1Lv available^000000";
+						mes "^4d4dffSP Máx + 30. 'Snow Flip' nv 1 disponível^000000";
 						mes "Acessório. Disponível para todas as classes. Nível Necessário: 1";
 						next;
 						mes "[ClickClick MiauMiau-GX]";
@@ -273,7 +273,7 @@
 					case 2:
 						mes "= Anel de Kvasir (Vermelho) =";
 						mes "Um anel que dizem estar preenchido com o poder de Kvasir, um deus sábio.";
-						mes "^4d4dffMSP + 30. 'Peony Mamy' 1Lv available^000000";
+						mes "^4d4dffSP Máx + 30. 'Peony Mamy' nv 1 disponível^000000";
 						mes "Acessório. Disponível para todas as classes. Nível Necessário: 1";
 						next;
 						mes "[ClickClick MiauMiau-GX]";
@@ -303,7 +303,7 @@
 					case 3:
 						mes "= Anel de Kvasir (Verde) =";
 						mes "Um anel que dizem estar preenchido com o poder de Kvasir, um deus sábio.";
-						mes "^4d4dffMSP + 100. 'Sada Ear' 1Lv available^000000";
+						mes "^4d4dffSP Máx + 100. 'Sada Ear' nv 1 disponível^000000";
 						mes "Acessório. Disponível para todas as classes. Nível Necessário: 1";
 						next;
 						mes "[ClickClick MiauMiau-GX]";
@@ -333,7 +333,7 @@
 					case 4:
 						mes "= Anel de Kvasir Marrom =";
 						mes "Um anel que dizem estar preenchido com o poder de Kvasir, um deus sábio.";
-						mes "^4d4dffMSP + 100. 'Dust of Galaxy' 1Lv available^000000";
+						mes "^4d4dffSP Máx + 100. 'Dust of Galaxy' nv 1 disponível^000000";
 						mes "Acessório. Disponível para todas as classes. Nível Necessário: 1";
 						next;
 						mes "[ClickClick MiauMiau-GX]";
@@ -377,7 +377,7 @@
 
 S_PurchaseMedicine:
 	mes "[ClickClick MiauMiau-GX]";
-	mes "You're purchasing 1 " + getarg(0) + ", meow!";
+	mes "Você está comprando 1 " + getarg(0) + ", meow!";
 	mes "Você tem certeza?";
 	next;
 	switch(select("Yes!","No!")) {
@@ -402,7 +402,7 @@ S_PurchaseGift:
 	.@itemid = getarg(1);
 	.@price = getarg(2);
 	mes "[ClickClick MiauMiau-GX]";
-	mes "You're purchasing 1 " + getarg(0) + ", meow!";
+	mes "Você está comprando 1 " + getarg(0) + ", meow!";
 	mes "Você tem certeza?";
 	next;
 	switch(select("Yes!","No!")) {
@@ -413,7 +413,7 @@ S_PurchaseGift:
 				delitem 6615,.@price; // Siege_Guild_Coin
 				getitem .@itemid,1;
 			} else {
-				mes "You need " + .@price + " Commemorative Coins in order to purchase the selected item.";
+				mes "Você precisa de " + .@price + " Commemorative Coins in order to purchase the selected item.";
 				mes "Você decidiu ver outros itens.";
 			}
 			break;
@@ -434,15 +434,15 @@ S_Kvasir:
 	mes "[ClickClick MiauMiau-GX]";
 	// One of Kvasir's Rings and 10 Siege_Guild_Coin
 	if( countitem( .@fromid ) > 0 && countitem( 6615 ) > 9 ){
-		mes "You have " + .@fromname$ + ".";
-		mes "Do you want to trade this in for " + .@toname$ + "?";
+		mes "Você tem " + .@fromname$ + ".";
+		mes "Você deseja trocar isso por " + .@toname$ + "?";
 		next;
 		mes "[ClickClick MiauMiau-GX]";
 		switch( select( "Yes!:Leave" ) ){
 			case 1:
 				// Recheck the items once more
 				if( countitem( .@fromid ) > 0 && countitem( 6615 ) > 9 ){
-					mes "You have traded " + .@fromname$ + " for " + .@toname$ + ".";
+					mes "Você trocou " + .@fromname$ + " for " + .@toname$ + ".";
 					delitem .@fromid, 1;
 					delitem 6615, 10; // Siege_Guild_Coin
 					getitem .@toid, 1;
@@ -454,7 +454,7 @@ S_Kvasir:
 				return;
 		}
 	}
-	mes "You need 1 " + .@fromname$ + " and 10 Commemorative Coins in order to complete the purchase.";
+	mes "Você precisa de 1 " + .@fromname$ + " and 10 Commemorative Coins in order to complete the purchase.";
 	return;
 }
 

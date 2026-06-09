@@ -13,7 +13,7 @@ dali02,51,130,4	script	Dimension Traveler	4_F_SHABBY,{
 	}
 	.@item_name_req$ = getitemname(6672);// Gray_Shard
 	mes "[Viajante Dimensional]";
-	mes "Adventurer friend, " + mesitemlink( 6672 ) + " is what I need. How about exchanging it with something I have?";
+	mes "Amigo aventureiro, " + mesitemlink( 6672 ) + " is what I need. How about exchanging it with something I have?";
 	next;
 	.@type = select( "Show me your weapon.", "Show me your armor.", "Anything special?", "I do not need." ) - 1;
 	mes "[Viajante Dimensional]";
@@ -33,7 +33,7 @@ dali02,51,130,4	script	Dimension Traveler	4_F_SHABBY,{
 	}
 	next;
 	mes "[Viajante Dimensional]";
-	mes "Ah! The number that is written beside " + mesitemlink( 6672 ) + " will be needed.";
+	mes "Ah! O número que está escrito ao lado de " + mesitemlink( 6672 ) + " will be needed.";
 	mes "Por favor, tenha isso em mente.";
 
 	switch(.@type) {
@@ -80,7 +80,7 @@ dali02,51,130,4	script	Dimension Traveler	4_F_SHABBY,{
 		.@s = (select(.@menu$) - 1) * 2;
 		mes "[Viajante Dimensional]";
 		if (.@type != 1)	// armor type doesn't display item info
-			mes "Do you mean " + mesitemlink( .@items[.@s] ) + "?";
+			mes "Você quer dizer " + mesitemlink( .@items[.@s] ) + "?";
 		mes "" + .@items[.@s+1] + " ^006400" + .@item_name_req$ + "^000000 are required in exchange.";
 		next;
 		switch( select( "Let's exchange.", "Let me see other stuff.", "I will come back later." ) ) {
@@ -96,7 +96,7 @@ dali02,51,130,4	script	Dimension Traveler	4_F_SHABBY,{
 				mes "Nós temos muitas armaduras para você. Por que você não escolhe uma?";
 				break;
 			case 2:
-				mes "If you bring me " + .@item_name_req$ + ", I will trade it with anything you want.";
+				mes "Se você me trouxer " + .@item_name_req$ + ", I will trade it with anything you want.";
 				break;
 			}
 			continue;
@@ -108,7 +108,7 @@ dali02,51,130,4	script	Dimension Traveler	4_F_SHABBY,{
 		if (countitem(6672) < .@items[.@s+1]) {
 			mes "[Viajante Dimensional]";
 			mes "Você me colocou em uma situação difícil, amigo.";
-			mes "I am in need of " + .@item_name_req$ + ". I will exchange it for ^006400" + .@items[.@s+1] + " " + .@item_name_req$ + "^000000.";
+			mes "Eu preciso de " + .@item_name_req$ + ". I will exchange it for ^006400" + .@items[.@s+1] + " " + .@item_name_req$ + "^000000.";
 			close;
 		}
 		mes "[Viajante Dimensional]";

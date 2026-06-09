@@ -17,11 +17,11 @@
 	next;
 	switch( select( "Manual", "Trade " + .@storage_ticket_name$, "Trade Novice equipments" ) ) {
 	case 1:
-		mes "[Exchange " + .@storage_ticket_name$ + "]";
+		mes "[Trocar " + .@storage_ticket_name$ + "]";
 		mes "4 " + .@storage_ticket_name$ + " can be exchanged into 1 Free Ticket for Warp, Airship or the Cart Service, or 1 Free Ticket for Peco Ride, 15 Novice Fly Wing, 5 Novice Butterfly Wing, 30 Novice Potion.";
 		next;
 		mes "[Trocar Equipamentos de Aprendiz]";
-		mes "Armor, Hood, Sandals, Main Gauche and Guard for Novice from Criatura Academy can be exchanged into 4 " + .@storage_ticket_name$ + ".";
+		mes "Armadura, Capuz, Sandálias, Adaga e Escudo para Aprendiz da Academia Criatura podem ser trocados por 4 " + .@storage_ticket_name$ + ".";
 		next;
 		mes "[Trocar Equipamentos de Aprendiz]";
 		mes "Casca de Ovo de Aprendiz pode ser trocada por Cupom de Cabelo de Criatura para mudar seu estilo de cabelo.";
@@ -44,12 +44,12 @@
 		}
 		.@s = (select(.@menu$) - 1) * 2;
 		if (countitem(.@storage_ticket) < 4) {
-			mes "The number of " + .@storage_ticket_name$ + " is insufficient to proceed with the exchange.";
+			mes "O número de " + .@storage_ticket_name$ + " is insufficient to proceed with the exchange.";
 			close;
 		}
 		if (.@exchange[.@s+1] > 1)
 			.@amount$ = .@exchange[.@s+1] + " ";
-		mes "Exchanged 4 " + .@storage_ticket_name$ + " to " + .@amount$ + getitemname(.@exchange[.@s]);
+		mes "Trocou 4 " + .@storage_ticket_name$ + " to " + .@amount$ + getitemname(.@exchange[.@s]);
 		delitem .@storage_ticket,4;
 		getitem .@exchange[.@s],.@exchange[.@s+1];
 		close;

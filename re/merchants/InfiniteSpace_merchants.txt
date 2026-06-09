@@ -59,9 +59,9 @@ cmd_fild07,57,275,5	script	Artifact Appraiser#pa0829_01	1_F_02,{
 	}
 	.@stone_id = 6905;
 	mes "[ Avaliador de Artefatos ]";
-	mes "Choose the type of equipment that you want to purchase. You can purchase as many as you want, as long as you have " + getitemname(.@stone_id) + ".";
+	mes "Escolha o tipo de equipamento que deseja comprar. Você pode comprar quantos quiser, desde que tenha " + getitemname(.@stone_id) + ".";
 	next;
-	switch (select("Cancel:Weapons:Armors")) {
+	switch (select("Cancelar:Armas:Armaduras")) {
 		case 1:
 			mes "[ Avaliador de Artefatos ]";
 			mes "Por favor, volte quando quiser~";
@@ -90,16 +90,16 @@ cmd_fild07,57,275,5	script	Artifact Appraiser#pa0829_01	1_F_02,{
 		default:
 			.@s--;
 			mes "[ Avaliador de Artefatos ]";
-			mes "You need ^0000FF" + .@price + "^000000 " + getitemname(.@stone_id) + " to purchase the " + getitemname(.@equip_id[.@s]) + "~";
+			mes "Você precisa de ^0000FF" + .@price + "^000000 " + getitemname(.@stone_id) + " to purchase the " + getitemname(.@equip_id[.@s]) + "~";
 			next;
-			if (select("Cancel:Purchase") == 1) {
+			if (select("Cancelar:Comprar") == 1) {
 				mes "[ Avaliador de Artefatos ]";
 				mes "Por favor, volte quando quiser~";
 				close;
 			}
 			if (countitem(.@stone_id) < .@price) {
 				mes "[ Avaliador de Artefatos ]";
-				mes "You don't have enough " + getitemname(.@stone_id) + " to purchase this item.";
+				mes "Você não tem o suficiente de " + getitemname(.@stone_id) + " to purchase this item.";
 				close;
 			}
 			mes "[ Avaliador de Artefatos ]";
@@ -122,12 +122,12 @@ cmd_fild07,60,275,3	script	Artifact Enhancer#pa0829_01	4_F_JOB_BLACKSMITH,{
 	function equip_check;
 	mes "[ Aprimorador de Artefatos ]";
 	mes "Se você está procurando fortalecer o equipamento que obteve no Espaço Infinito, você veio ao lugar certo.";
-	mes "Do you have any " + getitemname(.@stone_id) + "?";
+	mes "Você tem algum " + getitemname(.@stone_id) + "?";
 	next;
-	switch (select("How do I enchant my equipment?:Enchant equipment.:Initialize equipment's enchant.")) {
+	switch (select("Como encanto meu equipamento?:Encantar equipamento.:Inicializar encantamento do equipamento.")) {
 		case 1:
 			mes "[ Aprimorador de Artefatos ]";
-			mes "You'll be able to obtain " + getitemname(.@stone_id) + ", if you explore the space under the Paros Lighthouse.";
+			mes "Você será capaz de obter " + getitemname(.@stone_id) + ", if you explore the space under the Paros Lighthouse.";
 			next;
 			mes "[ Aprimorador de Artefatos ]";
 			mes "Com esse material, posso reforçar o equipamento que você obteve do Espaço Infinito.";
@@ -148,7 +148,7 @@ cmd_fild07,60,275,3	script	Artifact Enhancer#pa0829_01	4_F_JOB_BLACKSMITH,{
 			mes "[ Aprimorador de Artefatos ]";
 			mes "Por favor, selecione o equipamento que deseja encantar.";
 			next;
-			switch (select("Cancel:Weapon:Armor:Shoes:Garment:Helm")) {
+			switch (select("Cancelar:Arma:Armadura:Calçados:Capa:Elmo")) {
 				case 1:
 					mes "[ Aprimorador de Artefatos ]";
 					mes "Então venha me visitar quando quiser encantar o equipamento.";
@@ -210,24 +210,24 @@ cmd_fild07,60,275,3	script	Artifact Enhancer#pa0829_01	4_F_JOB_BLACKSMITH,{
 			.@slot = (.@card[3] > 0 ? 2 : 3);
 			.@index = (.@slot == 3 ? 0 : 1);
 			mes "[ Aprimorador de Artefatos ]";
-			mes "You can choose 3 types of enchant, and the enchant fee is " + .@fee + " " + getitemname(.@stone_id) + ".";
+			mes "Você pode escolher 3 tipos de encantamento, e a taxa de encantamento é " + .@fee + " " + getitemname(.@stone_id) + ".";
 			mes "Vou garantir que seja encantado sem problemas.";
 			next;
-			.@type = select("Quit:Physical:Magical:Range") - 2;
+			.@type = select("Sair:Físico:Mágico:Distância") - 2;
 			mes "[ Aprimorador de Artefatos ]";
 			if (.@slot == 3)
 				mes "Ok, vamos começar o primeiro encantamento.";
 			else
 				mes "Ok, vamos prosseguir com o segundo encantamento.";
 			next;
-			if (select("I'll return later.:Please proceed.") == 1) {
+			if (select("Voltarei mais tarde.:Por favor, prossiga.") == 1) {
 				mes "[ Aprimorador de Artefatos ]";
 				mes "Se mudar de ideia, é só voltar a mim.";
 				close;
 			}
 			if (countitem(.@stone_id) < .@fee) {
 				mes "[ Aprimorador de Artefatos ]";
-				mes "Hm. By the way, I don't think you were listening, you don't have enough " + getitemname(.@stone_id) + ".";
+				mes "Hm. Aliás, não acho que você estava ouvindo, você não tem o suficiente de " + getitemname(.@stone_id) + ".";
 				close;
 			}
 			explode(.@T$,.@enchant$[.@index],":");
@@ -251,7 +251,7 @@ cmd_fild07,60,275,3	script	Artifact Enhancer#pa0829_01	4_F_JOB_BLACKSMITH,{
 			mes "[ Aprimorador de Artefatos ]";
 			mes "Por favor, selecione o equipamento que deseja encantar.";
 			next;
-			switch (select("Cancel:Weapon:Armor:Shoes:Garment:Helm")) {
+			switch (select("Cancelar:Arma:Armadura:Calçados:Capa:Elmo")) {
 				case 1:
 					mes "[ Aprimorador de Artefatos ]";
 					mes "Então venha me visitar quando quiser encantar o equipamento.";
@@ -292,14 +292,14 @@ cmd_fild07,60,275,3	script	Artifact Enhancer#pa0829_01	4_F_JOB_BLACKSMITH,{
 			mes "[ Aprimorador de Artefatos ]";
 			mes "Existe uma chance de seu equipamento do Espaço Infinito ser destruído no processo de inicialização. Você ainda deseja prosseguir?";
 			next;
-			if (select("Quit:Proceed") == 1) {
+			if (select("Sair:Prosseguir") == 1) {
 				mes "[ Aprimorador de Artefatos ]";
 				mes "Se mudar de ideia, é só voltar a mim.";
 				close;
 			}
 			if (countitem(.@stone_id) < .@fee) {
 				mes "[ Aprimorador de Artefatos ]";
-				mes "Hm. By the way, I don't think you were listening, you don't have enough " + getitemname(.@stone_id) + ".";
+				mes "Hm. Aliás, não acho que você estava ouvindo, você não tem o suficiente de " + getitemname(.@stone_id) + ".";
 				close;
 			}
 			delitem .@stone_id,.@fee;

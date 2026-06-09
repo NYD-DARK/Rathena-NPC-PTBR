@@ -16,7 +16,7 @@ job3_rune01,88,62,5	script	Dragon Breeder	105,{
 	if ((eaclass()&EAJ_THIRDMASK)==EAJ_RUNE_KNIGHT) {
 		mes "Bem-vindo. Você gostaria de alugar um Dragão?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("Sim:Não")) {
 		case 1:
 			//if (!getskilllv("RK_DRAGONTRAINING")) {
 			if (!getskilllv("KN_RIDING")) {
@@ -54,7 +54,7 @@ prontera,130,213,5	script	Riding Creature Master	105,{
 	if ((eaclass()&EAJ_THIRDMASK)==EAJ_RUNE_KNIGHT) {
 		mes "Bem-vindo. Você gostaria de alugar um Dragão?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("Sim:Não")) {
 		case 1:
 			//if (!getskilllv("RK_DRAGONTRAINING")) {
 			if (!getskilllv("KN_RIDING")) {
@@ -83,7 +83,7 @@ prontera,130,213,5	script	Riding Creature Master	105,{
 	if ((eaclass()&EAJ_THIRDMASK)==EAJ_ROYAL_GUARD) {
 		mes "Bem-vindo. Você gostaria de alugar um Grifo?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("Sim:Não")) {
 		case 1:
 			if (!getskilllv("KN_RIDING")) {
 				mes "[Mestre de Montarias]";
@@ -130,7 +130,7 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 		mes "Você está montado em um Peco Peco.";
 		mes "Você gostaria de desmontar?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("Sim:Não")) {
 		case 1:
 			setriding 0;
 			mes "[Soldado]";
@@ -157,7 +157,7 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 		mes "Você gostaria de alugar um Carrinho ou";
 		mes "montar um Mado Gear?";
 		next;
-		switch(select("Rent a Pushcart:Ride a Mado Gear:Buy Emergency Mado Gear:Upgrade Cooling Device:Cancel")) {
+		switch(select("Alugar um Carrinho:Montar um Mado Gear:Comprar Mado Gear de Emergência:Aprimorar Dispositivo de Resfriamento:Cancelar")) {
 		case 1:
 			if (checkcart()) {
 				mes "[Armeiro de Mado Gear]";
@@ -194,7 +194,7 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 			mes "[Armeiro de Mado Gear]";
 			mes "O Mado Gear de Emergência é muito útil para situações de emergência e é vendido por 1.000.000 de Zenys.";
 			next;
-			if (select("Purchase:Cancel") == 2) {
+			if (select("Comprar:Cancelar") == 2) {
 				mes "[Armeiro de Mado Gear]";
 				mes "Entendo. Por favor, sinta-se à vontade para me procurar";
 				mes "se mudar de ideia.";
@@ -219,7 +219,7 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 			mes "[Armeiro de Mado Gear]";
 			mes "Qual dispositivo você deseja aprimorar?";
 			next;
-			if (select("Cooling Device:High Quality Cooler") == 1) {
+			if (select("Dispositivo de Resfriamento:Refrigerador de Alta Qualidade") == 1) {
 				mes "[Armeiro de Mado Gear]";
 				mes "Aprimorar o Dispositivo de Resfriamento para Refrigerador de Alta Qualidade requer 1 Dispositivo de Resfriamento e 2.000.000 de Zenys.";
 				next;
@@ -232,7 +232,7 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 				.@itemid = 2809;
 				.@cost = 4000000;
 			}
-			if (select("Upgrade:Cancel") == 2) {
+			if (select("Aprimorar:Cancelar") == 2) {
 				mes "[Armeiro de Mado Gear]";
 				mes "Entendo. Por favor, sinta-se à vontade para me procurar";
 				mes "se mudar de ideia.";
@@ -240,7 +240,7 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 			}
 			if (!countitem(.@itemid)) {
 				mes "[Armeiro de Mado Gear]";
-				mes "I'm sorry, but you don't have the " + getitemname(.@itemid) + ".";
+				mes "Sinto muito, mas você não tem o " + getitemname(.@itemid) + ".";
 				close;
 			}
 			if (Zeny < .@cost) {
@@ -252,7 +252,7 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 			delitem .@itemid,1;
 			getitem (.@itemid == 2804 ? 2809 : 2810),1; //High_Quality_Cooler,Special_Cooler
 			mes "[Armeiro de Mado Gear]";
-			mes "Here you are! Your very own " + getitemname(.@itemid) + ".";
+			mes "Aqui está! O seu próprio " + getitemname(.@itemid) + ".";
 			close;
 		case 5:
 			close;

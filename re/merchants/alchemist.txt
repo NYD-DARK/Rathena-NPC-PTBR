@@ -38,7 +38,7 @@ alde_alche,31,186,3	script	Craft Book Merchant#alde	883,{
 	mes "[Mercador de Livros de Criação]";
 	mes "Gostaria de dar uma olhada nos meus livros de criação?";
 	next;
-	if(select("Sure.:No.") == 2) {
+	if(select("Sim.:Não.") == 2) {
 		mes "[Mercador de Livros de Criação]";
 		mes "Obrigado por visitar minha loja.";
 		mes "Por favor, tome cuidado em suas viagens.";
@@ -58,7 +58,7 @@ alde_alche,31,186,3	script	Craft Book Merchant#alde	883,{
 	mes "[Mercador de Livros de Criação]";
 	mes "Certo então, aqui está a lista de livros de criação disponíveis.";
 	next;
-	switch(select("[Apple Bomb Craft Book] 100,000 zeny:[Pineapple Bomb Craft Book] 100,000 zeny:[Coconut Bomb Craft Book] 100,000 zeny:[Melon Bomb Craft Book] 100,000 zeny:[Banana Bomb Craft Book] 100,000 zeny:[Plant Gene Cultivation Method] 100,000 zeny:[Superior Potion Craft Manual] 100,000 zeny:[Mix Cooking Book] 100,000 zeny:[Health Improvement Research Book] 100,000 zeny:[Vigor Drink Recipe] 100,000 zeny:Close")){
+	switch(select("[Livro de Criação de Bomba de Maçã] 100.000 zenys:[Livro de Criação de Bomba de Abacaxi] 100.000 zenys:[Livro de Criação de Bomba de Coco] 100.000 zenys:[Livro de Criação de Bomba de Melão] 100.000 zenys:[Livro de Criação de Bomba de Banana] 100.000 zenys:[Método de Cultivo de Genes de Planta] 100.000 zenys:[Manual de Criação de Poção Superior] 100.000 zenys:[Livro de Culinária Mista] 100.000 zenys:[Livro de Pesquisa de Melhoria de Saúde] 100.000 zenys:[Receita de Bebida de Vigor] 100.000 zenys:Fechar")){
 	case 1: set .@item,6279; break;
 	case 2: set .@item,6280; break;
 	case 3: set .@item,6281; break;
@@ -92,10 +92,10 @@ alde_alche,31,186,3	script	Craft Book Merchant#alde	883,{
 		close;
 	}
 	mes "[Mercador de Livros de Criação]";
-	mes "You've entered "+.@amount+"x ^0000FF["+getitemname(.@item)+"]^000000 to be purchased.";
+	mes "Você digitou "+.@amount+"x ^0000FF["+getitemname(.@item)+"]^000000 to be purchased.";
 	mes "Gostaria de continuar?";
 	next;
-	if (select("Yes:No") == 1) {
+	if (select("Sim:Não") == 1) {
 		set .@total, .@amount * 100000;
 		if (Zeny < .@total) {
 			mes "[Mercador de Livros de Criação]";

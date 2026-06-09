@@ -80,7 +80,7 @@ glast_01,210,273,5	script	Hugin's Butler#pa0829	1_F_04,{
 	}
 	setarray .@type$[0], "Strength", "Intelligence", "Agility", "Vitality", "Dexterity", "Lucky";
 	mes "[Mordomo de Hugin]";
-	mes "Are you sure about buying Temporal ^FF0000" + .@type$[.@s] + "^000000 Boots? There's no refunds.";
+	mes "Tem certeza de que deseja comprar Botas Temporais ^FF0000" + .@type$[.@s] + "^000000 Boots? There's no refunds.";
 	next;
 	if (select( "Think again", "Yes, I am sure." ) == 1) {
 		mes "[Mordomo de Hugin]";
@@ -182,8 +182,8 @@ glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
 		if (.@card[3] == 0) {// 4th slot 1st try enchanting
 			.@cost = .@enchant_cost[0];
 			mes "[Mago de Hugin]";
-			mes "Want to enchant ^0000FF" + .@equip_name$ + "^000000?";
-			mes "For the 1st enchanting, you need ^0000FF" + .@cost + "^000000 Coagulated Spell items.";
+			mes "Deseja encantar ^0000FF" + .@equip_name$ + "^000000?";
+			mes "Para o 1º encantamento, você precisa de ^0000FF" + .@cost + "^000000 Coagulated Spell items.";
 			next;
 			.@s = select( "Quit", "Fighting Spirit", "Archery", "Spell", "Vitality", "Attack Speed", "Lucky" ) - 2;
 			if (.@s == -1) {
@@ -212,13 +212,13 @@ glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
 			if (.@enchant_num == 4) {
 				.@card[2] = callfunc("F_Rand",4875,4876,4877,4878,4879,4880);// Bear's_Power, Runaway_Magic, Speed_Of_Light, Muscle_Fool, Hawkeye, Lucky_Day
 				.@string$ = "^990000Bonus effect ^000000 upgrade.";
-				mes "4th slot is already upgraded to the final option. Would you like a random bonus effect for the 3rd slot? You need ^0000ff" + .@cost + "^000000 Coagulated Spell items.";
+				mes "O 4º slot já foi melhorado para a opção final. Você gostaria de um efeito bônus aleatório para o 3º slot? Você precisa de ^0000ff" + .@cost + "^000000 Coagulated Spell items.";
 			}
 			else {
 				.@number = .@enchant_num + 1;
 				.@card[3] = getd( ".@enchant_" + (.@enchant_num+1) + "[" + .@enchant_type + "]" );
 				.@string$ = "enchant number ^630000" + .@number + "^000000.";
-				mes "Enchanting ^0000FF" + .@equip_name$ + "^000000's 4th slot as ^0000FF" + .@number + "^000000 level effect. Requires ^0000FF" + .@cost + "^000000 Coagulated Spell items.";
+				mes "Encantando ^0000FF" + .@equip_name$ + "^000000's 4th slot as ^0000FF" + .@number + "^000000 level effect. Requires ^0000FF" + .@cost + "^000000 Coagulated Spell items.";
 			}
 			next;
 			if (select("Quit","Effect Upgrade!") == 1) {
@@ -229,7 +229,7 @@ glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
 		}
 		if (countitem(6608) < .@cost) {
 			mes "[Mago de Hugin]";
-			mes "Hmm, you are missing " + (.@cost - countitem(6608)) + " Coagulated Spell items. Go get more, and then we can talk about more enchants.";
+			mes "Hmm, você não tem " + (.@cost - countitem(6608)) + " Coagulated Spell items. Go get more, and then we can talk about more enchants.";
 			close;
 		}
 		specialeffect2 EF_REPAIRWEAPON;
@@ -241,7 +241,7 @@ glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
 
 		delequip EQI_SHOES;
 		mes "[Mago de Hugin]";
-		mes "Trying for " + .@string$;
+		mes "Tentando por " + .@string$;
 		getitem2 .@equip_id,1,1,.@equip_refine,0,0,0,.@card[2],.@card[3];
 		close;
 	default:
@@ -364,7 +364,7 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 		mes "Você deveria perguntar ao mestre de magia de Hugin sobre todas as coisas básicas. Eu quero uma conversa mais profunda sobre o trabalho de encantamento.";
 		next;
 		mes "[Mestre de magia sombria]";
-		mes "I need 4 items. ^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + ", " + getitemname(.@polluted_id) + ", " + getitemname(.@coagulated_id) + ", Temporal Boots(Socket) Series^000000. If you don't have any of these, I cannot help you.";
+		mes "Eu preciso de 4 itens. ^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + ", " + getitemname(.@polluted_id) + ", " + getitemname(.@coagulated_id) + ", Temporal Boots(Socket) Series^000000. If you don't have any of these, I cannot help you.";
 		next;
 		mes "[Mestre de magia sombria]";
 		mes "É meu pequeno hobby... Encantar Botas Temporais com Slot usando feitiço poluído e coagulado.";
@@ -434,7 +434,7 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 		.@amount_poll = .@en_amount_polluted[0];
 
 		mes "[Mestre de magia sombria]";
-		mes "Want to enchant ^0000ff" + .@equip_name$ + " (Socket)^000000? For the 1st enchanting, you need ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000.";
+		mes "Deseja encantar ^0000ff" + .@equip_name$ + " (Socket)^000000? For the 1st enchanting, you need ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000.";
 		mes "Tem algum risco de falha..";
 		next;
 		.@s = select( "Quit", "Fighting Spirit", "Archery", "Spell", "Vitality", "Attack Speed", "Lucky" ) - 2;
@@ -466,13 +466,13 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 		if (.@num == 4) {
 			.@card[2] = callfunc("F_Rand",4875,4876,4877,4878,4879,4880);// Bear's_Power, Runaway_Magic, Speed_Of_Light, Muscle_Fool, Hawkeye, Lucky_Day
 			.@string$ = "^990000 Bonus effect ^000000 upgrade.";
-			mes "Would you like a random bonus effect for the 3rd slot? You need ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000. But it has high risk of failing..";
+			mes "Você gostaria de um efeito bônus aleatório para o 3º slot? Você precisa de ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000. But it has high risk of failing..";
 		}
 		else {
 			.@level = .@num + 1;
 			.@card[3] = getd( ".@enchant_" + (.@num+1) + "[" + .@type + "]" );
 			.@string$ = "enchant number ^990000" + .@level + "^000000.";
-			mes "Enchanting ^0000ff" + .@equip_name$ + " (Socket)^000000's 4th slot as ^0000ff" + .@level + "^000000 level effect. Requires ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " z^000000. It has some risk of failing..";
+			mes "Encantando ^0000ff" + .@equip_name$ + " (Socket)^000000's 4th slot as ^0000ff" + .@level + "^000000 level effect. Requires ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " z^000000. It has some risk of failing..";
 		}
 		next;
 		if (select( "Quit", "Effect Upgrade!" ) == 1) {
@@ -483,17 +483,17 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 	}
 	if (countitem(.@coagulated_id) < .@amount_coag) {
 		mes "[Mestre de magia sombria]";
-		mes "Hmm, you are missing " + (.@amount_coag - countitem(.@coagulated_id)) + " " + getitemname(.@coagulated_id) + " items. Go get more, and then we can talk about more enchants.";
+		mes "Hmm, você não tem " + (.@amount_coag - countitem(.@coagulated_id)) + " " + getitemname(.@coagulated_id) + " items. Go get more, and then we can talk about more enchants.";
 		close;
 	}
 	if (countitem(.@polluted_id) < .@amount_poll) {
 		mes "[Mestre de magia sombria]";
-		mes "Hmm, you are missing " + (.@amount_poll - countitem(.@polluted_id)) + " " + getitemname(.@polluted_id) + " items. Go get more, and then we can talk about more enchants.";
+		mes "Hmm, você não tem " + (.@amount_poll - countitem(.@polluted_id)) + " " + getitemname(.@polluted_id) + " items. Go get more, and then we can talk about more enchants.";
 		close;
 	}
 	if (Zeny < .@cost_zeny) {
 		mes "[Mestre de magia sombria]";
-		mes "You must bring ^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000. Nothing is free you know...";
+		mes "Você deve trazer ^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000. Nothing is free you know...";
 		close;
 	}
 	delitem .@coagulated_id, .@amount_coag;
@@ -513,7 +513,7 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 	}
 	specialeffect2 EF_REPAIRWEAPON;
 	mes "[Mago de Hugin]";
-	mes "Trying for " + .@string$;
+	mes "Tentando por " + .@string$;
 	getitem2 .@equip_id,1,1,.@equip_refine,0,0,0,.@card[2],.@card[3];
 	close;
 }
@@ -538,7 +538,7 @@ glast_01,216,292,5	script	Portrait collector#0002	4_M_OILMAN,{
 	mes "Já coleciono retratos há um ano. Agora é hora de mostrar às pessoas minha coleção.";
 	next;
 	mes "[Colecionador de retratos]";
-	mes "Hey, do you have a lot of " + getitemname(.@polluted_id) + " or " + getitemname(.@coagulated_id) + "? If so, why don't you trade a nice portrait that I have?";
+	mes "Ei, você tem bastante " + getitemname(.@polluted_id) + " or " + getitemname(.@coagulated_id) + "? If so, why don't you trade a nice portrait that I have?";
 	next;
 	switch( select( "Cancel", "Exchange for " + getitemname(.@white_card), "Exchange for " + getitemname(.@khalitzburg_card) ) ) {
 	case 1:
@@ -557,7 +557,7 @@ glast_01,216,292,5	script	Portrait collector#0002	4_M_OILMAN,{
 		break;
 	}
 	mes "[Colecionador de retratos]";
-	mes "What would you like in exchange for the " + getitemname(.@reward_id) + "?";
+	mes "O que você gostaria em troca pelo(a) " + getitemname(.@reward_id) + "?";
 	next;
 	if (countitem(.@coagulated_id) < .@amount_coag)
 		.@color$[0] = "^666666";

@@ -34,14 +34,14 @@
 		mes "Quando um equipamento sombrio é refinado, ele ganha bônus extras assim como os itens normais.";
 		next;
 		mes "[Ferreiro Sombrio]";
-		mes "Weapon: ATK, MATK + 1 increase for each +1 refine success.";
-		mes "Etc: HP + 10 increase for each +1 refine success.";
+		mes "Arma: ATK, MATK + 1 de aumento para cada sucesso de refino +1.";
+		mes "Outros: HP + 10 de aumento para cada sucesso de refino +1.";
 		next;
 		mes "[Ferreiro Sombrio]";
 		mes "Todos os tipos de Oridecon e Elunium podem ser usados para refinar equipamentos sombrios. Cada tentativa também custará 20.000 zenys.";
 		next;
 		mes "[Ferreiro Sombrio]";
-		mes "HD ores can be used for gear that is at least refine level +7 and will prevent breaking as long as you stay talking to me.";
+		mes "Minérios HD podem ser usados para equipamentos que estão no nível de refino +7 ou superior e evitarão quebrar enquanto você continuar falando comigo.";
 		close;
 	}
 
@@ -58,7 +58,7 @@
 	while(1) {
 		.@equip_refine = getequiprefinerycnt(.@part);
 		mes "[Ferreiro Sombrio]";
-		mes "I require " + callfunc("F_InsertComma", .@zeny_cost) + " zeny as a fee for EACH refine attempt.";
+		mes "Eu preciso de " + callfunc("F_InsertComma", .@zeny_cost) + " zeny as a fee for EACH refine attempt.";
 		mes "Escolha seu minério e comece a refinar.";
 		next;
 
@@ -91,7 +91,7 @@
 		case 3:// HD
 			if (.@equip_refine < 7) {
 				mes "[Ferreiro Sombrio]";
-				mes "HD Ore can only used for +7 or higher refine level items.";
+				mes "Minério HD só pode ser usado para itens de nível de refino +7 ou superior.";
 				close;
 			}
 			.@hoihoi = 1;
@@ -104,7 +104,7 @@
 		}
 		if (!countitem(.@choose)) {
 			mes "[Ferreiro Sombrio]";
-			mes "You do not have enough "+ getitemname(.@choose) +".";
+			mes "Você não tem "+ getitemname(.@choose) +".";
 			close;
 		}
 		if (Zeny < .@zeny_cost) {
@@ -124,7 +124,7 @@
 		}
 		if (getequippercentrefinery(.@part) < 100) {
 			mes "[Ferreiro Sombrio]";
-			mes "The safety refine level for Shadow Equipment is +4.";
+			mes "O nível de segurança de refino para Equipamento Sombrio é +4.";
 			if (!.@hoihoi)
 				mes "Equipamentos sombrios podem ser destruídos em refinamentos subsequentes. Quer começar?";
 			else

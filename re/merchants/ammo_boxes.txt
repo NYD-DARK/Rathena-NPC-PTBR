@@ -20,9 +20,9 @@ que_ng,187,149,3	script	Magazine Dealer Kenny::mdk	4_M_01,{
 	mes "As bolsas de munição ajudarão você a carregar munições com muito mais facilidade.";
 	mes "Venha dar uma olhada~";
 	next;
-	switch(select("Various Bullet Cases:Sphere Exchange:Old Sphere Exchange:Slug Exchange:Cancel")) {
+	switch(select("Vários Estojos de Munição:Troca de Esferas:Old Troca de Esferas:Troca de Balotes:Cancelar")) {
 	case 1:
-		switch(select("Bullet Case:Bloody Bullet Case:Silver Bullet Case:Ammo AP Bullet Case:Ammo Blazing Bullet Case:Ammo Freezing Bullet Case:Ammo Lightning Bullet Case:Ammo Magic Stone Bullet Case:Ammo Purifying Bullet Case:Flare Bullet Case:Lightning Bullet Case:Ice Bullet Case:Poison Bullet Case:Blind Bullet Case:Cancel")) {
+		switch(select("Estojo de Munição:Bloody Estojo de Munição:Silver Estojo de Munição:Ammo AP Estojo de Munição:Ammo Blazing Estojo de Munição:Ammo Freezing Estojo de Munição:Ammo Lightning Estojo de Munição:Ammo Magic Stone Estojo de Munição:Ammo Purifying Estojo de Munição:Flare Estojo de Munição:Lightning Estojo de Munição:Ice Estojo de Munição:Poison Estojo de Munição:Blind Estojo de Munição:Cancelar")) {
 			case 1: callsub S_Casing,13200,12149;
 			case 2: callsub S_Casing,13222,22737;
 			case 3: callsub S_Casing,13221,22738;
@@ -40,7 +40,7 @@ que_ng,187,149,3	script	Magazine Dealer Kenny::mdk	4_M_01,{
 			case 15: callsub S_Close;
 		}
 	case 2:
-		switch(select("Fire Bullet:Wind Bullet:Freezing Bullet:Poison Bullet:Blind Bullet:Cancel")) {
+		switch(select("Munição de Fogo:Munição de Vento:Munição Congelante:Munição Envenenada:Munição Cegante:Cancelar")) {
 		case 1: callsub S_Sphere_Exchange,13223,13228;
 		case 2: callsub S_Sphere_Exchange,13224,13229;
 		case 3: callsub S_Sphere_Exchange,13227,13230;
@@ -49,7 +49,7 @@ que_ng,187,149,3	script	Magazine Dealer Kenny::mdk	4_M_01,{
 		case 6: callsub S_Close;
 		}
 	case 3:
-		switch(select("Fire Sphere:Wind Sphere:Freezing Sphere:Poison Sphere:Blind Sphere:Cancel")) {
+		switch(select("Esfera de Fogo:Esfera de Vento:Esfera Congelante:Esfera Envenenada:Esfera Cegante:Cancelar")) {
 		case 1: callsub S_Old_Sphere_Exchange,13203,13228;
 		case 2: callsub S_Old_Sphere_Exchange,13204,13229;
 		case 3: callsub S_Old_Sphere_Exchange,13207,13230;
@@ -58,7 +58,7 @@ que_ng,187,149,3	script	Magazine Dealer Kenny::mdk	4_M_01,{
 		case 6: callsub S_Close;
 		}
 	case 4:
-		switch(select("Slug Ammunition L:Slug Ammunition M:Slug Ammunition H:Slug Ammunition SH:Slug Ammunition XH:Cancel")) {
+		switch(select("Balote L:Balote M:Balote H:Balote SH:Balote XH:Cancelar")) {
 		case 1: callsub S_Slug_Exchange,13210,24;
 		case 2: callsub S_Slug_Exchange,13211,12;
 		case 3: callsub S_Slug_Exchange,13212,8;
@@ -81,30 +81,30 @@ S_Casing:
 	if (.@bullet_count < 500 || getequipid(EQI_AMMO) != -1 || BaseClass != Job_Gunslinger) {
 		mes "[Kenny]";
 		mes "Ei~ Você precisa da quantidade exata de itens para trocar. Vá buscar mais.";
-		mes "You must have 500 or more of ^FF0000" + .@bullet_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
+		mes "Você deve ter 500 ou mais de ^FF0000" + .@bullet_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
 		close;
 	}
 
 	mes "[Kenny]";
-	mes "You've chosen ^FF0000" + .@pack_str$ + "^000000.";
-	mes "You need 500 ^3131FF" + .@bullet_str$ + "^000000 to make 1 ^3131FF" + .@bullet_str$ + "^000000 item, and it will cost ^3131FF500^000000 zeny.";
+	mes "Você escolheu ^FF0000" + .@pack_str$ + "^000000.";
+	mes "Você precisa de 500 ^3131FF" + .@bullet_str$ + "^000000 to make 1 ^3131FF" + .@bullet_str$ + "^000000 item, and it will cost ^3131FF500^000000 zeny.";
 	mes "Quantos você quer trocar?";
 	next;
-	switch(select("Exchange all:Make only 1:Cancel")) {
+	switch(select("Trocar tudo:Fazer apenas 1:Cancelar")) {
 		case 1:
 			mes "[Kenny]";
-			mes "Bullet count: ^3131FF" + .@bullet_count;
-			mes "Combination of bullet bags: ^3131FF" + .@pack_count;
-			mes "Zeny required: ^3131FF" + .@pack_count * 500;
+			mes "Contagem de munição: ^3131FF" + .@bullet_count;
+			mes "Combinação de bolsas de munição: ^3131FF" + .@pack_count;
+			mes "Zeny necessário: ^3131FF" + .@pack_count * 500;
 			next;
 			mes "Você quer trocar?";
 			next;
-			switch(select("Exchange:Cancel")) {
+			switch(select("Trocar:Cancelar")) {
 				case 1:
 					if (Zeny < .@pack_count * 500) {
 						mes "[Kenny]";
 						mes "Ei~ Você precisa da quantidade exata de Zeny para trocar. Vá buscar mais.";
-						mes "You must have ^FF0000" + .@pack_count * 500 + "^000000, ok?";
+						mes "Você deve ter ^FF0000" + .@pack_count * 500 + "^000000, ok?";
 						close;
 					}
 					mes "[Kenny]";
@@ -146,16 +146,16 @@ S_Sphere_Exchange:
 	if (.@old_count < 10 || getequipid(EQI_AMMO) != -1 || BaseClass != Job_Gunslinger) {
 		mes "[Kenny]";
 		mes "Ei~ Você precisa da quantidade exata de itens para trocar. Vá buscar mais.";
-		mes "You must have 10 or more of ^FF0000" + .@old_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
+		mes "Você deve ter 10 ou mais de ^FF0000" + .@old_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
 		close;
 	}
 
 	mes "[Kenny]";
-	mes "You've chosen ^FF0000" + .@old_str$ + "^000000.";
-	mes "You need 10 ^3131FF" + .@old_str$ + "^000000 to make 1 ^3131FF" + .@new_str$ + "^000000 item.";
+	mes "Você escolheu ^FF0000" + .@old_str$ + "^000000.";
+	mes "Você precisa de 10 ^3131FF" + .@old_str$ + "^000000 to make 1 ^3131FF" + .@new_str$ + "^000000 item.";
 	mes "Quantos você quer trocar?";
 	next;
-	switch(select("Exchange all:Make only 1:Cancel")) {
+	switch(select("Trocar tudo:Fazer apenas 1:Cancelar")) {
 		case 1:
 			mes "[Kenny]";
 			mes .@old_str$ + " count: ^3131FF" + .@old_count;
@@ -163,7 +163,7 @@ S_Sphere_Exchange:
 			next;
 			mes "Você quer trocar?";
 			next;
-			switch(select("Exchange:Cancel")) {
+			switch(select("Trocar:Cancelar")) {
 				case 1:
 					mes "[Kenny]";
 					mes "Tudo pronto.";
@@ -193,16 +193,16 @@ S_Old_Sphere_Exchange:
 	if (.@old_count < 1 || getequipid(EQI_AMMO) != -1 || BaseClass != Job_Gunslinger) {
 		mes "[Kenny]";
 		mes "Ei~ Você precisa da quantidade exata de itens para trocar. Vá buscar mais.";
-		mes "You must have 1 or more of ^FF0000" + .@old_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
+		mes "Você deve ter 1 ou mais de ^FF0000" + .@old_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
 		close;
 	}
 
 	mes "[Kenny]";
-	mes "You've chosen ^FF0000" + .@old_str$ + "^000000.";
-	mes "You need 1 ^3131FF" + .@old_str$ + "^000000 to make 1 ^3131FF" + .@new_str$ + "^000000 item.";
+	mes "Você escolheu ^FF0000" + .@old_str$ + "^000000.";
+	mes "Você precisa de 1 ^3131FF" + .@old_str$ + "^000000 to make 1 ^3131FF" + .@new_str$ + "^000000 item.";
 	mes "Quantos você quer trocar?";
 	next;
-	switch(select("Exchange all:Make only 1:Cancel")) {
+	switch(select("Trocar tudo:Fazer apenas 1:Cancelar")) {
 		case 1:
 			mes "[Kenny]";
 			mes .@old_str$ + " count: ^3131FF" + .@old_count;
@@ -210,7 +210,7 @@ S_Old_Sphere_Exchange:
 			next;
 			mes "Você quer trocar?";
 			next;
-			switch(select("Exchange:Cancel")) {
+			switch(select("Trocar:Cancelar")) {
 				case 1:
 					mes "[Kenny]";
 					mes "Tudo pronto.";
@@ -241,16 +241,16 @@ S_Slug_Exchange:
 	if (.@count < .@req_count || getequipid(EQI_AMMO) != -1 || BaseClass != Job_Gunslinger) {
 		mes "[Kenny]";
 		mes "Ei~ Você precisa da quantidade exata de itens para trocar. Vá buscar mais.";
-		mes "You must have " + .@req_count + " or more of ^FF0000" + .@slug_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
+		mes "Você deve ter " + .@req_count + " or more of ^FF0000" + .@slug_str$ + "^000000, ok? Also, make sure not to ^FF0000wear^000000 them if you want to exchange.";
 		close;
 	}
 
 	mes "[Kenny]";
-	mes "You've chosen ^FF0000" + .@slug_str$ + "^000000.";
-	mes "You need " + .@req_count + " ^3131FF" + .@slug_str$ + "^000000 to make 1 ^3131FF" + .@new_slug_str$ + "^000000 item.";
+	mes "Você escolheu ^FF0000" + .@slug_str$ + "^000000.";
+	mes "Você precisa de " + .@req_count + " ^3131FF" + .@slug_str$ + "^000000 to make 1 ^3131FF" + .@new_slug_str$ + "^000000 item.";
 	mes "Quantos você quer trocar?";
 	next;
-	switch(select("Exchange all:Make only 1:Cancel")) {
+	switch(select("Trocar tudo:Fazer apenas 1:Cancelar")) {
 		case 1:
 			mes "[Kenny]";
 			mes .@slug_str$ + " count: ^3131FF" + .@count;
@@ -258,7 +258,7 @@ S_Slug_Exchange:
 			next;
 			mes "Você quer trocar?";
 			next;
-			switch(select("Exchange:Cancel")) {
+			switch(select("Trocar:Cancelar")) {
 				case 1:
 					mes "[Kenny]";
 					mes "Tudo pronto.";

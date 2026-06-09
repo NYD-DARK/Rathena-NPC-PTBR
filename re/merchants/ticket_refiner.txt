@@ -68,7 +68,7 @@ prontera,184,177,6	script	Refine Master	851,{
 		mes "em refinar itens,";
 		mes "mas eu não trabalho mais.";
 		next;
-		switch(select("I'll go on my way.:Hmm... this makes me curious.")) {
+		switch(select("Seguirei meu caminho.:Hmm... isso me deixa curioso.")) {
 		case 1:
 			mes "[Mestre de Refino]";
 			mes "Cuide-se, aventureiro.";
@@ -86,7 +86,7 @@ prontera,184,177,6	script	Refine Master	851,{
 	mes "Eu posso refinar um item até o ^006400mesmo nível do seu bilhete^000000.";
 	mes "Você não precisa se preocupar! Não há chance de quebrar seu item.";
 	next;
-	if(select("I'll come back later.:Refine item with ticket.") == 1) {
+	if(select("Voltarei mais tarde.:Refinar item com bilhete.") == 1) {
 		mes "[Mestre de Refino]";
 		mes "Ok.";
 		mes "Você pode voltar mais tarde.";
@@ -154,12 +154,12 @@ prontera,184,177,6	script	Refine Master	851,{
 	if (.@check == 0) {
 		emotion ET_THINK;
 		mes "[Mestre de Refino]";
-		mes "If you want to refine this ^006400"+.@type$+"^000000, please come along with ^006400"+.@type$+" Refine Ticket^000000.";
+		mes "Se você quiser refinar este ^006400"+.@type$+"^000000, please come along with ^006400"+.@type$+" Refine Ticket^000000.";
 		mes "Até mais!";
 		close;
 	}
 	mes "[Mestre de Refino]";
-	mes "Please choose which ^006400"+.@type$+" Refine Ticket^000000 you want to use.";
+	mes "Por favor, escolha qual ^006400"+.@type$+" Refine Ticket^000000 you want to use.";
 	next;
 	.@menu$ = "";
 	for ( .@i = 0; .@i < .@size_cert; ++.@i )
@@ -184,10 +184,10 @@ prontera,184,177,6	script	Refine Master	851,{
 		close;
 	}
 	mes "[Mestre de Refino]";
-	mes "I'm going to refine ^006400"+getequipname(.@part)+"^8B4513 up to the +"+.@ticket_lv+" level^000000 with ^006400"+getitemname(.@ticket_id)+"^000000.";
+	mes "Vou refinar ^006400"+getequipname(.@part)+"^8B4513 up to the +"+.@ticket_lv+" level^000000 with ^006400"+getitemname(.@ticket_id)+"^000000.";
 	mes "Posso prosseguir?";
 	next;
-	if(select("No.:Yes.") == 1) {
+	if(select("Não.:Sim.") == 1) {
 		emotion ET_THINK;
 		mes "[Mestre de Refino]";
 		mes "Oh, você mudou de ideia.";
@@ -216,7 +216,7 @@ prontera,184,177,6	script	Refine Master	851,{
 		emotion ET_FRET;
 		mes "Espere um segundo...";
 		mes "Você acha que eu sou estúpido?!";
-		mes "You switched the item while I wasn't looking! Get out of here!";
+		mes "Você trocou o item enquanto eu não estava olhando! Saia daqui!";
 		close;
 	}
 	successrefitem .@part, .@ticket_lv - getequiprefinerycnt(.@part);
@@ -224,8 +224,8 @@ prontera,184,177,6	script	Refine Master	851,{
 	emotion ET_DELIGHT;
 	mes "[Mestre de Refino]";
 	mes "Muito bem, aqui está~";
-	mes "Well, ^0000FF"+strcharinfo(0)+"^000000!";
-	mes "Congratulations on your shining "+.@type$+".";
+	mes "Bem, ^0000FF"+strcharinfo(0)+"^000000!";
+	mes "Parabéns pelo seu brilhante "+.@type$+".";
 	mes "Você está ÓTIMO!";
 	mes "Adeus~!";
 	close;

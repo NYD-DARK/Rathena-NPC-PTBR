@@ -465,7 +465,7 @@ lighthalzen,319,213,4	script	Veteran Adventurer#JCv2	4_M_MELODY,2,2,{
 		if (countitem(6820) < .@items[.@s+1]) {
 			emotion ET_SORRY;
 			mes "[Aventureiro Veterano]";
-			mes "Sorry. I don't have a choice because the guild master ordered it. You need " + .@items[.@s+1] + " items, if he says no, I'm not at liberty to exchange it.";
+			mes "Desculpe. Não tenho escolha, pois o líder da guilda ordenou. Você precisa de " + .@items[.@s+1] + " items, if he says no, I'm not at liberty to exchange it.";
 			close;
 		}
 		delitem 6820, .@items[.@s+1];// Energy Pieces
@@ -535,7 +535,7 @@ lighthalzen,312,296,4	script	Bully#JCv2	4_M_LGTPOOR,{
 		23016, 6820,666;	// Energy Fragment -> Cursed Fragment
 	.@index = .@s * 3;
 	mes "[Valentão]";
-	mes "Are you sure you want to exchange ^330066" + .@exchange[.@index+2] + " " + getitemname(.@exchange[.@index+1]) + "^000000 with ^CC33331 " + getitemname(.@exchange[.@index]) + "^000000?";
+	mes "Você tem certeza de que deseja trocar ^330066" + .@exchange[.@index+2] + " " + getitemname(.@exchange[.@index+1]) + "^000000 with ^CC33331 " + getitemname(.@exchange[.@index]) + "^000000?";
 	next;
 	if (select( "Exchange.", "Do not exchange." ) == 2) {
 		emotion ET_HNG;
@@ -548,7 +548,7 @@ lighthalzen,312,296,4	script	Bully#JCv2	4_M_LGTPOOR,{
 			emotion ET_SCRATCH;
 			mes "[Valentão]";
 			mes "Não... Não... você não deveria fazer isso.";
-			mes "You told me you would exchange it with " + .@exchange[.@index+2] + " (item)s.";
+			mes "Você me disse que trocaria com " + .@exchange[.@index+2] + " (item)s.";
 			close;
 		}
 		delitem .@exchange[.@index+1], .@exchange[.@index+2];
@@ -807,8 +807,8 @@ lhz_dun_n,134,265,2	script	Wandering Mind#JCv2	4_CENERE,{
 		mes "No entanto... antes que isso aconteça... preciso verificar... se você tem ou não... Fragmentos Amaldiçoados suficientes...";
 		next;
 		mes "[Mente Errante]";
-		mes "Cursed... Fragments..." + .@requirement + " are... needed... I wonder... whether... you can afford... them?... kk... kk...";
-		mes "^FF0000*In enchantment, " + .@requirement + " Cursed Fragment(s) is(are) required.*^000000";
+		mes "Fragmentos... Amaldiçoados..." + .@requirement + " are... needed... I wonder... whether... you can afford... them?... kk... kk...";
+		mes "^FF0000*No encantamento, " + .@requirement + " Cursed Fragment(s) is(are) required.*^000000";
 		next;
 		if (select( "Pay fee.", "Do not pay fee." ) == 2) {
 			mes "[Mente Errante]";
@@ -1018,7 +1018,7 @@ lhz_dun_n,134,265,2	script	Wandering Mind#JCv2	4_CENERE,{
 		}
 		mes "[Mente Errante]";
 		mes "Você quer... poder?... Se sim, você... precisa ter... o Elmo Antigo..";
-		mes "^FF0000*You can enchant it into the " + .@string$[0];
+		mes "^FF0000*Você pode encantá-lo no " + .@string$[0];
 		mes "" + .@string$[1];
 		mes "" + .@string$[2] + ".*^000000";
 		next;
@@ -1189,7 +1189,7 @@ S_Exchange:
 	if (select( "Disagree with it.", "Acquire Energy Fragments." ) == 2) {
 		if (countitem(getarg(.@s)) < 1) {
 			mes "[Mente da Alma Vitimizada]";
-			mes "You don't... have... ^006400" + getitemname(getarg(.@s)) + "^000000...";
+			mes "Você não... tem... ^006400" + getitemname(getarg(.@s)) + "^000000...";
 			mes "Você tem... algum outro assunto... comigo?...";
 			next;
 			return;
@@ -1213,7 +1213,7 @@ S_Exchange:
 			.@amount = 3;
 		getitem 6820, .@amount;// Energy Fragment
 		mes "[Mente da Alma Vitimizada]";
-		mes "I have made... Energy... Fragment... by restoring ^006400" + getitemname(getarg(.@s)) + "^000000...";
+		mes "Eu criei... um Fragmento de... Energia... ao restaurar ^006400" + getitemname(getarg(.@s)) + "^000000...";
 		next;
 		mes "- Recebi dano crítico - - pela poderosa frequência da mente - - que se infiltrou em meu corpo. -";
 		next;
@@ -1311,9 +1311,9 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 2:
 				mes "- " + .@item_name$[0] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1, MDEF+ 5^000000";
-				mes "^006400ATK + 4 per 1 refinement level increase^000000";
-				mes "^006400ASPD + 1 per 5 refinement level increase^000000";
+				mes "^006400Todos os atributos + 1, DEFM + 5^000000";
+				mes "^006400ATQ + 4 a cada nível de refino^000000";
+				mes "^006400ASPD + 1 a cada 5 níveis de refino^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Impacto Explosivo em 20%^000000";
 				mes "^006400a cada 2 níveis de refino^000000";
@@ -1331,8 +1331,8 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 3:
 				mes "- " + .@item_name$[1] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1, MDEF+ 5^000000";
-				mes "^006400MATK + 2, ATK + 4, Heal Amount + 2% per 1 refinement level increase.^000000";
+				mes "^006400Todos os atributos + 1, DEFM + 5^000000";
+				mes "^006400ATQM + 2, ATQ + 4, Eficácia de Cura + 2% a cada nível de refino.^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Judex em 20% a cada 2 níveis de refino.^000000";
 				mes "^006400Aumenta o dano de Magnus Exorcismus em 10% a cada 2 níveis de refino.^000000";
@@ -1348,9 +1348,9 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 4:
 				mes "- " + .@item_name$[2] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
-				mes "^006400ATK + 4 per 1 refinement level increase^000000";
-				mes "^006400ASPD + 1 per 5 refinement level increase^000000";
+				mes "^006400Todos os atributos + 1^000000";
+				mes "^006400ATQ + 4 a cada nível de refino^000000";
+				mes "^006400ASPD + 1 a cada 5 níveis de refino^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Choque de Carrinho em 20% a cada 2 níveis de refino.^000000";
 				mes "^006400Aumenta o dano de Tornado de Machado em 20% a cada 2 níveis de refino.^000000";
@@ -1366,9 +1366,9 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 5:
 				mes "- " + .@item_name$[3] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
-				mes "^006400ATK + 4 per 1 refinement level increase^000000";
-				mes "^006400ASPD + 1 per 5 refinement level increase^000000";
+				mes "^006400Todos os atributos + 1^000000";
+				mes "^006400ATQ + 4 a cada nível de refino^000000";
+				mes "^006400ASPD + 1 a cada 5 níveis de refino^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Canhão de Projéteis em 5% a cada 2 níveis de refino.^000000";
 				mes "^006400Reduz a recarga de Destruição Suicida em 10 segundos a cada 4 níveis de refino.^000000";
@@ -1384,8 +1384,8 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 6:
 				mes "- " + .@item_name$[4] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
-				mes "^006400ATK + 4, MATK + 4 per each refinement level increase.^000000";
+				mes "^006400Todos os atributos + 1^000000";
+				mes "^006400ATQ + 4, ATQM + 4 a cada nível de refino.^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Disparo Triplo em 25% a cada 2 níveis de refino.^000000";
 				mes "^006400Reduz a recarga de Mascarar de Sorte, Enervação em 1 segundo quando o nível de refino do personagem atingir 6.^000000";
@@ -1403,7 +1403,7 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 7:
 				mes "- " + .@item_name$[5] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
+				mes "^006400Todos os atributos + 1^000000";
 				mes "^006400Aumenta o dano físico à distância em 1% a cada nível de refino.^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Vulcão de Flechas em 20% a cada 2 níveis de refino.^000000";
@@ -1420,8 +1420,8 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 8:
 				mes "- " + .@item_name$[6] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
-				mes "^006400ATK + 4 per 1 refinement level increase^000000";
+				mes "^006400Todos os atributos + 1^000000";
+				mes "^006400ATQ + 4 a cada nível de refino^000000";
 				mes "^006400Aumenta o dano físico à distância em 1% a cada 2 níveis de refino.^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Canhão de Carrinho em 15% a cada 2 níveis de refino.^000000";
@@ -1437,9 +1437,9 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 9:
 				mes "- " + .@item_name$[7] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1 MDEF+ 5^000000";
+				mes "^006400Todos os atributos + 1 DEFM + 5^000000";
 				mes "^006400Aumenta a regeneração de SP em 20%.^000000";
-				mes "^006400MATK + 1% per each refinement level increase.^000000";
+				mes "^006400ATQM + 1% a cada nível de refino.^000000";
 				mes "^006400Aumenta HP máx., SP máx. em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Expansão Espiritual em 5% a cada 2 níveis de refino.^000000";
 				mes "^006400Reduz a recarga de Rocha Incandescente em 1 segundo.^000000";
@@ -1456,8 +1456,8 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 10:
 				mes "- " + .@item_name$[8] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
-				mes "^006400ATK + 4, CRI + 2 per each refinement level increase.^000000";
+				mes "^006400Todos os atributos + 1^000000";
+				mes "^006400ATQ + 4, CRI + 2 a cada nível de refino.^000000";
 				mes "^006400Aumenta o MHP e MSP em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Explosão Espiritual em 15% a cada 2 níveis de refino.^000000";
 				mes "^006400Aumenta o dano de Disparo Explosivo em 20% a cada 2 níveis de refino.^000000";
@@ -1473,8 +1473,8 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 11:
 				mes "- " + .@item_name$[9] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1 MDEF+ 5.^000000";
-				mes "^006400MATK + 1%, ATK + 4 per each refinement level increase.^000000";
+				mes "^006400Todos os atributos + 1 DEFM + 5.^000000";
+				mes "^006400ATQM + 1%, ATQ + 4 a cada nível de refino.^000000";
 				mes "^006400Aumenta o MHP e MSP em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Explosão Tóxica em 15% a cada 2 níveis de refino.^000000";
 				mes "^006400Aumenta o dano de Lança de Varetyr em 20% a cada 2 níveis de refino.^000000";
@@ -1490,7 +1490,7 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 12:
 				mes "- " + .@item_name$[10] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
+				mes "^006400Todos os atributos + 1^000000";
 				mes "^006400Aumenta o dano físico à distância em 1% a cada nível de refino.^000000";
 				mes "^006400Aumenta o MHP e MSP em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Vulcão de Flechas em 20% a cada 2 níveis de refino.^000000";
@@ -1507,9 +1507,9 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 13:
 				mes "- " + .@item_name$[11] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
+				mes "^006400Todos os atributos + 1^000000";
 				mes "^006400Aumenta o dano físico à distância em 1% a cada nível de refino.^000000";
-				mes "^006400Complete evasion +1 per 3 refinement level increase.^000000";
+				mes "^006400Esquiva Perfeita + 1 a cada 3 níveis de refino.^000000";
 				mes "^006400Aumenta o MHP e MSP em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Bomba Relógio em 15% a cada 2 níveis de refino.^000000";
 				mes "^006400Aumenta o dano de Investida Warg em 10% a cada 2 níveis de refino.^000000";
@@ -1525,7 +1525,7 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 14:
 				mes "- " + .@item_name$[12] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1^000000";
+				mes "^006400Todos os atributos + 1^000000";
 				mes "^006400Aumenta o dano crítico em 1% e a velocidade de ataque a cada nível de refino (Reduz o atraso de ataque em 1%)^000000";
 				mes "^006400Aumenta o MHP e MSP em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Impacto Flamejante em 10% a cada 2 níveis de refino.^000000";
@@ -1542,9 +1542,9 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 			case 15:
 				mes "- " + .@item_name$[13] + " -";
 				mes "^006400Este item não pode ser negociado com outras contas.^000000";
-				mes "^006400All State + 1 MDEF+ 5.^000000";
-				mes "^006400ATK + 4 per 1 refinement level increase^000000";
-				mes "^006400ASPD + 1 per 5 refinement level increase^000000";
+				mes "^006400Todos os atributos + 1 DEFM + 5.^000000";
+				mes "^006400ATQ + 4 a cada nível de refino^000000";
+				mes "^006400ASPD + 1 a cada 5 níveis de refino^000000";
 				mes "^006400Aumenta o MHP e MSP em 1% a cada 2 níveis de refino^000000";
 				mes "^006400Aumenta o dano de Lança do Destino em 20% a cada 2 níveis de refino.^000000";
 				mes "^006400Aumenta o dano de Toque do Oblívio em 5% a cada 2 níveis de refino.^000000";
@@ -1561,10 +1561,10 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 				mes "- " + .@item_name$[14] + "[1] -";
 				mes "^006400Relógio lendário, conhecido por ter sido usado por aqueles^000000 ^006400que lutaram bravamente e morreram em batalha.";
 				mes "Aumenta o MHP e MSP em 1% a cada 2 níveis de refino";
-				mes "ATK + 10 when your character's pure STR reaches 90.";
-				mes "(Additional ATK + 2 per each refinement level increase)";
-				mes "MATK + 20 when your character's pure INT reaches 90.";
-				mes "(Additional MATK + 3 per each refinement level increase)";
+				mes "ATQ + 10 quando o valor base de FOR do seu personagem atinge 90.";
+				mes "(ATQ adicional + 2 a cada nível de refino)";
+				mes "ATQM + 20 quando o valor base de INT do seu personagem atinge 90.";
+				mes "(ATQM adicional + 3 a cada nível de refino)";
 				mes "quando o valor base de VIT do seu personagem atinge 90";
 				mes "3% de resistência contra ataques normais";
 				mes "(Adicional de 3% quando o nível de refino atinge 8,";
@@ -1572,7 +1572,7 @@ lhz_dun_n,136,269,6	script	Sorrowful Soul's Mind#1	4_M_DEATH,{
 				mes "quando o valor base de AGI do seu personagem atinge 90";
 				mes "Velocidade de ataque aumentada (redução de 3% no atraso de ataque)";
 				mes "(Atraso de ataque reduzido adicionalmente em 1% a cada 2 níveis de refino)";
-				mes "(Additional ASPD + 1 when your character's refinement level reaches 10.)";
+				mes "(ASPD adicional + 1 quando o nível de refino do seu personagem atinge 10.)";
 				mes "Quando o valor base de DES do seu personagem atinge 90";
 				mes "Aumenta o poder de ataque à distância em 3%,";
 				mes "(Adicional de 1% a cada 2 níveis de refino)";
@@ -1608,12 +1608,12 @@ S_Make:
 	}
 	next;
 	mes "[Mente da Alma Dolorosa]";
-	mes "In order to make... ^006400" + getitemname(.@reward_id) + "^000000...";
-	mes "Bring their... wandering " + .@string$[0] + ", " + .@string$[1] + "... the vessel to hold the soul and... the dark energy... filling up this place...";
+	mes "Para fazer... ^006400" + getitemname(.@reward_id) + "^000000...";
+	mes "Traga seus... errantes " + .@string$[0] + ", " + .@string$[1] + "... the vessel to hold the soul and... the dark energy... filling up this place...";
 	next;
 	mes "[Mente da Alma Dolorosa]";
-	mes "I need 1 " + getitemname(.@equipment_req) + ", " + .@material[0] + " " + getitemname(.@item_misc_req) + "... " + .@material[1] + " " + getitemname(6820) + "..";
-	mes "If 5 times of " + getitemname(6820) + " and " + .@string$[0] + "s are collected... you... will never fail...";
+	mes "Eu preciso de 1 " + getitemname(.@equipment_req) + ", " + .@material[0] + " " + getitemname(.@item_misc_req) + "... " + .@material[1] + " " + getitemname(6820) + "..";
+	mes "Se 5 vezes de " + getitemname(6820) + " and " + .@string$[0] + "s are collected... you... will never fail...";
 	mes "Como... você... faria isso?";
 	next;
 	switch( select( "Go back to the previous menu.", "Use " + .@material[1] + " energies, " + .@material[0] + " " + .@string$[0], "Use " + (.@material[1] * 5) + " energies, " + (.@material[0] * 5) + " " + .@string$[0] + "s" ) ) {
@@ -1630,7 +1630,7 @@ S_Make:
 	}
 	if (countitem(.@equipment_req) < 1 || countitem(.@item_misc_req) < (.@material[0] * .@rate) || countitem(6820) < (.@material[1] * .@rate)) {
 		mes "[Mente da Alma Dolorosa]";
-		mes "You don't... have... enough material... to make... ^006400" + getitemname(.@reward_id) + "^000000...";
+		mes "Você não... tem... material suficiente... para fazer... ^006400" + getitemname(.@reward_id) + "^000000...";
 		return;
 	}
 	progressbar "000000",5;
@@ -1647,7 +1647,7 @@ S_Make:
 		specialeffect EF_DARKCASTING2;
 		specialeffect EF_RG_COIN7;
 		mes "[Mente da Alma Dolorosa]";
-		mes "Here is... ^006400" + getitemname(.@reward_id) + "^000000...";
+		mes "Aqui está... ^006400" + getitemname(.@reward_id) + "^000000...";
 		getitem .@reward_id,1;
 	}
 	else {

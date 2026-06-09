@@ -15,7 +15,7 @@ rachel,177,139,3	script	Temple Item Manager#0hmoon	4_M_TRAINEE,{
 		end;
 	}
 	mes "[Gerente de Itens do Templo]";
-	mes "If you have 1 ^0000cd" + getitemname(28387) + "^000000 and a ^0000cd" + getitemname(25088) + "^000000, I will grant you the power of the Goddess.";
+	mes "Se você tiver 1 ^0000cd" + getitemname(28387) + "^000000 and a ^0000cd" + getitemname(25088) + "^000000, I will grant you the power of the Goddess.";
 	next;
 	mes "[Gerente de Itens do Templo]";
 	mes "Farei um bom trabalho. Deixe comigo.";
@@ -186,7 +186,7 @@ rachel,177,139,3	script	Temple Item Manager#0hmoon	4_M_TRAINEE,{
 
 		if (.@itemid != 28387) {
 			mes "[Gerente de Itens do Templo]";
-			mes "Uh, wait! That's not the ^0000cd" + mesitemlink(28387, false) + "^000000, is it? Can you check it again?";
+			mes "Uh, espere! Esse não é o ^0000cd" + mesitemlink(28387, false) + "^000000, is it? Can you check it again?";
 			close;
 		}
 		.@card = getequipcardid(.@part,3);
@@ -207,7 +207,7 @@ rachel,177,139,3	script	Temple Item Manager#0hmoon	4_M_TRAINEE,{
 			setarray .@enhance_s[0],29122,29124,29126;
 
 			mes "[Gerente de Itens do Templo]";
-			mes "You have selected the " + .@enhance_n$[.@s] + " enchantment.";
+			mes "Você selecionou o " + .@enhance_n$[.@s] + " enchantment.";
 			mes "Por favor, selecione a classe";
 			mes "" + mesitemlink(.@enhance_a[.@s], false) + "";
 			mes "" + mesitemlink(.@enhance_s[.@s], false) + "";
@@ -225,7 +225,7 @@ rachel,177,139,3	script	Temple Item Manager#0hmoon	4_M_TRAINEE,{
 				break;
 			}
 			mes "[Gerente de Itens do Templo]";
-			mes "The necklace will be enchanted with the " + mesitemlink(.@enchant, false) + "";
+			mes "O colar será encantado com o " + mesitemlink(.@enchant, false) + "";
 			mes "Você tem certeza de que deseja prosseguir com este processo de encantamento?";
 			next;
 			if (select( "No, I need time to consider.","Yes, please proceed." ) == 1)
@@ -234,19 +234,19 @@ rachel,177,139,3	script	Temple Item Manager#0hmoon	4_M_TRAINEE,{
 
 			mes "[Gerente de Itens do Templo]";
 			if (!getequipisequiped(.@part) || isequipped(28387) < 1) {
-				mes "You aren't wearing the " + mesitemlink(28387, false) + "...!";
+				mes "Você não está usando o " + mesitemlink(28387, false) + "...!";
 				close;
 			}
 			if (.@enchant == .@card) {
-				mes "Your " + mesitemlink(28387, false) + " already has an enchant.";
+				mes "Seu " + mesitemlink(28387, false) + " already has an enchant.";
 				close;
 			}
 			if (countitem(25088) < .@cost) {
-				mes "You didn't bring enough " + mesitemlink(25088, false) + "!";
+				mes "Você não trouxe a quantidade suficiente de " + mesitemlink(25088, false) + "!";
 				close;
 			}
 			if (.@class == 2 && (.@enchant == 29122 && .@card != 29121 || .@enchant == 29124 && .@card != 29123 || .@enchant == 29126 && .@card != 29125)) {
-				mes "You need to have your necklace enchanted with " + mesitemlink(.@enhance_a[.@s], false) + " first.";
+				mes "Você precisa que seu colar esteja encantado com " + mesitemlink(.@enhance_a[.@s], false) + " first.";
 				close;
 			}
 			specialeffect2 182;
