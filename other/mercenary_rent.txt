@@ -22,7 +22,7 @@
 //============================================================ 
 
 -	script	Mercenary Manager#main	-1,{
-	setarray .@name$, 	"LanÃ§a", 			"Espada", 			"Arco";
+	setarray .@name$, 	"Spear", 			"Sword", 			"Bow";
 	setarray .@faith$, 	"SPEAR_MERC_GUILD",	"SWORD_MERC_GUILD",	"ARCH_MERC_GUILD";
 	setarray .@item, 	12182,				12172,				12162;
 	.@npc$ = strnpcinfo(2);
@@ -31,10 +31,10 @@
 	.@faith_merc = mercenary_get_faith(getd(.@faith$[.@type]));
 	mes "[Gerente de Mercenários]";
 	mes "Bem-vindo ao";
-	mes "Guilda dos MercenÃ¡rios de " + .@name$[.@type] + ".";
+	mes .@name$[.@type] + "Guilda dos Mercenários de ";
 	mes "O que posso fazer por você?";
 	next;
-	switch(select("Hire Mercenary:Mercenary Info:Nothing:10th Grade Mercenaries")) {
+	switch(select("Contratar Mercenário:Informações de Mercenário:Nada:Mercenários de 10ª Classe")) {
 		case 1:
 			mes "[Gerente de Mercenários]";
 			mes "Você quer contratar um";
@@ -51,13 +51,13 @@
 			setarray .@FaithCost[7], 50,100,300;
 			.@FaithCost = .@FaithCost[.@Grade];
 			mes "[Gerente de Mercenários]";
-			mes "So you want to hire a " + callfunc("F_GetNumSuffix",.@Grade);
-			mes "Grade " + .@name$[.@type] + " Mercenary?";
+			mes "Então você deseja contratar um " + callfunc("F_GetNumSuffix",.@Grade);
+			mes "Mercenário de Grau " + .@name$[.@type] + " Mercenary?";
 			mes "Você precisa ter alcançado";
-			mes "Base Level " + .@BaseLevel + " or higher, and";
-			mes "must pay the " + .@ZenyCost + ",000 zeny fee.";
+			mes "Nível Base " + .@BaseLevel + " or higher, and";
+			mes "deve pagar a taxa de " + .@ZenyCost + ",000 zeny fee.";
 			next;
-			if(select("Yes:No") == 2) {
+			if(select("Sim:Não") == 2) {
 				mes "[Gerente de Mercenários]";
 				mes "Oh, sério? Bem, agora";
 				mes "pode não ser um bom momento";
@@ -69,7 +69,7 @@
 			else if(.@FaithCost && .@faith_merc < .@FaithCost) {
 				mes "[Gerente de Mercenários]";
 				mes "Oh... Sua pontuação de Lealdade";
-				mes "with the " + .@name$[.@type] + " Mercenary";
+				mes "com o " + .@name$[.@type] + " Mercenary";
 				mes "com a guilda não é alta o suficiente para";
 				mes "contratar este Mercenário. Por favor,";
 				mes "volte depois que você ganhar";
@@ -81,14 +81,14 @@
 				mes "Base não é alto o suficiente";
 				mes "para contratar este Mercenário.";
 				mes "Por favor, volte a me procurar";
-				mes "once you reach Base Level " + .@BaseLevel + ".";
+				mes "assim que você atingir o Nível Base " + .@BaseLevel + ".";
 			}
 			else if (Zeny < .@ZenyCost * 1000) {
 				mes "[Gerente de Mercenários]";
 				mes "Sinto muito, mas você";
 				mes "não tem zenys suficientes";
 				mes "para contratar este Mercenário.";
-				mes "The hiring fee is " + .@ZenyCost + ",000 zeny.";
+				mes "A taxa de contratação é de " + .@ZenyCost + ",000 zeny.";
 			}
 			else {
 				mes "[Gerente de Mercenários]";
@@ -171,7 +171,7 @@
 			mes "Você ainda está interessado em";
 			mes "formar este contrato?";
 			next;
-			if (select("Yes:No") == 2) {
+			if (select("Sim:Não") == 2) {
 				mes "[Gerente de Mercenários]";
 				mes "Eu entendo... É preciso";
 				mes "trabalho duro e sacrifício para";
@@ -233,7 +233,7 @@ pay_arche,99,167,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Bow	4_M_J
 	.@str_cost$ = (.@len <= 3)? .@str$ : insertchar(.@str$,",",.@len-3);
 	mes "[Mercador de Mercadorias Mercenárias]";
 	mes getitemname(.@item[.@m]);
-	mes "each cost " + .@str_cost$ + " zeny.";
+	mes "cada um custa " + .@str_cost$ + " zeny.";
 	mes "Quantos você gostaria?";
 	next;
 	input .@input;
@@ -276,7 +276,7 @@ pay_arche,99,167,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Bow	4_M_J
 	}
 	mes "[Mercador de Mercadorias Mercenárias]";
 	if (.@input == 1) 
-		mes "Here's your " + getitemname(.@item[.@m]) + ".";
+		mes "Aqui está o seu " + getitemname(.@item[.@m]) + ".";
 	else {
 		mes "Aqui está, isto é exatamente";
 		mes callfunc("F_InsertPlural",.@input,getitemname(.@item[.@m])) + ".";

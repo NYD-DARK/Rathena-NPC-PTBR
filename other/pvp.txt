@@ -27,7 +27,7 @@
 	mes "explicar os modos de PVP.";
 	mes "Eu sou o Narrador de PVP!";
 	next;
-	switch(select("What is PVP?:What are the PVP Modes?:What are the rules for PVP?:Save Position.:End Dialog.")) {
+	switch(select("O que é PVP?:Quais são os modos de PVP?:Quais são as regras do PVP?:Salvar Posição.:Encerrar diálogo.")) {
 	case 1:
 		mes "[Narrador de PVP]";
 		mes "Em resumo, PVP significa";
@@ -184,7 +184,7 @@ geffen_in,67,63,4	duplicate(pvpe)	PVP Narrator#pe6	84
 	mes "regras do PVP, por favor pergunte";
 	mes "ao Narrador...";
 	next;
-	switch(select("^FF5533' PvP Nightmare Mode'^000000:^3355FF' PvP Yoyo Mode'^000000:^3355FF' PvP Event Mode'^000000:Quit")) {
+	switch(select("^FF5533' Modo Pesadelo PVP'^000000:^3355FF' Modo Yoyo PVP'^000000:^3355FF' Modo Evento PVP'^000000:Sair")) {
 		case 1:
 			mes "[Guardião do Portal]";
 			mes "Sinto muito, mas atualmente o serviço do modo Pesadelo não está disponível.";
@@ -197,7 +197,7 @@ geffen_in,67,63,4	duplicate(pvpe)	PVP Narrator#pe6	84
 			mes "para a arena de combate do";
 			mes "Modo Yoyo?";
 			next;
-			switch(select("Move:Cancel")) {
+			switch(select("Mover:Cancelar")) {
 			case 1:
 				if ((Zeny > 499) && (BaseLevel > 30)) {
 					set Zeny, Zeny - 500;
@@ -289,7 +289,7 @@ function	script	F_PVP_FSRS	{
 		setarray .@lvl[0], getarg(0), getarg(1);
 		if (BaseLevel < .@lvl[0] || BaseLevel > .@lvl[1]) {
 			mes "[Equipe de Recepção da Arena de Combate PVP]";
-			mes "Sorry, but you base level has to be between LV "+ .@lvl[0] +" and LV "+ .@lvl[1] +".";
+			mes "Desculpe, mas seu nível base precisa estar entre o Nível "+ .@lvl[0] +" and LV "+ .@lvl[1] +".";
 			close;
 		}
 	}
@@ -334,12 +334,12 @@ pvp_room,54,85,4	script	Registration Staff#1	105,{
 		setarray .warp_x,40,59,20,40;
 		setarray .warp_y,59,40,40,20;
 	}
-	if (select("Combat Square one:Cancel") == 1) {
+	if (select("Arena de Combate um:Cancelar") == 1) {
 		mes "[Equipe de Registro da Arena de Combate PVP]";
 		mes "'"+ strcharinfo(0) +"'";
 		mes "Você está pronto?!";
 		next;
-		if (select("Yes!:No!") == 1) {
+		if (select("Sim!:Não!") == 1) {
 			mes "[Equipe de Registro da Arena de Combate PVP]";
 			mes "OK! Eu enviarei você para dentro";
 			mes "Boa sorte!";
@@ -371,7 +371,7 @@ OnInit:
 		mes "Para detalhes sobre a entrada de jogadores, por favor dirija-se à Equipe de Registro à sua esquerda.";
 		close;
 	}
-	if (select("Compete Square one:Cancel") == 1) {
+	if (select("Arena de Competição um:Cancelar") == 1) {
 		mes "[Equipe de Registro da Arena de Combate PVP]";
 		mes "Entendido, obrigado por participar. Divirta-se!";
 		close2;
@@ -400,7 +400,7 @@ pvp_room,86,85,4	duplicate(PVPSpectator)	Spectator's Entrance#4	105
 OnTouch_:
 	mes "[Equipe da Arena de Combate]";
 	mes "Posso ajudar?";
-	if (select("To the center viewer seat.:Leave Combat Square.") == 1) {
+	if (select("Para o assento central do espectador.:Sair da Arena de Combate.") == 1) {
 		warp "pvp_2vs2",38,38;
 		end;
 	}
@@ -415,7 +415,7 @@ pvp_2vs2,74,5,0	duplicate(PVPSpecWarp)	Combat Square Staff#4	45,1,1
 pvp_2vs2,40,40,0	script	Combat Square Staff#5	45,1,1,{
 	mes "[Equipe da Arena de Combate]";
 	mes "Posso ajudar?";
-	switch(select("To the side viewer seat.:Leave Combat Square.")) {
+	switch(select("Para o assento lateral do espectador.:Sair da Arena de Combate.")) {
 	case 1:
 		switch(rand(1,4)) {
 			case 1: warp "pvp_2vs2",39,7; end;
@@ -437,7 +437,7 @@ OnTouch_:
 	mes "Você se divertiu na Arena de Combate?";
 	mes "Posso perguntar para onde você quer ir?";
 	next;
-	switch(select("Prontera.:Morocc.:Geffen.:Payon.:Alberta.:Cancel.")) {
+	switch(select("Prontera.:Morroc.:Geffen.:Payon.:Alberta.:Cancelar.")) {
 		case 1: warp "prontera",107,60; end;
 		case 2: warp "morocc",157,96; end;
 		case 3: warp "geffen",120,36; end;

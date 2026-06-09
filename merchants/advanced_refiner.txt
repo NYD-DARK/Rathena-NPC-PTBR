@@ -73,7 +73,7 @@ payon,157,146,6	script	Suhnbi#cash	85,{
 		emotion ET_BEST;
 		mes "[Suhnbi]";
 		mes "Aqui está! Está pronto.";
-		mes "It's been a while since I've made such a fine "+((.@itemtype == IT_WEAPON)?"weapon":"armor")+". You must be happy because it has become stronger!";
+		mes "Faz tempo que não faço uma "+((.@itemtype == IT_WEAPON)?"weapon":"armor")+". You must be happy because it has become stronger!";
 		close;
 	}
 	failedrefitem .@part;
@@ -140,11 +140,11 @@ S_RefineValidate:
 
 	mes "[Suhnbi]";
 	if (.@itemtype == IT_WEAPON)
-		mes "You want to refine a level "+ .@equip_lv +" weapon?";
-	mes "To refine that, you'll need to have one ^ff9999"+ getitemname(.@item_req) +"^000000 and "+ .@price +" zeny.";
+		mes "Você deseja refinar uma arma de nível "+ .@equip_lv +" weapon?";
+	mes "Para refinar isso, você precisará ter um(a) ^ff9999"+ getitemname(.@item_req) +"^000000 and "+ .@price +" zeny.";
 	mes "Você gostaria de continuar?";
 	next;
-	if(select("Yes:No") == 1) {
+	if(select("Sim:Não") == 1) {
 		if (getequippercentrefinery(.@part) < 100) {
 			if (.@itemtype == IT_WEAPON) {
 				mes "[Suhnbi]";
@@ -161,7 +161,7 @@ S_RefineValidate:
 				mes "^ff0000Além disso, o equipamento vai quebrar!^000000";
 				mes "Você tem certeza que ainda quer continuar?";
 				next;
-				if(select("Yes:No") == 2) {
+				if(select("Sim:Não") == 2) {
 					mes "[Suhnbi]";
 					mes "Bom.";
 					mes "Porque se a arma quebrar por um refino irrazoável, eu também fico de mau humor.";
@@ -174,10 +174,10 @@ S_RefineValidate:
 				next;
 				mes "Se seu equipamento defensivo quebrar, você nunca mais poderá usá-lo.";
 				mes "Até mesmo suas cartas e modificações vão ^ff0000desaparecer completamente^000000.";
-				//mes "Everything will disappear. As in... GONE!";
+				//mes "Tudo vai desaparecer. Como se... FOSSE EMBORA!";
 				mes "Você realmente deseja continuar?";
 				next;
-				if(select("Yes:No") == 2) {
+				if(select("Sim:Não") == 2) {
 					mes "[Suhnbi]";
 					mes "Que bobagem. Você desperdiça meu tempo precioso.";
 					mes "Dê o fora, pivete.";
@@ -196,7 +196,7 @@ S_RefineValidate:
 				emotion ET_FRET;
 				mes "Espere um segundo...";
 				mes "Você acha que eu sou estúpido?!";
-				mes "You switched the item while I wasn't looking! Get out of here!";
+				mes "Você trocou o item enquanto eu não estava olhando! Vá embora daqui!";
 				close;
 			}
 

@@ -39,14 +39,14 @@ prontera,123,102,5	script	Merchant#pron	85,{
 	mes "você me dar essas coisas de graça. Que tal se eu trocar uma Poção Vermelha por 5 Conchas, 10 Felpas,";
 	mes "ou 10 Gelatinas?";
 	next;
-	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
+	switch(select("Claro!:Acho que é um roubo!:Não, obrigado.")) {
 	case 1:
 		mes "[Mercador]";
 		mes "Então, qual item";
 		mes "você quer me trazer?";
 		mes "Conchas, Felpas ou Gelatinas?";
 		next;
-		switch(select("Shells:Jellopies:Fluff:Cancel")) {
+		switch(select("Conchas:Gelatinas:Felpas:Cancelar")) {
 		case 1: callfunc "F_PotExchange",935,5;
 		case 2: callfunc "F_PotExchange",909,10;
 		case 3: callfunc "F_PotExchange",914,10;
@@ -95,7 +95,7 @@ morocc,180,259,3	script	Merchant#Morocc	85,{
 	mes "você me dar essas coisas de graça. Que tal se eu trocar uma Poção Vermelha por 5 Conchas, 7 Penas de Pássaro";
 	mes "ou 10 Gelatinas?";
 	next;
-	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
+	switch(select("Claro!:Acho que é um roubo!:Não, obrigado.")) {
 	case 1:
 		mes "[Mercador]";
 		mes "Então, qual item";
@@ -103,7 +103,7 @@ morocc,180,259,3	script	Merchant#Morocc	85,{
 		mes "Conchas, Penas de Pássaros,";
 		mes "ou Gelatinas?";
 		next;
-		switch(select("Shells:Feathers of Birds:Jellopies:Cancel")) {
+		switch(select("Conchas:Penas de Pássaros:Gelatinas:Cancelar")) {
 		case 1: callfunc "F_PotExchange",935,5;
 		case 2: callfunc "F_PotExchange",916,7;
 		case 3: callfunc "F_PotExchange",909,10;
@@ -151,14 +151,14 @@ payon,200,134,5	script	Merchant#pay	85,{
 	mes "Claro, eu não vou pedir para";
 	mes "você me dar essas coisas de graça. Que tal se eu trocar uma Poção Vermelha por 6 Raízes ou 10 Gelatinas?";
 	next;
-	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
+	switch(select("Claro!:Acho que é um roubo!:Não, obrigado.")) {
 	case 1:
 		mes "[Mercador]";
 		mes "Então, qual item";
 		mes "você quer me trazer?";
 		mes "Raízes ou Gelatinas?";
 		next;
-		switch(select("Tree Roots:Jellopies:Cancel")) {
+		switch(select("Raízes:Gelatinas:Cancelar")) {
 		case 1: callfunc "F_PotExchange",902,6;
 		case 2: callfunc "F_PotExchange",909,10;
 		case 3:
@@ -205,7 +205,7 @@ aldebaran,152,63,5	script	Merchant#alde	85,{
 	mes "Claro, eu não vou pedir para";
 	mes "você me dar essas coisas de graça. Que tal se eu trocar uma Poção Vermelha por 1 Casca de Verme, 7 Penas de Pássaro ou 10 Gelatinas?";
 	next;
-	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
+	switch(select("Claro!:Acho que é um roubo!:Não, obrigado.")) {
 	case 1:
 		mes "[Mercador]";
 		mes "Então, qual item";
@@ -214,7 +214,7 @@ aldebaran,152,63,5	script	Merchant#alde	85,{
 		mes "Cascas de Verme?";
 		mes "Ou Gelatinas?";
 		next;
-		switch(select("Worm Peelings:Feathers of Birds:Jellopies:Cancel")) {
+		switch(select("Cascas de Verme:Penas de Pássaros:Gelatinas:Cancelar")) {
 		case 1: callfunc "F_PotExchange",955,1;
 		case 2: callfunc "F_PotExchange",916,7;
 		case 3: callfunc "F_PotExchange",909,10;
@@ -262,14 +262,14 @@ geffen,173,88,5	script	Merchant#geff	85,{
 	mes "Claro, eu não vou pedir para";
 	mes "você me dar essas coisas de graça. Que tal se eu trocar uma Poção Vermelha por 5 Conchas ou 6 Crisálidas, ou 10 Gelatinas?";
 	next;
-	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
+	switch(select("Claro!:Acho que é um roubo!:Não, obrigado.")) {
 	case 1:
 		mes "[Mercador]";
 		mes "Então, qual item";
 		mes "você quer me trazer?";
 		mes "Conchas, Crisálidas ou Gelatinas?";
 		next;
-		switch(select("Shells:Chrysalises:Jellopies:Cancel")) {
+		switch(select("Conchas:Crisálidas:Gelatinas:Cancelar")) {
 		case 1: callfunc "F_PotExchange",935,5;
 		case 2: callfunc "F_PotExchange",915,6;
 		case 3: callfunc "F_PotExchange",909,10;
@@ -303,33 +303,33 @@ function	script	F_PotExchange	{
 	if (countitem(.@item_req) < .@req_amount) {
 		mes "[Mercador]";
 		mes "Ei, cadê";
-		mes "all those "+ getitemname(.@item_req) +"";
+		mes "todas aquelas "+ getitemname(.@item_req) +"";
 		mes "o que você prometeu?";
-		mes "Give me "+ getitemname(.@item_req) +"!";
+		mes "Me dê "+ getitemname(.@item_req) +"!";
 		close;
 	}
 	else {
 		mes "[Mercador]";
 		mes "Ok, deixe-me verificar";
-		mes "how many "+ getitemname(.@item_req) +" you";
+		mes "quantos "+ getitemname(.@item_req) +" you";
 		mes "o que você tem. Hmm...";
 		next;
 		mes "[Mercador]";
 		mes "Você tem";
-		mes "a total of "+ countitem(.@item_req) +" "+ getitemname(.@item_req) +".";
+		mes "um total de "+ countitem(.@item_req) +" "+ getitemname(.@item_req) +".";
 		mes "Posso te dar um total";
-		mes "of "+ (countitem(.@item_req)/.@req_amount) +" Red Potions for those.";
+		mes "de "+ (countitem(.@item_req)/.@req_amount) +" Red Potions for those.";
 		next;
 		mes "[Mercador]";
 		mes "O que me diz?";
 		mes "Fechamos negócio?";
 		next;
-		if (select("Deal.:No deal.") == 1) {
+		if (select("Fechado.:Sem negócio.") == 1) {
 			mes "[Mercador]";
 			mes "Você sabe a quantidade";
 			mes "exata de Poções Vermelhas";
 			mes "que você quer receber por";
-			mes "those "+ getitemname(.@item_req) +", don't you?";
+			mes "aqueles "+ getitemname(.@item_req) +", don't you?";
 			next;
 			mes "[Mercador]";
 			mes "Agora, eu posso trocar";

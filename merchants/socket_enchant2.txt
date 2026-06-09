@@ -64,7 +64,7 @@
 	mes "e a chance de sucesso dependem de";
 	mes "item específico no qual estou trabalhando.";
 	next;
-	switch(select("Weapon:Armor:About that thing you skipped:More information:Quit"))
+	switch(select("Arma:Armadura:Sobre aquilo que você ignorou:Mais informações:Sair"))
 	{
 		case 1:
 			mes "[Leablem]";
@@ -81,7 +81,7 @@
 					mes "Classe C, entendo.";
 					mes "Então, que tipo de arma você tem?";
 					next;
-					switch(select("Book of Mother Earth:Book of Billows:Book of Gust of Wind:Book of the Blazing Sun"))
+					switch(select("Livro da Mãe Terra:Livro das Ondas:Livro do Vento Cortante:Livro do Sol Ardente"))
 					{
 						case 1: callfunc "Func_Socket2",1554,1569,40,66,200,1010,10;
 						case 2: callfunc "Func_Socket2",1553,1568,40,66,200,1010,10;
@@ -93,7 +93,7 @@
 					mes "Você escolheu a média Classe B.";
 					mes "Então, que tipo de arma você tem?";
 					next;
-					switch(select("Orcish Axe:Scimiter:Spike"))
+					switch(select("Machado Orc:Cimitarra:Espigão"))
 					{
 						case 1: callfunc "Func_Socket2",1304,1309,40,66,200,984,1;
 						case 2: callfunc "Func_Socket2",1113,1114,40,66,200,984,1;
@@ -104,7 +104,7 @@
 					mes "Classe A? Você parece querer um pouco demais. Mas, sem problemas.";
 					mes "Então, que tipo de arma você tem?";
 					next;
-					switch(select("Dragon Killer:Katar of Quaking:Katar of Raging Blaze:Katar of Frozen Icicle:Katar of Piercing Wind:Golden Mace:Oriental Lute:Queen's Whip:Spectral Spear:Gae Bolg:Schweizersabel"))
+					switch(select("Assassino de Dragão:Katar do Terremoto:Katar da Chama Furiosa:Katar do Gelo Congelante:Katar do Vento Perfurante:Maça Dourada:Alaúde Oriental:Chicote da Rainha:Lança Espectral:Gae Bolg:Sabre Suíço"))
 					{
 						case 1:  callfunc "Func_Socket2",13001,13030,40,61,500,984,2;
 						case 2:  callfunc "Func_Socket2", 1257, 1276,40,66,500,984,2;
@@ -123,7 +123,7 @@
 					mes "Huh, Classe S?! Oh meu Deus, você está falando sério?*Treme*";
 					mes "Então... qual arma Classe S você gostaria de criar um slot?!";
 					next;
-					switch(select("Zephyrus:Mailbreaker:Dragon Slayer:Swordbreaker:Assasin Dagger:Grand Cross:Executioner"))
+					switch(select("Zéfiro:Quebra-Armadura:Matador de Dragão:Quebra-Espada:Adaga do Algoz:Grand Cross:Executor"))
 					{
 						case 1: callfunc "Func_Socket2",1468, 1481,40,51,1000,984,5,999,10;
 						case 2: callfunc "Func_Socket2",1225,13032,40,51,1000,984,5,999,10;
@@ -149,7 +149,7 @@
 					mes "Classe C, entendo.";
 					mes "Então, que tipo de armadura você tem?";
 					next;
-					switch(select("Sunflower:Ph.D Hat:Big Ribbon:Boys Cap"))
+					switch(select("Girassol:Chapéu de Doutor:Laço Grande:Boné de Garoto"))
 					{
 						case 1: callfunc "Func_Socket2",2253,5351,40,66,100,999,3;
 						case 2: callfunc "Func_Socket2",5012,5347,40,66,100,999,3;
@@ -161,7 +161,7 @@
 					mes "Você escolheu a média Classe B.";
 					mes "Então, que tipo de armadura você tem?";
 					next;
-					switch(select("Skull Ring:High Heels"))
+					switch(select("Anel de Caveira:Salto Alto"))
 					{
 						case 1: callfunc "Func_Socket2",2609,2715,40,61,300,999,5;
 						case 2: callfunc "Func_Socket2",2409,2432,40,61,300,999,5;
@@ -171,7 +171,7 @@
 					mes "Classe A? Você parece querer um pouco demais. Mas, sem problemas.";
 					mes "Então, que tipo de armadura você tem?";
 					next;
-					switch(select("Pirate Bandana:Black Leather Boots"))
+					switch(select("Bandana de Pirata:Botas de Couro Pretas"))
 					{
 						case 1: callfunc "Func_Socket2",2287,5350,50,61,500,985,1; // 50,61 - it's not a typo
 						case 2: callfunc "Func_Socket2",2425,2434,40,51,500,985,1;
@@ -182,7 +182,7 @@
 					mes "Huh, Classe S?! Oh meu Deus, você está falando sério?*Treme*";
 					mes "Então... qual armadura Classe S você gostaria de criar um slot?!";
 					next;
-					switch(select("Mage Coat:Holy Robe:Sacred Mission:Undershirt:Pantie"))
+					switch(select("Capa de Mago:Túnica Sagrada:Missão Sagrada:Roupa de Baixo:Calcinha"))
 					{
 						case 1: callfunc "Func_Socket2",2334,2372,40,51,1000,985,1; // Mage Coat has 10% success chance
 						case 2: callfunc "Func_Socket2",2327,2373,45,51,1000,985,1; // the rest has 5%
@@ -397,24 +397,24 @@ function	script	Func_Socket2	{
 		mes getitemname(.@item_id) +"... Okay, then you need to bring me";
 		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req /1000 +",000") : .@zeny_req) +",000 zeny as service charge,";
 		mes "^FF0000"+ .@req_amount[0] +"ea "+ getitemname(.@item_req[0]) +" and "+ .@req_amount[1] +"ea "+ getitemname(.@item_req[1]) +".";
-		mes "^FF0000Of course, you need a "+ getitemname(.@item_id) +".^000000";
+		mes "^FF0000Claro, você precisa de um "+ getitemname(.@item_id) +".^000000";
 	}
 	else
 	{
 		mes getitemname(.@item_id) +"? Okay, then you need to bring me";
 		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req/1000 +",000") : .@zeny_req) +",000 zeny as service charge and "+ .@req_amount[0] +" "+ getitemname(.@item_req[0]) + (.@req_amount[0] > 1 && .@item_req[0] != 999 ? "s":"") +" as the requirement.";
-		mes "^FF0000Of course, don't forget to bring me a "+ getitemname(.@item_id) +".";
+		mes "^FF0000Claro, não se esqueça de me trazer um "+ getitemname(.@item_id) +".";
 		mes "^FF0000Você deve ter todos os itens.^000000";
 	}
 	next;
 	mes "[Leablem]";
 	mes "Você já trouxe todos eles?";
 	mes "Para sua informação, se você falhar ao criar um slot,";
-	mes "you will lose all the item requirement as well as the target "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +".";
-	mes "Also remember, if the "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +" has been upgraded, and has been inserted with a card,";
+	mes "você perderá todos os itens de requisito, bem como a "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +".";
+	mes "Lembre-se também, se a "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +" has been upgraded, and has been inserted with a card,";
 	mes "você os perderá, mesmo se tiver sucesso ao criar um slot.";
 	next;
-	switch(select("Ask for slot creation.:Try next time."))
+	switch(select("Pedir criação de slot.:Tentar na próxima vez."))
 	{
 		case 1:
 			if ((Zeny >= .@zeny_req*1000) && countitem(.@item_req[0]) >= .@req_amount[0] && countitem(getarg(7,512)) >= .@req_amount[1] && countitem(.@item_id) > 0)// if there's no .@req_amount[0] and .@req_amount[1] provided, check itemcount against 0 (we still need a valid item ID though)

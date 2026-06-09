@@ -36,7 +36,7 @@ prt_fild08,159,371,3	script	Poring War Recruiter#wop	909,{
 	mes "Eu.. Eu tenho um trabalho interessante para vocês.. Estariam interessados?";
 	mes "Nós.. nós porings precisamos de muitos e muitos bravos guerreiros humanos, ring~.";
 	next;
-	switch(select("Alright, I'm with you!:What's that?:Ignore")) {
+	switch(select("Certo, eu vou com vocês!:O que é isso?:Ignorar")) {
 	case 1:
 		if (Zeny > 499) {
 			mes "[Poring]";
@@ -76,12 +76,12 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 	}
 	mes "É uma máquina de vendas. Você pode usar Moedas Poring para comprar.";
 	next;
-	if(select("Purchase.:Read the descriptions of goods.") == 1) {
+	if(select("Comprar.:Ler as descrições dos produtos.") == 1) {
 		mes "Você precisa de Moedas Poring para comprar itens.";
 		mes "Você não pode usar zenys.";
 		mes "Nome do item - Preço em Moeda Poring (P.Co)";
 		next;
-		switch(select("Marvelous Medal - 4 P.Co:Union of Tribe - 20 P.Co:Poring Box - 30 P.Co:Next")) {
+		switch(select("Medalha Maravilhosa - 4 P.Co:União de Tribos - 20 P.Co:Caixa de Poring - 30 P.Co:Próximo")) {
 		case 1:
 			callsub S_PoringVending,7515,4;
 		case 2:
@@ -92,7 +92,7 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 			mes "Este é um item especial.";
 			mes "Nome do item - Moeda Poring (P.Co)";
 			next;
-			switch(select("Wild Rose - 15 P.Co:Doppelganger - 20 P.Co:Egnigem Cenia - 20 P.Co:Collection Item")) {
+			switch(select("Rosa Selvagem - 15 P.Co:Doppelganger - 20 P.Co:Egnigem Cenia - 20 P.Co:Item de Coleção")) {
 			case 1:
 				callsub S_PoringVending,12300,15;
 			case 2:
@@ -105,7 +105,7 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 				mes "Por favor, esteja ciente antes de realizar a compra~";
 				mes "Nome do item - Moeda Poring (P.Co)";
 				next;
-				switch(select("Novice Figure - 50 P.Co:Swordman Figure - 100 P.Co:Thief Figure - 100 P.Co:Merchant Figure - 100 P.Co:Acolyte Figure - 100 P.Co:Mage Figure - 100 P.Co:Archer Figure - 100 P.Co:Random Draw - 50 P.Co:Cancel")) {
+				switch(select("Figura de Aprendiz - 50 P.Co:Figura de Espadachim - 100 P.Co:Figura de Gatuno - 100 P.Co:Figura de Mercador - 100 P.Co:Figura de Noviço - 100 P.Co:Figura de Mago - 100 P.Co:Figura de Arqueiro - 100 P.Co:Sorteio Aleatório - 50 P.Co:Cancelar")) {
 				case 1:
 					callsub S_PoringVending,2765,50;
 				case 2:
@@ -124,7 +124,7 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 					mes "Você escolheu o Sorteio Aleatório.";
 					mes "1 de 7 tipos diferentes de figuras será selecionada.";
 					next;
-					if(select("Draw:Cancel") == 1) {
+					if(select("Sortear:Cancelar") == 1) {
 						if (countitem(7539) >= 50) {
 							mes "Insira a moeda Poring e puxe a alavanca.";
 							mes "Clique~ O item saiu da boca do Poring com um som de estrondo.";
@@ -139,7 +139,7 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 							case 14: set .@Random_Figure,2768; break; // Mage_Figure
 							default: set .@Random_Figure,2765; break; // Novice_Figure
 							}
-							mes "A nice " + getitemname(.@Random_Figure) + ".";
+							mes "Um bom " + getitemname(.@Random_Figure) + ".";
 							delitem 7539,50; // Poring_Coin
 							getitem .@Random_Figure,1;
 							close;
@@ -162,50 +162,50 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 	mes "Lista de Itens à Venda";
 	mes "====================";
 	mes "[Medalha Maravilhosa]";
-	mes ": Uma medalha feita de metal especial produzida apenas em Hugel.";
+	mes " : Uma medalha feita de metal especial produzida apenas em Hugel.";
 	mes " ";
 	mes "[União da Tribo]";
-	mes ": Uma estátua com a imagem de uma forte união das Tribos. As pessoas acreditam que observar esta estátua realmente ajuda a fortalecer os relacionamentos entre as Tribos.";
+	mes " : Uma estátua com a imagem de uma forte união das Tribos. As pessoas acreditam que observar esta estátua realmente ajuda a fortalecer os relacionamentos entre as Tribos.";
 	mes " ";
 	mes "[Caixa de Poring]";
-	mes ": Uma caixa embrulhada com papel de presente estampado de Poring. Há algo dentro.";
+	mes " : Uma caixa embrulhada com papel de presente estampado de Poring. Há algo dentro.";
 	mes " ";
 	mes "[Rosa Selvagem]";
-	mes ": Sua amiga Rosa Selvagem virá e te ajudará.";
+	mes " : Sua amiga Rosa Selvagem virá e te ajudará.";
 	mes " ";
 	mes "[Sr. Doppel]";
-	mes ": Um jovem nobre, Doppelganger, virá e te ajudará.";
+	mes " : Um jovem nobre, Doppelganger, virá e te ajudará.";
 	mes " ";
 	mes "[Egnigem Cenia]";
-	mes ": Uma linda garota, Egnigem Cenia do Laboratório de Somatologia, virá te ajudar.";
+	mes " : Uma linda garota, Egnigem Cenia do Laboratório de Somatologia, virá te ajudar.";
 	mes " ";
 	mes "[Figura de Aprendiz]";
-	mes ": Uma bela figura de um Aprendiz. Pode ser equipada como um '^4d4dffacessório^000000'.";
-	mes " HP + 70, extra effect of HP + 30 when equipped by a Novices.";
+	mes " : Uma bela figura de um Aprendiz. Pode ser equipada como um '^4d4dffacessório^000000'.";
+	mes " HP + 70, efeito extra de HP + 30 quando equipado por Aprendizes.";
 	mes " ";
 	mes "[Figura de Espadachim]";
-	mes ": Uma bela figura de um Espadachim. Pode ser equipada como um '^4d4dffacessório^000000'.";
-	mes " VIT + 1, extra effect of DEF + 2 when equipped by Swordman classes.";
+	mes " : Uma bela figura de um Espadachim. Pode ser equipada como um '^4d4dffacessório^000000'.";
+	mes " VIT + 1, efeito extra de DEF + 2 quando equipado por classes de Espadachim.";
 	mes " ";
 	mes "[Figura de Mercador]";
-	mes ": Uma bela figura de um Mercador. Pode ser equipada como um '^4d4dffacessório^000000'.";
-	mes " STR + 1, extra effect of CRI + 5 when equipped by Merchant classes.";
+	mes " : Uma bela figura de um Mercador. Pode ser equipada como um '^4d4dffacessório^000000'.";
+	mes " STR + 1, efeito extra de CRI + 5 quando equipado por classes de Mercador.";
 	mes " ";
 	mes "[Figura de Gatuno]";
-	mes ": Uma bela figura de um Gatuno. Pode ser equipada como um '^4d4dffacessório^000000'.";
-	mes " AGI + 1, extra effectASPD + 3% when equipped by Thief classes.";
+	mes " : Uma bela figura de um Gatuno. Pode ser equipada como um '^4d4dffacessório^000000'.";
+	mes " AGI + 1, efeito extra de ASPD + 3% quando equipado por classes de Gatuno.";
 	mes " ";
 	mes "[Figura de Mago]";
-	mes ": Uma bela figura de um Mago. Pode ser equipada como um '^4d4dffacessório^000000'.";
-	mes " INT + 1, an extra SP Recovery increase by 5% when equipped by Mage classes.";
+	mes " : Uma bela figura de um Mago. Pode ser equipada como um '^4d4dffacessório^000000'.";
+	mes " INT + 1, aumento extra de 5% na Recuperação de SP quando equipado por classes de Mago.";
 	mes " ";
 	mes "[Figura de Noviço]";
-	mes ": Uma bela figura de um Noviço. Pode ser equipada como um '^4d4dffacessório^000000'.";
-	mes " INT + 1, extra effct of SP + 50 when equipped by Acolyte classes.";
+	mes " : Uma bela figura de um Noviço. Pode ser equipada como um '^4d4dffacessório^000000'.";
+	mes " INT + 1, efeito extra de SP + 50 quando equipado por classes de Noviço.";
 	mes " ";
 	mes "[Figura de Arqueiro]";
-	mes ": Uma bela figura de um Arqueiro. Pode ser equipada como um '^4d4dffacessório^000000'.";
-	mes " DEX + 1, extra effct of ATK + 10 when equipped by Archer classes.";
+	mes " : Uma bela figura de um Arqueiro. Pode ser equipada como um '^4d4dffacessório^000000'.";
+	mes " DEX + 1, efeito extra de ATK + 10 quando equipado por classes de Arqueiro.";
 	close;
 	end;
 
@@ -246,7 +246,7 @@ poring_w01,96,97,3	script	Sweet Devi#wop	738,{
 	mes "Hehehee, eu me sinto um pouco tímido agora.";
 	mes "De qualquer forma, humano. Você quer participar da nossa Guerra Poring?";
 	next;
-	switch(select("Am I qualified to join?:How do I join the war?:Cancel:Let me out of here, please!")) {
+	switch(select("Estou qualificado para participar?:Como entro na guerra?:Cancelar:Deixe-me sair daqui, por favor!")) {
 	case 1:
 		mes "[Deviruchi]";
 		mes "Sem discriminação racial! Qualquer um pode participar se estiver disposto a lutar.";
@@ -634,10 +634,10 @@ poring_w02,26,181,3	script	Mr. Doppel#wop_team_a	739,{
 	if ($@wop_team_a != 0 && $@wop_team_a == getcharid(1)) {
 		mes "[Sr. Doppel]";
 		mes "Então, todos entraram no grupo?";
-		mes "The name of the party is... " + .@pname$ + ", right?";
+		mes "O nome do grupo é... " + .@pname$ + ", right?";
 		mes "Vou transferir vocês para a área de preparação da batalha.";
 		next;
-		switch(select("No! Wait!:Go to the staging area.")) {
+		switch(select("Não! Espere!:Ir para a área de preparação.")) {
 		case 1:
 			mes "[Sr. Doppel]";
 			mes "O que foi agora?";
@@ -652,7 +652,7 @@ poring_w02,26,181,3	script	Mr. Doppel#wop_team_a	739,{
 				mes "[Sr. Doppel]";
 				mes "Então, você é o líder. Antes de ir para o campo de batalha, você deve verificar todos os seus membros.";
 				next;
-				switch(select("Very well. I'll be the last.:I am the last. Send me to the battlefield.")) {
+				switch(select("Muito bem. Serei o último.:Eu sou o último. Envie-me para o campo de batalha.")) {
 				case 1:
 					mes "[Sr. Doppel]";
 					mes "Primeiro, certifique-se de que todos os membros estejam no seu grupo.";
@@ -694,7 +694,7 @@ poring_w02,26,181,3	script	Mr. Doppel#wop_team_a	739,{
 				mes " ";
 				mes "Certo? Esse é o nome que você deseja?";
 				next;
-				switch(select("No! You're wrong.:Yes. I would like to register that name.:Cancel")) {
+				switch(select("Não! Você está enganado.:Sim. Eu gostaria de registrar esse nome.:Cancelar")) {
 				case 1:
 					mes "[Sr. Doppel]";
 					mes "Ei, eu não tenho o dia todo! Decida-se e registre o mais rápido que puder.";
@@ -702,7 +702,7 @@ poring_w02,26,181,3	script	Mr. Doppel#wop_team_a	739,{
 					close;
 				case 2:
 					mes "[Sr. Doppel]";
-					mes "So, I'll register your party name as - " +.@pname$ + " -.";
+					mes "Então, registrarei o nome do seu grupo como - " +.@pname$ + " -.";
 					mes "Agora, peça aos seus ^4d4dffmembros para confirmarem seu grupo^000000.";
 					mes "Vou te enviar para o campo de batalha assim que eu confirmar seu grupo.";
 					set $@wop_team_a,getcharid(1);
@@ -721,7 +721,7 @@ poring_w02,26,181,3	script	Mr. Doppel#wop_team_a	739,{
 				mes "Você deve permanecer naquele que foi registrado!";
 				next;
 				mes "[Sr. Doppel]";
-				mes "O nome do grupo é";
+				mes "O nome do grupo é ";
 				mes " " + .@a_tname$ + " ";
 				mes "Por favor, confirme.";
 				close;
@@ -765,10 +765,10 @@ poring_w02,170,181,3	script	Mr. Doppel#wop_team_d	739,{
 	if ($@wop_team_d != 0 && $@wop_team_d == getcharid(1)) {
 		mes "[Sr. Doppel]";
 		mes "Então, todos entraram no grupo?";
-		mes "The name of the party is... " + .@pname$ + ", right?";
+		mes "O nome do grupo é... " + .@pname$ + ", right?";
 		mes "Vou transferir vocês para a área de preparação da batalha.";
 		next;
-		switch(select("No! Wait!:Go to the staging area.")) {
+		switch(select("Não! Espere!:Ir para a área de preparação.")) {
 		case 1:
 			mes "[Sr. Doppel]";
 			mes "O que foi agora?";
@@ -783,7 +783,7 @@ poring_w02,170,181,3	script	Mr. Doppel#wop_team_d	739,{
 				mes "[Sr. Doppel]";
 				mes "Então, você é o líder. Antes de ir para o campo de batalha, você deve verificar todos os seus membros.";
 				next;
-				switch(select("Very well. I'll be the last.:I am the last. Send me to the battlefield.")) {
+				switch(select("Muito bem. Serei o último.:Eu sou o último. Envie-me para o campo de batalha.")) {
 				case 1:
 					mes "[Sr. Doppel]";
 					mes "Primeiro, certifique-se de que todos os membros estejam no seu grupo.";
@@ -823,7 +823,7 @@ poring_w02,170,181,3	script	Mr. Doppel#wop_team_d	739,{
 				mes " ";
 				mes "Certo? Esse é o nome que você deseja?";
 				next;
-				switch(select("No! You're wrong.:Yes. I would like to register that name.:Cancel")) {
+				switch(select("Não! Você está enganado.:Sim. Eu gostaria de registrar esse nome.:Cancelar")) {
 				case 1:
 					mes "[Sr. Doppel]";
 					mes "Ei, eu não tenho o dia todo! Decida-se e registre o mais rápido que puder.";
@@ -831,7 +831,7 @@ poring_w02,170,181,3	script	Mr. Doppel#wop_team_d	739,{
 					close;
 				case 2:
 					mes "[Sr. Doppel]";
-					mes "So, I'll register your party name as - " + .@pname$ + " -.";
+					mes "Então, registrarei o nome do seu grupo como - " + .@pname$ + " -.";
 					mes "Agora, peça aos seus ^4d4dffmembros para confirmarem seu grupo^000000.";
 					mes "Vou te enviar para o campo de batalha assim que eu confirmar seu grupo.";
 					set $@wop_team_d,getcharid(1);
@@ -849,7 +849,7 @@ poring_w02,170,181,3	script	Mr. Doppel#wop_team_d	739,{
 				mes "Você deve permanecer naquele que foi registrado!";
 				next;
 				mes "[Sr. Doppel]";
-				mes "O nome do grupo é";
+				mes "O nome do grupo é ";
 				mes " " + .@d_tname$ + " ";
 				mes "Por favor, confirme.";
 				close;
@@ -1457,7 +1457,7 @@ poring_w02,99,52,0	script	Angeling Guardian#wop_da	111,{
 			mes "Há um dispositivo para equipar os Distintivos de Guerra.";
 			mes "Posso ver os espaços vazios para equipar os Distintivos.";
 			next;
-			switch(select("Equip War Badge.:Cancel.")) {
+			switch(select("Equipar Distintivo de Guerra.:Cancelar.")) {
 			case 1:
 				if (countitem(7773)) {
 					if ($@wop_doorcount_a < 4) {
@@ -1554,7 +1554,7 @@ poring_w02,98,113,0	script	Deviling Guardian#wop_dd	111,{
 			mes "Há um dispositivo para equipar os Distintivos de Guerra.";
 			mes "Posso ver os espaços vazios para equipar os Distintivos.";
 			next;
-			switch(select("Equip War Badge.:Cancel.")) {
+			switch(select("Equipar Distintivo de Guerra.:Cancelar.")) {
 			case 1:
 				if (countitem(7773)) {
 					if ($@wop_doorcount_d < 4) {

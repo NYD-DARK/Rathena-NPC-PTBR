@@ -34,12 +34,12 @@ alde_alche,24,188,3	script	Guild Dealer	740,{
 	mes "Sindicato dos Alquimistas.";
 	mes "Como posso ajudá-lo hoje?";
 	next;
-	switch(select("Purchase materials.:Purchase a production manual.:Quit.")) {
+	switch(select("Comprar materiais.:Comprar um manual de produção.:Sair.")) {
 	case 1:
 		mes "[Gever Al Sharp]";
 		mes "O que você gostaria?";
 		next;
-		if (select("Medicine Bowl - 8 Zeny:Cancel.") == 1) {
+		if (select("Tigela de Mistura - 8 Zeny:Cancelar.") == 1) {
 			mes "[Gever Al Sharp]";
 			mes "Quantos você quer?";
 			mes "Digite '0' se quiser sair.";
@@ -99,7 +99,7 @@ alde_alche,24,188,3	script	Guild Dealer	740,{
 		mes "O que você precisa?";
 		mes "Manuais geralmente custam 100.000 zenys. Mas há alguns manuais especiais que custam mais.";
 		next;
-		switch(select("Potion Creation Guide:Alcohol Creation Guide:Bottle Grenade Creation Guide:Acid Bottle Creation Guide:Plant Bottle Creation Guide:Marine Sphere Bottle Creation Guide:Glistening Coat Creation Guide:Condensed Potion Creation Guide:Cancel Deal.")) {
+		switch(select("Guia de Criação de Poções:Guia de Criação de Álcool:Guia de Criação de Bomba de Fogo:Guia de Criação de Frasco de Ácido:Guia de Criação de Frasco de Planta:Guia de Criação de Frasco de Esfera Marinha:Guia de Criação de Revestimento Total:Condensed Guia de Criação de Poções:Cancelar negócio.")) {
 		case 1:
 			callsub S_SellManual,7144,100000; //Normal_Potion_Book
 			break;
@@ -153,9 +153,9 @@ S_SellManual:
 	}
 	mes "[Gever Al Sharp]";
 	mes getitemname(.@item_id) +"?";
-	mes "That'll be "+ .@zeny_req +" zeny.";
+	mes "Isso custará "+ .@zeny_req +" zeny.";
 	next;
-	if (select("Purchase.:Quit.") == 1) {
+	if (select("Comprar.:Sair.") == 1) {
 		Zeny = Zeny - .@zeny_req;
 		getitem .@item_id,1;
 		mes "[Gever Al Sharp]";

@@ -32,12 +32,12 @@ morocc_in,146,99,3	script	Java Dullihan	58,{
 	mes "Uau...";
 	mes "Que dia agradável. Dias como este são perfeitos para fazer tintas.";
 	next;
-	switch(select("Talk:Make Dyestuffs:Cancel")) {
+	switch(select("Conversar:Fazer Tintas:Cancelar")) {
 	case 1:
 		mes "[Criador de Tintas Java Dullihan]";
 		mes "Hum, eu realmente não tenho muito a lhe dizer. Mas, se você quiser que eu lhe conte sobre minha vida, eu posso fazer isso. É um pouco longa e entediante, mas você gostaria de ouvir?";
 		next;
-		if (select("Listen:Don't Listen") == 1) {
+		if (select("Ouvir:Don't Ouvir") == 1) {
 			mes "[Criador de Tintas Java Dullihan]";
 			mes "Desde que me entendo por gente, meu pai fabricava tintas. Ele costumava passar incontáveis horas fazendo tintas de cores diferentes. Mesmo quando minha mãe faleceu, ele nunca parou.";
 			next;
@@ -79,7 +79,7 @@ morocc_in,146,99,3	script	Java Dullihan	58,{
 		mes "[Criador de Tintas Java Dullihan]";
 		mes "A cor da tinta é especial, feita com todo o meu coração e alma.";
 		next;
-		switch(select("Scarlet Dyestuffs:Lemon Dyestuffs:Cobaltblue Dyestuffs:Darkgreen Dyestuffs:Orange Dyestuffs:Violet Dyestuffs:White Dyestuffs:Black Dyestuffs:Cancel")) {
+		switch(select("Tintura Escarlate:Tintura Limão:Tintura Azul Cobalto:Tintura Verde Escuro:Tintura Laranja:Tintura Violeta:Tintura Branca:Tintura Preta:Cancelar")) {
 		case 1: callsub S_MakeDye,1,1; break;
 		case 2: callsub S_MakeDye,2,1; break;
 		case 3: callsub S_MakeDye,3,2; break;
@@ -163,13 +163,13 @@ S_MakeDye:
 	next;
 	mes "[Criador de Tintas Java Dullihan]";
 	switch(getarg(1)) {
-	case 1: mes "Ah! I think you would have everything ready. Would you like to start the process?"; break;
-	case 2: mes "Okay! I believe you would have everything ready. Would you like to start the process?"; break;
-	case 3: mes "Okay! I believe you would have everything ready. Shall we begin the process?"; break;
-	case 4: mes "Okay! I believe you would have everything prepared. Would you like to start the process?"; break;
+	case 1: mes "Ah! Acho que você já tem tudo pronto. Gostaria de iniciar o processo?"; break;
+	case 2: mes "Certo! Acredito que você já tenha tudo pronto. Gostaria de iniciar o processo?"; break;
+	case 3: mes "Certo! Acredito que você já tenha tudo pronto. Vamos iniciar o processo?"; break;
+	case 4: mes "Certo! Acredito que você já tenha tudo preparado. Gostaria de iniciar o processo?"; break;
 	}
 	next;
-	if (select("Make Dyestuffs:Cancel") == 1) {
+	if (select("Fazer Tintas:Cancelar") == 1) {
 		set .@size, getarraysize(.@item);
 		// check requirements
 		for( set .@i,0 ; .@i < .@size ; set .@i,.@i+1 )

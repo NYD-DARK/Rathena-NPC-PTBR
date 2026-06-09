@@ -31,7 +31,7 @@ payon,173,238,5	script	Jade#pay	754,{
 	mes "trocarei por Gemstones";
 	mes "de uma cor diferente.";
 	next;
-	switch(select("Blue Gemstones into Red ones!:Red Gemstones into Yellow ones!:Yellow Gemstones into Blue ones!")) {
+	switch(select("Gemstones Azuis em Vermelhas!:Gemstones Vermelhas em Amarelas!:Gemstones Amarelas em Azuis!")) {
 	case 1: callsub S_TradeGems,717,716;
 	case 2: callsub S_TradeGems,716,715;
 	case 3: callsub S_TradeGems,715,717;
@@ -55,12 +55,12 @@ S_TradeGems:
 		.@gems = countitem(.@item_req) /2;
 		mes "[Jade]";
 		mes "Eu acredito que posso criar";
-		mes "a total of "+ .@gems +" "+ getitemname(.@item_id) +"s";
-		mes "using the "+ getitemname(.@item_req) +"s";
+		mes "um total de "+ .@gems +" "+ getitemname(.@item_id) +"s";
+		mes "usando o "+ getitemname(.@item_req) +"s";
 		mes "que você tem atualmente.";
 		mes "O que você deseja fazer?";
 		next;
-		switch(select("Give me as many as you can.:I want to set the amount.:I quit.")) {
+		switch(select("Dê-me o máximo que puder.:Quero definir a quantidade.:Eu desisto.")) {
 		case 1:
 			delitem .@item_req,.@gems * 2;
 			getitem .@item_id,.@gems;

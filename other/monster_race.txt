@@ -169,14 +169,14 @@ p_track01,73,22,1	script	Ticket Helper#single	899,{
 	.@m = select ("Monster Status", "Monster 1", "Monster 2", "Monster 3", "Monster 4", "Monster 5", "Monster 6") - 1;
 	if (.@m == 0) {
 		for ( .@i = 1; .@i <= 6; .@i++ )
-			mes "Monster "+.@i+" [^CC6600Luck^000000: " + getd("$@mr_1_luk"+.@i) + "] [^EE0000HP^000000: " + getd("$@mr_1_tire"+.@i) + "]";
+			mes "Monstro "+.@i+" [^CC6600Luck^000000: " + getd("$@mr_1_luk"+.@i) + "] [^EE0000HP^000000: " + getd("$@mr_1_tire"+.@i) + "]";
 		close;
 	} else {
 		if ($@mon_time_1_1 == 1) {
 			if (monster_race_1) {
 				mes "[Assistente de Ingressos]";
 				mes "Você selecionou";
-				mes "Monster ^FF0000"+ monster_race_1 +"^000000 for the";
+				mes "Monstro ^FF0000"+ monster_race_1 +"^000000 for the";
 				mes "Corrida de Monstro Individual.";
 				mes "O início da corrida";
 				mes "será anunciado em breve,";
@@ -184,7 +184,7 @@ p_track01,73,22,1	script	Ticket Helper#single	899,{
 				close;
 			}
 			mes "[Assistente de Ingressos]";
-			mes "You've chosen Monster "+.@m+"?";
+			mes "Você escolheu o Monstro "+.@m+"?";
 			mes "Muito bem, por favor aguarde";
 			mes "até que o início da corrida seja";
 			mes "anunciado. Se o monstro que";
@@ -288,7 +288,7 @@ p_track01,67,45,5	script	Medal Distributor#single	845,{
 				mes "você gostaria de trocar seu";
 				mes "Bilhete de Corrida por Medalhas de Prêmio?";
 				next;
-				if (select("Yes, please.:No, thanks.") == 2) {
+				if (select("Sim, por favor.:Não, obrigado.") == 2) {
 					mes "[Distribuidor de Medalhas]";
 					mes "Hum, tem certeza? Você";
 					mes "só pode trocar um Bilhete de";
@@ -311,7 +311,7 @@ p_track01,67,45,5	script	Medal Distributor#single	845,{
 					mes "bilhete por uma Medalha de Prêmio";
 					mes "inserindo seu número de troca";
 					mes "de bilhete agora. Seu bilhete";
-					mes "exchange number is ^FF0000" + .@insa + "^000000.";
+					mes "o número de troca é ^FF0000" + .@insa + "^000000.";
 					next;
 					input .@input;
 					if (!.@input) {
@@ -453,7 +453,7 @@ p_track01,76,36,1	script	Exit Guide#single	798,{
 	mes "para fora. Você gostaria";
 	mes "de sair da arena agora?";
 	next;
-	if (select("Yes:No") == 2) {
+	if (select("Sim:Não") == 2) {
 		mes "[Guia de Saída]";
 		mes "Muito bem, então.";
 		mes "Apenas me avise";
@@ -490,7 +490,7 @@ hugel,58,72,6	script	Eckar Ellebird#single	798,{
 	mes "Arena de Corrida de Monstros.";
 	mes "Como posso te ajudar hoje?";
 	next;
-	if (select("Monster Race Info:Enter Monster Race") == 1) {
+	if (select("Informações da Corrida de Monstros:Entrar na Corrida de Monstros") == 1) {
 		mes "[Eckar Ellebird]";
 		mes "As Corridas de Monstros originaram-se de";
 		mes "brincadeiras simples de criança, nas quais";
@@ -544,7 +544,7 @@ hugel,58,72,6	script	Eckar Ellebird#single	798,{
 	mes "Você gostaria de apostar em";
 	mes "uma Corrida de Monstro Individual?";
 	next;
-	if (select("Yes, please.:No, thanks.") == 2) {
+	if (select("Sim, por favor.:Não, obrigado.") == 2) {
 		mes "[Eckar Ellebird]";
 		mes "Muito bem. Espero que";
 		mes "você aproveite seu tempo aqui";
@@ -624,7 +624,7 @@ hugel,58,72,6	script	Eckar Ellebird#single	798,{
 		mes "de assistir, a taxa é de 500 zeny";
 		mes "para espectadores. Você gostaria de entrar na Arena de Corrida de Monstros?";
 		next;
-		if (select("Enter:Cancel") == 2) {
+		if (select("Entrar:Cancelar") == 2) {
 			mes "[Eckar Ellebird]";
 			mes "Muito bem, então. Se você gostaria";
 			mes "de apostar em uma corrida";
@@ -673,7 +673,7 @@ p_track01,39,49,3	script	Game Guide#single	845,{
 	mes "Arena de Corrida de Monstros.";
 	mes "Como posso te ajudar?";
 	next;
-	switch(select("Monster Race Info:Wager Info:Ticket Redemption Info")) {
+	switch(select("Informações da Corrida de Monstros:Informações de Apostas:Informações de Resgate de Ingressos")) {
 	case 1:
 		mes "[Guia do Jogo]";
 		mes "As Corridas de Monstros originaram-se de";
@@ -1077,7 +1077,7 @@ hugel,62,69,1	script	Eckar Erenes#double	798,{
 	mes "da vila de Hugel!";
 	mes "Como posso te ajudar?";
 	next;
-	if (select("Monster Race Info:Enter Monster Race") == 1) {
+	if (select("Informações da Corrida de Monstros:Entrar na Corrida de Monstros") == 1) {
 		mes "[Eckar Erenes]";
 		mes "As Corridas de Monstros originaram-se de";
 		mes "brincadeiras simples de criança, nas quais";
@@ -1131,7 +1131,7 @@ hugel,62,69,1	script	Eckar Erenes#double	798,{
 	mes "Você gostaria de apostar";
 	mes "em uma Corrida de Monstros Dupla?";
 	next;
-	if (select("Yes, please.:No, thanks.") == 2) {
+	if (select("Sim, por favor.:Não, obrigado.") == 2) {
 		mes "[Eckar Erenes]";
 		mes "Muito bem. Espero que";
 		mes "você aproveite seu tempo aqui";
@@ -1215,7 +1215,7 @@ hugel,62,69,1	script	Eckar Erenes#double	798,{
 		mes "assistir, a taxa é de 500 zenys";
 		mes "para espectadores. Você gostaria de entrar na Arena de Corrida de Monstros?";
 		next;
-		if (select("Enter:Cancel") == 2) {
+		if (select("Entrar:Cancelar") == 2) {
 			mes "[Eckar Erenes]";
 			mes "Muito bem. Se você quiser";
 			mes "apostar em uma corrida";
@@ -1285,10 +1285,10 @@ p_track02,73,22,1	script	Ticket Helper#2	899,{
 		mes "tiver alguma dúvida, ou se";
 		mes "quiser fazer sua aposta.";
 		next;
-		switch(select("Check Monster Status:Wager on Race:Monster Race?:Cancel")) {
+		switch(select("Verificar Status do Monstro:Apostar na Corrida:Corrida de Monstros?:Cancelar")) {
 		case 1:
 			for ( .@i = 1; .@i <= 6; .@i++ )
-				mes "Monster "+.@i+" [^CC6600Luck^000000: " + getd("$@mon_r02_Luk"+.@i) + "] [^EE0000HP^000000: " + getd("$@mon_r02_tire"+.@i) + "]";
+				mes "Monstro "+.@i+" [^CC6600Luck^000000: " + getd("$@mon_r02_Luk"+.@i) + "] [^EE0000HP^000000: " + getd("$@mon_r02_tire"+.@i) + "]";
 			close;
 		case 2:
 			mes "[Assistente de Ingressos]";
@@ -1321,12 +1321,12 @@ p_track02,73,22,1	script	Ticket Helper#2	899,{
 				}
 				mes "[Assistente de Ingressos]";
 				mes "Você escolheu";
-				mes "^0000FFMonster "+.@m+"^000000, "+.@string$[0];
+				mes "^0000FFMonstro "+.@m+"^000000, "+.@string$[0];
 				mes .@string$[1]+".";
 				mes "Tem certeza de que quer";
 				mes "escolher este monstro?";
 				next;
-				if (select("Yes:No") == 2) {
+				if (select("Sim:Não") == 2) {
 					mes "[Assistente de Ingressos]";
 					mes "Você cancelou";
 					mes "sua aposta. Tudo bem,";
@@ -1348,7 +1348,7 @@ p_track02,73,22,1	script	Ticket Helper#2	899,{
 					if (!$@mon_time_2_2) {
 						mes "[Assistente de Ingressos]";
 						mes "Você apostou em";
-						mes "^0000FFMonster "+.@m1+"^000000 and ^0000FFMonster "+.@m+"^000000";
+						mes "^0000FFMonstro "+.@m1+"^000000 and ^0000FFMonstro "+.@m+"^000000";
 						mes "para vencer esta corrida. Boa sorte!";
 						mes "Espero realmente que as probabilidades";
 						mes "estejam a seu favor~";
@@ -1425,7 +1425,7 @@ p_track02,73,22,1	script	Ticket Helper#2	899,{
 		if (countitem(7514)) {
 			mes "[Assistente de Ingressos]";
 			mes "Você apostou em";
-			mes "^0000FFMonster " + monster_race_2_1 + "^000000 and ^0000FFMonster " + monster_race_2_2 + "^000000";
+			mes "^0000FFMonstro " + monster_race_2_1 + "^000000 and ^0000FFMonstro " + monster_race_2_2 + "^000000";
 			mes "para esta Corrida Dupla de Monstros.";
 			next;
 		} 
@@ -1451,7 +1451,7 @@ p_track02,39,49,3	script	Game Guide#double	845,{
 	mes "Arena de Corrida de Monstros.";
 	mes "Como posso ajudá-lo?";
 	next;
-	switch(select("Monster Race Info:Wager Info:Ticket Redemption Info")) {
+	switch(select("Informações da Corrida de Monstros:Informações de Apostas:Informações de Resgate de Ingressos")) {
 	case 1:
 		mes "[Guia do Jogo]";
 		mes "As Corridas de Monstros originaram-se de";
@@ -1587,7 +1587,7 @@ p_track02,67,45,5	script	Medal Distributor#medal	845,{
 		mes "de trocar seu Ingresso de";
 		mes "Corrida vencedor por Medalhas de Prêmio?";
 		next;
-		if (select("Yes, please.:No, thanks.") == 1) {
+		if (select("Sim, por favor.:Não, obrigado.") == 1) {
 			mes "[Distribuidor de Medalhas]";
 			mes "Tudo bem, tudo parece correto,";
 			mes "então aqui estão suas Medalhas de Prêmio~";
@@ -1649,7 +1649,7 @@ p_track02,76,38,1	script	Exit Guide#double	798,{
 	mes "para fora. Você gostaria";
 	mes "de sair da arena agora?";
 	next;
-	if (select("Yes:No") == 2) {
+	if (select("Sim:Não") == 2) {
 		mes "[Guia de Saída]";
 		mes "Muito bem.";
 		mes "Apenas me avise";
@@ -2028,7 +2028,7 @@ ein_in01,85,208,5	script	Ei'felle#repay01	854,{
 			mes "receber esta Jaqueta Cintilante";
 			mes "como minha forma de retribuir?";
 			next;
-			if (select("Accept:Wait for Further Development") == 1) {
+			if (select("Aceitar:Esperar por Desenvolvimento Futuro") == 1) {
 				callsub S_BonusReward,500,2319;//Glittering_Clothes
 				end;
 			}
@@ -2056,7 +2056,7 @@ ein_in01,85,208,5	script	Ei'felle#repay01	854,{
 			mes "medalhas até que eu possa desenvolver";
 			mes "outra coisa para você.";
 			next;
-			switch(select("Accept Armor:Can I have something else?:Wait for Further Development")) {
+			switch(select("Aceitar Armadura:Posso pegar outra coisa?:Esperar por Desenvolvimento Futuro")) {
 				case 1:
 					mes "[Ei'felle]";
 					mes "Posso fabricar um conjunto de";
@@ -2065,7 +2065,7 @@ ein_in01,85,208,5	script	Ei'felle#repay01	854,{
 					mes "Qual propriedade você";
 					mes "gostaria que sua armadura tivesse?";
 					next;
-					switch(select("Fire Property:Earth Property:Wind Property:Water Property")) {
+					switch(select("Propriedade Fogo:Propriedade Terra:Propriedade Vento:Propriedade Água")) {
 						case 1: callsub S_BonusReward,1000,2345; end;// Flame_Sprits_Armor_
 						case 2: callsub S_BonusReward,1000,2351; end;// Earth_Sprits_Armor_
 						case 3: callsub S_BonusReward,1000,2349; end;// Wind_Sprits_Armor_
@@ -2129,7 +2129,7 @@ ein_in01,85,208,5	script	Ei'felle#repay01	854,{
 		mes "como minha forma de retribuir";
 		mes "pela sua ajuda. O que você acha?";
 		next;
-		if (select("Yes, I want a Level 4 Weapon.:Can I have something else?") == 2) {
+		if (select("Sim, eu quero uma Arma de Nível 4.:Posso pegar outra coisa?") == 2) {
 			mes "[Ei'felle]";
 			mes "Outra coisa?";
 			mes "Oh, tudo bem então, você";
@@ -2138,7 +2138,7 @@ ein_in01,85,208,5	script	Ei'felle#repay01	854,{
 			mes "Armadura elemental com slot? Por favor,";
 			mes "siga em frente e faça sua escolha~";
 			next;
-			switch (select("Glittering Jacket:Fire Property Armor:Earth Property Armor:Wind Property Armor:Water Property Armor:Cancel")) {
+			switch (select("Jaqueta Cintilante:Armadura de Propriedade Fogo:Armadura de Propriedade Terra:Armadura de Propriedade Vento:Armadura de Propriedade Água:Cancelar")) {
 				case 1: callsub S_BonusReward,500,2319; end;
 				case 2: callsub S_BonusReward,1000,2345; end;
 				case 3: callsub S_BonusReward,1000,2351; end;
@@ -2216,7 +2216,7 @@ ein_in01,85,208,5	script	Ei'felle#repay01	854,{
 	}
 	
 S_Reward:
-	if (select("Sure:No") == 2) {
+	if (select("Claro:Não") == 2) {
 		mes "[Ei'felle]";
 		mes "Ah, tudo bem...";
 		mes "Ainda assim, eu realmente preciso";
@@ -2234,7 +2234,7 @@ S_Reward:
 	mes "devo recompensá-lo por me dar";
 	mes "algumas de suas Medalhas de Prêmio?";
 	next;
-	switch(select("Base Experience:Job Experience:No, I'm just glad to help.:How's your research progressing?")) {
+	switch(select("Experiência de Base:Experiência de Classe:Não, fico feliz em ajudar.:Como está indo sua pesquisa?")) {
 		case 1:
 			mes "[Ei'felle]";
 			mes "Você só quer melhorar";
@@ -2434,7 +2434,7 @@ S_Reward:
 			mes "medalhas você acha que";
 			mes "pode me dar agora?";
 			next;
-			switch(select("Take them all.:How about this much?:No, I changed my mind.")) {
+			switch(select("Pegue todas.:Que tal esta quantidade?:Não, mudei de ideia.")) {
 			case 1:
 				mes "[Ei'felle]";
 				mes "O-obrigada!";
@@ -2516,7 +2516,7 @@ S_Reward:
 			next;
 			mes "[Ei'felle]";
 			mes "Até agora, tenho o metal";
-			mes "from ^FF0000"+ ein_medal01 +"^000000 Prizes Medals that";
+			mes "de ^FF0000"+ ein_medal01 +"^000000 Prizes Medals that";
 			mes "que você doou para mim. Quanto mais";
 			mes "você trouxer, mais perto chegarei de fazer uma nova descoberta!";
 			close;
@@ -2527,17 +2527,17 @@ S_BonusReward:
 	.@arg1 = getarg(1);
 	if (.@arg1 == 2319) {
 		mes "Você realmente quer";
-		mes "this "+getitemname(.@arg1)+"?";
+		mes "isto "+getitemname(.@arg1)+"?";
 		mes "Você pode querer abrir mão desta";
 		mes "recompensa em favor de conseguir";
 		mes "algo melhor depois...";
 	} else if (.@arg1 == 2345 || .@arg1 == 2347 || .@arg1 == 2349 || .@arg1 == 2351) {
 		mes "Você tem certeza que quer";
 		mes "aceitar este conjunto de com slot";
-		if (.@arg1 == 2345) mes "Fire property Armor? If you do,";
-		else if (.@arg1 == 2351) mes "Earth property Armor? If you do,";
-		else if (.@arg1 == 2349) mes "Wind property Armor? If you do,";
-		else if (.@arg1 == 2347) mes "Water property Armor? If you do,";
+		if (.@arg1 == 2345) mes "Armadura de propriedade Fogo? Se aceitar,";
+		else if (.@arg1 == 2351) mes "Armadura de propriedade Terra? Se aceitar,";
+		else if (.@arg1 == 2349) mes "Armadura de propriedade Vento? Se aceitar,";
+		else if (.@arg1 == 2347) mes "Armadura de propriedade Água? Se aceitar,";
 		mes "Vou precisar de mais medalhas de você";
 		mes "para fazer mais avanços";
 		mes "em minha pesquisa de fabricação.";
@@ -2550,7 +2550,7 @@ S_BonusReward:
 		mes "para mim. Devemos prosseguir?";
 	}
 	next;
-	if (select("Decline:Accept") == 1) {
+	if (select("Recusar:Aceitar") == 1) {
 		mes "["+ strcharinfo(0) +"]";
 		mes "E-espere, eu mudei de";
 		mes "ideia. Tudo bem";
@@ -2574,17 +2574,17 @@ S_BonusReward:
 	mes "[Ei'felle]";
 	if (.@arg1 == 2319) {
 		mes "Aqui está, confio que";
-		mes "this "+getitemname(.@arg1)+" will";
+		mes "isto "+getitemname(.@arg1)+" will";
 		mes "lhe servirá bem. Obrigada";
 		mes "pela sua ajuda, e espero que";
 		mes "você continue a doar suas";
 		mes "medalhas para minha pesquisa de metal~";
 	} else if (.@arg1 == 2345 || .@arg1 == 2347 || .@arg1 == 2349 || .@arg1 == 2351) {
 		mes "Ótima escolha! Tenho certeza";
-		if (.@arg1 == 2345) mes "that this set of slotted Fire";
-		else if (.@arg1 == 2351) mes "that this set of slotted Earth";
-		else if (.@arg1 == 2349) mes "that this set of slotted Wind";
-		else if (.@arg1 == 2347) mes "that this set of slotted Water";
+		if (.@arg1 == 2345) mes "que este conjunto de Fogo com slot";
+		else if (.@arg1 == 2351) mes "que este conjunto de Terra com slot";
+		else if (.@arg1 == 2349) mes "que este conjunto de Vento com slot";
+		else if (.@arg1 == 2347) mes "que este conjunto de Água com slot";
 		mes "Armadura de propriedade lhe servirá";
 		mes "bem. Obrigada pela sua ajuda,";
 		mes "e se você conseguir mais medalhas,";
@@ -2626,7 +2626,7 @@ hugel,71,83,4	script	Wayne	900,{
 	mes "agora, comigo. Como sempre, a";
 	mes "escolha é realmente sua.";
 	next;
-	if (select("Prize Medal Exchange:Cancel") == 2) {
+	if (select("Troca de Medalhas de Prêmio:Cancelar") == 2) {
 		mes "[Wayne]";
 		mes "Bem, apenas tenha em mente";
 		mes "que você sempre pode vir";
@@ -2704,7 +2704,7 @@ hugel,71,83,4	script	Wayne	900,{
 		mes "Agora, por favor escolha";
 		mes "qual dos seguintes conjuntos";
 		mes "de itens você gostaria de receber";
-		mes "in exchange for "+.@pm[.@m]+" Prize Medal."+((getarraysize(.@item_array)<3)?" Well, we have only 1 set, but...":"");
+		mes "em troca de "+.@pm[.@m]+" Prize Medal."+((getarraysize(.@item_array)<3)?" Well, we have only 1 set, but...":"");
 		next;
 		.@m2 = ( select(.@items$) -1 ) *2;
 		if (countitem("Marvelous_Medal") < .@pm[.@m]) {
@@ -2937,7 +2937,7 @@ hugel,5,5,3	script	Monster Race Manager	868,{
 	mes "da Arena para as Corridas de Monstros";
 	mes "Simples e Duplas.";
 	next;
-	.@select = select("Single Race Entry - ON:Dual Race Entry - ON:Single Race Entry - OFF:Dual Race Entry - OFF");
+	.@select = select("Entrada na Corrida Simples - LIGADO:Entrada na Corrida Dupla - LIGADO:Entrada na Corrida Simples - DESLIGADO:Entrada na Corrida Dupla - DESLIGADO");
 	mes "[Gerente de Corridas de Monstros]";
 	mes "Por favor, insira";
 	mes "a senha.";

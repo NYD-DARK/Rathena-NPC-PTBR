@@ -37,7 +37,7 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 	mes "Ummmm...";
 	mes "O que traz você aqui...?";
 	next;
-	switch(select("Make Potion:Talk.:Mixing Information:Cancel")) {
+	switch(select("Preparar Poção:Conversar.:Informações de Mistura:Cancelar")) {
 	case 1:
 		if (MaxWeight - Weight < 5000) {
 			mes "[Velho Farmacêutico]";
@@ -52,7 +52,7 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 			mes "[Velho Farmacêutico]";
 			mes "Você está com todos os itens prontos, certo? Qual você gostaria?";
 			next;
-			switch(select("Red Potion.:Orange Potion.:Yellow Potion.:White Potion.:Blue Potion.:Green Potion.:Actually, I don't want anything.")) {
+			switch(select("Poção Vermelha.:Poção Laranja.:Poção Amarela.:Poção Branca.:Poção Azul.:Poção Verde.:Na verdade, não quero nada.")) {
 			case 1:
 				callsub L_Making,507,3,501;
 			case 2:
@@ -78,7 +78,7 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 				}
 				mes "Quantas?";
 				next;
-				switch(select("Make as many as I can.:I want to choose an amount.:Actually, I don't want anything.")) {
+				switch(select("Preparar o máximo que puder.:Quero escolher uma quantidade.:Na verdade, não quero nada.")) {
 				case 1:
 					if ((countitem(507) < .@max) || (countitem(508) < .@max) || (countitem(713) < .@max) || (Zeny < .@max*3)) {
 						mes "[Velho Farmacêutico]";
@@ -93,7 +93,7 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 					break;
 				case 2:
 					mes "[Velho Farmacêutico]";
-					mes "Then pick a number below 100. If you don't want any, just enter '0'. With the materials you have, you can make about "+.@max+" potions.";
+					mes "Então escolha um número abaixo de 100. Se não quiser nenhuma, apenas digite '0'. Com os materiais que você tem, pode fazer cerca de "+.@max+" potions.";
 					next;
 					input .@amount,0,101;
 					if (.@amount == 0) {
@@ -202,7 +202,7 @@ L_Making:
 	}
 	mes "Quantas?";
 	next;
-	switch(select("Make as many as I can.:I want to choose an amount.:Actually, I don't want anything.")) {
+	switch(select("Preparar o máximo que puder.:Quero escolher uma quantidade.:Na verdade, não quero nada.")) {
 	case 1:
 		if ((countitem(.@item_req) < .@max*2) || countitem(713) < .@max || (Zeny < .@max*.@req_amount)) {
 			mes "[Velho Farmacêutico]";
@@ -216,7 +216,7 @@ L_Making:
 		break;
 	case 2:
 		mes "[Velho Farmacêutico]";
-		mes "Then pick a number below 100. If you don't want any, just enter '0'. With the materials you have, you can make about "+.@max+" potions.";
+		mes "Então escolha um número abaixo de 100. Se não quiser nenhuma, apenas digite '0'. Com os materiais que você tem, pode fazer cerca de "+.@max+" potions.";
 		next;
 		input .@amount;
 		if (.@amount == 0) {

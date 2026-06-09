@@ -50,7 +50,7 @@ payon_in01,5,134,5	script	Inventor Jaax	89,{
 	mes "[Inventor Jaax]";
 	mes "Você gostaria de tentar usar uma das minhas aljaves de flechas? Não tenho dúvidas de que alguém como você pode apreciar meu gênio!";
 	next;
-	switch(select("Quiver:Iron Arrow Quiver:Steel Arrow Quiver:Oridecon Arrow Quiver:Fire Arrow Quiver:Silver Arrow Quiver:Wind Arrow Quiver:Stone Arrow Quiver:Crystal Arrow Quiver:Shadow Arrow Quiver:Immaterial Arrow Quiver:Rusty Arrow Quiver")) {
+	switch(select("Aljava:Iron Arrow Aljava:Steel Arrow Aljava:Oridecon Arrow Aljava:Fire Arrow Aljava:Silver Arrow Aljava:Wind Arrow Aljava:Stone Arrow Aljava:Crystal Arrow Aljava:Shadow Arrow Aljava:Immaterial Arrow Aljava:Rusty Arrow Aljava")) {
 	case 1: callsub S_BuyQuiver,1750,500,500,12004;
 	case 2: callsub S_BuyQuiver,1770,500,500,12005;
 	case 3: callsub S_BuyQuiver,1753,500,500,12006;
@@ -66,8 +66,8 @@ payon_in01,5,134,5	script	Inventor Jaax	89,{
 	}
 	//This doesn't seem to be accessable...
 	//mes "[Inventor Jaax]";
-	//mes "Is there";
-	//mes "anything you want?";
+	//mes "Há algo";
+	//mes "que você queira?";
 	//close;
 
 S_BuyQuiver:
@@ -78,20 +78,20 @@ S_BuyQuiver:
 	if (countitem(.@item_id) >= .@amount) {
 		mes "[Inventor Jaax]";
 		mes "Excelente!";
-		mes "Are you carrying any Arrows with you? I'll provide you with a quiver that can carry "+ .@amount +" of your "+ getitemname(.@item_id) +"s for only ^FF3131"+ .@zeny_req +" Zeny^000000.";
+		mes "Você está carregando Flechas com você? Eu lhe fornecerei uma aljava que pode carregar "+ .@amount +" of your "+ getitemname(.@item_id) +"s for only ^FF3131"+ .@zeny_req +" Zeny^000000.";
 		next;
-		switch(select("Store as many Arrows in quivers as possible:Purchase 1 quiver:Cancel")) {
+		switch(select("Armazenar o máximo de Flechas possível em aljavas:Comprar 1 aljava:Cancelar")) {
 		case 1:
 			.@arrows = countitem(.@item_id);
 			set .@quiver,.@arrows / .@amount;
 			set .@arrows_used,.@quiver * .@amount;
 			.@arrow_zeny01 = .@quiver * .@zeny_req;
 			mes "Número de";
-			mes "Arrows: ^3131FF"+.@arrows+" ^000000";
+			mes "Flechas: ^3131FF"+.@arrows+" ^000000";
 			mes "Número Máximo";
 			mes "de Compra";
-			mes "Quivers: ^3131FF"+.@quiver+" ^000000";
-			mes "Zeny required: ^3131FF"+.@arrow_zeny01+" Zeny^000000";
+			mes "Aljavas: ^3131FF"+.@quiver+" ^000000";
+			mes "Zeny necessário: ^3131FF"+.@arrow_zeny01+" Zeny^000000";
 			next;
 			mes "[Inventor Jaax]";
 			mes "Você gostaria de";
@@ -99,7 +99,7 @@ S_BuyQuiver:
 			mes "puder para as Flechas";
 			mes "que você está carregando atualmente?";
 			next;
-			if (select("Yes:Cancel") == 1) {
+			if (select("Sim:Cancelar") == 1) {
 				if (.@arrow_zeny01 < Zeny) {
 					mes "[Inventor Jaax]";
 					mes "Aqui está!";
@@ -150,7 +150,7 @@ S_BuyQuiver:
 			else {
 				mes "[Inventor Jaax]";
 				mes "Você nem";
-				mes "have "+ .@zeny_req +" Zeny?";
+				mes "tem "+ .@zeny_req +" Zeny?";
 				mes "Sinto muito. Eu não fazia";
 				mes "ideia que você fosse tão...";
 				mes "^333333Destituído^000000.";
@@ -165,11 +165,11 @@ S_BuyQuiver:
 	}
 	else {
 		mes "[Inventor Jaax]";
-		mes "You can carry a maximum of "+ .@amount +" Arrows within this quiver. It was made using my secret method,";
+		mes "Você pode carregar um máximo de "+ .@amount +" Arrows within this quiver. It was made using my secret method,";
 		mes "assim o peso total das Flechas e da Aljava é menor do que carregar as Flechas sozinhas.";
 		next;
 		mes "[Inventor Jaax]";
-		mes "It's a miracle of science! One that you can experience for yourself if you bring me at least "+ .@amount +" Arrows and "+ .@zeny_req +" Zeny for each Quiver.";
+		mes "É um milagre da ciência! Um que você pode experimentar pessoalmente se me trouxer pelo menos "+ .@amount +" Arrows and "+ .@zeny_req +" Zeny for each Quiver.";
 		close;
 	}
 }

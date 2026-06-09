@@ -51,7 +51,7 @@ prt_church,97,100,4	script	Wedding Staff#w	71,{
 		mes "casamento. Agora, você tem";
 		mes "alguma dúvida?";
 		next;
-		if (select("I want to get married.:I don't need your help!") == 1) {
+		if (select("Eu quero me casar.:Não preciso da sua ajuda!") == 1) {
 			mes "[Marry Happy]";
 			mes "Oh, me desculpe, mas";
 			mes "personagens adotados";
@@ -78,7 +78,7 @@ prt_church,97,100,4	script	Wedding Staff#w	71,{
 	mes "Existe alguém especial";
 	mes "assim em sua vida?";
 	next;
-	switch(select("Ask about Wedding Ceremony:Ask about Procedure:Apply for Wedding:We are the Invincible Single Army!")) {
+	switch(select("Perguntar sobre a Cerimônia de Casamento:Perguntar sobre o Procedimento:Solicitar Casamento:Nós somos o Exército Invencível dos Solteiros!")) {
 	case 1:
 		mes "[Marry Happy]";
 		mes "O sábio e benevolente";
@@ -158,7 +158,7 @@ prt_church,97,100,4	script	Wedding Staff#w	71,{
 		mes "Vomars depois que seus noivos";
 		mes "terminarem de falar com ele.";
 		next;
-		if (select("Thanks, that helps a lot!:Easiest way to say my partner's name?") == 1) {
+		if (select("Obrigado, isso ajuda muito!:Maneira mais fácil de dizer o nome do meu parceiro?") == 1) {
 			mes "[Marry Happy]";
 			mes "Bem, estou aqui para ajudar";
 			mes "os casamentos a prosseguirem o mais";
@@ -248,7 +248,7 @@ prt_church,97,100,4	script	Wedding Staff#w	71,{
 		mes "Agora, você gostaria de";
 		mes "se inscrever para o casamento?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("Sim:Não") == 1) {
 			if (getpartnerid()) {
 				cutin "wedding_marry02",2;
 				mes "[Marry Happy]";
@@ -558,7 +558,7 @@ OnEnable:
 prt_church,101,102,0	script	Single Army#Amatsu	767,{
 	mes "[Exército dos Solteiros]";
 	mes "^CC9966As mulheres podem quebrar meu";
-	mes "espírito, mas elas nunca";
+	mes " espírito, mas elas nunca";
 	mes "tomarão... minha LIBERDADE!^000000";
 	close;
 
@@ -628,11 +628,11 @@ prt_church,100,128,4	script	Bishop#w	60,{
 						next;
 						input $@wed_bride$;
 						mes "[Vomars]";
-						mes "Mr. " + strcharinfo(0) + "...";
+						mes "Sr. " + strcharinfo(0) + "...";
 						mes "Você jura pela sua vida";
 						mes "que você sempre cuidará";
 						mes "e amará sua noiva,";
-						mes "Miss " + $@wed_bride$ + "?";
+						mes "Srta. " + $@wed_bride$ + "?";
 						next;
 						select("I do.");
 						set $@wed_groom$,strcharinfo(0);
@@ -689,17 +689,17 @@ prt_church,100,128,4	script	Bishop#w	60,{
 							next;
 							mapannounce "prt_church","Let's hear what the bride, Miss "+$@wed_bride$+", has to say...",bc_map;
 							mes "[Vomars]";
-							mes "Miss "+$@wed_bride$+"...";
+							mes "Srta. "+$@wed_bride$+"...";
 							mes "Você jura ficar";
-							mes "true to "+$@wed_groom$+",";
+							mes "fiel a "+$@wed_groom$+",";
 							mes "ao lado dele, não importa";
 							mes "quais sejam os perigos?";
 							next;
-							if (select("^FF0000No.^000000:I do.") == 1) {
+							if (select("^FF0000Não.^000000:Sim, eu quero.") == 1) {
 								cutin "wedding_bomars03",2;
 								mapannounce "prt_church","Next couple, please proceed...",bc_map;
 								mes "[Vomars]";
-								mes "So "+$@wed_groom$;
+								mes "Então "+$@wed_groom$;
 								mes "não é a pessoa com quem você";
 								mes "quer se casar? Hmm.";
 								mes "Sinto muito por este";
@@ -713,9 +713,9 @@ prt_church,100,128,4	script	Bishop#w	60,{
 							mes "[Vomars]";
 							mes "Você jura verdadeiramente";
 							mes "fidelidade e paciência?";
-							mes "Will you marry "+$@wed_groom$+"?";
+							mes "Você se casará com "+$@wed_groom$+"?";
 							next;
-							if (select("Yes, I do.:^FF0000No.^000000") == 1) {
+							if (select("Sim, eu aceito.:^FF0000Não.^000000") == 1) {
 								if (isloggedin(getcharid(3,$@wed_groom$))) {
 									if (marriage($@wed_groom$)) {
 										//Call Wedding effect
@@ -743,7 +743,7 @@ prt_church,100,128,4	script	Bishop#w	60,{
 										mes "[Vomars]";
 										mes "E por último...";
 										mes "Sejam sempre felizes,";
-										mes "dear "+$@wed_bride$+"...";
+										mes "querido(a) "+$@wed_bride$+"...";
 										set $@wed_groom$,"";
 										set $@wed_bride$,"";
 										set $@wedding,0;
@@ -819,8 +819,8 @@ S_Busy:
 	if ($@wed_groom$ != "" && $@wed_bride$ != "") {
 		mes "[Vomars]";
 		mes "O casamento de";
-		mes "Miss "+ $@wed_bride$ +" and";
-		mes "Mister "+ $@wed_groom$;
+		mes "Srta. "+ $@wed_bride$ +" and";
+		mes "Sr. "+ $@wed_groom$;
 		mes "está atualmente em andamento.";
 		mes "Por favor, mantenham o silêncio.";
 		goto L_End;
@@ -872,7 +872,7 @@ prt_church,28,178,4	script	The King of Rune-Midgarts	108,{
 	mes "Eu posso resetar o NPC";
 	mes "Bispo Vomars se você quiser.";
 	next;
-	switch(select("No, thanks:RESET")) {
+	switch(select("Não, obrigado:RESETA")) {
 	case 1:
 		mes "[Wedding Switch]";
 		mes "Muito bem, então.";
@@ -916,7 +916,7 @@ prt_church,20,179,4	script	Divorce Staff	71,{
 	mes "Anel de Casamento do seu";
 	mes "inventário?";
 	next;
-	switch(select("Drop 1 Wedding Ring.:Keep it.")) {
+	switch(select("Descartar 1 Anel de Casamento.:Manter.")) {
 	case 1:
 		set .@ring, (Sex == SEX_MALE)?2634:2635; //Bridegroom_Ring, Bride_Ring
 		if (countitem(.@ring)) {
@@ -971,7 +971,7 @@ prt_church,22,179,4	script	Remarry Staff	71,{
 	mes "perdeu seu Anel de Casamento,";
 	mes "eu posso fazer um novo para você.";
 	next;
-	switch(select("Make new Wedding Ring.:Cancel.")) {
+	switch(select("Fazer novo Anel de Casamento.:Cancelar.")) {
 	case 1:
 		set .@ring, (Sex == SEX_MALE)?2634:2635; //Bridegroom_Ring, Bride_Ring
 		if (countitem(.@ring) || isequipped(.@ring)) {

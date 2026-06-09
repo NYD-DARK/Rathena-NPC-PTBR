@@ -91,7 +91,7 @@ prontera,115,90,0	script	Putty	4_F_01,{
 		mes "[Putty]";
 		mes "Bem-vindo de volta!";
 		mes "Vejo que você já tem algumas";
-		mes "trading points. Actually, you currently have ^00cc00" + .@points + "^000000.";
+		mes "pontos de troca. Na verdade, você tem atualmente ^00cc00" + .@points + "^000000.";
 		next;
 		mes "[Putty]";
 		mes "Você gostaria de trocar esses";
@@ -117,14 +117,14 @@ prontera,115,90,0	script	Putty	4_F_01,{
 		}
 		freeloop(0);
 		mes "[Putty]";
-		if (!.@card) mes "Please, come back here if you want to exchange a monster card.";
+		if (!.@card) mes "Por favor, volte aqui se quiser trocar uma carta de monstro.";
 		else {
 			.@count = countitem(.@card);
 			if (!.@count) {
-				mes "You don't have any ^0055FF"+callfunc("F_GetPlural",getitemname(.@card))+"^000000 with you!";
+				mes "Você não tem nenhum(a) ^0055FF"+callfunc("F_GetPlural",getitemname(.@card))+"^000000 with you!";
 				close;
 			}
-			mes "You've got ^0055FF"+callfunc("F_InsertPlural",.@count,getitemname(.@card))+"^000000.";
+			mes "Você tem ^0055FF"+callfunc("F_InsertPlural",.@count,getitemname(.@card))+"^000000.";
 			mes " ";
 			mes "Você gostaria de trocar 1 ponto por cada uma delas?";
 			next;
@@ -133,7 +133,7 @@ prontera,115,90,0	script	Putty	4_F_01,{
 					delitem .@card,.@count;
 					oversea_event9 = (.@points+.@count);
 					mes "[Putty]";
-					mes "Alright, you have received ^CC0000"+.@count+"^000000 points.";
+					mes "Certo, você recebeu ^CC0000"+.@count+"^000000 points.";
 					break;
 				case 2:
 					mes "[Putty]";
