@@ -35,7 +35,7 @@ prt_in,49,172,3	script	Marianne#juice	53,{
 		mes "[Dona de Casa Marianne]";
 		mes "Morrison!! Coma algumas frutas!! Você não quer se tornar um porquinho gordo e desleixado quando crescer, quer?";
 		next;
-		if (select("Talk:Cancel") == 1) {
+		if (select("Falar:Cancelar") == 1) {
 			mes "[Dona de Casa Marianne]";
 			mes "Hm? ...Você!";
 			mes "Foi você quem deu aquela Carne para o meu pequeno Morrison?! Você veio aqui achando que eu não saberia disso?!";
@@ -65,7 +65,7 @@ prt_in,49,172,3	script	Marianne#juice	53,{
 	mes "[Dona de Casa Marinaa]";
 	mes "Suspiro~!! Tal pai, tal filho...";
 	next;
-	switch(select("Talk:Cancel")) {
+	switch(select("Falar:Cancelar")) {
 		mes "[Dona de Casa Marianne]";
 		mes "*Suspiro*... Este é o Morrison...";
 		mes "Meu único filho.";
@@ -111,7 +111,7 @@ prt_in,47,173,3	script	Morrison#juice	97,{
 	mes "Não, não me faça comer isso! Não suporto o gosto de frutas!";
 	next;
 	if (countitem(517) > 0) {
-		switch(select("Talk:Show the Meat:Cancel")) {
+		switch(select("Falar:Mostrar a Carne:Cancelar")) {
 		case 1:
 			mes "[Pequeno Morrison]";
 			mes "Aaaah!! Uma ou duas vezes é o bastante!! Eu me recuso a comer mais frutas! Você tem que descascar e tem tanto suco que dá uma sensação pegajosa...";
@@ -127,7 +127,7 @@ prt_in,47,173,3	script	Morrison#juice	97,{
 			mes "Com licença...";
 			mes "V-você pode me dar um pedaço, por favor?";
 			next;
-			if (select("Give Meat:Don't Give Meat") == 1) {
+			if (select("Dar Carne:Don't Dar Carne") == 1) {
 				delitem 517,1; //Meat
 				set morison_meat,morison_meat+1;
 				mes "[Pequeno Morrison]";
@@ -151,7 +151,7 @@ prt_in,47,173,3	script	Morrison#juice	97,{
 			close;
 		}
 	}
-	if (select("Talk:Cancel") == 1) {
+	if (select("Falar:Cancelar") == 1) {
 		mes "[Pequeno Morrison]";
 		mes "Aaah!! Eu não consigo comer mais frutas!";
 		next;
@@ -184,12 +184,12 @@ payon_in03,188,146,5	script	Marx Hansen#juice	86,{
 		mes "Você veio para";
 		mes "processar frutas também?";
 		next;
-		switch(select("Make Juice.:Talk and get information about fruit processing.:Cancel.")) {
+		switch(select("Fazer Suco.:Conversar e obter informações sobre o processamento de frutas.:Cancelar.")) {
 		case 1:
 			mes "[Mercador Marx Hansen]";
 			mes "Que tipo de suco de fruta você gostaria de fazer?";
 			next;
-			switch(select("Apple Juice:Banana Juice:Carrot Juice:Grape Juice:Cancel")) {
+			switch(select("Suco de Maçã:Suco de Banana:Suco de Cenoura:Suco de Uva:Cancelar")) {
 			case 1:
 				set .@fruit,512;
 				set .@juice,531;
@@ -215,7 +215,7 @@ payon_in03,188,146,5	script	Marx Hansen#juice	86,{
 			if (countitem(.@fruit) == 0 || countitem(713) == 0 || Zeny < 3) {
 				mes "[Mercador Marx Hansen]";
 				mes "Oh, não...";
-				mes "You don't have all the necessary materials. To make "+getitemname(.@juice)+", I need 1 "+getitemname(.@fruit)+" and 1 Empty Bottle. I will also need a 3 zeny fee.";
+				mes "Você não tem todos os materiais necessários. Para fazer "+getitemname(.@juice)+", I need 1 "+getitemname(.@fruit)+" and 1 Empty Bottle. I will also need a 3 zeny fee.";
 				next;
 				mes "[Mercador Marx Hansen]";
 				mes "Quando você tiver preparado tudo, eu baterei a fruta para lhe dar um suco delicioso.";
@@ -225,7 +225,7 @@ payon_in03,188,146,5	script	Marx Hansen#juice	86,{
 			mes "[Mercador Marx Hansen]";
 			mes "Quantos você gostaria?";
 			next;
-			switch(select("As many as I can.:I want a certain amount.:Cancel.")) {
+			switch(select("O máximo que eu puder.:Quero uma quantidade específica.:Cancelar.")) {
 			case 1:
 				set .@make,countitem(.@fruit);
 				if (countitem(713) < .@make) set .@make, countitem(713);
@@ -233,7 +233,7 @@ payon_in03,188,146,5	script	Marx Hansen#juice	86,{
 				break;
 			case 2:
 				mes "[Mercador Marx Hansen]";
-				mes "Choose a number less than 100. If you don't want to, put '0'. You can make up to " + countitem(.@fruit) + " bottles of juice.";
+				mes "Escolha um número menor que 100. Se não quiser, coloque '0'. Você pode fazer até " + countitem(.@fruit) + " bottles of juice.";
 				next;
 				while(1) {
 					input .@input;
@@ -314,7 +314,7 @@ payon_in03,188,146,5	script	Marx Hansen#juice	86,{
 		mes "Bem-vindo.";
 		mes "Como posso ajudá-lo?";
 		next;
-		if (select("Talk:Cancel") == 1) {
+		if (select("Falar:Cancelar") == 1) {
 			mes "[Mercador Marx Hansen]";
 			mes "Antes que os humanos pudessem desenvolver sociedades tão vastas, eles coletavam frutas das árvores para sobreviver. As frutas podem ter sido a bênção da natureza que nos permitiu existir no mundo.";
 			next;

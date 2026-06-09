@@ -60,7 +60,7 @@ prt_in,88,105,2	script	Recruiter	105,{
 		mes "[Recrutador]";
 		mes "Claro que você é um voluntário para a campanha de reconquista do Esgoto de Prontera. Você me deixaria te teletransportar para lá?";
 		next;
-		if (select("Warp to Culvert Entrance.:Quit.") == 1) {
+		if (select("Teleportar para a Entrada do Esgoto.:Sair.") == 1) {
 			warp "prt_fild05",274,208;
 			end;
 		}
@@ -69,7 +69,7 @@ prt_in,88,105,2	script	Recruiter	105,{
 	mes "[Recrutador]";
 	mes "Ah, deixe-me informar que o Quartel General de Defesa da Capital do Reino de Rune-Midgard decidiu agora recrutar uma força punitiva devido à situação do Esgoto de Prontera.";
 	next;
-	switch(select("Volunteer.:Situation...?:Quit.")) {
+	switch(select("Voluntário.:Situação...?:Sair.")) {
 	case 1:
 		callsub S_Volunteer;
 		mes "[Recrutador]";
@@ -103,7 +103,7 @@ prt_in,88,105,2	script	Recruiter	105,{
 		mes "[Recrutador]";
 		mes "Guerreiros! Rune-Midgard está chamando vocês! Limpem a praga desta terra e expulsem os vermes do Esgoto! Só vocês... Podem fazer a diferença.";
 		next;
-		if (select("Volunteer.:Quit.") == 1) {
+		if (select("Voluntário.:Sair.") == 1) {
 			callsub S_Volunteer;
 			mes "[Recrutador]";
 			mes "Aventureiro...";
@@ -148,7 +148,7 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 		mes "Você deseja";
 		mes "entrar?";
 		next;
-		if (select("Sure.:Quit.") == 1) {
+		if (select("Claro.:Sair.") == 1) {
 			warp "prt_sewb1",131,247;
 			end;
 		}
@@ -170,7 +170,7 @@ prt_in,38,108,4	script	Teacher	53,{
 		mes "Oh...";
 		mes "Essas Flores em sua mão são...";
 		next;
-		switch(select("Show Flowers:Present Flowers:Cancel")) {
+		switch(select("Mostrar Flores:Entregar Flores:Cancelar")) {
 		case 1:
 			mes "[Professor]";
 			mes "Ah...";
@@ -207,7 +207,7 @@ prt_in,38,108,4	script	Teacher	53,{
 		mes "Você não acha...";
 		mes "Que flores são bonitas?";
 		next;
-		switch(select("Talk:Quit")) {
+		switch(select("Conversar:Sair")) {
 		case 1:
 			mes "[Professor]";
 			mes "Quando eu era jovem,";
@@ -268,7 +268,7 @@ prontera,248,212,3	script	Busy Boy#prt	706,3,3,{
 			mes "livros, mas... eu... Ah, meu,";
 			mes "Não posso ter medo agora!";
 			next;
-			if (select("Speak with him:Ignore him") == 1) {
+			if (select("Falar com ele:Ignorá-lo") == 1) {
 				mes "["+strcharinfo(0)+"]";
 				mes "Diga, qual é";
 				mes "o problema?";
@@ -472,7 +472,7 @@ OnTouch:
 			mes "a poeira de si mesmo e começou a";
 			mes "empilhar os livros cuidadosamente.^000000";
 			next;
-			if (select("Leave:Help him pile the books") == 1) {
+			if (select("Sair:Ajudá-lo a empilhar os livros") == 1) {
 				mes "[Garoto Atarefado]";
 				mes "Da próxima vez, olhe";
 				mes "por onde anda,";
@@ -524,7 +524,7 @@ OnTouch:
 			callsub S_GetBooks;
 			mes "[Garoto Atarefado]";
 			mes "E-Eu entendo.";
-			mes "Não é problema seu,";
+			mes "Não é problema seu, ";
 			mes "eu sei, mas";
 			mes "estou tão desesperado...";
 			emotion ET_CRY;
@@ -545,7 +545,7 @@ OnTouch:
 	end;
 
 S_GetBooks:
-	if (select("Help him:Don't help him") == 1) {
+	if (select("Ajudá-lo:Não ajudá-lo") == 1) {
 		mes "[Garoto Atarefado]";
 		mes "Ah, muito obrigado!";
 		mes "Você não entende o quanto";
@@ -802,7 +802,7 @@ yuno,311,195,3	script	Historian#prt01	754,{
 		mes "os 7 guerreiros estabeleceram";
 		mes "o Reino de Rune-Midgarts,";
 		mes "escolhendo Tristram Geoborg III";
-		mes "como o primeiro governante do reino.";
+		mes "como o primeiro governante do reino. ";
 		next;
 		mes "[Historiador]";
 		mes "Sabendo que seus descendentes";
@@ -872,7 +872,7 @@ yuno,311,195,3	script	Historian#prt01	754,{
 		mes "Você deve conseguir encontrá-la";
 		mes "lá pesquisando.";
 		next;
-		if (select("I will:Can I listen to that song again?") == 1) {
+		if (select("Eu irei:Posso ouvir aquela canção novamente?") == 1) {
 			mes "[Historiador]";
 			mes "Mais uma vez, obrigado";
 			mes "pela sua ajuda.";
@@ -981,7 +981,7 @@ morocc_in,45,126,3	script	Historian#prt02	702,{
 		mes "embora eu não espere";
 		mes "muito se Karlomoff o escreveu.";
 		next;
-		if (select("Ask her about her research:End conversation") == 1) {
+		if (select("Perguntar sobre a pesquisa dela:Encerrar conversa") == 1) {
 			mes "[Historiadora Rodafrian]";
 			mes "Oh, você conhece o";
 			mes "Grupo de Pesquisa Histórica Rekenber?";
@@ -1032,7 +1032,7 @@ morocc_in,45,126,3	script	Historian#prt02	702,{
 			mes "linha! Na verdade, você";
 			mes "já ouviu essa canção antes?";
 			next;
-			switch(select("Yes, I have.:Yes, but it is different.:No, sorry.")) {
+			switch(select("Sim, eu ouvi.:Sim, mas é diferente.:Não, desculpe.")) {
 			case 1:
 				mes "[Historiadora Rodafrian]";
 				mes "Ah, que ótimo!";
@@ -1202,7 +1202,7 @@ morocc_in,45,126,3	script	Historian#prt02	702,{
 		mes "para não contar a ninguém, porém.";
 		mes "Devo correr este risco?)^000000";
 		next;
-		if (select("Tell her about Jormungand's curse:Don't tell her") == 1) {
+		if (select("Contar a ela sobre a maldição de Jormungand:Não contar a ela") == 1) {
 			mes "^3355FFVocê explica tudo";
 			mes "o que você aprendeu para";
 			mes "Rodafrian, escolhendo não";
@@ -1633,7 +1633,7 @@ mjolnir_01,313,269,5	script	Dazed Boy#prt	706,{
 		mes "e começou a acariciar um";
 		mes "cachorro sentado ao lado dele.^000000";
 		next;
-		if (select("What did you just sing?:Ignore them") == 1) {
+		if (select("O que você acabou de cantar?:Ignorá-los") == 1) {
 			mes "[Garoto Distraído]";
 			mes "...";
 			mes "......";
@@ -1670,7 +1670,7 @@ mjolnir_01,313,269,5	script	Dazed Boy#prt	706,{
 			mes "mais sobre essa música? Tente";
 			mes "não se preocupar com isso: é apenas uma velha cantiga infantil.";
 			next;
-			if (select("Why are you here?:May I hear the song again?") == 1) {
+			if (select("Por que você está aqui?:Posso ouvir a canção novamente?") == 1) {
 				mes "[Mulher com Aparência Exausta]";
 				mes ".................";
 				next;
@@ -1790,7 +1790,7 @@ mjolnir_01,316,268,3	script	Exhausted-Looking Woman	879,{
 		mes "e começou a acariciar um";
 		mes "cachorro sentado ao lado dele.^000000";
 		next;
-		if (select("What did you just sing?:Ignore them") == 1) {
+		if (select("O que você acabou de cantar?:Ignorá-los") == 1) {
 			mes "[Garoto Distraído]";
 			mes "...";
 			mes "......";
@@ -1827,7 +1827,7 @@ mjolnir_01,316,268,3	script	Exhausted-Looking Woman	879,{
 			mes "mais sobre essa música? Tente";
 			mes "não se preocupar com isso: é apenas uma velha melodia infantil.";
 			next;
-			if (select("Why are you here?:May I hear the song again?") == 1) {
+			if (select("Por que você está aqui?:Posso ouvir a canção novamente?") == 1) {
 				mes "[Mulher com Aparência Exausta]";
 				mes ".................";
 				next;
@@ -2494,7 +2494,7 @@ prt_church,185,106,3	script	Father Bamph	60,{
 		mes "Venha comigo, aventureiro,";
 		mes "às dependências cerimoniais secretas";
 		mes "da família real.";
-		mes "Just use the switch hidden";
+		mes "Apenas use o interruptor escondido";
 		mes "dentro da estante e";
 		mes "eu te encontrarei lá.";
 		set prt_curse,18;
@@ -2511,7 +2511,7 @@ prt_church,185,106,3	script	Father Bamph	60,{
 		mes "Bonnie Imbullea realizou.";
 		next;
 		mes "[Padre Bamph]";
-		mes "There is a hidden switch";
+		mes "Existe um interruptor escondido";
 		mes "na estante que você";
 		mes "pode usar para se transportar";
 		mes "até lá. Vá, e eu te encontrarei";
@@ -2575,7 +2575,7 @@ prt_church,185,106,3	script	Father Bamph	60,{
 	else if (prt_curse == 32 || prt_curse == 33 || prt_curse == 41 || prt_curse == 42 || prt_curse == 51 || prt_curse == 52) {
 		mes "[Padre Bamph]";
 		mes "Você pode usar o";
-		mes "switch in the bookshelf to";
+		mes "interruptor na estante para";
 		mes "entrar nas dependências cerimoniais secretas.";
 		mes "Não se esqueça que nós";
 		mes "precisamos^3131FF 1 Gema Amarela^000000 e ^3131FF1 Poção Verde^000000 para testar veneno.";
@@ -2726,7 +2726,7 @@ prt_church,185,106,3	script	Father Bamph	60,{
 	}
 	else if (prt_curse == 60) {
 		mes "[Padre Bamph]";
-		mes "Oh, "+strcharinfo(0)+"~";
+		mes "Ah, "+strcharinfo(0)+"~";
 		mes "Muito tempo sem nos ver.";
 		mes "Você já falou com";
 		mes "Bonnie? Ah, e";
@@ -2774,7 +2774,7 @@ prt_church,185,106,3	script	Father Bamph	60,{
 		mes "da família real, peço que";
 		mes "você se abstenha de entrar nos";
 		mes "terrenos cerimoniais secretos";
-		mes "from now on. Thanks again for your help, "+strcharinfo(0)+".";
+		mes "daqui em diante. Obrigado novamente pela sua ajuda, "+strcharinfo(0)+".";
 		set prt_curse,61;
 		//completequest 18052;
 		close;
@@ -2870,7 +2870,7 @@ prt_church,185,106,3	script	Father Bamph	60,{
 					mes "trabalhar para nós. Se você";
 					mes "pode ajudar é sua escolha.";
 					next;
-					if (select("Let me think about it.:Of course, I'll help.") == 1) {
+					if (select("Deixe-me pensar sobre isso.:Claro, eu ajudo.") == 1) {
 						mes "[Padre Bamph]";
 						mes "Espero que você decida";
 						mes "nos ajudar. A segurança de";
@@ -3054,7 +3054,7 @@ prt_church,23,89,3	script	Father Biscuss#tomb	60,{
 	mes "Você está pronto para";
 	mes "voltar para cima?";
 	next;
-	if (select("Yes:No") == 1) {
+	if (select("Sim:Não") == 1) {
 		mes "[Padre Biscuss]";
 		mes "Por favor, me siga.";
 		next;
@@ -3243,14 +3243,14 @@ prt_church,21,111,5	script	#prince2	887,{
 		mes "e Pedra Amarela";
 		mes "nas marcas de escama do corpo. As";
 		mes "marcas de escama ficam mais fracas e";
-		mes "a solução borbulha ao contato.";
+		mes "a solução borbulha ao contato. ";
 		close;
 	}
 	else {
 		mes "^3355FFÉ o corpo de um homem";
 		mes "vestido com vestes luxuosas.";
 		mes "Embora falecido, a cor";
-		mes "da vida ainda não deixou o corpo.";
+		mes "da vida ainda não deixou o corpo. ";
 		close;
 	}
 }
@@ -3273,7 +3273,7 @@ prt_church,24,111,5	script	#prince3	887,{
 		mes "ter sido usado para matá-los?";
 		next;
 		while(1) {
-			if (select("A weapon!:Poison!") == 1) {
+			if (select("Uma arma!:Veneno!") == 1) {
 				mes "[Padre Bamph]";
 				mes "Hmm... Mas nenhum dos";
 				mes "corpos tinha feridas";
@@ -3365,7 +3365,7 @@ prt_church,24,111,5	script	#prince3	887,{
 		mes "^3355FFÉ o corpo de um homem";
 		mes "vestido com vestes luxuosas.";
 		mes "Embora falecido, a cor";
-		mes "da vida ainda não deixou o corpo.";
+		mes "da vida ainda não deixou o corpo. ";
 		close;
 	}
 }
@@ -3376,7 +3376,7 @@ moc_fild16,201,295,5	script	Assassin Guildsman#poiso	884,{
 		mes "Que negócios";
 		mes "o trazem aqui?";
 		next;
-		if (select("Poison:Nothing") == 1) {
+		if (select("Veneno:Nada") == 1) {
 			mes "["+strcharinfo(0)+"]";
 			mes "Preciso falar com";
 			mes "um especialista em venenos.";
@@ -3581,7 +3581,7 @@ OnTouch:
 		mes "a ela a letra daquela música, mas o Padre Bamph também está esperando";
 		mes "pelas informações que aprendi com a Guilda dos Assassinos. O que devo fazer?";
 		next;
-		if (select("Go to Rodafrian:Go to Father Bamph") == 1) {
+		if (select("Ir para Rodafrian:Ir para Padre Bamph") == 1) {
 			mes "["+strcharinfo(0)+"]";
 			mes "Bem, é mais fácil para mim";
 			mes "visitar Rodafrian agora.";
@@ -3623,7 +3623,7 @@ prt_in,162,99,4	script	Librarian#curse	67,{
 			mes "Não temos pessoal suficiente";
 			mes "para organizar todos esses livros...";
 			next;
-			if (select("Report the loss of the books:End Conversation") == 1) {
+			if (select("Reportar a perda dos livros:Encerrar Conversa") == 1) {
 				mes "[Bibliotecário]";
 				mes "Oh, você perdeu alguns livros?";
 				mes "Por favor, anote os títulos dos";

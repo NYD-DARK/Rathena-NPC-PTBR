@@ -22,7 +22,7 @@ hu_fild01,140,163,5	script	Tower Keeper	852,3,3,{
 	mes "desta Torre de Thanatos.";
 	mes "Como posso ajudá-lo?";
 	next;
-	switch(select("Thanatos Tower?:Entrance Fee?:Enter the tower:Cancel")) {
+	switch(select("Torre de Thanatos?:Taxa de Entrada?:Entrar na torre:Cancelar")) {
 	case 1:
 		mes "[Gatei]";
 		mes "Sim, a torre à sua frente";
@@ -76,7 +76,7 @@ hu_fild01,140,163,5	script	Tower Keeper	852,3,3,{
 		mes "entrar na Torre de Thanatos?";
 		mes "A taxa de entrada é ^FF00005.000 zenys^000000.";
 		next;
-		switch(select("Enter:Maybe next time.")) {
+		switch(select("Entrar:Talvez na próxima.")) {
 		case 1:
 			if (thana_tower > 0) {
 				mes "[Gatei]";
@@ -86,7 +86,7 @@ hu_fild01,140,163,5	script	Tower Keeper	852,3,3,{
 				mes "temporário da Rekenber, sua taxa";
 				mes "de entrada é de apenas 3.000 zenys.";
 				next;
-				switch(select("Enter:No, thanks.")) {
+				switch(select("Entrar:Não, obrigado.")) {
 				case 1:
 					if (Zeny > 2999) {
 						mes "[Gatei]";
@@ -171,7 +171,7 @@ tha_t01,149,78,4	script	Guide	90,{
 		mes "agora abertos ao público. Então";
 		mes "como posso ajudá-lo hoje?";
 		next;
-		switch(select("Tower Information:Temporary Work Contract:Cancel")) {
+		switch(select("Informações da Torre:Contrato de Trabalho Temporário:Cancelar")) {
 		case 1:
 			mes "[Ditze]";
 			mes "Quando esta torre foi construída,";
@@ -208,7 +208,7 @@ tha_t01,149,78,4	script	Guide	90,{
 			mes "um futuro próximo, nos deixando";
 			mes "mais perto do nosso objetivo de abrir todos os 12 andares da Torre de Thanatos.";
 			next;
-			switch(select("Tower Monsters?:Temp Contract Work?:......")) {
+			switch(select("Monstros da Torre?:Trabalho Temporário por Contrato?:......")) {
 			case 1:
 				mes "[Ditze]";
 				mes "Sim, quando começamos a";
@@ -226,7 +226,7 @@ tha_t01,149,78,4	script	Guide	90,{
 				mes "atacando sem motivo?";
 				next;
 				mes "[Ditze]";
-				mes "De qualquer forma, pedimos à";
+				mes "De qualquer forma, pedimos à ";
 				mes "Academia de Sábios de Juno que os";
 				mes "investigasse, e eles confirmaram que";
 				mes "essas criaturas angelicais são verdadeiros monstros--sua semelhança com";
@@ -292,7 +292,7 @@ tha_t01,149,78,4	script	Guide	90,{
 	close;
 
 L_Contract:
-	switch(select("Maybe next time:Sure, I'd like to work for you.")) {
+	switch(select("Talvez na próxima:Claro, gostaria de trabalhar para você.")) {
 	case 1:
 		mes "[Ditze]";
 		mes "Bem, tudo bem.";
@@ -327,7 +327,7 @@ L_Contract:
 		mes " ";
 		mes "1. Este contrato de trabalho";
 		mes "entra em vigor entre a Rekenber";
-		mes "Corporation (''Employer'') and "+strcharinfo(0)+"(''Employee'').";
+		mes "Corporação (''Empregador'') e "+strcharinfo(0)+"(''Employee'').";
 		mes "1-1. Este contrato de trabalho";
 		mes "é classificado como um contrato";
 		mes "de mercenário entre ambas as partes.";
@@ -368,7 +368,7 @@ L_Contract:
 		mes "Assinatura do Empregador____________";
 		mes "Assinatura do Empregado____________";
 		next;
-		switch(select("Sign:Don't Sign")) {
+		switch(select("Assinar:Don't Assinar")) {
 		case 1:
 			mes "^3355FFVocê assina duas cópias do";
 			mes "Contrato de Trabalho.^000000";
@@ -419,7 +419,7 @@ tha_t01,140,78,4	script	Guide#reward	831,{
 		mes "de Missões para Funcionários";
 		mes "aqui na Torre de Thanatos.";
 		next;
-		switch(select("Employee's mission reward?:Keep up the good work.")) {
+		switch(select("Recompensa da missão do funcionário?:Continue o bom trabalho.")) {
 		case 1:
 			mes "[Liei]";
 			mes "Atualmente, a Corporação Rekenber";
@@ -440,7 +440,7 @@ tha_t01,140,78,4	script	Guide#reward	831,{
 	mes "Ah, olá~";
 	mes "Como posso te ajudar?";
 	next;
-	if(select("Reward:Nothing") == 2) {
+	if(select("Recompensa:Nada") == 2) {
 		mes "[Liei]";
 		mes "Muito bem, então.";
 		mes "Por favor, faça o seu melhor";
@@ -451,7 +451,7 @@ tha_t01,140,78,4	script	Guide#reward	831,{
 		close;
 	}
 	mes "[Liei]";
-	mes "You're "+strcharinfo(0)+", yes?";
+	mes "Você é "+strcharinfo(0)+", yes?";
 	mes "Deixe-me verificar nossos registros";
 	mes "de funcionários temporários... ah.";
 	mes "Aqui está. Certo, então você poderia";
@@ -459,11 +459,11 @@ tha_t01,140,78,4	script	Guide#reward	831,{
 	mes "prova de missão você trouxe?";
 	next;
 	setarray .@Items[1],7435,7440,7441,7442;
-	set .@i, select("Golden Ornament:Red Feather:Blue Feather:Cursed Seal");
+	set .@i, select("Ornamento Dourado:Pena Vermelha:Pena Azul:Selo Amaldiçoado");
 	mes "[Liei]";
 	if (!countitem(.@Items[.@i])) {
 		mes "Sinto muito, mas você não";
-		mes "carrying any "+callfunc("F_GetPlural",getitemname(.@Items[.@i]))+".";
+		mes "carregando qualquer "+callfunc("F_GetPlural",getitemname(.@Items[.@i]))+".";
 		mes "Por favor, verifique seu inventário";
 		mes "mais uma vez e depois venha";
 		mes "até mim para resgatar seus itens";
@@ -474,7 +474,7 @@ tha_t01,140,78,4	script	Guide#reward	831,{
 	mes getitemname(.@Items[.@i])+" is...";
 	mes " ";
 	mes "1.000 zenys";
-	//mes "2,000 EXP";
+	//mes "2.000 EXP";
 	next;
 	set .@zeny_tt,(countitem(.@Items[.@i]) * 1000);
 	//set .@exp_tt,(countitem(.@Items[.@i]) * 2000);
@@ -487,10 +487,10 @@ tha_t01,140,78,4	script	Guide#reward	831,{
 	next;
 	mes "[Liei]";
 	mes "Você gostaria de trocar";
-	mes "all of your "+callfunc("F_GetPlural",getitemname(.@Items[.@i]));
+	mes "todos os seus "+callfunc("F_GetPlural",getitemname(.@Items[.@i]));
 	mes "pela sua recompensa agora?";
 	next;
-	switch(select("Yes:No")) {
+	switch(select("Sim:Não")) {
 		case 1:
 			mes "[Liei]";
 			mes "Ótimo! Aqui está a sua";
@@ -526,13 +526,13 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 	mes "Apenas os funcionários contratados têm permissão para entrar.";
 	mes "Como posso te ajudar?";
 	next;
-	switch(select("Let me go to 3rd floor.:Tower Information.:Start a conversation.")) {
+	switch(select("Leve-me ao 3º andar.:Informações da Torre.:Começar uma conversa.")) {
 	case 1:
 		mes "[Burled]";
 		mes "Ah, tudo bem. Deixe-me";
 		mes "verificar se você está";
 		mes "na nossa lista de temporários. Hmmm...";
-		mes "Ah, you're "+strcharinfo(0)+", right?";
+		mes "Ah, você é "+strcharinfo(0)+", right?";
 		next;
 		mes "[Burled]";
 		if (getareausers("tha_t02",226,156,236,166) < 5) {
@@ -615,7 +615,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 			mes "...?";
 			mes "Você tem alguma pergunta?";
 			next;
-			if(select("About the development.:The relationship of Cool Event Corporation and Rekenber Corporation.:Nope.") == 3) {
+			if(select("Sobre o desenvolvimento.:A relação entre a Corporação Cool Event e a Corporação Rekenber.:Não.") == 3) {
 				mes "[Burled]";
 				mes "Cuide-se.";
 				close;
@@ -625,7 +625,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 			mes "Se você quiser saber mais, você me faria um favor?";
 			mes "Já que você perguntou sobre nossas informações confidenciais...";
 			next;
-			if(select("Really? Don't make me afraid of it.:Just tell me about it.:I'll listen about it later.") == 3) {
+			if(select("Sério? Não me assuste.:Apenas me diga.:Vou ouvir sobre isso depois.") == 3) {
 				mes "[Burled]";
 				mes "Como desejar...";
 				mes "Cuide-se!";
@@ -676,7 +676,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 			mes "Não importa o que aconteceu lá, eles não seriam feridos.";
 			mes "Mesmo que não cheguem à raiz do acidente....";
 			next;
-			switch(select("Oh...:What accident are you referring to?")) {
+			switch(select("Oh...:A que acidente você se refere?")) {
 			case 1:
 				mes "[Burled]";
 				mes "Sim, não é nada tão grave. Haha....";
@@ -703,7 +703,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 				mes "Se você me prometer que";
 				mes "vai me fazer um favor...";
 				next;
-				switch(select("Ok! I will.:No, I won't.")) {
+				switch(select("Ok! Eu farei.:Não, não farei.")) {
 				case 1:
 					callsub L_Request;
 					next;
@@ -787,13 +787,13 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 			mes "Isso deveria ser deles, mas...";
 			next;
 			mes "[Burled]";
-			mes "How would you like to keep this, "+strcharinfo(0)+"?";
+			mes "Como você gostaria de guardar isso, "+strcharinfo(0)+"?";
 			mes "Definitivamente, isso deve ser um segredo.";
 			mes "...hum, isso é uma pequena vingança contra eles.";
 			next;
 			mes "[Burled]";
 			mes "Posso deduzir que existem vários segredos nesta torre através desta anotação.";
-			mes "This secret should be disclosed by you, "+strcharinfo(0)+", before Rekenber does.";
+			mes "Este segredo deve ser revelado por você, "+strcharinfo(0)+", before Rekenber does.";
 			next;
 			mes "[Burled]";
 			mes "Não importa quanto poder eles obtenham... eles não saberão sobre esta torre...";
@@ -806,7 +806,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 			mes "Não é muito, mas aqui está um presente de retribuição.";
 			next;
 			mes "[Burled]";
-			mes "I hope that these will be useful for you, "+strcharinfo(0)+".";
+			mes "Espero que isso seja útil para você, "+strcharinfo(0)+".";
 			next;
 			mes "- Burled lhe entrega a anotação e uma Caixa Velha Roxa. -";
 			mes " ";
@@ -898,7 +898,7 @@ tha_t03,67,70,0	script	Rune Device#tt1	111,4,4,{
 		mes "seu poder impede você de";
 		mes "se aproximar da máquina.^000000";
 		next;
-		switch(select("Investigate it.:I don't care about it.")) {
+		switch(select("Investigar.:Não me importo.")) {
 		case 1:
 			mes "["+strcharinfo(0)+"]";
 			mes "Isso parece misterioso...";
@@ -915,7 +915,7 @@ tha_t03,67,70,0	script	Rune Device#tt1	111,4,4,{
 				goto L_Key;
 			}
 			else if (getequipweaponlv(EQI_HAND_R) == 4) {
-				mes "^3355FFWith your "+getequipname(EQI_HAND_R)+" in";
+				mes "^3355FFCom seu "+getequipname(EQI_HAND_R)+" in";
 				mes "mão, você esmaga o campo de";
 				mes "energia com toda a sua força. Após absorver o impacto, o";
 				mes "campo se dissipa com um som";
@@ -959,7 +959,7 @@ L_Key:
 	mes "^4d4dffAssim que você segura a chave, uma sensação chocante atravessa sua cabeça.";
 	mes "Você vê uma ilusão de luz...^000000";
 	next;
-	switch(select("Ignore it.:Concentrate on it.")) {
+	switch(select("Ignorar.:Concentrar-se nela.")) {
 	case 1:
 		mes "^3355FVocê decide deixar";
 		mes "a máquina em paz.^000000";
@@ -1089,7 +1089,7 @@ tha_t04,195,195,0	script	Rune Device#tt2	111,3,3,{
 				mes "^4d4dffUma sensação intensa passa pela sua cabeça.";
 				mes "Você vê uma ilusão de luz, como quando adquiriu a primeira chave.^000000";
 				next;
-				switch(select("Ignore it.:Concentrate on it.")) {
+				switch(select("Ignorar.:Concentrar-se nela.")) {
 				case 1:
 					mes "Você decide ignorar.";
 					close;
@@ -1133,9 +1133,9 @@ tha_t04,195,195,0	script	Rune Device#tt2	111,3,3,{
 				mes "[Tela]";
 				mes "Número correto";
 				mes "na posição correta";
-				mes "in sequence total: ^FF0000" + .@strike + "^000000";
+				mes "total na sequência: ^FF0000" + .@strike + "^000000";
 				mes " ";
-				mes "Correct number total: ^FF0000" + .@ball + "^000000";
+				mes "Total de números corretos: ^FF0000" + .@ball + "^000000";
 				next;
 				if (.@retry > 4) {
 					mes "[Tela]";
@@ -1167,7 +1167,7 @@ tha_t05,62,179,0	script	Brilliant Statue#tt3	111,3,3,{
 		mes "Uma luz vermelha brilha em uma rachadura na asa esquerda, e uma luz dourada em uma rachadura na asa direita.";
 		mes "O que você vai fazer?";
 		next;
-		if(select("Stick the key into the crack...:Ignore it.") == 2) {
+		if(select("Inserir a chave na rachadura...:Ignorar.") == 2) {
 			mes "^3355FFVocê decide deixar";
 			mes "a estátua em paz.^000000";
 			close;
@@ -1203,7 +1203,7 @@ tha_t05,62,179,0	script	Brilliant Statue#tt3	111,3,3,{
 			mes "^4d4dffAssim que você segura a chave, uma sensação chocante passa pela sua cabeça.";
 			mes "Você vê uma ilusão de luz...^000000";
 			next;
-			switch(select("Concentrate on it.:Ignore it.")) {
+			switch(select("Concentrar-se nela.:Ignorar.")) {
 			case 1:
 				mes "Esta parte não está tão clara quanto antes.";
 				mes "Você tenta entender o que está dizendo...";
@@ -1253,7 +1253,7 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 		mes "Há luzes vermelha, amarela e azul em sequência.";
 		mes "O que você vai fazer?";
 		next;
-		if(select("Investigate.:Ignore it.") == 2) {
+		if(select("Investigar.:Ignorar.") == 2) {
 			mes "^3355FFVocê não vê necessidade de";
 			mes "investigar se nada parece";
 			mes "peculiar ou fora do lugar...^000000";
@@ -1264,7 +1264,7 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 			mes "e as combina pela cor correspondente, a Estátua de Pedra se abrirá.";
 			mes "Você pode ver pequenas engrenagens se movendo lá dentro.";
 			next;
-			switch(select("Investigate the Machine Chasis:Investigate the Wheels:Cancel")) {
+			switch(select("Investigar o Chassi da Máquina:Investigar as Engrenagens:Cancelar")) {
 			case 1:
 				mes "^3355FFA chave em seu inventário";
 				mes "não parece estar afetando";
@@ -1300,9 +1300,9 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 					next;
 					mes "^3355FFQual engrenagem";
 					mes "você quer mover?^000000";
-					switch(select("1st Small Wheel:2nd Small Wheel:1st Big Wheel:2nd Big Wheel:3rd Big Wheel:Check Current Wheel Configuration:Reset Wheels to Default Configuration")) {
+					switch(select("1ª Engrenagem Pequena:2ª Engrenagem Pequena:1ª Engrenagem Grande:2ª Engrenagem Grande:3ª Engrenagem Grande:Verificar Configuração Atual das Engrenagens:Resetar Engrenagens para Configuração Padrão")) {
 					case 1:
-						switch(select("Raise Wheel:Lower Wheel:Press Wheel")) {
+						switch(select("Levantar Engrenagem:Abaixar Engrenagem:Pressionar Engrenagem")) {
 						case 1:
 							mes "^EE0000*Chum*^000000";
 							set .@small_1, 2;
@@ -1321,7 +1321,7 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 						}
 						break;
 					case 2:
-						switch(select("Raise Wheel:Lower Wheel:Press Wheel")) {
+						switch(select("Levantar Engrenagem:Abaixar Engrenagem:Pressionar Engrenagem")) {
 						case 1:
 							mes "^5C246E*Mriiiim*^000000";
 							set .@small_2, 3;
@@ -1340,7 +1340,7 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 						}
 						break;
 					case 3:
-						switch(select("Raise Wheel:Lower Wheel:Vertically Shift Wheel")) {
+						switch(select("Levantar Engrenagem:Abaixar Engrenagem:Mover Engrenagem Verticalmente")) {
 						case 1:
 							mes "^00B2EE*Snip*^000000";
 							set .@big_1, 1;
@@ -1359,7 +1359,7 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 						}
 						break;
 					case 4:
-						switch(select("Raise Wheel:Lower Wheel:Vertically Shift Wheel")) {
+						switch(select("Levantar Engrenagem:Abaixar Engrenagem:Mover Engrenagem Verticalmente")) {
 						case 1:
 							mes "^EE0000*Chum*^000000";
 							set .@big_2, 2;
@@ -1378,7 +1378,7 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 						}
 						break;
 					case 5:
-						switch(select("Raise Wheel:Lower Wheel:Vertically Shift Wheel")) {
+						switch(select("Levantar Engrenagem:Abaixar Engrenagem:Mover Engrenagem Verticalmente")) {
 						case 1:
 							mes "^EE0000*Chum*^000000";
 							set .@big_3, 2;
@@ -1397,30 +1397,30 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 						}
 						break;
 					case 6:
-						if (.@small_1 == 0) mes "1st Small Wheel: No Change";
-						else if (.@small_1 == 1) mes "1st Small Wheel: Down";
-						else if (.@small_1 == 2) mes "1st Small Wheel: Up";
-						else mes "1st Small Wheel: Pressed";
+						if (.@small_1 == 0) mes "1ª Engrenagem Pequena: Sem Mudança";
+						else if (.@small_1 == 1) mes "1ª Engrenagem Pequena: Para Baixo";
+						else if (.@small_1 == 2) mes "1ª Engrenagem Pequena: Para Cima";
+						else mes "1ª Engrenagem Pequena: Pressionada";
 
-						if (.@small_2 == 0) mes "2nd Small Wheel: No Change";
-						else if (.@small_2 == 1) mes "2nd Small Wheel: Pressed";
-						else if (.@small_2 == 2) mes "2nd Small Wheel: Down";
-						else mes "2nd Small Wheel: Up";
+						if (.@small_2 == 0) mes "2ª Engrenagem Pequena: Sem Mudança";
+						else if (.@small_2 == 1) mes "2ª Engrenagem Pequena: Pressionada";
+						else if (.@small_2 == 2) mes "2ª Engrenagem Pequena: Para Baixo";
+						else mes "2ª Engrenagem Pequena: Para Cima";
 
-						if (.@big_1 == 0) mes "1st Big Wheel: No Change";
-						else if (.@big_1 == 1) mes "1st Big Wheel: Up";
-						else if (.@big_1 == 2) mes "1st Big Wheel: Moved";
-						else mes "1st Big Wheel: Down";
+						if (.@big_1 == 0) mes "1ª Engrenagem Grande: Sem Mudança";
+						else if (.@big_1 == 1) mes "1ª Engrenagem Grande: Para Cima";
+						else if (.@big_1 == 2) mes "1ª Engrenagem Grande: Movida";
+						else mes "1ª Engrenagem Grande: Para Baixo";
 
-						if (.@big_2 == 0) mes "2nd Big Wheel: No Change";
-						else if (.@big_2 == 1) mes "2nd Big Wheel: Moved";
-						else if (.@big_2 == 2) mes "2nd Big Wheel: Up";
-						else mes "2nd Big Wheel: Down";
+						if (.@big_2 == 0) mes "2ª Engrenagem Grande: Sem Mudança";
+						else if (.@big_2 == 1) mes "2ª Engrenagem Grande: Movida";
+						else if (.@big_2 == 2) mes "2ª Engrenagem Grande: Para Cima";
+						else mes "2ª Engrenagem Grande: Para Baixo";
 
-						if (.@big_3 == 0) mes "3rd Big Wheel: No Change";
-						else if (.@big_3 == 1) mes "3rd Big Wheel: Down";
-						else if (.@big_3 == 2) mes "3rd Big Wheel: Up";
-						else mes "3rd Big Wheel: Moved";
+						if (.@big_3 == 0) mes "3ª Engrenagem Grande: Sem Mudança";
+						else if (.@big_3 == 1) mes "3ª Engrenagem Grande: Para Baixo";
+						else if (.@big_3 == 2) mes "3ª Engrenagem Grande: Para Cima";
+						else mes "3ª Engrenagem Grande: Movida";
 						continue;
 					case 7:
 						set .@small_1, 0;
@@ -1450,7 +1450,7 @@ tha_t06,226,230,0	script	Brilliant Statue#tt4	111,3,3,{
 				mes "com um poder desconhecido";
 				mes "e você tem uma alucinação com algum texto.^000000";
 				next;
-				switch(select("Concentrate on it.:Ignore it.")) {
+				switch(select("Concentrar-se nela.:Ignorar.")) {
 				case 1:
 					mes "^b22222...Você encontrou 4 chaves";
 					mes "e finalmente liberou 4 feitiços...";
@@ -1526,7 +1526,7 @@ tha_t06,204,181,0	script	Splendid Sword#tt5	111,3,3,{
 			mes "respondem subitamente com um poder misterioso.";
 			specialeffect2 EF_ABSORBSPIRITS;
 			next;
-			if(select("Observe it.:Ignore it.") == 2) {
+			if(select("Observar.:Ignorar.") == 2) {
 				mes "^3355FFVocê decide deixar";
 				mes "a espada em paz.^000000";
 				close;
@@ -1535,7 +1535,7 @@ tha_t06,204,181,0	script	Splendid Sword#tt5	111,3,3,{
 			mes "Seus olhos são constantemente atraídos para o punho da espada.";
 			mes "Então você perde o controle de suas mãos, e elas se estendem para agarrar o cabo...";
 			next;
-			switch(select("Towards the blade of the sword:Towards the hilt of the sword:Towards the table")) {
+			switch(select("Em direção à lâmina da espada:Em direção ao punho da espada:Em direção à mesa")) {
 			case 1:
 				mes "Por um chamado desconhecido, você decide agarrar a lâmina da espada.";
 				mes "Suas mãos são feridas e começam a sangrar.";
@@ -1550,7 +1550,7 @@ tha_t06,204,181,0	script	Splendid Sword#tt5	111,3,3,{
 				mes "Agora, você segura a espada e...";
 				specialeffect EF_EXIT2;
 				next;
-				switch(select("Strike the table:Insert the sword into the hole:Bring the sword safely")) {
+				switch(select("Golpear a mesa:Inserir a espada no orifício:Guardar a espada em segurança")) {
 				case 1:
 					mes "Você golpeia a mesa com a espada.";
 					mes "Inúmeros feitiços conflitantes agem sobre ela, e você percebe que escolheu incorretamente.";
@@ -1802,7 +1802,7 @@ tha_t12,161,57,0	script	Gold Religious Statue#tt	111,{
 			specialeffect EF_BEGINSPELL5;
 			specialeffect2 EF_BEGINSPELL5;
 			next;
-			if(select("Insert the Yellow Charm Stone.:Run away.") == 2) close;
+			if(select("Inserir a Pedra de Encanto Amarela.:Fugir.") == 2) close;
 			if ($@thana_summon == 0) {
 				mes "Após inserir a Pedra de Encanto Amarela na espada, a estátua começa a reagir.";
 				specialeffect EF_BEGINSPELL5;
@@ -1832,7 +1832,7 @@ tha_t12,154,17,0	script	Green Wiseman Statue#tt	111,{
 			specialeffect EF_BEGINSPELL4;
 			specialeffect2 EF_BEGINSPELL4;
 			next;
-			if(select("Insert the Green Charm Stone.:Run away.") == 2) close;
+			if(select("Inserir a Pedra de Encanto Verde.:Fugir.") == 2) close;
 			if ($@thana_summon == 1) {
 				mes "Após inserir a Pedra de Encanto Verde na varinha, a estátua começa a reagir.";
 				specialeffect EF_BEGINSPELL4;
@@ -1862,7 +1862,7 @@ tha_t12,103,17,0	script	Blue Angel Statue#tt	111,{
 			specialeffect EF_BEGINSPELL2;
 			specialeffect2 EF_BEGINSPELL2;
 			next;
-			if(select("Insert the Blue Charm Stone.:Run away.") == 2) close;
+			if(select("Inserir a Pedra de Encanto Azul.:Fugir.") == 2) close;
 			if ($@thana_summon == 2) {
 				mes "Após inserir a Pedra de Encanto Azul no cinto, a estátua começa a reagir.";
 				specialeffect EF_BEGINSPELL2;
@@ -1892,7 +1892,7 @@ tha_t12,96,57,0	script	Bloody Knight Statue#tt	111,{
 			specialeffect EF_BEGINSPELL3;
 			specialeffect2 EF_BEGINSPELL3;
 			next;
-			if(select("Insert the Red Charm Stone.:Run away.") == 2) close;
+			if(select("Inserir a Pedra de Encanto Vermelha.:Fugir.") == 2) close;
 			if ($@thana_summon == 3) {
 				mes "Após inserir a Pedra de Encanto Vermelha na armadura, a estátua começa a reagir.";
 				specialeffect EF_BEGINSPELL3;
@@ -1922,7 +1922,7 @@ tha_t12,129,86,0	script	Dark Devil Statue#tt	111,{
 			specialeffect EF_BEGINSPELL7;
 			specialeffect2 EF_BEGINSPELL7;
 			next;
-			if(select("Insert the Black Charm Stone.:Run away.") == 2) close;
+			if(select("Inserir a Pedra de Encanto Preta.:Fugir.") == 2) close;
 			if ($@thana_summon == 4) {
 				mes "Após inserir a Pedra de Encanto Vermelha na órbita ocular, a estátua começa a reagir.";
 				specialeffect EF_BEGINSPELL7;
