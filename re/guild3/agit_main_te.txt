@@ -217,7 +217,7 @@ OnMyMobDead:
 	cutin "kafra_01",2;
 	mes "[Empregada Kafra]";
 	if (.@guild_id == getcharid(2)) {
-		mes "Welcome. ^ff0000" + .@guildname$ + "^000000 Member.";
+		mes "Bem-vindo. ^ff0000" + .@guildname$ + "^000000 Member.";
 		mes "A Corporação Kafra estará com você onde quer que vá.";
 		next;
 		switch( select( "Use Storage", "Use Teleport Service", "Rent a Pushcart", "Cancel" ) ) {
@@ -292,7 +292,7 @@ OnMyMobDead:
 		}
 	}
 	else {
-		mes "I am instructed to only offer my services to the ^ff0000"+ .@guildname$ +"^000000 Guild. Please try another Kafra Employee around here. Sorry for the inconvenience.";
+		mes "Fui instruída a oferecer meus serviços apenas para o ^ff0000"+ .@guildname$ +"^000000 Guild. Please try another Kafra Employee around here. Sorry for the inconvenience.";
 		close2;
 	}
 	cutin "",255;
@@ -310,7 +310,7 @@ S_Warp:
 			mes "Sinto muito, mas você não tem";
 			mes "zenys suficientes para o Serviço";
 			mes "de Teleporte. A taxa para teleportar";
-			mes "to "+getarg(0)+" is 200 zeny.";
+			mes "para "+getarg(0)+" is 200 zeny.";
 			close2;
 			cutin "",255;
 			end;
@@ -345,11 +345,11 @@ function GuardianData;
 		close;
 	}
 	if (strcharinfo(0) != .@guildmaster$) {
-		mes "No matter how much you pester me, I'll still follow my master ^ff0000"+.@guildmaster$+"^000000. Where are the Guardians?! Send these ruffians away right now!";
+		mes "Não importa o quanto você me importune, eu ainda seguirei meu mestre ^ff0000"+.@guildmaster$+"^000000. Where are the Guardians?! Send these ruffians away right now!";
 		close;
 	}
-	mes "Welcome. My honorable master, ^ff0000"+strcharinfo(0)+"^000000...";
-	mes "Your humble servent, "+strnpcinfo(1)+", is here to serve you.";
+	mes "Bem-vindo. Meu honrável mestre, ^ff0000"+strcharinfo(0)+"^000000...";
+	mes "Seu humilde servo, "+strnpcinfo(1)+", is here to serve you.";
 	next;
 	switch( select( "Castle briefing", "Invest in commercial growth", "Invest in Castle Defenses", "Summon Guardian", "Hire / Fire a Kafra Employee", "Go into Master's room" ) ) {
 	case 1:
@@ -358,12 +358,12 @@ function GuardianData;
 		mes .@npc_name$;
 		mes "Vou reportar o informativo do Castelo, Mestre.";
 		mes " ";
-		mes "^0000ffNow, the commercial growth level is "+GetCastleData(.@map$,CD_CURRENT_ECONOMY)+".";
+		mes "^0000ffAgora, o nível de crescimento comercial é "+GetCastleData(.@map$,CD_CURRENT_ECONOMY)+".";
 		if (.@economy_today > 0)
-			mes " You invested "+.@economy_today+" times in past 1 day.";
-		mes " Now, the Castle Defense level is "+GetCastleData(.@map$,CD_CURRENT_DEFENSE)+".^000000";
+			mes " Você investiu "+.@economy_today+" times in past 1 day.";
+		mes " Agora, o nível de Defesa do Castelo é "+GetCastleData(.@map$,CD_CURRENT_DEFENSE)+".^000000";
 		if (.@defense_today > 0)
-			mes " ^0000ff- You invested "+.@defense_today+" times in past 1 day.^000000";
+			mes " ^0000ff- Você investiu "+.@defense_today+" times in past 1 day.^000000";
 		mes " ";
 		mes "É tudo o que tenho a relatar, Mestre.";
 		close;
@@ -499,7 +499,7 @@ function GuardianData;
 		case 1:
 			mes .@npc_name$;
 			mes "Mostrarei o caminho secreto. Siga-me... por favor.";
-			mes "When you want to return here, please press the secret switch.";
+			mes "Quando você quiser retornar aqui, por favor, pressione o interruptor secreto.";
 			close2;
 			if (.@map$ == "te_aldecas1") warp "te_aldecas1",113,223;
 			else if (.@map$ == "te_aldecas2") warp "te_aldecas2",134,225;
@@ -528,22 +528,22 @@ S_Invest:
 		.@cost_invest = .@cost_invest * 4;
 
 	mes .@npc_name$;
-	mes "If you invest in "+ getarg(3) +", the "+ getarg(4) +". Therfore, if you consider our "+ getarg(5) +", investments will be a necessity.";
+	mes "Se você investir em "+ getarg(3) +", the "+ getarg(4) +". Therfore, if you consider our "+ getarg(5) +", investments will be a necessity.";
 	mes " ";
 	mes "Inicialmente, você pode investir apenas uma vez, mas se pagar mais dinheiro, poderá investir duas vezes.";
 	mes " ";
 	if (getcastledata(strnpcinfo(4),CD_CURRENT_ECONOMY) >= 100) {
-		mes "^ff0000The "+ getarg(3) +" level of our Castle is at it's highest, 100%. No more investments are needed. Just as I have expected from a great "+ getarg(6) +" like you, Master.^000000";
+		mes "^ff0000O "+ getarg(3) +" level of our Castle is at it's highest, 100%. No more investments are needed. Just as I have expected from a great "+ getarg(6) +" like you, Master.^000000";
 		close;
 	}
 	if (.@num_invest_today >= 2) {
-		mes "^ff0000You have already invested twice today. You cannot invest any more.^000000 I expect the "+ getarg(7) +" of the guild to grow at a high rate.";
+		mes "^ff0000Você já investiu duas vezes hoje. Você não pode investir mais.^000000 Eu espero que o "+ getarg(7) +" of the guild to grow at a high rate.";
 		close;
 	}
 	if (.@num_invest_today == 0)
-		mes "The current investment amount required is ^ff0000"+.@cost_invest+"^000000 zeny. Will you invest?";
+		mes "O valor de investimento atual necessário é ^ff0000"+.@cost_invest+"^000000 zeny. Will you invest?";
 	else
-		mes "You've invested once today... if you wish to invest once more, ^ff0000"+.@cost_invest+"^000000 more zeny will be needed.";
+		mes "Você investiu uma vez hoje... se desejar investir mais uma vez, ^ff0000"+.@cost_invest+"^000000 more zeny will be needed.";
 	next;
 	switch( select( "Invest in "+ getarg(3) +".","Cancel" ) ) {
 	case 1:
@@ -554,7 +554,7 @@ S_Invest:
 		}
 		Zeny = Zeny - .@cost_invest;
 		setcastledata strnpcinfo(4), getarg(0), (.@num_invest_today +1);
-		mes "We finished the investment safely. I expect that our "+ getarg(3) +" level will be increased by tomorrow.";
+		mes "Terminamos o investimento com sucesso. Espero que o nosso "+ getarg(3) +" level will be increased by tomorrow.";
 		close;
 	case 2:
 		mes .@npc_name$;
@@ -1107,9 +1107,9 @@ function	script	F_flag_woe_TE	{
 	mes " ";
 	mes "1. Siga a norma do Divino Reino de Rune-Midgard.";
 	mes "Aprovamos que este lugar está em";
-	mes "the private prossession of ^ff0000"+.@guildname$+"^000000 Guild.";
+	mes "propriedade privada de ^ff0000"+.@guildname$+"^000000 Guild.";
 	mes " ";
-	mes "2. The guild Master of ^ff0000"+.@guildname$+"^000000 Guild is";
+	mes "2. O líder da guilda de ^ff0000"+.@guildname$+"^000000 Guild is";
 	mes "^ff0000"+.@guildmaster$+"^000000";
 	mes "Se houver alguém que se oponha a isso,";
 	mes "prove sua força e honra com uma lâmina de aço em sua mão.";

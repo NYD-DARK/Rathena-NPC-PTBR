@@ -47,13 +47,13 @@ function calcjobexp;
 		.@edition = 3;
 	} else {
 		// Custom error message.
-		debugmes "Guild mission script called from an unknown agit region [" + .@zone$ + "].";
+		debugmes "Script de missão de guilda chamado de uma região de agitação desconhecida [" + .@zone$ + "].";
 		end;
 	}
 	.@npcname$ = .npcname$[.@zoneid];
 
 	mes .@npcname$;
-	mes "We provide missions and daily quests that you can complete in the region of " + .region$[.@zoneid] + ".";
+	mes "Nós fornecemos missões e tarefas diárias que você pode completar na região de " + .region$[.@zoneid] + ".";
 	mes "Existem missões diárias simples, bem como missões que você precisa completar apenas durante o horário de cerco. Então, pense sobre isso~";
 	next;
 	switch(select("Conquering " + .region$[.@zoneid], "Guild Dungeon Daily Quests", "About quests", "I don't need it.")){
@@ -111,9 +111,9 @@ function calcjobexp;
 									mes getcastlename(.castle$[.@i+.@zoneid*5]) + (.@gid == getcastledata(.castle$[.@i+.@zoneid*5],CD_GUILD_ID) ? ": ^4d4dffOccupied^000000" : "");
 								}
 								if(.@total == 5)
-									mes "Your guild has conquered " + .region$[.@zoneid] + "!";
+									mes "Sua guilda conquistou " + .region$[.@zoneid] + "!";
 								else
-									mes "is " + .@total + "!";
+									mes "é " + .@total + "!";
 								next;
 								mes .@npcname$;
 								mes "Eu lhe darei uma recompensa de acordo. Espero que faça bom uso dela.";
@@ -140,7 +140,7 @@ function calcjobexp;
 			break;
 		case 2: // Daily Quests
 			mes .@npcname$;
-			mes "These are missions that you can complete in guild dungeons of " + .region$[.@zoneid] + " area.";
+			mes "Estas são missões que você pode completar nas masmorras de guilda de " + .region$[.@zoneid] + " area.";
 			mes "Você pode cancelá-las se quiser. Sinta-se à vontade para se desafiar.";
 			next;
 			.@cancel_index = (.@edition == 1 ? 3 : 2);
@@ -158,7 +158,7 @@ function calcjobexp;
 			}
 			if(BaseLevel < .level_req[.@index]){
 				mes .@npcname$;
-				mes "Hmm, unfortunately, this mission is limited to users with ^4d4dfflevel " + .level_req[.@index] + "^000000 or higher only.";
+				mes "Hmm, infelizmente, esta missão é limitada a usuários com ^4d4dffnível " + .level_req[.@index] + "^000000 or higher only.";
 				mes "Seu nível não é alto o suficiente.";
 				close;
 			}
@@ -206,7 +206,7 @@ function calcjobexp;
 					close;
 				} else {
 					mes .@npcname$;
-					mes "This is the " + .ordinal$[.@sel] + " mission in " + .region$[.@zoneid] + ".";
+					mes "Esta é a " + .ordinal$[.@sel] + " mission in " + .region$[.@zoneid] + ".";
 					brief(.daily_hunting_questid[.@index]);
 					next;
 					mes .@npcname$;
@@ -418,7 +418,7 @@ OnInit:
 				else
 					return 5000;
 			} else {
-				debugmes "Unexpected case for Job: " + Class + "(" + jobname(Class) + ") for gld_mission#core::calcjobexp";
+				debugmes "Caso inesperado para a Classe: " + Class + "(" + jobname(Class) + ") for gld_mission#core::calcjobexp";
 				return 0;
 			}
 		} else if(.@edition == 2 ) {
