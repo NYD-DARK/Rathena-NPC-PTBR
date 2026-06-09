@@ -344,10 +344,10 @@ OnRecvCastle:
 	cutin "kafra_01",2;
 	if (getcharid(2) == .@GID) {
 		mes "[Funcionária Kafra]";
-		mes "Welcome. ^ff0000" + GetGuildName(.@GID) + "^000000 Member.";
+		mes "Bem-vindo. ^ff0000" + GetGuildName(.@GID) + "^000000 Member.";
 		mes "A Corporação Kafra estará com você aonde quer que vá.";
 		next;
-		switch (select("Use Storage:Use Teleport Service:Rent a Pushcart:Cancel")) {
+		switch (select("Usar Armazém:Usar Serviço de Teleporte:Alugar um Carrinho:Cancelar")) {
 		case 1:
 			if(!callfunc("F_CanOpenStorage")){
 				mes "[Funcionária Kafra]";
@@ -380,7 +380,7 @@ OnRecvCastle:
 					mes "Sinto muito, mas você não tem";
 					mes "zeny suficiente para o Serviço de";
 					mes "Teleporte. A taxa para teletransportar";
-					mes "to "+.@destination$+" is 200 zeny.";
+					mes "para "+.@destination$+" is 200 zeny.";
 					close2;
 					cutin "",255;
 					end;
@@ -424,7 +424,7 @@ OnRecvCastle:
 			mes "carrinho é 800 zeny. Você";
 			mes "gostaria de alugar um carrinho?";
 			next;
-			switch (select("Rent a Pushcart.:Cancel")) {
+			switch (select("Alugar um Carrinho.:Cancelar")) {
 			case 1:
 				if (Zeny < 800) {
 					mes "[Funcionária Kafra]";
@@ -457,7 +457,7 @@ OnRecvCastle:
 		}
 	}
 	mes "[Funcionária Kafra]";
-	mes "I am instructed to only offer my services to the ^ff0000"+GetGuildName(.@GID)+"^000000 Guild. Please try another Kafra Employee around here. Sorry for the inconvenience.";
+	mes "Fui instruída a oferecer meus serviços apenas para a guilda ^ff0000"+GetGuildName(.@GID)+"^000000 Guild. Please try another Kafra Employee around here. Sorry for the inconvenience.";
 	close2;
 	cutin "",255;
 	end;
@@ -612,25 +612,25 @@ OnRecvCastle:
 	}
 	if (is_guild_leader(.@GID) == false) {
 		mes "["+strnpcinfo(1)+"]";
-		mes "No matter how much you pester me, I'll still follow my master ^ff0000"+GetGuildMaster(.@GID)+"^000000. Where are the Guardians?! Send these ruffians away right now!";
+		mes "Não importa o quanto você me incomode, eu ainda seguirei meu mestre ^ff0000"+GetGuildMaster(.@GID)+"^000000. Where are the Guardians?! Send these ruffians away right now!";
 		close;
 	}
 	mes "["+strnpcinfo(1)+"]";
-	mes "Welcome. My honorable master, ^ff0000"+strcharinfo(0)+"^000000...";
-	mes "Your humble servent, "+strnpcinfo(1)+", is here to serve you.";
+	mes "Bem-vindo. Meu honrável mestre, ^ff0000"+strcharinfo(0)+"^000000...";
+	mes "Seu humilde servo, "+strnpcinfo(1)+", is here to serve you.";
 	next;
-	switch (select("Castle briefing:Invest in commercial growth:Invest in Castle Defenses:Summon Guardian:Hire / Fire a Kafra Employee:Go into Master's room")) {
+	switch (select("Resumo do Castelo:Investir no crescimento comercial:Investir na Defesa do Castelo:Invocar Guardião:Contratar / Demitir Funcionária Kafra:Ir para a sala do Mestre")) {
 	case 1:
 		mes "["+strnpcinfo(1)+"]";
 		mes "Vou reportar o resumo do Castelo, Mestre.";
 		mes " ";
-		mes "^0000ffNow, the commercial growth level is "+GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY)+".";
+		mes "^0000ffAgora, o nível de crescimento comercial é "+GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY)+".";
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)) {
-			mes " You invested "+GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)+" times in past 1 day.";
+			mes " Você investiu "+GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)+" times in past 1 day.";
 		}
-		mes " Now, the Castle Defense level is "+GetCastleData(strnpcinfo(2),CD_CURRENT_DEFENSE)+".^000000";
+		mes " Agora, o nível de defesa do castelo é "+GetCastleData(strnpcinfo(2),CD_CURRENT_DEFENSE)+".^000000";
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)) {
-			mes " ^0000ff- You invested "+GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)+" times in past 1 day.^000000";
+			mes " ^0000ff- Você investiu "+GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)+" times in past 1 day.^000000";
 		}
 		mes " ";
 		mes "Isso é tudo que tenho a reportar, Mestre.";
@@ -677,14 +677,14 @@ OnRecvCastle:
 		}
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY) == 0) {
 			mes " ";
-			mes "The current investment amount required is ^ff0000"+.@eco_invest+"^000000 zeny. Will you invest?";
+			mes "O valor de investimento atual necessário é de ^ff0000"+.@eco_invest+"^000000 zeny. Will you invest?";
 		}
 		else {
 			mes " ";
-			mes "You've invested once today... if you wish to invest once more, ^ff0000"+.@eco_invest+"^000000 more zeny will be needed.";
+			mes "Você investiu uma vez hoje... se desejar investir mais uma vez, ^ff0000"+.@eco_invest+"^000000 more zeny will be needed.";
 		}
 		next;
-		switch (select("Invest in commercial growth:Cancel")) {
+		switch (select("Investir no crescimento comercial:Cancelar")) {
 		case 1:
 			if (Zeny < .@eco_invest) {
 				mes "["+strnpcinfo(1)+"]";
@@ -743,14 +743,14 @@ OnRecvCastle:
 		}
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE) == 0) {
 			mes " ";
-			mes "The current investment amount required is ^ff0000"+.@def_invest+"^000000 zeny. Will you invest?";
+			mes "O valor de investimento atual necessário é de ^ff0000"+.@def_invest+"^000000 zeny. Will you invest?";
 		}
 		else {
 			mes " ";
-			mes "You've invested once today... if you wish to invest once more, ^ff0000"+.@def_invest+"^000000 more zeny will be needed.";
+			mes "Você investiu uma vez hoje... se desejar investir mais uma vez, ^ff0000"+.@def_invest+"^000000 more zeny will be needed.";
 		}
 		next;
-		switch (select("Invest in Castle Defenses.:Cancel")) {
+		switch (select("Investir na Defesa do Castelo.:Cancelar")) {
 		case 1:
 			if (Zeny < .@def_invest) {
 				mes "["+strnpcinfo(1)+"]";
@@ -788,7 +788,7 @@ OnRecvCastle:
 		mes "["+strnpcinfo(1)+"]";
 		mes "Você vai invocar o guardião escolhido? 10.000 zeny são necessários para invocar um Guardião.";
 		next;
-		switch (select("Summon:Cancel")) {
+		switch (select("Invocar:Cancelar")) {
 		case 1:
 			if (getgdskilllv(.@GID,10002) == 0) {
 				mes "["+strnpcinfo(1)+"]";
@@ -825,13 +825,13 @@ OnRecvCastle:
 			mes "["+strnpcinfo(1)+"]";
 			mes "Estamos contratando uma Funcionária Kafra no momento... Você deseja demitir a Funcionária Kafra?";
 			next;
-			switch (select("Fire:Cancel")) {
+			switch (select("Demitir:Cancelar")) {
 			case 1:
 				cutin "kafra_01",2;
 				mes "[ Funcionária Kafra Contratada ]";
 				mes "Eu trabalhei tão duro... Como você pode fazer isso, Mestre?... Por favor... Por favor, reconsidere... Verifique novamente, Mestre... Por favor...";
 				next;
-				switch (select("Fire:Cancel")) {
+				switch (select("Demitir:Cancelar")) {
 				case 1:
 					mes "[ Funcionária Kafra Contratada ]";
 					mes "Oh, meu Deus! Isso é um absurdo!";
@@ -858,9 +858,9 @@ OnRecvCastle:
 		}
 		mes "["+strnpcinfo(1)+"]";
 		mes "Você entrará em contato com a Matriz Kafra e contratará uma Funcionária para nosso Castelo?";
-		mes "^ff0000 10.000 zeny são necessários pelos seus serviços.";
+		mes "^ff0000 10.000 zeny são necessários pelos seus serviços. ";
 		next;
-		switch (select("Hire.:Cancel")) {
+		switch (select("Contratar.:Cancelar")) {
 		case 1:
 			if (getgdskilllv(.@GID,10001) == 0) {
 				mes "["+strnpcinfo(1)+"]";
@@ -898,11 +898,11 @@ OnRecvCastle:
 		mes "Você deseja visitar a sala onde nossos objetos de valor estão guardados?";
 		mes "Essa sala é restrita a você... você é o único com acesso a ela.";
 		next;
-		switch (select("Go into Master's room.:Cancel")) {
+		switch (select("Ir para a sala do Mestre.:Cancelar")) {
 		case 1:
 			mes "["+strnpcinfo(1)+"]";
 			mes "Vou lhe mostrar o caminho secreto. Siga-me... por favor.";
-			mes "When you want to return here, please press the secret switch.";
+			mes "Quando quiser retornar aqui, por favor, pressione o interruptor secreto.";
 			close2;
 			warp strnpcinfo(2),.@masterroom[0],.@masterroom[1];
 			end;
@@ -970,7 +970,7 @@ OnRecvCastle:
 	mes " ";
 	mes "Há uma pequena alavanca. Você vai puxá-la?";
 	next;
-	if(select("Pull.:Don't pull.") == 1) {
+	if(select("Puxar.:Não puxar.") == 1) {
 		if (getcharid(2) == .@GID) {
 			close2;
 			warp .@destination$,.@coordinates[0],.@coordinates[1];

@@ -21,7 +21,7 @@ mosk_in,21,246,5	script	Pinkamenia	71,{
 		setarray .@SweetsID[0],538,558,539,573,559,560,12062,596,597,12414,12319;
 		setarray .@SweetsCost[0],1,2,5,10,10,10,15,15,15,20,20;
 		mes .@n$;
-		mes "Hello "+strcharinfo(0)+", do";
+		mes "Olá "+strcharinfo(0)+", do";
 		mes "você quer comprar alguns itens?";
 		mes "Você terá que me dar Flores";
 		mes "do Amor para eles, é claro!";
@@ -40,8 +40,8 @@ mosk_in,21,246,5	script	Pinkamenia	71,{
 			mes "Você precisará de mais Flores do Amor se quiser isso!";
 			close;
 		}
-		mes "Are you sure you want to trade ^00aa00"+.@SweetsCost[.@choice]+"x Love Flower ^000000 for ^0055FF"+getitemname(.@SweetsID[.@choice])+"^000000?";
-		if(select("No, I've changed my mind.:Yes, trade!") == 1) close;
+		mes "Você tem certeza que deseja trocar ^00aa00"+.@SweetsCost[.@choice]+"x Love Flower ^000000 for ^0055FF"+getitemname(.@SweetsID[.@choice])+"^000000?";
+		if(select("Não, eu mudei de ideia.:Sim, trocar!") == 1) close;
 		set .@new, .@LFlowerID - .@SweetsCost[.@choice];
 		if (.@new < 0) set .@new, 0;
 		delitem .@LFlowerID, .@SweetsCost[.@choice];
@@ -74,13 +74,13 @@ mosk_in,21,246,5	script	Pinkamenia	71,{
 		close;
 	} else if (#V_QUE12==1) {
 		mes .@n$;
-		mes "Please bring a +8 Cake Hat";
+		mes "Por favor, traga um Chapéu de Bolo +8";
 		mes "para o Confeiteiro Extraordinário";
 		mes "que está ao meu lado!";
 		close;
 	} else if (BaseLevel >= 45) {
 		mes .@n$;
-		mes "Hello "+strcharinfo(0)+", it's";
+		mes "Olá "+strcharinfo(0)+", it's";
 		mes "Dia dos Namorados e nós";
 		mes "adoramos entregar chocolates";
 		mes "doces.";
@@ -90,14 +90,14 @@ mosk_in,21,246,5	script	Pinkamenia	71,{
 		mes "precisamos de uma pessoa forte";
 		mes "como você que pudesse nos";
 		mes "ajudar, mas primeiro você terá";
-		mes "to bring a +8 Cake Hat";
+		mes "trazer um Chapéu de Bolo +8";
 		mes "que ir ao Confeiteiro Extraordinário, que";
 		mes "está logo ao meu lado!";
 		set #V_QUE12,1;
 		close;
 	}
 	mes .@n$;
-	mes "Hello "+strcharinfo(0)+"!";
+	mes "Olá "+strcharinfo(0)+"!";
 	close;
 
 OnInit:
@@ -120,9 +120,9 @@ mosk_in,21,244,3	script	Baker Extraordinaire	410,{
 		mes .@n$;
 		if (getequipid(EQI_HEAD_TOP) == 5024 && getequiprefinerycnt(EQI_HEAD_TOP) >= 8) {
 			mes "Ah, então a Pinkamenia lhe contou";
-			mes "to bring me the +8 Cake";
+			mes "trazer-me o Chapéu de Bolo +8";
 			mes "sobre o Chapéu. Agora vou";
-			mes "to exchange your +8 Cake";
+			mes "trocar seu Chapéu de Bolo +8";
 			mes "trocar por outro Chapéu de Bolo.";
 			next;
 			mes .@n$;
@@ -145,14 +145,14 @@ mosk_in,21,244,3	script	Baker Extraordinaire	410,{
 			close;
 		} else {
 			mes "Desculpe, mas onde está seu";
-			mes "+8 Cake Hat? Bring";
+			mes "Chapéu de Bolo +8? Traga";
 			mes "traga-o para mim, e lembre-se";
 			mes "de estar equipado com ele!";
 			close;
 		}
 	} else {
 		mes .@n$;
-		mes "Hello, "+strcharinfo(0)+"!";
+		mes "Olá, "+strcharinfo(0)+"!";
 		close;
 	}
 }

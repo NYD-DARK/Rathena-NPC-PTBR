@@ -44,7 +44,7 @@ prontera,147,61,3	script	Driller#pron	87,{
 	mes "[Perfurador]";
 	mes "Você também deve saber que fazer um slot de carta é extremamente perigoso. ^ff0000As chances de sucesso são de cerca de 50%.^000000 Deseja prosseguir?";
 	next;
-	if(select("Cancel:Let's go!") == 1) {
+	if(select("Cancelar:Vamos lá!") == 1) {
 		mes "[Perfurador]";
 		mes "Até mais, então.";
 		close;
@@ -77,12 +77,12 @@ prontera,147,61,3	script	Driller#pron	87,{
 		getitem .@slotted,1;
 		specialeffect2 EF_REPAIRWEAPON;
 		mes "[Perfurador]";
-		mes "Yay! Success! Your "+.@name$+" now has a card slot. Check it out!";
+		mes "Oba! Sucesso! O seu "+.@name$+" now has a card slot. Check it out!";
 		close;
 	} else {
 		specialeffect2 EF_LORD;
 		mes "[Perfurador]";
-		mes "Awww... Damn weak "+.@str$+"... It broke during the procedure. I'm sorry.";
+		mes "Ah não... Que "+.@str$+"... It broke during the procedure. I'm sorry.";
 		close;
 	}
 }
@@ -112,7 +112,7 @@ prontera,147,59,3	script	Goldberg#pron	878,{
 		mes "No entanto, vejo que o acessório que você está usando não é algo em que eu possa trabalhar. Por favor, equipe um acessório RWC Memorial.";
 		close;
 	}
-	set .@select, select("Sorry, not interested.:Please, empower my accessory.:Remove the Enchant.")-1;
+	set .@select, select("Desculpe, não tenho interesse.:Por favor, fortaleça meu acessório.:Remover o encantamento.")-1;
 	if (.@select == 0) {
 		mes "[Goldberg]";
 		mes "Tudo bem, então, até a próxima...";
@@ -152,25 +152,25 @@ prontera,147,59,3	script	Goldberg#pron	878,{
 			mes "Qual encantamento você gostaria de infundir?";
 			next;
 			setarray .@enchant_select[0],1,2,3,4;
-			set .@i, select("Cancel:Fighting Spirit:ATK (%):Max HP:HP")-2;
+			set .@i, select("Cancelar:Espírito de Combate:ATQ (%):HP Máx:HP")-2;
 			break;
 		case 3:
 			setarray .@enchant_select[0],5,6,7;
-			set .@i, select("Cancel:Spell:MATK (%):SP")-2;
+			set .@i, select("Cancelar:Conjuração:ATQM (%):SP")-2;
 			break;
 		case 2:
 			mes "[Goldberg]";
 			mes "^ff0000Cuidado! Há cerca de 25% de chance do encantamento falhar. Se isso acontecer, o item será destruído.^000000 Qual encantamento você gostaria de infundir?";
 			next;
 			setarray .@enchant_select[0],8,9,10,11,12,13,14;
-			set .@i, select("Cancel:STR:AGI:VIT:INT:DEX:LUK:SP")-2;
+			set .@i, select("Cancelar:FOR:AGI:VIT:INT:DES:SOR:SP")-2;
 			break;
 		case 1:
 			mes "[Goldberg]";
 			mes "^ff0000Há cerca de 25% de chance do encantamento falhar. Se isso acontecer, o item será destruído.^000000 Qual encantamento você gostaria de infundir?";
 			next;
 			setarray .@enchant_select[0],8,9,10,11,12,13,15,16;
-			set .@i, select("Cancel:STR:AGI:VIT:INT:DEX:LUK:MHP:HP")-2;
+			set .@i, select("Cancelar:FOR:AGI:VIT:INT:DES:SOR:HP Máx:HP")-2;
 			break;
 		case 0:
 			mes "[Goldberg]";
@@ -185,7 +185,7 @@ prontera,147,59,3	script	Goldberg#pron	878,{
 		mes "[Goldberg]";
 		mes "O poder do encantamento será escolhido aleatoriamente. ^ff0000Uma vez infundido, o encantamento não pode ser removido.^000000 Vamos continuar?";
 		next;
-		if(select("No, please stop.:Yes, please proceed.") == 1) {
+		if(select("Não, por favor, pare.:Sim, por favor, prossiga.") == 1) {
 			mes "[Goldberg]";
 			mes "Tudo bem, então, até a próxima...";
 			close;
@@ -293,7 +293,7 @@ prontera,147,59,3	script	Goldberg#pron	878,{
 		} else {
 			mes "[Goldberg]";
 			mes "Ótimo!";
-			mes "The enchantment is a success! It will be applied in socket No.^990000"+(.@slot+1)+"^000000.";
+			mes "O encantamento foi um sucesso! Ele será aplicado no slot Nº^990000"+(.@slot+1)+"^000000.";
 			specialeffect2 EF_REPAIRWEAPON;
 		}
 
@@ -305,7 +305,7 @@ prontera,147,59,3	script	Goldberg#pron	878,{
 		mes "[Goldberg]";
 		mes "Vou apenas inicializar a opção de encantamento sem fazer nada com a carta equipada no slot. Você quer continuar?";
 		next;
-		if(select("I will stop.:Yep, sure, go on.") == 1) {
+		if(select("Vou parar.:Sim, claro, pode continuar.") == 1) {
 			mes "[Goldberg]";
 			mes "Volte se mudar de ideia.";
 			close;
