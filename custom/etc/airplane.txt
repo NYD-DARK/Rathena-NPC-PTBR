@@ -254,8 +254,8 @@ L_Nope:
 
 Notime:
 	mes "^FF0000[Porteiro]^000000";
-	if(Sex==SEX_FEMALE) mes "Sorry, ma'am, but the plane currently isn't ported.  However, you can view the airplane's hourly itinerary.";
-	else mes "Sorry, sir, but the plane currently isn't ported.  However, you can view the airplane's hourly itinerary.";
+	if(Sex==SEX_FEMALE) mes "Desculpe, senhorita, mas o aeroplano não está atracado no momento. No entanto, você pode ver o itinerário de hora em hora do aeroplano.";
+	else mes "Desculpe, senhor, mas o aeroplano não está atracado no momento. No entanto, você pode ver o itinerário de hora em hora do aeroplano.";
 	next;
 	menu "Yes, please.",Itin,"No thanks.",L_Nope;
 	close;
@@ -348,7 +348,7 @@ airplane,102,68,5	script	Docker	852,{
 	mes "^FF0000[Comissária de Bordo]^000000";
 	if($destination == 250)goto Notime;
 	set @dockky, $destination;
-	if($destination != 250)mes "We are currently docked at "+$locationsname$[$destination]+".  Would you like to exit?";
+	if($destination != 250)mes "Estamos atualmente atracados em "+$locationsname$[$destination]+".  Would you like to exit?";
 	next;
 	menu "Yes.",Lyes,"No.",Lnope;
 
@@ -365,8 +365,8 @@ Lnope:
 
 Notime:
 	mes "^FF0000[Comissária de Bordo]^000000";
-	if(Sex==SEX_FEMALE) mes "Sorry, ma'am, but the plane currently isn't docked.  Please wait.";
-	else mes "Sorry, sir, but the plane currently isn't docked.  Please wait.";
+	if(Sex==SEX_FEMALE) mes "Desculpe, senhorita, mas o aeroplano não está atracado no momento. Por favor, aguarde.";
+	else mes "Desculpe, senhor, mas o aeroplano não está atracado no momento. Por favor, aguarde.";
 	close;
 
 Nowhere:
@@ -377,7 +377,7 @@ Nowhere:
 
 function	script	F_Itin	{
 	//This is the itinerary's function.  It should work well enough.
-	if($@currenttime==0)mes "Try again later.  A recent server reboot or rehash has messed the itinerary up for a bit.";
+	if($@currenttime==0)mes "Tente novamente mais tarde. Uma reinicialização ou atualização recente do servidor desajustou o itinerário por um tempo.";
 	if($@currenttime==0)close;
 	if($@currenttime==0)end;
 	set @tempo, 0;

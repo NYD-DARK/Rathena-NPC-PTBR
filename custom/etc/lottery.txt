@@ -91,11 +91,11 @@ L_Rigged_Draw:
 prontera,141,182,5	script	Lottery	76,{
 L_Begin:
 	mes "[Loteria]";
-	mes "Winning Lotto Numbers ("+$LID2+"):";
+	mes "Números Sorteados da Loteria ("+$LID2+"):";
 	mes "^0000FF[" + $LW1 + "] [" + $LW2 + "] [" + $LW3 + "] [" + $LW4 + "] [" + $LW5 + "] [" + $LW6 + "]^000000";
-	if ($LID > 99999) mes "Your Ticket ("+#LID+"):";
+	if ($LID > 99999) mes "Seu Bilhete ("+#LID+"):";
 	if ($LID > 99999) mes "^FF0000[" + #LW1 + "] [" + #LW2 + "] [" + #LW3 + "] [" + #LW4 + "] [" + #LW5 + "] [" + #LW6 + "]^000000";
-	mes "Next Draw-ID: ^FF0000" + $LID + "^000000.";
+	mes "ID do Próximo Sorteio: ^FF0000" + $LID + "^000000.";
 	next;
 	if (getgmlevel() > 90) goto L_GM;
 	menu "Claim Prize",L_Claim,"Buy New Ticket",L_Buy,"Cancel",L_Cancel;
@@ -104,8 +104,8 @@ L_Begin:
 L_Buy:
 	if (#LID == $LID && #L1 != 0) goto L_DoubleTicket;
 	mes "[Loteria]";
-	mes "Tickets cost ^0000FF" + $L_TicketPrice + "z^000000.";
-	mes "The Jackpot is ^FF0000" + $L_Prize_Money + "z^000000.";
+	mes "Os bilhetes custam ^0000FF" + $L_TicketPrice + "z^000000.";
+	mes "O Prêmio Acumulado é de ^FF0000" + $L_Prize_Money + "z^000000.";
 	next;
 	menu "Buy Ticket",-,"Cancel",L_Cancel;
 	if (Zeny < $L_TicketPrice) goto L_NoZeny;
@@ -293,7 +293,7 @@ LWinBig:
 	mes "[Loteria]";
 	mes "Você acertou todos os seis números!";
 	mes "Jackpot!";
-	mes "You've won ^0000FF" + $L_Prize_Money + "z^000000.";
+	mes "Você ganhou ^0000FF" + $L_Prize_Money + "z^000000.";
 	set Zeny, Zeny+$L_Prize_Money;
 	Announce "Lottery: " + strcharinfo(0) + " has won the JACKPOT of " + $L_Prize_Money + "z!",8;
 	set #LID,0;
@@ -303,7 +303,7 @@ LWinBig:
 LWinSmall:
 	mes "[Loteria]";
 	mes "Você acertou pelo menos 4 números!";
-	mes "You've won ^0000FF" + $L_Prize_Money_Small + "z^000000.";
+	mes "Você ganhou ^0000FF" + $L_Prize_Money_Small + "z^000000.";
 	set Zeny, Zeny+$L_Prize_Money_Small;
 	Announce "Lottery: " + strcharinfo(0) + " has won a prize of " + $L_Prize_Money_Small + "z!",8;
 	set #LID,0;

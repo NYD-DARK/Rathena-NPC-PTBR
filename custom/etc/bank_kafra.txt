@@ -14,7 +14,7 @@
 // #kafrabank/100  =  1%  of interest per day
 // #kafrabank/10   =  10% of interest per day
 //
-// 1.1 Added log of bank operation -> logmes "some info";
+// 1.1 Added log of bank operation -> logmes "algumas informações";
 // 1.2 Set max income to 100,000z. It would help to avoid
 //     zeny exploits when you change DATE at your server
 // 1.2a Corrected bad duplicate names. (bugreport:921) [Samuray22]
@@ -34,10 +34,10 @@
 L_NoIncomeToday:
 	set #kb_int,@kb_int; //reset days timer
 
-	if(#kafrabank==0) mes "We could open you an account.";
-	if(@income>0) mes "Today's income: ^135445" + callfunc("F_InsertComma",@income) + "^000000 zeny.";
+	if(#kafrabank==0) mes "Poderíamos abrir uma conta para você.";
+	if(@income>0) mes "Renda de hoje: ^135445" + callfunc("F_InsertComma",@income) + "^000000 zeny.";
 	set #kafrabank,#kafrabank+@income;
-	if(#kafrabank>0) mes "Your account: ^135445" + callfunc("F_InsertComma",#kafrabank) + "^000000 zeny.";
+	if(#kafrabank>0) mes "Sua conta: ^135445" + callfunc("F_InsertComma",#kafrabank) + "^000000 zeny.";
 	mes "O que você gostaria?";
 	next;
 	if(#kafrabank==0) menu "-Open an account",-,"-Quit",B_EXIT2;
@@ -53,15 +53,15 @@ L_NoIncomeToday:
 	set Zeny, Zeny-@kafrabank;
 	set #kafrabank,#kafrabank+@kafrabank;
 	mes"[Maniss]";
-	mes "You've made a deposit of ^135445" + callfunc("F_InsertComma",@kafrabank) + "z^000000.";
+	mes "Você fez um depósito de ^135445" + callfunc("F_InsertComma",@kafrabank) + "z^000000.";
 	//we log these zeny operations into the log db
-	logmes "Bank %: " + @income +"z, Deposit: "+ @kafrabank +"z, Final: "+ #kafrabank +"z";
+	logmes "Porcentagem bancária: " + @income +"z, Deposit: "+ @kafrabank +"z, Final: "+ #kafrabank +"z";
 	goto B_EXIT;
 
 M_WITHDRAW:
 	if(#kafrabank==0) goto L_ZERO_ACCOUNT;
 	mes"[Maniss]";
-	mes "Your account: ^135445" + callfunc("F_InsertComma",#kafrabank) + "^000000 zeny.";
+	mes "Sua conta: ^135445" + callfunc("F_InsertComma",#kafrabank) + "^000000 zeny.";
 	mes "Quanto zeny você gostaria de sacar?";
 	next;
 	if(input(@kafrabank) == 1) goto L_TOO_BIG_AMOUNT;
@@ -71,9 +71,9 @@ M_WITHDRAW:
 	set #kafrabank,#kafrabank-@kafrabank;
 	set Zeny, Zeny+@kafrabank;
 	mes"[Maniss]";
-	mes "Here is your ^135445" + callfunc("F_InsertComma",@kafrabank) + "z^000000, put your sign here...";
+	mes "Aqui estão seus ^135445" + callfunc("F_InsertComma",@kafrabank) + "z^000000, put your sign here...";
 	//we log these zeny operations into the log db
-	logmes "Bank %: " + @income +"z, Withdraw: "+ @kafrabank +"z, Final: "+ #kafrabank +"z";
+	logmes "Porcentagem bancária: " + @income +"z, Withdraw: "+ @kafrabank +"z, Final: "+ #kafrabank +"z";
 	goto B_EXIT;
 
 L_NOT_ENOUGH:

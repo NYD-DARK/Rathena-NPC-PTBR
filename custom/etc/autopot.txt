@@ -15,8 +15,8 @@ OnInit:
 	setarray .blackList[0],0;	//Array of black listed item ID
 
 	if(!.HP_Option && !.SP_Option){
-		debugmes "Warning: @autopot both hp and sp are Disabled";
-		debugmes "Warning: @autopot script has been Disabled!";
+		debugmes "Aviso: @autopot tanto de HP quanto de SP foram desativados";
+		debugmes "Aviso: O script @autopot foi desativado!";
 		end;
 	}
 	bindatcmd("autopot",strnpcinfo(0)+"::OnCommand",0,99);
@@ -126,7 +126,7 @@ OnCommand:
 			}
 			if(.@count){
 				mes "[ Auto-Poção ]";
-				mes "Select a " + strtoupper(.@command$[0]) + " item.";
+				mes "Selecione um " + strtoupper(.@command$[0]) + " item.";
 				.@select = select(.@menu$ + "   ^777777Cancel^000000") - 1;
 				if (.@select != .@count)
 					callsub L_Start,.@command$[0],.@items[.@select];

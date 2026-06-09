@@ -26,7 +26,7 @@
 prontera,152,187,6	script	Hunting Missions	4_F_EDEN_MASTER,{
 function Chk;
 	mes "[Missões de Caça]";
-	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Olá, " + strcharinfo(0) + "!";
 	if (!#Mission_Delay) {
 		next;
 		mes "[Missões de Caça]";
@@ -42,8 +42,8 @@ function Chk;
 	mes F_Rand("Working hard, as always...", "Not slacking, I hope...");
 	mes "Há algo em que eu possa";
 	mes "ajudar você?";
-	mes "";
-	mes "^777777~ You've completed " + F_InsertPlural(Mission_Total,"mission",0,"^0055FF%d^777777 %s") + ". ~^000000";
+	mes " ";
+	mes "^777777~ Você completou a " + F_InsertPlural(Mission_Total,"mission",0,"^0055FF%d^777777 %s") + ". ~^000000";
 	next;
 	switch(select(
 		((!Mission0) ? " ~ New Mission::" : ": ~ Mission Status: ~ Abandon Mission") +
@@ -70,7 +70,7 @@ function Chk;
 			close;
 		}
 		if (#Mission_Delay > gettimetick(2) && .Delay) {
-			mes "I'm afraid you'll have to wait " + Time2Str(#Mission_Delay) + " before taking another mission.";
+			mes "Receio que você terá que esperar " + Time2Str(#Mission_Delay) + " before taking another mission.";
 			close;
 		}
 		mes "Você deve caçar:";
@@ -100,9 +100,9 @@ function Chk;
 		if (.Reset < 0 && .Delay)
 			mes "Seu tempo de espera não será reiniciado.";
 		else if (.Reset > 0)
-			mes "It will cost " + F_InsertComma(.Reset) + " Zeny.";
+			mes "Custará " + F_InsertComma(.Reset) + " Zeny.";
 		next;
-		switch(select(" ~ Abandon...: ~ ^777777Cancel^000000")) {
+		switch(select(" ~ Abandonar...: ~ ^777777Cancelar^000000")) {
 		case 1:
 			if (.Reset > 0) {
 				if (Zeny < .Reset) {
@@ -139,7 +139,7 @@ function Chk;
 		close;
 	case 5:
 		mes "[Missões de Caça]";
-		mes "You have ^0055FF" + #Mission_Points + "^000000 Mission Points.";
+		mes "Você tem ^0055FF" + #Mission_Points + "^000000 Mission Points.";
 		mes "Use-os bem!";
 		callshop "mission_shop",1;
 		npcshopattach "mission_shop";
@@ -179,9 +179,9 @@ Mission_Status:
 	next;
 	mes "[Missões de Caça]";
 	mes "Recompensas da missão:";
-	mes " > Mission Points: ^0055FF" + .@Mission_Points + "^000000";
-	mes " > Base Experience: ^0055FF" + F_InsertComma(.@Base_Exp) + "^000000";
-	mes " > Job Experience: ^0055FF" + F_InsertComma(.@Job_Exp) + "^000000";
+	mes " > Pontos de Missão: ^0055FF" + .@Mission_Points + "^000000";
+	mes " > Experiência de Base: ^0055FF" + F_InsertComma(.@Base_Exp) + "^000000";
+	mes " > Experiência de Classe: ^0055FF" + F_InsertComma(.@Job_Exp) + "^000000";
 	mes " > Zeny: ^0055FF" + F_InsertComma(.@Zeny) + "^000000";
 	if (@f) {
 		@f = false;

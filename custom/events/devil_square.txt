@@ -27,17 +27,17 @@ prontera,156,185,5	script	Devil Square Guardian#1	406,{
 			mes "A Praça do Demônio está fechada no momento.";
 			mes "Ela abrirá nestes horários:";
 			mes "00:00 , 02:00 , 04:00 , 06:00"; // display your times here
-			mes "";
+			mes "08:00 , 10:00 , 12:00 , 14:00";
 			mes "16:00 , 18:00 , 20:00 , 22:00";
 			close;
 		}
 		if (BaseLevel < 70 || Zeny < 20000) { // requirements
 			mes "[Guardião da Praça do Demônio]";
 			mes "Você não atende aos requisitos para entrar na Praça do Demônio.";
-			mes "";
+			mes " ";
 			mes "Requisitos:";
-			mes "- Nível Base 70";
-			mes "- Taxa de registro 20.000z";
+			mes " - Nível Base 70";
+			mes " - Taxa de registro 20.000z";
 			close;
 		}
 		Zeny -= 20000;
@@ -55,12 +55,12 @@ prontera,156,185,5	script	Devil Square Guardian#1	406,{
 	case 3:
 		mes "[Guardião da Praça do Demônio]";
 		switch (.start) { // event states
-			case 0: mes "Devil Square has not yet started."; break;
-			case 1: mes "Devil Square is currently accepting participants."; break;
-			case 2: mes "Devil Square Event is currently running on Round "+ .round +" with "+ .mob +" monsters remaining."; break;
+			case 0: mes "A Praça do Demônio ainda não começou."; break;
+			case 1: mes "A Praça do Demônio está aceitando participantes no momento."; break;
+			case 2: mes "O evento Praça do Demônio está atualmente na Rodada "+ .round +" with "+ .mob +" monsters remaining."; break;
 		}
 		next;
-		switch(select("Start event.:Stop event.:Cancel.")) {
+		switch(select("Iniciar evento.:Parar evento.:Cancelar.")) {
 		case 1:
 			mes "[Guardião da Praça do Demônio]";
 			if (.start)

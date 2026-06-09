@@ -17,7 +17,7 @@ prt_castle,80,170,4	script	King of Prontera	108,{
 	mes "[Rei de Prontera]";
 	mes "Olá, você pode me ajudar?";
 	next;
-	if(select("Sure, what can I do?:Sorry, I'm busy.")==2) {
+	if(select("Claro, o que posso fazer?:Desculpe, estou ocupado.")==2) {
 		mes "[Rei de Prontera]";
 		mes "Ok, tudo bem, tenho certeza de que outra pessoa irá ajudar.";
 		close; }
@@ -28,21 +28,21 @@ prt_castle,80,170,4	script	King of Prontera	108,{
 	next;
 	setarray .@Items1[0],5007,742,30,741,50,753,20,732,1,710,20,629,20;
 	setarray .@Items2[0],1137,2254,1,2282,1,714,1;
-	switch(select("What do you need?:I have the items!:Forget it.")) {
+	switch(select("O que você precisa?:Eu tenho os itens!:Esqueça.")) {
 		case 1:
 			for(set .@i,1; .@i<3; set .@i,.@i+1) {
 				mes "[Rei de Prontera]";
 				mes "Se você pudesse me conseguir:";
 				for(set .@j,1; .@j<getarraysize(getd(".@Items"+.@i)); set .@j,.@j+2)
 					mes " ~ ^0055FF"+getd(".@Items"+.@i+"["+(.@j+1)+"]")+"^000000x "+getitemname(getd(".@Items"+.@i+"["+.@j+"]"));
-				mes "I'll give my "+((.@i == 2 )?"sword.":"crown.");
+				mes "Eu darei minha "+((.@i == 2 )?"sword.":"crown.");
 				if (.@i==2) close;
 				next; }
 		case 2:
 			mes "[Rei de Prontera]";
 			mes "Qual item você deseja?";
 			next;
-			set .@i, select("Crown:Sword");
+			set .@i, select("Coroa:Espada");
 			for(set .@j,1; .@j<getarraysize(getd(".@Items"+.@i)); set .@j,.@j+2)
 				if (countitem(getd(".@Items"+.@i+"["+.@j+"]")) < getd(".@Items"+.@i+"["+(.@j+1)+"]")) set .@nr,1;
 			mes "[Rei de Prontera]";
@@ -55,7 +55,7 @@ prt_castle,80,170,4	script	King of Prontera	108,{
 			getitem getd(".@Items"+.@i+"[0]"),1;
 			mes "MUITO OBRIGADO!!";
 			mes "Isso com certeza vai acalmá-la.";
-			mes "As promised, here is my "+((.@i==1)?"crown.":"sword.");
+			mes "Como prometido, aqui está minha "+((.@i==1)?"crown.":"sword.");
 			close;
 		case 3:
 			mes "[Rei de Prontera]";
@@ -68,7 +68,7 @@ prt_castle,84,170,4	script	King's Daughter	62,{
 	mes "[Filha do Rei]";
 	mes "Hmph, eu odeio o meu pai agora mesmo!!";
 	next;
-	if(select("Why?:Whatever...")==2) {
+	if(select("Por quê?:Tanto faz...")==2) {
 		mes "[Filha do Rei]";
 		mes "TUDO BEM ENTÃO! Hmph!!";
 		close; }

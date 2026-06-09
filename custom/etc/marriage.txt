@@ -98,10 +98,10 @@ prt_church,100,123,4	script	Vomars	60,{
 		close;
 	}
 	if ($wed_groom_progress == 6) {
-		mes "I am wedding "+$wed_groom$+" and "+$wed_bride$+", and it's already too late to object. Please let me continue.";
+		mes "Estou casando "+$wed_groom$+" and "+$wed_bride$+", and it's already too late to object. Please let me continue.";
 		close;
 	}
-	mes "I am going to wed "+$wed_groom$+" and "+$wed_bride$+", do you have an objection to it?";
+	mes "Vou casar "+$wed_groom$+" and "+$wed_bride$+", do you have an objection to it?";
 	if (select("Sorry, please go on.","Yes, I actually do.") == 2) {
 		//Abort
 		npctalk @name$ +" : Ladies and gentlemen, "+strcharinfo(0)+" has an objection to the wedding!";
@@ -266,7 +266,7 @@ function SF_RingsAccepted {
 function SF_RetrieveRingM {
 	mes "["+@name$+"]";
 	if ($@wed_ring && countitem($@wed_ring) < 1) {
-		mes "What happened to your "+getitemname($@wed_ring)+"? You didn't lose it... did you? We need it to continue with the ceremony!";
+		mes "O que aconteceu com seu(sua) "+getitemname($@wed_ring)+"? You didn't lose it... did you? We need it to continue with the ceremony!";
 		close;
 	}
 	if ($wed_bride_sex)
@@ -292,7 +292,7 @@ function SF_RetrieveRingM {
 function SF_RetrieveRingF {
 	mes "["+@name$+"]";
 	if ($@wed_ring && countitem($@wed_ring) < 1) {
-		mes "What happened to your "+getitemname($@wed_ring)+"? You didn't lose it... did you? We need it to continue with the ceremony!";
+		mes "O que aconteceu com seu(sua) "+getitemname($@wed_ring)+"? You didn't lose it... did you? We need it to continue with the ceremony!";
 		close;
 	}
 	if ($wed_groom_sex)
@@ -326,7 +326,7 @@ function SF_StartCeremony {
 	if (marriage($@msg$) == 0) {
 		next;
 		mes "["+@name$+"]";
-		mes "Where is "+$@msg$+"?? I can't marry you both if one is missing...";
+		mes "Onde está "+$@msg$+"?? I can't marry you both if one is missing...";
 		close;
 	}
 	set $wed_bride_progress,6;
@@ -396,19 +396,19 @@ OnTimer55000:
 function SF_equip_check {
 	if (Sex == SEX_MALE && getequipid(EQI_ARMOR) != 7170) {
 		mes "["+@name$+"]";
-		mes "Child, what did you do with your "+getitemname(7170)+"?";
+		mes "Criança, o que você fez com seu(sua) "+getitemname(7170)+"?";
 		emotion ET_THINK;
 		return 0;
 	}
 	if (Sex == SEX_FEMALE && getequipid(EQI_ARMOR) != 2338) {
 		mes "["+@name$+"]";
-		mes "Child, you are supposed to wear a "+getitemname(2338)+" at all times during the ceremony...";
+		mes "Criança, você deveria estar usando um(a) "+getitemname(2338)+" at all times during the ceremony...";
 		emotion ET_THINK;
 		return 0;
 	}
 	if (Sex == SEX_FEMALE && $@wed_veil && getequipid(EQI_HEAD_TOP) != 2206) {
 		mes "["+@name$+"]";
-		mes "Child, you can't take off your "+getitemname(2206)+" yet....";
+		mes "Criança, você não pode tirar seu(sua) "+getitemname(2206)+" yet....";
 		emotion ET_THINK;
 		return 0;
 	}
@@ -607,16 +607,16 @@ function SF_WedProgress {
 		mes "O noivo ainda não se registrou.";
 		break;
 	case 1:
-		mes "The groom, "+$wed_groom$+", has yet to accept the bride.";
+		mes "O noivo, "+$wed_groom$+", has yet to accept the bride.";
 		break;
 	case 2:
-		mes "The groom, "+$wed_groom$+", is waiting for the bride's acceptance.";
+		mes "O noivo, "+$wed_groom$+", is waiting for the bride's acceptance.";
 		break;
 	case 3:
-		mes "The groom, "+$wed_groom$+", has yet to retrieve the ring.";
+		mes "O noivo, "+$wed_groom$+", has yet to retrieve the ring.";
 		break;
 	case 4:
-		mes "The groom, "+$wed_groom$+", is waiting for the bride to retrieve the ring.";
+		mes "O noivo, "+$wed_groom$+", is waiting for the bride to retrieve the ring.";
 		break;
 	}
 	switch ($wed_bride_progress) {
@@ -624,19 +624,19 @@ function SF_WedProgress {
 		mes "A noiva ainda não se registrou.";
 		break;
 	case 1:
-		mes "The bride, "+$wed_bride$+", has yet to confirm the groom.";
+		mes "A noiva, "+$wed_bride$+", has yet to confirm the groom.";
 		break;
 	case 2:
-		mes "The bride, "+$wed_bride$+", is waiting for the groom's acceptance.";
+		mes "A noiva, "+$wed_bride$+", is waiting for the groom's acceptance.";
 		break;
 	case 3:
-		mes "The bride, "+$wed_bride$+", has yet to retrieve the ring.";
+		mes "A noiva, "+$wed_bride$+", has yet to retrieve the ring.";
 		break;
 	case 4:
-		mes "The bride, "+$wed_bride$+", is waiting for the groom to retrieve the ring.";
+		mes "A noiva, "+$wed_bride$+", is waiting for the groom to retrieve the ring.";
 		break;
 	case 5:
-		mes "We are just waiting for both "+$wed_groom$+" and "+$wed_bride$+" to be together to marry them.";
+		mes "Estamos apenas esperando ambos, "+$wed_groom$+" and "+$wed_bride$+" to be together to marry them.";
 		break;
 	case 6:
 		mes $wed_groom$+" and "+$wed_bride$+"'s wedding ceremony is already well on it's way.";
@@ -679,7 +679,7 @@ function SF_TryRegister {
 		set @type$, "bride";
 		
 	mes "["+@name$+"]";
-	mes "Before registering as "+@type$+", let me check if you meet all the requirements...";
+	mes "Antes de se registrar como "+@type$+", let me check if you meet all the requirements...";
 	next;
 	if (Upper == 2) {
 		mes "["+@name$+"]";
@@ -694,17 +694,17 @@ function SF_TryRegister {
 	
 	if (getequipid(EQI_ARMOR) != @item) {
 		mes "["+@name$+"]";
-		mes "You should be wearing a "+getitemname(@item)+" if you want to get married.";
+		mes "Você deve estar usando um(a) "+getitemname(@item)+" if you want to get married.";
 		close;
 	}
 	if (Sex == SEX_FEMALE && $@wed_veil && getequipid(EQI_HEAD_TOP) != 2206) {
 		mes "["+@name$+"]";
-		mes "Where is your "+getitemname(2206)+"? It's a necessary complement to your dress.";
+		mes "Onde está seu(sua) "+getitemname(2206)+"? It's a necessary complement to your dress.";
 		close;
 	}
 	if ($@wed_ring && countitem($@wed_ring) < 1) {
 		mes "["+@name$+"]";
-		mes "Where's the ring? You need a "+getitemname($@wed_ring)+" for the ring exchange, dear.";
+		mes "Onde está a aliança? Você precisa de um(a) "+getitemname($@wed_ring)+" for the ring exchange, dear.";
 		close;
 	}
 	if (@bride)
@@ -715,7 +715,7 @@ function SF_TryRegister {
 	if (Zeny < @cost) {
 		mes "["+@name$+"]";
 		mes "Sinto muito, mas você não tem o suficiente para pagar a taxa de registro.";
-		mes "Come back once you have collected "+@cost+"z."; 
+		mes "Volte quando tiver coletado "+@cost+"z."; 
 		close;
 	}
 	set Zeny,Zeny-@cost;
@@ -768,25 +768,25 @@ function SF_Procedure {
 	if ($@wed_allow == 1) {
 		mes "["+@name$+"]";
 		mes "Os requisitos de registro são:";
-		mes "- Males must be wearing a "+getitemname(7170)+".";
-		mes "- Females must be wearing a "+getitemname(2338)+".";
-		if ($@wed_veil) mes "- Females must also wear a "+getitemname(2206)+".";
-		if ($@wed_ring) mes "- Both must own a "+getitemname($@wed_ring)+" each.";
-		if ($@wed_groom_reg > 0) mes "- The registration fee for the groom is "+$@wed_groom_reg+"z.";
-		if ($@wed_bride_reg > 0) mes "- The registration fee for the bride is "+$@wed_bride_reg+"z.";
+		mes "- Homens devem estar usando um(a) "+getitemname(7170)+".";
+		mes "- Mulheres devem estar usando um(a) "+getitemname(2338)+".";
+		if ($@wed_veil) mes "- Mulheres também devem usar um(a) "+getitemname(2206)+".";
+		if ($@wed_ring) mes "- Ambos devem possuir um(a) "+getitemname($@wed_ring)+" each.";
+		if ($@wed_groom_reg > 0) mes "- A taxa de registro para o noivo é "+$@wed_groom_reg+"z.";
+		if ($@wed_bride_reg > 0) mes "- A taxa de registro para a noiva é "+$@wed_bride_reg+"z.";
 	} else {
 		mes "["+@name$+"]";
 		mes "Os requisitos de registro para o noivo são:";
-		mes "- To be wearing a "+getitemname(7170)+".";
-		if ($@wed_ring) mes "- To own a "+getitemname($@wed_ring)+".";
-		if ($@wed_groom_reg > 0) mes "- Pay a Registration fee of "+$@wed_groom_reg+"z.";
+		mes "- Deve estar usando um(a) "+getitemname(7170)+".";
+		if ($@wed_ring) mes "- Possuir um(a) "+getitemname($@wed_ring)+".";
+		if ($@wed_groom_reg > 0) mes "- Pagar uma taxa de registro de "+$@wed_groom_reg+"z.";
 		next;
 		mes "["+@name$+"]";
 		mes "Os requisitos de registro para a noiva são:";
-		mes "- To be wearing a "+getitemname(2338)+".";
-		if ($@wed_veil) mes "- To be wearing a "+getitemname(2206)+".";
-		if ($@wed_ring) mes "- To own a "+getitemname($@wed_ring)+".";
-		if ($@wed_bride_reg > 0) mes "- Pay a Registration fee of "+$@wed_bride_reg+"z.";
+		mes "- Deve estar usando um(a) "+getitemname(2338)+".";
+		if ($@wed_veil) mes "- Deve estar usando um(a) "+getitemname(2206)+".";
+		if ($@wed_ring) mes "- Possuir um(a) "+getitemname($@wed_ring)+".";
+		if ($@wed_bride_reg > 0) mes "- Pagar uma taxa de registro de "+$@wed_bride_reg+"z.";
 	}
 	next;
 	mes "["+@name$+"]";
@@ -802,7 +802,7 @@ function SF_Procedure {
 		mes "Mas primeiro, vocês precisam preparar suas alianças.";
 		next;
 		mes "["+@name$+"]";
-		mes "Talk to the priest once more, and he will exchange your "+getitemname($@wed_ring)+" for a wedding ring. After you both have claimed the rings for exchanging, the ceremony will begin.";
+		mes "Fale com o sacerdote mais uma vez, e ele trocará seu(sua) "+getitemname($@wed_ring)+" for a wedding ring. After you both have claimed the rings for exchanging, the ceremony will begin.";
 	}
 	next;
 	mes "["+@name$+"]";
@@ -854,7 +854,7 @@ prt_church,94,99,4	script	Sister Lisa	79,{
 			mes "["+@name$+"]";
 			mes "Para dar entrada no divórcio, preciso que ambos concordem com isso.";
 			mes "Depois que você der entrada no divórcio, seu cônjuge tem um minuto para concordar, e então ambos estarão divorciados.";
-			if ($@wed_divorce_fee > 0) mes "The fee is of "+$@wed_divorce_fee+"z and is paid by the person who confirms the divorce, so plan ahead of time how you will divide the costs.";
+			if ($@wed_divorce_fee > 0) mes "- A taxa é de "+$@wed_divorce_fee+"z and is paid by the person who confirms the divorce, so plan ahead of time how you will divide the costs.";
 			next;
 			break;
 		case 4: //Divorce
@@ -886,7 +886,7 @@ function SF_InProgress {
 	}
 	if (getcharid(0) != $@divorcee) {
 		mes "["+@name$+"]";
-		mes "I am in the progress of divorcing "+$@divorcer$+".";
+		mes "Estou em processo de divórcio com "+$@divorcer$+".";
 		mes "Você sabe quem é o cônjuge?";
 		close;
 	}
@@ -909,7 +909,7 @@ function SF_InProgress {
 	}
 	if (!(divorce())) {
 		mes "["+@name$+"]";
-		mes "Where has "+$@divorcer$+" gone to? I can't divorce you unless you both are here...";
+		mes "Para onde "+$@divorcer$+" gone to? I can't divorce you unless you both are here...";
 		emotion ET_PROFUSELY_SWEAT;
 		close;
 	}

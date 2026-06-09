@@ -27,7 +27,7 @@ prontera,160,155,4	script	Disguise Event	795,{
 		mes .@n$;
 		mes "Selecione uma opção.";
 		next;
-		switch(select("Turn ON/OFF Event:Event Settings")) {
+		switch(select("Ligar/Desligar Evento:Configurações do Evento")) {
 		case 1:
 			mes .@n$;
 			if (.EventON) {
@@ -37,7 +37,7 @@ prontera,160,155,4	script	Disguise Event	795,{
 				mes "O evento está atualmente: [^FF0000DESLIGADO^000000]";
 				mes "Você gostaria de LIGÁ-LO?";
 			}
-			if(select("Yes:No")==2) close;
+			if(select("Sim:Não")==2) close;
 			if (.EventON) {
 				set .EventON,0; set .Timer,0;
 				setnpctimer 0; stopnpctimer;
@@ -55,7 +55,7 @@ prontera,160,155,4	script	Disguise Event	795,{
 			mes .@n$;
 			mes "Escolha uma configuração para modificar.";
 			next;
-			switch(select("Monster Display:Number of Rounds:Prize Settings")) {
+			switch(select("Exibição de Monstros:Número de Rodadas:Configurações de Prêmios")) {
 			case 1:
 				setarray .@r$[0],"Disguise as all monsters.","Disguise as MVPs only.";
 				mes .@n$;
@@ -69,17 +69,17 @@ prontera,160,155,4	script	Disguise Event	795,{
 			case 2:
 				mes .@n$;
 				mes "Insira o número de rodadas que deseja que o evento dure.";
-				mes "Current number: [^0000FF"+.Rounds+"^000000]";
+				mes "Número atual: [^0000FF"+.Rounds+"^000000]";
 				next;
 				input .@Rounds;
 				set .Rounds,.@Rounds;
 				mes .@n$;
-				mes "The number of rounds has been changed to "+.Rounds+".";
+				mes "O número de rodadas foi alterado para "+.Rounds+".";
 				close;
 			case 3:
 				mes .@n$;
 				mes "Insira o ID do item do prêmio dado a cada rodada.";
-				mes "Current item: [^0000FF"+getitemname(.Prize)+"^000000] (ID #"+.Prize+")";
+				mes "Item atual: [^0000FF"+getitemname(.Prize)+"^000000] (ID #"+.Prize+")";
 				next;
 				input .@Prize;
 				mes .@n$;
@@ -100,7 +100,7 @@ prontera,160,155,4	script	Disguise Event	795,{
 				}
 				set .PrizeAmt,.@amount;
 				mes "O prêmio foi alterado com sucesso.";
-				mes "Prize: "+.PrizeAmt+"x [^0000FF"+getitemname(.Prize)+"^000000]";
+				mes "Prêmio: "+.PrizeAmt+"x [^0000FF"+getitemname(.Prize)+"^000000]";
 				close;
 			}
 		}
@@ -109,7 +109,7 @@ prontera,160,155,4	script	Disguise Event	795,{
 	mes .@n$;
 	mes "Bem-vindo.";
 	mes "Como posso ajudar?";
-	if(select("Information:Nothing, just passing through.")==2) close;
+	if(select("Informações:Nada, só estou de passagem.")==2) close;
 	next;
 	mes .@n$;
 	mes "Este evento é bem simples.";

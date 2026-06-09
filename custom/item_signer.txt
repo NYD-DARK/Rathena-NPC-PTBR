@@ -19,37 +19,37 @@ prt_in,24,61,7	script	Perchik	47,{
 	setarray .@Cost[0],0,5000;	// Zeny requirements: <base price>,<price per refine>
 
 	disable_items;
-	mes "";
-	mes "";
+	mes "[Perchik]";
+	mes "Eu posso ^0055FFassinar seu nome^000000 em quase qualquer item raro que você possua.";
 	next;
-	if(select("Tell me more...:Sign my items, please!") == 1) {
-		mes "";
-		mes "";
+	if(select("Conte-me mais...:Assine meus itens, por favor!") == 1) {
+		mes "[Perchik]";
+		mes "Eu posso colocar seu nome em qualquer equipamento ou arma sem slot.";
 		emotion ET_AHA;
 		next;
-		mes "";
+		mes "[Perchik]";
 		if (getarraysize(.@Item) || getarraysize(.@Cost)) {
-			mes "";
+			mes "Pelo meu trabalho eu aceito:";
 			if (getarraysize(.@Item)) for(set .@i,0; .@i<getarraysize(.@Item); set .@i,.@i+2)
 				mes " ~ "+.@Item[.@i+1]+"x "+getitemname(.@Item[.@i]);
 			if (.@Cost[0]) mes " ~ "+callfunc("F_InsertComma",.@Cost[0])+" Zeny";
 			if (.@Cost[1]) mes " ~ "+callfunc("F_InsertComma",.@Cost[1])+" Zeny per refine";
 		}
-		else mes "I work for free, but...";
+		else mes "Eu trabalho de graça, mas...";
 		next;
 		emotion ET_CRY;
-		mes "";
-		mes "";
-		mes "";
+		mes "[Perchik]";
+		mes "Infelizmente, tenho 12 filhos famintos";
+		mes "e uma esposa muito brava.";
 		next;
-		mes "";
-		mes "";
-		mes "";
+		mes "[Perchik]";
+		mes "Ou eram 12 filhos bravos";
+		mes "e uma esposa muito faminta...";
 		emotion ET_SCRATCH;
 		close;
 	}
-	mes "";
-	mes "";
+	mes "[Perchik]";
+	mes "Mostre-me seus itens para assinar...";
 	next;
 	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
 	for (set .@i,1; .@i<=10; set .@i,.@i+1) {
@@ -60,65 +60,65 @@ prt_in,24,61,7	script	Perchik	47,{
 	set .@part, .@indices[ select(.@menu$) ];
 	set .@id, getequipid(.@part);
 	set .@ref, getequiprefinerycnt(.@part);
-	mes "";
+	mes "[Perchik]";
 	if (!getequipisequiped(.@part)) {
-		mes "";
+		mes "Não há nada equipado aí!";
 		emotion ET_KEK;
 		close;
 	}
 	for(set .@i,0; .@i<4; set .@i,.@i+1)
 		set .@slot[.@i], getequipcardid(.@part,.@i);
 	if (.@slot[0]==255 || .@slot[0]==254 || .@slot[0]<0) {
-		mes "";
-		mes "";
+		mes "Infelizmente, este item já está assinado.";
+		mes "Eu jamais tocaria no trabalho de um mestre.";
 		emotion ET_SCRATCH;
 		close;
 	}
 	if (.@slot[0]>4000 && .@slot[0]<5000) {
-		mes "";
-		mes "";
+		mes "Uma carta? Aqui?!";
+		mes "Como eu disse antes, eu não assino itens com cartas.";
 		emotion ET_SCRATCH;
 		close;
 	}
 	if (getiteminfo(.@id, ITEMINFO_SLOT)) {
-		mes "";
+		mes "Desculpe, eu não assino itens com slots.";
 		emotion ET_SORRY;
 		close;
 	}
 	getinventorylist;
 	for(set .@i,0; .@i<@inventorylist_count; set .@i,.@i+1)
 		if (@inventorylist_expire[.@i] != 0) {
-			mes "";
+			mes "Desculpe, eu não assino itens alugados!";
 			emotion ET_SCRATCH;
 			close;
 		}
 	set .@price, .@Cost[0]+(.@Cost[1]*.@ref);
 	if (getarraysize(.@Item) || .@price) {
-		mes "";
+		mes "Eu precisarei de:";
 		if (getarraysize(.@Item)) for(set .@i,0; .@i<getarraysize(.@Item); set .@i,.@i+2) {
 			mes " ~ "+.@Item[.@i+1]+"x "+getitemname(.@Item[.@i]);
 			if (countitem(.@Item[.@i]) < .@Item[.@i+1]) set .@nr,1;
 		}
 		if (.@price) mes " ~ "+.@price+" Zeny";
 	}
-	mes "Shall I sign your ^0055FF"+getitemname(.@id)+"^000000?";
+	mes "Devo assinar seu ^0055FF"+getitemname(.@id)+"^000000?";
 	next;
-	if(select("Ok!:Leave")==2) {
-		mes "";
-		mes "";
+	if(select("Ok!:Sair")==2) {
+		mes "[Perchik]";
+		mes "Até mais...";
 		emotion ET_SLEEPY;
 		close;
 	}
-	mes "";
+	mes "[Perchik]";
 	if (Zeny < .@price || .@nr) {
-		mes "";
+		mes "Eu não trabalho por 'obrigado'.";
 		emotion ET_SORRY;
 		close;
 	}
 	if (!countitem2(.@id,1,.@ref,0,.@slot[0],.@slot[1],.@slot[2],.@slot[3])) {
-		mes "Where is "+getitemname(@id)+"...?";
+		mes "Onde está "+getitemname(@id)+"...?";
 		npctalk "Perchik : You're a snoozy cheater!";
-		logmes "Hack: Tried to sign an item not having it: "+getitemname(@id);
+		logmes "Hack: Tentativa de assinar um item sem possuí-lo: "+getitemname(@id);
 		emotion ET_KEK;
 		close;
 	}
@@ -126,7 +126,7 @@ prt_in,24,61,7	script	Perchik	47,{
 	if (getarraysize(.@Item))  for(set .@i,0; .@i<getarraysize(.@Item); set .@i,.@i+2)
 		delitem .@Item[.@i], .@Item[.@i+1];
 	delitem2 .@id,1,1,.@ref,0,.@slot[0],.@slot[1],.@slot[2],.@slot[3];
-	mes "";
+	mes "Pronto!";
 	emotion ET_OK;
 	getitem2 .@id,1,1,.@ref,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
 	equip .@id;

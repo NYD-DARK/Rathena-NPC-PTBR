@@ -36,8 +36,8 @@ M_Start:
 M_Buy:
 	mes "[Assassino Suspeito]";
 	mes "Quantos ninjas você quer comprar?";
-	mes "There are ^0000FF" + $ninja_avail + "^000000 ninjas available.";
-	mes "They cost ^0000FF" + .@ninja_price + " zeny ^000000each.";
+	mes "Existem ^0000FF" + $ninja_avail + "^000000 ninjas available.";
+	mes "Eles custam ^0000FF" + .@ninja_price + " zeny ^000000each.";
 
 	input .@buy;
 	next;
@@ -47,7 +47,7 @@ M_Buy:
 	if (Zeny < .@price) goto NoZeny;
 
 	mes "[Assassino Suspeito]";
-	mes "That will cost you ^0000FF"+ .@price +" zeny^000000.";
+	mes "Isso custará ^0000FF"+ .@price +" zeny^000000.";
 	next;
 	menu "Continue",-,"Cancel",M_Exit;
 
@@ -75,8 +75,8 @@ M_Kill:
 	}
 	next;
 	mes "[Assassino Suspeito]";
-	mes "Active Ninjas: "+#ninjas;
-	mes "Resting Ninjas: "+#ninjasr;
+	mes "Ninjas Ativos: "+#ninjas;
+	mes "Ninjas em Repouso: "+#ninjasr;
 	mes "Quantos você quer enviar?";
 	input .@number;
 	if (.@number < 1) goto NoNinjasSent;
@@ -94,7 +94,7 @@ M_Kill:
 	mes "[Assassino Suspeito]";
 	set .@ninjasurvived, rand(1,.@number);
 	set #ninjasr,.@number-.@ninjasurvived;
-	mes "Your attack succeeded but only ^FF0000" + #ninjasr + "^000000 Ninjas survived.";
+	mes "Seu ataque foi bem-sucedido, mas apenas ^FF0000" + #ninjasr + "^000000 Ninjas survived.";
 	set .@acc_id, getcharid( 3,.@name$ );
 	if ( .@acc_id )
 		unitkill .@acc_id;
@@ -108,7 +108,7 @@ M_Failure:
 	mes "[Assassino Suspeito]";
 	set .@ninjasurvived, rand(1,.@number);
 	set #ninjasr, .@number-.@ninjasurvived;
-	mes "Your attack failed and only ^FF0000" + #ninjasr + "^000000 Ninjas survived.";
+	mes "Seu ataque falhou e apenas ^FF0000" + #ninjasr + "^000000 Ninjas survived.";
 
 	announce .@name$+" has survived " + strcharinfo(0) +"'s Ninja attack.",8;
 	close;

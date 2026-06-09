@@ -20,14 +20,14 @@ prontera,132,217,5	script	Banker	109,{
 	mes "[Banqueiro]";
 	mes "Bem-vindo ao Primeiro Banco de Prontera. Como posso ajudar você hoje?";
 	next;
-	switch(select("I'd like to make a deposit.:I'd like to make a withdrawal.:What's my current balance?:Cancel")) {
+	switch(select("Gostaria de fazer um depósito.:Gostaria de fazer um saque.:Qual é o meu saldo atual?:Cancelar")) {
 	case 1:
 		mes "[Banqueiro]";
 		mes "Muito bem... Quanto você gostaria de depositar? O máximo que você pode depositar de uma vez é 999.999 Zeny.";
 		next;
 		if (@cost > 0) {
 			mes "[Banqueiro]";
-			mes "Oh, and do realize there is a " +@cost + " Zeny charge on all transactions!";
+			mes "Ah, e saiba que há uma taxa de " +@cost + " Zeny charge on all transactions!";
 			next;
 		}
 		input @deposit;
@@ -40,7 +40,7 @@ prontera,132,217,5	script	Banker	109,{
 			close;
 		}
 		else if (@deposit > (Zeny - @cost)) {
-			mes "You need " + @cost + " Zeny to cover the transaction fee!";
+			mes "Você precisa de " + @cost + " Zeny to cover the transaction fee!";
 			close;
 		}
 		else {
@@ -57,7 +57,7 @@ prontera,132,217,5	script	Banker	109,{
 		next;
 		if (@cost > 0) {
 			mes "[Banqueiro]";
-			mes "Oh, and do realize there is a " +@cost + " Zeny charge on all transactions!";
+			mes "Ah, e saiba que há uma taxa de " +@cost + " Zeny charge on all transactions!";
 			next;
 		}
 		input @withdrawl;
@@ -66,17 +66,17 @@ prontera,132,217,5	script	Banker	109,{
 			close;
 		}
 		else if (@withdrawl > #bankstorage) {
-			mes "You only have ^00FF00" + callfunc("F_InsertComma",#bankstorage) +"^000000 zeny in your account!";
+			mes "Você só tem ^00FF00" + callfunc("F_InsertComma",#bankstorage) +"^000000 zeny in your account!";
 			close;
 		}
 		else if ((@cost > Zeny) && ((Zeny + @withdrawl) > @cost)) {
 			mes "[Banqueiro]";
 			mes "Você não tem o Zeny para a taxa de transação agora. Você gostaria que eu retirasse a taxa diretamente do seu saque?";
 			next;
-			switch(select("Yes please.:No, Thanks")){
+			switch(select("Sim, por favor.:Não, obrigado.")){
 			case 1:
 				mes "[Banqueiro]";
-				mes "Removing " + @cost + " from your withdrawal to cover the deposit fee...";
+				mes "Removendo " + @cost + " from your withdrawal to cover the deposit fee...";
 				set @withdrawl,@withdrawl - @cost;
 				set #bankstorage,#bankstorage - @cost;
 				set @cost,0;
@@ -108,7 +108,7 @@ prontera,132,217,5	script	Banker	109,{
 		mes "*Mexendo em papéis...*";
 		next;
 		mes "[Banqueiro]";
-		mes "You currently have " + callfunc("F_InsertComma",#bankstorage) + " Zeny in your account.";
+		mes "Você tem atualmente " + callfunc("F_InsertComma",#bankstorage) + " Zeny in your account.";
 		close;
 	case 4:
 		mes "[Banqueiro]";

@@ -249,22 +249,22 @@ OnInstanceInit:
 	end;
 
 L_Menu:
-	switch(select("Shields:Rings:Armor:End Conversation")){
+	switch(select("Escudos:Anéis:Armadura:Encerrar conversa")){
 		case 1:
 			mes .@n$,"There are two types of Shields are available for exchange.";
 			next;
 L_Shield:
-			switch(select("Magic Reflector ^3355FF<900 Coins>^000000:Revised Encyclopedia ^3355FF<900 Coins>^000000:Go back to previous menu")){
+			switch(select("Refletor Mágico ^3355FF<900 Moedas>^000000:Enciclopédia Revisada ^3355FF<900 Moedas>^000000:Voltar ao menu anterior")){
 				case 1: .@item = 2185; .@cost = 900; break;
 				case 2: .@item = 2186; .@cost = 900; break;
 				case 3: goto L_Menu; break;
 			}
 			mes .@n$;
 			mes mesitemlink( .@item, false );
-			mes "Price is "+.@cost+" coins";
+			mes "O preço é "+.@cost+" coins";
 			mes "Você deseja trocar suas moedas?";
 			next;
-				switch(select("Do Not Exchange:Exchange")){
+				switch(select("Não trocar:Trocar")){
 					case 1:
 						mes .@n$,"Take a look at the other equipment available.";
 						next;
@@ -277,7 +277,7 @@ L_Shield:
 							mes .@n$,"Participate in the Tournament to earn more coins."," ","Do you need more help?"; 
 							goto L_Shield; 
 						}
-						if(!checkweight(.@item,1)) { mes .@n$; mes "You have too many things in your inventory to carry a ^FF0000"+getitemname(.@item)+"^000000."; end; }
+						if(!checkweight(.@item,1)) { mes .@n$; mes "Você tem itens demais no seu inventário para carregar um ^FF0000"+getitemname(.@item)+"^000000."; end; }
 						delitem 6671,.@cost;
 						getitem .@item,1;
 						mes .@n$,"Thank you.";
@@ -289,7 +289,7 @@ L_Shield:
 			mes "Há dois tipos de Anéis disponíveis para troca.";
 			next;
 L_Ring:
-				switch(select("Physical Enhancer Ring ^3355FF<1350 Coins>^000000:Magic Intensifier Ring ^3355FF<1350 Coins>^000000:Go back to previous menu")){
+				switch(select("Anel de Fortalecimento Físico ^3355FF<1350 Moedas>^000000:Anel de Intensificação Mágica ^3355FF<1350 Moedas>^000000:Voltar ao menu anterior")){
 					case 1:
 						.@item = 2963;
 						.@cost = 1350;
@@ -304,10 +304,10 @@ L_Ring:
 				}
 			mes .@n$;
 			mes mesitemlink( .@item, false );
-			mes "Price is "+.@cost+" coins";
+			mes "O preço é "+.@cost+" coins";
 			mes "Você deseja trocar suas moedas?";
 			next;
-				switch(select("Do Not Exchange:Exchange")){
+				switch(select("Não trocar:Trocar")){
 					case 1:
 						mes .@n$,"Take a look at the other equipment available.";
 						next;
@@ -320,7 +320,7 @@ L_Ring:
 							mes .@n$,"Participate in the Tournament to earn more coins."," ","Do you need more help?"; 
 							goto L_Ring; 
 						}
-						if(!checkweight(.@item,1)) { mes .@n$; mes "You have too many things in your inventory to carry a ^FF0000"+getitemname(.@item)+"^000000."; end; }
+						if(!checkweight(.@item,1)) { mes .@n$; mes "Você tem itens demais no seu inventário para carregar um ^FF0000"+getitemname(.@item)+"^000000."; end; }
 						delitem 6671,.@cost;
 						getitem .@item,1;
 						mes .@n$,"Thank you.";
@@ -331,7 +331,7 @@ L_Ring:
 			mes "Há dois tipos de Armaduras disponíveis para troca.";
 			next;
 L_Armor:
-				switch(select("Anti-Magic Suit ^3355FF<1800 Coins>^000000:Geffen Magic Robe ^3355FF<1800 Coins>^000000:Go back to previous menu")){
+				switch(select("Traje Antimagia ^3355FF<1800 Moedas>^000000:Robe Mágico de Geffen ^3355FF<1800 Moedas>^000000:Voltar ao menu anterior")){
 					case 1:
 						.@item = 15073;
 						.@cost = 1800;
@@ -346,10 +346,10 @@ L_Armor:
 				}
 			mes .@n$;
 			mes mesitemlink( .@item, false );
-			mes "Price is "+.@cost+" coins";
+			mes "O preço é "+.@cost+" coins";
 			mes "Você deseja trocar suas moedas?";
 			next;
-				switch(select("Do Not Exchange:Exchange")){
+				switch(select("Não trocar:Trocar")){
 					case 1:
 						mes .@n$,"Take a look at the other equipment available.";
 						next;
@@ -362,7 +362,7 @@ L_Armor:
 							mes .@n$,"Participate in the Tournament to earn more coins."," ","Do you need more help?"; 
 							goto L_Armor; 
 						}
-						if(!checkweight(.@item,1)) { mes .@n$; mes "You have too many things in your inventory to carry a ^FF0000"+getitemname(.@item)+"^000000."; end; }
+						if(!checkweight(.@item,1)) { mes .@n$; mes "Você tem itens demais no seu inventário para carregar um ^FF0000"+getitemname(.@item)+"^000000."; end; }
 						delitem 6671,.@cost;
 						getitem .@item,1;
 						mes .@n$,"Thank you.";
@@ -540,7 +540,7 @@ OnTouch_:
 	mes "[ Mercador de Pontos ]";
 	mes "Olá. Estou vendendo um catalisador chamado ^FF0000Pontos^000000 para Feiticeiros. O que você gostaria?";
 	next;
-	.@i = select("Scarlet Points - 200z:Lime Green Points - 200z:Indigo Points - 200z:Yellow Wish Points - 200z:Cancel")-1;
+	.@i = select("Pontos Escarlates - 200z:Pontos Verde-Limão - 200z:Pontos Índigo - 200z:Pontos de Desejo Amarelo - 200z:Cancelar")-1;
 	mes "[ Mercador de Pontos ]";
 	if (.@i == 4) {
 		mes "Não consegue encontrar o que precisa?";
@@ -548,7 +548,7 @@ OnTouch_:
 	}
 	setarray .@itemid[0],6360,6363,6361,6362;
 	setarray .@color$[0],"Scarlet","Lime Green","Indigo","Yellow Wish";
-	mes "You have chosen "+.@color$[.@i]+" Points.";
+	mes "Você escolheu "+.@color$[.@i]+" Points.";
 	mes "Quantos você quer?";
 	mes "Se quiser cancelar, digite 0.";
 	next;
@@ -578,12 +578,12 @@ OnTouch_:
 		end;
 	} else if ((eaclass()&EAJ_THIRDMASK==EAJ_RANGER) && !countitem(6124)) {
 		if (!checkfalcon() && getskilllv("HT_FALCON") && !checkwug()) {
-			if(select(" ~ Falcon: ~ Warg")==1) setfalcon;
+			if(select(" ~ Falcão: ~ Warg")==1) setfalcon;
 			else getitem 6124,1; //Wolf's_Flute
 		} else getitem 6124,1; //Wolf's_Flute
 	} else if ((eaclass()&EAJ_THIRDMASK==EAJ_MECHANIC) && !checkcart() && getskilllv("MC_PUSHCART")) {
 		if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) {
-			if(select(" ~ Cart: ~ Mado")==1) setcart;
+			if(select(" ~ Carrinho: ~ Mado")==1) setcart;
 			else setmadogear;
 		} else setcart;
 	} else if (!checkcart() && getskilllv("MC_PUSHCART")) setcart;
@@ -637,7 +637,7 @@ dali,100,147,3	script	Dimensional Device#gefma	PORTAL,{
 				end;
 			}
 				
-			switch(select("Leave it alone:^3355FFUse the Device^000000")){
+			switch(select("Deixe como está:^3355FFUsar o Dispositivo^000000")){
 			
 				case 1:
 					mes .@n$;
@@ -658,7 +658,7 @@ dali,100,147,3	script	Dimensional Device#gefma	PORTAL,{
 								mes "A instância do Torneio de Magia de Geffen não foi criada. Por favor, fale com Emmitt White primeiro.";
 								end;
 							case 1:
-								mes "Only registered members can enter the "+.@md_name$+" instance.";
+								mes "Apenas membros registrados podem entrar na instância "+.@md_name$+" instance.";
 								end;
 							case 0:
 								mapannounce "dali02",strcharinfo(0)+" of the party, "+.@p_name$+" is entering the "+.@md_name$+".",bc_map,"0x00ff99";
@@ -780,7 +780,7 @@ dali,98,141,3	script	Emmitt White	4_M_KHKYEL,{
 			mes "O portal é instável, então você tem que ir sozinho.";
 			mes "Você está pronto para entrar?";
 			next;
-				switch(select("No:Yes")){
+				switch(select("Não:Sim")){
 					case 1:
 						mes .@n$;
 						mes "Volte se mudar de ideia~!";
@@ -793,8 +793,8 @@ dali,98,141,3	script	Emmitt White	4_M_KHKYEL,{
 						}
 						
 						if (instance_create(.@md_name$) < 0) {
-							mes "Party Name: "+.@p_name$;
-							mes "Party Leader: "+strcharinfo(0);
+							mes "Nome do Grupo: "+.@p_name$;
+							mes "Líder do Grupo: "+strcharinfo(0);
 							mes "^0000ff"+.@md_name$+" ^000000- Reservation Failed!";
 							end;
 						}
@@ -813,14 +813,14 @@ dali,98,141,3	script	Emmitt White	4_M_KHKYEL,{
 		mes .@n$;
 		mes "Só um segundo.";
 		mes "Você precisa esperar o tempo expirar antes de voltar.";
-		mes "";
+		mes " ";
 		
 		.@time = (GeffenTournament - gettimetick(2));
 		.@sec = .@time % 60;
 		.@min = (.@time / 60) % 60;
 		.@hrs = (.@time / 3600) % 24;
 
-		mes "Cooldown: ^3355FF"+(.@hrs < 10 ? "0" : "")+.@hrs+":"+(.@min < 10 ? "0" : "")+.@min+":"+(.@sec < 10 ? "0" : "")+.@sec+"^000000";
+		mes "Tempo de Espera: ^3355FF"+(.@hrs < 10 ? "0" : "")+.@hrs+":"+(.@min < 10 ? "0" : "")+.@min+":"+(.@sec < 10 ? "0" : "")+.@sec+"^000000";
 		end;
 		
 
@@ -948,7 +948,7 @@ OnEnable:
 		mes "Se falhar, será automaticamente eliminado da lista. Pode tentar novamente quantas vezes quiser.";
 		mes "Você fará o teste novamente?";
 		next;
-		switch(select("No:Yes")){
+		switch(select("Não:Sim")){
 			case 1:
 				mes .@n$;
 				mes "Volte se mudar de ideia.";
@@ -965,7 +965,7 @@ OnEnable:
 				mes "Se falhar, será eliminado automaticamente da lista, mas pode tentar de novo quantas vezes quiser.";
 				mes "Você está pronto?";
 				next;
-				switch(select("No:Yes")){
+				switch(select("Não:Sim")){
 					case 1:
 						mes .@n$;
 						mes "Volte se mudar de ideia.";
@@ -1039,7 +1039,7 @@ OnEnable:
 		mes "O que posso fazer por você?";
 		next;
 	L_Menu:
-		switch(select("About Geffen Magic Tournament:How do I Register?:Collecting Rewards.:Can I get a Spectator Pass?:End Conversation")){
+		switch(select("Sobre o Torneio de Magia de Geffen:Como me registro?:Coletar recompensas.:Posso obter um Passe de Espectador?:Encerrar conversa")){
 			case 1:
 				mes .@n$;
 				mes "O Torneio de Magia de Geffen é realizado uma vez a cada 3 anos.";
@@ -1068,7 +1068,7 @@ OnEnable:
 				mes "Se falhar, será eliminado da lista, mas pode tentar de novo quantas vezes quiser.";
 				mes "Você quer fazer o teste?";
 				next;
-				switch(select("No:Yes")){
+				switch(select("Não:Sim")){
 					case 1:
 						mes .@n$;
 						mes "Volte se mudar de ideia.";
@@ -1402,13 +1402,13 @@ OnInstanceInit:
 	.@n$ = "[ Tournament Guide ]";
 	ignoretimeout 1;
 	if (checkquest(9308) != -1) {
-		switch(select("Leave the Arena and receive your reward:End Conversation")) {
+		switch(select("Sair da Arena e receber sua recompensa:Encerrar conversa")) {
 			case 1:
 				mes .@n$;
-				mes "You won the competition!","Congratulations!";
+				mes "Você venceu a competição!","Congratulations!";
 				next;
 				mes .@n$;
-				mes "By the way, the Academy Master has","something to tell you!";
+				mes "A propósito, o Mestre da Academia tem","something to tell you!";
 				next;
 				cutin "acamaster_a.bmp",2;
 				.@n2$ = "[ Geffen Academy Master ]";
@@ -1446,7 +1446,7 @@ OnInstanceInit:
 	}
 	mes .@n$;
 	if ('GMT_1QUE <22) {
-		mes "Congratulations on winning the "+callfunc("F_GetNumSuffix",('GMT_1QUE-10))+" round!";
+		mes "Parabéns por vencer a "+callfunc("F_GetNumSuffix",('GMT_1QUE-10))+" round!";
 		.@menu$ = "Begin the "+callfunc("F_GetNumSuffix",('GMT_1QUE-9))+" match.";
 	}
 	else {
@@ -1525,7 +1525,7 @@ OnInstanceInit:
 					end;
 			case 2:
 				mes .@n$; // KURAMA END CONVERSATION TEXT
-				mes "";
+				mes "Vejo que precisa de mais tempo para se preparar.";
 				mes "Sem problemas, fale comigo quando estiver pronto.";
 				close;
 		}
@@ -4484,12 +4484,12 @@ OnMobKilled:
 					cutin "fenrir_a.bmp", 2;
 					mes "[Fenrir]", "Are you okay?", "Where are all these punks coming from anyways?"; next;
 					cutin "", 255;
-					mes "[Magic Academy Student]", "Thanks for helping me.", "Who are you?"; next;
+					mes "[Estudante da Academia de Magia]", "Thanks for helping me.", "Who are you?"; next;
 					cutin "fenrir_a.bmp", 2;
 					mes "[Fenrir]", "I am Fenris Fenrir."; next;
 					mes "[Fenrir]", "Thank " + strcharinfo(0) + ".", "It would have been much worse if "+('sex?"he":"she")+" hadn't shown up."; next;
 					cutin "", 255;
-					mes "[Magic Academy Student]", "Thank you so much " + strcharinfo(0) + ".", "You saved me."; next;
+					mes "[Estudante da Academia de Magia]", "Thank you so much " + strcharinfo(0) + ".", "You saved me."; next;
 					cutin "fenrir_a.bmp", 2;
 					mes "[Fenrir]", "You don't meet many people like " + strcharinfo(0) + " these days.", "You're a good person."; next;
 					mes "[Fenrir]", "I was on the way to register for the Geffen Magic Tournament with Loki."; next;
@@ -4666,8 +4666,8 @@ OnTimer1000:
 		case 22: hideonnpc instance_npcname("Geffen Shoplifter#1"); break;
 		case 24:
 			if (attachrid('gmt_account_id)) {
-				mes "[Geffen Resident]", "My monthly salary...", "What am I gonna do?", "I have to eat..."; next;
-				mes "[Geffen Resident]", "You're not a thief are you?", "I don't know what to do about my zeny being stolen."; next;
+				mes "[Residente de Geffen]", "My monthly salary...", "What am I gonna do?", "I have to eat..."; next;
+				mes "[Residente de Geffen]", "You're not a thief are you?", "I don't know what to do about my zeny being stolen."; next;
 				mes "[Lydia]", "Woo, yeah, what a day~", "It seems like all these thieves in Geffen are rich.", "They may be good at stealing but they're easy to steal from too.";
 				cutin "lydia_a.bmp", 0;
 				next;
@@ -4676,18 +4676,18 @@ OnTimer1000:
 				mes "Você conta a Lydia sobre os ladrões de loja.";
 				cutin "", 255;
 				next;
-				mes "[Geffen Resident]", "What am I going to do?", "*sobbing*"; next;
+				mes "[Residente de Geffen]", "What am I going to do?", "*sobbing*"; next;
 				mes "[Lydia]", "(I stole this envelope from one of those thug-looking guys)", "....", "How much zeny was stolen from you?";
 				cutin "lydia_a.bmp", 0;
 				next;
-				mes "[Geffen Resident]", "1,000,000 zeny!", "It's everything that I had.";
+				mes "[Residente de Geffen]", "1,000,000 zeny!", "It's everything that I had.";
 				cutin "", 255;
 				next;
 				mes "[Lydia]", "Whoa! That's the same amount as what's in this envelope that I stole from that shoplifter.";
 				cutin "lydia_a.bmp", 0;
 				next;
 				mes "[Lydia]", "Maybe this is what you are looking for?", "Check it out!"; next;
-				mes "[Geffen Resident]", "Let me see...", "Wait, this has to be my zeny!", "Thank you very much for finding it!";
+				mes "[Residente de Geffen]", "Let me see...", "Wait, this has to be my zeny!", "Thank you very much for finding it!";
 				cutin "", 255;
 				next;
 				hideonnpc instance_npcname("Geffen Resident#1");
@@ -4695,7 +4695,7 @@ OnTimer1000:
 				mes "[Lydia]", "Well... Um, that is...", "I didn't say I was gonna give it back to you...";
 				cutin "lydia_a.bmp", 0;
 				next;
-				mes "[Geffen Resident]", "Thank you very much!!", "I will never forget your kindness~!", "I'm putting it in the bank right now!", "Have a good day~!!! Zap~!!";
+				mes "[Residente de Geffen]", "Thank you very much!!", "I will never forget your kindness~!", "I'm putting it in the bank right now!", "Have a good day~!!! Zap~!!";
 				cutin "", 255;
 				next;
 				hideonnpc instance_npcname("Geffen Resident#2");

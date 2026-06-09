@@ -29,9 +29,9 @@ M_PAY:
 	set .@MUSTPAY,(PRISON+1)*1000000;
 	if (.@MUSTPAY<1000000) set .@MUSTPAY,1000000;
 	if (.@MUSTPAY>100000000) set .@MUSTPAY,100000000;
-	if (PRISON==0) mes "I can't remember you. Is it your 1st time?";
-	if (PRISON>0) mes "You again? Somebody hasn't grown wiser from the very first visit...";
-	mes "OK, we could release you for ^FF0000"+.@MUSTPAY+"z^000000.";
+	if (PRISON==0) mes "Não consigo me lembrar de você. É a sua primeira vez?";
+	if (PRISON>0) mes "Você de novo? Alguém não aprendeu nada desde a primeira visita...";
+	mes "Certo, nós podemos te libertar por ^FF0000"+.@MUSTPAY+"z^000000.";
 	next;
 	menu "I pay cash!",M_PAYCASH,"Do you accept cheques?",M_PAYBANK,"I've changed my mind.",-;
 
@@ -60,8 +60,8 @@ M_PAYBANK:
 
 L_NOBANK:
 	mes "[Saddeus]";
-	if (#kafrabank==0) mes "Your case says nothing about your bank accounts.";
-	if (#kafrabank!=0) mes "Alas, there's your bank account info... ^FF0000"+#kafrabank+"z^000000... in the case. It's not enough.";
+	if (#kafrabank==0) mes "O seu registro não diz nada sobre suas contas bancárias.";
+	if (#kafrabank!=0) mes "Infelizmente, aqui estão as informações da sua conta bancária... ^FF0000"+#kafrabank+"z^000000... in the case. It's not enough.";
 	mes "Pare com seus joguinhos bobos agora!";
 	close;
 
@@ -119,7 +119,7 @@ L_W4:
 
 M_NO_THANKS:
 	mes "[Saddeus]";  
-	if (rand(2)) mes "Is today X-Mas time, huh?";
+	if (rand(2)) mes "Hoje é época de Natal, hein?";
 	mes "Agora cale a boca e afaste-se!";
 	if (rand(2)) emotion ET_HUK;
 	close;  
@@ -135,11 +135,11 @@ sec_in02,137,57,1	script	Overseer	708,{
 	
 	if (PRISON_Q <= 0 ) goto L_GET_Q;
 
-	mes "I want you to gather ^FF0000"+PRISON_Q+" Orange Net Mushroom^000000.";
+	mes "Quero que você colete ^FF0000"+PRISON_Q+" Orange Net Mushroom^000000.";
 	if ( countitem(1069)<PRISON_Q ) close;//Items: Orange_Net_Mushroom,
 	mes "OK... entregue-me todos os cogumelos...";
-	mes "Let me see... "+countitem(1069)+" of almost edible ones...";//Items: Orange_Net_Mushroom,
-	mes "And "+countitem(1070)+" useless deadly ones.";//Items: Orange_Gooey_Mushroom_,
+	mes "Deixe-me ver... "+countitem(1069)+" of almost edible ones...";//Items: Orange_Net_Mushroom,
+	mes "E "+countitem(1070)+" useless deadly ones.";//Items: Orange_Gooey_Mushroom_,
 	next;
 	mes "[Oliver]";
 	mes "Obrigado. Você está livre!";
@@ -153,18 +153,18 @@ sec_in02,137,57,1	script	Overseer	708,{
 
 L_GET_Q:
 	set PRISON,PRISON+1;
-	if (PRISON > 1) mes "Hmm... You've been here already... Well-well...";
+	if (PRISON > 1) mes "Hmm... Você já esteve aqui antes... Ora, ora...";
 
-	if ( countitem(1069) || countitem(1070) ) mes "Drop these mushrooms!! They are poisonous!";//Items: Orange_Net_Mushroom, Orange_Gooey_Mushroom_,
+	if ( countitem(1069) || countitem(1070) ) mes "Jogue esses cogumelos fora!! Eles são venenosos!";//Items: Orange_Net_Mushroom, Orange_Gooey_Mushroom_,
 	delitem 1069,countitem(1069);//Items: Orange_Net_Mushroom,
 	delitem 1070,countitem(1070);//Items: Orange_Gooey_Mushroom_,
 
 	set PRISON_Q, PRISON*3 + BaseLevel/3;
 	set PRISON_Q, PRISON_Q * (readparam(bAspd)/55 + 1);
 	set PRISON_Q, PRISON_Q+rand(50,60);
-	mes "OK, you must bring me ^FF0000"+PRISON_Q+"^000000 edible ^FF0000Orange Net Mushroom^000000 toadstoo.. shrooms.";
-	if(readparam(bAspd)>=100) mes "You're a fast fella! You'll have to get more shrooms, then.";
-	if (rand(10)<4) mes "And you may eat the deadly ones for breakfast.";
+	mes "Ok, você deve me trazer ^FF0000"+PRISON_Q+"^000000 edible ^FF0000Orange Net Mushroom^000000 toadstoo.. shrooms.";
+	if(readparam(bAspd)>=100) mes "Você é um sujeito rápido! Então, terá que buscar mais cogumelos.";
+	if (rand(10)<4) mes "E você pode comer os mortais no café da manhã.";
 	close;
 }
 
