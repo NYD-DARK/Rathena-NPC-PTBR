@@ -93,7 +93,7 @@ izlude_in,74,172,4	script	Swordman#swd_1	119,{
 	mes "Que negócios";
 	mes "o trazem até nós?";
 	next;
-	switch(select("Job Change:About Swordman.:About the Job requirements.:Cancel.")) {
+	switch(select("Trocar de Classe:Sobre Espadachim.:Sobre os requisitos de Classe.:Cancelar.")) {
 	case 1:
 		if (BaseJob == Job_Swordman) {
 			mes "[Espadachim]";
@@ -109,7 +109,7 @@ izlude_in,74,172,4	script	Swordman#swd_1	119,{
 			mes "[Espadachim]";
 			mes "Então você deseja se tornar um orgulhoso Espadachim? De qualquer forma, por favor, inscreva-se!";
 			next;
-			if (select("Sign up.:Cancel.") == 1) {
+			if (select("Inscrever-se.:Cancelar.") == 1) {
 				savepoint "izlude_in",65,165,1,1;
 				set job_sword_q,1;
 				setquest 1014;
@@ -119,7 +119,7 @@ izlude_in,74,172,4	script	Swordman#swd_1	119,{
 				mes "[Espadachim]";
 				mes "Se você já cumpriu os requisitos, pode fazer uma entrevista agora mesmo. Gostaria de fazer?";
 				next;
-				if (select("Yes.:No.") == 1) {
+				if (select("Sim.:Não.") == 1) {
 					mes "[Espadachim]";
 					mes "Bom, bom.";
 					mes "Agora, vamos ver...";
@@ -326,7 +326,7 @@ job_sword1,223,167,2	script	Mae#swd_1_success	92,{
 function	script	F_JobSwdMedic	{
 	percentheal 100,0;
 	mes "[Médico]";
-	mes "This is the "+getarg(0)+" check point! Cheer up!";
+	mes "Esta é a "+getarg(0)+" check point! Cheer up!";
 	close;
 }
 
@@ -334,7 +334,7 @@ function	script	F_JobSwdStaff	{
 	mes "[Equipe do Salão de Testes]";
 	mes "Você desiste?";
 	next;
-	if (select("Yes.:No.") == 1) {
+	if (select("Sim.:Não.") == 1) {
 		mapannounce "job_sword1","Applicant " + strcharinfo(0) + " quit the test.",bc_map;
 		warp "izlude_in",65,165;
 		end;
@@ -347,9 +347,9 @@ function	script	F_JobSwdStaff	{
 function	script	F_JobSwdTestStaff	{
 OnTouch:
 	mes "[Equipe do Salão de Testes]";
-	mes "Applicant " + strcharinfo(0) + ". Do you surrender??";
+	mes "Candidato " + strcharinfo(0) + ". Do you surrender??";
 	next;
-	if (select("Yes.:No.") == 1) {
+	if (select("Sim.:Não.") == 1) {
 		mapannounce "job_sword1","Applicant " + strcharinfo(0) + " quit the test..",bc_map;
 		warp "izlude_in",65,165;
 		end;

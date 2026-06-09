@@ -75,7 +75,7 @@ payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
 	mes "[Membro da Guilda dos Arqueiros]";
 	mes "Bom dia. Como posso ajudá-lo?";
 	next;
-	switch(select("I want to be an Archer.:I need the requirements, please.:Nothing, thanks.")) {
+	switch(select("Quero ser um Arqueiro.:Preciso dos requisitos, por favor.:Nada, obrigado.")) {
 	case 1:
 		if (BaseJob == Job_Archer) {
 			mes "[Membro da Guilda dos Arqueiros]";
@@ -96,7 +96,7 @@ payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
 			mes "Você quer ser um Arqueiro?";
 			mes "Se sim, você precisa preencher este formulário de inscrição.";
 			next;
-			if (select("Apply.:Cancel") == 1) {
+			if (select("Aplicar.:Cancelar") == 1) {
 				set job_archer_q,1;
 				setquest 1004;
 				mes "[Membro da Guilda dos Arqueiros]";
@@ -106,7 +106,7 @@ payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
 				mes "Se você acha que já os atendeu, podemos verificar isso agora.";
 				mes "Você está pronto?";
 				next;
-				if (select("Yes, I am.:No, not yet.") == 1) {
+				if (select("Sim, estou.:Não, ainda não.") == 1) {
 					mes "[Membro da Guilda dos Arqueiros]";
 					mes "Certo, deixe-me verificar.";
 					next;
@@ -125,7 +125,7 @@ payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
 			}
 		}
 		mes "[Membro da Guilda dos Arqueiros]";
-		mes "Are you..." + strcharinfo(0) + "?";
+		mes "Você é..." + strcharinfo(0) + "?";
 		next;
 		if (!callfunc("F_CanChangeJob")) {
 			mes "[Membro da Guilda dos Arqueiros]";
@@ -157,19 +157,19 @@ payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
 				close;
 			}
 			mes "[Membro da Guilda dos Arqueiros]";
-			if (countitem(1066) != 0) mes " Grade S : " + countitem(1066) + " ea, Grade: " + .@archer_item1 + " . ";
-			if (countitem(1067) != 0) mes " Grade A : " + countitem(1067) + " ea, Grade : " + .@archer_item2 + " . ";
-			if (countitem(1068) != 0) mes " Grade B : " + countitem(1068) + " ea, Grade : " + .@archer_item3 + " . ";
-			if (countitem(1019) != 0) mes " Grade C : " + countitem(1019) + " ea, Grade : " + .@archer_item4 + " . ";
+			if (countitem(1066) != 0) mes " Grau S: " + countitem(1066) + " ea, Grade: " + .@archer_item1 + " . ";
+			if (countitem(1067) != 0) mes " Grau A: " + countitem(1067) + " ea, Grade : " + .@archer_item2 + " . ";
+			if (countitem(1068) != 0) mes " Grau B: " + countitem(1068) + " ea, Grade : " + .@archer_item3 + " . ";
+			if (countitem(1019) != 0) mes " Grau C: " + countitem(1019) + " ea, Grade : " + .@archer_item4 + " . ";
 			if (.@total_archer < 25) {
-				mes "Total Grades: ^FF0000" + .@total_archer + "^000000 / 40";
+				mes "Total de Graus: ^FF0000" + .@total_archer + "^000000 / 40";
 				next;
 				mes "[Membro da Guilda dos Arqueiros]";
 				mes "Menos de 25!? Você tem que conseguir uma nota de pelo menos 25! Vamos, tente com mais empenho!";
 				close;
 			}
 			else {
-				mes "Total Grades: ^0000FF" + .@total_archer + "^000000 / 40";
+				mes "Total de Graus: ^0000FF" + .@total_archer + "^000000 / 40";
 				next;
 				mes "[Membro da Guilda dos Arqueiros]";
 				if (.@total_archer > 40) {

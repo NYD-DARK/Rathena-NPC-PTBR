@@ -125,7 +125,7 @@ alberta_in,53,43,6	script	Merchant#mer	86,{
 			mes "A única coisa a resolver é a sua Taxa de Adesão.";
 			mes "Você está pronto?";
 			next;
-			switch(select("Pay the rest of the 500 Zeny:Quit")) {
+			switch(select("Pagar o restante dos 500 Zeny:Sair")) {
 			case 1:
 				mes "[Chefe Mahnsoo]";
 				if (Zeny < 500) {
@@ -273,7 +273,7 @@ alberta_in,53,43,6	script	Merchant#mer	86,{
 		mes "Há algo";
 		mes "em que eu possa ajudar?";
 		next;
-		switch(select("I want to be a Merchant.:Tell me about Merchants.:Tell me the requirements.:Nope.")) {
+		switch(select("Eu quero ser um Mercador.:Me fale sobre Mercadores.:Me fale os requisitos.:Não.")) {
 		case 1:
 			mes "[Chefe Mahnsoo]";
 			mes "Você quer";
@@ -305,7 +305,7 @@ alberta_in,53,43,6	script	Merchant#mer	86,{
 			mes "Então, o que você acha?";
 			mes "Você está pronto para entrar agora?";
 			next;
-			if (select("Yes, I will.:Ummm, maybe later...") ==1 ) {
+			if (select("Sim, eu vou.:Hmmm, talvez mais tarde...") ==1 ) {
 				mes "[Chefe Mahnsoo]";
 				mes "Deixe-me verificar se você";
 				mes "preencheu tudo";
@@ -323,7 +323,7 @@ alberta_in,53,43,6	script	Merchant#mer	86,{
 				mes "Como você deseja";
 				mes "cuidar da taxa?";
 				next;
-				switch(select("Pay all 1,000 Zeny now!:Two payments of 500 Zeny.:Quit")) {
+				switch(select("Pagar 1.000 Zeny agora!:Duas parcelas de 500 Zeny.:Sair")) {
 				case 1:
 					mes "[Chefe Mahnsoo]";
 					if (Zeny >= 1000) {
@@ -520,7 +520,7 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 	}
 	else if (job_merchant_q == 6 || job_merchant_q == 5) {
 		mes "[Funcionário da União Kay]";
-		mes "Oh, yeah? Okay, lemme check. Your name is " + strcharinfo(0) + "? Alright, your destination was...";
+		mes "Ah, é? Ok, deixe eu verificar. Seu nome é " + strcharinfo(0) + "? Alright, your destination was...";
 		next;
 		mes "[Funcionário da União Kay]";
 		if (job_merchant_q2 == 1 || job_merchant_q2 == 2)
@@ -577,7 +577,7 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 		mes "Então, como foi";
 		mes "a entrega?";
 		next;
-		if (select("*Sob* I lost the package.:Fine.") == 1) {
+		if (select("*Sol* Eu perdi o pacote.:Tudo bem.") == 1) {
 			set job_merchant_q,9;
 			mes "[Funcionário da União Kay]";
 			mes "Você está brincando? Você será reprovado no teste se perder o pacote!";
@@ -595,7 +595,7 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 		mes "[Funcionário da União Kay]";
 		mes "Ei, o que você ainda está fazendo aqui? Você já não deveria estar a caminho?";
 		next;
-		if (select("I need a new package.:Oh, yeah. You're right!") == 1) {
+		if (select("Eu preciso de um novo pacote.:Ah, sim. Você está certo!") == 1) {
 			if (countitem(1081) == 0 && countitem(1082) == 0 && countitem(1083) == 0 && countitem(1091) == 0) {
 				mes "[Funcionário da União Kay]";
 				mes "O quê--?";
@@ -603,7 +603,7 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 				mes "o pacote foi?";
 				mes "Onde ele está?!";
 				next;
-				if (select("*Sob* I lost it!:I have it right here.") == 1) {
+				if (select("*Sol* Eu perdi!:Eu tenho ele bem aqui.") == 1) {
 					set job_merchant_q,9;
 					mes "[Funcionário da União Kay]";
 					mes "Você...";
@@ -650,7 +650,7 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 		mes "o que lhe";
 		mes "traz aqui?";
 		next;
-		switch(select("My Merchant License test.:I'm looking for part time work.:Nothing.")) {
+		switch(select("Meu teste de Licença de Mercador.:Estou procurando por um trabalho de meio período.:Nada.")) {
 		case 1:
 			mes "[Equipe da União Kay]";
 			mes "Entendo.";
@@ -671,7 +671,7 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 			mes "[Equipe da União Kay]";
 			mes "Certo, aqui está. Deixe-me lhe entregar o pacote. Agora, escolha o destino da entrega.";
 			next;
-			switch(select("Prontera.:Geffen.:Morocc.:Byalan Island.")) {
+			switch(select("Prontera.:Geffen.:Morroc.:Ilha de Byalan.")) {
 			case 1: set .@where_village,1; break;
 			case 2: set .@where_village,2; break;
 			case 3: set .@where_village,3; break;
@@ -686,7 +686,7 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 					if (.@input == 0) {
 						mes "[Equipe da União Kay]";
 						mes "Tem certeza de que deseja cancelar?";
-						if (select("Yes.:Let me try again.") == 1) {
+						if (select("Sim.:Deixe-me tentar novamente.") == 1) {
 							mes "Certo, vamos cancelar por enquanto.";
 							close;
 						}
@@ -702,15 +702,15 @@ alberta_in,28,29,2	script	Merchant Guildsman#mer	83,{
 				}
 				mes "[Equipe da União Kay]";
 				if (.@where_village == 1)
-					mes "Destination is Prontera. The Serial Number is " + .@input + ". Are you positive?";
+					mes "O destino é Prontera. O número de série é " + .@input + ". Are you positive?";
 				else if (.@where_village == 2)
-					mes "Destination is Geffen. Phew! That's really far! The Serial Number is " + .@input + ". Are you positive?";
+					mes "O destino é Geffen. Ufa! Isso é realmente longe! O número de série é " + .@input + ". Are you positive?";
 				else if (.@where_village == 3)
-					mes "Destination is Morocc. That's pretty far away! The Serial Number is " + .@input + ". Are you positive?";
+					mes "O destino é Morocc. Isso é bem longe! O número de série é " + .@input + ". Are you positive?";
 				else
-					mes "Lucky you! Your destination is Byalan Island. The Serial Number is " + .@input + ". Are you positive?";
+					mes "Que sorte! Seu destino é a Ilha de Byalan. O número de série é " + .@input + ". Are you positive?";
 				next;
-				if (select("Positive.:Whoops! Wrong number!") == 1) {
+				if (select("Positivo.:Opa! Número errado!") == 1) {
 					break;
 				}
 			}
@@ -1034,7 +1034,7 @@ prontera,248,42,0	script	Kafra Employee#mer	116,{
 		mes "Atualmente, oferecemos um serviço de";
 		mes "Teleporte para Izlude por 600 zenys.";
 		next;
-		if (select("Use:Cancel") == 1) {
+		if (select("Usar:Cancelar") == 1) {
 			if (Zeny < 600) {
 				mes "[Funcionária da Kafra]";
 				mes "Sinto muito, mas você";

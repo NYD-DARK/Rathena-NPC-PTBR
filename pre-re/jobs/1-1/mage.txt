@@ -71,7 +71,7 @@ geffen_in,164,124,4	script	Mage Guildsman	123,{
 	mes "[Membro da Guilda dos Magos]";
 	mes "E aí. Como vai?";
 	next;
-	switch(select("I want to be a Mage.:Tell me the Requirements.:Pretty much nothing.")) {
+	switch(select("Quero ser um Mago.:Me diga os Requisitos.:Quase nada.")) {
 	case 1:
 		mes "[Membro da Guilda dos Magos]";
 		if (BaseJob == Job_Mage) {
@@ -97,9 +97,9 @@ geffen_in,164,124,4	script	Mage Guildsman	123,{
 			mes "[Membro da Guilda dos Magos]";
 			mes "Certo, você disse que quer ser um Mago? Tudo bem então, por favor, assine o Formulário de Inscrição de Mago.";
 			next;
-			if (select("Sign Up.:Quit.") == 1) {
+			if (select("Inscrever-se.:Sair.") == 1) {
 				mes "[Membro da Guilda dos Magos]";
-				mes "Okay. Sign right there. Oh, you're very good at spelling. Alright. So your name is... " + strcharinfo(0) + ".";
+				mes "Ok. Assine bem ali. Oh, você é muito bom em soletração. Tudo bem. Então seu nome é... " + strcharinfo(0) + ".";
 				next;
 				mes "[Membro da Guilda dos Magos]";
 				mes "Agora é hora";
@@ -288,13 +288,13 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 	mes "[Máquina de Mistura]";
 	mes "Esta máquina é propriedade da Guilda dos Magos de Geffen e é usada apenas para misturar soluções para fins mágicos.";
 	next;
-	if (select("Use Machine.:Cancel.") == 1) {
+	if (select("Usar Máquina.:Cancelar.") == 1) {
 		mes "[Máquina de Mistura]";
 		mes "Escolha o";
 		mes "Solvente para";
 		mes "a Solução.";
 		next;
-		switch(select("Payon Solution.:Morocc Solution.:No Solvent.")) {
+		switch(select("Solução de Payon.:Solução de Morocc.:Sem Solvente.")) {
 		case 1:
 			if (countitem(1089) == 0) {
 				mes "[Máquina de Mistura]";
@@ -326,15 +326,15 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 				mes "[Máquina de Mistura]";
 				if (.@mixitem1_1 != 0) mes "Jellopy: " + .@mixitem1_1 + " ea.";
 				if (.@mixitem1_2 != 0) mes "Fluff: " + .@mixitem1_2 + " ea.";
-				if (.@mixitem1_3 != 0) mes "Milk: " + .@mixitem1_3 + " ea.";
-				if (.@mixitem2 == 0) mes "Solvent: None.";
-				if (.@mixitem2 == 1) mes "Solvent: Payon Solution.";
-				if (.@mixitem2 == 2) mes "Solvent: Morocc Solution.";
+				if (.@mixitem1_3 != 0) mes "Leite: " + .@mixitem1_3 + " ea.";
+				if (.@mixitem2 == 0) mes "Solvente: Nenhum.";
+				if (.@mixitem2 == 1) mes "Solvente: Solução de Payon.";
+				if (.@mixitem2 == 2) mes "Solvente: Solução de Morocc.";
 				next;
 				mes "[Máquina de Mistura]";
 				mes "Escolha se deseja começar a misturar ou inserir novamente o número de itens a serem misturados.";
 				next;
-				switch(select("Begin Mixing.:Re-Enter Number of Items.:Reset.")) {
+				switch(select("Iniciar Mistura.:Reinserir Número de Itens.:Reiniciar.")) {
 				case 1:
 					mes "[Máquina de Mistura]";
 					mes "Por favor, coloque os itens no Recipiente de Mistura. Certifique-se de que as quantidades de itens estejam corretas.";
@@ -345,7 +345,7 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 					mes "[Máquina de Mistura]";
 					mes "Se tudo estiver correto, aperte o botão 'Misturar' quando estiver pronto. Caso contrário, aperte o botão 'Cancelar'.";
 					next;
-					if (select("Press 'Mix' Button.:Press 'Cancel' Button.") == 1) {
+					if (select("Pressione o Botão 'Misturar'.:Pressione o Botão 'Cancelar'.") == 1) {
 						mes "[Máquina de Mistura]";
 						mes "Coloque os itens no Recipiente de Mistura agora. Por favor, aguarde.";
 						next;
@@ -401,7 +401,7 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 					mes "Reinicialização Concluída.";
 					mes "Iniciar novamente?";
 					next;
-					if (select("Yes.:No.") == 1)
+					if (select("Sim.:Não.") == 1)
 						break;
 					mes "[Máquina de Mistura]";
 					mes "Processo Interrompido.";
@@ -418,7 +418,7 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 			mes "[Máquina de Mistura]";
 			mes "Selecione os itens para misturar.";
 			while(1) {
-				switch(select("Jellopy.:Fluff.:Milk.:Ready to Mix.")) {
+				switch(select("Jellopy.:Fluff.:Leite.:Pronto para Misturar.")) {
 				case 1:
 					while(1) {
 						input .@input;
@@ -489,7 +489,7 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 				if (.@input == 0) {
 					mes "Deseja pular este Menu?";
 					next;
-					if (select("Yes.:No.") == 1) {
+					if (select("Sim.:Não.") == 1) {
 						break;
 					}
 				}
@@ -501,9 +501,9 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 			}
 			else {
 				mes "[Máquina de Mistura]";
-				mes "The Serial Number is #" + .@input + ", correct?";
+				mes "O número de série é #" + .@input + ", correct?";
 				next;
-				if (select("Confirm.:Cancel.") == 1) {
+				if (select("Confirmar.:Cancelar.") == 1) {
 					if (.@input == 8472)
 						set .@magic_powder,1;
 					else if (.@input == 3735)
@@ -522,7 +522,7 @@ geffen_in,164,112,4	script	Mixing Machine	111,{
 		mes "Escolha uma";
 		mes "Pedra Catalisadora.";
 		next;
-		switch(select("Yellow Gemstone.:Red Gemstone.:Blue Gemstone.:1carat Diamond.:Skip.")) {
+		switch(select("Gema Amarela.:Gema Vermelha.:Gema Azul.:Diamante 1 quilate.:Pular.")) {
 		case 1: set .@mixitem3,1; break;
 		case 2: set .@mixitem3,2; break;
 		case 3: set .@mixitem3,3; break;
@@ -605,7 +605,7 @@ geffen_in,177,112,4	script	Bookshelf	111,{
 	mes "[Livro Guia]";
 	mes "Este Livro Guia é propriedade da Associação de Magos de Geffen. Por favor, manuseie com cuidado.";
 	next;
-	switch(select("Solution No. 1.:Solution No. 2.:Solution No. 3.:Solution No. 4.:Close.")) {
+	switch(select("Solução No. 1.:Solução No. 2.:Solução No. 3.:Solução No. 4.:Fechar.")) {
 	case 1:
 		mes "[Solução de Teste de Mago nº 1]";
 		mes "* Lista de Ingredientes *";
