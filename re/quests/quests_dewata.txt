@@ -98,7 +98,7 @@ dew_in01,22,48,3	script	Sage Kasyapa#dew	541,{
 		mes "que você tem algo a dizer";
 		mes "então você bem que poderia me dizer o que é.";
 		next;
-		if(select("I overheard talk about a crown?:Just looking for the gift shop.") == 2) {
+		if(select("Ouvi falar de uma coroa?:Apenas procurando a loja de presentes.") == 2) {
 			mes "[Chefe Tribal Paiko]";
 			mes "Sério?";
 			mes "Parecia que seus olhos";
@@ -230,7 +230,7 @@ dew_in01,15,49,4	script	Tribal Chief Paiko#dew	540,{
 		mes "de outra terra.";
 		mes "O que o traz aqui?";
 		next;
-		if(select("I overheard the story by accident:I have nothing to say.") == 2) {
+		if(select("Ouvi a história por acidente.:Não tenho nada a dizer.") == 2) {
 			mes "[Chefe Tribal Paiko]";
 			mes "Você está perdendo seu tempo aqui.";
 			mes "Existem muitas outras atrações ao redor da nossa vila.";
@@ -278,7 +278,7 @@ dew_in01,15,49,4	script	Tribal Chief Paiko#dew	540,{
 		mes "Você acha que pode ajudar?";
 		mes "Seus esforços não ficarão sem recompensa.";
 		next;
-		if(select("Ok, I will help:I am sorry, I cannot help now.") == 2) {
+		if(select("Ok, eu vou ajudar.:Desculpe, não posso ajudar agora.") == 2) {
 			mes "[Chefe Tribal Paiko]";
 			mes "Isso é muito triste.";
 			mes "Se você mudar";
@@ -358,7 +358,7 @@ dew_in01,15,49,4	script	Tribal Chief Paiko#dew	540,{
 		mes "[Chefe Tribal Paiko]";
 		mes "Você está disposto a fazer um pequeno trabalho de entrega?";
 		next;
-		if(select("Of course, I can help:Sorry, I am too busy to help.") == 2) {
+		if(select("Claro, posso ajudar.:Desculpe, estou muito ocupado para ajudar.") == 2) {
 			mes "[Chefe Tribal Paiko]";
 			mes "Eu acreditava que você definitivamente me ajudaria...";
 			mes "É um pouco decepcionante.";
@@ -496,7 +496,7 @@ L_Delivery:
 		mes "Algo deu errado?";
 	}
 	next;
-	switch(select("I ate them all.:Deliver to whom.:Nothing.")) {
+	switch(select("Eu comi todos.:Entregar para quem?:Nada.")) {
 	case 1:
 		mes "[Chefe Tribal Paiko]";
 		mes "Huh... então você não conseguiu resistir, hein?";
@@ -681,7 +681,7 @@ dew_dun01,292,164,4	script	Gatekeeper of Krakatau#2	541,{
 	mes "Quer voltar";
 	mes "para Dewata?";
 	next;
-	switch(select("Yes:No")) {
+	switch(select("Sim:Não")) {
 	case 1:
 		close2;
 		warp "dewata",232,53;
@@ -827,7 +827,7 @@ dewata,109,262,4	script	Memo#dew_drink	534,{
 		mes "[Memo]";
 		mes "Ah, certo! Você está ocupado agora?";
 		next;
-		if(select("Sorry, I am busy.:No, I am not busy.") == 1) {
+		if(select("Desculpe, estou ocupado.:Não, não estou ocupado.") == 1) {
 			mes "[Memo]";
 			mes "Hmm, não tenho escolha.";
 			mes "Você não se importa que outros estejam em apuros. A que ponto este mundo chegou?";
@@ -976,7 +976,7 @@ dewata,109,262,4	script	Memo#dew_drink	534,{
 			mes "[Memo]";
 			mes strcharinfo(0)+", to what do I owe the pleasure?";
 			next;
-			switch(select("Just came by to say hello.:I will help you.")) {
+			switch(select("Apenas vim dizer oi.:Eu vou te ajudar.")) {
 			case 1:
 				mes "[Memo]";
 				mes "Suponho que você esteja ocupado.";
@@ -1280,7 +1280,7 @@ dew_fild01,114,275,4	script	Lero#dew_drink	536,{
 			next;
 			set .@quest,rand(3);
 			mes "[Lero]";
-			mes "I'm ashamed to ask you this, but can you bring ^0000FF"+(20+(.@quest*10))+" pieces of oil palm nuts^000000 please?";
+			mes "Tenho vergonha de pedir isso, mas você pode trazer ^0000FF"+(20+(.@quest*10))+" pieces of oil palm nuts^000000 please?";
 			changequest 5045,5046+(.@quest*2);
 			next;
 			mes "[Lero]";
@@ -1298,7 +1298,7 @@ dew_fild01,114,275,4	script	Lero#dew_drink	536,{
 
 			if (countitem(6402) < .@i[0]) {
 				mes "[Lero]";
-				mes "Once you bring the "+.@i[0]+" pieces of oil palm nuts, Mr. Memo will exchange them with oil.";
+				mes "Assim que você trouxer o "+.@i[0]+" pieces of oil palm nuts, Mr. Memo will exchange them with oil.";
 				close;
 			}
 			if (checkweight(1201,1) == 0 || MaxWeight - Weight < .@i[3]) {
@@ -1310,7 +1310,7 @@ dew_fild01,114,275,4	script	Lero#dew_drink	536,{
 			mes "Um, dois, três, quatro, . . . .";
 			next;
 			mes "[Lero]";
-			mes "Exactly "+.@i[0]+" pieces of oil palm nuts. Let you exchange them with oil right now.";
+			mes "Exatamente "+.@i[0]+" pieces of oil palm nuts. Let you exchange them with oil right now.";
 			changequest .@i[1], .@i[1]+1;
 			delitem 6402,.@i[0]; //Oil_Palm_F
 			getitem 6401,.@i[2]; //Palm_O
@@ -1473,11 +1473,11 @@ dew_fild01,259,48,4	script	Poby#dew_drink	538,{
 			getitem 6401,.@new_count; //Palm_O
 			next;
 			mes "[Poby]";
-			mes "Please~ "+strcharinfo(0)+".";
+			mes "Por favor~ "+strcharinfo(0)+".";
 			close;
 		}
 		next;
-		switch(select("Why'd you come here?:I want to know how to get fruit.")) {
+		switch(select("Por que você veio aqui?:Eu quero saber como conseguir frutas.")) {
 		case 1:
 			mes "[Poby]";
 			mes "Estou dando uma volta porque acho que isso fará minha dor nas costas diminuir.";
@@ -1526,7 +1526,7 @@ dew_fild01,259,48,4	script	Poby#dew_drink	538,{
 		mes "O que você deseja fazer?";
 	}
 	next;
-	switch(select("Shake the tree:Kick the tree")) {
+	switch(select("Balance a árvore:Chutar a árvore")) {
 	case 1:
 		specialeffect EF_HITLINE2;
 		set .@message$, "As you shake the palm tree...";
@@ -1576,7 +1576,7 @@ dew_fild01,259,48,4	script	Poby#dew_drink	538,{
 			emotion ET_BEST, playerattached();
 			break;
 		} else {
-			mes "something smashes down on your head, right where that soft spot is, $#*@! that's a one in a million shot.";
+			mes "algo cai em sua cabeça, bem naquele ponto macio, $#*@! essa é uma chance de um em um milhão.";
 			percentheal -30,0;
 			close2;
 			donpcevent strnpcinfo(0)+"::OnDisable";
@@ -1680,7 +1680,7 @@ dew_fild01,127,240,4	script	Gatti#weapon	813,{
 	}
 	if (dew_weapon == 0) {
 		mes "[Gatti]";
-		mes "Hey there, young "+((Sex == SEX_MALE)?"man":"lady")+"~ Are you from around here?";
+		mes "Ei aí, jovem "+((Sex == SEX_MALE)?"man":"lady")+"~ Are you from around here?";
 		next;
 		select("No, I'm not.");
 		mes "[Gatti]";
@@ -1693,7 +1693,7 @@ dew_fild01,127,240,4	script	Gatti#weapon	813,{
 		input .@island_name$;
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "It's called "+ .@island_name$ +". What's wrong?";
+		mes "Isso é chamado "+ .@island_name$ +". What's wrong?";
 		next;
 		if (.@island_name$ == "Dewata Island") {
 			mes "[Gatti]";
@@ -1707,7 +1707,7 @@ dew_fild01,127,240,4	script	Gatti#weapon	813,{
 			close;
 		} else {
 			mes "[Gatti]";
-			mes "Is that so... "+ .@island_name$ +"? "+ .@island_name$ +"... "+ .@island_name$ +"... "+ .@island_name$ +"...";
+			mes "É mesmo... "+ .@island_name$ +"? "+ .@island_name$ +"... "+ .@island_name$ +"... "+ .@island_name$ +"...";
 			next;
 			mes "- O velho deu um suspiro profundo de resignação e continuou a falar. -";
 			next;
@@ -2008,9 +2008,9 @@ dew_fild01,127,240,4	script	Gatti#weapon	813,{
 		close;
 	} else if (dew_weapon >= 7) {
 		mes "[Gatti]";
-		mes "You're "+strcharinfo(0)+",";
+		mes "Você é "+strcharinfo(0)+",";
 		mes "Então, como está a Carícia que eu fiz para você?";
-		switch(select("It's great!:I need another Caress.:Can I make it stronger?")) {
+		switch(select("É ótimo!:Preciso de outro Afago.:Posso deixá-lo mais forte?")) {
 		case 1:
 			mes "[Gatti]";
 			mes "Sim, sim, claro que é ótima.";
@@ -2064,7 +2064,7 @@ dew_fild01,127,240,4	script	Gatti#weapon	813,{
 		case 3:
 			mes "[Gatti]";
 			mes "Então, você quer reforçar sua arma? A arma acaba quebrando de vez em quando durante o processo, mas não acontece com tanta frequência.";
-			if(select("Please reinforce the weapon.:May be next time.") == 2) {
+			if(select("Por favor, reforje a arma.:Talvez da próxima vez.") == 2) {
 				mes "[Gatti]";
 				mes "Sempre que você quiser reforçar a Carícia, basta trazer-me a Carícia e 100.000 zenys.";
 				close;
@@ -2084,7 +2084,7 @@ dew_fild01,127,240,4	script	Gatti#weapon	813,{
 			mes "[Gatti]";
 			mes "^FF0000Terceiro!^009977 Às vezes o reforço falha. A arma não é destruída toda vez que você falha. No entanto, você deve saber que a arma é destruída de vez em quando se você falhar.^000000";
 			next;
-			if(select("Please reinforce the weapon.:Maybe next time.") == 2) {
+			if(select("Por favor, reforje a arma.:Talvez da próxima vez.") == 2) {
 				mes "[Gatti]";
 				mes "Sempre que você quiser reforçar a Carícia, basta trazer-me a Carícia e 100.000 zenys.";
 				close;

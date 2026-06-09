@@ -29,13 +29,13 @@ moc_para01,38,38,3	script	Mission [26 - 40]	857,{
 		mes "Seu nível não é qualificado. Você não pode usar o quadro de avisos.";
 		close;
 	}
-	switch(select("Hunting Mission:Delivery Mission:Gathering Mission:Escort Mission")) {
+	switch(select("Missão de Caça:Missão de Entrega:Missão de Coleta:Missão de Escolta")) {
 	case 1:
 		mes "[Quadro de Missões de Caça]";
 		mes "- Os detalhes da Missão de Caça -";
 		mes "- estão no quadro. -";
 		next;
-		switch(select("Hunting Poison Spore:Hunting Smokie:Hunting Elder Willow(Above Lv.30):Hunting Coco(Above Lv.35):Hunting Thara Frog(Above Lv.38)")) {
+		switch(select("Caçar Esporo Venenoso:Caçar Smokie:Caçar Salgueiro Ancião (Acima do Lv. 30):Caçar Coco (Acima do Lv. 35):Caçar Sapo Thara (Acima do Lv. 38)")) {
 			case 1: callsub L_Quest,8266,0,"Hunting Poison Spore","Sponiac","Geffen","Hunt 10 Poison Spores";
 			case 2: callsub L_Quest,8267,0,"Hunting Smokie","Sponiac","Geffen","Hunt 10 Smokies";
 			case 3: callsub L_Quest,8268,30,"Hunting Elder Willow","Sponiac","Geffen","Hunt 10 Elder Willows";
@@ -47,7 +47,7 @@ moc_para01,38,38,3	script	Mission [26 - 40]	857,{
 		mes "- Os detalhes da Missão de Entrega -";
 		mes "- estão no quadro. -";
 		next;
-		switch(select("Deliver an Insecticide:Deliver Honey:Deliver Blanket(Above Lv.35)")) {
+		switch(select("Entregar um Inseticida:Entregar Mel:Entregar Cobertor (Acima do Lv. 35)")) {
 			case 1: callsub L_Quest,8271,0,"Deliver an Insecticide","Dieshin Man","Morocc Ruins","Get an 'Insecticide' from Dieshin Man and deliver it south east of Payon";
 			case 2: callsub L_Quest,8272,0,"Deliver Honey","Dieshin Man","Morocc Ruins","Get 'Honey' from Dieshin Man and deliver it west of St. Capitolina Abbey";
 			case 3: callsub L_Quest,8273,35,"Deliver Blanket","Dieshin Man","Morocc Ruins","Get Blankets from Dieshin Man and deliver to the field south of Lutie";
@@ -57,7 +57,7 @@ moc_para01,38,38,3	script	Mission [26 - 40]	857,{
 		mes "- Os detalhes da Missão de Coleta -";
 		mes "- estão no quadro. -";
 		next;
-		switch(select("Gather Bones:Gather Animal Skins:Gather Peelings(Above Lv.30):Gather Tails(Above Lv.32):Gather Cookies(Above Lv.35):Gather Mustaches(Above Lv.35)")) {
+		switch(select("Coletar Ossos:Coletar Peles de Animal:Coletar Cascas (Acima do Lv. 30):Coletar Rabos(Acima do Nv.32):Coletar Biscoitos(Acima do Nv.35):Coletar Bigodes(Acima do Nv.35)")) {
 			case 1: callsub L_Quest,8274,0,"Gather Bones","Dashia","Payon","Gather '10 Skel-Bones' and give them to Dashia";
 			case 2: callsub L_Quest,8275,0,"Gather Animal Skins","Dashia","Payon","Gather '10 Bear's Footskins' and '5 Animal Skins' and give them to Dashia";
 			case 3: callsub L_Quest,8276,30,"Gather Peelings","Dashia","Payon","Gather '20 Worm Peelings' and '20 Garlets' and give them to Dashia";
@@ -75,28 +75,28 @@ L_Quest:
 	//QuestID,ReqLvl,Quest,Client,Loc,Desc
 	.@string$ = getarg(2);
 	if (BaseLevel < getarg(1,26)) {
-		mes "Your level doesn't meet the requirements. You can't take the '"+ .@string$ +"' mission.";
+		mes "Seu nível não cumpre os requisitos. Você não pode aceitar a missão '"+ .@string$ +"' mission.";
 		close;
 	}
 	mes "["+ .@string$ +" !!]";
-	mes "Client : "+getarg(3);
-	mes "Client Location : "+getarg(4);
-	mes "Requested Mission : "+getarg(5);
+	mes "Cliente : "+getarg(3);
+	mes "Localização do Cliente : "+getarg(4);
+	mes "Missão Solicitada : "+getarg(5);
 	mes " ";
 	mes "Você aceitará esta missão?";
 	next;
-	if(select("No, I won't accept it.:Yes, I will accept it.") == 1) {
-		mes "You have declined the "+ .@string$ +" mission.";
+	if(select("Não, eu não aceito.:Sim, eu aceito.") == 1) {
+		mes "Você recusou a missão "+ .@string$ +" mission.";
 		close;
 	}
-	if (checkquest(getarg(0)) > -1) mes "You are already doing this mission.";
+	if (checkquest(getarg(0)) > -1) mes "Você já está realizando esta missão.";
 	else {
 		setquest getarg(0);
-		mes "You have accepted the "+ .@string$ +" mission.";
+		mes "Você aceitou a missão "+ .@string$ +" mission.";
 	}
 	mes "Você pode obter uma recompensa do cliente após terminar a missão.";
 	next;
-	mes "For more details, please press 'Alt + U', to get more information from the Quest Window.";
+	mes "Para mais detalhes, pressione 'Alt + U' para obter mais informações na Janela de Missões.";
 	close;
 }
 
@@ -119,7 +119,7 @@ geffen,103,42,5	script	Sponiac	99,{
 	mes "[Sponiac]";
 	mes "Por que você não vai caçar lá fora em vez de ficar andando por aí e perdendo seu tempo?";
 	next;
-	if(select("I am about to leave now.:I've got a Hunting Mission.") == 1) {
+	if(select("Estou prestes a sair agora.:Tenho uma Missão de Caça.") == 1) {
 		mes "[Sponiac]";
 		mes "Ah, bem. Então, resolva você mesmo.";
 		mes "Tchau~ tchau.";
@@ -129,7 +129,7 @@ geffen,103,42,5	script	Sponiac	99,{
 	mes "Ah, você é do Grupo do Éden?";
 	mes "Qual missão você tem?";
 	next;
-	switch(select("Hunting Poison Spore:Hunting Smokie:Hunting Elder Willow:Hunting Coco:Hunting Thara Frog")) {
+	switch(select("Caçar Esporo Venenoso:Caçar Smokie:Caçar Salgueiro Ancião:Caçar Coco:Caçar Sapo Thara")) {
 		case 1: callsub L_Quest,8266,"Hunting Poison Spore",1000,0,100,"You can find Poison Spores on the Geffen Dungeon 1F or northeast of Prontera. There are other spots but I'll leave it up to you to find out.";
 		case 2: callsub L_Quest,8267,"Hunting Smokie",1000,0,100,"You can find Smokies northeast and northwest of Geffen. Oh, also the field east of Ayothaya is good spot to find them.";
 		case 3: callsub L_Quest,8268,"Hunting Elder Willow",1000,100,110,"You can find Elder Willows northeast of Geffen, east of payon and southwest of Prontera.";
@@ -166,7 +166,7 @@ L_Quest:
 		next;
 		mes "[Sponiac]";
 		mes getarg(5);
-		mes "You can check the world map by pressing 'ctrl + ~' key.";
+		mes "Você pode verificar o mapa-múndi pressionando as teclas 'ctrl + ~'.";
 		next;
 		mes "[Sponiac]";
 		mes "De qualquer forma, estarei aqui esperando por você. Por favor, volte quando terminar a missão!";
@@ -177,7 +177,7 @@ L_Quest:
 	next;
 	mes "[Sponiac]";
 	mes "É estranho.";
-	mes "Please check your Quest Window by pressing 'alt + u'.";
+	mes "Por favor, verifique sua Janela de Missões pressionando 'alt + u'.";
 	close;
 }
 
@@ -199,7 +199,7 @@ moc_ruins,173,55,3	script	Dieshin Man	89,{
 	mes "[Homem da Dieshin]";
 	mes "Como posso ajudá-lo?";
 	next;
-	if(select("I don't need help.:I've got a Delivery Mission.") == 1) {
+	if(select("Não preciso de ajuda.:Tenho uma Missão de Entrega.") == 1) {
 		mes "[Homem da Dieshin]";
 		mes "Ah, bem. Então, resolva você mesmo. Tchau~!";
 		close;
@@ -208,7 +208,7 @@ moc_ruins,173,55,3	script	Dieshin Man	89,{
 	mes "Ah, você é do Grupo do Éden?";
 	mes "Qual missão você tem?";
 	next;
-	switch(select("Deliver an Insecticide.:Deliver Honey.:Deliver Blankets.")) {
+	switch(select("Entregar um Inseticida.:Entregar Mel.:Entregar Cobertores.")) {
 		case 1: callsub L_Quest,8271;
 		case 2: callsub L_Quest,8272;
 		case 3: callsub L_Quest,8273;
@@ -221,7 +221,7 @@ L_Quest:
 		next;
 		mes "[Homem da Dieshin]";
 		mes "É estranho.";
-		mes "Please check your Quest Window by pressing 'alt + u'.";
+		mes "Por favor, verifique sua Janela de Missões pressionando 'alt + u'.";
 		close;
 	}
 	if (countitem(6218) > 0) {
@@ -232,7 +232,7 @@ L_Quest:
 		mes "Não podemos permitir que você entregue duas caixas ao mesmo tempo. Portanto, por favor, termine sua entrega primeiro.";
 		next;
 		mes "[Homem da Dieshin]";
-		mes "If you forgot where to deliver, then please check Quest Window by pressing 'alt + u'.";
+		mes "Se você esqueceu onde entregar, por favor, verifique a Janela de Missões pressionando 'alt + u'.";
 		close;
 	}
 	switch(getarg(0)) {
@@ -260,7 +260,7 @@ L_Quest:
 	mes "O motivo da cooperação da Dieshin é oferecer a entrega mais rápida e credenciada. Então, por favor, entregue agora sem qualquer atraso.";
 	next;
 	mes "[Homem da Dieshin]";
-	mes "If you forgot where to make the delivery, then please check the Quest Window by pressing 'alt + u'.";
+	mes "Se você esqueceu onde fazer a entrega, por favor, verifique a Janela de Missões pressionando 'alt + u'.";
 	getitem 6218,1; //Disin_Delivery_Box
 	close;
 }
@@ -282,7 +282,7 @@ pay_fild07,83,89,7	script	Zoologist	89,{
 	mes "[Zoólogo]";
 	mes "Estou estudando isso atualmente e tentando provar a teoria. Então planejo matar as moscas ao redor do Pé Grande e observar sua reação.";
 	next;
-	if(select("...I am not interested.:Here is the Insecticide.") == 1) {
+	if(select("...Não estou interessado.:Aqui está o Inseticida.") == 1) {
 		mes "[Zoólogo]";
 		mes "Ah, preciso de um Inseticida para continuar o estudo.";
 		close;
@@ -347,7 +347,7 @@ prt_fild03,30,254,3	script	Entomologist	83,{
 	mes "[Entomologista]";
 	mes "Estou estudando isso atualmente e tentando provar a teoria. Então planejo colocar uma armadilha de Mel nos lugares por onde ele costuma passar e observar sua reação.";
 	next;
-	if(select("...I am not interested.:Here is the Honey.") == 1) {
+	if(select("...Não estou interessado.:Aqui está o Mel.") == 1) {
 		mes "[Entomologista]";
 		mes "Ah, preciso de Mel para continuar o estudo.";
 		close;
@@ -412,7 +412,7 @@ xmas_fild01,92,57,3	script	Biologist	97,{
 	mes "[Biólogo]";
 	mes "Mas este lugar é muito frio.";
 	next;
-	if(select("...I am not interested.:Here are the blankets.") == 1) {
+	if(select("...Não estou interessado.:Aqui estão os cobertores.") == 1) {
 		mes "[Biólogo]";
 		mes "Hã, tanto faz. Mas tenha cuidado! É muito escorregadio aqui.";
 		close;
@@ -476,7 +476,7 @@ payon,179,66,3	script	Dashia	931,{
 	mes "[Dashia]";
 	mes "Ei~! Cara! Você parece um aventureiro muito rico.";
 	next;
-	if(select("I am a poor adventurer.:I have a gathering mission.") == 1) {
+	if(select("Sou um pobre aventureiro.:Tenho uma missão de coleta.") == 1) {
 		mes "[Dashia]";
 		mes "Sério? Hmm, ah certo. Você não parece sofisticado.";
 		next;
@@ -488,7 +488,7 @@ payon,179,66,3	script	Dashia	931,{
 	mes "Ah, você é do Grupo do Éden?";
 	mes "Qual missão você tem?";
 	next;
-	switch(select("Gather Bones:Gather Animal Skin:Gather Peelings:Gather Tails:Gather Cookies:Gather Mustaches")) {
+	switch(select("Coletar Ossos:Coletar Pele de Animal:Coletar Cascas:Coletar Rabos:Coletar Biscoitos:Coletar Bigodes")) {
 	case 1:
 		callsub L_Quest,8274;
 		if (countitem(932) > 9) {
@@ -657,7 +657,7 @@ L_Quest:
 		next;
 		mes "[Dashia]";
 		mes "É estranho.";
-		mes "Please check your Quest Window by pressing 'alt + u'.";
+		mes "Por favor, verifique sua Janela de Missões pressionando 'alt + u'.";
 		close;
 	}
 	return;

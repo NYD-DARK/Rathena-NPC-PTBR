@@ -29,16 +29,16 @@ moc_para01,42,38,3	script	Mission [56 - 70]	857,{
 	next;
 	mes "Muitas missões, como Caça a Monstros, Entrega de Mercadorias e Encontrar Pessoas.";
 	next;
-	switch(select("Mission Numbers 1~5:Mission Numbers 6~10:Mission Numbers 11~15")) {
+	switch(select("Missões de Número 1~5:Missões de Número 6~10:Missões de Número 11~15")) {
 	case 1:
-		switch(select("What is this Bandage?:Dangerous Alligators.:That wasn't a mermaid...:My country is calling me!")) {
+		switch(select("O que é este Bandagem?:Jacarés Perigosos.:Aquilo não era uma sereia...:Meu país está me chamando!")) {
 			case 1: callsub L_HuntingQuest,3250,15000,5000,930,30;
 			case 2: callsub L_HuntingQuest,3251,16000,6000;
 			case 3: callsub L_HuntingQuest,3252,17000,8000;
 			case 4: callsub L_Quest,3254,18000,8000,7043,10,1056,30;
 		}
 	case 2:
-		switch(select("Hunt Wild Boar:Preparing the Summer:A Woman's Grudge:Special ingredients:Puppet Master's Agony")) {
+		switch(select("Caçar Javalis Selvagens:Preparando o Verão:O Ressentimento de uma Mulher:Ingredientes Especiais:A Agonia do Mestre dos Fantoches")) {
 			case 1: callsub L_HuntingQuest,3255,16000,7000;
 			case 2: callsub L_Quest,3256,15000,5000,918,30;
 			case 3: callsub L_HuntingQuest,3257,17000,8000;
@@ -46,7 +46,7 @@ moc_para01,42,38,3	script	Mission [56 - 70]	857,{
 			case 5: callsub L_HuntingQuest,3259,17000,7000,1060,30;
 		}
 	case 3:
-		switch(select("Tiresome Flies:Dangerous Munak:Make the World green:Magic Wand")) {
+		switch(select("Moscas Incomodas:Munaks Perigosos:Tornar o Mundo Verde:Varinha Mágica")) {
 			case 1: callsub L_HuntingQuest,3260,16000,6000;
 			case 2: callsub L_HuntingQuest,3261,16000,7000;
 			case 3: callsub L_Quest,3262,17000,7000,1032,40;
@@ -62,7 +62,7 @@ L_Quest:
 		next;
 		mes "Você gostaria de aceitar esta missão?";
 		next;
-		if(select("Accept the mission.:Do not accept the mission.") == 1) {
+		if(select("Aceitar a missão.:Não aceitar a missão.") == 1) {
 			if (BaseLevel < 55 || BaseLevel > 70) {
 				mes "Essas missões não são adequadas para o meu nível. Devo procurar outras missões.";
 				close;
@@ -83,13 +83,13 @@ L_Quest:
 	if (checkquest(.@quest_id) < 2 && (countitem(getarg(3)) < getarg(4) || .@items == 1)) {
 		mes "Você tem uma missão em andamento. Gostaria de verificar os detalhes?";
 		next;
-		if(select("Check the details.:Cancel.") == 1)
+		if(select("Verificar os detalhes.:Cancelar.") == 1)
 			callsub L_Details, .@quest_id;
 		close;
 	} else {
 		mes "Eu me saí muito bem na missão. Devo relatá-la agora?";
 		next;
-		if(select("Report the mission.:Do not report it yet.") == 1) {
+		if(select("Reportar a missão.:Ainda não reportar.") == 1) {
 			delitem getarg(3),getarg(4);
 			if (.@items)
 				delitem getarg(5),getarg(6);
@@ -108,7 +108,7 @@ L_HuntingQuest:
 		next;
 		mes "Você gostaria de aceitar esta missão?";
 		next;
-		if(select("Accept the mission.:Do not accept the mission.") == 1) {
+		if(select("Aceitar a missão.:Não aceitar a missão.") == 1) {
 			if (BaseLevel < 55 || BaseLevel > 70) {
 				mes "Essas missões não são adequadas para o meu nível. Devo procurar outras missões.";
 				close;
@@ -129,13 +129,13 @@ L_HuntingQuest:
 	if (checkquest(.@quest_id,HUNTING) < 2 || .@items == 1) {
 		mes "Você tem uma missão em andamento. Gostaria de verificar os detalhes?";
 		next;
-		if(select("Check the details.:Cancel.") == 1)
+		if(select("Verificar os detalhes.:Cancelar.") == 1)
 			callsub L_Details, .@quest_id;
 		close;
 	} else if (checkquest(.@quest_id,HUNTING) == 2) {
 		mes "Eu me saí muito bem na missão. Devo relatá-la agora?";
 		next;
-		if(select("Report the mission.:Do not report it yet.") == 1) {
+		if(select("Reportar a missão.:Ainda não reportar.") == 1) {
 			if (.@items)
 				delitem getarg(3),getarg(4);
 			getexp getarg(1),getarg(2);

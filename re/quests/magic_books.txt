@@ -67,7 +67,7 @@ geffen_in,176,105,4	script	Master Velofos	1_M_WIZARD,{
 	mes "[Mestre Velofos]";
 	mes "A propósito, o que o traz até mim hoje?";
 	next;
-	switch (select("Nothing.:Do you know the Reading Spell Book?:What's the Freezing Spell?:Can I have a Magic Book?:Can I use the Reading Spell Book without the Freezing Spell?:About the Ultimate Magic Book")) {
+	switch (select("Nada.:Você conhece o Livro de Leitura de Magia?:Qual é o Feitiço de Congelamento?:Posso pegar um Livro de Magia?:Posso usar o Livro de Leitura de Magia sem o Feitiço de Congelamento?:Sobre o Livro de Magia Supremo")) {
 	case 1:
 		mes "[Mestre Velofos]";
 		mes "Hah! Você é engraçado.";
@@ -76,7 +76,7 @@ geffen_in,176,105,4	script	Master Velofos	1_M_WIZARD,{
 		mes "[Mestre Velofos]";
 		mes "Ler Livro de Magia significa literalmente 'ler um livro de magia'. Você sabe como usar Livros de Magia?";
 		next;
-		switch (select("Yes, I do.:No, I don't.")) {
+		switch (select("Sim, eu sei.:Não, eu não sei.")) {
 		case 1:
 			mes "[Mestre Velofos]";
 			mes "Bem, então você não precisa de uma aula adicional.";
@@ -173,7 +173,7 @@ geffen_in,176,105,4	script	Master Velofos	1_M_WIZARD,{
 		mes "[Mestre Velofos]";
 		mes "Sinto muito, mas eu só tenho Livros Mágicos para iniciantes, mas eles obviamente não são adequados para você. Você ainda quer um?";
 		next;
-		switch (select("Sure thing.:Where can I find advanced books?")) {
+		switch (select("Claro.:Onde posso encontrar livros avançados?")) {
 		case 1:
 			mes "[Mestre Velofos]";
 			mes "Por favor, vá falar com a [Lea] no Arquivo. Diga a ela que você precisa de um dos Livros Mágicos que armazenei lá.";
@@ -286,7 +286,7 @@ geffen_in,175,112,4	script	Lea	2_F_MAGICMASTER,{
 		mes "[Lea]";
 		mes "Você está pegando um livro emprestado?";
 		next;
-		switch (select("Let me think.:I want the Intermediate Magic Books.:I want the Superior Magic Books.:I want the Ultimate Magic Books.")) {
+		switch (select("Deixe-me pensar.:Eu quero os Livros de Magia Intermediários.:Eu quero os Livros de Magia Superiores.:Eu quero os Livros de Magia Supremos.")) {
 		case 1:
 			mes "[Lea]";
 			mes "Sem problemas.";
@@ -298,7 +298,7 @@ geffen_in,175,112,4	script	Lea	2_F_MAGICMASTER,{
 			mes "[Lea]";
 			mes "Que tipo de Livro de Magia você deseja?";
 			next;
-			set .@i, select("Let me think.:Magic Book (Storm Gust):Magic Book (Lord of Vermillion):Magic Book (Meteor Storm)")-1;
+			set .@i, select("Deixe-me pensar.:Livro de Magia (Nevasca):Livro de Magia (Ira de Thor):Livro de Magia (Chuva de Meteoros)")-1;
 			mes "[Lea]";
 			if (!.@i) {
 				mes "Sem problemas.";
@@ -331,7 +331,7 @@ geffen_in,175,112,4	script	Lea	2_F_MAGICMASTER,{
 			mes "[Lea]";
 			mes "Que tipo de Livro de Magia você deseja?";
 			next;
-			set .@i, select("Let me think.:Magic Book (Drain Life):Magic Book (Jack Frost):Magic Book (Earth Strain):Magic Book (Crimson Rock):Magic Book (Chain Lightning)")-1;
+			set .@i, select("Deixe-me pensar.:Livro de Magia (Drenar Vida):Livro de Magia (Geada):Livro de Magia (Sepultura):Livro de Magia (Pedra Escarlate):Livro de Magia (Corrente Elétrica)")-1;
 			mes "[Lea]";
 			if (!.@i) {
 				mes "Sem problemas.";
@@ -514,7 +514,7 @@ mid_camp,255,244,4	script	Galfos	4_M_JOB_WIZARD,{
 		mes "Oh, você encontrou";
 		mes "algo útil?";
 		next;
-		set .@i, select("I've discovered everything about Comet.:I've mastered the zenith of Tetra Vortex.");
+		set .@i, select("Eu descobri tudo sobre Cometa.:Eu dominei o auge de Tetra Vortex.");
 		mes "[Galfos]";
 		if ((.@i == 1 && countitem(100073)) || (.@i == 2 && countitem(100074))) {
 			mes "Você está brincando comigo? Você já tem o livro!";
@@ -529,7 +529,7 @@ mid_camp,255,244,4	script	Galfos	4_M_JOB_WIZARD,{
 			mes "[Galfos]";
 			mes "Preciso de pelo menos ^0000aa500.000 zenys^000000 para comprar todas as ferramentas necessárias. Você tem o dinheiro?";
 			next;
-			if(select("Wh-what? No!:Sure.") == 1) {
+			if(select("O-o quê? Não!:Claro.") == 1) {
 				mes "[Galfos]";
 				mes "Ah, você não tem? É decepcionante, mas não há nada que eu possa fazer. Volte quando tiver dinheiro suficiente, ok?";
 				close;
@@ -710,18 +710,18 @@ function	script	Magic_Book_Essence	{
 		progressbar "ffff00",4;
 		delitem .@item_req,.@req_amount;
 		if (rand(2)) {
-			mes "You have used "+ callfunc("F_InsertPlural",.@req_amount,getitemname(.@item_req)) +" to create ^999900"+ getarg(3) +" Essence^000000.";
+			mes "Você usou "+ callfunc("F_InsertPlural",.@req_amount,getitemname(.@item_req)) +" to create ^999900"+ getarg(3) +" Essence^000000.";
 			next;
-			mes "^008800The "+getarg(3)+" Essence will last permanently, unless there's a problem.^000000";
+			mes "^008800O "+getarg(3)+" Essence will last permanently, unless there's a problem.^000000";
 			completequest getarg(0);
 			specialeffect2 EF_LORD;
 			close;
 		}
-		mes "^008888You have failed to refine the essence using "+ callfunc("F_InsertPlural",.@req_amount,getitemname(.@item_req)) +".^000000";
+		mes "^008888Você falhou ao refinar a essência usando "+ callfunc("F_InsertPlural",.@req_amount,getitemname(.@item_req)) +".^000000";
 		close;
 	}
 	if (checkquest(getarg(0)) == 2) {
-		mes "You've already created "+getarg(3)+" Essence in this area.";
+		mes "Você já criou "+getarg(3)+" Essence in this area.";
 		close;
 	}
 	mes "Alguém já usou esta área.";

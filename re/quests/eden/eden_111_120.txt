@@ -136,7 +136,7 @@ moc_para01,17,95,5	script	Mingmin#1	4_F_GENETIC,{
 	}
 	else if (para_110lv01 == 3) {
 		cutin "min02",0;
-		mes "Question "+ strcharinfo(0) +"! I was practising because new servant is coming soon.";
+		mes "Pergunta "+ strcharinfo(0) +"! I was practising because new servant is coming soon.";
 		next;
 		select("Waddya mean new servant?");
 		mes "[Mingmin]";
@@ -182,15 +182,15 @@ moc_para01,17,95,5	script	Mingmin#1	4_F_GENETIC,{
 		mes "Chega de enrolação, quero fazer um contrato com alguém que realmente anseia por aventura.";
 		next;
 		mes "[Mingmin]";
-		mes "Maybe "+ strcharinfo(0) +" I'll let you be my servant if you are interested in doing this Eden Group request for my research.";
+		mes "Talvez "+ strcharinfo(0) +" I'll let you be my servant if you are interested in doing this Eden Group request for my research.";
 		para_110lv01 = 4;
 	}
 	else if (para_110lv01 > 3) {
 		cutin "min01",0;
 		if (para_110lv01 == 5)
-			mes "Welcome! "+ strcharinfo(0) +"...";
+			mes "Bem-vindo! "+ strcharinfo(0) +"...";
 		else
-			mes "Hello "+ strcharinfo(0) +".";
+			mes "Olá "+ strcharinfo(0) +".";
 			next;
 		switch( select( "Request to research monsters", "Make small-talk" ) ) {
 			mes "[Mingmin]";
@@ -922,7 +922,7 @@ moc_para01,17,95,5	script	Mingmin#1	4_F_GENETIC,{
 			}
 			else {
 				cutin "min01",0;
-				mes "Contract is terminated. "+ strcharinfo(0) +" reward for completed research. ^FF0000I will delete incompleted research from your quest list.^000000";
+				mes "O contrato foi encerrado. "+ strcharinfo(0) +" reward for completed research. ^FF0000I will delete incompleted research from your quest list.^000000";
 				para_110lv01 = 6;
 				next;
 				callsub S_Hunting,
@@ -949,7 +949,7 @@ moc_para01,17,95,5	script	Mingmin#1	4_F_GENETIC,{
 				mes "É um pouco inconveniente. Lerei para você educadamente ^FF0000novamente^000000 em público.";
 				next;
 				mes "[Mingmin]";
-				mes "Anyway "+ strcharinfo(0) +" thank you for helping me start my research.";
+				mes "De qualquer forma "+ strcharinfo(0) +" thank you for helping me start my research.";
 				next;
 				cutin "min03",0;
 				mes "[Mingmin]";
@@ -1108,13 +1108,13 @@ S_Hunting:
 			continue;
 		case 2:
 			mes "[Mingmin]";
-			mes "You finished researching about "+ getarg(.@i+2) +". Thank you.";
+			mes "Você terminou de pesquisar sobre "+ getarg(.@i+2) +". Thank you.";
 			getexp 700000,getarg(.@i+1);
 			break;
 		case 0:
 		case 1:
 			mes "[Mingmin]";
-			mes "I will delete "+ getarg(.@i+2) +" research from request list.";
+			mes "Eu vou apagar a pesquisa "+ getarg(.@i+2) +" research from request list.";
 		}
 		erasequest .@quest_id;
 		next;
@@ -1128,9 +1128,9 @@ S_Gathering:
 		mes "[Mingmin]";
 		if (countitem(getarg(3)) >= getarg(4) && .@count_item2 >= getarg(6,0)) {
 			if (.@count_item2)
-				mes "You finished researching about "+ getitemname(getarg(3)) +" and "+ getitemname(getarg(5)) +". Thank you.";
+				mes "Você terminou de pesquisar sobre "+ getitemname(getarg(3)) +" and "+ getitemname(getarg(5)) +". Thank you.";
 			else
-				mes "You finished researching about "+ getitemname(getarg(3)) +". Thank you.";
+				mes "Você terminou de pesquisar sobre "+ getitemname(getarg(3)) +". Thank you.";
 			delitem getarg(3),getarg(4);
 			if (getarg(5,0))
 				delitem getarg(5),getarg(6);
@@ -1138,9 +1138,9 @@ S_Gathering:
 		}
 		else {
 			if (getarg(5,0))
-				mes "I will delete "+  getitemname(getarg(3)) +" and "+ getitemname(getarg(5)) +" research from request list.";
+				mes "Eu vou apagar as pesquisas "+  getitemname(getarg(3)) +" and "+ getitemname(getarg(5)) +" research from request list.";
 			else
-				mes "I will delete "+  getitemname(getarg(3)) +" research from request list.";
+				mes "Eu vou apagar a pesquisa "+  getitemname(getarg(3)) +" research from request list.";
 		}
 		erasequest .@quest_id;
 		next;

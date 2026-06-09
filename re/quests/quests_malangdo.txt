@@ -63,7 +63,7 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 		mes "Primeiro, você precisa ter dez unidades de latas de Malangdo se quiser abrir uma conta.";
 		next;
 		while(1) {
-			switch(select("Open an account:Ask about benefits:Cancel")) {
+			switch(select("Abrir uma conta:Perguntar sobre benefícios:Cancelar")) {
 			case 1:
 				if (countitem(12636) < 10) {
 					mes "[Auxiliar de Investimento Gato]";
@@ -85,7 +85,7 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 				mes strcharinfo(0)+" you are~";
 				next;
 				mes "[Auxiliar de Investimento Gato]";
-				mes "Name: "+strcharinfo(0);
+				mes "Nome: "+strcharinfo(0);
 				mes "Número de contas: 10";
 				mes "OK! Registrado!";
 				next;
@@ -161,7 +161,7 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 		mes "[Auxiliar de Investimento Gato]";
 		mes "O que você fará?";
 		next;
-		switch(select("Invest:Check the number of accounts:Cancel")) {
+		switch(select("Investir:Verificar o número de contas:Cancelar")) {
 		case 1:
 			mes "[Auxiliar de Investimento Gato]";
 			mes "Ohh~ obrigado por investir~";
@@ -182,10 +182,10 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 			set .@required, .@input*.@cans;
 			mes "[Auxiliar de Investimento Gato]";
 			mes "Total " + .@input + " accounts, right?";
-			mes "The number of cans you need is "+.@required+" pieces.";
+			mes "O número de latas que você precisa é "+.@required+" pieces.";
 			mes "Você quer prosseguir com isso?";
 			next;
-			if(select("Yes:No") == 2) {
+			if(select("Sim:Não") == 2) {
 				mes "[Auxiliar de Investimento Gato]";
 				mes "Oh? Está errado? Estranho.";
 				mes "Por favor, verifique novamente~";
@@ -222,7 +222,7 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 					mes "Muito obrigado pelo seu investimento~";
 					next;
 					mes "[Auxiliar do Gato Investidor]";
-					mes "Now, "+strcharinfo(0)+", you can't invest further";
+					mes "Agora, "+strcharinfo(0)+", you can't invest further";
 					mes "mas você ainda pode doar algumas de suas latas para o grupo de negociantes.";
 					mes "Muito obrigado~";
 					close;
@@ -245,8 +245,8 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 			mes "Você quer verificar o número de contas? Hum, vamos ver~";
 			next;
 			mes "[Auxiliar do Gato Investidor]";
-			mes "Name: "+strcharinfo(0);
-			mes "Number of accounts: "+ep13_yong1;
+			mes "Nome: "+strcharinfo(0);
+			mes "Número de contas: "+ep13_yong1;
 			next;
 			mes "[Auxiliar do Gato Investidor]";
 			if (ep13_yong1 < 10000)
@@ -267,13 +267,13 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 		mes "[Auxiliar do Gato Investidor]";
 		mes "Quer doar?";
 		next;
-		if(select("Donate:No") == 2) {
+		if(select("Doar:Não") == 2) {
 			mes "[Auxiliar do Gato Investidor]";
 			mes "Hehe~ então divirta-se aqui~";
 			close;
 		}
 		mes "[Auxiliar do Gato Investidor]";
-		mes "Wow, thank you, "+strcharinfo(0)+"~!";
+		mes "Uau, obrigado, "+strcharinfo(0)+"~!";
 		next;
 		mes "[Auxiliar do Gato Investidor]";
 		mes strcharinfo(0)+"~ with your help";
@@ -298,7 +298,7 @@ mal_in02,134,31,5	script	Investment Cat Helper	505,{
 			mes "Ohh! Obrigado~";
 			next;
 			mes "[Auxiliar do Gato Investidor]";
-			mes "Dear "+strcharinfo(0)+" ~";
+			mes "Querido "+strcharinfo(0)+" ~";
 			mes "Eu só tenho Aumentar Agilidade";
 			mes "e Bênção para lhe dar.";
 			mes "Obrigado.";
@@ -321,11 +321,11 @@ malangdo,184,139,4	script	Storekeeper#mal	560,{
 	if (ep13_yong1 > 999) {
 		set .@cans,1;
 		set .@zeny,1500;
-		set .@i, select("Pay with Can ----- 1 unit:Pay with Zeny ------- 1,500z");
+		set .@i, select("Pagar com Lata ----- 1 unidade:Pagar com Zeny ------- 1.500z");
 	} else {
 		set .@cans,2;
 		set .@zeny,3000;
-		set .@i, select("Pay with Can ----- 2units:Pay with Zeny ------- 3,000z");
+		set .@i, select("Pagar com Lata ----- 2 unidades:Pagar com Zeny ------- 3.000z");
 	}
 	if(!callfunc("F_CanOpenStorage")){
 		mes "[Armazenista]";
@@ -371,7 +371,7 @@ mal_in02,28,56,5	script	Samuel#mal	495,{
 	mes "^0000FFMas seria impossível conversar sem incomodá-lo de qualquer forma......^000000";
 	mes "Ele simplesmente está sempre ocupado.";
 	next;
-	switch(select("Ad...?:Village chief?")) {
+	switch(select("Ad...?:Chefe da vila?")) {
 	case 1:
 		mes "[Samuel]";
 		mes "Ah, havia um almirante deste navio antes de se estabelecer aqui~";
@@ -462,14 +462,14 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 		mes "Então, a quantidade das próximas caixas é 1300....";
 		mes "E a seguir, as 700 caixas lá embaixo para carregar no navio...";
 		next;
-		switch(select("Try to talk to him.:Stop since he seems busy.")) {
+		switch(select("Tentar falar com ele.:Parar já que ele parece ocupado.")) {
 		case 1:
 			mes "[Tomas, Chefe da Vila]";
 			mes "Hum, quem é você?";
 			mes "Você não é familiar. Desculpe, mas você poderia vir novamente se não for tão urgente?";
 			cutin "ma_tomas01",2;
 			next;
-			switch(select("It's my first time to Malangdo.:Another cat told me to come over here.:I will come around again later.")) {
+			switch(select("É a primeira vez que venho a Malangdo.:Outro gato me disse para vir aqui.:Voltarei novamente mais tarde.")) {
 			case 1:
 				mes "[Tomas, Chefe da Vila]";
 				mes "...Então eu te disse que seu rosto não era familiar.";
@@ -917,7 +917,7 @@ mal_in02,174,64,5	script	Linguist Devore#mal	549,{
 		emotion ET_HUK;
 		next;
 		mes "[Linguista Devore]";
-		mes "Ah, ah! Thanks to you, "+strcharinfo(0)+"!";
+		mes "Ah, ah! Graças a você, "+strcharinfo(0)+"!";
 		mes "Sinto-me tão grato.";
 		next;
 		mes "[Linguista Devore]";
@@ -942,7 +942,7 @@ mal_in02,174,64,5	script	Linguist Devore#mal	549,{
 	mes "[Linguista Devore]";
 	mes "Ah, ah!!";
 	mes "O estudo sobre a Estrela do Mar está indo bem.";
-	mes "It could've really been a disaster, if you, "+strcharinfo(0)+", didn't help us.";
+	mes "Poderia ter sido um verdadeiro desastre, se você, "+strcharinfo(0)+", didn't help us.";
 	emotion ET_THANKS;
 	close;
 }
@@ -1037,7 +1037,7 @@ mal_in02,179,57,1	script	Geologist Mali#mal	559,{
 		mes "Então, recebemos inscrições para serviço voluntário, miau~";
 		mes "Embora seja serviço voluntário, não é de graça. Então, por favor, visite-me quando quiser, miau~";
 		next;
-		switch(select("Help repairing.:Finish the talk.")) {
+		switch(select("Ajude a reparar.:Terminar a conversa.")) {
 		case 1:
 			mes "[Geóloga Mali]";
 			mes "Khhh!!!";
@@ -1126,7 +1126,7 @@ mal_in02,179,57,1	script	Geologist Mali#mal	559,{
 			mes "Ainda há muito mais reparos a serem feitos hoje!";
 			mes "Não parece ser algo fácil de resolver, miau~";
 			next;
-			switch(select("I will help.:I will stop.")) {
+			switch(select("Eu vou ajudar.:Eu vou parar.")) {
 			case 1:
 				mes "[Geóloga Mali]";
 				mes "Por favor, ouça ^6666ccmeu assistente, Bob^000000 em detalhes, miau~";
@@ -1184,7 +1184,7 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 			mes "Você parece estar carregando muitos itens pesados, então alivie seu peso~";
 			close;
 		}
-		switch(select("Yes.:No.")) {
+		switch(select("Sim.:Não.")) {
 		case 1:
 			mes "[Bob]";
 			mes "Khhh...";
@@ -1332,7 +1332,7 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 			end;
 		} else {
 			while (1) {
-				switch(select("Repair the gap.:Use the stapler.")) {
+				switch(select("Reparar a fenda.:Use o grampeador.")) {
 				case 1:
 					switch(rand(1,3)) {
 					case 1:
@@ -1488,7 +1488,7 @@ mal_in02,181,55,3	script	Brie#mal	545,{
 		mes "O quê?!";
 		mes "Eu não vou ouvir se você ficar reclamando.";
 		next;
-		switch(select("About Rican.:I will stop.")) {
+		switch(select("Sobre Rican.:Eu vou parar.")) {
 		case 1:
 			mes "[Brie]";
 			mes "Quanto ao meu pai?";
@@ -1695,7 +1695,7 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 		mes "Por esse motivo, você gostaria de me ajudar?";
 		mes "Embora meu filho esteja me ajudando, a quantidade que podemos preparar não é suficiente.";
 		next;
-		switch(select("I'll help him.:I won't.")) {
+		switch(select("Eu vou ajudá-lo.:Não vou.")) {
 		case 1:
 			mes "[Rican]";
 			mes "Khhh!";
@@ -1833,7 +1833,7 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 			mes "Você veio aqui para me ajudar de novo?";
 			mes "Você é muito fiel!";
 			next;
-			switch(select("I'll help.:I won't.")) {
+			switch(select("Vou ajudar.:Não vou.")) {
 			case 1:
 				mes "[Rican]";
 				mes "É a mesma tarefa de antes.";
@@ -1869,7 +1869,7 @@ mal_in01,116,168,0	script	Dry Machine#mal	563,{
 			mes "Você precisa de exatamente 30 para conseguir um conjunto!";
 			close;
 		}
-		switch(select("Put the fruits in.:Don't.")) {
+		switch(select("Coloque as frutas.:Não.")) {
 		case 1:
 			mes "[Rican]";
 			mes "Eu mesmo vou apertar o botão!!!";
@@ -2095,7 +2095,7 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 		mes "...O que você está olhando...";
 		next;
 		while(1) {
-			switch(select("Ask about Star Candy.:Ask about Biscuit.:Ask about Malangdo.")) {
+			switch(select("Perguntar sobre Balas Estreladas.:Perguntar sobre Biscoito.:Perguntar sobre Malangdo.")) {
 			case 1:
 				mes "[Biscuit]";
 				mes "Estrela de Doce?";
@@ -2176,7 +2176,7 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 		mes "Ei, você não foi embora ainda?";
 		mes "Pegue algumas geleias para a Estrela de Doce comer se você tiver tempo.";
 		next;
-		switch(select("Okay.:Why me?")) {
+		switch(select("Ok.:Por que eu?")) {
 		case 1:
 			mes "[Biscuit]";
 			mes "Você pode conseguir as geleias por aqui.";
@@ -2287,7 +2287,7 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 		mes "Ei, você aí...";
 		mes "Mesmo eu pedindo assim, você vai apenas me ignorar e ficar parado aí?";
 		next;
-		select("I'll help.:It's unavoidable, so I'll help.:I'll admit this is my destiny, so I'll and help.:I'll do anything I can for Star Candy.");
+		select("Eu vou ajudar.:It's unavoidable, so Eu vou ajudar.:Eu admito que este é o meu destino, então vou ajudar.:Eu farei qualquer coisa que puder pelo Star Candy.");
 		mes "[Biscuit]";
 		mes "Boa atitude!";
 		mes "Hoo hoo~";
@@ -2400,7 +2400,7 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 			mes "Está na hora da Star Candy fazer uma refeição.";
 			mes "Consiga algumas geleias.";
 			next;
-			switch(select("I'll help.:I'll stop.")) {
+			switch(select("Eu vou ajudar.:Eu vou parar.")) {
 			case 1:
 				mes "[Biscuit]";
 				mes "Você pode conseguir as geleias por aqui.";
@@ -2442,7 +2442,7 @@ OnTouch:
 	mes "[Equipe de Limpeza]";
 	mes "Tudo seu. Existem várias ferramentas de limpeza aqui.";
 	next;
-	switch(select("Bucket:Cleaning Brush:Stop.")) {
+	switch(select("Balde:Escova de Limpeza:Parar.")) {
 	case 1:
 		mes "[Equipe de Limpeza]";
 		mes "Você quer dizer o Balde!";
@@ -2495,7 +2495,7 @@ malangdo,246,184,0	script	1st Rate Point	111,{
 	}
 	mes "- A água parece tão pura. -";
 	next;
-	switch(select("Get water.:Stop.")) {
+	switch(select("Pegar água.:Parar.")) {
 	case 1:
 		mes "- O balde fica visivelmente -";
 		mes "- pesado conforme a água o enche. -";
@@ -2600,7 +2600,7 @@ mal_dun01,133,125,5	script	Star Candy#mal	552,{
 	}
 	if (ma_tomas != .@index) {
 		mes "- Sinto muito pela pele -";
-		mes "- to be so "+.@str$+". -";
+		mes "- ser tão "+.@str$+". -";
 		close;
 	}
 	if (!countitem(6433) || !countitem(6432)) {
@@ -2609,7 +2609,7 @@ mal_dun01,133,125,5	script	Star Candy#mal	552,{
 		mes "- e um balde cheio. -";
 		close;
 	}
-	mes "- Poured water on the "+.@str$+" skin. -";
+	mes "- Despejou água no "+.@str$+" skin. -";
 	delitem 6432,1; //Full_Bucket
 	getitem 6431,1; //Bucket
 	next;
@@ -2621,13 +2621,13 @@ mal_dun01,133,125,5	script	Star Candy#mal	552,{
 	case 1:
 	case 3:
 		mes "- Despejou água em -";
-		mes "- the "+.@str$+" skin -";
+		mes "- o "+.@str$+" skin -";
 		mes "- e escovou com força. -";
 		specialeffect EF_BUBBLE;
 		if (rand(1,3) > 1)
 			close;
 		next;
-		mes "- The "+.@str$+" skin turned -";
+		mes "- O "+.@str$+" skin turned -";
 		mes "- macio e hidratado. -";
 		switch(rand(1,50)) {
 		case 7:
@@ -2696,14 +2696,14 @@ malangdo,190,167,7	script	Portali#mal	546,{
 	mes "Vou deixar você ir para a terra de Midgard com a nova habilidade que descobri!";
 	mes "Não é de graça. Vou precisar de comida enlatada!";
 	next;
-	switch(select("Go.:Don't go.:Prices?")) {
+	switch(select("Ir.:Não ir.:Preços?")) {
 	case 1:
 		if (countitem(12636) < 4) {
 			mes "[Portali]";
 			mes "Aonde você vai sem comida enlatada...?";
 			close;
 		}
-		switch(select("Rune-Midgarts:Schwarzwald Republic:Arunafeltz Kingdom")) {
+		switch(select("Rune-Midgarts:República de Schwarzwald:Reino de Arunafeltz")) {
 		case 1:
 			switch(select("Prontera:Morocc:Alberta:Al De Baran:Payon:Geffen")) {
 				case 1: callsub L_Warp,"Prontera",4,"prontera",155,111;
@@ -2745,7 +2745,7 @@ L_Warp:
 		close;
 	}
 	mes "[Portali]";
-	mes "Then to "+getarg(0)+"~";
+	mes "Então para "+getarg(0)+"~";
 	delitem 12636,getarg(1); //Malang_Sp_Can
 	close2;
 	warp getarg(2),getarg(3),getarg(4);
@@ -2818,7 +2818,7 @@ malangdo,137,200,6	script	Pipielle	549,{
 		mes "[Pipielle]";
 		mes "De qualquer forma, agora estou coletando espécimes para estudar os monstros daqui. Espero que você possa me ajudar.";
 		next;
-		if(select("How can I help you?:I have to decline.") == 2) {
+		if(select("Como posso te ajudar?:Eu tenho que recusar.") == 2) {
 			mes "[Pipielle]";
 			mes "Ah, tudo bem. Se mudar de ideia, por favor, venha novamente.";
 			close;
@@ -2853,12 +2853,12 @@ malangdo,137,200,6	script	Pipielle	549,{
 		mes "[Pipielle]";
 		mes "Ah, você conheceu o Almirante Tomas... como foi?";
 		next;
-		if(select("He looks gentle:He looks terrible") == 2) {
+		if(select("Ele parece gentil:Ele parece terrível") == 2) {
 			mes "[Pipielle]";
 			mes "Hmm...";
 			mes "Francamente falando, eu era muito fã do Almirante Tomas. Você pode se responsabilizar pelo que disse?";
 			next;
-			if(select("Just kidding!:Oh yes, he was really terrible!") == 2) {
+			if(select("Só estava brincando!:Ah sim, ele era realmente terrível!") == 2) {
 				mes "[Pipielle]";
 				mes "Sério?";
 				mes "Certo, isso depende muito do gosto pessoal...";
@@ -2919,7 +2919,7 @@ malangdo,175,206,3	script	Gobonge#ml	561,{
 		mes "[Gobonge]";
 		mes "Você vai ouvir minha tristeza?";
 		next;
-		switch(select("Sure I will.:No, I won't.")) {
+		switch(select("Claro que sim.:Não, não vou.")) {
 		case 1:
 			mes "[Gobonge]";
 			mes "Esta é uma história triste.";
@@ -2942,7 +2942,7 @@ malangdo,175,206,3	script	Gobonge#ml	561,{
 			mes "isso me machuca muito!";
 			emotion ET_CRY;
 			next;
-			switch(select("You deserve the pain!:Need help?")) {
+			switch(select("Você merece a dor!:Precisa de ajuda?")) {
 			case 1:
 				mes "[Gobonge]";
 				mes "Sim, você é!";
@@ -2953,7 +2953,7 @@ malangdo,175,206,3	script	Gobonge#ml	561,{
 				mes "Por favor, encontre o fornecedor ruim";
 				mes "e vingue nosso inimigo!";
 				next;
-				switch(select("No, I don't want to!:Yes, I'll do it!")) {
+				switch(select("Não, não quero!:Sim, eu farei!")) {
 				case 1:
 					mes "[" + strcharinfo(0) + "]";
 					mes "Pela paz em Malangdo,";
@@ -3027,7 +3027,7 @@ malangdo,175,206,3	script	Gobonge#ml	561,{
 		mes "Eu quero que você vá primeiro para acalmá-lo.";
 		mes "O que acha?";
 		next;
-		switch(select("It's troublsome, I quit.:Sure I will!")) {
+		switch(select("É muito chato, desisto.:Claro que sim!")) {
 		case 1:
 			mes "[Gobonge]";
 			mes "Haha, você acha que é uma palavra ruim.";
@@ -3248,7 +3248,7 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 		mes "Devido a muito trabalho por aqui";
 		mes "não posso ter um tempinho para conversar?";
 		next;
-		switch(select("Look suspicious?:I knew all things here!")) {
+		switch(select("Parece suspeito?:Eu sabia de tudo aqui!")) {
 		case 1:
 			mes "[Comerciante Altamente Suspeito]";
 			mes "Estou no mesmo barco que você!";
@@ -3292,7 +3292,7 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 		mes "Oh! Isso é ^0000FFum saco de latas estragadas^000000, não é?";
 		mes "Onde você conseguiu isso? Incrível!";
 		next;
-		switch(select("Do not pretend not to know!:Need to show them our general!")) {
+		switch(select("Não finja que não sabe!:Precisamos mostrar a eles nosso general!")) {
 		case 1:
 			mes "[Comerciante Altamente Suspeito]";
 			mes "Parece simplesmente maravilhoso.";
@@ -3311,7 +3311,7 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 			mes "Vou montar o quartel-general da equipe viva os guaxinins aqui";
 			mes "depois de expulsar o grupo dos gatos.";
 			next;
-			switch(select("Are you the leader?:Let me clear the usage of bad can.:Can it be worked as you want?")) {
+			switch(select("Você é o líder?:Deixe-me explicar o uso da lata ruim.:Pode ser usado como você quiser?")) {
 			case 1:
 				mes "[Comerciante Altamente Suspeito]";
 				mes "Este é um mal-entendido agradecido,";
@@ -3438,7 +3438,7 @@ malangdo,125,147,3	script	Patrol Leader#ml	545,{
 		mes "por um tempo.";
 		mes "Eu vou te dar uma bronca como Líder da Patrulha!";
 		next;
-		switch(select("What Patrol Leader do like this?:Cheer up!!")) {
+		switch(select("O que o Líder do Patrulha faz assim?:Anime-se!!")) {
 		case 1:
 			mes "[Líder da Patrulha]";
 			mes "Este é o meu gosto por fazer isso!";
@@ -3524,7 +3524,7 @@ malangdo,3,1,3	script	Guidance for quest#ml	543,{
 	mes "[Ajudante]";
 	mes "Escolha agora, depressa!";
 	next;
-	switch(select("NPC appear!:NPC walkout!:Reset setitem:30 pcs of bad cans:Just before collecting cans:Start quest for Patrol Leader")) {
+	switch(select("NPC aparece!:NPC sai!:Resetar setitem:30 latas ruins:Logo antes de coletar latas:Iniciar missão para o Líder do Patrulha")) {
 	case 1:
 		donpcevent "Gobonge#ml::OnEnable";
 		mes "[Ajudante]";
@@ -3595,7 +3595,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		next;
 		mes "Não pôde continuar a conversa.";
 		next;
-		switch(select("Cheer him up.:Ignore.")) {
+		switch(select("Anime-o.:Ignore.")) {
 		case 1:
 			mes "Eu confortei seu coração ferido apenas ficando ao lado dele.";
 			next;
@@ -3625,7 +3625,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 			mes "A propósito, eles estão vindo de novo e de novo.";
 			mes "Eu não sei de onde eles vêm.";
 			next;
-			switch(select("Don't ask anymore.:Asking for the place of vermin came.")) {
+			switch(select("Não pergunte mais.:Perguntando pelo lugar dos vermes veio.")) {
 			case 1:
 				emotion ET_CRY;
 				mes "[Cleanyang]";
@@ -3759,7 +3759,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		mes "Sem o biscoito de navio de gato era um paraíso. Eu não quero ir para o inferno de novo!!!!";
 		mes "Kmeauuu... Kmeauuu... Kmeauuu~";
 		next;
-		switch(select("Tickling under the chin.:Hit the end of nose.:Tap on butt.")) {
+		switch(select("Fazendo cócegas no queixo.:Bater na ponta do nariz.:Tapinha no bumbum.")) {
 		case 1:
 			mes "[Cleanyang]";
 			mes "Miau... Koleung koleung...";
@@ -3838,7 +3838,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 	mes "[Cleanyang]";
 	mes "A propósito, o que está acontecendo?";
 	next;
-	switch(select("It's time to promise~:I'm here to see the result~:Shake your butt~")) {
+	switch(select("É hora de prometer~:Estou aqui para ver o resultado~:Balance o bumbum~")) {
 	case 1:
 		if (checkquest(7267,PLAYTIME) == 0) {
 			mes "[Cleanyang]";
@@ -3868,7 +3868,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		mes "Tem alguém que esconde o biscoito de navio de gato hoje?";
 		mes "Provavelmente ele está lá?";
 		next;
-		switch(select("Try to search today.:Maybe not today.")) {
+		switch(select("Tente procurar hoje.:Talvez não hoje.")) {
 		case 1:
 			mes "[Cleanyang]";
 			mes "Meu serviço para você hoje.";
@@ -3963,7 +3963,7 @@ mal_in02,29,67,0	script	#CaptainRoom3	844,{
 			mes "Não toque nisso!";
 			cutin "ma_tomas03",2;
 			next;
-			switch(select("Sorry.:I'll clean up!")) {
+			switch(select("Desculpe.:Eu vou limpar!")) {
 			case 1:
 				mes "[Almirante Thomas]";
 				mes "Temos um interesse comum para conversar.";
@@ -4037,7 +4037,7 @@ mal_in02,183,49,0	script	#MeetingFloor4	844,{
 			mes "Esta é a janela de ventilação no chão. Ela fica muito perto da mesa de culinária.";
 			mes "Estou tentando ignorar isso, mas não sai da minha cabeça. O que devo fazer?";
 			next;
-			switch(select("Just look roughly.:Take a look at this.")) {
+			switch(select("Apenas olhe rapidamente.:Dê uma olhada nisso.")) {
 			case 1:
 				mes "Olhei bem para a janela de ventilação, mas não encontrei nenhum problema.";
 				close;
@@ -4084,7 +4084,7 @@ mal_in02,103,22,0	script	#MalBed5	844,{
 			mes "Esta é a cama dos marinheiros. Tem muito pelo e está uma bagunça.";
 			mes "No canto debaixo da cama a mão não alcança, então estou pensando muito nisso.";
 			next;
-			switch(select("Raise the matress slightly.:Search under the bed.")) {
+			switch(select("Levante o colchão levemente.:Procure embaixo da cama.")) {
 			case 1:
 				mes "Empurro levemente e levanto a parte que tocava a borda da parede.";
 				mes "E nesse momento...";
@@ -4129,7 +4129,7 @@ malangdo,141,178,0	script	#Darkweed6	844,{
 			mes "Muitas ervas daninhas estão crescendo na área de descanso perto da torre de gatos.";
 			mes "É fácil ignorar, então isso não sai da minha cabeça.";
 			next;
-			switch(select("Search through the weeds.:Search under the chair.")) {
+			switch(select("Procure através das ervas daninhas.:Procure embaixo da cadeira.")) {
 			case 1:
 				mes "Decido procurar no arbusto que está fora da vista das pessoas.";
 				mes "E nesse momento...";
@@ -4167,7 +4167,7 @@ malangdo,133,134,0	script	Strange Pile of Sand#7	557,{
 			mes "A pilha de areia está ondulada como uma sepultura. Deve ter algo aí dentro.";
 			mes "Segundo boatos, gatos têm o hábito de enterrar com areia depois de fazer suas necessidades...";
 			next;
-			switch(select("Avoid this dirty place.:Darn it-!")) {
+			switch(select("Evite este lugar sujo.:Droga!")) {
 			case 1:
 				mes "[" + strcharinfo(0) + "]";
 				mes "Certo!";
@@ -4362,7 +4362,7 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 		mes "Sou o único chef em toda a frota.";
 		mes "Você quer algo de mim?";
 		next;
-		switch(select("Show the cat's ship biscuit.:Talk about story of Cleanyang.")) {
+		switch(select("Mostre o biscoito do navio do gato.:Fale sobre a história de Cleanyang.")) {
 		case 1:
 			mes "[Chef Nyas]";
 			mes "Hm? Isso é um biscoito de marinheiro do gato?";
@@ -4484,7 +4484,7 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 	mes "Aí está você.";
 	mes "Não é hora da refeição... Por que você está aqui?";
 	next;
-	switch(select("What's today's work?:Food Delivery:Just bored...")) {
+	switch(select("Qual é o trabalho de hoje?:Entrega de comida:Apenas entediado...")) {
 	case 1:
 		if (checkquest(7276,PLAYTIME) == 0) {
 			mes "[Chef Nyas]";
@@ -4519,14 +4519,14 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 		mes "Você poderia trazer alguns ingredientes para o biscoito de navio dos gatos da terra firme?";
 		mes "Se você diz isso, tenho mais uma coisa para pedir...";
 		next;
-		switch(select("I'm busy today.:Sure, what are you need?")) {
+		switch(select("Estou ocupado hoje.:Claro, o que você precisa?")) {
 		case 1:
 			mes "[Chef Nyas]";
 			mes "Essa é uma notícia triste.";
 			mes "No entanto, tudo bem. O biscoito de navio dos gatos é originalmente uma comida preparada.";
 			mes "De qualquer forma, o biscoito de hoje será fornecido quando a segunda lua estiver cheia.";
 			next;
-			switch(select("So teeth grinder?:Worm castle...:Do not throw away?")) {
+			switch(select("Então, moedor de dentes?:Castelo de vermes...:Não jogar fora?")) {
 			case 1:
 				mes "[Chef Nyas]";
 				mes "O que você quer ouvir de mim?!";
@@ -4666,7 +4666,7 @@ malangdo,165,223,4	script	Expert Cat#nya_01	561,{
 		mes "Olá.";
 		mes "Eu sou Rato, você tem um momento?";
 		next;
-		switch(select("Yeah, sure I do.:I'm sorry, but I'm busy right now.")) {
+		switch(select("Sim, claro que sim.:Lamento, mas estou ocupado no momento.")) {
 		case 1:
 			mes "[Rato]";
 			mes "Bem, nada especial, mas você poderia me fazer um favor?";
@@ -4686,7 +4686,7 @@ malangdo,165,223,4	script	Expert Cat#nya_01	561,{
 			mes "Elas costumavam brincar de fazer coisas, mas parecem cansadas disso também...";
 			mes "Se não for pedir muito, você poderia brincar com elas por um tempo?";
 			next;
-			switch(select("Uh, sure...:I don't have enough time for that.")) {
+			switch(select("Ah, claro...:Não tenho tempo suficiente para isso.")) {
 			case 1:
 				mes "[Rato]";
 				mes "Oh, obrigado!";
@@ -4786,7 +4786,7 @@ malangdo,165,223,4	script	Expert Cat#nya_01	561,{
 		mes "[Rato]";
 		mes "Ei, como vai? Se tiver tempo, por favor, dê uma olhada nisso.";
 		next;
-		switch(select("Look at a picture.:Don't look at a picture.")) {
+		switch(select("Olhe para uma imagem.:Não olhe para a imagem.")) {
 		case 1:
 			mes "[Rato]";
 			mes "Sim, eles desenharam este quadro cheio de felicidade.";
@@ -4819,7 +4819,7 @@ malangdo,211,203,4	script	[Meow Team] Charo#nya_11	560,{
 		mes "Eles estão tendo uma conversa séria sobre a máquina estranha à frente deles.";
 		mes "Eles parecem ser as crianças sobre as quais Rato me falou.";
 		next;
-		switch(select("Just watch them without a word.:Busy right now.")) {
+		switch(select("Apenas observe-os sem dizer nada.:Ocupado no momento.")) {
 		case 1:
 			mes "Você tenta ouvir a conversa sem incomodá-los.";
 			next;
@@ -4841,7 +4841,7 @@ malangdo,211,203,4	script	[Meow Team] Charo#nya_11	560,{
 			next;
 			mes "Os gatos olham para você ao mesmo tempo.";
 			next;
-			switch(select("I have a spare Glass Bead!:Why are you guys staring at me?")) {
+			switch(select("Eu tenho uma Conta de Vidro sobrando!:Por que vocês estão me encarando?")) {
 			case 1:
 				if (countitem(746) == 0) {
 					mes "[Roku]";
@@ -4902,7 +4902,7 @@ malangdo,211,203,4	script	[Meow Team] Charo#nya_11	560,{
 		mes "Desta vez, adicionamos especialmente um curso de estudo.";
 		mes "É simples de resolver, você só precisa encontrar a bússola nesta ilha seguindo a ordem.";
 		next;
-		switch(select("I'll give it a try.:Quit.")) {
+		switch(select("Vou tentar.:Desistir.")) {
 		case 1:
 			mes "[Charo]";
 			mes "Aqui está o seu Cartão de Aventura.";
@@ -4991,7 +4991,7 @@ malangdo,211,203,4	script	[Meow Team] Charo#nya_11	560,{
 		mes "[Charo]";
 		mes "Você deveria ir para lá também!";
 		next;
-		switch(select("Why do I have to go there?:What an adventure! I'll take it!")) {
+		switch(select("Por que eu tenho que ir lá?:Que aventura! Vou aceitar!")) {
 		case 1:
 			mes "[Charo]";
 			mes "Este é um caso grande!";
@@ -5028,7 +5028,7 @@ malangdo,211,203,4	script	[Meow Team] Charo#nya_11	560,{
 		mes "Você sente vontade de ajudar o detetive e seu amigo?";
 		mes "Não sente?";
 		next;
-		switch(select("Yes I do.:No I don't.")) {
+		switch(select("Sim, eu tenho.:Não, eu não tenho.")) {
 		case 1:
 			mes "[Charo]";
 			mes "Você tem ótimas capacidades como aventureiro!";
@@ -5233,7 +5233,7 @@ malangdo,215,201,3	script	[Meow Team] Roku#nya_10	553,{
 	mes "[Roku]";
 	mes "Você tem algo para me dizer?";
 	next;
-	switch(select("Report results of the race.:Challenge the race.:Nothing.")) {
+	switch(select("Relatar resultados da corrida.:Desafiar a corrida.:Nada.")) {
 	case 1:
 		if (countitem(6428) == 0) {
 			mes "[Roku]";
@@ -5267,7 +5267,7 @@ malangdo,215,201,3	script	[Meow Team] Roku#nya_10	553,{
 			erasequest 7244;
 			erasequest 7245;
 			next;
-			switch(select("Give me one more chance!:Okay.I will try tomorrow.")) {
+			switch(select("Me dê mais uma chance!:Ok. Vou tentar amanhã.")) {
 			case 1:
 				if (countitem(12636) == 0) {
 					mes "[Roku]";
@@ -5279,7 +5279,7 @@ malangdo,215,201,3	script	[Meow Team] Roku#nya_10	553,{
 				mes "[Roku]";
 				mes "Certo. Você deseja trocar 1 Lata de Malangdo por um Cartão de Aventura?";
 				next;
-				switch(select("Exchange for Adventure Card A.:Stop it.")) {
+				switch(select("Trocar por Carta de Aventura A.:Pare com isso.")) {
 				case 1:
 					if (countitem(6428)) {
 						mes "[Roku]";
@@ -5355,7 +5355,7 @@ malangdo,215,201,3	script	[Meow Team] Roku#nya_10	553,{
 		mes "Você precisa de um Cartão de Aventura para desafiar novamente.";
 		mes "Você deseja trocar 1 Lata de Malangdo por um Cartão de Aventura?";
 		next;
-		switch(select("Buy Adventure Card.:Just stop it.")) {
+		switch(select("Comprar Carta de Aventura.:Apenas pare com isso.")) {
 		case 1:
 			if (countitem(6428)) {
 				mes "[Roku]";
@@ -5398,7 +5398,7 @@ malangdo,212,204,0	script	Beginning Compass#nya_02	844,{
 		mes "Após inserir seu cartão, um botão vermelho e o mapa dentro da panela se iluminam.";
 		mes "Parece começar depois de pressionar o botão.";
 		next;
-		switch(select("Start it right now.:Start it later.")) {
+		switch(select("Começar agora.:Começar depois.")) {
 		case 1:
 			mes "O cartão saiu com luzes no mapa após pressionar o botão.";
 			if (rand(20) < 10) {
@@ -5468,7 +5468,7 @@ L_Viewpoint:
 		set .@str$, .@str$+((.@i >= .@index)?.@Colors$[.@i]:"")+.@Text$[.@i]+" ";
 	if (.@index > 1)
 		mes "Após inserir o cartão e pressionar o botão vermelho, o caminho para o destino se iluminou.";
-	mes "The order will be "+.@str$+"^000000.";
+	mes "A ordem será "+.@str$+"^000000.";
 	return;
 }
 
@@ -5501,7 +5501,7 @@ L_Viewpoint:
 		set .@color$,"white";
 		break;
 	}
-	mes "Delicate "+.@color$+" lights surround the "+strnpcinfo(1)+".";
+	mes "Delicado "+.@color$+" lights surround the "+strnpcinfo(1)+".";
 	if (nyadven02 < 11) {
 		mes "Após inserir o cartão e pressionar o botão, caracteres aparecem na tela.";
 		next;
@@ -5550,7 +5550,7 @@ L_Viewpoint:
 			input .@input;
 			if (.@input == .@nori_c) {
 				mes "O cartão desliza para fora com um som após inserir o número.";
-				mes "^4d4dffYou have passed the "+strnpcinfo(1)+"! Run to the next destination!^000000";
+				mes "^4d4dffVocê passou pela "+strnpcinfo(1)+"! Run to the next destination!^000000";
 				mes "Você deve correr para o próximo destino.";
 				set nyadven02, nyadven02+1;
 				close;
@@ -5716,7 +5716,7 @@ malangdo,172,178,7	script	Cat Detective#nya_14	560,{
 		mes "Haha, Nyangson, isso não é nada para mim.";
 		mes "Antes disso, vamos ouvir as histórias do visitante primeiro.";
 		next;
-		switch(select("Charo? Rosy?:Are you guys detectives?")) {
+		switch(select("Charo? Rosy?:Você são detetives?")) {
 		case 1:
 			cutin "mal_homnya_s",2;
 			mes "[Homnya]";
@@ -5763,7 +5763,7 @@ malangdo,172,178,7	script	Cat Detective#nya_14	560,{
 		next;
 		mes "Não entendo o significado disso, mas eles parecem estar com pressa.";
 		next;
-		switch(select("Continue to humor them.:Stop playing around.")) {
+		switch(select("Continue a satisfazê-los.:Pare de brincar.")) {
 		case 1:
 			cutin "mal_homnya_n",2;
 			mes "[Homnya]";
@@ -5833,7 +5833,7 @@ malangdo,172,178,7	script	Cat Detective#nya_14	560,{
 		mes "[Nyangson]";
 		mes "Custa uma Lata de Malangdo.";
 		next;
-		switch(select("Buy Adventure Card.:Do not buy.")) {
+		switch(select("Comprar Carta de Aventura.:Não comprar.")) {
 		case 1:
 			if (countitem(12636) == 0) {
 				mes "[Homnya]";
@@ -5876,7 +5876,7 @@ malangdo,172,178,7	script	Cat Detective#nya_14	560,{
 		mes "Ele estará escondido em vários lugares dentro da cabine.";
 		mes "Você deveria encontrá-los!";
 		next;
-		switch(select("I feel tired of it now.:Oh, yes!")) {
+		switch(select("Estou cansado disso agora.:Ah, sim!")) {
 		case 1:
 			mes "[Homnya]";
 			mes "Oh, sério?";
@@ -6000,7 +6000,7 @@ malangdo,172,178,7	script	Cat Detective#nya_14	560,{
 		mes "Eu sempre fico de olho na sua percepção aguçada.";
 		mes "Você é meu verdadeiro amigo.";
 		next;
-		switch(select("How's the condition of Bang?:Ignore it.")) {
+		switch(select("Qual é a condição do Bang?:Ignore isso.")) {
 		case 1:
 			if (checkquest(7249,PLAYTIME) == 0 || checkquest(7249,PLAYTIME) == 1) {
 				mes "[Homnya]";
@@ -6022,7 +6022,7 @@ malangdo,172,178,7	script	Cat Detective#nya_14	560,{
 				mes "Ele precisa de um Cartão de Aventura para pará-la.";
 				mes "Bem, você quer tentar?";
 				next;
-				switch(select("Buy Adventure Card B.:Don't buy it.")) {
+				switch(select("Comprar Carta de Aventura B.:Não comprar.")) {
 				case 1:
 					if (countitem(12636) == 0) {
 						mes "[Homnya]";
@@ -6134,7 +6134,7 @@ malangdo,174,175,0	script	Noisy Machine#nya_13	844,{
 	mes "Vá em frente!";
 	next;
 	cutin "",255;
-	if(select("Insert card.:Stop it.") == 2) {
+	if(select("Inserir carta.:Parar.") == 2) {
 		mes "[Homnya]";
 		mes "Hum? Você não vai fazer isso?";
 		mes "Sério?";
@@ -6187,7 +6187,7 @@ malangdo,174,175,0	script	Noisy Machine#nya_13	844,{
 		mes "Ele estará escondido em vários lugares dentro da cabine.";
 		mes "Você deve encontrá-los!";
 		next;
-		switch(select("I feel tired of it now.:Oh, yes!")) {
+		switch(select("Estou cansado disso agora.:Ah, sim!")) {
 		case 1:
 			mes "[Homnya]";
 			mes "Ah, sério?";
@@ -6249,10 +6249,10 @@ L_ShowLights:
 	set .@pass,0;
 	setarray .@Count$[0],"first","second","third","fourth","fifth","sixth","seventh","eighth";
 	for(set .@i,0; .@i < .@num; set .@i,.@i+1) {
-		mes "Which color button do you want to press "+.@Count$[.@i]+"?";
+		mes "Qual botão colorido você deseja pressionar "+.@Count$[.@i]+"?";
 		next;
 		// Red <-> Green, Blue <-> Yellow
-		set .@j, select("Red:Blue:Yellow:Green");
+		set .@j, select("Vermelho:Azul:Amarelo:Verde");
 		if (.@Lamp[.@i] == 4-.@j)
 			set .@pass,.@pass+1;
 	}
@@ -6607,7 +6607,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		emotion ET_SURPRISE;
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "My name is "+strcharinfo(0)+", Mr. Cat.";
+		mes "Meu nome é "+strcharinfo(0)+", Mr. Cat.";
 		next;
 		mes "[Diretor dos Gatos Gamers]";
 		mes "Oh, ^0000FF"+strcharinfo(0)+"^000000.";
@@ -6633,7 +6633,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		else
 			setarray .@sex$[0],"Miss","girl";
 		mes "[Diretor dos Gatos Gamers]";
-		mes "I like you, "+.@sex$[0]+" "+strcharinfo(0)+". Will you help us get out of this 10 game losing streak? Ehehe~";
+		mes "Eu gosto de você, "+.@sex$[0]+" "+strcharinfo(0)+". Will you help us get out of this 10 game losing streak? Ehehe~";
 		next;
 		switch(select("Sorry, I'm a stupid "+.@sex$[1]+".:Sure, I'm a cool "+.@sex$[1]+".")) {
 		case 1:
@@ -6646,7 +6646,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 			close;
 		case 2:
 			mes "[Diretor dos Gatos Gamers]";
-			mes "Wow. I respect you, "+strcharinfo(0)+".";
+			mes "Uau. Eu respeito você, "+strcharinfo(0)+".";
 			mes "Deixe-me pedir um favor.";
 			mes "Por favor, encontre o dedicado Gato Gerente e pergunte sobre a atitude da nossa equipe ultimamente.";
 			set malang_gamer,3;
@@ -6728,7 +6728,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		mes "Ok? Seja! Gentil!";
 		next;
 		mes "[Diretor dos Gatos Gamers]";
-		mes "I appreciate your help, "+strcharinfo(0)+". heh~";
+		mes "Agradeço sua ajuda, "+strcharinfo(0)+". heh~";
 		set malang_gamer,6;
 		erasequest 5060;
 		setquest 5061;
@@ -6780,7 +6780,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		mes "Ok? Seja! Gentil!";
 		next;
 		mes "[Diretor dos Gatos Gamers]";
-		mes "I appreciate your help, "+strcharinfo(0)+". heh~";
+		mes "Agradeço sua ajuda, "+strcharinfo(0)+". heh~";
 		close;
 	} else if (malang_gamer == 7) {
 		if (checkquest(5060,PLAYTIME) == 0 || checkquest(5060,PLAYTIME) == 1) {
@@ -6806,7 +6806,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		mes "essa minha imagem de gato assustador. Heh~";
 		next;
 		mes "[Diretor dos Gatos Gamers]";
-		mes "Heh~ I would much appreciate your help, "+strcharinfo(0)+"~.";
+		mes "Heh~ Eu agradeceria muito sua ajuda, "+strcharinfo(0)+"~.";
 		set malang_gamer,8;
 		erasequest 5060;
 		setquest 5066;
@@ -6835,7 +6835,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		mes "Você vai me perguntar para que serve?";
 		next;
 		mes "[Diretor dos Gatos Gamers]";
-		mes "Well, I kind of was eavesdropping when "+strcharinfo(0)+" and Manager Cat were talking together. Heh~";
+		mes "Bem, eu estava meio que escutando quando "+strcharinfo(0)+" and Manager Cat were talking together. Heh~";
 		emotion ET_SMILE;
 		next;
 		mes "["+strcharinfo(0)+"]";
@@ -6929,14 +6929,14 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		next;
 		mes "[Diretor dos Jogadores Gatos]";
 		mes "Heh~";
-		mes "Hey, "+strcharinfo(0)+". What did you say? Heh~";
+		mes "Ei, "+strcharinfo(0)+". What did you say? Heh~";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Nada! Por favor, continue.";
 		next;
 		mes "[Diretor dos Jogadores Gatos]";
 		mes "Heh~ Por causa do que esses jogadores querem,";
-		mes "I have a favor to ask you, "+strcharinfo(0)+"...";
+		mes "Tenho um favor para pedir, "+strcharinfo(0)+"...";
 		mes "Heh~";
 		next;
 		mes "["+strcharinfo(0)+"]";
@@ -6944,22 +6944,22 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		next;
 		mes "[Diretor dos Jogadores Gatos]";
 		mes "Você seria o parceiro de treino dos nossos jogadores?";
-		mes "Heh~ I feel strongly that you, "+strcharinfo(0)+", can be trusted for this. Heh~";
+		mes "Heh~ Eu sinto fortemente que você, "+strcharinfo(0)+", can be trusted for this. Heh~";
 		next;
-		switch(select("No thanks, buddy!:Ok, I'll do it!")) {
+		switch(select("Não, obrigado!:Ok, eu farei!")) {
 		case 1:
 			mes "[Diretor dos Jogadores Gatos]";
 			mes "Heh~ Você está me rejeitando? Heh~";
 			next;
 			mes "[Diretor dos Jogadores Gatos]";
 			mes "Estou triste. Triste~ Heh~";
-			mes "I didn't expect a refusal from a person like you, "+strcharinfo(0)+".";
+			mes "Eu não esperava uma recusa de uma pessoa como você, "+strcharinfo(0)+".";
 			mes "Mas ainda assim, aqui estão algumas moedas para você~";
 			mes "Heh~";
 			emotion ET_CRY;
 			next;
 			mes "[Diretor dos Jogadores Gatos]";
-			mes "We will always welcome you, "+strcharinfo(0)+", as a guest member of the Cat Gamers.";
+			mes "Nós sempre te receberemos, "+strcharinfo(0)+", as a guest member of the Cat Gamers.";
 			mes "Heh~";
 			set malang_gamer,11;
 			erasequest 5068;
@@ -6995,15 +6995,15 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 	} else if (malang_gamer == 11) {
 		mes "[Diretor dos Jogadores Gatos]";
 		mes "Heh~";
-		mes "Aren't you "+strcharinfo(0)+"?";
+		mes "Não é "+strcharinfo(0)+"?";
 		mes "Você já mudou de ideia?";
 		mes "Você está disposto a ser o parceiro de treino da nossa equipe?";
 		next;
-		switch(select("No, I'm just passing through.:I accept your offer.")) {
+		switch(select("Não, estou apenas passando.:Eu aceito sua oferta.")) {
 		case 1:
 			mes "[Diretor dos Jogadores Gatos]";
 			mes "Heh~ Entendi.";
-			mes "But, let me tell you once again, "+strcharinfo(0)+".";
+			mes "Mas, deixe-me dizer novamente, "+strcharinfo(0)+".";
 			mes "Você é sempre bem-vindo para ser um dos nossos 'Membros Honoráveis dos Jogadores Gatos'.";
 			mes "Heh~";
 			close;
@@ -7068,21 +7068,21 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		close;
 	}
 	mes "[Diretor dos Jogadores Felinos]";
-	mes "Heh~ Hello, "+strcharinfo(0)+". How is it going practicing with the players?";
+	mes "Heh~ Olá, "+strcharinfo(0)+". How is it going practicing with the players?";
 	emotion ET_QUESTION;
 	next;
-	switch(select("How are the players doing?:Just stopped by to say hi~:Here's the current status...")) {
+	switch(select("Como estão os jogadores?:Apenas passei para dizer oi~:Aqui está o status atual...")) {
 	case 1:
 		mes "[Diretor dos Jogadores Felinos]";
-		mes "Heh~ Wow, "+strcharinfo(0)+"! I'm so touched by your care for the players.";
+		mes "Heh~ Uau, "+strcharinfo(0)+"! I'm so touched by your care for the players.";
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
-		mes "Heh~ For 13 years of my life, I've never seen anyone like you, "+strcharinfo(0)+". Heh~";
+		mes "Heh~ Por 13 anos da minha vida, nunca vi ninguém como você, "+strcharinfo(0)+". Heh~";
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
 		mes "Heh~ "+strcharinfo(0)+", which player's condition are you interested in?";
 		next;
-		switch(select("Rock Paper Scissors players:ChamChamCham players:KongNyangKong players:Flag Game players")) {
+		switch(select("Jogadores de Pedra, Papel e Tesoura:Jogadores de ChamChamCham:Jogadores de KongNyangKong:Jogadores de Jogo da Bandeira")) {
 		case 1:
 			mes "[Diretor dos Jogadores Felinos]";
 			mes "Heh~ Os jogadores de Pedra, Papel e Tesoura perdem treinos ocasionalmente, mas ainda estão melhorando. Heh~";
@@ -7102,11 +7102,11 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		}
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
-		mes "Heh~ Please keep up the good work, "+strcharinfo(0)+". Heh~";
+		mes "Heh~ Por favor, continue com o bom trabalho, "+strcharinfo(0)+". Heh~";
 		close;
 	case 2:
 		mes "[Diretor dos Jogadores Felinos]";
-		mes "Heh~ Hello there~ "+strcharinfo(0)+". You have such good manners~ Heh~";
+		mes "Heh~ Olá~ "+strcharinfo(0)+". You have such good manners~ Heh~";
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
 		mes "Heh~ Hoje em dia, há tantos gatos e humanos sem boas maneiras. Heh~";
@@ -7115,17 +7115,17 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		mes "Nós também temos alguns deles em nossos 'Jogadores Felinos'. Eles são tão arrogantes toda vez que vencemos o jogo... Heh~";
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
-		mes "Heh~ There should be more people like you, "+strcharinfo(0)+". Heh~";
+		mes "Heh~ Deveria haver mais pessoas como você, "+strcharinfo(0)+". Heh~";
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
-		mes "Heh~ Please practice with our players more often~ Heh~ So they can learn some manners from you, "+strcharinfo(0)+". Heh~";
+		mes "Heh~ Por favor, pratique com nossos jogadores mais frequentemente~ Heh~ Para que eles possam aprender alguns modais com você, "+strcharinfo(0)+". Heh~";
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
 		mes "Continue com o bom trabalho~ Heh~";
 		close;
 	case 3:
 		mes "[Diretor dos Jogadores Felinos]";
-		mes "Heh~ What happened to your face, "+strcharinfo(0)+"? Guess you lost from the practice, right? Heh~";
+		mes "Heh~ O que aconteceu com seu rosto, "+strcharinfo(0)+"? Guess you lost from the practice, right? Heh~";
 		emotion ET_KIK;
 		next;
 		mes "[Diretor dos Jogadores Felinos]";
@@ -7137,7 +7137,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 	// Detect quest (ID range 5074~5090)
 	mes "[Diretor dos Jogadores Felinos]";
 	if (checkquest(5074,HUNTING) > -1) {
-		mes "Heh~ It's not like I didn't feed them right... Heh~ I hope it was not too much for you, "+strcharinfo(0)+".";
+		mes "Heh~ Não é como se eu não os tivesse alimentado direito... Heh~ Espero que não tenha sido demais para você, "+strcharinfo(0)+".";
 		next;
 		if (checkquest(5074,HUNTING) == 2 && countitem(1023) >= 10) {
 			delitem 1023,10; //Fish_Tail
@@ -7292,7 +7292,7 @@ mal_in01,31,210,2	script	Cat Gamers Director	549,{
 		}
 	}
 	mes "[Diretor dos Jogadores Felinos]";
-	mes "Heh?! There's no favor note for you, "+strcharinfo(0)+". Heh~ What do you want to report? Heh~";
+	mes "Heh?! Não há nota de favor para você, "+strcharinfo(0)+". Heh~ What do you want to report? Heh~";
 	close;
 
 // callsub L_CompleteQuest,<quest ID>,"<message>";
@@ -7303,7 +7303,7 @@ L_CompleteQuest:
 	mes getarg(1);
 	next;
 	mes "[Diretor dos Jogadores Felinos]";
-	mes "Heh~ Thanks for coming by, "+strcharinfo(0)+". Heh~ Keep up the good work. Heh~";
+	mes "Heh~ Obrigado por passar por aqui, "+strcharinfo(0)+". Heh~ Keep up the good work. Heh~";
 	emotion ET_THANKS;
 	close;
 }
@@ -7379,7 +7379,7 @@ malangdo,127,111,4	script	Strange Cat#gamer	547,{
 		mes "Ele parece estar gostando...";
 		emotion ET_THROB;
 		next;
-		switch(select("Help~ Fire~:Hey~!:Do you want to hear something?")) {
+		switch(select("Socorro~ Fogo~:Ei~!:Quer ouvir algo?")) {
 		case 1:
 			mes "[Gato Gerente]";
 			mes "Não minta~ Nós não usamos fogo tanto assim~";
@@ -7443,7 +7443,7 @@ malangdo,127,111,4	script	Strange Cat#gamer	547,{
 		close;
 	} else if (malang_gamer == 12) {
 		mes "[Gato Gerente]";
-		mes "Meow~ Aren't you "+strcharinfo(0)+"? I heard Cat Gamers Director ordered a special certificate, meow~";
+		mes "Miau~ Você não está "+strcharinfo(0)+"? I heard Cat Gamers Director ordered a special certificate, meow~";
 		next;
 		mes "[Gato Gerente]";
 		mes "Ao praticar, você deve equipar o item '^0000FFCertificado de Gato Gamer^000000'~ Não se esqueça, miau~";
@@ -7458,7 +7458,7 @@ malangdo,127,111,4	script	Strange Cat#gamer	547,{
 	mes "[Gato Gerente]";
 	mes "O que você quer, miau?";
 	next;
-	switch(select("Hi.:Any news?:Help me with playing.")) {
+	switch(select("Oi.:Alguma novidade?:Me ajude a jogar.")) {
 	case 1:
 		mes "[Gato Gerente]";
 		mes "Ah, oi, miau~";
@@ -7505,7 +7505,7 @@ malangdo,127,111,4	script	Strange Cat#gamer	547,{
 		mes "'Gatos Gamers' tem jogadores para 4 tipos de jogos, miau~";
 		mes "O Diretor dos Gatos Gamers disse que desafiará outros jogos mais tarde~";
 		next;
-		switch(select("Rock Paper Scissors:KongNyangKong:ChamChamCham:Flag Game")) {
+		switch(select("Pedra, Papel e Tesoura:KongNyangKong:ChamChamCham:Jogo da Bandeira")) {
 		case 1:
 			mes "[Gato Gerente]";
 			mes "Pedra, Papel e Tesoura, miau? Nada de especial...";
@@ -7616,7 +7616,7 @@ malangdo,161,197,4	script	Eryu#gamer	876,{
 			mes "[Eryu]";
 			mes "Hum... Quem é você?";
 			next;
-			switch(select("The Games Director sent me.:I am a writer for the 'Human' magazine.:Who are you?")) {
+			switch(select("O Diretor dos Jogos me enviou.:Sou um escritor da revista 'Humano'.:Quem é você?")) {
 			case 1:
 				mes "[Eryu]";
 				mes "Argh. Vá embora...";
@@ -7756,7 +7756,7 @@ malangdo,161,197,4	script	Eryu#gamer	876,{
 		} else
 			set .@str$, "You didn't deliver the right message, but let's still get away.";
 		mes "[Eryu]";
-		mes "What is this? What do you mean by '"+.@inputstr$+"'...?";
+		mes "O que é isso? O que você quer dizer com '"+.@inputstr$+"'...?";
 		mes "Ah... você não é o redator?";
 		emotion ET_FRET;
 		next;
@@ -7833,7 +7833,7 @@ malangdo,230,197,4	script	Stew#gamer	555,{
 			mes "Miau...? Quem é você, miau?";
 			emotion ET_QUESTION;
 			next;
-			switch(select("The 'Cat Gamers' Manager sent me.:Meow~ Grrr~:I'm with the 'Boom Can' Company.")) {
+			switch(select("O Gerente dos 'Gatos Gamers' me enviou.:Miau~ Grrr~:Eu sou da Companhia 'Boom Can'.")) {
 			case 1:
 				mes "[Stew]";
 				mes "Stew não está interessado, miau.";
@@ -7985,7 +7985,7 @@ malangdo,230,197,4	script	Stew#gamer	555,{
 		} else
 			set .@str$, "You didn't deliver the right message, but let's still get away.";
 		mes "[Stew]";
-		mes "What is this? What do you mean by '"+.@inputstr$+"'? Meow...";
+		mes "O que é isso? O que você quer dizer com '"+.@inputstr$+"'? Meow...";
 		mes "E... Você não é da Empresa 'Lata Explosiva', miau?";
 		emotion ET_QUESTION;
 		next;
@@ -8062,7 +8062,7 @@ malangdo,244,144,4	script	Ketchup#gamer	546,{
 			mes "Miau...? Quem é você?";
 			emotion ET_QUESTION;
 			next;
-			switch(select("Grrr~ Bow wow~:The Game Director cat sent me.:I'm from 'Cans for Kittens'.")) {
+			switch(select("Grrr~ Au au~:O gato Diretor de Jogo me enviou.:Eu sou da 'Latas para Gatinhos'.")) {
 			case 1:
 				mes "[Ketchup]";
 				mes "Que cão? Hiss~";
@@ -8174,7 +8174,7 @@ malangdo,244,144,4	script	Ketchup#gamer	546,{
 			close2;
 		} else {
 			mes "[Ketchup]";
-			mes "What is this? What do you mean by '"+.@inputstr$+"'...?";
+			mes "O que é isso? O que você quer dizer com '"+.@inputstr$+"'...?";
 			mes "Pode ser... 'Latas para Gatinhos'?";
 			emotion ET_HUK;
 			next;
@@ -8251,7 +8251,7 @@ malangdo,181,119,7	script	Eff#gamer	560,{
 			mes "Quem é você, miau?";
 			emotion ET_QUESTION;
 			next;
-			switch(select("I have some good investment news...:A... Cat?:The 'Cat Gamers' Director sent me...")) {
+			switch(select("Eu tenho algumas boas notícias de investimento...:Um... Gato?:O Diretor dos 'Cat Gamers' me enviou...")) {
 			case 1:
 				mes "[Eff]";
 				mes "Informações de investimento? Miau~?";
@@ -8434,7 +8434,7 @@ malangdo,181,119,7	script	Eff#gamer	560,{
 		} else
 			set .@str$, "You didn't deliver the right message, but let's still get away.";
 		mes "[Eff]";
-		mes "What is this? What do you mean by '"+.@inputstr$+"'? Meow...";
+		mes "O que é isso? O que você quer dizer com '"+.@inputstr$+"'? Meow...";
 		mes "Miau...? Miau! Você! Investidor, miau?";
 		next;
 		mes "["+strcharinfo(0)+"]";
@@ -8507,7 +8507,7 @@ mal_in01,91,216,4	script	Ser#gamer	544,{
 	for(set .@i,5074; .@i<=5090; set .@i,.@i+1) {
 		if (checkquest(.@i) > -1) {
 			mes "[Ser]";
-			mes "Hey, ^0000FF"+strcharinfo(0)+"^000000. You haven't done what we asked you for. A promise is a promise, you know.";
+			mes "Ei, ^0000FF"+strcharinfo(0)+"^000000. You haven't done what we asked you for. A promise is a promise, you know.";
 			next;
 			mes "[Ser]";
 			mes "Ah!! Quando terminar, por favor, peça para ser verificado pelo Diretor dos Jogadores Gatos ali.";
@@ -8547,7 +8547,7 @@ mal_in01,91,216,4	script	Ser#gamer	544,{
 	mes "[Ser]";
 	mes "Oh, ^0000FF"+strcharinfo(0)+"^000000? Want to play the Rock Paper Scissors game?";
 	next;
-	switch(select("Play the game.:Say hi.:Ask about the game rules.")) {
+	switch(select("Jogue o jogo.:Diga oi.:Pergunte sobre as regras do jogo.")) {
 	case 1:
 		mes "[Ser]";
 		mes "Boa ideia.";
@@ -8617,7 +8617,7 @@ mal_in01,91,216,4	script	Ser#gamer	544,{
 		mes "Pedra! Papel! Tesoura!";
 		next;
 
-		set .@pc,  select("Rock:Paper:Scissors")-1;
+		set .@pc,  select("Pedra:Papel:Tesoura")-1;
 		set .@npc, rand(3);
 		emotion .@emote[.@pc], playerattached();
 		emotion .@emote[.@npc];
@@ -8638,7 +8638,7 @@ mal_in01,91,216,4	script	Ser#gamer	544,{
 		}
 		next;
 		mes "[Ser]";
-		mes "You were "+.@rps$[.@pc]+", I was "+.@rps$[.@npc]+"~";
+		mes "Você estava "+.@rps$[.@pc]+", I was "+.@rps$[.@npc]+"~";
 		mes .@result$;
 		next;
 		if (.@match == 5) break;
@@ -8648,7 +8648,7 @@ mal_in01,91,216,4	script	Ser#gamer	544,{
 	next;
 	mes "[Ser]";
 	mes "Hum... Deixe-me ver...";
-	mes "I won "+.@loss+" times, and you, "+strcharinfo(0)+", won "+.@win+" times, right?";
+	mes "Eu ganhei "+.@loss+" times, and you, "+strcharinfo(0)+", won "+.@win+" times, right?";
 	next;
 	if (.@win > .@loss) {
 		mes "[Ser]";
@@ -8659,7 +8659,7 @@ mal_in01,91,216,4	script	Ser#gamer	544,{
 		mes "[Ser]";
 		mes "Foi um ótimo jogo. Admiro seu entusiasmo pelo jogo. Então, quero lhe dar minha preciosa Lata como presente.";
 		next;
-		switch(select("I don't need it!:Thank you.")) {
+		switch(select("Eu não preciso disso!:Obrigado.")) {
 		case 1:
 			mes "[Ser]";
 			mes "Apenas aceite!! Faça como eu digo~";
@@ -8891,7 +8891,7 @@ mal_in01,86,222,4	script	Paa#gamer	544,{
 	mes "[Paa]";
 	mes "Oh, ^0000FF"+strcharinfo(0)+"^000000 meow? Want to play the Rock Paper Scissors game meow?";
 	next;
-	switch(select("Play the game.:Say hi.:Ask about the game rules.")) {
+	switch(select("Jogue o jogo.:Diga oi.:Pergunte sobre as regras do jogo.")) {
 	case 1:
 		mes "[Paa]";
 		mes "Boa ideia, miau.";
@@ -8949,7 +8949,7 @@ mal_in01,86,222,4	script	Paa#gamer	544,{
 		mes "Pedra! Papel! Tesoura!";
 		next;
 
-		set .@pc,  select("Rock:Paper:Scissors")-1;
+		set .@pc,  select("Pedra:Papel:Tesoura")-1;
 		set .@npc, rand(3);
 		emotion .@emote[.@pc], playerattached();
 		emotion .@emote[.@npc];
@@ -8970,7 +8970,7 @@ mal_in01,86,222,4	script	Paa#gamer	544,{
 		}
 		next;
 		mes "[Paa]";
-		mes "You were "+.@rps$[.@pc]+", I was "+.@rps$[.@npc]+"~";
+		mes "Você estava "+.@rps$[.@pc]+", I was "+.@rps$[.@npc]+"~";
 		mes .@result$;
 		next;
 		if (.@match == 5) break;
@@ -8980,7 +8980,7 @@ mal_in01,86,222,4	script	Paa#gamer	544,{
 	next;
 	mes "[Paa]";
 	mes "Deixe-me ver, miau...";
-	mes "I won "+.@loss+" times meow, and you, "+strcharinfo(0)+", won "+.@win+" times, right meow?";
+	mes "Eu ganhei "+.@loss+" times meow, and you, "+strcharinfo(0)+", won "+.@win+" times, right meow?";
 	next;
 	if (.@win > .@loss) {
 		mes "[Paa]";
@@ -8991,7 +8991,7 @@ mal_in01,86,222,4	script	Paa#gamer	544,{
 		mes "[Paa]";
 		mes "Foi um ótimo jogo, miau. Admiro seu entusiasmo pelo jogo, miau. Então, quero lhe dar minha preciosa Lata como presente, miau.";
 		next;
-		switch(select("I don't need it!:Thank you.")) {
+		switch(select("Eu não preciso disso!:Obrigado.")) {
 		case 1:
 			mes "[Paa]";
 			mes "Apenas pegue, miau!! Faça o que eu digo, miau~";
@@ -9200,7 +9200,7 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 	}
 	if (!isequipped(2872)) {
 		mes "[Kuka]";
-		mes "Oh great member you, ^0000FF"+strcharinfo(0)+"^000000~ Let's play ChamChamCham yo~";
+		mes "Ó grande membro você, ^0000FF"+strcharinfo(0)+"^000000~ Let's play ChamChamCham yo~";
 		next;
 		mes "[Kuka]";
 		mes "... ... ...";
@@ -9219,9 +9219,9 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 	} else if (checkquest(5071,PLAYTIME) == 2)
 		erasequest 5071;
 	mes "[Kuka]";
-	mes "Oh great member you, ^0000FF"+strcharinfo(0)+"^000000~ Let's play ChamChamCham yo~";
+	mes "Ó grande membro você, ^0000FF"+strcharinfo(0)+"^000000~ Let's play ChamChamCham yo~";
 	next;
-	switch(select("Play the game.:Ask who is 1st place.:Ask about the game rules.")) {
+	switch(select("Jogue o jogo.:Pergunte quem está em 1º lugar.:Pergunte sobre as regras do jogo.")) {
 	case 1:
 		mes "[Kuka]";
 		mes "Boa escolha, yo~";
@@ -9241,7 +9241,7 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 		if (strcharinfo(0) == $malangdo_gamer$)
 			mes "Nunca se sabe quando alguém vai quebrar o recorde, yo~";
 		else
-			mes "I expect that you, "+strcharinfo(0)+", can beat ^0000FF"+$malangdo_gamer$+"^000000 sometime yo~";
+			mes "Eu espero que você, "+strcharinfo(0)+", can beat ^0000FF"+$malangdo_gamer$+"^000000 sometime yo~";
 		close;
 	case 3:
 		mes "[Kuka]";
@@ -9276,7 +9276,7 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 		mes "[Kuka & "+strcharinfo(0)+"]";
 		mes "Cham! Cham! Cham!";
 		next;
-		switch(select("Hand towards left:Hand towards right")) {
+		switch(select("Mão para a esquerda:Mão para a direita")) {
 		case 1:
 			if (rand(1000) < 500) {
 				cutin "g_cat_01",4;
@@ -9316,7 +9316,7 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 	} else if (.@win > 0 && .@win < 3) {
 		setquest 5071;
 		mes "[Kuka]";
-		mes "After the practice, "+strcharinfo(0)+" has won "+.@win+" in a row yo~";
+		mes "Após a prática, "+strcharinfo(0)+" has won "+.@win+" in a row yo~";
 		mes "O presente é para 3 vitórias ou mais, yo~ Nada para hoje, yo~ Mas volte amanhã, yo~";
 		close;
 	} else {
@@ -9328,13 +9328,13 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 			set $malangdo_gamer$, strcharinfo(0);
 			set $malangdo_gamer, .@win;
 			mes "[Kuka]";
-			mes "Congrats yo~ You won ^DE2B21"+.@win+"^000000 in a row yo~";
+			mes "Parabéns você~ Você ganhou ^DE2B21"+.@win+"^000000 in a row yo~";
 			if (strcharinfo(0) == .@name_record$)
-				mes "You won ^DE2B21"+.@win_cnt+"^000000 more than the recent ^DE2B21"+.@win_record+"^000000 record yo~ Congrats yo~";
+				mes "Você ganhou ^DE2B21"+.@win_cnt+"^000000 more than the recent ^DE2B21"+.@win_record+"^000000 record yo~ Congrats yo~";
 			// custom conditions
 			//else
 			else if (.@win_record)
-				mes "And you have won ^DE2B21"+.@win_cnt+"^000000 more than ^0000FF"+.@name_record$+"^000000's ^DE2B21"+.@win_record+"^000000 winning streak yo~ New record yo~ Congrats yo~";
+				mes "E você ganhou ^DE2B21"+.@win_cnt+"^000000 more than ^0000FF"+.@name_record$+"^000000's ^DE2B21"+.@win_record+"^000000 winning streak yo~ New record yo~ Congrats yo~";
 			else
 				mes "Um novo recorde, yo~ Parabéns, yo~";
 			next;
@@ -9346,7 +9346,7 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 			close;
 		} else {
 			mes "[Kuka]";
-			mes "Congrats yo~ For winning "+.@win+" times I'll give you "+.@cans+" cans yo~ Well done yo~ Come back tomorrow yo~";
+			mes "Parabéns! Por ganhar "+.@win+" times I'll give you "+.@cans+" cans yo~ Well done yo~ Come back tomorrow yo~";
 			setquest 5071;
 			getitem 12636, .@cans; //Malang_Sp_Can
 			close;
@@ -9429,7 +9429,7 @@ mal_in01,91,222,4	script	Kuka#gamer	422,{
 		mes "Recentemente, nosso Diretor parece ter tentado cortar algumas despesas, miau~ Ou talvez o Gato Gerente esteja se aproveitando, miau~";
 		next;
 		mes "[Kuka]";
-		mes "Regular snacks for our players have been reduced yo~ "+strcharinfo(0)+" should go get 30 Rat Tails, and report to our Cat Gamers Director yo~";
+		mes "Lanches regulares para nossos jogadores foram reduzidos, hein~ "+strcharinfo(0)+" should go get 30 Rat Tails, and report to our Cat Gamers Director yo~";
 		next;
 		mes "[Kuka]";
 		mes "Então, nós descobriremos se nosso gerente está sendo ganancioso ou não, miau~";
@@ -9537,7 +9537,7 @@ mal_in01,134,221,4	script	KungKung#gamer	422,{
 	mes "[KungKung]";
 	mes "Você é o parceiro de treino? Você está atrasado. Vamos começar logo.";
 	next;
-	switch(select("Play the game.:Ask current 1st place.:Ask about the game rules.")) {
+	switch(select("Jogue o jogo.:Pergunte ao atual 1º lugar.:Pergunte sobre as regras do jogo.")) {
 	case 1:
 		mes "[KungKung]";
 		mes "Antes do jogo, decidiremos o turno jogando um dado.";
@@ -9646,7 +9646,7 @@ mal_in01,134,221,4	script	KungKung#gamer	422,{
 			mes "Escolher costas: ^FF0000Você vence se o gato mostrar as costas da pata.^000000";
 			mes "Escolher palma: ^FF0000Você vence se o gato mostrar a palma da pata.^000000";
 			next;
-			switch(select("Back:Palm")) {
+			switch(select("Voltar:Palma")) {
 			case 1:
 				if (.@cat_hand <= 5) {
 					set .@npc_hp, .@npc_hp-10;
@@ -9692,7 +9692,7 @@ mal_in01,134,221,4	script	KungKung#gamer	422,{
 			mes "Escolher costas: ^FF0000Você vence se o gato mostrar as costas da pata.^000000";
 			mes "Escolher palma: ^FF0000Você vence se o gato mostrar a palma da pata.^000000";
 			next;
-			switch(select("Back:Palm")) {
+			switch(select("Voltar:Palma")) {
 			case 1:
 				if (.@cat_hand <= 5) {
 					set .@pc_hp, .@pc_hp-10;
@@ -9955,7 +9955,7 @@ mal_in01,133,214,6	script	Leader#gamer	546,{
 	mes "[Líder]";
 	mes "Você quer desafiar?";
 	next;
-	switch(select("Challenge.:Who are you?:Ask about the rules.")) {
+	switch(select("Desafiar.:Quem é você?:Perguntar sobre as regras.")) {
 	case 1:
 		mes "[Líder]";
 		mes "Vamos desafiar o Jogo da Bandeira. Por favor, espere enquanto nossos gatos se preparam.";
@@ -10097,9 +10097,9 @@ mal_in01,133,214,6	script	Leader#gamer	546,{
 			mes "Os gatos já estão todos preparados.";
 			mes "O que você vai fazer?";
 			mes " ";
-			mes "Tip: ^F86A08"+.@tip$+"^000000";
+			mes "Dica: ^F86A08"+.@tip$+"^000000";
 			next;
-			set .@choice, select("Observe cats:Wave flag:Wait");
+			set .@choice, select("Observar gatos:Acenar bandeira:Esperar");
 			switch(.@choice) {
 			case 1:
 				mes "Observando gatos...";
@@ -10145,10 +10145,10 @@ mal_in01,133,214,6	script	Leader#gamer	546,{
 			}
 		}
 		mes "[Líder]";
-		mes "Game ^C1653E"+.@round+"^000000 results...";
+		mes "Jogo ^C1653E"+.@round+"^000000 results...";
 		next;
 		mes "[Líder]";
-		mes "~ Flag Game challenger "+strcharinfo(0)+" ~";
+		mes "~ Desafiante do Jogo da Bandeira "+strcharinfo(0)+" ~";
 		mes "^FF0000"+.@you_flag$+"^000000 for game ^C1653E"+.@round+"^000000.";
 		mes .@flag_point+" Flag Point remaining.";
 		emotion .@emotion[0], playerattached();
@@ -10187,7 +10187,7 @@ mal_in01,133,214,6	script	Leader#gamer	546,{
 		} else {
 			if (.@cat_flags_waved == 5) {
 				mes "[Líder]";
-				mes "Congrats "+strcharinfo(0)+". You have succeed on not waving your flag.";
+				mes "Parabéns "+strcharinfo(0)+". You have succeed on not waving your flag.";
 				next;
 				mes "[Líder]";
 				mes "Mas! Este é um jogo de agitar bandeiras, então isso não conta.";
@@ -10212,7 +10212,7 @@ mal_in01,133,214,6	script	Leader#gamer	546,{
 					}
 				} else {
 					mes "[Líder]";
-					mes "Game "+.@round+" has ended properly. Point penalty will be given after "+(10-.@rounds_nowave)+" more.";
+					mes "Jogo "+.@round+" has ended properly. Point penalty will be given after "+(10-.@rounds_nowave)+" more.";
 					next;
 				}
 				mes "[Líder]";
@@ -10229,7 +10229,7 @@ mal_in01,133,214,6	script	Leader#gamer	546,{
 	next;
 	mes "[Líder]";
 	mes "Resultados finais!!";
-	mes "After "+.@round+" games, "+strcharinfo(0)+" has "+.@flag_point+" Flag Point left.";
+	mes "Depois "+.@round+" games, "+strcharinfo(0)+" has "+.@flag_point+" Flag Point left.";
 	mes "... ... ...";
 	next;
 	if (.@you_flag == 1 && .@cat_flags_waved == 0) {
@@ -10251,7 +10251,7 @@ mal_in01,133,214,6	script	Leader#gamer	546,{
 			}
 			getitem 12636, .@cans; //Malang_Sp_Can
 			mes "[Líder]";
-			mes "Congratulations. You have won the Flag-Waving Game. "+.@cans+" Canned Foods will be given as the present.";
+			mes "Parabéns. Você venceu o Jogo de Agitar Bandeira. "+.@cans+" Canned Foods will be given as the present.";
 		}
 		next;
 		mes "[Líder]";
@@ -10542,7 +10542,7 @@ mal_in01,15,16,3	script	Fallen Angel#mal	403,{
 	next;
 	switch(select("What is that?:"+.@menu$+":Enchant Initialization")) {
 	case 1:
-		switch(select("Stop speaking:What are you going to do?")) {
+		switch(select("Pare de falar:O que você vai fazer?")) {
 		case 1:
 			mes "[Anjo Caído]";
 			mes "O que você disse?";
@@ -10568,7 +10568,7 @@ mal_in01,15,16,3	script	Fallen Angel#mal	403,{
 		mes "Segundo, ^ff0000embora a taxa não seja alta, a Asa de Arcanjo pode ser danificada^000000! Isso é muito azar!";
  		mes "Se você puder aceitar essas condições, eu encantarei a asa para você.";
 		next;
-		if(select("Let me consider...:I accept, let's enchant!") == 1) {
+		if(select("Deixe-me pensar...:Eu aceito, vamos encantá-lo!") == 1) {
 			mes "[Anjo Caído]";
 			mes "Ok! Tome seu tempo para considerar!";
 			close;
@@ -10655,7 +10655,7 @@ mal_in01,15,16,3	script	Fallen Angel#mal	403,{
 		mes "[Anjo Caído]";
 		mes "A inicialização requer ^0000ff3 unidades de Fruto de Agave^000000. A asa não será danificada, exceto pela capacidade encantada.";
 		next;
-		if(select("Let me consider...:Ok, I want initialize it.") == 1) {
+		if(select("Deixe-me pensar...:Ok, eu quero inicializá-lo.") == 1) {
 			mes "[Anjo Caído]";
 			mes "Ok! Tome seu tempo para considerar!";
 			close;

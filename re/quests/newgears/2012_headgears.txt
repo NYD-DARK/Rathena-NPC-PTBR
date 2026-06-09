@@ -38,9 +38,9 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 			erasequest .@quests_playtime[.@i];
 			mes "[Reno]";
 			if (.@i < 3)	// hunting quest wait time
-				mes "The waiting time for a "+.@type$[.@i]+" collection quest has expired. You can now take another request.";
+				mes "O tempo de espera para um "+.@type$[.@i]+" collection quest has expired. You can now take another request.";
 			else        	// buff wait time
-				mes "The waiting time for storing "+.@crystal$[.@i]+" Energy Crystals has expired. You can now store them again.";
+				mes "O tempo de espera para armazenar "+.@crystal$[.@i]+" Energy Crystals has expired. You can now store them again.";
 			close;
 		}
 	}
@@ -112,27 +112,27 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 			isbegin_quest(5175) + isbegin_quest(5176) + isbegin_quest(5177) + isbegin_quest(5178) + isbegin_quest(5179) + isbegin_quest(5180) + isbegin_quest(5181) + isbegin_quest(5182);
 		setarray .@quest_index[0],5161,5169,5174;
 
-		set .@select, select("Lower level hunting [61-80]:Intermediate level hunting [80-99]:High level hunting [90 and up]:Cancel my current quest.") - 1;
+		set .@select, select("Caça de nível inferior [61-80]:Caça de nível intermediário [80-99]:Caça de alto nível [90 e acima]:Cancelar minha missão atual.") - 1;
 		if (.@select < 3) {
 			setarray .@min_level[0],60,80,90,100;
 			if (BaseLevel < .@min_level[.@select]) {
 				mes "[Reno]";
-				mes "I am sorry but the request for the "+.@type$[.@select]+" collection is only available for those level "+.@min_level[.@select]+" and higher. You do not seem to be capable of carrying out this request.";
+				mes "Sinto muito, mas o pedido para o "+.@type$[.@select]+" collection is only available for those level "+.@min_level[.@select]+" and higher. You do not seem to be capable of carrying out this request.";
 				close;
 			}
 			if (.@quest_status[.@select]) {
 				mes "[Reno]";
-				mes "You seem to be under the other request of "+.@type$[.@select]+" collection. If the quest seems to be too hard... how about you ^FF0000give up on the request^000000?";
+				mes "Parece que você está sob o outro pedido de "+.@type$[.@select]+" collection. If the quest seems to be too hard... how about you ^FF0000give up on the request^000000?";
 				close;
 			}
 			set .@playtime, checkquest(.@quest_index[.@select],PLAYTIME);
 			if (.@playtime == 0 || .@playtime == 1) {
 				mes "[Reno]";
-				mes "Currently waiting for the "+.@type$[.@select]+" collection commission. Tasks in each collection can only be completed once per day."; //custom translation
+				mes "Atualmente aguardando o "+.@type$[.@select]+" collection commission. Tasks in each collection can only be completed once per day."; //custom translation
 				close;
 			}
 			mes "[Reno]";
-			mes "You selected to hunt a monster from the "+.@type$[.@select]+" collection. After hunting these monsters you will receive "+((.@features_iRO)?"10 ":"")+"^0000FF"+.@crystal$[.@select]+" Energy Crystals^000000 when you return to me.";
+			mes "Você selecionou para caçar um monstro do "+.@type$[.@select]+" collection. After hunting these monsters you will receive "+((.@features_iRO)?"10 ":"")+"^0000FF"+.@crystal$[.@select]+" Energy Crystals^000000 when you return to me.";
 			next;
 			mes "[Reno]";
 			mes "Por favor, selecione o monstro que você acha que pode caçar facilmente na lista.";
@@ -170,23 +170,23 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 				);
 				if (.@quest > 4 && BaseLevel < .@min_level[3]) {
 					mes "[Reno]";
-					mes "I am sorry but the request for the most advanced collection is only available for those level "+.@min_level[3]+" and higher. You do not seem to be capable of carrying out this request.";
+					mes "Sinto muito, mas o pedido para a coleção mais avançada está disponível apenas para aqueles nível "+.@min_level[3]+" and higher. You do not seem to be capable of carrying out this request.";
 					close;
 				}
 				break;
 			}
 			setquest .@quest_index[.@select] + .@quest;
 			mes "[Reno]";
-			mes "The request for "+.@type$[.@select]+" collection monsters has been issued. Please check the details on the issued document.";
+			mes "O pedido para "+.@type$[.@select]+" collection monsters has been issued. Please check the details on the issued document.";
 			close;
 		} else {
 			setarray .@quest_count[0],7,4,8;
 			for (set .@i,0; .@i<3; set .@i,.@i+1) {
 				if (.@quest_status[.@i]) {
 					mes "[Reno]";
-					mes "You are currently under the request of the "+.@type$[.@i]+" collection. If you give up now, all your history will be lost. Do you really want to give up?";
+					mes "Você está atualmente sob o pedido do "+.@type$[.@i]+" collection. If you give up now, all your history will be lost. Do you really want to give up?";
 					next;
-					set .@erase_quest, select("Yes:No");
+					set .@erase_quest, select("Sim:Não");
 					switch (.@erase_quest) {
 					case 1:
 						for (set .@quest,.@quest_index[.@i]+1; .@quest<=.@quest_index[.@i]+.@quest_count[.@i]; set.@quest,.@quest+1) {
@@ -218,7 +218,7 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 		mes "[Reno]";
 		mes "Você quer acumular Cristais de Energia dentro do seu corpo para receber um bônus?";
 		next;
-		set .@select, select("Accumulating Energy Crystals?:Accumulate Rough Energy Crystal:Accumulate Purified Energy Crystal:Accumulate High Energy Crystal");
+		set .@select, select("Acumular Cristais de Energia Brutos?:Accumulate Rough Energy Crystal:Acumular Cristais de Energia Purificados:Acumular Cristais de Energia Elevados");
 		switch (.@select) {
 		case 1:
 			mes "[Reno]";
@@ -259,7 +259,7 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 		}
 		if (BaseLevel < .@min_level) {
 			mes "[Reno]";
-			mes "With a body like that, you can't accumulate "+.@crystal$[.@select-2]+" Energy Crystals. You must be level "+.@min_level+" or your body will be harmed in the process."; //custom translation
+			mes "Com um corpo assim, você não pode acumular "+.@crystal$[.@select-2]+" Energy Crystals. You must be level "+.@min_level+" or your body will be harmed in the process."; //custom translation
 			close;
 		}
 		if (.@energy_buf00) {
@@ -274,9 +274,9 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 			close;
 		}
 		mes "[Reno]";
-		mes "It takes 3 hours for your body to accumulate 2 to 4 "+.@crystal$[.@select-2]+" Energy Crystals. Do you want to start?";
+		mes "Leva 3 horas para seu corpo acumular 2 a 4 "+.@crystal$[.@select-2]+" Energy Crystals. Do you want to start?";
 		next;
-		if(select("Cancel:Start") == 1) {
+		if(select("Cancelar:Iniciar") == 1) {
 			mes "[Reno]";
 			mes "Eu recomendo que você tente acumular Cristal de Energia quando tiver tempo.";
 			close;
@@ -293,13 +293,13 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 		mes "- Puck -";
 		next;
 		mes "[Reno]";
-		mes "Everything seems to be in order. Let's start accumulating "+.@crystal$[.@select-2]+" Energy Crystals. Remember to come back to me after 3 hours to get the "+.@crystal$[.@select-2]+" Energy Crystals.";
+		mes "Tudo parece estar em ordem. Vamos começar a acumular "+.@crystal$[.@select-2]+" Energy Crystals. Remember to come back to me after 3 hours to get the "+.@crystal$[.@select-2]+" Energy Crystals.";
 		close;
 	case 4:
 		mes "[Reno]";
 		mes "Você quer comprimir os Cristais de Energia?";
 		next;
-		switch(select("What does compressing do?:Compress Rough to Purified Crystal:Compress Purified to High Crystal")) {
+		switch(select("O que a compressão faz?:Comprimir Brutos em Cristais Purificados:Comprimir Purificados em Cristais Elevados")) {
 		case 1:
 			mes "[Reno]";
 			mes "Você está curioso sobre a compressão de Cristal de Energia? Eu posso comprimir Cristais de Energia de nível inferior em outros de nível mais alto.";
@@ -332,7 +332,7 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 		mes sprintf("%d %ss will be compressed to %d %ss.",.@crystal_count,getitemname(.@crystal),.@crystal_get,getitemname(.@crystal_));
 		mes "Você quer comprimir?";
 		next;
-		if(select("Compress:Stop") == 2) {
+		if(select("Comprimir:Pare") == 2) {
 			mes "[Reno]";
 			mes "Ok, por favor, entre em contato se precisar de mim no futuro.";
 			close;
@@ -345,13 +345,13 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 				set .@crystal_get, .@crystal_count / .@rate;
 				mes "[Reno]";
 				mes "A compressão foi um grande sucesso.";
-				mes "There are "+.@crystal_count+" Energy Crystals left, which can compress into "+.@crystal_get+" Energy Crystals. Do you want to continue?";
+				mes "Há "+.@crystal_count+" Energy Crystals left, which can compress into "+.@crystal_get+" Energy Crystals. Do you want to continue?";
 				next;
-				if(select("Compress:Stop") == 2)
+				if(select("Comprimir:Pare") == 2)
 					break;
 			} else {
 				mes "[Reno]";
-				mes "You don't have enough "+getitemname(.@crystal)+"s.";
+				mes "Você não tem o suficiente "+getitemname(.@crystal)+"s.";
 				next;
 				break;
 			}
@@ -402,7 +402,7 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 			break;
 		}
 		mes "[Reno]";
-		mes "Please select the equipment to exchange for "+getitemname(.@crystal)+"s.";
+		mes "Por favor, selecione o equipamento para trocar por "+getitemname(.@crystal)+"s.";
 		next;
 		set .@crystal_count, countitem(.@crystal);
 		set .@menu$,"";
@@ -446,13 +446,13 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 		mes "[Reno]";
 		mes "Você está familiarizado com as ^FF0000precauções^000000?";
 		next;
-		if(select("I am.:No.") == 2) {
+		if(select("Eu sou.:Não.") == 2) {
 			mes "[Reno]";
 			mes "Ok. Então, da próxima vez.";
 			close;
 		}
 		mes "[Reno]";
-		mes "Then let's begin to upgrade "+.@item_name$+".";
+		mes "Então vamos começar a atualizar "+.@item_name$+".";
 		next;
 		specialeffect2 EF_REPAIRWEAPON;
 		progressbar "ffff00",2;
@@ -474,7 +474,7 @@ moc_para01,41,169,3	script	Reno#2012hat	64,{
 		mes "[Reno]";
 		mes "Você deseja doar Cristais de Energia para ganhar um novo equipamento para a cabeça aleatório?";
 		next;
-		switch(select("Donate Energy Crystals?:Donate 300 Rough Energy Crystals.:Donate 600 Purified Energy Crystals.:Donate 900 High Energy Crystals.")) {
+		switch(select("Doar Cristais de Energia?:Doar 300 Cristais de Energia Brutos.:Doar 600 Cristais de Energia Purificados.:Doar 900 Cristais de Energia Elevados.")) {
 		case 1:
 			mes "[Reno]";
 			mes "Estamos coletando Cristais de Energia para podermos pesquisar mais combinações de equipamentos para a cabeça para aventureiros.";
@@ -592,12 +592,12 @@ L_CheckHunting:
 	for (set .@quest,getarg(0)+1; .@quest<getarg(1)+getarg(2); set .@quest,.@quest+1) {
 		if (checkquest(.@quest,HUNTING) == 2) {
 			mes "[Reno]";
-			mes "Finished "+getarg(3)+" collection hunting quest.";
+			mes "Concluído "+getarg(3)+" collection hunting quest.";
 			next;
 			setquest getarg(0);
 			erasequest .@quest;
 			getitem getarg(4),getarg(5);
-			mes "You receive "+getarg(5)+" "+getitemname(getarg(4))+"s as the "+getarg(3)+" collection reward.";
+			mes "Você recebe "+getarg(5)+" "+getitemname(getarg(4))+"s as the "+getarg(3)+" collection reward.";
 			close;
 		}
 	}

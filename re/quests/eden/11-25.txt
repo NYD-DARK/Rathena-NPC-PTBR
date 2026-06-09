@@ -61,7 +61,7 @@ moc_para01,36,38,3	script	Mission [11 - 25]#Tuto	4_BOARD3,{
 	mes " ";
 	mes "- Gerente : Spike -";
 	next;
-	switch(select("Hornet Hunting:Condor Hunting:Grasshopper's Leg:Worm Tail Hunting:Spore Hunting:Pest Control:Muka Hunting:Familiar Hunting:Collect Feathers:Collect Poison Spores:Cancel")) {
+	switch(select("Caça aos Zangões:Caça aos Condores:Perna de Gafanhoto:Caça às Caudas de Verme:Caça aos Esporos:Controle de Pragas:Caça aos Mukas:Caça aos Familiares:Coletar Penas:Coletar Esporos Venenosos:Cancelar")) {
 		case 1: callsub L_Quest,11114,"Hornet Hunting"," - Hunt 10 ^4d4dff'Hornets'^000000 - "," - northwest of Prontera. - ";
 		case 2: callsub L_Quest,11115,"Condor Hunting"," - Hunt 20 ^4d4dff'Condors'^000000 - "," - south of Morocc. - ";
 		case 3: callsub L_Quest,11116,"Grasshopper's Leg"," - Hunt 10 ^4d4dff'Rockers'^000000 - "," - southwest of Prontera and - "," - bring 10 ^4d4dffGrasshopper's Legs^000000. - ";
@@ -80,19 +80,19 @@ moc_para01,36,38,3	script	Mission [11 - 25]#Tuto	4_BOARD3,{
 L_Quest:
 	.@quest_status = checkquest(getarg(0)+10,PLAYTIME);
 	if (.@quest_status == 0 || .@quest_status == 1) {
-		mes " - Mission ^4d4dff"+ getarg(1) +"^000000 - ";
+		mes " - Missão ^4d4dff"+ getarg(1) +"^000000 - ";
 		mes "- já terminou por hoje. -";
 		mes " ";
 		mes "- Gerente : Spike -";
 		close;
 	}
-	mes " - Mission '"+ getarg(1) +"' - ";
+	mes " - Missão '"+ getarg(1) +"' - ";
 	for ( .@i = 2; .@i < getargcount(); .@i++ )
 		mes getarg(.@i);
 	mes " ";
 	mes "- Gerente : Spike -";
 	next;
-	if (select("I will do this mission.:Look for other missions.") == 2) {
+	if (select("Vou fazer esta missão.:Procurar outras missões.") == 2) {
 		mes "- Vamos procurar por -";
 		mes "- outras missões. -";
 		close;
@@ -143,14 +143,14 @@ L_Quest:
 		if (.@item_req) {
 			if (countitem(.@item_req) < .@req_amount) {
 				mes "[Spike]";
-				mes "You don't have enough "+ getitemname(.@item_req) +".";
-				mes "You need to bring "+ .@req_amount +" "+ getitemname(.@item_req) +".";
+				mes "Você não tem "+ getitemname(.@item_req) +".";
+				mes "Você precisa trazer "+ .@req_amount +" "+ getitemname(.@item_req) +".";
 				close;
 			}
 		}
 		mes "[Spike]";
 		mes "Hum... deixe-me ver~";
-		mes "You have completed the '"+ getarg(1) +"' mission.";
+		mes "Você completou a missão '"+ getarg(1) +"' mission.";
 		next;
 		mes "[Spike]";
 		mes "Bom trabalho~!!";

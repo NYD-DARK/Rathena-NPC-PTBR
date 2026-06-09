@@ -49,7 +49,7 @@ manuk,321,182,5	script	Entrance Manager#ep133	450,{
 		mes "[Gerente da Entrada]";
 		mes "Você está visitando a cidade capital, El Dicastes?";
 		next;
-		if(select("Yes.:No.") == 2) {
+		if(select("Sim.:Não.") == 2) {
 			mes "[Gerente da Entrada]";
 			mes "Então use o túnel na próxima vez.";
 			close; 
@@ -77,7 +77,7 @@ dic_dun01,266,113,5	script	Curious Sapha#ep13_3_	449,{
 	mes "[Sapha Curioso]";
 	mes "Olá?";
 	next;
-	switch(select("What are you doing here?:Buy research items.:Hello!:I want to help your research.")) {
+	switch(select("O que você está fazendo aqui?:Comprar itens de pesquisa.:Olá!:Quero ajudar na sua pesquisa.")) {
 	case 1:
 		mes "[Sapha Curioso]";
 		mes "Você vê aquele vigilante sujo ali?";
@@ -132,9 +132,9 @@ dic_dun01,266,113,5	script	Curious Sapha#ep13_3_	449,{
 			close; 
 		}
 		mes "[Sapha Curioso]";
-		mes "Will you buy "+.@input+"?";
+		mes "Você vai comprar "+.@input+"?";
 		next;
-		if(select("Yes:No") == 2) {
+		if(select("Sim:Não") == 2) {
 			mes "[Sapha Curioso]";
 			mes "Você mudou de ideia?";
 			close;
@@ -155,7 +155,7 @@ dic_dun01,266,113,5	script	Curious Sapha#ep13_3_	449,{
 		input .@str$;
 		next;
 		mes "[Sapha Curioso]";
-		mes "It says ^0000FF"+.@str$+"^000000.";
+		mes "Está escrito ^0000FF"+.@str$+"^000000.";
 		next;
 		switch(rand(1,3)) {
 		case 1:
@@ -207,7 +207,7 @@ sec_in02,16,43,5	script	Scaraba Dungeon Entrance	449,{
 		mes "Manuk está logo à nossa frente.";
 		mes "Você está indo para Manuk?";
 		next;
-		if (select("Yes.:No.") == 1) {
+		if (select("Sim.:Não.") == 1) {
 			mes "[Vigilante]";
 			mes "Eu vou te mandar para Manuk.";
 			close2;
@@ -236,7 +236,7 @@ sec_in02,16,43,5	script	Scaraba Dungeon Entrance	449,{
 	mes "[Vigilante]";
 	mes "Você precisa de algo da caverna?";
 	next;
-	if (select("Yes.:No.") == 1) {
+	if (select("Sim.:Não.") == 1) {
 		mes "[Vigilante]";
 		mes "Tenha cuidado.";
 		close2;
@@ -272,12 +272,12 @@ dic_dun01,284,102,5	script	Dirty Vigilante#ep13_3	450,{
 		mes "[Vigilante]";
 		mes "Você precisa de algo da caverna?";
 		next;
-		if (select("Yes.:No.") == 1) {
+		if (select("Sim.:Nº") == 1) {
 			mes "[Vigilante]";
 			mes "Eca, que cheiro é esse?";
 			mes "Tenha cuidado. O cheiro da Secreção de Scaraba foi sentido por outros Scarabas.";
 			next;
-			if (select("Enter after spraying perfume.:Do not enter because it's dangerous.") == 1) {
+			if (select("Entrar após borrifar perfume.:Não entrar, pois é perigoso.") == 1) {
 				if (!countitem(6437)) {
 					mes "- Seu Perfume de Scaraba desapareceu. -";
 					close;
@@ -394,7 +394,7 @@ OnEnable:
 		mes "[Guarda da Cidade Capital]";
 		mes "Você está voltando para El Dicastes?";
 		next;
-		set .@m, select("Yes. Going to the castle.:No.") - 1;
+		set .@m, select("Sim. Indo para o castelo.:Não.") - 1;
 		mes "[Guarda da Cidade Capital]";
 		mes "Boa sorte.";
 		close2;
@@ -402,7 +402,7 @@ OnEnable:
 		end;
 	}
 	mes "[Guarda da Cidade Capital]";
-	mes "Unknown situation occurred. Case " + strnpcinfo(2);
+	mes "Situação desconhecida ocorreu. Caso " + strnpcinfo(2);
 	mes "Por favor, consulte um GM.";
 	close;
 }
@@ -413,7 +413,7 @@ dic_in01,254,119,0	script	Item Storage#01	844,{
 	mes "Este é o armazém de itens.";
 	mes "Há algo escrito no papel.";
 	next;
-	mes "+ Shay's precious safe +";
+	mes "+ Cofre precioso de Shay +";
 	mes "Para aqueles que querem usar este cofre!";
 	mes "1. Minha comida é deliciosa?";
 	mes "2. Você tem habilidades básicas suficientes, certo?";
@@ -423,7 +423,7 @@ dic_in01,254,119,0	script	Item Storage#01	844,{
 	mes "Inserir Moedas: Você vai";
 	mes "depositar 500 Zeny?";
 	next;
-	if(select("Use safe:No way.")==2) {
+	if(select("Usar cofre:De jeito nenhum.")==2) {
 		mes "["+strcharinfo(0)+"]";
 		mes "Vou usar mais tarde.";
 		close; 
@@ -548,7 +548,7 @@ dic_in01,48,263,5	script	Hunting Dept. 1 Manager	449,{
 	que_dic(0,12103,4000,.@s$);
 	que_dic(0,12104,73000,.@s$);
 	que_dic(0,12105,59000,.@s$);
-	mes "Um....." + strcharinfo(0) + "";
+	mes "Hum....." + strcharinfo(0) + "";
 	mes "Você terá problemas se mentir sobre o pedido...";
 	close;
 }
@@ -617,7 +617,7 @@ dic_in01,51,266,6	script	Hunting Dept. 2 Manager	449,{
 	que_dic(0,12109,53000,.@s$);
 	que_dic(0,12110,30000,.@s$);
 	que_dic(0,12111,42000,.@s$);
-	mes "Umm.." + strcharinfo(0) + "";
+	mes "Hmm.." + strcharinfo(0) + "";
 	mes "Por favor, verifique seu histórico de pedidos novamente. Há uma discrepância com nossos documentos.";
 	close;
 }
@@ -929,10 +929,10 @@ dic_in01,40,193,1	script	Papyrus#0001	453,{
 	}
 	set .@map_hi, rand(1,4);
 	mes "[Papiro]";
-	if (.@map_hi == 1) mes "Welcome, I am Papyrus, the manager of the Archive room here.";
-	else if (.@map_hi == 2) mes "The number of adventurers visiting the Archive room has increased";
-	else if (.@map_hi == 3) mes "This is the very place where Ancient Sapha forefathers created history";
-	else mes "The Archive room holds transcendent knowledge beyond that of Midgard and Asgard";
+	if (.@map_hi == 1) mes "Bem-vindo, sou Papyrus, o gerente da Sala do Arquivo.";
+	else if (.@map_hi == 2) mes "O número de aventureiros que visitam a Sala do Arquivo aumentou.";
+	else if (.@map_hi == 3) mes "Este é o local onde os ancestrais de Sapha criaram a história.";
+	else mes "A Sala do Arquivo contém conhecimentos transcendentais além de Midgard e Asgard.";
 	next;
 	if (countitem(6308) > 29) {
 		mes "[Papiro]";
@@ -941,7 +941,7 @@ dic_in01,40,193,1	script	Papyrus#0001	453,{
 		mes "[Papiro]";
 		mes "Nós trocamos 11 Certificações Sapha por 30 Relíquias Desconhecidas. Você deseja trocar?";
 		next;
-		if (select("Next time:Exchange now") == 1) {
+		if (select("Mais tarde:Trocar agora") == 1) {
 			mes "[Papiro]";
 			mes "Ok, como quiser. Estou aqui se mudar de ideia";
 			close;
@@ -958,7 +958,7 @@ dic_in01,40,193,1	script	Papyrus#0001	453,{
 		mes "Você encontrou uma Relíquia Desconhecida.";
 		mes "Você deseja trocá-la por 1 Certificação Sapha?";
 		next;
-		if (select("Next time:Exchange now") == 1) {
+		if (select("Mais tarde:Trocar agora") == 1) {
 			mes "[Papiro]";
 			mes "Ok, como quiser. Estou aqui se mudar de ideia";
 			close;
@@ -972,7 +972,7 @@ dic_in01,40,193,1	script	Papyrus#0001	453,{
 	mes "[Papiro]";
 	mes "Como posso ajudar?";
 	next;
-	switch (select("What is this place for? :How do I view documents?:What is an Unknown Relic? ")) {
+	switch (select("Para que serve este lugar? :Como visualizo documentos?:O que é uma Relíquia Desconhecida? ")) {
 		case 1:
 			mes "[Papiro]";
 			mes "Este é um lugar importante onde os dados de várias relíquias coletadas, desde nossos antigos antepassados, são mantidos.";
@@ -1107,7 +1107,7 @@ dic_in01,40,193,1	script	Papyrus#0001	453,{
 		mes "^660066"+getarg(2)+"^000000";
 		mes "^660066"+getarg(3)+"^000000";
 		next;
-		mes "You've found a document about ^990099"+getarg(1)+"^000000. Check for details in the ^800080Quest Window^000000.";
+		mes "Você encontrou um documento sobre ^990099"+getarg(1)+"^000000. Check for details in the ^800080Quest Window^000000.";
 		specialeffect2 EF_STEAL;
 		setquest getarg(0);
 		close; 
@@ -1129,7 +1129,7 @@ function	script	unknown_d	{
 	specialeffect2 EF_BEGINSPELL_N1;
 	progressbar "ffff00",4;
 	erasequest getarg(0);
-	mes "You were able to find information on the "+getitemname(getarg(1))+".";
+	mes "Você conseguiu encontrar informações sobre o "+getitemname(getarg(1))+".";
 	specialeffect2 EF_STEAL;
 	getitem getarg(1),rand(1,4);
 	if (!rand(2)) {
@@ -1218,7 +1218,7 @@ dic_in01,138,225,3	script	Diel Guard#ep133_19	492,{
 		mes "Por favor, pare.";
 		mes "Apenas aqueles com permissão têm permissão para entrar.";
 		next;
-		if (select("I have permission.:Go back.") == 1) {
+		if (select("Tenho permissão.:Voltar.") == 1) {
 			mes "[Guarda Diel]";
 			mes "Espere...";
 			mes strcharinfo(0) + "......ah... I see your name on the list.";
@@ -1237,7 +1237,7 @@ dic_in01,138,225,3	script	Diel Guard#ep133_19	492,{
 	}
 	else if (ep13_3_secret > 13) {
 		mes "[Guarda Diel]";
-		mes "Ah, you are " + strcharinfo(0) + "..";
+		mes "Ah, você é " + strcharinfo(0) + "..";
 		mes "Recebi uma ordem de Ahat para deixá-lo passar a qualquer momento.";
 		mes "Por favor, suba.";
 		close2;
@@ -1549,7 +1549,7 @@ dic_in01,300,280,5	script	Minister Ahat#ep133_21	493,{
 		mes "Surpreso?";
 		mes "Porque pareço um humano exatamente como você?";
 		next;
-		select("You aren't a Sapha?:Human?!!!!!:Pretty..!!:So handsome..!");
+		select("Você não é um Saha?:Humano?!!!!!:Lindo...!!:Tão bonito...!");
 		mes "[Ahat]";
 		mes "Hahaha... tudo bem.";
 		mes "Entendo que você não consegue evitar a surpresa com minha aparência.";
@@ -1580,7 +1580,7 @@ dic_in01,300,280,5	script	Minister Ahat#ep133_21	493,{
 		mes "- Ahat parece estar lançando um feitiço poderoso.";
 		mes "Esta pode ser sua habilidade real. -";
 		next;
-		select("Stop that!:Demon go away!");
+		select("Pare com isso!:Vá embora, demônio!");
 		mes "[Ahat]";
 		mes ".. resistência inútil...";
 		mes "Mas isso é divertido de vez em quando.";
@@ -1645,7 +1645,7 @@ dic_in01,300,280,5	script	Minister Ahat#ep133_21	493,{
 		mes "[Ahat]";
 		mes "Quem é seu mestre?";
 		next;
-		if (select("Pretend to be under the spell.:Well, you tell me") == 1) {
+		if (select("Finja estar sob o feitiço.:Bem, você me diz.") == 1) {
 			mes "- Você começa a agir como se estivesse hipnotizado.";
 			mes "Ahat parece satisfeito. -";
 			next;
@@ -1668,7 +1668,7 @@ dic_in01,300,280,5	script	Minister Ahat#ep133_21	493,{
 		mes "[Ahat]";
 		mes "Quem é você para mim?";
 		next;
-		if (select("A foot stool!:Loyal servant.") == 1) {
+		if (select("Um banquinho!:Servo leal.") == 1) {
 			mes "[Ahat]";
 			mes "Eu não preciso de um escabelo.";
 			mes "Vamos conversar depois de um minuto.";
@@ -1688,7 +1688,7 @@ dic_in01,300,280,5	script	Minister Ahat#ep133_21	493,{
 		mes "Meu leal servo maligno.";
 		mes "Aproxime-se.";
 		next;
-		if (select("What am I doing?:Your wish is my command.") == 1) {
+		if (select("O que estou fazendo?:Seu desejo é uma ordem.") == 1) {
 			mes "[Ahat]";
 			mes "Como você é teimoso.";
 			mes "Meu feitiço não funciona em você?";
@@ -1823,7 +1823,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 		mes "O ministro Sapha parece desamparado.";
 		mes "Ele gesticula com uma expressão de abandono.";
 		next;
-		select("Is he asking me to leave?:Or doesn't have a clue on something?");
+		select("Ele está pedindo para eu ir embora?:Ou não tem a menor ideia de algo?");
 		mes "Eu sigo o gesto que o ministro fez e então o ministro suspira e acena com a cabeça.";
 		close2;
 		warp "dic_in01",144,188;
@@ -1861,7 +1861,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 			mes "[HesLanta]";
 			mes "Jarute... Como Ahat parecia para você?";
 			next;
-			set .@m, select("I don't understand your question.:My master.") - 1;
+			set .@m, select("Não entendi sua pergunta.:Meu mestre.") - 1;
 			if (.@m) {
 				mes "[HesLanta]";
 				mes "....huh....?";
@@ -1943,7 +1943,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 		mes "Espere, isso significa que você está sob o feitiço de Ahat...!!";
 		mes "Oh, não!";
 		next;
-		select("No!:That's not it!");
+		select("Não!:Não é isso!");
 		mes "[" + strcharinfo(0) + "]";
 		mes "Eu não estou sob o feitiço!";
 		mes "Eu apenas finjo que estou. Eu também estou investigando Ahat!";
@@ -2152,7 +2152,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 				mes "[" + strcharinfo(0) + "]";
 				mes "Por que Cheshire tentaria roubar o relatório?";
 				next;
-				if (select("No idea.:To make the conflict between 3 countries worse") == 1) {
+				if (select("Não faço ideia.:Para piorar o conflito entre os 3 países") == 1) {
 					mes "[" + strcharinfo(0) + "]";
 					mes "Não sabemos o motivo real neste momento.";
 					mes "Mas o que Cheshire ganharia com isso?";
@@ -2170,7 +2170,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 				mes "O mestre de Cheshire é Ahat.";
 				mes "Então todas as suas ações são para...";
 				next;
-				if (select("Cheshire is plotting on his own.:Ahat must be ordering him.") == 1) {
+				if (select("O Cheshire está agindo por conta própria.:Deve ser ordem do Ahat.") == 1) {
 					mes "[" + strcharinfo(0) + "]";
 					mes "Cheshire agiu por conta própria?";
 					mes "Tem certeza?";
@@ -2194,7 +2194,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 				mes "E tenta apagar todos os vestígios encontrados perto da fenda.";
 				mes "E Ahat quer eliminar...";
 				next;
-				if (select("Ahat himself.:Morocc because of the crack?") == 1) {
+				if (select("O próprio Ahat.:Por causa da fenda em Morroc?") == 1) {
 					mes "[" + strcharinfo(0) + "]";
 					mes "Sim, Ahat pode ser um vestígio de si mesmo.";
 					mes "Os Saphas querem esconder algo, é por isso que me contrataram";
@@ -2214,7 +2214,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 				mes "Percebo que existe um relacionamento entre eles, mas não consigo identificar.";
 				mes "E no relatório da expedição...";
 				next;
-				if (select("Content of conflict between three countries.. :Content about evil lord Morocc..") == 1) {
+				if (select("Conflito entre três países... :História sobre o Lorde das Trevas Morroc...") == 1) {
 					mes "[" + strcharinfo(0) + "]";
 					mes "Havia algo sobre o conflito entre os três países...";
 					mes "Mas... acho que isso não faz sentido?";
@@ -2301,7 +2301,7 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 	mes "É muito trágico e triste desconfiar de alguém.";
 	mes "É pior ainda se você nunca puder compartilhar essa tristeza com ninguém.";
 	next;
-	if (select("You are fine.:Then give up now.") == 1) {
+	if (select("Você está bem.:Então desista agora.") == 1) {
 		mes "[HesLanta]";
 		mes "Sério?";
 		mes "Eu me sinto muito melhor.";
@@ -2527,7 +2527,7 @@ dicastes01,211,178,2	script	Moltuka#pa0829	453,{
 	mes "Bem-vindo.";
 	mes "O que o traz aqui?";
 	next;
-	if (select("Please explain the request to me.:Please give me a request.") == 1) {
+	if (select("Por favor, me explique o pedido.:Por favor, me dê um pedido.") == 1) {
 		mes "[Moltuka]";
 		mes "É melhor você ir ver Calyon para que ele lhe explique sobre o Departamento de Transporte 1 e 2.";
 		next;
@@ -2752,7 +2752,7 @@ dicastes01,175,217,5	script	Kalipo#pa0829	453,{
 	mes "Bem-vindo.";
 	mes "Você está aqui para um pedido?";
 	next;
-	if (select("Please explain the request to me.:Please give me a request.") == 1) {
+	if (select("Por favor, me explique o pedido.:Por favor, me dê um pedido.") == 1) {
 		mes "[Kalipo]";
 		mes "Como você sabe melhor";
 		mes "e Laponte lhe explicou";
@@ -2894,7 +2894,7 @@ dicastes01,187,230,5	script	Laponte#pa0829	453,{
 	mes "Bem-vindo.";
 	mes "Você está aqui por uma solicitação?";
 	next;
-	if (select("Please explain the request to me.:Please give me a request.") == 1) {
+	if (select("Por favor, me explique o pedido.:Por favor, me passe um pedido.") == 1) {
 		mes "[Laponte]";
 		mes "Sou responsável por alocar";
 		mes "solicitações de outros departamentos";
@@ -3018,7 +3018,7 @@ dicastes01,187,230,5	script	Laponte#pa0829	453,{
 		mes "Recebemos um relatório de que minerais brutos de Bradium nas minas estão vivos.";
 		next;
 		mes "[Laponte]";
-		mes "Parece que os minerais brutos de Bradium foram transformados em Golems por um feitiço antigo e agora talvez precisemos fechar nossas minas por causa deles. Você pode ir lá e eliminá-los? ";
+		mes "Parece que os minerais brutos de Bradium foram transformados em Golems por um feitiço antigo e agora talvez precisemos fechar nossas minas por causa deles. Você pode ir lá e eliminá-los?";
 		next;
 		mes "Eu consegui uma solicitação para você chamada ^880088Rochas Móveis^000000. Você pode verificar os detalhes da solicitação e a quem deve reportar abrindo a ^990099Janela de Missões^000000.";
 		close;
@@ -3065,7 +3065,7 @@ dicastes01,208,230,3	script	Pura#pa0829	453,{
 	mes "Bem-vindo(a).";
 	mes "O que o traz aqui?";
 	next;
-	if (select("Please explain the request to me.:Please give me a request.") == 1) {
+	if (select("Por favor, me explique o pedido.:Por favor, me passe um pedido.") == 1) {
 		mes "[Pura]";
 		mes "Aventureiros me ajudam a";
 		mes "entregar vários itens";
@@ -3255,7 +3255,7 @@ dicastes01,225,211,3	script	Tragis#pa0829	453,{
 	mes "Bem-vindo(a).";
 	mes "O que o traz aqui?";
 	next;
-	if (select("Please explain the request to me.:Please give me a request.") == 1) {
+	if (select("Por favor, me explique o pedido.:Por favor, me passe um pedido.") == 1) {
 		mes "[Tragis]";
 		mes "Pura explicará os detalhes sobre o trabalho de suprimentos. Estou muuuito ocupado, como pode ver.";
 		close;
@@ -3405,7 +3405,7 @@ mid_campin,168,170,3	script	Inspector Doha#ep133	59,{
 		mes "Quem está perguntando?";
 		mes "Se você está na sala errada, por favor, vá embora agora.";
 		next;
-		if (select("Came to meet the inspector.:Sorry.") == 1) {
+		if (select("Vim para encontrar o inspetor.:Desculpe.") == 1) {
 			mes "[Doha]";
 			mes "Eu?";
 			mes "Você é a pessoa de quem o capitão estava falando?";
@@ -3467,7 +3467,7 @@ mid_campin,168,170,3	script	Inspector Doha#ep133	59,{
 			mes "Mas acontece que tive sorte de encontrar este gato.";
 			mes "Porque ele acabou sendo uma testemunha do caso.";
 			next;
-			select("Witness!:Who did it?");
+			select("Testemunha!:Quem foi?");
 			mes "[Doha]";
 			mes "Suspiro...";
 			mes "Ele testemunhou o caso, mas a descrição que recebi foi...";
@@ -3525,7 +3525,7 @@ mid_campin,168,170,3	script	Inspector Doha#ep133	59,{
 		mes "Você está falando daquela Tiara de Gatinho que era popular em Prontera?";
 		mes "Se um homem adulto estivesse usando uma daquelas... e também uma cauda?";
 		next;
-		if (select("Was he in disguise?:Taste should be respected.") == 1) {
+		if (select("Ele estava disfarçado?:O gosto deve ser respeitado.") == 1) {
 			mes "[Doha]";
 			mes "Eu concordo.";
 			mes "Eu acho que um dos países está por trás disso.";
@@ -3678,9 +3678,9 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 	mes "[Shay]";
 	switch (rand(1,5)) {
 		case 1: mes ".. Burman Flone."; break;
-		case 2: mes "What?"; break;
-		case 3: mes "Boring. What is it?"; break;
-		case 4: mes "Sigh... Ready to order?"; break;
+		case 2: mes "O quê?"; break;
+		case 3: mes "Chato. O que é?"; break;
+		case 4: mes "Suspiro... Pronto para pedir?"; break;
 		case 5:
 			mes "Outro fracasso?.";
 			mes "Estou falando sozinho. Não se incomode.";
@@ -3688,14 +3688,14 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 			break;
 	}
 	next;
-	switch (select("Order.:Talk.:Never mind.")) {
+	switch (select("Fazer pedido.:Conversar.:Deixa pra lá.")) {
 		case 1:
 			mes "[Shay]";
 			mes "O que vai ser?";
 			mes "Tenho Tropical de Sograt e Vermillion da Praia trazidos de Morroc.";
 			mes "Um pouco caros, no entanto.";
 			next;		
-			if (select("Tropical Sorgrat - 2000z:Vermilion on the Beach - 2000z:Anything else?") == 3) {
+			if (select("Sorvete Tropical - 2000z:Vermelho na Praia - 2000z:Mais alguma coisa?") == 3) {
 				mes "[Shay]";
 				mes "Aqui..";
 				mes "......Hmmm...";
@@ -3706,7 +3706,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 			setarray .@item[1], 12112,12113;
 			if (Zeny > 1999) {
 				mes "[Shay]";
-				mes "Here is your "+.@str$[@menu]+".";
+				mes "Aqui está o seu "+.@str$[@menu]+".";
 				set Zeny, Zeny - 2000;
 				getitem .@item[@menu],1; //Tropical_Sograt
 				break;
@@ -3739,7 +3739,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 				mes "Não quero falar sobre assuntos pessoais.";
 				mes "Mas você tem alguma dúvida?";
 				next;
-				switch (select("Tell me about yourself:About Sapha:About other races:....Hmm..")) {
+				switch (select("Fale sobre você:Sobre a Sapha:Sobre outras raças:Hmm...")) {
 					case 1:
 						mes "[Shay]";
 						mes "Eu?";
@@ -3799,7 +3799,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 						mes "Outras raças?";
 						mes "Falando sobre os Saphas?";
 						next;
-						if (select("With cat ears.:With butterfly wings.") == 1) {
+						if (select("Com orelhas de gato.:Com asas de borboleta.") == 1) {
 							mes "[Shay]";
 							mes "Gato?";
 							mes "Você está falando sobre o Mercador Gato?";
@@ -3851,7 +3851,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 						set .@sealall, .@sealall + 1;
 						mes .@ward$[.@i+1];
 					}
-				if (!.@sealall) mes "But what should I do with the collected information?";
+				if (!.@sealall) mes "Mas o que devo fazer com as informações coletadas?";
 				next;
 				if (.@sealall < 3) {
 					mes "[" + strcharinfo(0) + "]";
@@ -3987,7 +3987,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 				
 				for (set .@size, getarraysize(.@item); .@i < .@size; set .@i, .@i + 1) {
 					if (countitem(.@item[.@i])) {
-						mes "- You show the " + .@str$[.@i] + " you collected from near the crack.-";
+						mes "- Você mostra o " + .@str$[.@i] + " you collected from near the crack.-";
 						set .@crack, 1;
 						next;
 						break;
@@ -4091,7 +4091,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 				mes "[Shay]";
 				mes "Como foi com o ministro?";
 				next;
-				if (select("Strange.:..Beautiful...") == 1) {
+				if (select("Estranho.:..Lindo...") == 1) {
 					mes "[Shay]";
 					mes "Então... que estranho.";
 					mes "..foi ruim ou bom?";
@@ -4146,7 +4146,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 				mes "Por que você está aqui de novo?";
 				mes "Você está trabalhando?";
 				next;
-				if (select("Mission completed!:Came to thank you.") == 1) {
+				if (select("Missão concluída!:Vim te agradecer.") == 1) {
 					mes "[Shay]";
 					mes "Sério?";
 					mes "Bom para você.";
@@ -4174,7 +4174,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 				mes "[Shay]";
 				mes "O que você quer?";
 				next;
-				switch (select("Tell me about yourself:About Sapha:....Hmm..")) {
+				switch (select("Me fale sobre você:Sobre a Sapha:....Hmm...")) {
 					case 1:
 						mes "[Shay]";
 						mes "Eu?";
@@ -4266,7 +4266,7 @@ dic_in01,245,119,4	script	Shay#ep133_13	884,{
 				mes "............";
 				mes "...As garotas gostam disso?";
 				next;
-				if (select("They normally do like homemade chocolate.:No. only aliens.") == 1) {
+				if (select("Normalmente eles gostam de chocolate caseiro.:Não. só alienígenas.") == 1) {
 					mes "[Shay]";
 					mes "Entendo.";
 					mes "Então...";
@@ -4305,7 +4305,7 @@ dicastes01,207,210,5	script	Walking Knit#ep133_15	449,{
 		mes "Bem-vindo, humano.";
 		mes "Finalmente me acostumei a encontrar outras raças como você.";
 		next;
-		if (select("Are there races other than humans?:What are you doing?") == 1) {
+		if (select("Existem raças além dos humanos?:O que você está fazendo?") == 1) {
 			mes "[Knit]";
 			mes "Havia Rapine antes de você chegar.";
 			mes "E, claro, ainda existem.";
@@ -4552,7 +4552,7 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 		mes "... Oh, um humano na capital de Sapha.";
 		mes "Miau...";
 		next;
-		if (select("About a man with cat ears:What are you?") == 1) {
+		if (select("Sobre um homem com orelhas de gato:O que você é?") == 1) {
 			mes "[BK]";
 			mes "Ha, eu sou BK. O infame coletor de informações dos Mercadores de Gatos.";
 			mes "Mas não tenho nenhuma informação para compartilhar com você.";
@@ -4634,7 +4634,7 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 		next;
 		mes "- BK pede uma Certificação de Exploração. -";
 		next;
-		if (select("No way.:Give.") == 1) {
+		if (select("De jeito nenhum.:Dá.") == 1) {
 			mes "[BK]";
 			mes "Humph";
 			mes "Fizemos um acordo.";
@@ -4673,7 +4673,7 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 			mes "...Eu não acabei de te contar sobre o homem com orelhas de gato?";
 			mes "Eu o vi com o ministro em Diel.";
 			next;
-			if (select("About Ravail?:Who is the minister?") == 1) {
+			if (select("Sobre o Ravail?:Quem é o ministro?") == 1) {
 				mes "[BK]";
 				mes "Ravail é o alto ministro.";
 				mes "Algo como um Chefe.";
@@ -4691,7 +4691,7 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 			mes "O novo ministro...";
 			mes "(BK esfrega suas patas dianteiras)";
 			next;
-			if (select("Give a certification.:No way.") == 2) {
+			if (select("Dar uma certificação.:De jeito nenhum.") == 2) {
 				mes "[BK]";
 				mes "Não, não, violação de contrato.";
 				mes "Não tenho nada a dizer se você não me der uma certificação.";
@@ -4719,7 +4719,7 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 			mes "O que foi agora?";
 			mes "Outra história de ministro?";
 			next;
-			if (select("That the minister is an alien?:Nothing...") == 2) {
+			if (select("Que o ministro é um alienígena?:Nada...") == 2) {
 				mes "[BK]";
 				mes "MIAU~";
 				mes "Pensei que você tivesse trazido a comida do Shay para cá como recompensa.";
@@ -4816,9 +4816,9 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 		next;
 		set .@menu$, (.@npc$[.@type] == "Rock Pile")? "Try to knock down the rock pile.:Study the pile closely." : "Stomp on it with your feet.:Poke around in the dirt pile.";
 		if (select(.@menu$) == 1) {
-			if (.@npc$[.@type] == "Rock Pile") mes "Knock down the pebbles that make up the pile of rocks and spread them out.";
-			else if (.@npc$[.@type] == "Dirt Pile") mes "You step on the dug up dirt pile and make the ground flat.";
-			else if (.@npc$[.@type] == "Split Earth") mes "You step on the dry, split surface and make the ground flat.";
+			if (.@npc$[.@type] == "Rock Pile") mes "Derrube as pedrinhas que formam a pilha de pedras e espalhe-as.";
+			else if (.@npc$[.@type] == "Dirt Pile") mes "Você pisa na pilha de terra escavada e deixa o chão plano.";
+			else if (.@npc$[.@type] == "Split Earth") mes "Você pisa na superfície seca e rachada e deixa o chão plano.";
 			donpcevent strnpcinfo(0)+"::OnDisable";
 			close;
 		}
@@ -4851,9 +4851,9 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 	}
 	else if (ep13_3_secret == 11) {
 		mes "[" + strcharinfo(0) + "]";
-		if (.@npc$[.@type] == "Rock Pile") mes "This is where you picked up the strange magical stone.";
-		else if (.@npc$[.@type] == "Dirt Pile") mes "Collected Clotted Bloodstains from the dirt pile here.";
-		else if (.@npc$[.@type] == "Split Earth") mes "It is the place where the frozen skin was found.";
+		if (.@npc$[.@type] == "Rock Pile") mes "É aqui que você pegou a estranha pedra mágica.";
+		else if (.@npc$[.@type] == "Dirt Pile") mes "Coletou manchas de sangue coagulado da pilha de terra aqui.";
+		else if (.@npc$[.@type] == "Split Earth") mes "É o local onde a pele congelada foi encontrada.";
 		mes "Também sinto uma energia estranha ao redor.";
 		mes "Vamos voltar ao pub e conversar com o Shay.";
 		close;
@@ -4878,9 +4878,9 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 			getitem .@item[.@type], 1;
 			donpcevent strnpcinfo(0)+"::OnDisable";
 			next;
-			if (.@npc$[.@type] == "Rock Pile") mes "You collect stone fragments.";
-			else if (.@npc$[.@type] == "Dirt Pile") mes "Collect bloodstains.";
-			else if (.@npc$[.@type] == "Split Earth") mes "Collect a piece of skin.";
+			if (.@npc$[.@type] == "Rock Pile") mes "Você coleta fragmentos de pedra.";
+			else if (.@npc$[.@type] == "Dirt Pile") mes "Coleta manchas de sangue.";
+			else if (.@npc$[.@type] == "Split Earth") mes "Coleta um pedaço de pele.";
 			if (countitem(.@item[.@type]) == 10) {
 				mes "Coletou o suficiente para Cheshire, mas";
 				mes "você pode precisar de um pouco mais para relatar separadamente.";
@@ -4893,17 +4893,17 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 		else if (countitem(.@item[.@type]) == 10) {
 			if (checkquest(7202) >= 0) {
 				setarray .@str$, "stone fragments","bloodstains","pieces of skin";
-				mes "Need more " + .@str$[.@type] + " to report back to Doha at the expedition camp.";
+				mes "Precisa de mais " + .@str$[.@type] + " to report back to Doha at the expedition camp.";
 			}
 			else {
-				if (.@npc$[.@type] == "Rock Pile") mes "Need more stone fragments to report back to Doha at the expedition camp.";
-				else if (.@npc$[.@type] == "Dirt Pile") mes "You've collected enough for Cheshire but need more to report back to Doha.";
-				else if (.@npc$[.@type] == "Split Earth") mes "You've collected enough pieces of skin for Cheshire but need more to report back to Doha.";
+				if (.@npc$[.@type] == "Rock Pile") mes "Precisa de mais fragmentos de pedra para relatar a Doha no acampamento da expedição.";
+				else if (.@npc$[.@type] == "Dirt Pile") mes "Você coletou o suficiente para o Cheshire, mas precisa de mais para relatar a Doha.";
+				else if (.@npc$[.@type] == "Split Earth") mes "Você coletou pedaços suficientes de pele para o Cheshire, mas precisa de mais para relatar a Doha.";
 				setquest 7202;
 			}
-			if (.@npc$[.@type] == "Rock Pile") mes "You collect another stone fragment that emits a strange magical force.";
-			else if (.@npc$[.@type] == "Dirt Pile") mes "You collect another clotted bloodstain from a dirt pile.";
-			else if (.@npc$[.@type] == "Split Earth") mes "You collect another piece of skin frozen in the frost in the crack of the split earth.";	
+			if (.@npc$[.@type] == "Rock Pile") mes "Você coleta outro fragmento de pedra que emite uma estranha força mágica.";
+			else if (.@npc$[.@type] == "Dirt Pile") mes "Você coleta outra mancha de sangue coagulado de um monte de terra.";
+			else if (.@npc$[.@type] == "Split Earth") mes "Você coleta outro pedaço de pele congelado na geada na fenda da terra rachada.";	
 			getitem .@item[.@type], 1;
 			donpcevent strnpcinfo(0)+"::OnDisable";
 			close;
@@ -4929,7 +4929,7 @@ dic_fild01,231,174,5	script	BK#ep133_18	496,{
 			close;
 		}
 		setarray .@str$, "stone fragments","bloodstains","pieces of skin";
-		mes "No need to collect more " + .@str$[.@type] + ".";
+		mes "Não precisa coletar mais " + .@str$[.@type] + ".";
 		close;
 	}
 	mes "Encontrou vestígios de algo.";
@@ -5165,7 +5165,7 @@ dic_in01,165,104,0	script	Frede#13_3_in	454,{
 			mes "[Frede]";
 			mes "Você se importaria de visitar a caverna para ver se meus amigos estão bem?";
 			next;
-			if (select("Will do.:No can't do.") == 1) {
+			if (select("Vou fazer isso.:Não, não posso fazer isso.") == 1) {
 				mes "[Frede]";
 				mes "Muito obrigado.";
 				mes "Minha memória está um pouco confusa já que faz um tempo desde que voltei para a vila,";
@@ -5196,7 +5196,7 @@ dic_in01,165,104,0	script	Frede#13_3_in	454,{
 			mes "[Frede]";
 			mes "Você se importaria de visitar a caverna para ver se meus amigos estão bem?";
 			next;
-			if (select("Will do..:No can't do.")) {
+			if (select("Vou fazer...:Não, não posso fazer isso.")) {
 				mes "[Frede]";
 				mes "Muito obrigado.";
 				mes "Minha memória está um pouco confusa já que faz um tempo desde que voltei para a vila,";
@@ -5320,7 +5320,7 @@ dic_in01,165,104,0	script	Frede#13_3_in	454,{
 				mes "Tyler precisa de algum tratamento médico, mas todos os outros estão seguros.";
 				next;
 				mes "[Frede]";
-				mes "I don't even want to imagine what could have happened if you, " + strcharinfo(0) + ", weren't here to help.";
+				mes "Nem quero imaginar o que poderia ter acontecido se você, " + strcharinfo(0) + ", weren't here to help.";
 				mes "Não quero perder mais nenhum amigo.";
 				next;
 				mes "[Frede]";
@@ -6138,7 +6138,7 @@ dic_in01,349,129,5	script	Bouy#13_3	449,{
 	mes "Tudo o que precisamos fazer é esperar pelo anúncio.";
 	mes "Ele nos dará as respostas.";
 	next;
-	if(select("What is it?:Stay silent and listen.") == 2) {
+	if(select("O que é?:Fique em silêncio e ouça.") == 2) {
 		mes "[Ben]";
 		mes "Hmm...";
 		mes "Isso pode ser verdade, mas você não está pensando demais?";
@@ -6168,7 +6168,7 @@ dic_in01,349,129,5	script	Bouy#13_3	449,{
 	mes "Bem... eles voltaram com um mensageiro de Manuk!";
 	mes "...um Sapha de Manuk.";
 	next;
-	if (select("Where is he?!:Is this top secret information?!") == 1) {
+	if (select("Onde ele está?!:Isso é informação ultrassecreta?!") == 1) {
 		mes "[Ben]";
 		mes "Ele está no centro de comando agora mesmo.";
 		mes "Nós deveríamos ir até lá.";
@@ -6248,12 +6248,12 @@ mid_campin,111,120,3	script	Soldier#ep133_is04	852,{
 		mes "[Soldado]";
 		mes "Desculpe, mas esta sala está atualmente restrita para visitantes.";
 		next;
-		if (select("I have authorization.:Is that so.") == 1) {
+		if (select("Eu tenho autorização.:É assim mesmo.") == 1) {
 			mes "[Soldado]";
 			mes "Você tem?";
 			mes "Qual é o seu nome?";
 			mes "Obrigado.";
-			mes "So you are " + strcharinfo(0) + ".";
+			mes "Então você é " + strcharinfo(0) + ".";
 			next;
 			mes "[Soldado]";
 			mes "Você pode entrar agora.";
@@ -6314,7 +6314,7 @@ function	script	eldicastes_c	{
 			mes "gostaria de convidar os humanos para El Dicastes,";
 			mes "a cidade capital de Sapha.";
 			next;
-			select("Invite? Visit? City?!:What is that suppose to mean, Hound?");
+			select("Convidar? Visitar? Cidade?!:O que isso quer dizer, Cão?");
 			mes "[Hound]";
 			mes "Exatamente como ele disse.";
 			mes "Nossa equipe de expedição tem ajudado os Saphas há algum tempo.";
@@ -6395,7 +6395,7 @@ function	script	eldicastes_c	{
 			mes strcharinfo(0)+"..?";
 			mes "Prazer em conhecê-lo.";
 			next;
-			if(select("Same here.:A tree monster!")==1) {
+			if(select("Eu também.:Um monstro árvore!")==1) {
 				mes "[Vyhannus]";
 				mes "Incrível.";
 				mes "Assim como com Hound, aquele anel que vocês humanos fizeram...";
@@ -6754,7 +6754,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 	mes "[Escrivão Rhawyne]";
 	mes "Como posso ajudar você?";
 	next;
-	switch (select("Register as an adventurer.:Talk.:Cancel.")) {
+	switch (select("Registrar como aventureiro.:Falar.:Cancelar.")) {
 		case 1:
 			if (ep13_3_invite < 5) {
 				mes "[Escrivão Rhawyne]";
@@ -6778,10 +6778,10 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 				mes "Qual é o seu nome?";
 				next;
 				mes "[" + strcharinfo(0) + "]";
-				mes "It is " + strcharinfo(0) + ".";
+				mes "É " + strcharinfo(0) + ".";
 				next;
 				mes "[Escrivão Rhawyne]";
-				mes "Yes.. " + strcharinfo(0) + "...";
+				mes "Sim... " + strcharinfo(0) + "...";
 				mes "Eu encontrei.";
 				mes "Bem-vindo a El Dicastes, cidade capital dos Sapha.";
 				next;
@@ -6814,13 +6814,13 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 				mes "Eu reconheço você.";
 				mes "Como posso ajudar você?";
 				next;
-				if (select("I want to meet the minister.:Nothing particular.") == 1) {
+				if (select("Quero falar com o ministro.:Nada em especial.") == 1) {
 					mes "[Escrivão Rhawyne]";
 					mes "Você quer encontrar o ministro?";
 					mes "Qual ministro?";
 					mes "Ravail não pode ser encontrado pessoalmente, mesmo com certificações de exploração.";
 					next;
-					if (select("Ahat:Another minister") == 1) {
+					if (select("Ahat:Outro ministro") == 1) {
 						if (countitem(6304) > 2) {
 							mes "[Escrivão Rhawyne]";
 							mes "Você realmente já coletou 3 certificações de exploração de Sapha.";
@@ -6866,7 +6866,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 			mes "[Atendente Rhawyne]";
 			mes "Sobre o que você está curioso hoje?";
 			next;
-			switch (select("About official requests:About the adventurer's pub:Ahat?:Exploit certification of Sapha?:End conversation.")) {
+			switch (select("Sobre pedidos oficiais:Sobre a pousada do aventureiro:Ahat?:Certificação de exploração da Sapha?:Encerrar conversa.")) {
 				case 1:
 					mes "[Atendente Rhawyne]";
 					mes "Se Diel ou os ministros precisarem de ajuda com as operações na capital";
@@ -6963,7 +6963,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 
 			// The reset feature was disabled in previous versions.
 			//mes "[Kareka]";
-			//mes "Ha ha ha, that is out of the question. This item is very rare and valuable so I cannot give you a new one.";
+			//mes "Hahaha, isso está fora de questão. Este item é muito raro e valioso, então não posso te dar um novo.";
 			//close;
 
 			mes "[Kareka]";
@@ -6973,7 +6973,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 			mes "[Kareka]";
 			mes "Você tem certeza de que quer fazer isso?";
 			next;
-			if(select("No, let me think about it.:Take my Light of El Dicastes.") == 2) {
+			if(select("Não, deixa eu pensar melhor.:Pegue minha Luz de El Dicastes.") == 2) {
 				if (countitem(2844) == 0 || countitem(6304) < 6) {
 					mes "[Kareka]";
 					mes "Você precisa trazer a Luz de El Dicastes e 6 Certificados Sapha!";
@@ -7007,7 +7007,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 		mes "[Kareka]";
 		mes "Você veio para despertar a força infinita da ^990099Luz de El Dicastes^000000.";
 		next;
-		if (select("Please explain.:I want to upgrade.") == 1) {
+		if (select("Por favor, explique.:Quero fazer um upgrade.") == 1) {
 			mes "[Kareka]";
 			mes "Ouvi dizer que alguns artesãos fora da cidade também podem lançar feitiços em equipamentos.";
 			next;
@@ -7032,23 +7032,23 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 	else {
 		mes .@n$;
 		set .@cat_hi, rand(1,30);
-		if (.@cat_hi == 1) mes "It is difficult to find fish here. Can't find any so Jahbong would forget that he's busy or angry at the sight of a Fish Tail.";
-		else if (.@cat_hi == 2) mes "Grrr... I was punished with a ladle for peeing on my blanket yesterday.";
-		else if (.@cat_hi == 3) mes "I dream sometimes of a giant patting me on the head. But I feel more annoyed than afraid.";
-		else if (.@cat_hi == 4) mes "Newbie Jarute, Ahat doesn't seem to look like a Sapha.";
-		else if (.@cat_hi == 5) mes "Our people say Ahat looks like a beautiful cat.";
-		else if (.@cat_hi == 6) mes "I heard there was a superior equipment upgrade craftsman in the capital city of Manuk.";
-		else if (.@cat_hi == 7) mes "Grrr... I don't think my voice sounds normal these days. I think it's the weather.";
-		else if (.@cat_hi == 8) mes "There are times when I shout out loud but it is only because I am in a good mood. No need to be startled.";
-		else if (.@cat_hi == 9) mes "I feel an urge to jump on a pile with my four paws when I see one.";
-		else if (.@cat_hi == 10) mes "I must have been a cat in my previous life.";
-		else if (.@cat_hi == 11) mes "I dreamt about the giant again. I waved my paws annoyed and he kept on patting me.";
-		else if (.@cat_hi == 12) mes "Yup!! Was the rumor true that Ahat looks like a human?! ";
-		else if (.@cat_hi == 13) mes "I heard on my way that this Pinqucula Dark has a Withered Flower.";
-		else if (.@cat_hi == 14) mes "There is a guy named Pinguicula nearby who has the Sharp Leaf nearby.";
-		else if (.@cat_hi == 15) mes "There is a guy named Pinguicula nearby who has the Great Leaf nearby.";
-		else if (.@cat_hi == 16) mes "I recommend getting it from the Dracos nearby. But then, they only drop it randomly so you may come back empty handed...";
-		else mes "Hmm... This may not be important to you but.";
+		if (.@cat_hi == 1) mes "É difícil encontrar peixes aqui. Não acho nenhum, então Jahbong esqueceria que está ocupado ou bravo ao ver uma Cauda de Peixe.";
+		else if (.@cat_hi == 2) mes "Grrr... Ontem fui castigado com uma colher de pau por fazer xixi na minha coberta.";
+		else if (.@cat_hi == 3) mes "Às vezes eu sonho com um gigante me dando tapinhas na cabeça. Mas me sinto mais irritado do que com medo.";
+		else if (.@cat_hi == 4) mes "O novato Jarute acha que Ahat não parece um Sapa.";
+		else if (.@cat_hi == 5) mes "Nosso povo diz que Ahat parece um gato lindo.";
+		else if (.@cat_hi == 6) mes "Ouvi dizer que tem um artesão de upgrades de equipamentos superiores na capital de Manuk.";
+		else if (.@cat_hi == 7) mes "Grrr... Acho que minha voz não está normal ultimamente. Deve ser o clima.";
+		else if (.@cat_hi == 8) mes "Às vezes grito alto, mas é só porque estou de bom humor. Não precisa se assustar.";
+		else if (.@cat_hi == 9) mes "Quando vejo um monte, sinto vontade de pular nele com minhas quatro patas.";
+		else if (.@cat_hi == 10) mes "Com certeza fui um gato em outra vida.";
+		else if (.@cat_hi == 11) mes "Sonhei com aquele gigante de novo. Acenei com minhas patinhas irritado, mas ele continuou me dando tapinhas.";
+		else if (.@cat_hi == 12) mes "Pois é!! O boato de que o Ahat parece um humano é verdade?!";
+		else if (.@cat_hi == 13) mes "Ouvi pelo caminho que este Pinqucula Dark tem uma Flor Murcha.";
+		else if (.@cat_hi == 14) mes "Tem um cara chamado Pinguicula por perto que tem a Folha Afiada.";
+		else if (.@cat_hi == 15) mes "Tem um cara chamado Pinguicula por perto que tem a Grande Folha.";
+		else if (.@cat_hi == 16) mes "Recomendo pegar com os Dracos por perto. Mas, bem... eles só soltam aleatoriamente, então pode ser que você volte de mãos vazias...";
+		else mes "Hmm... Isso pode não ser importante pra você, mas...";
 		next;
 		mes .@n$;
 		if (countitem(6304) < 1) {
@@ -7097,7 +7097,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 			set .@v$, "shoe";
 		}
 		next;
-		switch(select("Please explain.:I want to reset.:I want to upgrade.")) {
+		switch(select("Por favor, explique.:Quero redefinir.:Quero evoluir.")) {
 			case 1:
 				if (.@re$ == "Brare") {
 					mes .@n$;
@@ -7152,7 +7152,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 					mes "Isso envolve ^990000destruir o Sino Dourado^000000 que você está aprimorando e cancelar todos os registros dele. Tem certeza?";
 				}
 				next;
-				if(select("Maybe next time.:Please reset it.") == 1) {
+				if(select("Talvez da próxima vez.:Por favor, redefina.") == 1) {
 					mes .@n$;
 					mes "Quando estiver pronto,";
 					mes "por favor, volte novamente";
@@ -7165,8 +7165,8 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 				}
 				specialeffect2 EF_OVERTHRUST;
 				mes .@n$;
-				if (.@re$ == "Brare") mes "I've collected all equipment and erased all records as you requested. Now all your equipment and records are clean.";
-				else mes "I only do what I'm asked to do. I've retrieved all equipment and cancelled all records.";
+				if (.@re$ == "Brare") mes "Já coletei todos os equipamentos e apaguei todos os registros como você pediu. Agora todos os seus equipamentos e registros estão limpos.";
+				else mes "Eu só faço o que me pedem. Recuperei todos os equipamentos e cancelei todos os registros.";
 				delitem .@Items_,1;
 				setd "ep13_3_"+.@v$, 0;
 				close;
@@ -7236,7 +7236,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 		mes "e destruir todos os registros";
 		mes "dele";
 		next;
-		if (select("I'll just use it.:Please take it.") == 1) {
+		if (select("Vou usar mesmo.:Pegue, por favor.") == 1) {
 			mes .@n$;
 			mes "Sempre que mudar de ideia.";
 			mes "Por favor, volte novamente";
@@ -7260,7 +7260,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 		close;
 	}
 	next;
-	if(select("Maybe next time.:I want to upgrade.") == 1) {
+	if(select("Talvez da próxima vez.:Quero fazer uma melhoria.") == 1) {
 		mes .@n$;
 		mes "Quando estiver pronto,";
 		mes "por favor, volte novamente.";
@@ -7268,7 +7268,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 	}
 	if (countitem(6304) < .@req) {
 		mes .@n$;
-		mes "But you don't have enough exploit certifications. You need "+.@req+" exploit certification of Sapha for the "+((.@req == 3)?"third":((.@req == 2)?"second":"first"))+" step of upgrade.";
+		mes "Mas você não tem certificados de exploração suficientes. Você precisa de "+.@req+" exploit certification of Sapha for the "+((.@req == 3)?"third":((.@req == 2)?"second":"first"))+" step of upgrade.";
 		close;
 	}
 	mes .@n$;
@@ -7313,9 +7313,9 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133	453,{
 				delitem .@Items_,1;
 				setd "ep13_3_"+.@v$, 0;
 				mes .@n$;
-				if (.@re$ == "Jalepano") mes "Ha ha ha. See, I told you. Oops, sorry. Forget that I just said that!!";
-				else if (.@re$ == "Mancho") mes "Greed is the reason for failing investments. Tsk, tsk.";
-				else if (.@re$ == "Brare") mes "Oh no....!!!! What happened to the Golden Bell!";
+				if (.@re$ == "Jalepano") mes "Hahaha. Viu? Eu te falei. Oops, desculpe. Esqueça que eu disse isso!!";
+				else if (.@re$ == "Mancho") mes "A ganância é a razão de investimentos fracassados. Tsk, tsk.";
+				else if (.@re$ == "Brare") mes "Ah não...!!!! O que aconteceu com o Sino Dourado!";
 				close;
 			}
 			setarray .@rates, 90,75,65,60,45,35,30,15,5;
@@ -7384,21 +7384,21 @@ dic_fild01,228,159,4	script	Jahbong#pa0829	496,{
 		close; 
 	}
 	set .@cattalkj,rand(1,9);
-	if (.@cattalkj == 1) mes "Don't touch my back! I might bite you unconsciously.";
-	else if (.@cattalkj == 2) mes "Pub owner Shay carried something away to make something strange! Be careful!";
-	else if (.@cattalkj == 3) mes "We cats can jump 5 times our size. Isn't it cool? But then, don't ask me to jump from here now.";
-	else if (.@cattalkj == 4) mes "I have to be diligent with my grooming to maintain beautiful fur.";
-	else if (.@cattalkj == 5) mes "I have to groom myself everyday to maintain shiny fluffy fur. But I don't have very nice fur in the first place. Very sad.";
-	else if (.@cattalkj == 6) mes "You should receive a Sapha Certification with both paws as a sign of respect. No cat deserves a certification if they don't!";
-	else if (.@cattalkj == 7) mes "I don't really talk that much! Ahat looks like... meow meow meooow... sorry.";
-	else if (.@cattalkj == 8) mes "Meow~~~~~~~~~~";
-	else mes "Yarn is a great way to calm a cat.";
+	if (.@cattalkj == 1) mes "Não toque nas minhas costas! Posso morder você sem querer.";
+	else if (.@cattalkj == 2) mes "O dono da taverna Shay levou algo embora para fazer algo estranho! Tome cuidado!";
+	else if (.@cattalkj == 3) mes "Nós, gatos, conseguimos pular 5 vezes o nosso tamanho. Não é incrível? Mas, não me peça para pular daqui agora.";
+	else if (.@cattalkj == 4) mes "Tenho que ser diligente com minha higiene para manter uma pelagem bonita.";
+	else if (.@cattalkj == 5) mes "Tenho que me limpar todos os dias para manter uma pelagem macia e brilhante. Mas, no fundo, minha pelagem não é tão bonita assim. Muito triste.";
+	else if (.@cattalkj == 6) mes "Você deveria receber uma Certificação de Sapha com as duas patas como sinal de respeito. Nenhum gato merece uma certificação se não fizer isso!";
+	else if (.@cattalkj == 7) mes "Eu não falo muito! Ah, parece... miau miau miau... desculpe.";
+	else if (.@cattalkj == 8) mes "Miau~~~~~~~~~~";
+	else mes "O fio é uma ótima forma de acalmar um gato.";
 	next;
 	mes "[Jahbong]";
 	mes "Por que você está aqui?";
 	mes "Jahbong trocará ^8000801 Certificação Sapha^000000 por ^8000801 item^000000!";
 	next;
-	set .@i, select("Just came to see what you have.:I want the Feral Boots!:Give me the Feral Tail!:Give me the Golden Bell!:How much to buy you?")-1;
+	set .@i, select("Só vim ver o que você tem.:Quero as Botas Ferozes!:Me dê a Cauda Feroz!:Me dê o Sino Dourado!:Quanto custa me vender?")-1;
 	switch (.@i) {
 		case 0:
 			mes "[Jahbong]";
@@ -7433,7 +7433,7 @@ dic_fild01,228,159,4	script	Jahbong#pa0829	496,{
 	mes "[Jahbong]";
 	mes "Você está realmente comprando algo?!";
 	next;
-	if (select("Nope:Give me!!!") == 1) {
+	if (select("Não.:Me dê!!!") == 1) {
 		mes "[Jahbong]";
 		mes "Ok!";
 		close;
