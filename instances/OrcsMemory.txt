@@ -48,18 +48,18 @@ gef_fild10,242,202,0	script	Dimensional Gorge Piece	406,{
 	set .@orctime,checkquest(12059,PLAYTIME);
 	if (.@orctime == -1) {
 		if (is_party_leader() == true) {
-			mes "Party status confirmed. Would you like to book entrance to the "+.@md_name$+"?";
+			mes "Status do grupo confirmado. Gostaria de agendar a entrada para a "+.@md_name$+"?";
 			next;
 			switch(select("Reserve the "+.@md_name$+":Enter the Dungeon:Cancel")) {
 			case 1:
 				if (instance_create(.@md_name$) < 0) {
-					mes "Party Name: "+ getpartyname(.@party_id);
-					mes "Party Leader: "+strcharinfo(0);
+					mes "Nome do Grupo: "+ getpartyname(.@party_id);
+					mes "Líder do Grupo: "+strcharinfo(0);
 					mes "^0000ff"+.@md_name$+" ^000000 - Reservation Failed.";
 					close;
 				}
 				mes "^0000ff"+.@md_name$+"^000000- Attempting to book an entrance";
-				mes "After making a reservation, you have to select 'Enter the Dungeon' from the menu if you wish to enter the "+.@md_name$+".";
+				mes "Após fazer um agendamento, você deve selecionar 'Entrar na Instância' no menu se deseja entrar na "+.@md_name$+".";
 				close;
 			case 2:
 				callsub L_Enter,0;
@@ -115,7 +115,7 @@ gef_fild10,238,202,6	script	Mad Scientist#orc	865,{
 		mes "Haha, nenhum Orc chega perto de mim!";
 		mes "O poder da Fenda Dimensional é imbatível!!";
 		next;
-		switch(select("Orcs don't attack you?:You wish!")) {
+		switch(select("Os Orcs não te atacam?:Até parece!")) {
 		case 1:
 			mes "[Cientista Louco]";
 			mes "Sim, sim... eu sei que é difícil de acreditar. Eu não te culpo.";
@@ -143,7 +143,7 @@ gef_fild10,238,202,6	script	Mad Scientist#orc	865,{
 		mes "[Cientista Louco]";
 		mes "As chances são de que eles apenas lhe darão muitas instruções assim que te virem, então apenas improvise! Eles sempre dizem a mesma coisa, a ponto de eu ter memorizado!";
 		next;
-		switch(select("Alright... What do I do?:Umm, maybe not.")) {
+		switch(select("Tudo bem... O que eu faço?:Hum, talvez não.")) {
 		case 1:
 			mes "[Cientista Louco]";
 			mes "Muito bem! Apenas sente-se nas mãos desta estátua! E tente agir naturalmente quando estiver lá!";

@@ -41,10 +41,10 @@ monk_test,309,146,3	script	Friar Patrick#edq	412,{
 	next;
 	if (countitem(6004) > 0) {
 		set .@doll,1;
-		set .@selection,select("What is this place?:I want to enter.:About the Cursed Baphomet Doll.:Cancel.");
+		set .@selection,select("O que é este lugar?:Quero entrar.:Sobre a Boneca de Baphomet Amaldiçoada.:Cancelar.");
 	}
 	else {
-		set .@selection,select("What is this place?:I want to enter.:Cancel.");
+		set .@selection,select("O que é este lugar?:Quero entrar.:Cancelar.");
 	}
 	switch(.@selection) {
 	case 1:
@@ -57,7 +57,7 @@ monk_test,309,146,3	script	Friar Patrick#edq	412,{
 		mes "[Frei Patrick]";
 		mes "O próprio lugar onde o grande Diabo que uma vez devastou este mundo está dormindo.";
 		next;
-		switch(select("Tell me more.:Stop talking.")) {
+		switch(select("Conte-me mais.:Pare de falar.")) {
 		case 1:
 			cutin "ins_cata_pri_n",2;
 			mes "[Frei Patrick]";
@@ -111,8 +111,8 @@ monk_test,309,146,3	script	Friar Patrick#edq	412,{
 			if (.@ins_bapho_check == -1) {
 				if (is_party_leader(.@party_id) == true && instance_check_party(.@party_id,2,75)) {
 					mes "[Frei Patrick]";
-					mes "Party name is "+getpartyname(.@party_id)+"...";
-					mes "Name of the leader is "+strcharinfo(0)+"...";
+					mes "O nome do grupo é "+getpartyname(.@party_id)+"...";
+					mes "O nome do líder é "+strcharinfo(0)+"...";
 					if (instance_create("Sealed Catacomb") < 0) {
 						mes "Hmm... Mas parece que há um problema aqui... Vou verificar rapidamente. Por favor, espere.";
 					}
@@ -205,7 +205,7 @@ monk_test,306,151,3	script	Grave of Baphomet#edq	111,{
 	if (countitem(6002)) delitem 6002,countitem(6002); //Token_Of_Apostle
 	mes "Esta lápide tem a escultura de um diabo perverso com grandes chifres. Ela desperta um sentimento sinistro.";
 	next;
-	if(select("Touch the stone.:Step back.") == 2)
+	if(select("Tocar na pedra.:Dar um passo atrás.") == 2)
 		close;
 
 	// 12 hour cooldown
@@ -303,7 +303,7 @@ prt_monk,261,91,3	script	Rust Blackhand#edq	826,{
 		}
 	}
 	else if ((.@new_maje == -1) && (countitem(6004) > 0)) {
-		switch(select("About the Cursed Baphomet Doll:Stop talking.")) {
+		switch(select("Sobre a Boneca de Baphomet Amaldiçoada:Pare de falar.")) {
 		case 1:
 			mes "[Rust Blackhand]";
 			mes "O quê?... Hmm... Você conseguiu a boneca? Você é muito bom, ao contrário da sua aparência...";
@@ -323,7 +323,7 @@ prt_monk,261,91,3	script	Rust Blackhand#edq	826,{
 			mes "[Rust Blackhand]";
 			mes "A Boneca de Baphomet Amaldiçoada é o ingrediente mais importante... Posso fazer um para você, se quiser. O que você gostaria de fazer?";
 			next;
-			switch(select("I want to make one!:I don't need one.")) {
+			switch(select("Eu quero fazer uma!:Eu não preciso de uma.")) {
 			case 1:
 				mes "[Rust Blackhand]";
 				mes "kkk... Sim, os sábios aproveitam as chances quando a oportunidade aparece. Vou te dizer os ingredientes. Não se esqueça, e traga todos eles.";
@@ -364,7 +364,7 @@ prt_monk,261,91,3	script	Rust Blackhand#edq	826,{
 		close;
 	}
 	else if ((.@new_maje == 2) && (countitem(6004) > 0)) {
-		switch(select("About the Cursed Baphomet Doll:Stop talking.")) {
+		switch(select("Sobre a Boneca de Baphomet Amaldiçoada:Pare de falar.")) {
 		case 1:
 			mes "[Rust Blackhand]";
 			mes "O quê?... Você de novo? O que você quer desta vez?";
@@ -381,7 +381,7 @@ prt_monk,261,91,3	script	Rust Blackhand#edq	826,{
 			mes "[Rust Blackhand]";
 			mes "Vou te dizer os ingredientes de novo. Então, você quer fazer?";
 			next;
-			switch(select("I want.:No, I don't want.")) {
+			switch(select("Eu quero.:Não, eu não quero.")) {
 			case 1:
 				mes "[Rust Blackhand]";
 				mes "kkk... Sim, os sábios aproveitam as chances quando a oportunidade aparece. Vou te dizer os ingredientes. Não se esqueça, e traga todos eles.";
@@ -494,7 +494,7 @@ OnMyMobDead:
 		mes "Esperei e esperei por um aventureiro corajoso como você, que voltaria aqui novamente...";
 		next;
 		while(1) {
-			switch(select("Who are you?:Waited for me?:Cancel.")) {
+			switch(select("Quem é você?:Esperou por mim?:Cancelar.")) {
 			case 1:
 				mes "[Voz da Lápide]";
 				mes "Eu era um dos guerreiros que pararam Baphomet, assim como você. Agora, estou morto e apenas minha alma permanece...";
@@ -607,7 +607,7 @@ OnInstanceInit: // Temporary fix for @reloadscript.
 		next;
 		while(1) {
 			cutin "ins_cata_champ_n",2;
-			switch(select("What is Essence of Fire?:What is a Token of Apostle?:What should I do?:I am ready.")) {
+			switch(select("O que é a Essência de Fogo?:O que é uma Insígnia do Apóstolo?:O que devo fazer?:Estou pronto.")) {
 			case 1:
 				set .@ins_baphomet_1f_1,.@ins_baphomet_1f_1+1;
 				mes "[Alma do Herói Ancestral]";
@@ -1158,7 +1158,7 @@ OnInstanceInit:
 	mes "[Alma do Herói Ancestral]";
 	mes "A luta pela paz neste mundo nunca terminará. Mas... meu papel aqui finalmente acabou porque existem heróis corajosos como vocês.";
 	next;
-	switch(select("Let me leave the shrine.:Stop talking.")) {
+	switch(select("Deixe-me sair do santuário.:Pare de falar.")) {
 	case 1:
 		mes "[Alma do Herói Ancestral]";
 		mes "Ok. Deixarei você e seu grupo saírem daqui em segurança.";

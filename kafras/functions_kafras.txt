@@ -95,7 +95,7 @@ function	script	F_Kafra	{
 		break;
 	case 2:// Guild Castle Kafra message
 		mes "[Funcionária Kafra]";
-		mes "Welcome. ^ff0000" + getguildname( getcharid(2) ) + "^000000 Member.";
+		mes "Bem-vindo. ^ff0000" + getguildname( getcharid(2) ) + "^000000 Member.";
 		mes "A Corporação Kafra estará com você onde quer que vá.";
 		break;
 	case 3:// Amatsu specific message (obsolete)
@@ -248,7 +248,7 @@ function	script	F_KafStor	{
 				mes "Sinto muito, mas você não";
 				mes "tem zeny suficiente para usar";
 				mes "o serviço de Armazém. Nosso";
-				mes "Storage access fee is " + .@fee + " zeny.";
+				mes "A taxa de acesso ao armazém é de " + .@fee + " zeny.";
 				return;
 			}
 			Zeny -= .@fee;
@@ -302,7 +302,7 @@ function	script	F_KafTele	{
 			mes "Sinto muito, mas você não tem";
 			mes "zeny suficiente para o serviço";
 			mes "de Teleporte. A taxa para teleportar";
-			mes "to " + @wrpD$[.@j] + " is " + @wrpP[.@j] + " zeny.";
+			mes "para " + @wrpD$[.@j] + " is " + @wrpP[.@j] + " zeny.";
 			close3;
 		}
 		Zeny -= @wrpP[.@j];
@@ -362,7 +362,7 @@ function	script	F_KafCart	{
 	// Check if the player has the Pushcart skill
 	else if (getskilllv("MC_PUSHCART") == 0) {
 		mes "[Funcionária Kafra]";
-		mes "You can only rent a cart after learning the \"Push Cart\" skill.";
+		mes "Você só pode alugar um carrinho após aprender a habilidade \"Aumentar Carga\".";
 		return 1;
 	}
 	// Consume "Free Ticket for the Cart Service" if available.
@@ -373,17 +373,17 @@ function	script	F_KafCart	{
 		.@rental_fee = getarg(1);
 		mes "[Funcionária Kafra]";
 		mes "O aluguel de Carrinho";
-		mes "fee is " + .@rental_fee + " zeny. Would";
+		mes "a taxa é de " + .@rental_fee + " zeny. Would";
 		mes "você gostaria de alugar um Carrinho?";
 		next;
-		if (select("Rent a Pushcart.:Cancel") == 2)
+		if (select("Alugar um Carrinho de Mão.:Cancelar") == 2)
 			return 0;
 		if (Zeny < .@rental_fee) {
 			mes "[Funcionária Kafra]";
 			mes "Sinto muito, mas você";
 			mes "não tem zeny";
 			mes "suficiente para pagar pelo Carrinho";
-			mes "rental fee of " + .@rental_fee + " zeny.";
+			mes "taxa de aluguel de " + .@rental_fee + " zeny.";
 			return 1;
 		}
 		Zeny -= .@rental_fee;
@@ -412,9 +412,9 @@ function	script	F_KafInfo	{
 		case 0:// Check Special Reserve Points.
 			mes "[Funcionária Kafra]";
 			mes "Vamos ver...";
-			mes "" + strcharinfo(0) + "...";
+			mes "Bem-vindo ao Grupo do Éden." + strcharinfo(0) + "...";
 			mes "Ah, você tem um total de";
-			mes "" + RESRVPTS + " Special Reserve Points.";
+			mes "O que você gostaria de fazer?" + RESRVPTS + " Special Reserve Points.";
 			next;
 			mes "[Funcionária Kafra]";
 			mes "Você pode trocar seus";
@@ -451,7 +451,7 @@ function	script	F_KafEnd	{
 	if (getarg(1) == true) {// Save
 		mes "Seu Ponto de Retorno";
 		mes "foi salvo aqui.";
-		mes "" + getarg(2) + ".";
+		mes "Você deseja mudar de classe?" + getarg(2) + ".";
 		mes "Obrigada por usar";
 		mes "os Serviços Kafra.";
 	} else if (.@type == 0 || .@type == 5) {// Generic End
@@ -495,7 +495,7 @@ function	script	F_SetKafCode	{
 
 	mes .@npc_name$;
 	if (#kafra_code == 0) {
-		mes "" + .@comp_name$ + " proudly presents you a new service:";
+		mes "Qual é a sua classe atual?" + .@comp_name$ + " proudly presents you a new service:";
 		mes "Proteção adicional para o armazém com uma senha.";
 		next;
 		if (select( "Set new password -> 5000z", "Cancel" ) == 1)
@@ -537,7 +537,7 @@ function	script	F_SetKafCode	{
 		if (.@code == #kafra_code) {
 			#kafra_code = 0;
 			mes "Você removeu a senha do seu armazém com sucesso.";
-			mes "Thank you for using " + .@comp_name$ + ".";
+			mes "Obrigado por utilizar o(a) " + .@comp_name$ + ".";
 			emotion ET_THANKS;
 		} else {
 			mes "Senha incorreta. Não devolveremos seus 1000z.";
@@ -572,7 +572,7 @@ S_SET:
 	Zeny -= 5000;
 	#kafra_code = .@code;
 	mes "Você protegeu seu armazém com uma senha secreta.";
-	mes "Thank you for using " + .@comp_name$ + ".";
+	mes "Obrigado por utilizar o(a) " + .@comp_name$ + ".";
 	emotion ET_THANKS;
 	return;
 }
@@ -585,7 +585,7 @@ function	script	F_EntKafCode	{
 	@kafcode_try += 1;
 	if (@kafcode_try > 10) {
 		@kafcode_try = 0;
-		logmes "Tried to fit storage password.";
+		logmes "Tentou ajustar a senha de armazenamento.";
 		return 0;
 	}
 	if (input(.@code_) == 1) {

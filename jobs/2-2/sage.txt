@@ -77,7 +77,7 @@ yuno_in02,38,61,5	script	Dean of the Academy#sa	743,{
 		mes "Bem-vindo, jovem. Posso ver que você está intrigado com as maravilhas da magia.";
 		mes "Então, que tipo de assunto o traz a mim?";
 		next;
-		switch(select("I would like to be a Sage.:Let me know about the Sage job change.:Nothing.")) {
+		switch(select("Eu gostaria de ser um Sábio.:Fale-me sobre a mudança de classe para Sábio.:Nada.")) {
 		case 1:
 			mes "[Kayron Grik]";
 			mes "Hm? Você deseja se tornar um Sábio?";
@@ -256,7 +256,7 @@ yuno_in03,154,35,4	script	Staff of the Academy#a	742,{
 		mes "Bem-vindo à Academia de Magia Schweicherbil.";
 		mes "Oh, você é um Mago. Como posso ajudá-lo?";
 		next;
-		switch(select("Let me know about the Sage job change.:I want to enroll in the school.:Nothing.")) {
+		switch(select("Fale-me sobre a mudança de classe para Sábio.:Quero me matricular na escola.:Nada.")) {
 		case 1:
 			mes "[Metheus Sylphe]";
 			mes "Entendo. Você deseja se tornar um Sábio?";
@@ -301,7 +301,7 @@ yuno_in03,154,35,4	script	Staff of the Academy#a	742,{
 			mes "[Metheus Sylphe]";
 			mes "Então, você deseja se inscrever imediatamente?";
 			next;
-			switch(select("Yes, I do.:The fee is much too expensive.:I will come back later.")) {
+			switch(select("Sim, eu quero.:A taxa é muito cara.:Voltarei mais tarde.")) {
 			case 1:
 				if (JobLevel < 40) {
 					mes "[Metheus Sylphe]";
@@ -321,7 +321,7 @@ yuno_in03,154,35,4	script	Staff of the Academy#a	742,{
 				next;
 				select(strcharinfo(0));
 				mes "[Metheus Sylphe]";
-				mes "Your name is ... " + strcharinfo(0) + ". It's a very nice name.";
+				mes "Seu nome é ... " + strcharinfo(0) + ". It's a very nice name.";
 				next;
 				if (JobLevel == 50) {
 					mes "[Metheus Sylphe]";
@@ -343,7 +343,7 @@ yuno_in03,154,35,4	script	Staff of the Academy#a	742,{
 				mes "Você pagará a taxa de matrícula de 70.000 zenys?";
 				mes "Ou você me dará ^3355FFLivro Mágico Antigo^000000 e ^3355FFColar da Sabedoria^000000?";
 				next;
-				if (select("Pay 70,000 zeny.:Give him Old Magicbook and Necklace of Wisdom.") == 1) {
+				if (select("Pagar 70.000 zenys.:Entregar o Livro Mágico Antigo e o Colar da Sabedoria.") == 1) {
 					if (Zeny > 69999) {
 						set Zeny, Zeny-70000;
 						mes "[Metheus Sylphe]";
@@ -402,7 +402,7 @@ yuno_in03,154,35,4	script	Staff of the Academy#a	742,{
 					next;
 					select(strcharinfo(0));
 					mes "[Metheus Sylphe]";
-					mes "Your name is ... " + strcharinfo(0) + ". It's a very nice name.";
+					mes "Seu nome é ... " + strcharinfo(0) + ". It's a very nice name.";
 					next;
 					mes "[Metheus Sylphe]";
 					mes "Sim, tudo está pronto.";
@@ -433,7 +433,7 @@ yuno_in03,154,35,4	script	Staff of the Academy#a	742,{
 					mes "Oh, suponho que você não tenha dinheiro suficiente?";
 					mes "Sob as disposições existentes, você deve pagar 70.000 zenys pela inscrição...";
 					next;
-					if (select("Please...is there any way?:Ok, I will come back later.") == 1) {
+					if (select("Por favor... existe alguma maneira?:Ok, voltarei mais tarde.") == 1) {
 						mes "[Metheus Sylphe]";
 						mes "Hmmm... então oferecerei uma opção especial!";
 						mes "Você pagará 30.000 zenys e trará alguns itens como compensação pelo desconto na mensalidade.";
@@ -588,9 +588,9 @@ yuno_in03,154,35,4	script	Staff of the Academy#a	742,{
 		select(strcharinfo(0));
 		mes "[Metheus Sylphe]";
 		switch (.@SAGE_Q_T) {
-		case 1: mes "Your name is ... " + strcharinfo(0) + ". It's a very nice name."; break;
-		case 2: mes "Your name is ... " + strcharinfo(0) + ". It sounds very sagacious."; break;
-		case 3: mes "Your name is ... " + strcharinfo(0) + ". Interesting name."; break;
+		case 1: mes "Seu nome é ... " + strcharinfo(0) + ". It's a very nice name."; break;
+		case 2: mes "Seu nome é ... " + strcharinfo(0) + ". It sounds very sagacious."; break;
+		case 3: mes "Seu nome é ... " + strcharinfo(0) + ". Interesting name."; break;
 		}
 		next;
 		mes "[Metheus Sylphe]";
@@ -699,7 +699,7 @@ yuno_in03,105,177,5	script	Written Test Professor#s	754,{
 		mes "Você já se inscreveu para este teste, não é?";
 		next;
 		mes "[Claytos Verdo]";
-		mes "Let's see, your name is " + strcharinfo(0) + "...";
+		mes "Vamos ver, seu nome é " + strcharinfo(0) + "...";
 		mes "Ok, vamos começar!";
 		next;
 		mes "[Claytos Verdo]";
@@ -715,11 +715,11 @@ L_AskQuestions:
 		case 1:
 			mes "1. Escolha um item que o mercador de presentes em Prontera não vende.";
 			next;
-			if (select("China:Red Frame:Bouquet:Glass Bead") == 3)
+			if (select("China:Moldura Vermelha:Buquê:Conta de Vidro") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "2. Escolha uma cidade onde você não pode comprar um Estilete.";
 			next;
-			if (select("Prontera:Morocc:Geffen:Lutie") == 1)
+			if (select("Prontera:Morroc:Geffen:Lutie") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "3. Escolha a cidade mais próxima da Ilha das Tartarugas.";
 			next;
@@ -727,19 +727,19 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "4. Escolha o monstro que é de um tipo diferente dos outros.";
 			next;
-			if (select("Raggler:Pest:Frilldora:Aster") == 4)
+			if (select("Raggler:Praga:Frilldora:Aster") == 4)
 				set .@sage_t,.@sage_t+5;
 			mes "5. Escolha o monstro que tem um atributo diferente dos outros.";
 			next;
-			if (select("Mantis:Metaller:Rocker:Horn") == 2)
+			if (select("Louva-a-deus:Metaller:Rocker:Chifre") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "6. Escolha o monstro que tem um tamanho diferente dos outros.";
 			next;
-			if (select("Raydric:Raydric Archer:Wanderer:Dark Frame") == 1)
+			if (select("Raydric:Arqueiro Raydric:Desordeiro:Moldura Sombria") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "7. Escolha o monstro que não derruba 'Álcool'.";
 			next;
-			if (select("Horong:Plankton:Poison Spore:Toad") == 3)
+			if (select("Horong:Plankton:Esporo Venenoso:Sapo Cururu") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "8. Escolha o NPC que é irrelevante para a missão de mudança de classe para Cavaleiro.";
 			next;
@@ -759,11 +759,11 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "12. Escolha a quantidade correta de redução de dano e consumo de SP da habilidade Escudo Mágico quando o SP restante do conjurador for 50%.";
 			next;
-			if (select("Damage -24% SP1.5%:Damage -24% SP2%:Damage -18% SP1.5%:Damage -18% SP2%") == 4)
+			if (select("Dano -24% SP 1.5%:Dano -24% SP 2%:Dano -18% SP 1.5%:Dano -18% SP 2%") == 4)
 				set .@sage_t,.@sage_t+5;
 			mes "13. Escolha a propriedade que é irrelevante para as habilidades do tipo 'Relâmpago' para a classe Mago.";
 			next;
-			if (select("Water:Earth:Fire:Wind") == 2)
+			if (select("Água:Terra:Fogo:Vento") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "14. Escolha a chance e a força de ataque corretas para Ataque Duplo nível 7, a habilidade de Gatuno.";
 			next;
@@ -771,23 +771,23 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "15. Escolha a habilidade que é irrelevante para aprender Magnus Exorcismus, a habilidade de Sacerdote.";
 			next;
-			if (select("Divine Protection:Heal:Ruwach:Aqua Benedicta") == 1)
+			if (select("Proteção Divina:Curar:Ruwach:Água Bendita") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "16. Escolha a defesa e habilidade corretas da Faixa de Coelho.";
 			next;
-			if (select("1 / LUK +2:1 / LUK +5:2 / LUK +2:2 / LUK +5") == 3)
+			if (select("1 / SOR +2:1 / SOR +5:2 / SOR +2:2 / SOR +5") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "17. Escolha a classe que não pode equipar Armadura Acolchoada.";
 			next;
-			if (select("Swordman:Merchant:Thief:Archer") == 4)
+			if (select("Espadachim:Mercador:Gatuno:Arqueiro") == 4)
 				set .@sage_t,.@sage_t+5;
 			mes "18. Escolha o item que cura todos os status anormais e restaura todo o HP e SP ao mesmo tempo.";
 			next;
-			if (select("Royal Jelly:Yggdrasil Seed:Yggdrasilberry:Mastella Fruit") == 3)
+			if (select("Geleia Real:Semente de Yggdrasil:Fruto de Yggdrasil:Fruta de Mastela") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "19. Quem governa o reino de Rune-Midgard agora?";
 			next;
-			if (select("Tristun the 3rd:Tristram the 3rd:Tristar the 3rd:Trast the 3rd") == 2)
+			if (select("Tristun III:Tristram III:Tristar III:Trast III") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "20. Escolha o deus dos Templários.";
 			next;
@@ -797,15 +797,15 @@ L_AskQuestions:
 		case 2:
 			mes "1. Escolha a joia que o Mercador de Joias de Morroc não vende.";
 			next;
-			if (select("Topaz:Garnet:Diamond:Sapphire") == 2)
+			if (select("Topázio:Granada:Diamante:Safira") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "2. Escolha a cidade onde os usuários não podem comprar Ração de Monstro de um NPC.";
 			next;
-			if (select("Prontera:Morocc:Al De Baran:Alberta") == 3)
+			if (select("Prontera:Morroc:Al De Baran:Alberta") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "3. Escolha a cidade mais próxima do Labirinto.";
 			next;
-			if (select("Prontera:Morocc:Geffen:Payon") == 1)
+			if (select("Prontera:Morroc:Geffen:Payon") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "4. Escolha o monstro que é de um tipo diferente dos outros.";
 			next;
@@ -813,15 +813,15 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "5. Escolha o monstro com o atributo diferente.";
 			next;
-			if (select("Dokebi:Isis:Giearth:Deviruchi") == 3)
+			if (select("Dokebi:Ísis:Giearth:Deviruchi") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "6. Escolha o monstro que tem um tamanho diferente.";
 			next;
-			if (select("Thiefbug (Aggressive):Horn:Metaller:Argos") == 4)
+			if (select("Inseto de Fogo (Agressivo):Chifre:Metaller:Argos") == 4)
 				set .@sage_t,.@sage_t+5;
 			mes "7. Escolha o monstro que não derruba 'Folha de Yggdrasil'.";
 			next;
-			if (select("Marduk:Baphomet Jr.:Angeling:Wanderer") == 1)
+			if (select("Marduk:Bafomé Jr.:Angeling:Desordeiro") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "8. Escolha o NPC que é irrelevante para a missão de mudança de classe para Sacerdote.";
 			next;
@@ -837,7 +837,7 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "11. Escolha a habilidade que é irrelevante para aprender Barreira de Fogo, a habilidade de Mago.";
 			next;
-			if (select("lvl 4 Fire Bolt:lvl 4 Napalm Beat:lvl 5 Fire Ball:lvl 1 Sight") == 2)
+			if (select("Nv 4 Lanças de Fogo:Nv 4 Napalm Beat:Nv 5 Bola de Fogo:Nv 1 Visão Real") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "12. Quanto de SP pode ser restaurado ao aprender Recuperação de SP nível 6 (sem ser afetado pela INT)?";
 			next;
@@ -849,11 +849,11 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "14. Escolha o consumo de SP e a duração corretos para Aumentar Concentração nível 5 (habilidade de Arqueiro).";
 			next;
-			if (select("45 / 80 sec:50 / 80 sec:45 / 90 sec:50 / 90 sec") == 1)
+			if (select("45 / 80 seg:50 / 80 seg:45 / 90 seg:50 / 90 seg") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "15. Escolha a habilidade que é irrelevante para aprender Maximizar Poder, a habilidade de Ferreiro.";
 			next;
-			if (select("Hilt Binding:Skin Tempering:Hammer Fall:Weapon Perfection") == 2)
+			if (select("Ligação de Punho:Temperar Arma:Martelo de Thor:Perfeição de Arma") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "16. Qual é a defesa e habilidade corretas da Tiara Bonitinha?";
 			next;
@@ -861,11 +861,11 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "17. Escolha a classe que não pode equipar Veste Sagrada.";
 			next;
-			if (select("Swordman:Merchant:Thief:Acolyte") == 3)
+			if (select("Espadachim:Mercador:Gatuno:Noviço") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "18. Escolha o status anormal que não pode ser curado por Poção Verde.";
 			next;
-			if (select("Silence:Chaos:Blind:Curse") == 4)
+			if (select("Silêncio:Caos:Cegueira:Maldição") == 4)
 				set .@sage_t,.@sage_t+5;
 			mes "19. Escolha o nome correto para o reino antigo que desapareceu em algum lugar em Geffen.";
 			next;
@@ -873,13 +873,13 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "20. Escolha o nome correto para a árvore que se tornou a raiz deste mundo.";
 			next;
-			if (select("Yggdrasil:Iggdrassil:Mastella:Dead Branch") == 1)
+			if (select("Yggdrasil:Iggdrassil:Mastela:Galho Seco") == 1)
 				set .@sage_t,.@sage_t+5;
 			break;
 		case 3:
 			mes "1. Escolha o item que o mercador de Ferramentas Mágicas em Geffen não vende.";
 			next;
-			if (select("Mantle:Wand:Circlet:Silver Robe") == 1)
+			if (select("Manto:Varinha:Tiara:Túnica de Prata") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "2. Escolha a cidade onde os usuários não podem comprar uma Lâmina de um NPC.";
 			next;
@@ -887,7 +887,7 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "3. Escolha a cidade mais próxima de Glast Heim.";
 			next;
-			if (select("Prontera:Geffen:Morocc:Payon") == 2)
+			if (select("Prontera:Geffen:Morroc:Payon") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "4. Escolha o monstro que é de um tipo diferente dos outros.";
 			next;
@@ -895,15 +895,15 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "5. Escolha o monstro que tem um atributo diferente.";
 			next;
-			if (select("Baby Desert Wolf:Smokie:Picky:Choco") == 2)
+			if (select("Filhote de Lobo do Deserto:Smokie:Picky:Choco") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "6. Escolha o monstro que tem um tamanho diferente.";
 			next;
-			if (select("Drake:Wraith:Evil Druid:Khalitzburg") == 1)
+			if (select("Drake:Espectro:Druida Maligno:Khalitzburg") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "7. Escolha o monstro que não derruba 'Phracon'.";
 			next;
-			if (select("Pupa:Peco Peco Egg:Savage Bebe:Baby Desert Wolf") == 2)
+			if (select("Pupa:Ovo de Peco Peco:Savage Bebê:Filhote de Lobo do Deserto") == 2)
 				set .@sage_t,.@sage_t+5;
 			mes "8. Escolha o NPC que é irrelevante para a missão de mudança de classe para Ferreiro.";
 			next;
@@ -919,7 +919,7 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "11. Escolha o consumo de SP e o número de evasões corretos ao usar Escudo Sagrado nível 6.";
 			next;
-			if (select("SP 40, 6 times:SP 35, 6 times:SP 40, 7 times:SP 35, 7 times") == 3)
+			if (select("SP 40, 6 vezes:SP 35, 6 vezes:SP 40, 7 vezes:SP 35, 7 vezes") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "12. Escolha a quantidade correta de ataque mágico para Golpe Napalm nível 6.";
 			next;
@@ -927,7 +927,7 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "13. Escolha a pedra catalisadora para Solução de Mago nº 4 que é usada para a missão de mudança de classe para Mago.";
 			next;
-			if (select("Blue Gemstone:Red Gemstone:Yellow Gemstone:1 carat Diamond") == 4)
+			if (select("Gema Azul:Gema Vermelha:Gema Amarela:Diamante de 1 quilate") == 4)
 				set .@sage_t,.@sage_t+5;
 			mes "14. Escolha a força de ataque e consumo de SP corretos para Impacto Explosivo nível 6, a habilidade de Espadachim.";
 			next;
@@ -935,7 +935,7 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "15. Escolha a habilidade que é irrelevante para aprender Armadilha de Claymore, a habilidade de Caçador.";
 			next;
-			if (select("Remove Trap:Land Mine:Ankle Snare:Flasher") == 1)
+			if (select("Remover Armadilha:Mina Terrestre:Armadilha Escorregadia:Flasher") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "16. Escolha a defesa e habilidade corretas do Véu de Casamento.";
 			next;
@@ -943,19 +943,19 @@ L_AskQuestions:
 				set .@sage_t,.@sage_t+5;
 			mes "17. Escolha a classe que não pode equipar Casaco.";
 			next;
-			if (select("Swordman:Merchant:Thief:Novice") == 4)
+			if (select("Espadachim:Mercador:Gatuno:Aprendiz") == 4)
 				set .@sage_t,.@sage_t+5;
 			mes "18. Escolha o item que não é um ingrediente para Tintura Azul.";
 			next;
-			if (select("Alcohol:Detrimindexta:Karvodailnirol:Blue Herb") == 3)
+			if (select("Álcool:Detrimindexta:Karvodailnirol:Erva Azul") == 3)
 				set .@sage_t,.@sage_t+5;
 			mes "19. Quando o mundo foi criado pelo deus Odin, o que ele usou como material?";
 			next;
-			if (select("The heart of Ymir:The nail of Ymir:The tooth of Ymir:The memento of Ymir") == 1)
+			if (select("O coração de Ymir:A unha de Ymir:O dente de Ymir:A lembrança de Ymir") == 1)
 				set .@sage_t,.@sage_t+5;
 			mes "20. Escolha o metal que tem a fama de trazer fortuna e fama a uma pessoa com o destino.";
 			next;
-			if (select("Empelium Gold:Emperium:Emperor:Phracon") == 2)
+			if (select("Ouro de Emperium:Emperium:Imperador:Phracon") == 2)
 				set .@sage_t,.@sage_t+5;
 		}
 		mes "[Claytos Verdo]";
@@ -973,7 +973,7 @@ L_AskQuestions:
 		mes "Hmm... hmm...";
 		next;
 		mes "[Claytos Verdo]";
-		mes "You got " + .@sage_t + " points.";
+		mes "Você obteve " + .@sage_t + " points.";
 		if (.@sage_t == 100) {
 			if (SAGE_Q == 4)
 				mes "Excelente! Você parece estar totalmente qualificado para se tornar um Sábio!";
@@ -1128,7 +1128,7 @@ yuno_in03,169,180,3	script	Practical Examination P	755,{
 		mes "É melhor experimentar isso por si mesmo, em vez de ser informado sobre este teste 100 vezes.";
 		mes "O que me diz? Você está pronto para fazer este teste?";
 		next;
-		if (select("Yes, I am.:Sorry, give me some time.") == 1) {
+		if (select("Sim, eu estou.:Desculpe, me dê um tempo.") == 1) {
 			set SAGE_Q,7;
 			mes "[Hermes Tris]";
 			mes "Bom, vamos começar imediatamente.";
@@ -1149,7 +1149,7 @@ yuno_in03,169,180,3	script	Practical Examination P	755,{
 		mes "[Hermes Tris]";
 		mes "Você está pronto?";
 		next;
-		if (select("Yes, I am.:Sorry, give me some time.") == 1) {
+		if (select("Sim, eu estou.:Desculpe, me dê um tempo.") == 1) {
 			mes "[Hermes Tris]";
 			mes "Bom, vamos começar imediatamente.";
 			mes "Faça o seu melhor e retorne em segurança!";
@@ -1298,23 +1298,23 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 	}
 	if (SAGE_Q == 9) {
 		if (SAGE_Q2 == 0) {
-			mes "Welcome, " + strcharinfo(0) + ". I am glad to meet you.";
+			mes "Bem-vindo(a), " + strcharinfo(0) + ". I am glad to meet you.";
 			mes "Meu nome é Saphien Layless, ficarei responsável pela sua aula por um tempo.";
 			next;
 			mes "[Saphien Layless]";
 			mes "O assunto que você está estudando é Yggdrasil.";
 			mes "Então... você ao menos sabe o que é Yggdrasil?";
 			next;
-			switch(select("Yes, I know very well.:No, I don't.")) {
+			switch(select("Sim, eu sei muito bem.:Não, não sei.")) {
 			case 1:
 				mes "[Saphien Layless]";
 				mes "Ok então, o que é Yggdrasil?";
 				mes "Por favor, responda-me.";
 				next;
-				switch(select("It's a name of a health item.:It's the source of life in the world.:Suckah, I lied.")) {
+				switch(select("É o nome de um item de cura.:É a fonte da vida no mundo.:Babaca, eu menti.")) {
 				case 1:
 					mes "[Saphien Layless]";
-					mes "Wrong. " + strcharinfo(0) + ", you got - 10 points.";
+					mes "Errado. " + strcharinfo(0) + ", you got - 10 points.";
 					mes "Isso é apenas um dos presentes de Yggdrasil.";
 					next;
 					mes "[Saphien Layless]";
@@ -1322,13 +1322,13 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 					break;
 				case 2:
 					mes "[Saphien Layless]";
-					mes "Exatamente. Yggdrasil, a chamada 'Árvore do Mundo',";
+					mes "Exatamente. Yggdrasil, a chamada 'Árvore do Mundo', ";
 					mes "é o nome da árvore que tem sido a fonte da vida neste mundo.";
 					break;
 				case 3:
 					mes "[Saphien Layless]";
 					mes "Grandes coisas... Se você não sabe, apenas diga.";
-					mes "By the way, " + strcharinfo(0) + ", you just got - 10 points for lying and for being wrong.";
+					mes "Aliás, " + strcharinfo(0) + ", you just got - 10 points for lying and for being wrong.";
 					break;
 				}
 				next;
@@ -1383,7 +1383,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 				next;
 				mes "[Saphien Layless]";
 				mes "Você pode comprar este item na cidade de Al De Baran! Você não demonstrou nenhum esforço.";
-				mes "So, I must give you - 10 points, " + strcharinfo(0) + ".";
+				mes "Então, devo lhe tirar 10 pontos, " + strcharinfo(0) + ".";
 				next;
 				mes "[Saphien Layless]";
 				mes "Ok, agora vou começar a aula.";
@@ -1423,7 +1423,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 			mes "Essas raízes se estendem para 3 lugares diferentes.";
 			next;
 			mes "[Saphien Layless]";
-			mes "A primeira raiz alcança Asgard, onde os deuses vivem e";
+			mes "A primeira raiz alcança Asgard, onde os deuses vivem e ";
 			mes "onde nós, meros humanos, ainda não exploramos ou vivenciamos.";
 			next;
 			mes "[Saphien Layless]";
@@ -1451,11 +1451,11 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 			mes "revive os mortos, trazendo-os de volta a este mundo.";
 			next;
 			mes "[Saphien Layless]";
-			mes "Por último... se por algum acaso você descobrir um caminho para Asgard no futuro,";
+			mes "Por último... se por algum acaso você descobrir um caminho para Asgard no futuro, ";
 			mes "espero que você encontre a árvore Yggdrasil.";
 			next;
 			mes "[Saphien Layless]";
-			mes "Embora a história da árvore Yggdrasil exista apenas em mitos e lendas,";
+			mes "Embora a história da árvore Yggdrasil exista apenas em mitos e lendas, ";
 			mes "nós, Sábios, somos obrigados a descobrir a verdade sobre a árvore Yggdrasil.";
 			next;
 			mes "[Saphien Layless]";
@@ -1500,7 +1500,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 			next;
 			mes ".....Existe um oceano ao redor do continente,";
 			mes "O oceano é enrolado por";
-			switch(select("A giant ash tree.:A giant snake Yormungandr.:A giant turtle and elephants.:A giant dragon.")) {
+			switch(select("Um freixo gigante.:Uma cobra gigante, Jormungand.:Uma tartaruga e elefantes gigantes.:Um dragão gigante.")) {
 			case 1:
 				set .@w_point,.@w_point+1;
 				mes "Um freixo gigante.";
@@ -1518,7 +1518,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 				break;
 			}
 			mes "O continente consiste em três lugares, tais como,";
-			switch(select("Mt.Mjolnir, where spiders live,:Uranos, where titans live,:Utgard, where titans live,:Lutie, the winter land,")) {
+			switch(select("Mt. Mjolnir, onde vivem aranhas,:Uranos, onde vivem titãs,:Utgard, onde vivem titãs,:Lutie, a terra do inverno,")) {
 			case 1:
 				set .@w_point,.@w_point+1;
 				mes "Mt. Mjolnir, onde vivem aranhas,";
@@ -1535,7 +1535,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 				mes "Lutie, a terra do inverno,";
 				break;
 			}
-			switch(select("Midgard, where humans live,:Rune-Midgarts where humans live,:Tritonia, where mermaids live,:Morocc, the desert city,")) {
+			switch(select("Midgard, onde vivem os humanos,:Rune-Midgard, onde vivem os humanos,:Tritonia, onde vivem sereias,:Morroc, a cidade do deserto,")) {
 			case 1:
 				mes "Midgard, onde vivem os humanos,";
 				break;
@@ -1552,7 +1552,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 				mes "Morroc, a cidade do deserto,";
 				break;
 			}
-			switch(select("Abguard, where gods live.:Asgard, where gods live.:Schwarzwald, where citizens live.:Prontera, the capital of Rune-Midgarts.")) {
+			switch(select("Abguard, onde vivem os deuses.:Asgard, onde vivem os deuses.:Schwarzwald, onde vivem cidadãos.:Prontera, a capital de Rune-Midgard.")) {
 			case 1:
 				set .@w_point,.@w_point+1;
 				mes "Abguard, onde vivem os deuses.";
@@ -1583,7 +1583,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 			}
 			mes ".....como estudamos na última aula,";
 			mes "Yggdrasil é...";
-			switch(select("A giant ash tree.:A fabulous Mastella tree.:A giant willow.:A giant dead branch.")) {
+			switch(select("Um freixo gigante.:Uma árvore de Mastela fabulosa.:Um salgueiro gigante.:Um galho seco gigante.")) {
 			case 1:
 				mes "Um freixo gigante.";
 				break;
@@ -1601,7 +1601,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 				break;
 			}
 			mes "A raiz de Yggdrasil é dividida em 3 partes. Essas partes alcançam 3 lugares...";
-			switch(select("Schwarzwald, Jotunnheim, Niflheim.:Midgard, Jotunnheim, Naffleheim.:Asgard, Jotunnheim, Naffleheim.:Asgard, Jotunnheim, Niflheim.")) {
+			switch(select("Schwarzwald, Jotunheim, Niflheim.:Midgard, Jotunheim, Naffleheim.:Asgard, Jotunheim, Naffleheim.:Asgard, Jotunheim, Niflheim.")) {
 			case 1:
 				set .@w_point,.@w_point+1;
 				mes "Schwarzwald, Jotunheim, Niflheim.";
@@ -1619,7 +1619,7 @@ yuno_in03,62,176,2	script	History Professor#sa	109,{
 				break;
 			}
 			mes "Aquele que tem uma Semente de Yggdrasil,";
-			switch(select("can be cured from all the abnormal statuses.:can restore full HP and SP at once.:can restore half of total HP and SP.:can be cured from Silence, Curse and Chaos.")) {
+			switch(select("pode ser curado de todos os estados anormais.:pode restaurar todo o HP e SP de uma vez.:pode restaurar metade do HP e SP total.:pode ser curado de Silêncio, Maldição e Caos.")) {
 			case 1:
 				set .@w_point,.@w_point+1;
 				mes "pode ser curado de todos os estados anormais.";
@@ -1751,7 +1751,7 @@ yuno_in03,32,102,1	script	Biology Professor#sa	755,{
 			mes "Como você sabe, seu tópico de estudo são os monstros.";
 			mes "Quantas vezes você lutou contra monstros?";
 			next;
-			if (select("Well, I can't even count.:A few times, I guess...") == 1) {
+			if (select("Bem, nem consigo contar.:Algumas vezes, eu acho...") == 1) {
 				mes "[Lucius Celsus]";
 				mes "Ah, cale a boca, pirralho. Não fique tão confiante de si mesmo.";
 				mes "Mesmo que você tenha muita experiência com monstros, terá dificuldade em compreender minha palestra.";
@@ -1814,7 +1814,7 @@ yuno_in03,32,102,1	script	Biology Professor#sa	755,{
 				mes "De alguma forma, os monstros que deixam cair esses itens têm algo em comum.";
 				mes "Você pode me dizer qual é essa semelhança?";
 				next;
-				switch(select("They possess water property.:They are fishes.:They are aggressive.:Um...they monsters.")) {
+				switch(select("Eles possuem propriedade de água.:Eles são peixes.:Eles são agressivos.:Um... eles são monstros.")) {
 				case 1:
 					mes "[Lucius Celsus]";
 					mes "Sim, eles possuem propriedade de água e, ao mesmo tempo, são peixes.";
@@ -1847,7 +1847,7 @@ yuno_in03,32,102,1	script	Biology Professor#sa	755,{
 				mes "Nem todos os monstros da classe peixe possuem propriedade de água, mas a maioria deles possui.";
 				mes "Então, que tipo de magia funcionaria melhor na maioria dos monstros da classe peixe?";
 				next;
-				switch(select("Lightening Bolt.:Fire Bolt.:Thunder Storm.:Frost Diver.")) {
+				switch(select("Relâmpago.:Lanças de Fogo.:Tempestade de Raios.:Congelar.")) {
 				case 1:
 					mes "[Lucius Celsus]";
 					mes "Exatamente, Relâmpago, que possui a propriedade de vento, funciona melhor em monstros com propriedade de água.";
@@ -1873,7 +1873,7 @@ yuno_in03,32,102,1	script	Biology Professor#sa	755,{
 				}
 				next;
 				mes "[Lucius Celsus]";
-				mes "A propósito, embora alguns monstros, como Phen ou Aster, sejam considerados monstros da classe peixe,";
+				mes "A propósito, embora alguns monstros, como Phen ou Aster, sejam considerados monstros da classe peixe, ";
 				mes "eles têm uma propriedade diferente dos outros. É melhor você tomar cuidado com eles.";
 				next;
 				mes "[Lucius Celsus]";
@@ -1971,7 +1971,7 @@ yuno_in03,32,102,1	script	Biology Professor#sa	755,{
 				mes "Ah, bem, acredito que você fez um bom trabalho com a tarefa.";
 				next;
 				mes "[Lucius Celsus]";
-				mes "Monstros da classe inseto não compartilham a mesma propriedade na maioria das vezes,";
+				mes "Monstros da classe inseto não compartilham a mesma propriedade na maioria das vezes, ";
 				mes "Você deve pensar duas vezes antes de lançar uma magia em um inseto.";
 				next;
 				mes "[Lucius Celsus]";
@@ -1988,7 +1988,7 @@ yuno_in03,32,102,1	script	Biology Professor#sa	755,{
 				mes "ou Besouro-Ladrão Dourado, o rei dos besouros-ladrões...";
 				next;
 				mes "[Lucius Celsus]";
-				mes "Você não pode derrotar esses monstros chefes sozinho,";
+				mes "Você não pode derrotar esses monstros chefes sozinho, ";
 				mes "é melhor você formar um grupo se quiser lutar contra eles.";
 				next;
 				mes "[Lucius Celsus]";
@@ -2373,7 +2373,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 			mes ".................................";
 			next;
 			mes ".....Magias são variadas em 4 elementos, tais como";
-			switch(select("Water, Earth, Fire and Wind.:Earth, Water, Fire and Wind.:Water, Wind, Earth and Fire.")) {
+			switch(select("Água, Terra, Fogo e Vento.:Terra, Água, Fogo e Vento.:Água, Vento, Terra e Fogo.")) {
 			case 1:
 				mes "Água, Terra, Fogo e Vento.";
 				break;
@@ -2385,7 +2385,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				break;
 			}
 			mes "Cada propriedade tem uma propriedade oposta,";
-			switch(select("Magic with wind property is strong against water:Magic with water property is strong against fire:Magic with fire property is strong against earth")) {
+			switch(select("A magia com propriedade de vento é forte contra a água:A magia com propriedade de água é forte contra o fogo:A magia com propriedade de fogo é forte contra a terra")) {
 			case 1:
 				mes "A magia com propriedade de vento é forte contra a água";
 				break;
@@ -2397,7 +2397,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				break;
 			}
 			mes "A magia com propriedade de terra é forte contra o vento.";
-			switch(select("However, that does not work on the opposite case :This theory works the same for earth property weapons:Elemental properties are varied by monster types")) {
+			switch(select("No entanto, isso não funciona no caso oposto :Esta teoria funciona da mesma forma para armas com propriedade de terra:Propriedades elementais variam de acordo com os tipos de monstros")) {
 			case 1:
 				mes "No entanto, isso não funciona no caso oposto ";
 				break;
@@ -2408,7 +2408,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "Propriedades elementais variam de acordo com os tipos de monstros";
 				break;
 			}
-			switch(select("You must be aware of the limit of your ability.:You must apply different types of property by the situation or place.:Red Potion is rumored to taste like strawberries.")) {
+			switch(select("Você deve estar ciente do limite de sua habilidade.:Você deve aplicar diferentes tipos de propriedade de acordo com a situação ou local.:Rumores dizem que a Poção Vermelha tem sabor de morango.")) {
 			case 1:
 				mes "Você deve estar ciente do limite de sua habilidade.";
 				break;
@@ -2420,7 +2420,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				break;
 			}
 			next;
-			switch(select("The most adorable NPC is YuPi in Prontera:Red Potion is rumored to be made out of Porings:You never know the limits of magic")) {
+			switch(select("O NPC mais adorável é YuPi em Prontera:Rumores dizem que a Poção Vermelha é feita de Porings:Você nunca conhece os limites da magia")) {
 			case 1:
 				mes "O NPC mais adorável é YuPi em Prontera";
 				break;
@@ -2431,7 +2431,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "Você nunca conhece os limites da magia";
 				break;
 			}
-			switch(select("Merchant Lady in Morocc is also as cute as YuPi.:Nobody knows why Red Potion tastes like strawberries.:It is not suggested to be too addicted to magic spells.")) {
+			switch(select("A Mercadora em Morroc também é tão fofa quanto YuPi.:Ninguém sabe por que a Poção Vermelha tem sabor de morango.:Não é recomendado ficar muito viciado em magias.")) {
 			case 1:
 				mes "A Mercadora em Morroc também é tão fofa quanto YuPi.";
 				break;
@@ -2442,7 +2442,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "Não é recomendado ficar muito viciado em magias.";
 				break;
 			}
-			switch(select("If I had a Bunny Band,:If so, what about the taste of White Potion?:Only pertinent uses of magic, as well as rest")) {
+			switch(select("Se eu tivesse uma Faixa de Coelho,:Se for assim, o que dizer do sabor da Poção Branca?:Apenas o uso pertinente de magia, bem como descanso")) {
 			case 1:
 				mes "Se eu tivesse uma Faixa de Coelho,";
 				break;
@@ -2453,7 +2453,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "Apenas o uso pertinente de magia, bem como descanso";
 				break;
 			}
-			switch(select("I would want to give it to her as a present.:I can't even imagine the taste.:will guarantee you a safe battle.")) {
+			switch(select("Eu gostaria de dar a ela como presente.:Não consigo nem imaginar o sabor.:garantirá a você uma batalha segura.")) {
 			case 1:
 				mes "Eu gostaria de dar a ela como presente.";
 				break;
@@ -2464,7 +2464,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "garantirá a você uma batalha segura.";
 				break;
 			}
-			switch(select("Although the Bunny Band best fits the Acolyte class:I love this thrilling feeling:Forming a party with people of different classes")) {
+			switch(select("Embora a Faixa de Coelho combine melhor com a classe Noviço:Eu amo essa sensação emocionante:Formar um grupo com pessoas de classes diferentes")) {
 			case 1:
 				mes "Embora a Faixa de Coelho combine melhor com a classe Noviço";
 				break;
@@ -2475,7 +2475,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "Formar um grupo com pessoas de classes diferentes";
 				break;
 			}
-			switch(select("I still wonder if the Bunny Band would be perfect for GOD-POING.:I won't be able to drink it even if my HP is less than 1.:is considered the best way to ready for battle.")) {
+			switch(select("Ainda me pergunto se a Faixa de Coelho seria perfeita para o DEUS-PORING.:Não serei capaz de bebê-la mesmo que meu HP seja inferior a 1.:é considerado a melhor maneira de se preparar para a batalha.")) {
 			case 1:
 				mes "Ainda me pergunto se a Faixa de Coelho seria perfeita para o DEUS-PORING.";
 				break;
