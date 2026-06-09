@@ -23,7 +23,7 @@ alberta_in,55,142,7	script	Hair Dresser	91,{
 	mes "Bem-vindo ao salão de cabeleireiro da Veronica.";
 	mes "Como posso te ajudar?";
 	next;
-	switch(select("See available hair styles.:Change hair style.:End conversation.")) {
+	switch(select("Ver estilos de cabelo disponíveis.:Mudar estilo de cabelo.:Encerrar conversa.")) {
 	case 1:
 		mes "[Veronica]";
 		mes "Temos um total de 19 estilos, disponíveis do nº 1 ao nº 19.";
@@ -413,11 +413,11 @@ alberta_in,55,142,7	script	Hair Dresser	91,{
 		}
 			callsub L_cutin,.@style;
 			mes "[Veronica]";
-			mes "You have chosen style no. (" + .@style + ").";
+			mes "Você escolheu o estilo nº. (" + .@style + ").";
 			mes "Proseguirei com seu pedido.";
 			mes "Você se importa?";
 			next;
-			if(select("No, I don't mind.:Yes, let me choose another one.") == 1) {
+			if(select("Não, não me importo.:Sim, deixe-me escolher outro.") == 1) {
 				if(getlook(6) == 0) {
 					mes "[Veronica]";
 					mes "Oh, céus, você não tingiu seu cabelo";
@@ -426,7 +426,7 @@ alberta_in,55,142,7	script	Hair Dresser	91,{
 					mes "Bem, farei isso de graça.";
 					mes "Então, que tipo de cor você gostaria?";
 					next;
-					switch(select("Red.:Yellow.:Purple.:Orange.:Green.:Blue.:White.:Dark Brown.:Cancel.")) {
+					switch(select("Vermelho.:Amarelo.:Roxo.:Laranja.:Verde.:Azul.:Branco.:Marrom Escuro.:Cancelar.")) {
 					case 1:
 						set .@pallete,8;
 						break;
@@ -487,7 +487,7 @@ alberta_in,55,142,7	script	Hair Dresser	91,{
 				mes "[Veronica]";
 				mes "Muito bem, está pronto~";
 				mes "Espero que goste";
-				mes "this style no.(" + .@style + ").";
+				mes "este estilo nº (" + .@style + ").";
 				mes "Sinta-se à vontade para voltar sempre";
 				mes "que quiser um penteado novo. Hohohohohoho~";
 				setlook 1,.@style;
@@ -534,7 +534,7 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 	mes "tímido, me diga exatamente como você";
 	mes "quer que eu deixe você glamoroso~";
 	next;
-	switch(select("Check all hairstyles:Change hairstyle:Cancel")) {
+	switch(select("Ver todos os penteados:Mudar penteado:Cancelar")) {
 	case 1:
 		mes "[Prince Shammi]";
 		mes "Oh, você gostaria de";
@@ -544,10 +544,10 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 		mes "[Prince Shammi]";
 		mes "Por favor, oh, por favor, escolha entre os estilos abaixo e eu mostrarei uma prévia.";
 		next;
-		switch(select("Old Hairstyles:New Hairstyles")) {
+		switch(select("Penteados Antigos:Penteados Novos")) {
 		case 1:
 			if (Sex == SEX_MALE) {
-				switch(select("Petite Style:Executioner Style:Prince Style:Deviace Style:Cancel")) {
+				switch(select("Estilo Petite:Estilo Carrasco:Estilo Príncipe:Estilo Deviace:Cancelar")) {
 				case 1:
 					cutin "hair_m_20",4;
 					mes "[Prince Shammi]";
@@ -598,7 +598,7 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 				}
 			}
 			else {
-				switch(select("Spring Rabbit Style:Harpy Style:Medusa Style:Isis Style:Cancel")) {
+				switch(select("Estilo Coelho da Primavera:Estilo Harpia:Estilo Medusa:Estilo Isis:Cancelar")) {
 				case 1:
 					cutin "hair_f_20",4;
 					mes "[Príncipe Shammi]";
@@ -652,7 +652,7 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 			break;
 		case 2:
 			if (Sex == SEX_MALE) {
-				switch(select("Emergency Heal Perm:Aura Blade Cut:Power Swing:Renovatio Cut:Cancel")) {
+				switch(select("Cura de Emergência Perm:Corte de Lâmina Aura:Golpe Poderoso:Corte Renovatio:Cancelar")) {
 				case 1:
 					cutin "hair_m_24",4;
 					mes "[Príncipe Shammi]";
@@ -691,7 +691,7 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 				}
 			}
 			else {
-				switch(select("Assumptio Perm:Soul Changer Cut:X Tornado Cut:Oratio Cut:Cancel")) {
+				switch(select("Assumptio Perm:Corte de Troca de Alma:Corte Tornado X:Corte Oratio:Cancelar")) {
 				case 1:
 					cutin "hair_f_24",4;
 					mes "[Príncipe Shammi]";
@@ -834,9 +834,9 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 			mes "[Príncipe Shammi]";
 			mes "Oooh! Agora, é este o";
 			mes "estilo de cabelo que você queria?";
-			mes "This is No. "+.@input+", by the way.";
+			mes "Este é o No. "+.@input+", by the way.";
 			next;
-			switch(select("Yes.:No.")) {
+			switch(select("Sim.:Não.")) {
 			case 1:
 				if (getlook(VAR_HEADPALETTE) == 0) {
 					mes "[Príncipe Shammi]";
@@ -847,7 +847,7 @@ lhz_in02,100,143,3	script	Hair Dresser#li	122,{
 					mes "do meu serviço, então";
 					mes "por favor escolha uma cor~";
 					next;
-					switch(select("Red:Yellow:Purple:Orange:Green:Blue:White:Dark Brown")) {
+					switch(select("Vermelho:Amarelo:Roxo:Laranja:Verde:Azul:Branco:Marrom Escuro")) {
 					case 1:
 						set .@headpalette,8;
 						break;

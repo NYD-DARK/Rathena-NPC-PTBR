@@ -24,7 +24,7 @@ prt_in,243,168,4	script	Jovovich	91,{
 	mes "Como posso ajudar você?";
 	next;
 	mes "[Cabeleireira Jovovich]";
-	if (Sex == SEX_MALE) mes "Oh, no! Your hair is damaged. It seems as if you may need professional treatment. Come sit over here, please. Come.";
+	if (Sex == SEX_MALE) mes "Oh, não! Seu cabelo está danificado. Parece que você precisa de um tratamento profissional. Venha sentar aqui, por favor. Venha.";
 	else {
 		if (rand(20) > 11) {
 			mes "Eh!? Oh, céus! Oh, não, não, não, não! Seu cabelo está tão danificado! Não é bom deixar seu cabelo assim.";
@@ -32,11 +32,11 @@ prt_in,243,168,4	script	Jovovich	91,{
 			mes "[Cabeleireira Jovovich]";
 			mes "Você me deixaria tratar seu cabelo? Por favor?";
 		}
-		else mes "Wow! Your hair would be perfect once it's dyed~ How about dying your hair for a change?";
+		else mes "Uau! Seu cabelo ficaria perfeito se fosse tingido. Que tal tingir seu cabelo para uma mudança?";
 	}
 	next;
 	while(1) {
-		switch(select("Dye Hair:Tips and Information:Cancel")) {
+		switch(select("Tingir Cabelo:Dicas e Informações:Cancelar")) {
 		case 1:
 			mes "[Cabeleireira Jovovich]";
 			mes "Sim, sim, boa escolha~";
@@ -47,7 +47,7 @@ prt_in,243,168,4	script	Jovovich	91,{
 					mes "[Cabeleireira Jovovich]";
 					mes "O que você acha? Você queria uma cor diferente?";
 					next;
-					if (select("Yes:No") == 1) {
+					if (select("Sim:Não") == 1) {
 						mes "[Cabeleireira Jovovich]";
 						mes "Ok! Escolha a cor que você gostaria.";
 						next;
@@ -60,7 +60,7 @@ prt_in,243,168,4	script	Jovovich	91,{
 				}
 
 				while(1) {
-					switch(select("Red, please.:Yellow, please.:Violet, please.:Orange, please.:Green, please.:Blue, please.:White, please.:Black, please.:Actually, I like my hair as it is.")) {
+					switch(select("Vermelho, por favor.:Amarelo, por favor.:Violeta, por favor.:Laranja, por favor.:Verde, por favor.:Azul, por favor.:Branco, por favor.:Preto, por favor.:Na verdade, eu gosto do meu cabelo como ele está.")) {
 					case 1: set .@headpalette,8; break;
 					case 2: set .@headpalette,1; break;
 					case 3: set .@headpalette,2; break;
@@ -150,7 +150,7 @@ prt_in,243,168,4	script	Jovovich	91,{
 S_NoDye:
 	if (countitem(getarg(0)) == 0) {
 		mes "[Cabeleireira Jovovich]";
-		mes "Eh?! But you need the item '"+getitemname(getarg(0))+"' to dye your hair "+getarg(1)+"...";
+		mes "Eh?! Mas você precisa do item '"+getitemname(getarg(0))+"' to dye your hair "+getarg(1)+"...";
 		close;
 	}
 	return;
